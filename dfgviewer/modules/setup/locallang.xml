@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module txdfgviewersetup</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title">DFG Viewer</label>
+			<label index="flash.wrongPageType">Page is no SysFolder!</label>
+			<label index="flash.wrongPageTypeMsg">The configuration records need to be stored in a SysFolder.</label>
+			<label index="flash.structureOkay">Structures found!</label>
+			<label index="flash.structureOkayMsg">There are configuration records for structural metadata.</label>
+			<label index="flash.structureNotOkay">No structures found!</label>
+			<label index="flash.structureNotOkayMsg">There are no configuration records for structural metadata. They can be added automatically.&lt;br /&gt;&lt;br /&gt;&lt;a href="%s"&gt;Add configuration!&lt;/a&gt;</label>
+			<label index="flash.structureAdded">Configuration added!</label>
+			<label index="flash.structureAddedMsg">Configuration records for structural metadata were added.</label>
+			<label index="flash.structureNotAdded">No configuration added!</label>
+			<label index="flash.structureNotAddedMsg">While adding the configuration records an error occured. The records should be checked in the list module!</label>
+			<label index="flash.metadataOkay">Metadata found!</label>
+			<label index="flash.metadataOkayMsg">There are configuration records for bibliographic metadata.</label>
+			<label index="flash.metadataNotOkay">No metadata found!</label>
+			<label index="flash.metadataNotOkayMsg">There are no configuration records for bibliographic metadata. They can be added automatically.&lt;br /&gt;&lt;br /&gt;&lt;a href="%s"&gt;Add configuration!&lt;/a&gt;</label>
+			<label index="flash.metadataAdded">Configuration added!</label>
+			<label index="flash.metadataAddedMsg">Configuration records for bibliographic metadata were added.</label>
+			<label index="flash.metadataNotAdded">No configuration added!</label>
+			<label index="flash.metadataNotAddedMsg">While adding the configuration records an error occured. The records should be checked in the list module!</label>
+			<!-- structural data -->
+			<label index="additional">Additional</label>
+			<label index="address">Address</label>
+			<label index="annotation">Annotation</label>
+			<label index="article">Article</label>
+			<label index="binding">Binding</label>
+			<label index="bookplate">Bookplate</label>
+			<label index="chapter">Chapter</label>
+			<label index="collation">Collation</label>
+			<label index="colophon">Colophon</label>
+			<label index="contained_work">Contained Work</label>
+			<label index="contents">Table of Contents</label>
+			<label index="corrigenda">Corrigenda</label>
+			<label index="cover">Cover</label>
+			<label index="dedication">Dedication</label>
+			<label index="edge">Edge</label>
+			<label index="endsheet">Endsheet</label>
+			<label index="engraved_titlepage">Engraved Titlepage</label>
+			<label index="entry">Entry</label>
+			<label index="fascicle">Fascicle</label>
+			<label index="fragment">Fragment</label>
+			<label index="illustration">Illustration</label>
+			<label index="imprint">Imprint</label>
+			<label index="index">Index</label>
+			<label index="initial_decoration">Initial Decoration</label>
+			<label index="issue">Issue</label>
+			<label index="manuscript">Manuscript</label>
+			<label index="map">Map</label>
+			<label index="monograph">Monograph</label>
+			<label index="multivolume_work">Multivolume Work</label>
+			<label index="musical_notation">Musical Notation</label>
+			<label index="ornament">Ornament</label>
+			<label index="paste_down">Paste Down</label>
+			<label index="periodical">Periodical</label>
+			<label index="preface">Preface</label>
+			<label index="printers_mark">Printers Mark</label>
+			<label index="privileges">Privileges</label>
+			<label index="provenance">Provenance</label>
+			<label index="scheme">Scheme</label>
+			<label index="section">Section</label>
+			<label index="spine">Spine</label>
+			<label index="stamp">Stamp</label>
+			<label index="table">Table</label>
+			<label index="text">Text</label>
+			<label index="title_page">Titlepage</label>
+			<label index="verse">Verse</label>
+			<label index="volume">Volume</label>
+			<!-- metadata -->
+			<label index="type">Document Type</label>
+			<label index="title">Title</label>
+			<label index="parentTitle">Parent Title</label>
+			<label index="author">Author</label>
+			<label index="parentAuthor">Author (Parent)</label>
+			<label index="year">Year of Publication</label>
+			<label index="parentYear">Year of Publication (Parent)</label>
+			<label index="place">Place of Publication</label>
+			<label index="parentPlace">Place of Publication (Parent)</label>
+			<label index="urn">URN</label>
+			<label index="vd16">VD16</label>
+			<label index="vd17">VD17</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="title">DFG-Viewer</label>
+			<label index="flash.wrongPageType">Seite ist kein SysOrdner!</label>
+			<label index="flash.wrongPageTypeMsg">Die Konfigurationsdatensätze müssen in SysOrdnern abgelegt werden.</label>
+			<label index="flash.structureOkay">Strukturdaten gefunden!</label>
+			<label index="flash.structureOkayMsg">Es ist eine Konfiguration für Strukturdaten vorhanden.</label>
+			<label index="flash.structureNotOkay">Keine Strukturdaten gefunden!</label>
+			<label index="flash.structureNotOkayMsg">Es wurde keine Konfiguration für Strukturdaten gefunden. Sie kann automatisch angelegt werden.&lt;br /&gt;&lt;br /&gt;&lt;a href="%s"&gt;Konfiguration jetzt anlegen!&lt;/a&gt;</label>
+			<label index="flash.structureAdded">Konfiguration angelegt!</label>
+			<label index="flash.structureAddedMsg">Es wurde eine Konfiguration für Strukturdaten angelegt.</label>
+			<label index="flash.structureNotAdded">Keine Konfiguration angelegt!</label>
+			<label index="flash.structureNotAddedMsg">Beim Anlegen der Konfiguration für Strukturdaten ist ein Fehler aufgetreten. Die Konfiguration wurde nicht oder unvollständig angelegt und sollte über das Listenmodul kontrolliert werden!</label>
+			<label index="flash.metadataOkay">Metadaten gefunden!</label>
+			<label index="flash.metadataOkayMsg">Es ist eine Konfiguration für Metadaten vorhanden.</label>
+			<label index="flash.metadataNotOkay">Keine Metadaten gefunden!</label>
+			<label index="flash.metadataNotOkayMsg">Es wurde keine Konfiguration für Metadaten gefunden. Sie kann automatisch angelegt werden.&lt;br /&gt;&lt;br /&gt;&lt;a href="%s"&gt;Konfiguration jetzt anlegen!&lt;/a&gt;</label>
+			<label index="flash.metadataAdded">Konfiguration angelegt!</label>
+			<label index="flash.metadataAddedMsg">Es wurde eine Konfiguration für Metadaten angelegt.</label>
+			<label index="flash.metadataNotAdded">Keine Konfiguration angelegt!</label>
+			<label index="flash.metadataNotAddedMsg">Beim Anlegen der Konfiguration für Metadaten ist ein Fehler aufgetreten. Die Konfiguration wurde nicht oder unvollständig angelegt und sollte über das Listenmodul kontrolliert werden!</label>
+			<!-- Strukturdaten -->
+			<label index="additional">Beilage</label>
+			<label index="address">Anrede</label>
+			<label index="annotation">Annotation</label>
+			<label index="article">Artikel</label>
+			<label index="binding">Einband</label>
+			<label index="bookplate">Exlibris</label>
+			<label index="chapter">Kapitel</label>
+			<label index="collation">Bogensignatur</label>
+			<label index="colophon">Kolophon</label>
+			<label index="contained_work">Enthaltenes Werk</label>
+			<label index="contents">Inhaltsverzeichnis</label>
+			<label index="corrigenda">Errata</label>
+			<label index="cover">Deckel</label>
+			<label index="dedication">Widmung</label>
+			<label index="edge">Schnitt</label>
+			<label index="endsheet">Vorsatz</label>
+			<label index="engraved_titlepage">Kupfertitel</label>
+			<label index="entry">Eintrag</label>
+			<label index="fascicle">Faszikel</label>
+			<label index="fragment">Fragment</label>
+			<label index="illustration">Illustration</label>
+			<label index="imprint">Impressum</label>
+			<label index="index">Register</label>
+			<label index="initial_decoration">Initialschmuck</label>
+			<label index="issue">Heft</label>
+			<label index="manuscript">Handschrift</label>
+			<label index="map">Karte</label>
+			<label index="monograph">Monographie</label>
+			<label index="multivolume_work">Mehrbändiges Werk</label>
+			<label index="musical_notation">Musiknotation</label>
+			<label index="ornament">Buchschmuck</label>
+			<label index="paste_down">Spiegel</label>
+			<label index="periodical">Peridica</label>
+			<label index="preface">Vorwort</label>
+			<label index="printers_mark">Druckermarke</label>
+			<label index="privileges">Privilegien</label>
+			<label index="provenance">Besitznachweis</label>
+			<label index="scheme">Schema</label>
+			<label index="section">Abschnitt</label>
+			<label index="spine">Rücken</label>
+			<label index="stamp">Stempel</label>
+			<label index="table">Tabelle</label>
+			<label index="text">Text</label>
+			<label index="title_page">Titelseite</label>
+			<label index="verse">Vers</label>
+			<label index="volume">Band</label>
+			<!-- Metadaten -->
+			<label index="type">Strukturtyp</label>
+			<label index="title">Titel</label>
+			<label index="parentTitle">Gesamttitel</label>
+			<label index="author">Autor</label>
+			<label index="parentAuthor">Autor (Gesamtheit)</label>
+			<label index="year">Erscheinungsjahr</label>
+			<label index="parentYear">Erscheinungsjahr (Gesamtheit)</label>
+			<label index="place">Erscheinungsort</label>
+			<label index="parentPlace">Erscheinungsort (Gesamtheit)</label>
+			<label index="urn">URN</label>
+			<label index="vd16">VD16</label>
+			<label index="vd17">VD17</label>
+		</languageKey>
+	</data>
+</T3locallang>

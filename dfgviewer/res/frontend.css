@@ -1,0 +1,137 @@
+/* DFG-Viewer relaunch by TJ @ 2012 */
+
+
+/* base element styles */
+* { margin: 0; padding: 0; font-size: 1em; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100%; width: 100%; font-size: 62.5%; text-align:left; }
+html, button, input, select, textarea { font-family: sans-serif; color: #222; }
+body { background-color: #666; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 1.3em; line-height: 1.4;  height: 100%; width: 100%; padding: 0; margin: 0; text-align: center; }
+img { border: none; }
+ul { list-style-type: none; }
+
+/* links and selections */
+a { color: #fff; text-decoration: none; }
+a:visited { #fff }
+a:hover { text-decoration: underline; }
+a:focus { outline: thin dotted; }
+a:hover, a:active { outline: 0; }
+::-moz-selection { background: #fff; color: #333; text-shadow: none; }
+::selection { background: #fff; color: #333; text-shadow: none; }
+
+
+/* structure elements */
+#sitespanner { position: relative; top: 0; left: 0; width: 100%; min-height: 100%; display: block; }
+table { position: relative; width: auto; height: auto; margin: 30px; }
+#header, #siteend { background: url(images/footnhead.png) repeat-x 0 0; }
+
+/* header */
+#header { position: relative; top: 0; left: 0; width: 100%; height: 85px; z-index: 1; background-position: 0 0; }
+h1, #provider, #local, #sponsor, #loc, #con, #ref { background: url(images/headergraphics.png) no-repeat 0 0; }
+h1 { position: absolute; top: 0; left: 155px; width: 410px; height: 60px; z-index: 2; text-indent: -1000px; overflow: hidden; background-position: 0 0; }
+h1 a { position: absolute; top: 0; left: 0; width: 410px; height: 60px; display: block; }
+#provider { position: absolute; top: 8px; left: 0; width: 120px; height: 70px; z-index: 4; background-position: right -107px; }
+#provider img { position: absolute; top: 10px; left: 0px; width: 108px; height: 50px; }
+#local { position: absolute; bottom: 0; left: 0; width: 220px; height: 45px; top; z-index: 3; background-position: right -60px; }
+#local a#loc, #local a#con, #local a#ref { position: absolute; top: 8px; width: 26px; height: 25px; border: none; display: block; text-indent: -1000px; overflow: hidden; }
+#local a#loc { right: 48px; background-position: 0 -180px; }
+#local a#con { right: 16px; background-position: 0 -205px; }
+#local a#ref { right: 77px; background-position: 0 -230px; }
+#sponsor { position: absolute; top: 8px; right: 0; width: 120px; height: 70px; z-index: 4; background-position: left -107px; padding: 0 0 0 23px; }
+#sponsor img { position: absolute; top: 10px; right: 0; width: 108px; height: 50px; }
+
+
+/* small-nav */
+#mininavi { position: absolute; top: 39px; right: 123px; font-size: 10px; padding: 3px 15px 3px 3px; background-color: #666; border-color: #aaa; border-style: solid; border-width: 1px 0 0 1px; z-index: 3; }
+#mininavi span { color: #fff; float: left; display: block; }
+#mininavi ul { float: left; }
+#mininavi ul li { float: left; margin: 0 2px; }
+#mininavi ul li #infos { border-right: 1px solid #fff; padding: 0 4px 0 0; }
+#mininavi ul li #lang_en, #mininavi ul li #lang_de { position: relative; height: 15px; top: -0px; width: 16px; display: block; overflow: hidden; text-indent: -9000px; cursor: pointer; background: url(images/flags.png) no-repeat 0 0; }
+#mininavi ul li #lang_en {  background-position: 0 0; }
+#mininavi ul li #lang_en {  background-position: 0 -16px; }
+#mininavi ul li #lang_fr {  background-position: 0 -32px; }
+
+
+
+/* basic document frame (contains metadata, document itself and both navigation elements) */
+#whiteboxcontainer { position: relative; min-width: 700px; height: auto; vertical-align: top; }
+#whitebox { position: relative; width: auto; height: auto; min-width: 700px; background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAMAAAC6sdbXAAAABlBMVEXZ2dkAAABP7x8TAAAAAnRSTlP/AOW3MEoAAAAWSURBVAgdY2AEAgYGEAGEEATmgQhGAAFKABXO4MGqAAAAAElFTkSuQmCC') repeat 0 0; border-width: 10px; border-style: solid; border-color: #fff; }
+#whitebox table { margin: 0 auto 0 auto; }
+#whitebox table tr td#messages { text-align: left; padding: 10px 25px 25px; }
+#whitebox table tr td#messages h3 { margin: 15px 0 5px; }
+#whitebox table tr td#messages ul.check { list-style-image: url(images/check.png); }
+#whitebox table tr td#messages ul.error { list-style-image: url(images/error.png); }
+#whitebox table tr td#messages ul.warning { list-style-image: url(images/warning.png); }
+#whitebox table tr td#messages ul.hint { list-style-image: url(images/hint.png); }
+#whitebox table tr td#messages ul li { margin-top: 5px; }
+#whitebox table tr td#messages object#sourcecode { width: 100%; height: 100%; min-height: 500px; margin-top: 25px; display: none; }
+
+
+/* table of contents */
+td#navcontainer { position: relative; min-width: 240px; vertical-align: top; }
+#nav { position: relative; margin: 240px 0 0 40px; text-align: left; background: #888; padding: 8px; font-size: 10px; line-height: 1.2; -webkit-box-shadow: 0 3px 8px rgba(0,0,0,0.4); -moz-box-shadow: 0 3px 8px rgba(0,0,0,0.4); -o-box-shadow: 0 3px 8px rgba(0,0,0,0.4); box-shadow: 0 3px 8px rgba(0,0,0,0.4); border: 1px solid #aaa; }
+#nav > ul { border-top: 1px dotted #aaa; margin: 10px 0; }
+#nav ul li { position: relative; }
+#nav ul li a { position: relative; border-bottom: 1px dotted #aaa; display: block; padding: 4px; }
+#nav ul li a:hover { background-color: #f44; text-decoration: none; }
+#nav ul li a { padding-left: 1px; }
+#nav ul li li a { padding-left: 10px; }
+#nav ul li li li a { padding-left: 20px; }
+#nav ul li li li li a { padding-left: 30px; }
+#nav ul li li li li li a { padding-left: 40px; }
+#nav ul li li li li li li a { padding-left: 50px; }
+#nav ul li li li li li li li a { padding-left: 60px; }
+#nav ul li li.active { font-weight: bold; }
+#nav ul li.current { background: #555; }
+#nav ul li .currentArrow { position: absolute; top: 5px; left: -23px; height: 100%; width: 6px; display: block; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAMAAACg0N8BAAAABlBMVEX///8vLy/fHteXAAAAAnRSTlP/AOW3MEoAAAAbSURBVAhbY2AEAgYGBjgFxlAKSRghCKeQFAAABcYAKeph6IYAAAAASUVORK5CYII=') no-repeat 0 0; }
+
+
+/* page navigation and title with metadata */
+#toprow { position: relative; top: 0; left: 0; margin: 0 20px 0 0; z-index: 10; text-align: left; }
+#bottomrow { position: relative; top: 0; left: 0; height: 30px; margin: 0 20px 0 auto; width: 700px; z-index: 10; text-align: left; clear: left; }
+#browser_top, #browser_bottom { position: absolute; right: 20px; bottom: 0; width: 370px; height: 26px; background: #fff; z-Index: 10; border-style: solid; border-color: #fff; }
+#browser_top { border-width: 4px 0 0 0; }
+#browser_bottom { border-width: 0 0 4px 0; }
+#title { position: relative; left: 0; top: 0; margin: 0 205px 0 20px; padding: 12px 12px 36px 12px; color: #fff; text-align: left; background-color: #888; }
+h2 { font-weight: bold; display: inline; }
+h2 .volume { font-weight: normal; }
+.dfgviewer .uri { font-size:11px; color:#fff; font-weight:normal; display:block; margin:6px 0 0 0; }
+.dfgviewer .uri a { color:#fff; font-weight:normal; text-decoration:none; border-bottom:1px dotted #ccc; }
+.dfgviewer .uri a:hover { color:#999; border-bottom:1px dotted #999; background:#fff; }
+.dfgviewer .author { color:#ddd; font-weight:normal; }
+.dfgviewer .place, .dfgviewer .date { color:#ccc; font-weight:normal; }
+.opac, .double, .downloads, .zoom, .backs, .fwds { position: relative; height: 21px; float: left; border-right: 1px dotted #999; padding: 2px 4px; }
+.fwds { padding: 2px 0 2px 4px; border-right: none; }
+.opac *, .double *, .downloads *, .zoom *, .first, .rwnd, .prev, .next, .fwd, .last { position: relative; float: left; height: 20px; width: 22px; margin: 0 1px; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
+.opac a { background-position: 0 0; } .opac a:hover { background-position: 0 -20px; } .opac span { background-position: 0 -40px; }
+.double a.doubleoff { background-position: -264px 0; } .double a.doubleoff:hover { background-position: -264px -20px; } .double span.doubleoff { background-position: -264px -40px; }
+.double a.switch { background-position: -286px 0; } .double a.switch:hover { background-position: -286px -20px; } .double span.switch { background-position: -286px -40px; }
+.downloads a.site { background-position: -220px 0; } .downloads a.site:hover { background-position: -220px -20px; } .downloads span.site { background-position: -220px -40px; }
+.downloads a.all { background-position: -198px 0; } .downloads a.all:hover { background-position: -198px -20px; } .downloads span.all { background-position: -198px -40px; }
+.zoom a.in { background-position: -44px 0; } .zoom a.in:hover { background-position: -44px -20px; } .zoom span.in { background-position: -44px -40px; }
+.zoom a.out { background-position: -22px 0; } .zoom a.out:hover { background-position: -22px -20px; } .zoom span.out { background-position: -22px -40px; }
+.first { background-position: -154px 0; } a.first:hover { background-position: -154px -20px; } span.first { background-position: -154px -40px; }
+a.rwnd { background-position: -66px 0; } a.rwnd:hover { background-position: -66px 0; } span.rwnd { background-position: -66px -40px; }
+a.prev { background-position: -110px 0; } a.prev:hover { background-position: -110px -20px; } span.prev { background-position: -110px -40px; }
+a.next { background-position: -132px 0; } a.next:hover { background-position: -132px -20px; } span.next { background-position: -132px -40px; }
+a.fwd { background-position: -88px 0; } a.fwd:hover { background-position: -88px -20px; } span.fwd { background-position: -88px -40px; }
+a.last { background-position: -176px 0; } a.last:hover { background-position: -176px -20px; } span.last { background-position: -176px -40px; }
+.pages { position: absolute; right: 0; font-size: 11px; }
+#toprow .pages { top: -40px; }
+#bottomrow .pages { bottom: -40px; }
+.pages label { color: #ccc; }
+.pages select { margin: 0 0 0 4px; }
+
+
+/* DLFs page view system */
+.tx-dlf-pageview { position: relative; height: 600px; width: 750px; }
+ #tx-dlf-map { position: relative; height: 100%; width: 100%; }
+.tx-dlf-pageview .olTileImage {  cursor: move; }
+
+
+/* black gradient footer bar */
+#siteend { position: absolute; bottom: 0; left: 0; width: 100%; height: 85px; background-position: 0 -100px; z-index: 1; }
+#siteendspacer { position: relative; height: 85px; width: 100%; z-Index: 10; background: transparent !important; }
+
+
+/* EOF */

@@ -1,0 +1,145 @@
+config {
+	sys_language_uid = 0
+	htmlTag_langKey = de-DE
+	locale_all = de_DE.utf8
+	language = de
+	renderCharset = utf-8
+	enableContentLengthHeader = 1
+	htmlTag_setParams = xmlns="http://www.w3.org/1999/xhtml"
+	htmlTag_dir = ltr
+	xhtml_cleaning = all
+	doctype = xhtml_strict
+	removeDefaultJS = 1
+	baseURL = {$plugin.tx_dfgviewer.baseURL}
+	cache_period = 86400
+	cache_clearAtMidnight = 1
+	sendCacheHeaders = 1
+	meaningfulTempFilePrefix = 1
+}
+[globalVar = GP:L=1]
+config.sys_language_uid = 1
+config.htmlTag_langKey = en-GB
+config.locale_all = en_GB.utf8
+config.language =
+[global]
+
+plugin.tx_dfgviewer_amd {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	templateFile = {$plugin.tx_dfgviewer.templateFileAmd}
+}
+
+plugin.tx_dfgviewer_uri {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	templateFile = {$plugin.tx_dfgviewer.templateFileUri}
+}
+
+plugin.tx_dlf_metadata {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	excludeOther = 0
+	linkTitle = 0
+	getTitle = 0
+	showFull = 0
+	rootline = 1
+	separator = #
+	templateFile = {$plugin.tx_dfgviewer.templateFileMeta}
+}
+
+plugin.tx_dlf_navigation {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	pageStep = 5
+	templateFile = {$plugin.tx_dfgviewer.templateFileNav}
+}
+
+plugin.tx_dlf_pageview {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	excludeOther = 0
+	features =
+	elementId = tx-dfgviewer-map
+	templateFile = {$plugin.tx_dfgviewer.templateFilePage}
+}
+
+plugin.tx_dlf_pagegrid {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	limit = 24
+	placeholder = EXT:dfgviewer/res/images/placeholder.jpg
+	targetPid.data = TSFE:page|uid
+	templateFile = {$plugin.tx_dfgviewer.templateFileGrid}
+}
+
+plugin.tx_dlf_toc {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	excludeOther = 0
+	targetPid.data = TSFE:page|uid
+	templateFile = {$plugin.tx_dfgviewer.templateFileToc}
+	menuConf {
+		expAll = 0
+		1 = TMENU
+		1.noBlur = 1
+		1.wrap = <td id="navcontainer"><div id="nav"><div id="navtop"></div><a id="skip2nav"></a><ul>|</ul><div id="navend"></div></div></td>
+		1.NO = 1
+		1.NO.stdWrap.crop = 55 | &nbsp;... | 1
+		1.NO.stdWrap.ifEmpty.field = type
+		1.NO.stdWrap.dataWrap = | <span class="pagination">{field:pagination}</span>
+		1.NO.doNotLinkIt.field = doNotLinkIt
+		1.NO.ATagTitle.field = type
+		1.NO.allWrap = <span class="a">|</span>
+		1.NO.allWrap.fieldRequired = doNotLinkIt
+		1.NO.wrapItemAndSub = <li>|</li>
+		1.IFSUB < .1.NO
+		1.IFSUB.wrapItemAndSub = <li class="submenu">|</li>
+		1.CUR < .1.NO
+		1.CUR.wrapItemAndSub = <li class="current">|</li>
+		1.CURIFSUB < .1.NO
+		1.CURIFSUB.wrapItemAndSub = <li class="current submenu">|</li>
+		1.ACT < .1.NO
+		1.ACT.wrapItemAndSub = <li class="active">|</li>
+		1.ACTIFSUB < .1.NO
+		1.ACTIFSUB.wrapItemAndSub = <li class="active submenu">|</li>
+		2 < .1
+		2.wrap = <ul>|</ul>
+		3 < .2
+		4 < .3
+		5 < .4
+	}
+}
+
+includeLibs.t3jquery = EXT:t3jquery/class.tx_t3jquery.php
+
+page >
+
+page = PAGE
+
+page.typeNum = 0
+
+page.meta.author.field = author
+page.meta.description.field = description
+page.meta.keywords.field = keywords
+page.meta.robots = noindex
+
+page.shortcutIcon = EXT:dfgviewer/res/favicon.ico
+
+page.includeCSS.styles = {$plugin.tx_dfgviewer.stylesheet}
+page.includeCSS.styles.media = screen,projection
+page.includeJS.script = {$plugin.tx_dfgviewer.javascript}
+
+page.bodyTag = <body class="dfgviewer">
+
+page.1 = USER
+page.1.userFunc = tx_t3jquery->addJqJS
+
+page.2 = TEMPLATE
+page.2.template = FILE
+page.2.template.file = {$plugin.tx_dfgviewer.templateFile}
+page.2.workOnSubpart = TEMPLATE
+
+page.2.marks.AMD < plugin.tx_dfgviewer_amd
+page.2.marks.METADATA < plugin.tx_dlf_metadata
+page.2.marks.URI < plugin.tx_dfgviewer_uri
+page.2.marks.GUI < plugin.tx_dlf_navigation
+[globalVar = GP:tx_dfgviewer|thumbs=1]
+page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
+page.2.marks.NAVIGATION = TEXT
+[else]
+page.2.marks.IMAGE < plugin.tx_dlf_pageview
+page.2.marks.NAVIGATION < plugin.tx_dlf_toc
+[global]
