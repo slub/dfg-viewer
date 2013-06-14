@@ -101,7 +101,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 			foreach ($uriBook as $uri) {
 
-				if (strpos($uri, 'http:') === 0) {
+				if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
 
 					$uris[] = '<a href="'.htmlspecialchars($uri).'">'.htmlspecialchars($uri).'</a>';
 
@@ -130,7 +130,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 			foreach ($uriPage as $uri) {
 
-				if (strpos($uri, 'http:') === 0) {
+				if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
 
 					$uris[] = '<a href="'.htmlspecialchars($uri).'">'.htmlspecialchars($uri).'</a>';
 
