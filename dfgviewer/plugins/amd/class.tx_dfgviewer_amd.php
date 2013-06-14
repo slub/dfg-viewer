@@ -91,31 +91,35 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 			'###SPONSORLOGO###' => ''
 		);
 
+		$subpart = '';
+
 		// Get legal and contact information.
 		$legalContact = $this->doc->mets->xpath('//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE="DVRIGHTS"]/mets:xmlData');
 
 		if ($legalContact) {
 
+			$rights = $legalContact[0]->children('http://dfg-viewer.de/')->rights;
+
 			// Get owner.
-			$markerArray['###OWNER###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->owner);
+			$markerArray['###OWNER###'] = htmlspecialchars((string) $rights->owner);
 
 			// Get owner's site URL.
-			$markerArray['###OWNERSITEURL###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->ownerSiteURL);
+			$markerArray['###OWNERSITEURL###'] = htmlspecialchars((string) $rights->ownerSiteURL);
 
 			// Get owner's logo.
-			$markerArray['###OWNERLOGO###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->ownerLogo);
+			$markerArray['###OWNERLOGO###'] = htmlspecialchars((string) $rights->ownerLogo);
 
 			// Get owner's contact information.
-			$markerArray['###OWNERCONTACT###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->ownerContact);
+			$markerArray['###OWNERCONTACT###'] = htmlspecialchars((string) $rights->ownerContact);
 
 			// Get sponsor.
-			$markerArray['###SPONSOR###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->sponsor);
+			$markerArray['###SPONSOR###'] = htmlspecialchars((string) $rights->sponsor);
 
 			// Get sponsor's site URL.
-			$markerArray['###SPONSORSITEURL###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->sponsorSiteURL);
+			$markerArray['###SPONSORSITEURL###'] = htmlspecialchars((string) $rights->sponsorSiteURL);
 
 			// Get sponsor's logo.
-			$markerArray['###SPONSORLOGO###'] = htmlspecialchars((string) $legalContact[0]->children('http://dfg-viewer.de/')->rights->sponsorLogo);
+			$markerArray['###SPONSORLOGO###'] = htmlspecialchars((string) $rights->sponsorLogo);
 
 		}
 
@@ -124,11 +128,38 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 		if ($digiProv) {
 
-			// Get catalog reference.
-			$markerArray['###REFERENCE###'] = htmlspecialchars((string) $digiProv[0]->children('http://dfg-viewer.de/')->links->reference);
+			$links = $digiProv[0]->children('http://dfg-viewer.de')->links;
+
+			// Get sub-template.
+			$referencesTmpl = $this->cObj->getSubpart($this->template, '###REFERENCES###');
+
+			foreach ($links->reference as $reference) {
+
+				$refMarkerArray = array (
+					'###CATALOG###' => '',
+					'###REFERENCEURL###' => ''
+				);
+
+				// Get catalog references.
+				$refMarkerArray['###CATALOG###'] = htmlspecialchars((string) $reference->attributes()->linktext);
+
+				if (empty($refMarkerArray['###CATALOG###'])) {
+
+					$refMarkerArray['###CATALOG###'] = $this->pi_getLL('opac', '', TRUE);
+
+				}
+
+				$refMarkerArray['###REFERENCEURL###'] = htmlspecialchars((string) $reference);
+
+				$subpart .= $this->cObj->substituteMarkerArray($referencesTmpl, $refMarkerArray);
+
+			}
 
 			// Get local view.
-			$markerArray['###LOCALVIEW###'] = htmlspecialchars((string) $digiProv[0]->children('http://dfg-viewer.de/')->links->presentation);
+
+			$markerArray['###LOCALVIEW###'] = $this->pi_getLL('localview', '', TRUE);
+
+			$markerArray['###LOCALVIEWURL###'] = htmlspecialchars((string) $links->presentation);
 
 		}
 
@@ -143,7 +174,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 		}
 
-		return $this->cObj->substituteMarkerArray($this->template, $markerArray);
+		return $this->cObj->substituteSubpart($this->cObj->substituteMarkerArray($this->template, $markerArray), '###REFERENCES###', $subpart, TRUE);
 
 	}
 

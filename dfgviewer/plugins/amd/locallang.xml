@@ -10,12 +10,16 @@
 			<label index="tt_content.pi_flexform.templateFile">Template file</label>
 			<label index="dfg">German Research Foundation</label>
 			<label index="dfgLink">http://www.dfg.de/en/</label>
+			<label index="localview">Show in local context</label>
+			<label index="opac">Online Public Access Catalog</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.pi_flexform.sheet_general">Einstellungen</label>
 			<label index="tt_content.pi_flexform.templateFile">HTML-Template</label>
 			<label index="dfg">Deutsche Forschungsgemeinschaft</label>
 			<label index="dfgLink">http://www.dfg.de/</label>
+			<label index="localview">Lokale Präsentation anzeigen</label>
+			<label index="opac">Lokaler Katalog</label>
 		</languageKey>
 	</data>
 </T3locallang>
