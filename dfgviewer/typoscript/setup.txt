@@ -62,7 +62,7 @@ plugin.tx_dlf_pagegrid {
 	pages = {$plugin.tx_dfgviewer.storagePid}
 	limit = 24
 	placeholder = EXT:dfgviewer/res/images/placeholder.jpg
-	targetPid.data = TSFE:page|uid
+	targetPid = #
 	templateFile = {$plugin.tx_dfgviewer.templateFileGrid}
 }
 
@@ -136,7 +136,7 @@ page.2.marks.AMD < plugin.tx_dfgviewer_amd
 page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
 page.2.marks.GUI < plugin.tx_dlf_navigation
-[globalVar = GP:tx_dfgviewer|thumbs=1]
+[globalVar = GP:set|thumbs=1]
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
 page.2.marks.NAVIGATION = TEXT
 [else]
