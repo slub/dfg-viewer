@@ -84,8 +84,8 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 			'###OWNERSITEURL###' => '',
 			'###OWNERLOGO###' => '',
 			'###OWNERCONTACT###' => '',
-			'###REFERENCE###' => '',
 			'###LOCALVIEW###' => '',
+			'###LOCALVIEWURL###' => '',
 			'###SPONSOR###' => '',
 			'###SPONSORSITEURL###' => '',
 			'###SPONSORLOGO###' => ''
@@ -128,7 +128,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 		if ($digiProv) {
 
-			$links = $digiProv[0]->children('http://dfg-viewer.de')->links;
+			$links = $digiProv[0]->children('http://dfg-viewer.de/')->links;
 
 			// Get sub-template.
 			$referencesTmpl = $this->cObj->getSubpart($this->template, '###REFERENCES###');
