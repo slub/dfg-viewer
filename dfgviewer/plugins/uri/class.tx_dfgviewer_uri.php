@@ -66,6 +66,11 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 			// Quit without doing anything if required variables are not set.
 			return $content;
 
+		} else {
+
+			// Set default values if not set.
+			$this->piVars['page'] = t3lib_div::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+
 		}
 
 		// Load template file.
