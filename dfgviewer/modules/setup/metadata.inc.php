@@ -99,7 +99,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => '',
+		'wrap' => "key.noTrimWrap = || |\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
 		'is_listed' => 1,
 	),
 	'place' => array (
