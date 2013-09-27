@@ -1,18 +1,18 @@
 <!-- ###TEMPLATE### -->
-	<div class="grid">
-		<a class="gridon" title="Seitenvorschau aktivieren">Seitenvorschau aktivieren</a>
-	</div>
 	<div class="downloads">
 		<span class="site" title="diese Seite herunterladen">diese Seite herunterladen</span>
 		<span class="all" title="ganzes Werk herunterladen">ganzes Werk herunterladen</span>
+	</div>
+	<div class="grid">
+		<a class="gridon" title="Seitenvorschau aktivieren" onclick="window.location.search+='&amp;set%5Bthumbs%5D=1';">Seitenvorschau aktivieren</a>
 	</div>
 	<div class="doublepage">
 		<span class="double">###DOUBLEPAGE###</span>
 		<span class="switch">###DOUBLEPAGE+1###</span>
 	</div>
 	<div class="zoom">
-		<span class="in" title="Ansicht vergrößern">Ansicht vergrößern</span>
-		<span class="out" title="Ansicht verkleinern">Ansicht verkleinern</span>
+		<a class="in" title="Ansicht vergrößern" onclick="tx_dlf_viewer.map.zoomIn();">Ansicht vergrößern</a>
+		<a class="out" title="Ansicht verkleinern" onclick="tx_dlf_viewer.map.zoomOut();">Ansicht verkleinern</a>
 	</div>
 	<div class="backs">
 		<span class="first">###FIRST###</span>

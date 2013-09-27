@@ -139,11 +139,10 @@ page.2.workOnSubpart = TEMPLATE
 page.2.marks.AMD < plugin.tx_dfgviewer_amd
 page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
-page.2.marks.GUI < plugin.tx_dlf_navigation
 [globalVar = GP:set|thumbs=1]
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
-page.2.marks.NAVIGATION = TEXT
 [else]
+page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 [global]
