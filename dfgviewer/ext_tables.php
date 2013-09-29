@@ -39,7 +39,16 @@ t3lib_extMgm::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgvie
 
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_amd', 'FILE:EXT:'.$_EXTKEY.'/plugins/amd/flexform.xml');
 
-// Plugin "amd".
+// Plugin "gridpager".
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_gridpager'] = 'layout,select_key,pages,recursive';
+
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_gridpager'] = 'pi_flexform';
+
+t3lib_extMgm::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_gridpager', $_EXTKEY.'_gridpager'), 'list_type');
+
+t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_gridpager', 'FILE:EXT:'.$_EXTKEY.'/plugins/gridpager/flexform.xml');
+
+// Plugin "uri".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_uri'] = 'layout,select_key,pages,recursive';
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_uri'] = 'pi_flexform';

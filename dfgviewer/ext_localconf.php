@@ -27,6 +27,8 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 // Register plugins.
 t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/amd/class.tx_dfgviewer_amd.php', '_amd', 'list_type', FALSE);
 
+t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/gridpager/class.tx_dfgviewer_gridpager.php', '_gridpager', 'list_type', FALSE);
+
 t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/uri/class.tx_dfgviewer_uri.php', '_uri', 'list_type', FALSE);
 
 ?>

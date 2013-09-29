@@ -45,7 +45,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'php' => '5.3.0-',
 			'typo3' => '4.5.0-',
 			't3jquery' => '2.6.0-',
-			'dlf' => '1.1.2-',
+			'dlf' => '1.2.0-',
 		),
 		'conflicts' => array(
 		),

@@ -28,6 +28,13 @@ plugin.tx_dfgviewer_amd {
 	templateFile = {$plugin.tx_dfgviewer.templateFileAmd}
 }
 
+plugin.tx_dfgviewer_gridpager {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	limit = 24
+	pageStep = 5
+	templateFile = {$plugin.tx_dfgviewer.templateFilePager}
+}
+
 plugin.tx_dfgviewer_uri {
 	pages = {$plugin.tx_dfgviewer.storagePid}
 	templateFile = {$plugin.tx_dfgviewer.templateFileUri}
@@ -75,7 +82,7 @@ plugin.tx_dlf_toc {
 		expAll = 0
 		1 = TMENU
 		1.noBlur = 1
-		1.wrap = <td id="navcontainer"><div id="nav"><div id="navtop"></div><a id="skip2nav"></a><ul>|</ul><div id="navend"></div></div></td>
+		1.wrap = <div id="navcontainer"><div id="nav"><div id="navtop"></div><a id="skip2nav"></a><ul>|</ul><div id="navend"></div></div></div>
 		1.NO = 1
 		1.NO.stdWrap.crop = 55 | &nbsp;... | 1
 		1.NO.stdWrap.ifEmpty.field = type
@@ -137,11 +144,19 @@ page.2.template.file = {$plugin.tx_dfgviewer.templateFileMain}
 page.2.workOnSubpart = TEMPLATE
 
 page.2.marks.AMD < plugin.tx_dfgviewer_amd
+page.2.marks.INFOS = HTML
+page.2.marks.INFOS.value = <a href="http://dfg-viewer.de/" id="infos" title="Informationen">Informationen</a>
+page.2.marks.LANGSWITCHER = HTML
+page.2.marks.LANGSWITCHER.value = <li><a id="lang_en" title="Language: English" onclick="window.location.search+='&amp;L=1';">English</a></li><li><a id="lang_de" title="Sprache: Deutsch" onclick="window.location.search+='&amp;L=0';">Deutsch</a></li>
 page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
+page.2.marks.GRIDSWITCHER = HTML
 [globalVar = GP:set|thumbs=1]
+page.2.marks.GRIDSWITCHER.value = <a class="gridoff" title="Seitenvorschau deaktivieren" onclick="window.location.search+='&amp;set%5Bthumbs%5D=0';">Seitenvorschau deaktivieren</a>
+page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
 [else]
+page.2.marks.GRIDSWITCHER.value = <a class="gridon" title="Seitenvorschau aktivieren" onclick="window.location.search+='&amp;set%5Bthumbs%5D=1';">Seitenvorschau aktivieren</a>
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc

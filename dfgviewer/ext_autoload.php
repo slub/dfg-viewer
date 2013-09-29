@@ -27,6 +27,7 @@ $extensionPath = t3lib_extMgm::extPath('dfgviewer');
 return array (
 	'tx_dfgviewer_modSetup' => $extensionPath.'modules/setup/index.php',
 	'tx_dfgviewer_amd' => $extensionPath.'plugins/amd/class.tx_dfgviewer_amd.php',
+	'tx_dfgviewer_gridpager' => $extensionPath.'plugins/gridpager/class.tx_dfgviewer_gridpager.php',
 	'tx_dfgviewer_uri' => $extensionPath.'plugins/uri/class.tx_dfgviewer_uri.php'
 );
 
