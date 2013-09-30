@@ -11,6 +11,8 @@ config {
 	doctype = xhtml_strict
 	removeDefaultJS = 1
 	baseURL = {$plugin.tx_dfgviewer.baseURL}
+	linkVars = L
+	uniqueLinkVars = 1
 	cache_period = 86400
 	cache_clearAtMidnight = 1
 	sendCacheHeaders = 1
@@ -141,9 +143,11 @@ lib.gridswitcher {
 	value.typolink.addQueryString.exclude = cHash
 }
 [globalVar = GP:tx_dlf|pagegrid=1]
+lib.gridswitcher.value.typolink.additionalParams = &tx_dlf[pagegrid]=0
 lib.gridswitcher.value.typolink.title = Einzelbildansicht
 lib.gridswitcher.value.typolink.ATagParams = class="gridoff"
 [else]
+lib.gridswitcher.value.typolink.additionalParams = &tx_dlf[pagegrid]=1
 lib.gridswitcher.value.typolink.title = Thumbnail-Vorschau
 lib.gridswitcher.value.typolink.ATagParams = class="gridon"
 [global]
