@@ -125,6 +125,9 @@ lib.langswitcher {
 	special = language
 	special.value = 1,0
 	special.normalWhenNoLanguage = 1
+	addQueryString = 1
+	addQueryString.method = GET
+	addQueryString.exclude = cHash
 	1 = TMENU
 	1.accessKey = 1
 	1.noBlur = 1
