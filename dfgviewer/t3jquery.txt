@@ -1,1 +1,2 @@
-components=jQuery
+script=res/js/script.js
+components=jQuery,EffectsSlide
