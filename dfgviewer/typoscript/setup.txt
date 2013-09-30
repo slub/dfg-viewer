@@ -110,6 +110,44 @@ plugin.tx_dlf_toc {
 	}
 }
 
+lib.info = HTML
+lib.info {
+	value = DFG-Viewer
+	value.typolink.parameter = http://dfg-viewer.de/
+	value.typolink.title = DFG-Viewer
+	value.typolink.ATagParams = id="infos"
+}
+
+lib.langswitcher = HMENU
+lib.langswitcher {
+	special = language
+	special.value = 1,0
+	special.normalWhenNoLanguage = 1
+	1 = TMENU
+	1.accessKey = 1
+	1.noBlur = 1
+	1.NO = 1
+	1.NO.ATagParams = id="lang_en" || id="lang_de"
+	1.NO.ATagTitle = Language: English || Sprache: Deutsch
+	1.NO.allWrap = <li>|</li>
+}
+
+lib.gridswitcher = HTML
+lib.gridswitcher {
+	value = Thumbnails
+	value.typolink.parameter = #
+	value.typolink.addQueryString = 1
+	value.typolink.addQueryString.method = GET
+	value.typolink.addQueryString.exclude = cHash
+}
+[globalVar = GP:tx_dlf|pagegrid=1]
+lib.gridswitcher.value.typolink.title = Einzelbildansicht
+lib.gridswitcher.value.typolink.ATagParams = class="gridoff"
+[else]
+lib.gridswitcher.value.typolink.title = Thumbnail-Vorschau
+lib.gridswitcher.value.typolink.ATagParams = class="gridon"
+[global]
+
 includeLibs.t3jquery = EXT:t3jquery/class.tx_t3jquery.php
 
 page >
@@ -136,7 +174,7 @@ page.1.userFunc = tx_t3jquery->addJqJS
 
 page.2 = TEMPLATE
 page.2.template = FILE
-[globalVar = GP:set|thumbs=1]
+[globalVar = GP:tx_dlf|pagegrid=1]
 page.2.template.file = {$plugin.tx_dfgviewer.templateFileThumbs}
 [else]
 page.2.template.file = {$plugin.tx_dfgviewer.templateFileMain}
@@ -144,19 +182,15 @@ page.2.template.file = {$plugin.tx_dfgviewer.templateFileMain}
 page.2.workOnSubpart = TEMPLATE
 
 page.2.marks.AMD < plugin.tx_dfgviewer_amd
-page.2.marks.INFOS = HTML
-page.2.marks.INFOS.value = <a href="http://dfg-viewer.de/" id="infos" title="Informationen">Informationen</a>
-page.2.marks.LANGSWITCHER = HTML
-page.2.marks.LANGSWITCHER.value = <li><a id="lang_en" title="Language: English" onclick="window.location.search+='&amp;L=1';">English</a></li><li><a id="lang_de" title="Sprache: Deutsch" onclick="window.location.search+='&amp;L=0';">Deutsch</a></li>
+page.2.marks.INFOS < lib.info
+page.2.marks.LANGSWITCHER < lib.langswitcher
 page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
-page.2.marks.GRIDSWITCHER = HTML
-[globalVar = GP:set|thumbs=1]
-page.2.marks.GRIDSWITCHER.value = <a class="gridoff" title="Seitenvorschau deaktivieren" onclick="window.location.search+='&amp;set%5Bthumbs%5D=0';">Seitenvorschau deaktivieren</a>
+page.2.marks.GRIDSWITCHER < lib.gridswitcher
+[globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
 [else]
-page.2.marks.GRIDSWITCHER.value = <a class="gridon" title="Seitenvorschau aktivieren" onclick="window.location.search+='&amp;set%5Bthumbs%5D=1';">Seitenvorschau aktivieren</a>
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
