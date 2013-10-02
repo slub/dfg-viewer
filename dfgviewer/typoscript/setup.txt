@@ -25,6 +25,16 @@ config.locale_all = en_GB.utf8
 config.language =
 [global]
 
+[globalString = GP:set|mets=http*]
+plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
+[global]
+[globalVar = GP:set|image>0]
+plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
+[global]
+[globalVar = GP:set|double>0]
+plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
+[global]
+
 plugin.tx_dfgviewer_amd {
 	pages = {$plugin.tx_dfgviewer.storagePid}
 	templateFile = {$plugin.tx_dfgviewer.templateFileAmd}
