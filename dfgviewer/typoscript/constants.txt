@@ -12,10 +12,7 @@ plugin.tx_dfgviewer {
 	javascript = EXT:dfgviewer/res/js/script.js
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file
-	templateFileMain = EXT:dfgviewer/res/template_main.tmpl
-
-	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Thumbnails template file
-	templateFileThumbs = EXT:dfgviewer/res/template_thumbs.tmpl
+	templateFile = EXT:dfgviewer/res/template.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Metadata template file
 	templateFileMeta = EXT:dfgviewer/res/metadata.tmpl

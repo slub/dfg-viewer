@@ -191,11 +191,7 @@ page.1.userFunc = tx_t3jquery->addJqJS
 
 page.2 = TEMPLATE
 page.2.template = FILE
-[globalVar = GP:tx_dlf|pagegrid=1]
-page.2.template.file = {$plugin.tx_dfgviewer.templateFileThumbs}
-[else]
-page.2.template.file = {$plugin.tx_dfgviewer.templateFileMain}
-[global]
+page.2.template.file = {$plugin.tx_dfgviewer.templateFile}
 page.2.workOnSubpart = TEMPLATE
 
 page.2.marks.AMD < plugin.tx_dfgviewer_amd
@@ -207,6 +203,7 @@ page.2.marks.GRIDSWITCHER < lib.gridswitcher
 [globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
+page.2.marks.NAVIGATION = HTML
 [else]
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
