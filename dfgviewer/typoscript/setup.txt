@@ -25,6 +25,8 @@ config.locale_all = en_GB.utf8
 config.language =
 [global]
 
+plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
+
 [globalString = GP:set|mets=http*]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [global]
