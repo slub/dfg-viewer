@@ -101,71 +101,71 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 			$rights = $legalContact[0]->children('http://dfg-viewer.de/')->rights;
 
 			// Get owner.
-			$markerArray['###OWNER###'] = htmlspecialchars((string) $rights->owner);
+			$markerArray['###OWNER###'] = htmlspecialchars(trim((string) $rights->owner));
 
 			// Get owner's site URL.
-			if (t3lib_div::isValidUrl((string) $rights->ownerSiteURL)
+			if (t3lib_div::isValidUrl(trim((string) $rights->ownerSiteURL))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###OWNERSITEURL###'] = htmlspecialchars((string) $rights->ownerSiteURL);
+				$markerArray['###OWNERSITEURL###'] = htmlspecialchars(trim((string) $rights->ownerSiteURL));
 
 			}
 
 			// Get owner's logo.
-			if (t3lib_div::isValidUrl((string) $rights->ownerLogo)
+			if (t3lib_div::isValidUrl(trim((string) $rights->ownerLogo))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###OWNERLOGO###'] = htmlspecialchars((string) $rights->ownerLogo);
+				$markerArray['###OWNERLOGO###'] = htmlspecialchars(trim((string) $rights->ownerLogo));
 
 			}
 
 			// Get owner's contact information.
-			if (t3lib_div::isValidUrl((string) $rights->ownerContact)
+			if (t3lib_div::isValidUrl(trim((string) $rights->ownerContact))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###OWNERCONTACT###'] = htmlspecialchars((string) $rights->ownerContact);
+				$markerArray['###OWNERCONTACT###'] = htmlspecialchars(trim((string) $rights->ownerContact));
 
-			} elseif (t3lib_div::isValidUrl('mailto:'.(string) $rights->ownerContact)
+			} elseif (t3lib_div::isValidUrl('mailto:'.trim((string) $rights->ownerContact))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###OWNERCONTACT###'] = htmlspecialchars('mailto:'.(string) $rights->ownerContact);
+				$markerArray['###OWNERCONTACT###'] = htmlspecialchars('mailto:'.trim((string) $rights->ownerContact));
 
 			}
 
 			// Get sponsor.
-			$markerArray['###SPONSOR###'] = htmlspecialchars((string) $rights->sponsor);
+			$markerArray['###SPONSOR###'] = htmlspecialchars(trim((string) $rights->sponsor));
 
 			// Get sponsor's site URL.
-			if (t3lib_div::isValidUrl((string) $rights->sponsorSiteURL)
+			if (t3lib_div::isValidUrl(trim((string) $rights->sponsorSiteURL))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###SPONSORSITEURL###'] = htmlspecialchars((string) $rights->sponsorSiteURL);
+				$markerArray['###SPONSORSITEURL###'] = htmlspecialchars(trim((string) $rights->sponsorSiteURL));
 
 			}
 
 			// Get sponsor's logo.
-			if (t3lib_div::isValidUrl((string) $rights->sponsorLogo)
+			if (t3lib_div::isValidUrl(trim((string) $rights->sponsorLogo))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###SPONSORLOGO###'] = htmlspecialchars((string) $rights->sponsorLogo);
+				$markerArray['###SPONSORLOGO###'] = htmlspecialchars(trim((string) $rights->sponsorLogo));
 
 			}
 
@@ -183,7 +183,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 			foreach ($links->reference as $reference) {
 
-				if (t3lib_div::isValidUrl((string) $reference)
+				if (t3lib_div::isValidUrl(trim((string) $reference))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -195,7 +195,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 					);
 
 					// Get catalog references.
-					$refMarkerArray['###CATALOG###'] = htmlspecialchars((string) $reference->attributes()->linktext);
+					$refMarkerArray['###CATALOG###'] = htmlspecialchars(trim((string) $reference->attributes()->linktext));
 
 					if (empty($refMarkerArray['###CATALOG###'])) {
 
@@ -203,7 +203,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 					}
 
-					$refMarkerArray['###REFERENCEURL###'] = htmlspecialchars((string) $reference);
+					$refMarkerArray['###REFERENCEURL###'] = htmlspecialchars(trim((string) $reference));
 
 					$subpart .= $this->cObj->substituteMarkerArray($referencesTmpl, $refMarkerArray);
 
@@ -214,13 +214,13 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 			// Get local view.
 			$markerArray['###LOCALVIEW###'] = $this->pi_getLL('localview', '', TRUE);
 
-			if (t3lib_div::isValidUrl((string) $links->presentation)
+			if (t3lib_div::isValidUrl(trim((string) $links->presentation))
 				// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 				// the function to validate URLs containing whitespaces and invalidate URLs containing
 				// hyphens. (see https://bugs.php.net/bug.php?id=51192)
 				|| version_compare(phpversion(), '5.3.3', '<')) {
 
-				$markerArray['###LOCALVIEWURL###'] = htmlspecialchars((string) $links->presentation);
+				$markerArray['###LOCALVIEWURL###'] = htmlspecialchars(trim((string) $links->presentation));
 
 			}
 
