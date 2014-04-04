@@ -91,14 +91,15 @@ h2 .volume { font-weight: normal; }
 .grid { left: 56px; }
 .doublepage { left: 90px;  }
 .fwds { padding: 2px 0 2px 4px; border-right: none; }
-.doublepage *, .grid *, .switch *, .downloads *, .zoom *, .first *, .rwnd *, .prev *, .next *, .fwd *, .last * { position: relative; float: left; height: 20px; width: 22px; margin: 0 1px; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
+.doublepage *, .grid *, .switch *, .downloads span, .zoom *, .first *, .rwnd *, .prev *, .next *, .fwd *, .last * { position: relative; float: left; height: 20px; width: 22px; margin: 0 1px; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
+.downloads span a { position: relative; height: 20px; width: 22px; margin: 0; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
 .grid a { background-position: -308px 0; } .grid a:hover { background-position: -308px -20px; } .grid span { background-position: -308px -40px; }
 .grid a.gridoff { background-position: -330px 0; } .grid a.gridoff:hover { background-position: -330px -20px; } .grid span.gridoff { background-position: -330px -40px; }
 .double a.tx-dlf-navigation-doubleOn { background-position: -242px 0; } .double a.tx-dlf-navigation-doubleOn:hover { background-position: -242px -20px; } .double.tx-dlf-navigation-doubleOn span { background-position: -242px -40px; }
 .double a.tx-dlf-navigation-doubleOff { background-position: -264px 0; } .double a.tx-dlf-navigation-doubleOff:hover { background-position: -264px -20px; } .double.tx-dlf-navigation-doubleOff span { background-position: -264px -40px; }
 .switch a { background-position: -286px 0; } .switch a:hover { background-position: -286px -20px; } .switch span { background-position: -286px -40px; }
-.downloads a.site { background-position: -220px 0; } .downloads a.site:hover { background-position: -220px -20px; } .downloads span.site { background-position: -220px -40px; }
-.downloads a.all { background-position: -198px 0; } .downloads a.all:hover { background-position: -198px -20px; } .downloads span.all { background-position: -198px -40px; }
+.downloads span.site a { background-position: -220px 0; } .downloads span.site a:hover { background-position: -220px -20px; } .downloads span.site { background-position: -220px -40px; }
+.downloads span.all a { background-position: -198px 0; } .downloads span.all a:hover { background-position: -198px -20px; } .downloads span.all { background-position: -198px -40px; }
 .zoom a.in { background-position: -44px 0; } .zoom a.in:hover { background-position: -44px -20px; } .zoom span.in { background-position: -44px -40px; }
 .zoom a.out { background-position: -22px 0; } .zoom a.out:hover { background-position: -22px -20px; } .zoom span.out { background-position: -22px -40px; }
 .first a { background-position: -154px 0; } .first a:hover { background-position: -154px -20px; } .first span { background-position: -154px -40px; }

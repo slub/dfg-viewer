@@ -40,4 +40,10 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Table of Contents template file
 	templateFileToc = EXT:dfgviewer/res/toc.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Toolbox template file
+	templateFileToolbox = EXT:dfgviewer/res/toolbox.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Download Tool template file
+	templateFileToolPdf = EXT:dfgviewer/res/downloads.tmpl
 }

@@ -124,6 +124,16 @@ plugin.tx_dlf_toc {
 	}
 }
 
+plugin.tx_dlf_toolbox {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	tools = tx_dlf_toolsPdf
+	templateFile = {$plugin.tx_dfgviewer.templateFileToolbox}
+}
+
+plugin.tx_dlf_toolsPdf {
+	templateFile = {$plugin.tx_dfgviewer.templateFileToolPdf}
+}
+
 lib.info = HTML
 lib.info {
 	value = DFG-Viewer
@@ -201,6 +211,7 @@ page.2.marks.INFOS < lib.info
 page.2.marks.LANGSWITCHER < lib.langswitcher
 page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
+page.2.marks.TOOLBOX < plugin.tx_dlf_toolbox
 page.2.marks.GRIDSWITCHER < lib.gridswitcher
 [globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
