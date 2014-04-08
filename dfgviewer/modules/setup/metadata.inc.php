@@ -25,6 +25,32 @@
 // Define metadata elements.
 // @see http://dfg-viewer.de/en/profile-of-the-metadata/
 $metadata = array (
+	'settlement' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:settlement',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
+		'is_listed' => 1,
+	),
+	'repository' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:repository',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
+		'is_listed' => 1,
+	),
 	'type' => array (
 		'hidden' => 1,
 		'format' => array (),
@@ -37,7 +63,7 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:name',
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title/teihdr:persName[@role="author"]',
 				'xpath_sorting' => '',
 			),
 		),
@@ -68,7 +94,7 @@ $metadata = array (
 			),
 			array (
 				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:note[@type="caption"]',
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:idno',
 				'xpath_sorting' => '',
 			),
 		),
@@ -102,12 +128,38 @@ $metadata = array (
 		'wrap' => "key.noTrimWrap = || |\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
 		'is_listed' => 1,
 	),
+	'material' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:support',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
+		'is_listed' => 1,
+	),
+	'leavesCount' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:measure[@type="leavesCount"]',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
+		'is_listed' => 1,
+	),
 	'place' => array (
 		'hidden' => 0,
 		'format' => array (
 			array (
 				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:origPlace',
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origPlace',
 				'xpath_sorting' => '',
 			),
 		),
@@ -133,8 +185,8 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:origDate',
-				'xpath_sorting' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:origDate/@when',
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate',
+				'xpath_sorting' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate/@when',
 			),
 		),
 		'default_value' => '',

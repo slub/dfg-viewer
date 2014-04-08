@@ -6,7 +6,6 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="title">DFG Viewer</label>
 			<label index="flash.wrongPageType">Page is no SysFolder!</label>
 			<label index="flash.wrongPageTypeMsg">The configuration records need to be stored in a SysFolder.</label>
 			<label index="flash.structureOkay">Structures found!</label>
@@ -73,21 +72,24 @@
 			<label index="verse">Verse</label>
 			<label index="volume">Volume</label>
 			<!-- metadata -->
+			<label index="settlement">Settlement</label>
+			<label index="repository">Repository</label>
 			<label index="type">Document Type</label>
-			<label index="title">Title</label>
-			<label index="parentTitle">Parent Title</label>
 			<label index="author">Author</label>
 			<label index="parentAuthor">Author (Parent)</label>
-			<label index="year">Year of Publication</label>
-			<label index="parentYear">Year of Publication (Parent)</label>
+			<label index="title">Title</label>
+			<label index="parentTitle">Parent Title</label>
+			<label index="volume">Volume</label>
+			<label index="material">Material</label>
+			<label index="leavesCount">Leaves Count</label>
 			<label index="place">Place of Publication</label>
 			<label index="parentPlace">Place of Publication (Parent)</label>
-			<label index="urn">URN</label>
+			<label index="year">Year of Publication</label>
+			<label index="parentYear">Year of Publication (Parent)</label>
 			<label index="vd16">VD16</label>
 			<label index="vd17">VD17</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="title">DFG-Viewer</label>
 			<label index="flash.wrongPageType">Seite ist kein SysOrdner!</label>
 			<label index="flash.wrongPageTypeMsg">Die Konfigurationsdatensätze müssen in SysOrdnern abgelegt werden.</label>
 			<label index="flash.structureOkay">Strukturdaten gefunden!</label>
@@ -154,16 +156,20 @@
 			<label index="verse">Vers</label>
 			<label index="volume">Band</label>
 			<!-- Metadaten -->
+			<label index="settlement">Aufbewahrungsort</label>
+			<label index="repository">Einrichtung</label>
 			<label index="type">Strukturtyp</label>
-			<label index="title">Titel</label>
-			<label index="parentTitle">Gesamttitel</label>
 			<label index="author">Autor</label>
 			<label index="parentAuthor">Autor (Gesamtheit)</label>
-			<label index="year">Erscheinungsjahr</label>
-			<label index="parentYear">Erscheinungsjahr (Gesamtheit)</label>
+			<label index="title">Titel</label>
+			<label index="parentTitle">Gesamttitel</label>
+			<label index="volume">Band</label>
+			<label index="material">Beschreibstoff</label>
+			<label index="leavesCount">Blattzahl</label>
 			<label index="place">Erscheinungsort</label>
 			<label index="parentPlace">Erscheinungsort (Gesamtheit)</label>
-			<label index="urn">URN</label>
+			<label index="year">Erscheinungsjahr</label>
+			<label index="parentYear">Erscheinungsjahr (Gesamtheit)</label>
 			<label index="vd16">VD16</label>
 			<label index="vd17">VD17</label>
 		</languageKey>
