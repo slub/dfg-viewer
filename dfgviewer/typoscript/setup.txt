@@ -163,6 +163,7 @@ lib.gridswitcher = HTML
 lib.gridswitcher {
 	value = Thumbnails
 	value.typolink.parameter = #
+	value.typolink.useCacheHash = 1
 	value.typolink.addQueryString = 1
 	value.typolink.addQueryString.method = GET
 	value.typolink.addQueryString.exclude = cHash
