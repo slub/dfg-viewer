@@ -4,10 +4,10 @@
 $(document).ready(function() {
 
 	// trigger height adjustment on initial load and on window resize
-	$(document).rearrangeTitleBar();  
+	$(document).rearrangeTitleBar();
 	$(window).resize(function(){ $(document).rearrangeTitleBar(); });
 
-	// hide additional functions in page browser in a hidden menu  
+	// hide additional functions in page browser in a hidden menu
 	$('.downloads, .grid, .doublepage').addClass('hiddenFunctions').hide();
 	$('#browser_top, #browser_bottom').fadeIn(120).css({'width':'224px'}).prepend('<div class="moreFunctionsTrigger"></div>');
 	$('.moreFunctionsTrigger').click(function() { $(this).fadeOut().parent().animate({'padding-left':'144px'}, 200, function() { $(this).parent().find('.hiddenFunctions').show('slide', {'direction': 'left'}, 400) }).find('.pages').animate({'right':'400px'},200); });

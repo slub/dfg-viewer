@@ -1,6 +1,6 @@
 plugin.tx_dfgviewer {
 	# cat=plugin.tx_dfgviewer/enable; type=int+; label=Storage PID
-	storagePid = 
+	storagePid =
 
 	# cat=plugin.tx_dfgviewer/links; type=string; label=Base URL
 	baseURL = http://dfg-viewer.de/
