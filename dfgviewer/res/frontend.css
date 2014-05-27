@@ -80,7 +80,7 @@ h2 .volume { font-weight: normal; }
 
 /* page browser bars */
 #toprow,#bottomrow { position: absolute; left: 0; min-height: 42px; width: 100%; }
-#toprowÂ { top: 0; }
+#toprow { top: 0; }
 #bottomrow { bottom: 0; }
 #browser_top, #browser_bottom { position: absolute; right: 20px; width: 370px; height: 26px; padding-left: 30px; background: #fff; z-Index: 10; border-style: solid; border-color: #fff; display: none; }
 #browser_top { border-width: 4px 0 0 0; bottom: 0; }
