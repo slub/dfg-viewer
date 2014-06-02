@@ -25,10 +25,7 @@ config.locale_all = en_GB.utf8
 config.language =
 [global]
 
-<<<<<<< Updated upstream
 plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
-=======
->>>>>>> Stashed changes
 
 [globalString = GP:set|mets=http*]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
@@ -236,10 +233,10 @@ page.10.value = <h2>XAB NONEx</h2>
 
 # userFunc only accepts one paramater --> glue together --> "storagePid:Type"
 # from TYPO3 6.2 multiple parameters are allowed
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper)]
-page.10 = TEXT
-page.10.value = <h2>XAB NEWSPAPER</h2>
-[global]
+#[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper)]
+#page.10 = TEXT
+#page.10.value = <h2>XAB NEWSPAPER</h2>
+#[global]
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:periodical)]
 page.10 = TEXT
@@ -258,13 +255,14 @@ page.2.marks.IMAGE < temptext
 [global]
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_year_anchor)]
-page.10 = TEXT
-page.10.value = <h2>XAB NEWSPAPER YEAR ANCHOR</h2>
+temptext = TEXT
+temptext.value = <h2>XAB NEWSPAPER YEAR ANCHOR</h2>
 page.2.marks.IMAGE < temptext
+#page.2.marks.NAVIGATION >
 [global]
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_issue)]
-page.10 = TEXT
-page.10.value = <h2>XAB NEWSPAPER ISSUE</h2>
+temptext = TEXT
+temptext.value = <h2>XAB NEWSPAPER ISSUE</h2>
 page.2.marks.IMAGE < temptext
 [global]
