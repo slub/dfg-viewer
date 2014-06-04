@@ -56,7 +56,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 		$this->init($conf);
 
 		// Turn cache off.
-		$this->setCache(FALSE);
+		//~ $this->setCache(FALSE);
 
 		// Load current document.
 		$this->loadDocument();
