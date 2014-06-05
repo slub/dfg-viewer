@@ -32,7 +32,14 @@ $(document).ready(function() {
 	// show/hide navigation (with cookie-saved status)
 	$('.tx-dlf-toc').append('<div class="hideNav" title="Navigation ein- und ausblenden"></div>');
 	var navigationStatus = getCookie('dfgviewer-navigationStatus');
-	if(navigationStatus == "closed") { $('#navcontainer').hide(); $('.tx-dlf-toc').css({'width':'30px'}); $('#whiteboxcontainer').css({'right':'30px'}); $('.hideNav').addClass('hiddenNav'); }
+	// hide navigation if cookie set to closed OR on small windows as default
+	if(navigationStatus == "closed" || (!navigationStatus && $('#whiteboxcontainer').outerWidth() < 700)) {
+		$('#navcontainer').hide();
+		$('.tx-dlf-toc').css({'width':'30px'});
+		$('#whiteboxcontainer').css({'right':'30px'});
+		$('.hideNav').addClass('hiddenNav');
+	}
+
 	$('.hideNav').click(function() {
 		if($(this).hasClass('hiddenNav')) {
 			$('.tx-dlf-toc').css({'width':'300px'});
