@@ -37,7 +37,6 @@ plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
 
-
 plugin.tx_dfgviewer_amd {
 	pages = {$plugin.tx_dfgviewer.storagePid}
 	templateFile = {$plugin.tx_dfgviewer.templateFileAmd}
@@ -215,54 +214,12 @@ page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
 page.2.marks.TOOLBOX < plugin.tx_dlf_toolbox
 page.2.marks.GRIDSWITCHER < lib.gridswitcher
-
-page.2.marks.GUI < plugin.tx_dlf_navigation
-page.2.marks.IMAGE < plugin.tx_dlf_pageview
-page.2.marks.NAVIGATION < plugin.tx_dlf_toc
-
-# overwrite in case of pagegrid
 [globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
-page.2.marks.NAVIGATION >
-[global]
-
-
-page.10 = TEXT
-page.10.value = <h2>XAB NONEx</h2>
-
-# userFunc only accepts one paramater --> glue together --> "storagePid:Type"
-# from TYPO3 6.2 multiple parameters are allowed
-#[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper)]
-#page.10 = TEXT
-#page.10.value = <h2>XAB NEWSPAPER</h2>
-#[global]
-
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:periodical)]
-page.10 = TEXT
-page.10.value = <h2>XAB PERIODICAL</h2>
-[global]
-
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:volume)]
-page.10 = TEXT
-page.10.value = <h2>XAB VOLUME</h2>
-[global]
-
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_global_anchor)]
-temptext = TEXT
-temptext.value = <h2>XAB NEWSPAPER GLOBAL ANCHOR</h2>
-page.2.marks.IMAGE < temptext
-[global]
-
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_year_anchor)]
-temptext = TEXT
-temptext.value = <h2>XAB NEWSPAPER YEAR ANCHOR</h2>
-page.2.marks.IMAGE < temptext
-#page.2.marks.NAVIGATION >
-[global]
-
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_issue)]
-temptext = TEXT
-temptext.value = <h2>XAB NEWSPAPER ISSUE</h2>
-page.2.marks.IMAGE < temptext
+page.2.marks.NAVIGATION = HTML
+[else]
+page.2.marks.GUI < plugin.tx_dlf_navigation
+page.2.marks.IMAGE < plugin.tx_dlf_pageview
+page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 [global]
