@@ -223,3 +223,18 @@ page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 [global]
+
+[userFunc = user_dlf_docTypeCheck(4152:newspaper_global_anchor)]
+page.2.marks.IMAGE = TEXT
+page.2.marks.IMAGE.value = Hallo Welt! newspaper_global_anchor
+[global]
+
+[userFunc = user_dlf_docTypeCheck(4152:newspaper_year_anchor)]
+page.2.marks.IMAGE = TEXT
+page.2.marks.IMAGE.value = Hallo Welt! newspaper_year_anchor
+[global]
+
+[userFunc = user_dlf_docTypeCheck(4152:newspaper_issue)]
+page.2.marks.IMAGE = TEXT
+page.2.marks.IMAGE.value = Hallo Welt! newspaper_issue
+[global]
