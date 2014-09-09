@@ -31,4 +31,6 @@ t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/gridpager/class.tx_dfgviewer_gridpa
 
 t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/uri/class.tx_dfgviewer_uri.php', '_uri', 'list_type', TRUE);
 
+t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php', '_newspapercalendar', 'list_type', TRUE);
+
 ?>

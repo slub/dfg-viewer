@@ -159,5 +159,36 @@ h2 .volume { font-weight: normal; }
 /* black gradient footer bar */
 #siteend { position: absolute; bottom: 0; left: 0; width: 100%; height: 25px; background-position: 0 -120px; z-index: 1; }
 
+/* newspaper calendar */
+.tx-dfgviewer-newspaper-calendar .year {
+	width: 100%;
+	font-size: 200%;
+	text-align: center;
+	padding: 20px;
+}
 
+.tx-dfgviewer-newspaper-calendar .month {
+	float: left;
+	width: 20%;
+	padding: 2px;
+	margin: 2px;
+	border: 1px solid red;
+}
+
+.tx-dfgviewer-newspaper-calendar .month a,
+.tx-dfgviewer-newspaper-calendar .month a:visited {
+	color: red;
+	font-weight: bold;
+}
+
+a.year {
+	color: red;
+}
+.tx-dfgviewer-newspaper-calendar .month td {
+	text-align: center;
+	color: #888;
+}
+.tx-dfgviewer-newspaper-calendar .clear {
+	clear: both;
+}
 /* EOF */
