@@ -49,4 +49,7 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Calendar template file
 	templateFileNewspaperCalendar = EXT:dfgviewer/plugins/newspaper-calendar/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Year List template file
+	templateFileNewspaperYears = EXT:dfgviewer/plugins/newspaper-years/template.tmpl
 }

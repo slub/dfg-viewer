@@ -175,6 +175,8 @@ h2 .volume { font-weight: normal; }
 	border: 1px solid red;
 }
 
+.tx-dfgviewer-newspaper-years .year a,
+.tx-dfgviewer-newspaper-years .year a:visited,
 .tx-dfgviewer-newspaper-calendar .month a,
 .tx-dfgviewer-newspaper-calendar .month a:visited {
 	color: red;

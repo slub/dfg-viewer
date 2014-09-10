@@ -228,35 +228,38 @@ page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 plugin.tx_dfgviewer_newspapercalendar {
 	pages = {$plugin.tx_dfgviewer.storagePid}
 	targetPid = #
-#	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperCalendar}
+	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperCalendar}
+}
+
+plugin.tx_dfgviewer_newspaperyears {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	targetPid = #
+	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperYears}
 }
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_global_anchor)]
-page.2.marks {
-	IMAGE = TEXT
-	IMAGE {
-		value = 1928
-		stdWrap.typolink {
-			parameter = 8071
-			useCacheHash = 1
-			addQueryString = 1
-			addQueryString.method = GET
-			addQueryString.exclude = cHash
-			additionalParams = &tx_dlf[id]=http://digital.slub-dresden.de/fileadmin/data/dfg-viewer-examples/newspaper-demo_year-1928.xml
-			ATagParams = class="year"
-		}
-	}
-
-}
+#page.2.marks {
+#	IMAGE = TEXT
+#	IMAGE {
+#		value = 1928
+#		stdWrap.typolink {
+#			parameter = 8071
+#			useCacheHash = 1
+#			addQueryString = 1
+#			addQueryString.method = GET
+#			addQueryString.exclude = cHash
+#			additionalParams = &tx_dlf[id]=http://digital.slub-dresden.de/fileadmin/data/dfg-viewer-examples/newspaper-demo_year-1928.xml
+#			ATagParams = class="year"
+#		}
+#	}
+#}
+page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >
 page.2.marks.GUI = TEXT
-#page.2.marks.IMAGE.value = newspaper_global_anchor
 [global]
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_year_anchor)]
-#page.2.marks.IMAGE = TEXT
-#page.2.marks.IMAGE.value = Hallo Welt! newspaper_year_anchor
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >

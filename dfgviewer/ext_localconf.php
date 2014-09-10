@@ -33,4 +33,6 @@ t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/uri/class.tx_dfgviewer_uri.php', '_
 
 t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php', '_newspapercalendar', 'list_type', TRUE);
 
+t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php', '_newspaperyears', 'list_type', TRUE);
+
 ?>
