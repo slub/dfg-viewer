@@ -99,7 +99,7 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 				$linkConf = array (
 					'useCacheHash' => 1,
 					'parameter' => $this->conf['targetPid'],
-					'additionalParams' => '&' . $this->prefixId . '[id]=' . $year['points'],
+					'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($year['points']),
 					'title' => $year['label']
 				);
 				$yearText = $this->cObj->typoLink($year['label'], $linkConf);
