@@ -195,7 +195,12 @@ page.shortcutIcon = EXT:dfgviewer/res/favicon.ico
 
 page.includeCSS.styles = {$plugin.tx_dfgviewer.stylesheet}
 page.includeCSS.styles.media = screen,projection
+
+page.includeCSS.tooltipster = {$plugin.tx_dfgviewer.css_tooltipster}
+page.includeCSS.tooltipster.media = screen,projection
+
 page.includeJS.script = {$plugin.tx_dfgviewer.javascript}
+page.includeJS.tooltipster = {$plugin.tx_dfgviewer.js_tooltipster}
 
 page.bodyTag = <body class="dfgviewer">
 

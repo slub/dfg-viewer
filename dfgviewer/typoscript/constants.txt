@@ -11,8 +11,14 @@ plugin.tx_dfgviewer {
 	# cat=plugin.tx_dfgviewer/file; type=file[css]; label=Main stylesheet file
 	stylesheet = EXT:dfgviewer/res/frontend.css
 
+	# cat=plugin.tx_dfgviewer/file; type=file[css]; label=Tooltipster stylesheet file
+	css_tooltipster = EXT:dfgviewer/res/tooltipster.css
+
 	# cat=plugin.tx_dfgviewer/file; type=file[js]; label=Main javascript file
 	javascript = EXT:dfgviewer/res/js/script.js
+
+	# cat=plugin.tx_dfgviewer/file; type=file[js]; label=Tooltipster javascript file
+	js_tooltipster = EXT:dfgviewer/res/js/jquery.tooltipster.min.js
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file
 	templateFile = EXT:dfgviewer/res/template.tmpl

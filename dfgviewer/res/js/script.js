@@ -63,6 +63,17 @@ $(document).ready(function() {
 		$('.refs').before('<div class="referenceTrigger"></div>');
 	}
 
+	//~ $('.tooltip').tooltipster();
+	$('.tooltip').tooltipster({
+	   animation: 'fade',
+	   contentAsHTML: true,
+	   delay: 200,
+	   theme: 'tooltipster-default',
+	   touchDevices: false,
+	   trigger: 'hover',
+	   interactive: true
+	});
+
 });
 
 

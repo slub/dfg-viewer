@@ -142,13 +142,17 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 					if ( $currentDayTime >= $firstOfMonth && $currentDayTime <= $lastOfMonth) {
 
 						$dayLinks = '';
+						$dayLinksText = '';
 
 						$currentMonth = strftime('%m', $currentDayTime);
 
 						if ($month[$currentMonth] == ($i - 1)) {
+
 							foreach($toc[0]['children'][0]['children'][($i -1)]['children'] as $id => $day) {
+
 								if ((int)$day['label'] === (int)date('j', $currentDayTime)
 									&& $day['type'] === 'day') {
+
 									$dayLinks     = $day['label'];
 									$dayPoints    = $day['children'][0]['points'];
 									$dayLinkLabel = $day['children'][0]['label'];
@@ -157,28 +161,38 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 										'useCacheHash' => 1,
 										'parameter' => $this->conf['targetPid'],
 										'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints),
-										'title' => $dayLinkLabel
+										//~ 'ATagParams' => 'class="tooltip"',
+										//~ 'title' => $dayLinkLabel
 									);
-									$dayLinksText = $this->cObj->typoLink($dayLinks, $linkConf);
+									$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
 
 								}
+
 							}
+
+							$dayLinksList = '<ul>';
+							foreach ($dayLinksText as $link) {
+								$dayLinksList .= '<li>'.$link.'</li>';
+							}
+							$dayLinksList .= '</ul>';
+
+							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
 						}
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
-							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
-							case '2': $weekArray['###DAYTUE###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '2': $weekArray['###DAYTUE###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
-							case '3': $weekArray['###DAYWED###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '3': $weekArray['###DAYWED###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
-							case '4': $weekArray['###DAYTHU###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '4': $weekArray['###DAYTHU###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
-							case '5': $weekArray['###DAYFRI###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '5': $weekArray['###DAYFRI###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
-							case '6': $weekArray['###DAYSAT###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '6': $weekArray['###DAYSAT###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
-							case '7': $weekArray['###DAYSUN###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinksText : strftime('%d', $currentDayTime);
+							case '7': $weekArray['###DAYSUN###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
 									break;
 						}
 					}

@@ -183,6 +183,11 @@ h2 .volume { font-weight: normal; }
 	font-weight: bold;
 }
 
+.tx-dfgviewer-newspaper-calendar .issues {
+	color: red;
+	font-weight: bold;
+	cursor: pointer;
+}
 a.year {
 	color: red;
 }
