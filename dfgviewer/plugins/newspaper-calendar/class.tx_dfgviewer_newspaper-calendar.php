@@ -106,7 +106,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 				'###DAYFRI_NAME###' => strftime('%a', strtotime('last Friday')),
 				'###DAYSAT_NAME###' => strftime('%a', strtotime('last Saturday')),
 				'###DAYSUN_NAME###' => strftime('%a', strtotime('last Sunday')),
-				'###MONTHNAME###' => strftime('%B', strtotime($year . '-' . $i . '-1'))
+				'###MONTHNAME###' 	=> strftime('%B', strtotime($year . '-' . $i . '-1'))
 			);
 
 			// Get week subpart template
@@ -165,7 +165,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 										//~ 'title' => $dayLinkLabel
 									);
 									$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
-
 								}
 
 							}
@@ -207,8 +206,25 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 			$subPartContent = $this->cObj->substituteSubpart($subPartContent, '###CALWEEK###', $subWeekPartContent);
 		}
 
+		// link to years overview
+		$linkConf = array (
+			'useCacheHash' => 1,
+			'parameter' => $this->conf['targetPid'],
+			'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($toc[0]['points']),
+		);
+		$allYearsLink = $this->cObj->typoLink($this->pi_getLL('allYears', '', TRUE) . ' ' .$toc[0]['label'], $linkConf);
+
+		// link to this year itself
+		$linkConf = array (
+			'useCacheHash' => 1,
+			'parameter' => $this->conf['targetPid'],
+			'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($toc[0]['children'][0]['points']),
+		);
+		$yearLink = $this->cObj->typoLink($year, $linkConf);
+
 		$markerArray = array (
-			'###CALYEAR###' => $year
+			'###CALYEAR###' => $yearLink,
+			'###CALALLYEARS###' => $allYearsLink
 		);
 		$this->template = $this->cObj->substituteMarkerArray($this->template, $markerArray);
 

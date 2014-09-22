@@ -30,9 +30,9 @@ plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
 [globalString = GP:set|mets=http*]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [global]
-[globalVar = GP:set|image>0]
+#[globalVar = GP:set|image>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
-[global]
+#[global]
 [globalVar = GP:set|double>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
@@ -243,21 +243,7 @@ plugin.tx_dfgviewer_newspaperyears {
 }
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_global_anchor)]
-#page.2.marks {
-#	IMAGE = TEXT
-#	IMAGE {
-#		value = 1928
-#		stdWrap.typolink {
-#			parameter = 8071
-#			useCacheHash = 1
-#			addQueryString = 1
-#			addQueryString.method = GET
-#			addQueryString.exclude = cHash
-#			additionalParams = &tx_dlf[id]=http://digital.slub-dresden.de/fileadmin/data/dfg-viewer-examples/newspaper-demo_year-1928.xml
-#			ATagParams = class="year"
-#		}
-#	}
-#}
+page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >
@@ -265,6 +251,7 @@ page.2.marks.GUI = TEXT
 [global]
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_year_anchor)]
+page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >

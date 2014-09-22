@@ -23,6 +23,9 @@ plugin.tx_dfgviewer {
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file
 	templateFile = EXT:dfgviewer/res/template.tmpl
 
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file newspaper
+	templateFileNewspaper = EXT:dfgviewer/res/template_newspaper.tmpl
+
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Metadata template file
 	templateFileMeta = EXT:dfgviewer/res/metadata.tmpl
 
