@@ -259,7 +259,6 @@ page.2.marks.GUI = TEXT
 [global]
 
 [userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_issue)]
-page.2.template.file = {$plugin.tx_dfgviewer.templateFile}
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
