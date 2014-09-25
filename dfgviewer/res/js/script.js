@@ -54,6 +54,32 @@ $(document).ready(function() {
 		$(this).toggleClass('hiddenNav');
 	});
 
+	$('.select-calendar-view').click(function() {
+		if(!$(this).hasClass('active')) {
+			$(this).addClass('active');
+			$('.select-list-view').removeClass('active');
+			$('.calendar-view').show();
+			$('.list-view').hide();
+		}
+	});
+	$('.select-list-view').click(function() {
+		if(!$(this).hasClass('active')) {
+			$(this).addClass('active');
+			$('.select-calendar-view').removeClass('active');
+			$('.calendar-view').hide();
+			$('.list-view').show();
+		}
+	});
+
+	if ($('.select-calendar-view').hasClass('active')) {
+			$('.calendar-view').show();
+			$('.list-view').hide();
+	}
+	if ($('.select-list-view').hasClass('active')) {
+			$('.calendar-view').hide();
+			$('.list-view').show();
+	}
+
 	//go fullwidth if no navbar exists
 	if(!$('.tx-dlf-toc')[0]) { $('#whiteboxcontainer').css({'right':'30px'}); };
 

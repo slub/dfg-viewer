@@ -72,6 +72,11 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 //~ t3lib_utility_Debug::debug($conf, 'tx_dfgviewer_newspaperyear: conf... ');
 //~ t3lib_utility_Debug::debug($this->piVars, 'tx_dfgviewer_newspaperyear: prefixId... ');
 
+		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
+			$month[$mo['label']] = $id;
+			$allIssuesCount += count($mo['children']);
+		}
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
 
@@ -86,15 +91,15 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		// Get subpart templates
 		$subparts['template'] = $this->template;
 		$subparts['month'] = $this->cObj->getSubpart($subparts['template'], '###CALMONTH###');
-		$subparts['week'] = $this->cObj->getSubpart($subparts['singlerow'], '###CALWEEK###');
+
+		//~ $subparts['issuelist'] = $this->cObj->getSubpart($subparts['template'], '###ISSUELIST###');
+		$subparts['singleissue'] = $this->cObj->getSubpart($subparts['issuelist'], '###SINGLEISSUE###');
 
 		$year = (int)$toc[0]['children'][0]['label'];
 
 		$subPartContent = '';
 
-		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
-			$month[$mo['label']] = $id;
-		}
+//~ t3lib_utility_Debug::debug($allIssuesCount, 'tx_dfgviewer_newspaperyear: allIssuesCount... ');
 
 		for ($i = 1; $i <= 12; $i++) {
 
@@ -139,7 +144,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 					$currentDayTime = strtotime('+ '.$k.' Day', $firstDayOfWeek);
 
-					if ( $currentDayTime >= $firstOfMonth && $currentDayTime <= $lastOfMonth) {
+					if ( $currentDayTime >= $firstOfMonth && $currentDayTime <= $lastOfMonth ) {
 
 						$dayLinks = '';
 						$dayLinksText = '';
@@ -161,14 +166,15 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 										'useCacheHash' => 1,
 										'parameter' => $this->conf['targetPid'],
 										'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints) . '&' . $this->prefixId . '[page]=1',
-										//~ 'ATagParams' => 'class="tooltip"',
-										//~ 'title' => $dayLinkLabel
 									);
 									$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+
+									$allIssues[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
 								}
 
 							}
 
+							// use title attribute for tooltip
 							$dayLinksList = '<ul>';
 							foreach ($dayLinksText as $link) {
 								$dayLinksList .= '<li>'.$link.'</li>';
@@ -196,12 +202,13 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 						}
 					}
 				}
-				//~ // fill the weeks
+				// fill the weeks
 				$subWeekPartContent .= $this->cObj->substituteMarkerArray($subWeekTemplate, $weekArray);
 			}
 
 			// fill the month markers
 			$subPartContent .= $this->cObj->substituteMarkerArray($subparts['month'], $markerArray);
+
 			// fill the week markers
 			$subPartContent = $this->cObj->substituteSubpart($subPartContent, '###CALWEEK###', $subWeekPartContent);
 		}
@@ -222,13 +229,38 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		);
 		$yearLink = $this->cObj->typoLink($year, $linkConf);
 
+
+		// show list instead of calendar?
+		$issueListTemplate = $this->cObj->getSubpart($subparts['template'], '###ISSUELIST###');
+
+		$subparts['singleissue'] = $this->cObj->getSubpart($issueListTemplate, '###SINGLEISSUE###');
+
+		foreach($allIssues as $id => $issue) {
+
+			$subPartContentList .= $this->cObj->substituteMarker($subparts['singleissue'], '###ITEM###', $issue);
+
+		}
+
+		$issueListTemplate = $this->cObj->substituteSubpart($issueListTemplate, '###SINGLEISSUE###', $subPartContentList);
+
+		$this->template = $this->cObj->substituteSubpart($this->template, '###ISSUELIST###', $issueListTemplate);
+
+		if ($allIssuesCount < 6) {
+			$listViewActive = 'active';
+		} else {
+			$calendarViewActive = 'active';
+		}
+
 		$markerArray = array (
+			'###CALENDARVIEWACTIVE###' => $calendarViewActive,
+			'###LISTVIEWACTIVE###' => $listViewActive,
 			'###CALYEAR###' => $yearLink,
 			'###CALALLYEARS###' => $allYearsLink
 		);
 		$this->template = $this->cObj->substituteMarkerArray($this->template, $markerArray);
 
 		return $this->cObj->substituteSubpart($this->template, '###CALMONTH###', $subPartContent);
+
 	}
 
 }

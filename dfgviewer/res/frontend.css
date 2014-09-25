@@ -182,7 +182,9 @@ h2 .volume { font-weight: normal; }
 	margin: 2px;
 	border: 1px solid red;
 }
-
+.tx-dfgviewer-newspaper-calendar .issue-list {
+	float: left;
+}
 .tx-dfgviewer-newspaper-years .year a,
 .tx-dfgviewer-newspaper-years .year a:visited,
 .tx-dfgviewer-newspaper-calendar .month a,
