@@ -159,7 +159,15 @@ h2 .volume { font-weight: normal; }
 /* black gradient footer bar */
 #siteend { position: absolute; bottom: 0; left: 0; width: 100%; height: 25px; background-position: 0 -120px; z-index: 1; }
 
+
+
 /* newspaper calendar */
+#newspaperbox {
+	position: absolute;
+	top: 90px;
+	left: 0;
+	right: 0;
+}
 .tx-dfgviewer-newspaper-calendar .year {
 	width: 100%;
 	font-size: 200%;

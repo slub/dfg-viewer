@@ -80,7 +80,7 @@ $(document).ready(function() {
 /* check dynamic height of titlebar and add height and top values to relevant elements */
 $.fn.rearrangeTitleBar = function() {
 	var titleHeightValue = $('#title').outerHeight()+'px';
-	$('#whitebox, #navcontainer').css({'top':titleHeightValue});
+	$('#whitebox, #navcontainer, #newspaperbox').css({'top':titleHeightValue});
 	$('#toprow').css({'height':titleHeightValue});
 };
 
