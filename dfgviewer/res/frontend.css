@@ -1,4 +1,4 @@
-/* DFG-Viewer relaunch by TJ @ 2013 */
+/* DFG-Viewer */
 
 
 /* base element styles */
@@ -22,7 +22,7 @@ a:hover, a:active { outline: 0; }
 
 /* structure elements */
 #sitespanner { position: relative; height: 100%; width: 100%; min-width: 800px; }
-#header, #siteend { background: url(images/footnhead.png) repeat-x 0 0; }
+#header { background: url(images/footnhead.png) repeat-x 0 0; }
 
 
 /* header */
@@ -57,7 +57,7 @@ h1 a { position: absolute; top: 0; left: 0; width: 410px; height: 60px; display:
 
 
 /* basic document frame (contains metadata, document itself and both navigation elements) */
-#whiteboxcontainer { position: absolute; top: 100px; bottom: 25px; left: 30px; right: 350px; }
+#whiteboxcontainer { position: absolute; top: 0; bottom: 25px; left: 30px; right: 350px; }
 #whitebox { position: absolute; top: 90px; bottom: 40px; left: 0; right: 0; background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAMAAAC6sdbXAAAABlBMVEXZ2dkAAABP7x8TAAAAAnRSTlP/AOW3MEoAAAAWSURBVAgdY2AEAgYGEAGEEATmgQhGAAFKABXO4MGqAAAAAElFTkSuQmCC') repeat 0 0; border-width: 10px; border-style: solid; border-color: #fff; }
 .tx-dlf-pageview .olTileImage {  cursor: move; }
 .olMap { position: absolute; top: 0; left: 0; bottom: 0; right: 0; }
@@ -157,55 +157,39 @@ h2 .volume { font-weight: normal; }
 
 
 /* black gradient footer bar */
-#siteend { position: absolute; bottom: 0; left: 0; width: 100%; height: 25px; background-position: 0 -120px; z-index: 1; }
-
+#siteend { position: fixed; bottom: 0; left: 0; width: 100%; height: 25px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAANCAQAAADC3sx5AAAAIUlEQVQI12Ng4GJi4GdiEGRiEAKT/Az//zMwPGNiYEBGAEFQA1XK7Zo4AAAAAElFTkSuQmCC') repeat-x left bottom; z-index: 1; }
 
 
 /* newspaper calendar */
-#newspaperbox {
-	position: absolute;
-	top: 90px;
-	left: 0;
-	right: 0;
-}
-.tx-dfgviewer-newspaper-calendar .year {
-	width: 100%;
-	font-size: 200%;
-	text-align: center;
-	padding: 20px;
-}
+.metanewspaper { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; margin: 100px 30px 0 30px; min-height: 110px; text-align: left; background: url('images/newspaperBgIcon.png') no-repeat right top; background-size: 108px auto; }
+.metanewspaper h2 { font-size: 22px; color: #fff; font-weight: 300; text-transform: uppercase; border-bottom: 1px dotted #ccc; padding: 5px 0 5px 30px; margin-bottom: 10px; background: url('images/newspaperHeadlineIcon.png') no-repeat left center; display: block; }
+#newspaperbox { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; margin: 0 30px 100px 30px; }
+#newspaperbox h4 { font-size: 14px; color: #999; font-weight: bold; margin: 10px 0 0 0; text-transform: uppercase; }
+.tx-dfgviewer-newspaper-meta { text-align: left; color: #eee; font-size: 12px; line-height: 1.6; }
+.tx-dfgviewer-newspaper-meta a { text-decoration: underline; }
+.tx-dfgviewer-newspaper-meta p { max-width: 800px; }
+.tx-dfgviewer-newspaper-years, .tx-dfgviewer-newspaper-calendar { background: #777; padding: 4px; margin-top: 30px; }
+.tx-dfgviewer-newspaper-years h4 { text-align: left; margin: 10px !important; }
+.tx-dfgviewer-newspaper-years ul li { position: relative; float: left; background: #ccc; padding: 30px 10px 10px 5px; width: 60px; height: 30px; margin: 10px; color: #999; font-weight: 100; font-size: 24px; text-align: right; border: 1px solid #555; border-width: 0 1px 1px 0; letter-spacing: -0.1ex; cursor: not-allowed; }
+.tx-dfgviewer-newspaper-years ul li a { position: absolute; top: 0; right: 0; left: 0; bottom: 0; padding: 30px 10px 10px 5px; display: block; background: #fff; color: #f44; font-weight: 500; }
+.tx-dfgviewer-newspaper-years ul li a:hover { text-decoration: none; background: #f44; color: #fff; }
+.tx-dfgviewer-newspaper-years ul li:after { position: absolute; top: 0; left: 0; width: 0; height: 0; content: ""; display: block; border: 12px solid transparent; border-width: 0 0 12px 12px; border-left-color: #777; }
+.tx-dfgviewer-newspaper-years ul:after, .tx-dfgviewer-newspaper-calendar .calendar-view:after { position: relative; display: table; content: ""; clear: both;  }
+.tx-dfgviewer-newspaper-calendar .year-anchor, .tx-dfgviewer-newspaper-calendar .year { float: left; margin-right: 5px; font-weight: 500; margin-bottom: 5px; margin-top: 10px; }
+.tx-dfgviewer-newspaper-calendar .year-anchor { margin-left: 12px; font-weight: 300; }
+.tx-dfgviewer-newspaper-calendar .calendar-list-selection { margin: 10px 10px 5px 0; float: right; }
+.tx-dfgviewer-newspaper-calendar .calendar-list-selection a { cursor: pointer; }
+.tx-dfgviewer-newspaper-calendar .calendar-list-selection .active { color: #999; font-weight: 800; }
+.tx-dfgviewer-newspaper-calendar .calendar-view { clear: both; }
+.tx-dfgviewer-newspaper-calendar .month { float: left; margin: 10px; border: 1px solid #999; width: 31%; padding: 3px; border-spacing: 2px; }
+.tx-dfgviewer-newspaper-calendar .month caption { caption-side: top; background: #999; text-align: right; padding: 4px 8px 4px 4px; text-transform: uppercase; font-weight: 900; color: #ccc; }
+.tx-dfgviewer-newspaper-calendar .month th { background: #ccc; padding: 8px 4px; text-transform: uppercase; color: #666; }
+.tx-dfgviewer-newspaper-calendar .month td { position: relative; background: #999; padding: 8px 4px; height: 24px; font-size: 20px; font-weight: 200; color: #666; }
+.tx-dfgviewer-newspaper-calendar .month td .issues { position: absolute; top: 0; right: 0; bottom: 0; left: 0; padding: 4px; color: #333; background: #eee; font-weight: 500; cursor: pointer; }
+.tx-dfgviewer-newspaper-calendar .month td .issues:hover { color: #f44; }
+.tx-dfgviewer-newspaper-calendar .list-view { clear: both; text-align: left; padding: 4px 10px; }
+.tx-dfgviewer-newspaper-calendar .list-view li a { padding: 8px; font-size: 16px; background: #999; margin: 4px 0; display: block; }
+.tx-dfgviewer-newspaper-calendar .list-view li a:hover { text-decoration: none; background: #fff; color: #f44; }
 
-.tx-dfgviewer-newspaper-calendar .month {
-	float: left;
-	width: 20%;
-	padding: 2px;
-	margin: 2px;
-	border: 1px solid red;
-}
-.tx-dfgviewer-newspaper-calendar .issue-list {
-	float: left;
-}
-.tx-dfgviewer-newspaper-years .year a,
-.tx-dfgviewer-newspaper-years .year a:visited,
-.tx-dfgviewer-newspaper-calendar .month a,
-.tx-dfgviewer-newspaper-calendar .month a:visited {
-	color: red;
-	font-weight: bold;
-}
 
-.tx-dfgviewer-newspaper-calendar .issues {
-	color: red;
-	font-weight: bold;
-	cursor: pointer;
-}
-a.year {
-	color: red;
-}
-.tx-dfgviewer-newspaper-calendar .month td {
-	text-align: center;
-	color: #888;
-}
-.tx-dfgviewer-newspaper-calendar .clear {
-	clear: both;
-}
 /* EOF */
