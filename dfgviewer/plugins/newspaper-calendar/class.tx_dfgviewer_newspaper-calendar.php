@@ -100,8 +100,9 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$subPartContent = '';
 
 //~ t3lib_utility_Debug::debug($allIssuesCount, 'tx_dfgviewer_newspaperyear: allIssuesCount... ');
+//~ t3lib_utility_Debug::debug($month, 'tx_dfgviewer_newspaperyear: month... ');
 
-		for ($i = 1; $i <= 12; $i++) {
+		for ($i = 0; $i <= 11; $i++) {
 
 			$markerArray = array (
 				'###DAYMON_NAME###' => strftime('%a', strtotime('last Monday')),
@@ -111,14 +112,14 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 				'###DAYFRI_NAME###' => strftime('%a', strtotime('last Friday')),
 				'###DAYSAT_NAME###' => strftime('%a', strtotime('last Saturday')),
 				'###DAYSUN_NAME###' => strftime('%a', strtotime('last Sunday')),
-				'###MONTHNAME###' 	=> strftime('%B', strtotime($year . '-' . $i . '-1'))
+				'###MONTHNAME###' 	=> strftime('%B', strtotime($year . '-' . ($i + 1) . '-1'))
 			);
 
 			// Get week subpart template
 			$subWeekTemplate = $this->cObj->getSubpart($subparts['month'], '###CALWEEK###');
 			$subWeekPartContent = '';
 
-			$firstOfMonth = strtotime($year . '-' . $i . '-1');
+			$firstOfMonth = strtotime($year . '-' . ($i + 1) . '-1');
 			$lastOfMonth = strtotime('last day of', ($firstOfMonth));
 			$firstOfMonthStart = strtotime('last Monday', $firstOfMonth);
 
@@ -151,9 +152,12 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 						$currentMonth = strftime('%m', $currentDayTime);
 
-						if ($month[$currentMonth] == ($i - 1)) {
+						//~ if ($month[$currentMonth] == ($i - 1)) {
+//~ t3lib_utility_Debug::debug($i . ' --> ' . $month[$i] . ' ' . $currentMonth, 'tx_dfgviewer_newspaperyear: i --> month... ');
+						//~ if ($month[$i] == $currentMonth) {
+//~ t3lib_utility_Debug::debug($i . ' --> ' . $month[$i]. ' == ' . $currentMonth, 'tx_dfgviewer_newspaperyear: i --> month... ');
 
-							foreach($toc[0]['children'][0]['children'][($i -1)]['children'] as $id => $day) {
+							foreach($toc[0]['children'][0]['children'][$month[$currentMonth]]['children'] as $id => $day) {
 
 								if ((int)$day['label'] === (int)date('j', $currentDayTime)
 									&& $day['type'] === 'day') {
@@ -182,7 +186,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 							$dayLinksList .= '</ul>';
 
 							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
-						}
+						//~ }
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
 							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
