@@ -163,17 +163,20 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 									&& $day['type'] === 'day') {
 
 									$dayLinks     = $day['label'];
-									$dayPoints    = $day['children'][0]['points'];
-									$dayLinkLabel = $day['children'][0]['label'];
 
-									$linkConf = array (
-										'useCacheHash' => 1,
-										'parameter' => $this->conf['targetPid'],
-										'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints) . '&' . $this->prefixId . '[page]=1',
-									);
-									$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+									foreach($day['children'] as $id => $issue) {
+										$dayPoints    = $issue['points'];
+										$dayLinkLabel = $issue['label'];
 
-									$allIssues[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+										$linkConf = array (
+											'useCacheHash' => 1,
+											'parameter' => $this->conf['targetPid'],
+											'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints) . '&' . $this->prefixId . '[page]=1',
+										);
+										$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+
+										$allIssues[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+									}
 								}
 
 							}
