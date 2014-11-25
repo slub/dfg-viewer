@@ -69,8 +69,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 		$toc = $this->doc->tableOfContents;
 //~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
-//~ t3lib_utility_Debug::debug($conf, 'tx_dfgviewer_newspaperyear: conf... ');
-//~ t3lib_utility_Debug::debug($this->piVars, 'tx_dfgviewer_newspaperyear: prefixId... ');
 
 		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
 			$month[$mo['label']] = $id;
@@ -98,9 +96,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$year = (int)$toc[0]['children'][0]['label'];
 
 		$subPartContent = '';
-
-//~ t3lib_utility_Debug::debug($allIssuesCount, 'tx_dfgviewer_newspaperyear: allIssuesCount... ');
-//~ t3lib_utility_Debug::debug($month, 'tx_dfgviewer_newspaperyear: month... ');
 
 		for ($i = 0; $i <= 11; $i++) {
 
@@ -152,11 +147,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 						$currentMonth = strftime('%m', $currentDayTime);
 
-						//~ if ($month[$currentMonth] == ($i - 1)) {
-//~ t3lib_utility_Debug::debug($i . ' --> ' . $month[$i] . ' ' . $currentMonth, 'tx_dfgviewer_newspaperyear: i --> month... ');
-						//~ if ($month[$i] == $currentMonth) {
-//~ t3lib_utility_Debug::debug($i . ' --> ' . $month[$i]. ' == ' . $currentMonth, 'tx_dfgviewer_newspaperyear: i --> month... ');
-
 							foreach($toc[0]['children'][0]['children'][$month[$currentMonth]]['children'] as $id => $day) {
 
 								if ((int)$day['label'] === (int)date('j', $currentDayTime)
@@ -189,7 +179,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 							$dayLinksList .= '</ul>';
 
 							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
-						//~ }
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
 							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);

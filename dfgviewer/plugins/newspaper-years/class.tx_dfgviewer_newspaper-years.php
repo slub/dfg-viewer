@@ -69,8 +69,6 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 
 		$toc = $this->doc->tableOfContents;
 //~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
-//~ t3lib_utility_Debug::debug($conf, 'tx_dfgviewer_newspaperyear: conf... ');
-//~ t3lib_utility_Debug::debug($this->piVars, 'tx_dfgviewer_newspaperyear: prefixId... ');
 
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
