@@ -35,4 +35,9 @@ t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-calendar/class.tx_dfgview
 
 t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php', '_newspaperyears', 'list_type', TRUE);
 
+t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/sru/class.tx_dfgviewer_sru.php', '_sru', 'list_type', TRUE);
+
+// Register eID handlers.
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = 'EXT:'.$_EXTKEY.'/plugins/sru/class.tx_dfgviewer_sru_eid.php';
+
 ?>

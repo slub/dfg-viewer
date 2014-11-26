@@ -134,6 +134,11 @@ plugin.tx_dlf_toolsPdf {
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolPdf}
 }
 
+plugin.tx_dfgviewer_sru {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	templateFile = {$plugin.tx_dfgviewer.templateFileSru}
+}
+
 lib.info = HTML
 lib.info {
 	value = DFG-Viewer
@@ -262,7 +267,10 @@ page.2.marks.GUI = TEXT
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
+page.2.marks.SRU < plugin.tx_dfgviewer_sru
 
 #page.2.marks.IMAGE = TEXT
 #page.2.marks.IMAGE.value = Hallo Welt! newspaper_issue
 [global]
+
+
