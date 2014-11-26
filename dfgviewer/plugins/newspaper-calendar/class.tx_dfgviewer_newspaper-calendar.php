@@ -165,7 +165,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 										);
 										$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
 
-										$allIssues[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+										$allIssues[] = array(strftime('%A, %x', $currentDayTime), $this->cObj->typoLink($dayLinkLabel, $linkConf));
 									}
 								}
 
@@ -226,14 +226,25 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$yearLink = $this->cObj->typoLink($year, $linkConf);
 
 
-		// show list instead of calendar?
+		// prepare list as alternative of the calendar view
 		$issueListTemplate = $this->cObj->getSubpart($subparts['template'], '###ISSUELIST###');
 
 		$subparts['singleissue'] = $this->cObj->getSubpart($issueListTemplate, '###SINGLEISSUE###');
 
+		$allDaysList = array();
+
 		foreach($allIssues as $id => $issue) {
 
-			$subPartContentList .= $this->cObj->substituteMarker($subparts['singleissue'], '###ITEM###', $issue);
+			// only add date output, if not already done (multiple issues per day)
+			if (! in_array($issue[0], $allDaysList)) {
+
+				$allDaysList[] = $issue[0];
+
+				$subPartContentList .= $issue[0];
+
+			}
+
+			$subPartContentList .= $this->cObj->substituteMarker($subparts['singleissue'], '###ITEM###', $issue[1]);
 
 		}
 
@@ -242,9 +253,14 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$this->template = $this->cObj->substituteSubpart($this->template, '###ISSUELIST###', $issueListTemplate);
 
 		if ($allIssuesCount < 6) {
+
+
 			$listViewActive = 'active';
+
 		} else {
+
 			$calendarViewActive = 'active';
+
 		}
 
 		$markerArray = array (
@@ -253,6 +269,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 			'###CALYEAR###' => $yearLink,
 			'###CALALLYEARS###' => $allYearsLink
 		);
+
 		$this->template = $this->cObj->substituteMarkerArray($this->template, $markerArray);
 
 		return $this->cObj->substituteSubpart($this->template, '###CALMONTH###', $subPartContent);
