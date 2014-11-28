@@ -224,6 +224,7 @@ page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
 page.2.marks.TOOLBOX < plugin.tx_dlf_toolbox
 page.2.marks.GRIDSWITCHER < lib.gridswitcher
+page.2.marks.SRU = TEXT
 
 [globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager

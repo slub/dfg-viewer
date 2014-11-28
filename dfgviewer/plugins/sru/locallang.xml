@@ -8,10 +8,16 @@
 		<languageKey index="default" type="array">
 			<label index="tt_content.pi_flexform.sheet_general">Options</label>
 			<label index="tt_content.pi_flexform.templateFile">Template file</label>
+			<label index="label.query">Search for:</label>
+			<label index="label.submit">Search</label>
+			<label index="search">Search</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.pi_flexform.sheet_general">Einstellungen</label>
 			<label index="tt_content.pi_flexform.templateFile">HTML-Template</label>
+			<label index="label.query">Suchen nach:</label>
+			<label index="label.submit">Suchen</label>
+			<label index="search">Suche</label>
 		</languageKey>
 	</data>
 </T3locallang>

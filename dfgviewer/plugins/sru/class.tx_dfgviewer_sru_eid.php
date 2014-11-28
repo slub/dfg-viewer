@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Goobi. Digitalisieren im Verein e.V. <contact@goobi.org>
+*  (c) 2014 Alexander Bigga <alexander.bigga@slub-dresden.de>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,25 +22,20 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- */
 
 /**
- * Search suggestions for the plugin 'DLF: Search' of the 'dlf' extension.
+ * Plugin 'DFG-Viewer: SRU Client eID script' for the 'dfgviewer' extension.
  *
- * @author	Henrik Lochmann <dev@mentalmotive.com>
- * @author	Sebastian Meyer <sebastian.meyer@slub-dresden.de>
+ * @author	Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @copyright	Copyright (c) 2014, Alexander Bigga, SLUB Dresden
  * @package	TYPO3
- * @subpackage	tx_dlf
+ * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dlf_search_suggest extends tslib_pibase {
-
-	public $scriptRelPath = 'plugins/search/class.tx_dlf_search_suggest.php';
+class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 	/**
-	 * The main method of the PlugIn
+	 * The main method of the eID-Script
 	 *
 	 * @access	public
 	 *
@@ -51,25 +46,69 @@ class tx_dlf_search_suggest extends tslib_pibase {
 	 */
 	public function main($content = '', $conf = array ()) {
 
-		if (t3lib_div::_GP('encrypted') != '' && t3lib_div::_GP('hashed') != '') {
+		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
 
-			$core = tx_dlf_helper::decrypt(t3lib_div::_GP('encrypted'), t3lib_div::_GP('hashed'));
+$fp = fopen('/home/ab/public_html/sru_eid.txt', 'a');
+fwrite($fp, $url . "\n");
+		// make request to SRU service
+		$sruXML = simplexml_load_file($url);
 
-		}
+		if ($sruXML !== FALSE) {
 
-		if (!empty($core)) {
+			// the result may be a valid <srw:searchRetrieveResponse> or some HTML code
+			//~ $content = "super";
 
-			$url = trim(tx_dlf_solr::getSolrUrl($core), '/').'/suggest/?q='.tx_dlf_solr::escapeQuery(t3lib_div::_GP('q'));
+			$sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
 
-			if ($stream = fopen($url, 'r')) {
+			if ($sruResponse === FALSE) {
 
-				$content .= stream_get_contents($stream);
-
-				fclose($stream);
+				// no <srw:searchRetrieveResponse>
+				//~ $content = "error";
+				return '<ul><li>kein Ergebnis</li></ul>';
 
 			}
 
+			$sruRecords = $sruXML->xpath('/srw:searchRetrieveResponse/srw:records/srw:record');
+
+			foreach ($sruRecords as $id => $record) {
+
+				$fullTextHit = $record->xpath('//srw:recordData');
+
+				$results[] = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit->span;
+					//~ fwrite($fp, $id . ' --> ' . print_r($fullTextHit, 1) . "\n");
+
+			}
+
+
+
+		} else {
+
+			// something went wrong
+			//~ $content = "error2";
+			return '<ul><li>kein Ergebnis</li></ul>';
+
 		}
+
+
+
+fwrite($fp, $content . "\n");
+//~ fwrite($fp, "sodelle \n");
+//~ fwrite($fp, $sruXML->asXML() . "\n");
+fclose($fp);
+
+		$content = '<ul>';
+		foreach ($results as $result) {
+
+			$content .= '<li>';
+
+			foreach ($result as $item) {
+				$content .= $item . '<br />';
+			}
+
+			$content .= '</li>';
+
+		}
+		$content .= '</ul>';
 
 		echo $content;
 
@@ -77,11 +116,11 @@ class tx_dlf_search_suggest extends tslib_pibase {
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dlf/plugins/search/class.tx_dlf_search_suggest.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dlf/plugins/search/class.tx_dlf_search_suggest.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/search/class.tx_dfgviewer_sru_eid.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/search/class.tx_dfgviewer_sru_eid.php']);
 }
 
-$cObj = t3lib_div::makeInstance('tx_dlf_search_suggest');
+$cObj = t3lib_div::makeInstance('tx_dfgviewer_sru_eid');
 
 $cObj->main();
 

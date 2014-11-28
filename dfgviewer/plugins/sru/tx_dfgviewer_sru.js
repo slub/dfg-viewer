@@ -1,7 +1,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Goobi. Digitalisieren im Verein e.V. <contact@goobi.org>
+*  (c) 2014 Goobi. Digitalisieren im Verein e.V. <contact@goobi.org>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -21,40 +21,31 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-$("#tx-dlf-search-query").attr({
-	'autocomplete': "off",
-	'role': "textbox",
-	'aria-autocomplete': "list",
-	'aria-haspopup': "true"
+$(document).ready(function() {
+
+$("#tx-dfgviewer-sru-form").submit(function( event ) {
+
+	// Stop form from submitting normally
+	event.preventDefault();
+
+	var $form = $( this ),
+		term = $form.find( "input[name='tx_dlf[query]']" ).val(),
+		sru = $form.find( "input[name='tx_dfgviewer[sru]']" ).val();
+
+	// Send the data using post
+	$.post(
+		"/",
+		{
+			eID: "tx_dfgviewer_sru_eid",
+			q: escape(term),
+			sru: $("input[name='tx_dfgviewer[sru]']").val(),
+		},
+		function(data) {
+			console.log(data);
+			$('#tx-dfgviewer-sru-results').html(data);
+		},
+		"html");
 });
 
-$(
-	function() {
-		// jQuery autocomplete integration
-		$("#tx-dlf-search-query").autocomplete({
-			source: function(request, response) {
-				return $.post(
-					"/",
-					{
-						eID: "tx_dlf_search_suggest",
-						q: escape(request.term.toLowerCase()),
-						encrypted: $("input[name='tx_dlf[encrypted]']").val(),
-						hashed: $("input[name='tx_dlf[hashed]']").val()
-					},
-					function(data) {
-						var result = new Array();
-						var option = "";
-						$("arr[name='suggestion'] str", data).each(function(i) {
-							option = $(this).text();
-							option = option.replace(/(\?|!|:)/g, "\\\$1");
-							result.push(option);
-						});
-						return response(result);
-					},
-					"xml");
-			},
-			minLength: 3,
-			appendTo: "#tx-dlf-search-suggest"
-		});
-	}
-);
+
+});

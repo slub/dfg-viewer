@@ -1,25 +1,25 @@
 <!-- ###TEMPLATE### begin -->
 <div class="tx-dfgviewer-sru">
 	<div class="sru-searchfield">
-	<form class="tx-dfgviewer-sru-form" action="###ACTION_URL###" method="post" enctype="multipart/form-data"><div>
-		<label for="tx-dlf-search-query">###LABEL_QUERY###</label>
-		<!-- Never change the @id of this input field! Otherwise search suggestions won't work! -->
-		<input type="text" id="tx-dlf-search-query" name="###FIELD_QUERY###" value="###QUERY###" />
-		<!-- The following element is needed for auto-completion! -->
-		<div id="tx-dlf-search-suggest"></div>
-		<input type="submit" value="###LABEL_SUBMIT###" />
-		###FIELD_DOC###
-		###FIELD_COLL###
-		###ADDITIONAL_INPUTS###
-		</div>
-	</form>
+		<form id="tx-dfgviewer-sru-form" action="###ACTION_URL###" method="post" enctype="multipart/form-data">
+			<label for="tx-dfgviewer-sru-query">###LABEL_QUERY###</label>
+			<!-- Never change the @id of this input field! Otherwise search suggestions won't work! -->
+			<input type="text" id="tx-dfgviewer-sru-query" name="###FIELD_QUERY###" value="###QUERY###" />
+			<input type="submit" value="###LABEL_SUBMIT###" />
+			<input type="hidden" name="tx_dfgviewer[sru]" value="###SRU_URL###" />
+			###ADDITIONAL_INPUTS###
+		</form>
+		<!-- The following element is needed for the result list -->
+		<div id="tx-dfgviewer-sru-results"></div>
 	</div>
-	<ul>
-	<!-- ###LISTYEAR### begin -->
-		<li class="year">
-			###YEARNAME###
-		</li>
-	<!-- ###LISTYEAR### end -->
+</div>
+
+<form id="target" action="destination.html">
+  <input type="text" value="Hello there">
+  <input type="submit" value="Go">
+</form>
+<div id="other">
+  Trigger the handler
 </div>
 <!-- ###TEMPLATE### end -->
 

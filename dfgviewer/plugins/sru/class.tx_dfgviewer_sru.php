@@ -49,7 +49,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	 * @return	string		The content that is displayed on the website
 	 */
 	public function main($content, $conf) {
-t3lib_utility_Debug::debug($conf, 'tx_dfgviewer_sru: conf... ');
 
 		$this->init($conf);
 
@@ -61,15 +60,34 @@ t3lib_utility_Debug::debug($conf, 'tx_dfgviewer_sru: conf... ');
 			// Quit without doing anything if required variables are not set.
 			return $content;
 
-		} else {
+		}
 
-			// Set default values if not set.
-			$this->piVars['page'] = tx_dlf_helper::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+		// Get digital provenance information.
+		$digiProv = $this->doc->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
+
+		if ($digiProv) {
+
+			$links = $digiProv[0]->children('http://dfg-viewer.de/')->links;
+
+			// if no children found with given namespace, skip the following section
+			if ($links) {
+
+				if ($links->sru) {
+
+					$sruLink = htmlspecialchars(trim((string) $links->sru));
+
+				}
+
+			}
 
 		}
 
-		$toc = $this->doc->tableOfContents;
-t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_sru: conf... ');
+		if (empty($sruLink)) {
+
+			// Quit without doing anything if required variables are not set.
+			return $content;
+
+		}
 
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
@@ -82,9 +100,45 @@ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_sru: conf... ');
 
 		}
 
+		$this->addAutocompleteJS();
 
-		// fill the markers
-		return $this->cObj->substituteSubpart($this->template, '###LISTYEAR###', $subYearPartContent);
+		// Configure @action URL for form.
+		$linkConf = array (
+			'parameter' => $GLOBALS['TSFE']->id,
+			'forceAbsoluteUrl' => 1
+		);
+
+		// Fill markers.
+		$markerArray = array (
+			'###ACTION_URL###' => $this->cObj->typoLink_URL($linkConf),
+			'###SRU_URL###' => $sruLink,
+			'###LABEL_SUBMIT###' => $this->pi_getLL('label.submit'),
+			'###FIELD_QUERY###' => $this->prefixId.'[query]',
+			'###QUERY###' => htmlspecialchars($lastQuery),
+		);
+
+		// Display search form.
+		$content .= $this->cObj->substituteSubpart($this->cObj->substituteMarkerArray($this->template, $markerArray), '###EXT_SEARCH_ENTRY###', $extendedSearch);
+
+		return $this->pi_wrapInBaseClass($content);
+
+	}
+
+	/**
+	 * Adds the JS files necessary for search suggestions
+	 *
+	 * @access	protected
+	 *
+	 * @return	void
+	 */
+	protected function addAutocompleteJS() {
+
+		// Add javascript to page header.
+		if (tx_dlf_helper::loadJQuery()) {
+
+			$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
+
+		}
 
 	}
 
