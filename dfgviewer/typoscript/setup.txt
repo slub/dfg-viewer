@@ -137,6 +137,7 @@ plugin.tx_dlf_toolsPdf {
 plugin.tx_dfgviewer_sru {
 	pages = {$plugin.tx_dfgviewer.storagePid}
 	templateFile = {$plugin.tx_dfgviewer.templateFileSru}
+	targetPid.data = TSFE:page|uid
 }
 
 lib.info = HTML

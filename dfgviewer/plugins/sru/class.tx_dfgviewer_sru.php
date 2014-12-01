@@ -111,10 +111,12 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 		// Fill markers.
 		$markerArray = array (
 			'###ACTION_URL###' => $this->cObj->typoLink_URL($linkConf),
+			'###LABEL_QUERY###' => $this->pi_getLL('label.query'),
 			'###SRU_URL###' => $sruLink,
 			'###LABEL_SUBMIT###' => $this->pi_getLL('label.submit'),
 			'###FIELD_QUERY###' => $this->prefixId.'[query]',
 			'###QUERY###' => htmlspecialchars($lastQuery),
+			'###CURRENT_DOCUMENT###' => $this->doc->location,
 		);
 
 		// Display search form.

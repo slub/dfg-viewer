@@ -7,19 +7,13 @@
 			<input type="text" id="tx-dfgviewer-sru-query" name="###FIELD_QUERY###" value="###QUERY###" />
 			<input type="submit" value="###LABEL_SUBMIT###" />
 			<input type="hidden" name="tx_dfgviewer[sru]" value="###SRU_URL###" />
-			###ADDITIONAL_INPUTS###
+			<input type="hidden" name="tx_dfgviewer[id]" value="###CURRENT_DOCUMENT###" />
+			<input type="hidden" name="tx_dfgviewer[action]" value="###ACTION_URL###" />
 		</form>
 		<!-- The following element is needed for the result list -->
 		<div id="tx-dfgviewer-sru-results"></div>
 	</div>
 </div>
 
-<form id="target" action="destination.html">
-  <input type="text" value="Hello there">
-  <input type="submit" value="Go">
-</form>
-<div id="other">
-  Trigger the handler
-</div>
 <!-- ###TEMPLATE### end -->
 

@@ -35,6 +35,12 @@
 class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 	/**
+	 *
+	 */
+	public $cObj;
+
+
+	/**
 	 * The main method of the eID-Script
 	 *
 	 * @access	public
@@ -46,17 +52,18 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 	 */
 	public function main($content = '', $conf = array ()) {
 
+		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+
 		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
 
-$fp = fopen('/home/ab/public_html/sru_eid.txt', 'a');
-fwrite($fp, $url . "\n");
+//~ $fp = fopen('/home/ab/public_html/sru_eid.txt', 'a');
+//~ fwrite($fp, $url . "\n");
 		// make request to SRU service
 		$sruXML = simplexml_load_file($url);
 
 		if ($sruXML !== FALSE) {
 
 			// the result may be a valid <srw:searchRetrieveResponse> or some HTML code
-			//~ $content = "super";
 
 			$sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
 
@@ -74,8 +81,17 @@ fwrite($fp, $url . "\n");
 
 				$fullTextHit = $record->xpath('//srw:recordData');
 
-				$results[] = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit->span;
-					//~ fwrite($fp, $id . ' --> ' . print_r($fullTextHit, 1) . "\n");
+				$text = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit->span;
+				$coo = '';
+				foreach($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit[0]->attributes() as $key => $val) {
+					if (in_array($key, array('x1', 'x2', 'y1', 'y2'))) {
+						$coordinates[$key] = $val;
+						$coo .= $key . '=' . $val . ',';
+					}
+				}
+				$page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
+
+				$results[] = $text[0] . ' <a href="' . t3lib_div::_GP('action') . '?' . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '" title='.$coo.'>'.$text[1].'</a> ' . $text[2];
 
 			}
 
@@ -91,15 +107,15 @@ fwrite($fp, $url . "\n");
 
 
 
-fwrite($fp, $content . "\n");
-//~ fwrite($fp, "sodelle \n");
+//~ fwrite($fp, $content . "\n");
 //~ fwrite($fp, $sruXML->asXML() . "\n");
-fclose($fp);
+//~ fclose($fp);
 
 		$content = '<ul>';
 		foreach ($results as $result) {
 
 			$content .= '<li>';
+			$content .= $result;
 
 			foreach ($result as $item) {
 				$content .= $item . '<br />';

@@ -200,4 +200,10 @@ h2 .volume { font-weight: normal; }
 .fullscreenLogos { position: absolute; z-index: 20000; left: 90px; top: -60px; height: 50px; background: #fff; padding-left: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
 .fullscreenLogos a { position: relative; display: block; float: left; overflow: hidden; }
 .fullscreenLogos a.own { margin-right: 30px; }
+
+.tx-dfgviewer-sru { position: absolute; top: 10px; right: 30px; width: 400px; z-index: 11; background: #FFF;}
+#tx-dfgviewer-sru-results a { color: red; font-weight: bold; }
+#tx-dfgviewer-sru-results li { border-top: 1px dotted #ccc; padding: 2px; }
+
+
 /* EOF */

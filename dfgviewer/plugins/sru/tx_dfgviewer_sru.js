@@ -28,17 +28,15 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 	// Stop form from submitting normally
 	event.preventDefault();
 
-	var $form = $( this ),
-		term = $form.find( "input[name='tx_dlf[query]']" ).val(),
-		sru = $form.find( "input[name='tx_dfgviewer[sru]']" ).val();
-
 	// Send the data using post
 	$.post(
 		"/",
 		{
 			eID: "tx_dfgviewer_sru_eid",
-			q: escape(term),
-			sru: $("input[name='tx_dfgviewer[sru]']").val(),
+			q: escape( $( "input[name='tx_dlf[query]']" ).val() ),
+			id: $( "input[name='tx_dfgviewer[id]']" ).val(),
+			sru: $( "input[name='tx_dfgviewer[sru]']" ).val(),
+			action: $( "input[name='tx_dfgviewer[action]']" ).val(),
 		},
 		function(data) {
 			console.log(data);
