@@ -54,6 +54,14 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
+		// Load translation files.
+		$LANG = t3lib_div::makeInstance('language');
+
+		$this->LLkey = t3lib_div::_GP('L') ? t3lib_div::_GP('L') : 'default';
+		 $this->extKey = 'dfgviewer';
+		 $this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
+		$this->pi_loadLL();
+
 		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
 
 //~ $fp = fopen('/home/ab/public_html/sru_eid.txt', 'a');
@@ -69,43 +77,52 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 			if ($sruResponse === FALSE) {
 
-				// no <srw:searchRetrieveResponse>
-				//~ $content = "error";
-				return '<ul><li>kein Ergebnis</li></ul>';
+				$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q');
 
-			}
+			} else {
 
-			$sruRecords = $sruXML->xpath('/srw:searchRetrieveResponse/srw:records/srw:record');
+				$sruRecords = $sruXML->xpath('/srw:searchRetrieveResponse/srw:records/srw:record');
 
-			foreach ($sruRecords as $id => $record) {
+				foreach ($sruRecords as $id => $record) {
 
-				$fullTextHit = $record->xpath('//srw:recordData');
+					$fullTextHit = $record->xpath('//srw:recordData');
 
-				$text = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit->span;
-				$coo = '';
-				foreach($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit[0]->attributes() as $key => $val) {
-					if (in_array($key, array('x1', 'x2', 'y1', 'y2'))) {
-						$coordinates[$key] = $val;
-						$coo .= $key . '=' . $val . ',';
+					$text = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit->span;
+
+					$hitAttributes = '';
+
+					foreach($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit[0]->attributes() as $key => $val) {
+
+						$hitAttributes[$key] = $val;
+
 					}
-				}
-				$page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
 
-				$results[] = $text[0] . ' <a href="' . t3lib_div::_GP('action') . '?' . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '" title='.$coo.'>'.$text[1].'</a> ' . $text[2];
+					$page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
+
+					if (!empty($hitAttributes['preview'])) {
+
+						$spanPreview = '<span class="sru-preview"><img src="'.$hitAttributes['preview'].'"></span>';
+
+					}
+
+					if (is_array($text)) {
+
+						$spanText = '<span class="sru-textsnippet">' . $text[0] . '<span class="sru-searchquery">'.$text[1].'</span>' . $text[2] . '</span>';
+
+					}
+
+					$results[] = '<a href="' . t3lib_div::_GP('action') . '?' . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
+
+				}
 
 			}
-
 
 
 		} else {
 
-			// something went wrong
-			//~ $content = "error2";
-			return '<ul><li>kein Ergebnis</li></ul>';
+			$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q');
 
 		}
-
-
 
 //~ fwrite($fp, $content . "\n");
 //~ fwrite($fp, $sruXML->asXML() . "\n");

@@ -76,6 +76,10 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 					$sruLink = htmlspecialchars(trim((string) $links->sru));
 
+				} else if ($links->fulltextsearch) {
+
+					$sruLink = htmlspecialchars(trim((string) $links->fulltextsearch));
+					t3lib_utility_Debug::debug($sruLink, 'Please change your METS-file and use dv:sru instead of dv:fulltextsearch. ');
 				}
 
 			}
@@ -113,6 +117,7 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 			'###ACTION_URL###' => $this->cObj->typoLink_URL($linkConf),
 			'###LABEL_QUERY###' => $this->pi_getLL('label.query'),
 			'###SRU_URL###' => $sruLink,
+			'###LANG_ID###' => $this->LLkey,
 			'###LABEL_SUBMIT###' => $this->pi_getLL('label.submit'),
 			'###FIELD_QUERY###' => $this->prefixId.'[query]',
 			'###QUERY###' => htmlspecialchars($lastQuery),
