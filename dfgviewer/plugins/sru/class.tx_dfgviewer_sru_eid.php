@@ -105,7 +105,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					}
 
-					if (is_array($text)) {
+					if (is_object($text)) {
 
 						$spanText = '<span class="sru-textsnippet">' . $text[0] . '<span class="sru-searchquery">'.$text[1].'</span>' . $text[2] . '</span>';
 
