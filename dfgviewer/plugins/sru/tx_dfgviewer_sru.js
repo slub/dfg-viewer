@@ -28,6 +28,8 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 	// Stop form from submitting normally
 	event.preventDefault();
 
+	$('#tx-dfgviewer-sru-results-loading').show();
+
 	// Send the data using post
 	$.post(
 		"/",
@@ -40,11 +42,14 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 			action: $( "input[name='tx_dfgviewer[action]']" ).val(),
 		},
 		function(data) {
-			console.log(data);
 			$('#tx-dfgviewer-sru-results').html(data);
 		},
-		"html");
+		"html")
+		.done(function( data ) {
+			$('#tx-dfgviewer-sru-results-loading').hide();
+		});
 });
+
 
 
 });

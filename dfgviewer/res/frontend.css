@@ -203,7 +203,7 @@ h2 .volume { font-weight: normal; }
 
 .tx-dfgviewer-sru { position: absolute; top: 10px; right: 30px; width: 400px; z-index: 11; background: #FFF;}
 #tx-dfgviewer-sru-results a { color: black; }
-#tx-dfgviewer-sru-results a span.sru-searchquery { color: red; font-weight: bold; }
+#tx-dfgviewer-sru-results a span.highlight { color: red; font-weight: bold; }
 #tx-dfgviewer-sru-results li { border-top: 1px dotted #ccc; padding: 2px; }
 #tx-dfgviewer-sru-results li span.sru-preview img { width: 100%; }
 #tx-dfgviewer-sru-results li span.sru-preview img:hover { width: 140%; position: relative; left: -20%; }

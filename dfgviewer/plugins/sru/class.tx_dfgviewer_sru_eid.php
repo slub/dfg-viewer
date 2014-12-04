@@ -58,8 +58,8 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 		$LANG = t3lib_div::makeInstance('language');
 
 		$this->LLkey = t3lib_div::_GP('L') ? t3lib_div::_GP('L') : 'default';
-		 $this->extKey = 'dfgviewer';
-		 $this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
+		$this->extKey = 'dfgviewer';
+		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
 		$this->pi_loadLL();
 
 		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
@@ -77,7 +77,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 			if ($sruResponse === FALSE) {
 
-				$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q');
+				$results[] =  $this->pi_getLL('label.noresults') . ' ' . urldecode(t3lib_div::_GP('q')) ;
 
 			} else {
 
@@ -87,32 +87,85 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					$fullTextHit = $record->xpath('//srw:recordData');
 
-					$text = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit->span;
+					$pageAttributes = '';
 
-					$hitAttributes = '';
+					foreach($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->attributes() as $key => $val) {
 
-					foreach($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit[0]->attributes() as $key => $val) {
-
-						$hitAttributes[$key] = $val;
+						$pageAttributes[$key] = $val;
 
 					}
+
+					unset($hitFound);
+
+					// there may be multiple hits on a page per search query
+					foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
+
+						unset($hitAttributes);
+
+						foreach ($hit->attributes() as $key => $val) {
+
+							$hitAttributes[$key] = $val;
+
+						}
+
+						$hitFound[] = array('text' => $hit->span, 'attributes' => $hitAttributes);
+					}
+//~ t3lib_utility_Debug::debug($hitFound, 'tx_dfgviewer_newspaperyear: hitAttributes... ');
 
 					$page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
 
-					if (!empty($hitAttributes['preview'])) {
+					unset($highlightParams);
+					// get highlight boxes for all results of a page
+					foreach ($hitFound as $key => $hit) {
 
-						$spanPreview = '<span class="sru-preview"><img src="'.$hitAttributes['preview'].'"></span>';
+						$highlightField = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
+						if (!in_array($highlightField, $highlightParams)) {
+							$highlightParams[] = $highlightField;
+						}
 
 					}
+					//~ highlightParams = serialize($highlightParams);
+					//~ t3lib_utility_Debug::debug($highlightParams, 'tx_dfgviewer_newspaperyear: hitAttributes... ');
+					foreach ($hitFound as $key => $hit) {
 
-					if (is_object($text)) {
+						unset($spanPreview);
+						unset($spanText);
 
-						$spanText = '<span class="sru-textsnippet">' . $text[0] . '<span class="sru-searchquery">'.$text[1].'</span>' . $text[2] . '</span>';
+						if (!empty($hit['attributes']['preview'])) {
+
+							$spanPreview = '<span class="sru-preview"><img src="'.$hit['attributes']['preview'].'"></span>';
+
+						}
+
+						if (is_object($hit['text'])) {
+
+							$spanText = '<span class="sru-textsnippet">';
+
+							foreach ($hit['text'] as $key => $text) {
+
+								if ($text->attributes()->class[0] == 'highlight') {
+
+									$spanText .= '<span class="highlight">'.$text.'</span>';
+
+								} else {
+
+									$spanText .= $text;
+
+								}
+
+							}
+							$spanText .= '</span>';
+
+							//~ $spanText = '<span class="sru-textsnippet">' . $hit['text'][0] . '<span class="sru-searchquery">'.$hit['text'][1].'</span>' . $hit['text'][2] . '</span>';
+
+						}
+
+						//~ $highlightParams = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
+						$origImageParams = $pageAttributes['width'] . ',' . $pageAttributes ['height'];
+
+						$results[] = '<a href="' . t3lib_div::_GP('action') . '?' . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '&tx_dlf[origimage]='.$origImageParams.'&tx_dlf[hightlight]='.urlencode(serialize($highlightParams)).'" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
 
 					}
-
-					$results[] = '<a href="' . t3lib_div::_GP('action') . '?' . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
-
 				}
 
 			}
@@ -120,7 +173,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		} else {
 
-			$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q');
+			$results[] =  $this->pi_getLL('label.noresults') . ' ' . urldecode(t3lib_div::_GP('q')) ;
 
 		}
 

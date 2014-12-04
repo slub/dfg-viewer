@@ -79,7 +79,7 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 				} else if ($links->fulltextsearch) {
 
 					$sruLink = htmlspecialchars(trim((string) $links->fulltextsearch));
-					t3lib_utility_Debug::debug($sruLink, 'Please change your METS-file and use dv:sru instead of dv:fulltextsearch. ');
+					//~ t3lib_utility_Debug::debug($sruLink, 'Please change your METS-file and use dv:sru instead of dv:fulltextsearch. ');
 				}
 
 			}
@@ -104,7 +104,9 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 		}
 
-		$this->addAutocompleteJS();
+		$this->addSearchFormJS();
+		$this->addSruOrigImageJS();
+		$this->addSruResultsJS();
 
 		// Configure @action URL for form.
 		$linkConf = array (
@@ -132,19 +134,72 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	}
 
 	/**
-	 * Adds the JS files necessary for search suggestions
+	 * Adds the JS files necessary for search form
 	 *
 	 * @access	protected
 	 *
 	 * @return	void
 	 */
-	protected function addAutocompleteJS() {
+	protected function addSearchFormJS() {
 
 		// Add javascript to page header.
 		if (tx_dlf_helper::loadJQuery()) {
 
 			$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
 
+		}
+
+	}
+
+	/**
+	 * Adds SRU Search result javascript
+	 *
+	 * @access	protected
+	 *
+	 * @return	string		Viewer script tags ready for output
+	 */
+
+	protected function addSruOrigImageJS() {
+
+		if (!empty($this->piVars['origimage'])) {
+			$origImage = $this->piVars['origimage'];
+			// Add SRU Results if any
+			$javascriptFooter[] = '
+			<script type="text/javascript">
+				tx_dlf_viewer.setOrigImage('.$origImage.');
+			</script>';
+
+			$GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] = implode("\n", $javascriptFooter);
+		}
+
+	}
+
+	/**
+	 * Adds SRU Search result javascript
+	 *
+	 * @access	protected
+	 *
+	 * @return	string		Viewer script tags ready for output
+	 */
+
+	protected function addSruResultsJS() {
+
+		if (!empty($this->piVars['hightlight'])) {
+
+
+			$highlight = unserialize($this->piVars['hightlight']);
+			// Add SRU Results if any
+			$javascriptFooter = '
+			<script type="text/javascript">';
+
+			foreach ($highlight as $field) {
+				$javascriptFooter .= 'tx_dlf_viewer.addHightlightField('.$field.');';
+			}
+
+			$javascriptFooter .= '
+			</script>';
+
+			$GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] .= $javascriptFooter;
 		}
 
 	}
