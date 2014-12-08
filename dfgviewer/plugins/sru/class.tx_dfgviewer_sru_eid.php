@@ -124,6 +124,9 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 						}
 
 					}
+
+
+
 					//~ highlightParams = serialize($highlightParams);
 					//~ t3lib_utility_Debug::debug($highlightParams, 'tx_dfgviewer_newspaperyear: hitAttributes... ');
 					foreach ($hitFound as $key => $hit) {
@@ -181,7 +184,8 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 //~ fwrite($fp, $sruXML->asXML() . "\n");
 //~ fclose($fp);
 
-		$content = '<ul>';
+		$content = '<div class="sru-results-active-indicator"></div>';
+		$content .= '<ul>';
 		foreach ($results as $result) {
 
 			$content .= '<li>';

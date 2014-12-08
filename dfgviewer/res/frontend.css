@@ -201,12 +201,19 @@ h2 .volume { font-weight: normal; }
 .fullscreenLogos a { position: relative; display: block; float: left; overflow: hidden; }
 .fullscreenLogos a.own { margin-right: 30px; }
 
-.tx-dfgviewer-sru { position: absolute; top: 10px; right: 30px; width: 400px; z-index: 11; background: #FFF;}
-#tx-dfgviewer-sru-results a { color: black; }
-#tx-dfgviewer-sru-results a span.highlight { color: red; font-weight: bold; }
-#tx-dfgviewer-sru-results li { border-top: 1px dotted #ccc; padding: 2px; }
-#tx-dfgviewer-sru-results li span.sru-preview img { width: 100%; }
-#tx-dfgviewer-sru-results li span.sru-preview img:hover { width: 140%; position: relative; left: -20%; }
+.tx-dfgviewer-sru .tx-dfgviewer-sru { position: absolute; top: 155px; right: 30px; z-index: 11; width: 300px; height: 22px; border-bottom: 1px dotted #999; padding-bottom: 4px; display: none; }
+.tx-dfgviewer-sru label, .tx-dfgviewer-sru input[type="text"] { position: relative; float: left; }
+.tx-dfgviewer-sru label { color: #fff; font-size: 11px; line-height: 22px; width: 128px; text-align: right; }
+.tx-dfgviewer-sru input[type="submit"] { display: block; width: 22px; height: 22px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAQAAABuvaSwAAAAkElEQVR4AbWSwQ3EMAgEKYViqMhV0YmLoYi5D7pVnOgsRzr2kUcGloS1l0WQFADFZODYVf3AmaxVjCc4qC+QJGrMFfZGJ4GcxoI3PG8zrn4hOHqq3bW+M1Ldi+TqDVNAYc/qzUfDMnpUvIfP1jj6wP2vK8Gboygl+3OrJr4PUiqF24hqlGDjd/gHSRgH+h/8ASO6XbTIRcOxAAAAAElFTkSuQmCC') no-repeat center center; background-size: 16px 16px; border: 0 none; text-indent: 100%; white-space: nowrap; float: right; }
+.tx-dfgviewer-sru input[type="text"] { margin: 0 4px 0 6px; width: 140px; height: 20px; line-height: 18px; background: #888; border: 1px solid #fff; box-sizing: border-box; padding: 4px; color: #fff; font-size: 11px; }
+#tx-dfgviewer-sru-results-loading, #tx-dfgviewer-sru-results-clearing { position: absolute; right: 30px; top: 1px; width: 18px; height: 18px; overflow: hidden; text-indent: 100%; white-space: nowrap; }
+#tx-dfgviewer-sru-results-loading { background: url('images/sru_loading.gif') no-repeat center center; }
+#tx-dfgviewer-sru-results-clearing { background: url('images/sru_clearing.png') no-repeat center center; background-size: 17px; cursor: pointer; }
+#tx-dfgviewer-sru-results ul { position: absolute; right: 10px; top: 25px; width: 350px; height: 450px; overflow: scroll; background: #000; background: rgba(31,31,31,0.8); padding: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); font-size: 11px; color: #eee; text-align: left; }
+#tx-dfgviewer-sru-results ul li a { display: block; border-bottom: 1px dotted #fff; padding: 10px 5px; }
+#tx-dfgviewer-sru-results ul li a:hover { background: #f33; text-decoration: none; }
+#tx-dfgviewer-sru-results .sru-results-active-indicator { position: absolute; top: 15px; right: 60px; width: 0; height: 0; border: 10px solid transparent; border-bottom-color: rgba(31,31,31,0.8); border-top-width: 0; }
+#tx-dfgviewer-sru-results .sru-preview img { width: 100%; }
 
 
 /* EOF */

@@ -1,6 +1,12 @@
 /* DFG-VIEWER JS-ADAPTIONS */
 $(document).ready(function() {
 
+  // maybe you can move the lines 5-8 to tx_dfgviewer_sru.js. i was a bit lazy...
+  $('#tx-dfgviewer-sru-results-clearing').click(function() {
+    $('#tx-dfgviewer-sru-results ul').remove();
+    $('#tx-dfgviewer-sru-query').val('');
+  });
+
 	// trigger height adjustment on initial load and on window resize
 	$(document).rearrangeTitleBar();
 	$(window).resize(function(){ $(document).rearrangeTitleBar(); });
@@ -11,11 +17,11 @@ $(document).ready(function() {
 	$('.moreFunctionsTrigger').click(function() { $(this).fadeOut().parent().animate({'padding-left':'144px'}, 200, function() { $(this).parent().find('.hiddenFunctions').show('slide', {'direction': 'left'}, 400) }).find('.pages').animate({'right':'400px'},200); });
 
 	// show/hide metadata in title bar (with cookie-saved status)
-	if($('.mdblock').length > 1) { $('#title').append('<div title="weitere Metadaten anzeigen" class="moreMetaData"></div>'); }
+	if($('.mdblock').length > 1) { $('#title').append('<div title="weitere Metadaten anzeigen" class="moreMetaData"></div>'); }
 	var metaDataStatus = getCookie('dfgviewer-metaDataStatus');
 	if(metaDataStatus == "open") { $('.mdblock').show(); $(document).rearrangeTitleBar(); $('.moreMetaData').addClass('allMetaDataShown'); }
 	$('.moreMetaData').click(function() {
-		if($(this).hasClass('allMetaDataShown')) {
+		if($(this).hasClass('allMetaDataShown')) {
 			$('.mdblock:not(:first-child)').slideUp(200,function() { $(document).rearrangeTitleBar() });
 			$(this).attr('title','weitere Metadaten anzeigen');
 			document.cookie = 'dfgviewer-metaDataStatus'+'=closed; path=/';
@@ -36,24 +42,28 @@ $(document).ready(function() {
 		$('.tx-dlf-toc').css({'width':'30px'});
 		$('#whiteboxcontainer').css({'right':'30px'});
 		$('.hideNav').addClass('hiddenNav');
+	} else {
+    $('.tx-dfgviewer-sru .tx-dfgviewer-sru').show();
 	}
 
 	$('.hideNav').click(function() {
-		if($(this).hasClass('hiddenNav')) {
+		if($(this).hasClass('hiddenNav')) {
 			$('.tx-dlf-toc').css({'width':'300px'});
 			$('#navcontainer').show('slide', {'direction': 'right'}, 400);
 			$('#whiteboxcontainer').animate({'right':'350px'},400, function() { if(!$('body').hasClass('noHeader')) { $(document).rearrangeTitleBar(); } });
+			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').show('slide', {'direction': 'right'}, 400);
 			document.cookie = 'dfgviewer-navigationStatus'+'=open; path=/';
 		} else {
 			$('#navcontainer').hide('slide', {'direction': 'right'}, 200, function() { $('.tx-dlf-toc').css({'width':'30px'}) });
 			$('#whiteboxcontainer').animate({'right':'30px'},200, function() { if(!$('body').hasClass('noHeader')) { $(document).rearrangeTitleBar(); } });
+			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').hide('slide', {'direction': 'right'}, 200);
 			document.cookie = 'dfgviewer-navigationStatus'+'=closed; path=/';
 		}
 		$(this).toggleClass('hiddenNav');
 	});
 
 	$('.select-calendar-view').click(function() {
-		if(!$(this).hasClass('active')) {
+		if(!$(this).hasClass('active')) {
 			$(this).addClass('active');
 			$('.select-list-view').removeClass('active');
 			$('.calendar-view').show();
@@ -61,7 +71,7 @@ $(document).ready(function() {
 		}
 	});
 	$('.select-list-view').click(function() {
-		if(!$(this).hasClass('active')) {
+		if(!$(this).hasClass('active')) {
 			$(this).addClass('active');
 			$('.select-calendar-view').removeClass('active');
 			$('.calendar-view').hide();
@@ -112,6 +122,7 @@ $(document).ready(function() {
 		$('#toprow').css({ 'height': '30px' });
 		$('#title *').hide();
 		$('.fullscreenLogos').css({'top':'0px'});
+		$('.tx-dfgviewer-sru .tx-dfgviewer-sru').css({'top':'25px'});
 	}
 
 	// add fullscreen button to navigationbar click toggle
@@ -122,6 +133,7 @@ $(document).ready(function() {
 			$('#whiteboxcontainer, .tx-dlf-toc').animate({ 'top': '100px' });
 			$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
 			$('.fullscreenLogos').animate({'top':'-60px'});
+      $('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'155px'});
 			$('body').toggleClass('noHeader');
 			document.cookie = 'dfgviewer-headerStatus'+'=open; path=/';
 		} else {
@@ -131,6 +143,7 @@ $(document).ready(function() {
 			$('#toprow').animate({ 'height': '30px' });
 			$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
 			$('.fullscreenLogos').animate({'top':'0'});
+      $('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'25px'});
 			$('body').toggleClass('noHeader');
 			document.cookie = 'dfgviewer-headerStatus'+'=closed; path=/';
 		}
