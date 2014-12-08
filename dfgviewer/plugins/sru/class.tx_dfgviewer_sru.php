@@ -118,6 +118,8 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 		$markerArray = array (
 			'###ACTION_URL###' => $this->cObj->typoLink_URL($linkConf),
 			'###LABEL_QUERY###' => $this->pi_getLL('label.query'),
+			'###LABEL_DELETE_SEARCH###' => $this->pi_getLL('label.delete_search'),
+			'###LABEL_LOADING###' => $this->pi_getLL('label.loading'),
 			'###SRU_URL###' => $sruLink,
 			'###LANG_ID###' => $this->LLkey,
 			'###LABEL_SUBMIT###' => $this->pi_getLL('label.submit'),

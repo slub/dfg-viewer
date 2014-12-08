@@ -1,12 +1,6 @@
 /* DFG-VIEWER JS-ADAPTIONS */
 $(document).ready(function() {
 
-  // maybe you can move the lines 5-8 to tx_dfgviewer_sru.js. i was a bit lazy...
-  $('#tx-dfgviewer-sru-results-clearing').click(function() {
-    $('#tx-dfgviewer-sru-results ul').remove();
-    $('#tx-dfgviewer-sru-query').val('');
-  });
-
 	// trigger height adjustment on initial load and on window resize
 	$(document).rearrangeTitleBar();
 	$(window).resize(function(){ $(document).rearrangeTitleBar(); });
@@ -43,7 +37,7 @@ $(document).ready(function() {
 		$('#whiteboxcontainer').css({'right':'30px'});
 		$('.hideNav').addClass('hiddenNav');
 	} else {
-    $('.tx-dfgviewer-sru .tx-dfgviewer-sru').show();
+		$('.tx-dfgviewer-sru .tx-dfgviewer-sru').show();
 	}
 
 	$('.hideNav').click(function() {
@@ -133,7 +127,7 @@ $(document).ready(function() {
 			$('#whiteboxcontainer, .tx-dlf-toc').animate({ 'top': '100px' });
 			$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
 			$('.fullscreenLogos').animate({'top':'-60px'});
-      $('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'155px'});
+			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'155px'});
 			$('body').toggleClass('noHeader');
 			document.cookie = 'dfgviewer-headerStatus'+'=open; path=/';
 		} else {
@@ -143,7 +137,7 @@ $(document).ready(function() {
 			$('#toprow').animate({ 'height': '30px' });
 			$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
 			$('.fullscreenLogos').animate({'top':'0'});
-      $('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'25px'});
+			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'25px'});
 			$('body').toggleClass('noHeader');
 			document.cookie = 'dfgviewer-headerStatus'+'=closed; path=/';
 		}

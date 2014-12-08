@@ -29,6 +29,7 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 	event.preventDefault();
 
 	$('#tx-dfgviewer-sru-results-loading').show();
+	$('#tx-dfgviewer-sru-results-clearing').hide();
 
 	// Send the data using post
 	$.post(
@@ -47,7 +48,14 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 		"html")
 		.done(function( data ) {
 			$('#tx-dfgviewer-sru-results-loading').hide();
+			$('#tx-dfgviewer-sru-results-clearing').show();
 		});
+});
+
+// clearing button
+$('#tx-dfgviewer-sru-results-clearing').click(function() {
+	$('#tx-dfgviewer-sru-results').remove();
+	$('#tx-dfgviewer-sru-query').val('');
 });
 
 
