@@ -51,8 +51,11 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	public function main($content, $conf) {
 
 		$this->init($conf);
-
-		// Load current document.
+ //~ t3lib_utility_Debug::debug($this->LLkey, 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
+ //~ t3lib_utility_Debug::debug($this->lang, 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
+ //~ t3lib_utility_Debug::debug($this->LOCAL_LANG, 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
+ //~ t3lib_utility_Debug::debug(t3lib_div::GPvar('L'), 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
+// Load current document.
 		$this->loadDocument();
 
 		if ($this->doc === NULL) {

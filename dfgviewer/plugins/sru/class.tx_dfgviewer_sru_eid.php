@@ -57,9 +57,14 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 		// Load translation files.
 		$LANG = t3lib_div::makeInstance('language');
 
-		$this->LLkey = t3lib_div::_GP('L') ? t3lib_div::_GP('L') : 'default';
+//~ $GLOBALS['TSFE']->sys_language_uid;
+
 		$this->extKey = 'dfgviewer';
+
 		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
+
+		$this->LLkey = t3lib_div::_GP('L') ? t3lib_div::_GP('L') : 'default';
+
 		$this->pi_loadLL();
 
 		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
@@ -127,6 +132,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					//~ highlightParams = serialize($highlightParams);
 					//~ t3lib_utility_Debug::debug($highlightParams, 'tx_dfgviewer_newspaperyear: hitAttributes... ');
+
 					foreach ($hitFound as $key => $hit) {
 
 						unset($spanPreview);
