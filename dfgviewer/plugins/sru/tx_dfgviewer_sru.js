@@ -40,6 +40,7 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 			L: escape( $( "input[name='tx_dfgviewer[L]'" ).val() ),
 			id: $( "input[name='tx_dfgviewer[id]']" ).val(),
 			sru: $( "input[name='tx_dfgviewer[sru]']" ).val(),
+			pages: $( "input[name='tx_dfgviewer[pages]']" ).val(),
 			action: $( "input[name='tx_dfgviewer[action]']" ).val(),
 		},
 		function(data) {

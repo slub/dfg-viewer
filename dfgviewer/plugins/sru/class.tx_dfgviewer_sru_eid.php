@@ -69,6 +69,8 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
 
+		$pages = unserialize(t3lib_div::_GP('pages'));
+
 //~ $fp = fopen('/home/ab/public_html/sru_eid.txt', 'a');
 //~ fwrite($fp, $url . "\n");
 		// make request to SRU service
@@ -115,9 +117,13 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 						$hitFound[] = array('text' => $hit->span, 'attributes' => $hitAttributes);
 					}
-//~ t3lib_utility_Debug::debug($hitFound, 'tx_dfgviewer_newspaperyear: hitAttributes... ');
 
-					$page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
+					//~ $page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
+
+					$page = $pages[(string)$pageAttributes['id']];
+//~ t3lib_utility_Debug::debug($pages, 'tx_dfgviewer_newspaperyear: pageAttributess1... ');
+//~ t3lib_utility_Debug::debug($page, 'tx_dfgviewer_newspaperyear: pageAttributess2... ');
+//~ t3lib_utility_Debug::debug($pageAttributes, 'tx_dfgviewer_newspaperyear: pageAttributess3... ');
 
 					unset($highlightParams);
 					// get highlight boxes for all results of a page
