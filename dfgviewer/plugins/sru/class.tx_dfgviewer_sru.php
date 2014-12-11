@@ -118,14 +118,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 			'forceAbsoluteUrl' => 1
 		);
 
-		$i = 0;
-		foreach($this->doc->physicalPagesInfo as $physicalPage => $physicalPageDetails) {
-			if ($physicalPageDetails['type'] === 'page') {
-				$i++;
-				$currentPages[$physicalPage] = $i;
-			}
-		}
- //~ t3lib_utility_Debug::debug($currentPages, 'tx_dfgviewer_newspaperyear: currentPages... ');
 		// Fill markers.
 		$markerArray = array (
 			'###ACTION_URL###' => $this->cObj->typoLink_URL($linkConf),
@@ -138,7 +130,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 			'###FIELD_QUERY###' => $this->prefixId.'[query]',
 			'###QUERY###' => htmlspecialchars($lastQuery),
 			'###CURRENT_DOCUMENT###' => $this->doc->location,
-			'###CURRENT_PAGES###' => htmlspecialchars(serialize($currentPages)),
 		);
 
 		// Display search form.
