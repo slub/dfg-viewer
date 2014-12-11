@@ -114,12 +114,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 						$hitFound[] = array('text' => $hit->span, 'attributes' => $hitAttributes);
 					}
 
-					//~ $page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->pagination;
-
 					$page = (string)$pageAttributes['id'];
-//~ t3lib_utility_Debug::debug($pages, 'tx_dfgviewer_newspaperyear: pageAttributess1... ');
-//~ t3lib_utility_Debug::debug($page, 'tx_dfgviewer_newspaperyear: pageAttributess2... ');
-//~ t3lib_utility_Debug::debug($pageAttributes, 'tx_dfgviewer_newspaperyear: pageAttributess3... ');
 
 					unset($highlightParams);
 					// get highlight boxes for all results of a page
@@ -131,9 +126,6 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 						}
 
 					}
-
-					//~ highlightParams = serialize($highlightParams);
-					//~ t3lib_utility_Debug::debug($highlightParams, 'tx_dfgviewer_newspaperyear: hitAttributes... ');
 
 					foreach ($hitFound as $key => $hit) {
 
@@ -165,14 +157,11 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 							}
 							$spanText .= '</span>';
 
-							//~ $spanText = '<span class="sru-textsnippet">' . $hit['text'][0] . '<span class="sru-searchquery">'.$hit['text'][1].'</span>' . $hit['text'][2] . '</span>';
-
 						}
 
-						//~ $highlightParams = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
 						$origImageParams = $pageAttributes['width'] . ',' . $pageAttributes ['height'];
 
-						$results[] = '<a href="' . t3lib_div::_GP('action') . '?' . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '&tx_dlf[origimage]='.$origImageParams.'&tx_dlf[hightlight]='.urlencode(serialize($highlightParams)).'" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
+						$results[] = '<a href="' . t3lib_div::_GP('action') . (strpos(t3lib_div::_GP('action'), '?') > 0 ? '&' : '?') . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '&tx_dlf[origimage]='.$origImageParams.'&tx_dlf[hightlight]='.urlencode(serialize($highlightParams)).'" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
 
 					}
 				}
@@ -186,10 +175,6 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		}
 
-//~ fwrite($fp, $content . "\n");
-//~ fwrite($fp, $sruXML->asXML() . "\n");
-//~ fclose($fp);
-
 		// pseudo div-tag for design
 		$content = '<div class="sru-results-active-indicator"></div>';
 
@@ -201,7 +186,9 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 			$content .= $result;
 
 			foreach ($result as $item) {
+
 				$content .= $item . '<br />';
+
 			}
 
 			$content .= '</li>';

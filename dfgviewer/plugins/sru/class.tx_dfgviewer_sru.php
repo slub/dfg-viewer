@@ -51,11 +51,8 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	public function main($content, $conf) {
 
 		$this->init($conf);
- //~ t3lib_utility_Debug::debug($this->LLkey, 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
- //~ t3lib_utility_Debug::debug($this->lang, 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
- //~ t3lib_utility_Debug::debug($this->LOCAL_LANG, 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
- //~ t3lib_utility_Debug::debug(t3lib_div::GPvar('L'), 'tx_dfgviewer_newspaperyear: $this->LLkey... ');
-// Load current document.
+
+		// Load current document.
 		$this->loadDocument();
 
 		if ($this->doc === NULL) {
@@ -64,7 +61,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 			return $content;
 
 		}
- //~ t3lib_utility_Debug::debug($this->doc->physicalPagesInfo, 'tx_dfgviewer_newspaperyear: toc... ');
 
 		// Get digital provenance information.
 		$digiProv = $this->doc->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
