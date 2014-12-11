@@ -57,8 +57,6 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 		// Load translation files.
 		$LANG = t3lib_div::makeInstance('language');
 
-//~ $GLOBALS['TSFE']->sys_language_uid;
-
 		$this->extKey = 'dfgviewer';
 
 		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
@@ -67,7 +65,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$this->pi_loadLL();
 
-		$url = t3lib_div::_GP('sru').t3lib_div::_GP('q');
+		$url = t3lib_div::_GP('sru').urlencode(t3lib_div::_GP('q'));
 
 		// make request to SRU service
 		$sruXML = simplexml_load_file($url);
@@ -80,7 +78,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 			if ($sruResponse === FALSE) {
 
-				$results[] =  $this->pi_getLL('label.noresults') . ' ' . urldecode(t3lib_div::_GP('q')) ;
+				$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
 
 			} else {
 
@@ -171,7 +169,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		} else {
 
-			$results[] =  $this->pi_getLL('label.noresults') . ' ' . urldecode(t3lib_div::_GP('q')) ;
+			$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
 
 		}
 
