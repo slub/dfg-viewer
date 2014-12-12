@@ -271,8 +271,8 @@ page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 page.2.marks.SRU < plugin.tx_dfgviewer_sru
 
-#page.2.marks.IMAGE = TEXT
-#page.2.marks.IMAGE.value = Hallo Welt! newspaper_issue
+#page.2.marks.GUI = TEXT
+#page.2.marks.GUI.value = Hallo Welt! newspaper_issue
 [global]
 
 

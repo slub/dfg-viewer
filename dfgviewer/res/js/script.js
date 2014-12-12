@@ -91,7 +91,6 @@ $(document).ready(function() {
 		$('.refs').before('<div class="referenceTrigger"></div>');
 	}
 
-	//~ $('.tooltip').tooltipster();
 	$('.tooltip').tooltipster({
 	   animation: 'fade',
 	   contentAsHTML: true,
@@ -102,46 +101,49 @@ $(document).ready(function() {
 	   interactive: true
 	});
 
+	/* fullscreen mode */
 	// clone dfg and provider logos for fullscreen view
-	$('#sitespanner').prepend('<div class="fullscreenLogos">'+$('#provider').clone().html()+$('#sponsor').clone().html()+'</div>')
+	if ($('#newspaperbox').length == 0) {
+		$('#sitespanner').prepend('<div class="fullscreenLogos">'+$('#provider').clone().html()+$('#sponsor').clone().html()+'</div>')
 
-
-	// inital changes at active fullscreen view
-	var headerStatus = getCookie('dfgviewer-headerStatus');
-	if(headerStatus == "closed") {
-		$('body').toggleClass('noHeader');
-		$('#header').css({'overflow':'hidden', 'height': '0' });
-		$('#whiteboxcontainer, .tx-dlf-toc').css({ 'top': '20px' });
-		$('#whitebox, #navcontainer').css({'top':'42px'});
-		$('#toprow').css({ 'height': '30px' });
-		$('#title *').hide();
-		$('.fullscreenLogos').css({'top':'0px'});
-		$('.tx-dfgviewer-sru .tx-dfgviewer-sru').css({'top':'25px'});
-	}
-
-	// add fullscreen button to navigationbar click toggle
-	$('.zoom').append('<span class="fullscreen"></span>');
-	$('.tx-dlf-navigation .zoom .fullscreen').click(function() {
-		if($('body').hasClass('noHeader')) {
-			$('#header').css({'overflow':'visible'}).animate({ 'height': '85px' });
-			$('#whiteboxcontainer, .tx-dlf-toc').animate({ 'top': '100px' });
-			$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
-			$('.fullscreenLogos').animate({'top':'-60px'});
-			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'155px'});
+		// inital changes at active fullscreen view
+		var headerStatus = getCookie('dfgviewer-headerStatus');
+		if(headerStatus == "closed") {
 			$('body').toggleClass('noHeader');
-			document.cookie = 'dfgviewer-headerStatus'+'=open; path=/';
-		} else {
-			$('#header').css({'overflow':'hidden'}).animate({ 'height': '0' });
-			$('#whiteboxcontainer, .tx-dlf-toc').animate({ 'top': '20px' });
-			$('#whitebox, #navcontainer').animate({'top':'42px'});
-			$('#toprow').animate({ 'height': '30px' });
-			$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
-			$('.fullscreenLogos').animate({'top':'0'});
-			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'25px'});
-			$('body').toggleClass('noHeader');
-			document.cookie = 'dfgviewer-headerStatus'+'=closed; path=/';
+			$('#header').css({'overflow':'hidden', 'height': '0' });
+			$('#whiteboxcontainer, .tx-dlf-toc').css({ 'top': '20px' });
+			$('#whitebox, #navcontainer').css({'top':'42px'});
+			$('#toprow').css({ 'height': '30px' });
+			$('#title *').hide();
+			$('.fullscreenLogos').css({'top':'0px'});
+			$('.tx-dfgviewer-sru .tx-dfgviewer-sru').css({'top':'25px'});
 		}
-	});
+
+		// add fullscreen button to navigationbar click toggle
+		$('.tx-dlf-navigation .zoom .fullscreen').click(function() {
+			if($('body').hasClass('noHeader')) {
+				$('#header').css({'overflow':'visible'}).animate({ 'height': '85px' });
+				$('#whiteboxcontainer, .tx-dlf-toc').animate({ 'top': '100px' });
+				$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
+				$('.fullscreenLogos').animate({'top':'-60px'});
+				$('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'155px'});
+				$('body').toggleClass('noHeader');
+				document.cookie = 'dfgviewer-headerStatus'+'=open; path=/';
+			} else {
+				$('#header').css({'overflow':'hidden'}).animate({ 'height': '0' });
+				$('#whiteboxcontainer, .tx-dlf-toc').animate({ 'top': '20px' });
+				$('#whitebox, #navcontainer').animate({'top':'42px'});
+				$('#toprow').animate({ 'height': '30px' });
+				$('#title *').fadeToggle('fast',function() { $(document).rearrangeTitleBar(); });
+				$('.fullscreenLogos').animate({'top':'0'});
+				$('.tx-dfgviewer-sru .tx-dfgviewer-sru').animate({'top':'25px'});
+				$('body').toggleClass('noHeader');
+				document.cookie = 'dfgviewer-headerStatus'+'=closed; path=/';
+			}
+		});
+	}
+	/* -end- fullscreen mode */
+
 });
 
 /* check dynamic height of titlebar and add height and top values to relevant elements */

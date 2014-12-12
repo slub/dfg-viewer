@@ -21,7 +21,11 @@ a:hover, a:active { outline: 0; }
 
 
 /* structure elements */
-#sitespanner { position: relative; height: 100%; width: 100%; min-width: 800px; }
+#sitespanner {
+	height: 100%;
+	width: 100%;
+	min-width: 800px;
+}
 #header { background: url(images/footnhead.png) repeat-x 0 0; }
 
 
