@@ -60,5 +60,6 @@ $('#tx-dfgviewer-sru-results-clearing').click(function() {
 });
 
 
-
 });
+
+
