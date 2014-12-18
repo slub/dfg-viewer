@@ -11,11 +11,20 @@ plugin.tx_dfgviewer {
 	# cat=plugin.tx_dfgviewer/file; type=file[css]; label=Main stylesheet file
 	stylesheet = EXT:dfgviewer/res/frontend.css
 
+	# cat=plugin.tx_dfgviewer/file; type=file[css]; label=Tooltipster stylesheet file
+	css_tooltipster = EXT:dfgviewer/res/tooltipster.css
+
 	# cat=plugin.tx_dfgviewer/file; type=file[js]; label=Main javascript file
 	javascript = EXT:dfgviewer/res/js/script.js
 
+	# cat=plugin.tx_dfgviewer/file; type=file[js]; label=Tooltipster javascript file
+	js_tooltipster = EXT:dfgviewer/res/js/jquery.tooltipster.min.js
+
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file
 	templateFile = EXT:dfgviewer/res/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file newspaper
+	templateFileNewspaper = EXT:dfgviewer/res/template_newspaper.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Metadata template file
 	templateFileMeta = EXT:dfgviewer/res/metadata.tmpl
@@ -46,4 +55,13 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Download Tool template file
 	templateFileToolPdf = EXT:dfgviewer/res/downloads.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Calendar template file
+	templateFileNewspaperCalendar = EXT:dfgviewer/plugins/newspaper-calendar/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Year List template file
+	templateFileNewspaperYears = EXT:dfgviewer/plugins/newspaper-years/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=SRU searchform template file
+	templateFileSru = EXT:dfgviewer/plugins/sru/template.tmpl
 }

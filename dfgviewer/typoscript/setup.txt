@@ -30,9 +30,9 @@ plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
 [globalString = GP:set|mets=http*]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [global]
-[globalVar = GP:set|image>0]
+#[globalVar = GP:set|image>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
-[global]
+#[global]
 [globalVar = GP:set|double>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
@@ -134,6 +134,12 @@ plugin.tx_dlf_toolsPdf {
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolPdf}
 }
 
+plugin.tx_dfgviewer_sru {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	templateFile = {$plugin.tx_dfgviewer.templateFileSru}
+	targetPid.data = TSFE:page|uid
+}
+
 lib.info = HTML
 lib.info {
 	value = DFG-Viewer
@@ -193,9 +199,14 @@ page.meta.robots = noindex
 
 page.shortcutIcon = EXT:dfgviewer/res/favicon.ico
 
+page.includeCSS.tooltipster = {$plugin.tx_dfgviewer.css_tooltipster}
+page.includeCSS.tooltipster.media = screen,projection
+
 page.includeCSS.styles = {$plugin.tx_dfgviewer.stylesheet}
 page.includeCSS.styles.media = screen,projection
+
 page.includeJS.script = {$plugin.tx_dfgviewer.javascript}
+page.includeJS.tooltipster = {$plugin.tx_dfgviewer.js_tooltipster}
 
 page.bodyTag = <body class="dfgviewer">
 
@@ -214,6 +225,8 @@ page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
 page.2.marks.TOOLBOX < plugin.tx_dlf_toolbox
 page.2.marks.GRIDSWITCHER < lib.gridswitcher
+page.2.marks.SRU = TEXT
+
 [globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
@@ -223,3 +236,43 @@ page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 [global]
+
+plugin.tx_dfgviewer_newspapercalendar {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	targetPid = #
+	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperCalendar}
+}
+
+plugin.tx_dfgviewer_newspaperyears {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	targetPid = #
+	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperYears}
+}
+
+[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_global_anchor)]
+page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
+page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
+page.2.marks.GRIDSWITCHER >
+page.2.marks.NAVIGATION >
+page.2.marks.GUI = TEXT
+[global]
+
+[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_year_anchor)]
+page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
+page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
+page.2.marks.GRIDSWITCHER >
+page.2.marks.NAVIGATION >
+page.2.marks.GUI = TEXT
+[global]
+
+[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_issue)]
+page.2.marks.GUI < plugin.tx_dlf_navigation
+page.2.marks.IMAGE < plugin.tx_dlf_pageview
+page.2.marks.NAVIGATION < plugin.tx_dlf_toc
+page.2.marks.SRU < plugin.tx_dfgviewer_sru
+
+#page.2.marks.GUI = TEXT
+#page.2.marks.GUI.value = Hallo Welt! newspaper_issue
+[global]
+
+

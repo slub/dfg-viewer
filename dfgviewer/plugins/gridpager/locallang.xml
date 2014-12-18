@@ -16,6 +16,12 @@
 			<label index="nextPage">Next Page</label>
 			<label index="forwardXPages">Forward %d Pages</label>
 			<label index="lastPage">Last Page</label>
+			<label index="doublePageOn">Show double pages</label>
+			<label index="doublePageOff">Show single page</label>
+			<label index="doublePage+1">Adjust recto/verso</label>
+			<lable index="zoom-in">Zoom In</lable>
+			<lable index="zoom-out">Zoom Out</lable>
+			<lable index="zoom-fullscreen">Fullscreen Mode</lable>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.pi_flexform.sheet_general">Einstellungen</label>
@@ -28,6 +34,12 @@
 			<label index="nextPage">Nächste Seite</label>
 			<label index="forwardXPages">%d Seiten weiter</label>
 			<label index="lastPage">Letzte Seite</label>
+			<lable index="zoom-in">Ansicht vergrößern</lable>
+			<lable index="zoom-out">Ansicht verkleinern</lable>
+			<lable index="zoom-fullscreen">Vollansicht</lable>
+			<label index="doublePageOn">Doppelseitenansicht</label>
+			<label index="doublePageOff">Einzelseitenansicht</label>
+			<label index="doublePage+1">Recto/Verso korrigieren</label>
 		</languageKey>
 	</data>
 </T3locallang>
