@@ -66,7 +66,16 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 		} else {
 
 			// Set default values if not set.
-			$this->piVars['page'] = tx_dlf_helper::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+			// page may be integer or string (pyhsical page attribute)
+			if (tx_dlf_helper::testInt($this->piVars['page']) || empty($this->piVars['page'])) {
+
+				$this->piVars['page'] = tx_dlf_helper::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+
+			} else {
+
+				$this->piVars['page'] = array_search($this->piVars['page'], $this->doc->physicalPages);
+
+			}
 
 		}
 
