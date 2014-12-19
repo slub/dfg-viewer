@@ -92,17 +92,29 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 
 		foreach($years as $id => $year) {
 
+			$yearLabel = empty($year['label']) ? $year['orderlabel'] : $year['label'];
+
+			if (empty($yearLabel)) {
+
+				// if neither order nor orderlabel is set, use the id...
+				$yearLabel = (string)$id;
+
+			}
 			if (strlen($year['points']) > 0) {
 
 				$linkConf = array (
 					'useCacheHash' => 1,
 					'parameter' => $this->conf['targetPid'],
 					'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($year['points']),
-					'title' => $year['label']
+					'title' => $yearLabel
 				);
-				$yearText = $this->cObj->typoLink($year['label'], $linkConf);
-			} else
-				$yearText = $year['label'];
+				$yearText = $this->cObj->typoLink($yearLabel, $linkConf);
+
+			} else {
+
+				$yearText = $yearLabel;
+
+			}
 
 			$yearArray = array(
 				'###YEARNAME###' => $yearText,
