@@ -71,8 +71,14 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 //~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
 
 		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
-			$month[$mo['label']] = $id;
+
+			// prefer oderlabel over label
+			$monthNum = isset($mo['orderlabel']) ? (int)$mo['orderlabel'] : $mo['label'];
+
+			$month[$monthNum] = $id;
+
 			$allIssuesCount += count($mo['children']);
+
 		}
 
 		// Load template file.
@@ -90,7 +96,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$subparts['template'] = $this->template;
 		$subparts['month'] = $this->cObj->getSubpart($subparts['template'], '###CALMONTH###');
 
-		//~ $subparts['issuelist'] = $this->cObj->getSubpart($subparts['template'], '###ISSUELIST###');
 		$subparts['singleissue'] = $this->cObj->getSubpart($subparts['issuelist'], '###SINGLEISSUE###');
 
 		$year = (int)$toc[0]['children'][0]['label'];
@@ -145,18 +150,23 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 						$dayLinks = '';
 						$dayLinksText = '';
 
-						$currentMonth = strftime('%m', $currentDayTime);
+						$currentMonth = date('n', $currentDayTime);
 
 							foreach($toc[0]['children'][0]['children'][$month[$currentMonth]]['children'] as $id => $day) {
 
-								if ((int)$day['label'] === (int)date('j', $currentDayTime)
+								// prefer oderlabel over label
+								$dayNum = isset($day['orderlabel']) ? (int)$day['orderlabel'] : $day['label'];
+
+								if ($dayNum === (int)date('j', $currentDayTime)
 									&& $day['type'] === 'day') {
 
-									$dayLinks     = $day['label'];
+									$dayLinks = $dayNum;
 
 									foreach($day['children'] as $id => $issue) {
+
 										$dayPoints    = $issue['points'];
-										$dayLinkLabel = $issue['label'];
+
+										$dayLinkLabel = empty($issue['label']) ? strftime('%x', $currentDayTime) : $issue['label'];
 
 										$linkConf = array (
 											'useCacheHash' => 1,
