@@ -103,10 +103,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 					$sruLink = htmlspecialchars(trim((string) $links->sru));
 
-				} else if ($links->fulltextsearch) {
-
-					$sruLink = htmlspecialchars(trim((string) $links->fulltextsearch));
-					//~ t3lib_utility_Debug::debug($sruLink, 'Please change your METS-file and use dv:sru instead of dv:fulltextsearch. ');
 				}
 
 			}
