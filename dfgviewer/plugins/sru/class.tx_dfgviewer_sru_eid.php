@@ -84,6 +84,12 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 				$sruRecords = $sruXML->xpath('/srw:searchRetrieveResponse/srw:records/srw:record');
 
+				if ($sruRecords === FALSE || empty($sruRecords) ) {
+
+					$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+
+				}
+
 				foreach ($sruRecords as $id => $record) {
 
 					$fullTextHit = $record->xpath('//srw:recordData');
@@ -165,7 +171,6 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 				}
 
 			}
-
 
 		} else {
 
