@@ -126,12 +126,16 @@ plugin.tx_dlf_toc {
 
 plugin.tx_dlf_toolbox {
 	pages = {$plugin.tx_dfgviewer.storagePid}
-	tools = tx_dlf_toolsPdf
+	tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolbox}
 }
 
 plugin.tx_dlf_toolsPdf {
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolPdf}
+}
+
+plugin.tx_dlf_toolsFulltext {
+	templateFile = {$plugin.tx_dfgviewer.templateFileToolFulltext}
 }
 
 plugin.tx_dfgviewer_sru {
