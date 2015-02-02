@@ -163,7 +163,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 						}
 
-						$origImageParams = $pageAttributes['width'] . ',' . $pageAttributes ['height'];
+						$origImageParams = '0,' . $pageAttributes['width'] . ',' . $pageAttributes ['height'];
 
 						$results[] = '<a href="' . t3lib_div::_GP('action') . (strpos(t3lib_div::_GP('action'), '?') > 0 ? '&' : '?') . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '&tx_dlf[origimage]='.$origImageParams.'&tx_dlf[hightlight]='.urlencode(serialize($highlightParams)).'" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
 
