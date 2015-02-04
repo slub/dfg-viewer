@@ -43,13 +43,55 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 			action: $( "input[name='tx_dfgviewer[action]']" ).val(),
 		},
 		function(data) {
-			$('#tx-dfgviewer-sru-results').html(data);
+
+			var resultList = '<div class="sru-results-active-indicator"></div><ul>';
+
+			if (data.error) {
+
+				resultList += '<li>' + data.error + '</li>';
+
+			} else {
+
+				for (var i=0; i < data.length; i++) {
+
+					var link = $( "a#" + data[i].link );
+					if (link.length == 0) {
+						// we take current url
+						link = $(location).attr('href');
+					} else {
+						link = link[0].href;
+					}
+					// remove cHash as it's not valid afterwards
+					link = decodeURI(link).replace(/&cHash=(.)*[&]*/, '');
+					// remove page parameter
+					link = link.replace(/&tx_dlf\[page\]=(.)*[&]*/, '');
+
+					var link_base = link.substring(0, link.indexOf('?'));
+					var link_params = link.substring(link_base.length + 1, link.length);
+					var newlink = link_base + '?' + (link_params
+					+ '&tx_dlf[origimage]=' + data[i].origImage
+					+ '&tx_dlf[hightlight]=' + (data[i].hightlight)
+					+ '&tx_dlf[page]=' + (data[i].page));
+					if (data[i].previewImage) {
+						resultList += '<li><a href=\"' + newlink + '\">' + data[i].previewImage + '</li>';
+					}
+					if (data[i].previewText) {
+						resultList += '<li><a href=\"' + newlink + '\">' + data[i].previewText + '</li>';
+					}
+				}
+
+			}
+			resultList += '</ul>';
+
+			$('#tx-dfgviewer-sru-results').html(resultList);
+
 		},
-		"html")
-		.done(function( data ) {
-			$('#tx-dfgviewer-sru-results-loading').hide();
-			$('#tx-dfgviewer-sru-results-clearing').show();
-		});
+		"json"
+	)
+	.done(function( data ) {
+		$('#tx-dfgviewer-sru-results-loading').hide();
+		$('#tx-dfgviewer-sru-results-clearing').show();
+	});
 });
 
 // clearing button

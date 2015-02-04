@@ -258,6 +258,7 @@ page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >
+page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 
@@ -266,6 +267,7 @@ page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >
+page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 

@@ -78,7 +78,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 			if ($sruResponse === FALSE) {
 
-				$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+				$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
 
 			} else {
 
@@ -86,7 +86,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 				if ($sruRecords === FALSE || empty($sruRecords) ) {
 
-					$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+					$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
 
 				}
 
@@ -119,6 +119,9 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 					}
 
 					$page = (string)$pageAttributes['id'];
+
+					// get logical page id of search result
+					$parentId = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->id;
 
 					unset($highlightParams);
 					// get highlight boxes for all results of a page
@@ -165,8 +168,17 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 						$origImageParams = '0,' . $pageAttributes['width'] . ',' . $pageAttributes ['height'];
 
-						$results[] = '<a href="' . t3lib_div::_GP('action') . (strpos(t3lib_div::_GP('action'), '?') > 0 ? '&' : '?') . 'tx_dlf[id]=' . urlencode(t3lib_div::_GP('id')) . '&tx_dlf[page]=' . $page  . '&tx_dlf[origimage]='.$origImageParams.'&tx_dlf[hightlight]='.urlencode(serialize($highlightParams)).'" '.$style.' title="'.$coo['x1'].'">'.$spanPreview . ' ' . $spanText.'</a> ';
+						unset($data);
 
+						$data['link'] = $parentId;
+						$data['page'] = $page;
+						$data['text'] = $spanText;
+						$data['previewImage'] = $spanPreview;
+						$data['previewText'] = $spanText;
+						$data['origImage'] = $origImageParams;
+						$data['hightlight'] = urlencode(serialize($highlightParams));
+
+						$results[] = $data;
 					}
 				}
 
@@ -174,33 +186,11 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		} else {
 
-			$results[] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+			$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
 
 		}
 
-		// pseudo div-tag for design
-		$content = '<div class="sru-results-active-indicator"></div>';
-
-		$content .= '<ul>';
-
-		foreach ($results as $result) {
-
-			$content .= '<li>';
-			$content .= $result;
-
-			foreach ($result as $item) {
-
-				$content .= $item . '<br />';
-
-			}
-
-			$content .= '</li>';
-
-		}
-
-		$content .= '</ul>';
-
-		echo $content;
+		echo json_encode($results);
 
 	}
 

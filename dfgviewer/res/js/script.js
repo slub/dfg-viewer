@@ -30,8 +30,8 @@ $(document).ready(function() {
 	// show/hide navigation (with cookie-saved status)
 	$('.tx-dlf-toc').append('<div class="hideNav" title="Navigation ein- und ausblenden"></div>');
 	var navigationStatus = getCookie('dfgviewer-navigationStatus');
-	// hide navigation if cookie set to closed OR on small windows as default
-	if(navigationStatus == "closed" || (!navigationStatus && $('#whiteboxcontainer').outerWidth() < 700)) {
+	// hide navigation on pages with whiteboxcontainer: if cookie set to "closed" OR on small windows as default
+	if((navigationStatus == "closed" && $('#whiteboxcontainer').length > 0) || (!navigationStatus && ($('#whiteboxcontainer').length > 0) && ($('#whiteboxcontainer').outerWidth() < 700))) {
 		$('#navcontainer').hide();
 		$('.tx-dlf-toc').css({'width':'30px'});
 		$('#whiteboxcontainer').css({'right':'30px'});

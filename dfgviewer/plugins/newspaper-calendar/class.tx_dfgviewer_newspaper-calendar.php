@@ -172,6 +172,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 											'useCacheHash' => 1,
 											'parameter' => $this->conf['targetPid'],
 											'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints) . '&' . $this->prefixId . '[page]=1',
+											'ATagParams' => 'id=' . $issue['id'],
 										);
 										$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
 
