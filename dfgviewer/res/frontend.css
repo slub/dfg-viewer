@@ -221,5 +221,13 @@ h2 .volume { font-weight: normal; }
 #tx-dfgviewer-sru-results .sru-results-active-indicator { position: absolute; top: 15px; right: 60px; width: 0; height: 0; border: 10px solid transparent; border-bottom-color: rgba(31,31,31,0.8); border-top-width: 0; }
 #tx-dfgviewer-sru-results .sru-preview img { width: 100%; }
 
+#tx-dlf-fulltextselection { position: absolute; z-index: 11; right: 10px; top: 25px; width: 400px; height: 450px; overflow: scroll; background: #000; background: rgba(31,31,31,0.8); padding: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); font-size: 11px; color: #eee; text-align: left; }
 
+/*
+path[id *= "OpenLayers_Geometry_Polygon_"]:hover
+{
+	 stroke: black;
+	 fill: red;
+}
+*/
 /* EOF */
