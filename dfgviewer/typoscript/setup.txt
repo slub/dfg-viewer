@@ -126,12 +126,16 @@ plugin.tx_dlf_toc {
 
 plugin.tx_dlf_toolbox {
 	pages = {$plugin.tx_dfgviewer.storagePid}
-	tools = tx_dlf_toolsPdf
+	tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolbox}
 }
 
 plugin.tx_dlf_toolsPdf {
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolPdf}
+}
+
+plugin.tx_dlf_toolsFulltext {
+	templateFile = {$plugin.tx_dfgviewer.templateFileToolFulltext}
 }
 
 plugin.tx_dfgviewer_sru {
@@ -254,6 +258,7 @@ page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >
+page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 
@@ -262,6 +267,7 @@ page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
 page.2.marks.GRIDSWITCHER >
 page.2.marks.NAVIGATION >
+page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 

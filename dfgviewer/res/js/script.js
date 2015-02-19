@@ -8,8 +8,14 @@ $(document).ready(function() {
 	// hide additional functions in page browser in a hidden menu
 	$('.downloads, .grid, .doublepage').addClass('hiddenFunctions').hide();
 	$('#browser_top, #browser_bottom').fadeIn(120).css({'width':'252px'}).prepend('<div class="moreFunctionsTrigger"></div>');
-	$('.moreFunctionsTrigger').click(function() { $(this).fadeOut().parent().animate({'padding-left':'144px'}, 200, function() { $(this).parent().find('.hiddenFunctions').show('slide', {'direction': 'left'}, 400) }).find('.pages').animate({'right':'400px'},200); });
-
+	$('.moreFunctionsTrigger').click(function() { 
+  	if($(this).hasClass('open')) {
+    	$(this).parent().find('.hiddenFunctions').hide('slide', {'direction':'right'}, 200, function() { $(this).parents('#whiteboxcontainer [id^="browser"]').animate({'padding-left':'30px'}, 200).find('.moreFunctionsTrigger').toggleClass('open').parent().find('.pages').animate({'right':'290px'},200)});
+  	} else {
+    	$(this).toggleClass('open').parent().animate({'padding-left':'197px'}, 200, function() { $(this).parent().find('.hiddenFunctions').show('slide', {'direction': 'left'}, 400) }).find('.pages').animate({'right':'465px'},200);
+    }
+  });
+  
 	// show/hide metadata in title bar (with cookie-saved status)
 	if($('.mdblock').length > 1) { $('#title').append('<div title="weitere Metadaten anzeigen" class="moreMetaData"></div>'); }
 	var metaDataStatus = getCookie('dfgviewer-metaDataStatus');
@@ -30,8 +36,8 @@ $(document).ready(function() {
 	// show/hide navigation (with cookie-saved status)
 	$('.tx-dlf-toc').append('<div class="hideNav" title="Navigation ein- und ausblenden"></div>');
 	var navigationStatus = getCookie('dfgviewer-navigationStatus');
-	// hide navigation if cookie set to closed OR on small windows as default
-	if(navigationStatus == "closed" || (!navigationStatus && $('#whiteboxcontainer').outerWidth() < 700)) {
+	// hide navigation on pages with whiteboxcontainer: if cookie set to "closed" OR on small windows as default
+	if((navigationStatus == "closed" && $('#whiteboxcontainer').length > 0) || (!navigationStatus && ($('#whiteboxcontainer').length > 0) && ($('#whiteboxcontainer').outerWidth() < 700))) {
 		$('#navcontainer').hide();
 		$('.tx-dlf-toc').css({'width':'30px'});
 		$('#whiteboxcontainer').css({'right':'30px'});
