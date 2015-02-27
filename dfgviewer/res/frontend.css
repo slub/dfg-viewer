@@ -136,15 +136,15 @@ h2 .volume { font-weight: normal; }
 #nav { position: relative; height: 100%; text-align: left; -webkit-overflow-scrolling: touch; overflow-y: scroll; overflow: scroll; padding: 8px; }
 #nav > ul { border-top: 1px dotted #aaa; margin: 10px 0; }
 #nav ul li { position: relative; }
-#nav ul li a { position: relative; border-bottom: 1px dotted #aaa; display: block; padding: 4px 22px 4px 4px; }
+#nav ul li a, #nav ul li span.a { position: relative; border-bottom: 1px dotted #aaa; display: block; padding: 4px 22px 4px 4px; }
 #nav ul li a:hover { background-color: #f44; text-decoration: none; }
-#nav ul li a { padding-left: 15px; }
-#nav ul li li a { padding-left: 30px; }
-#nav ul li li li a { padding-left: 45px; }
-#nav ul li li li li a { padding-left: 60px; }
-#nav ul li li li li li a { padding-left: 75px; }
-#nav ul li li li li li li a { padding-left: 90px; }
-#nav ul li li li li li li li a { padding-left: 105px; }
+#nav ul li a, #nav ul li span.a { padding-left: 15px; }
+#nav ul li li a, #nav ul li li span.a { padding-left: 30px; }
+#nav ul li li li a, #nav ul li li li span.a { padding-left: 45px; }
+#nav ul li li li li a, #nav ul li li li li span.a { padding-left: 60px; }
+#nav ul li li li li li a, #nav ul li li li li li span.a { padding-left: 75px; }
+#nav ul li li li li li li a, #nav ul li li li li li li span.a { padding-left: 90px; }
+#nav ul li li li li li li li a, #nav ul li li li li li li li span.a { padding-left: 105px; }
 #nav ul li li.active { background: #999; }
 #nav ul li.submenu > a { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHCAAAAAAKDrMMAAAAAnRSTlMAL91C8GEAAAAcSURBVHgBY/ivr6/PoP8fRABJBn0gCWJBxMCyAL7ZCtXJfpgHAAAAAElFTkSuQmCC'); background-position: 4px center; background-repeat: no-repeat; }
 #nav ul li.active.submenu > a { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAAAAABnrXqhAAAAAnRSTlMAL91C8GEAAAAaSURBVHgBY/ivDwL/GfSBDCBmABJACKLBIgC3IArVbBoj2AAAAABJRU5ErkJggg=='); background-position: 4px center; background-repeat: no-repeat; }
@@ -152,7 +152,7 @@ h2 .volume { font-weight: normal; }
 #nav ul li li li.submenu > a, #nav ul li li li.submenu.active > a { background-position: 35px center; }
 #nav ul li.current { background: #777; }
 #nav ul li .currentArrow { position: absolute; top: 5px; left: -23px; height: 100%; width: 6px; display: block; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAMAAACg0N8BAAAABlBMVEX///8vLy/fHteXAAAAAnRSTlP/AOW3MEoAAAAbSURBVAhbY2AEAgYGBjgFxlAKSRghCKeQFAAABcYAKeph6IYAAAAASUVORK5CYII=') no-repeat 0 0; }
-#nav a .pagination { position: absolute; right: 4px; color: #ccc;}
+#nav a .pagination, #nav span.a .pagination { position: absolute; right: 4px; color: #ccc;}
 
 
 /* 6x4 page grid */
