@@ -212,21 +212,22 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	protected function addSruResultsJS() {
 
 
-		if (!empty($this->piVars['hightlight'])) {
+		if (!empty($this->piVars['highlight'])) {
 
 			// add necessary files for syntax highlightning to the header
 			// dlf_pageview will concat it with the other files from OpenLayers
-			$javascriptHeader = '<script type="text/javascript">var openLayerFilesHightlightning = ["' . implode('", "', $this->openLayersHighlightning) . '"];</script>';
+			$javascriptHeader = '<script type="text/javascript">var openLayerFilesHighlightning = ["' . implode('", "', $this->openLayersHighlightning) . '"];</script>';
 
 			$GLOBALS['TSFE']->additionalHeaderData['tx-dlf-header-sru'] = $javascriptHeader;
 
-			$highlight = unserialize($this->piVars['hightlight']);
+			$highlight = unserialize(urldecode($this->piVars['highlight']));
+
 			// Add SRU Results if any
 			$javascriptFooter = '
 			<script type="text/javascript">';
 
 			foreach ($highlight as $field) {
-				$javascriptFooter .= 'tx_dlf_viewer.addHightlightField('.$field.');';
+				$javascriptFooter .= 'tx_dlf_viewer.addHighlightField('.$field.');';
 			}
 
 			$javascriptFooter .= '
