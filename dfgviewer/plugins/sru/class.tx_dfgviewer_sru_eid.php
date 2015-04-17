@@ -176,7 +176,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 						$data['previewImage'] = $spanPreview;
 						$data['previewText'] = $spanText;
 						$data['origImage'] = $origImageParams;
-						$data['hightlight'] = urlencode(serialize($highlightParams));
+						$data['highlight'] = urlencode(serialize($highlightParams));
 
 						$results[] = $data;
 					}
