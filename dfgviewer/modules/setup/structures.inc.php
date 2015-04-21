@@ -85,6 +85,10 @@ $structures = array (
 		'toplevel' => 0,
 		'oai_name' => ''
 	),
+	'day' => array (
+		'toplevel' => 0,
+		'oai_name' => ''
+	),
 	'dedication' => array (
 		'toplevel' => 0,
 		'oai_name' => ''
@@ -145,12 +149,20 @@ $structures = array (
 		'toplevel' => 1,
 		'oai_name' => ''
 	),
+	'month' => array (
+		'toplevel' => 0,
+		'oai_name' => ''
+	),
 	'multivolume_work' => array (
 		'toplevel' => 1,
 		'oai_name' => ''
 	),
 	'musical_notation' => array (
 		'toplevel' => 0,
+		'oai_name' => ''
+	),
+	'newspaper' => array (
+		'toplevel' => 1,
 		'oai_name' => ''
 	),
 	'ornament' => array (
@@ -214,6 +226,10 @@ $structures = array (
 		'oai_name' => ''
 	),
 	'volume' => array (
+		'toplevel' => 1,
+		'oai_name' => ''
+	),
+	'year' => array (
 		'toplevel' => 1,
 		'oai_name' => ''
 	)
