@@ -112,7 +112,7 @@ $(document).ready(function() {
 	if ($('#newspaperbox').length == 0) {
 		$('#sitespanner').prepend('<div class="fullscreenLogos">'+$('#provider').clone().html()+$('#sponsor').clone().html()+'</div>')
 
-		// inital changes at active fullscreen view
+		// initial changes at active fullscreen view
 		var headerStatus = getCookie('dfgviewer-headerStatus');
 		if(headerStatus == "closed") {
 			$('body').toggleClass('noHeader');
