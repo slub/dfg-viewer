@@ -15,7 +15,7 @@
 			<label index="flash.structureAdded">Configuration added!</label>
 			<label index="flash.structureAddedMsg">Configuration records for structural metadata were added.</label>
 			<label index="flash.structureNotAdded">No configuration added!</label>
-			<label index="flash.structureNotAddedMsg">While adding the configuration records an error occured. The records should be checked in the list module!</label>
+			<label index="flash.structureNotAddedMsg">While adding the configuration records an error occurred. The records should be checked in the list module!</label>
 			<label index="flash.metadataOkay">Metadata found!</label>
 			<label index="flash.metadataOkayMsg">There are configuration records for bibliographic metadata.</label>
 			<label index="flash.metadataNotOkay">No metadata found!</label>
@@ -23,7 +23,7 @@
 			<label index="flash.metadataAdded">Configuration added!</label>
 			<label index="flash.metadataAddedMsg">Configuration records for bibliographic metadata were added.</label>
 			<label index="flash.metadataNotAdded">No configuration added!</label>
-			<label index="flash.metadataNotAddedMsg">While adding the configuration records an error occured. The records should be checked in the list module!</label>
+			<label index="flash.metadataNotAddedMsg">While adding the configuration records an error occurred. The records should be checked in the list module!</label>
 			<!-- structural data -->
 			<label index="additional">Additional</label>
 			<label index="address">Address</label>
