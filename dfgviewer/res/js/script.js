@@ -89,7 +89,7 @@ $(document).ready(function() {
 	}
 
 	//go fullwidth if no navbar exists
-	if(!$('.tx-dlf-toc')[0]) { $('#whiteboxcontainer').css({'right':'30px'}); };
+	if(!$('.tx-dlf-toc')[0]) { $('#whiteboxcontainer').css({'right':'30px'}); }
 
 	// extend reference menu if there are more than one references
 	if($('#local .ref').length > 1) {
@@ -110,7 +110,7 @@ $(document).ready(function() {
 	/* fullscreen mode */
 	// clone dfg and provider logos for fullscreen view
 	if ($('#newspaperbox').length == 0) {
-		$('#sitespanner').prepend('<div class="fullscreenLogos">'+$('#provider').clone().html()+$('#sponsor').clone().html()+'</div>')
+		$('#sitespanner').prepend('<div class="fullscreenLogos">'+$('#provider').clone().html()+$('#sponsor').clone().html()+'</div>');
 
 		// inital changes at active fullscreen view
 		var headerStatus = getCookie('dfgviewer-headerStatus');
@@ -169,5 +169,5 @@ getCookie = function(name) {
 	} else {
 		return null;
 	}
-}
+};
 /* EOF */
