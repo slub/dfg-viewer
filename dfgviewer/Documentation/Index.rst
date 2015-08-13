@@ -2,14 +2,14 @@
 Documentation
 =============
 
-The following document holds information about the installation of the *TYPO3 dfg-viewer* extension. In case of further question please contact question please contact the release management.
+The following document holds information about the installation of the *TYPO3 dfgviewer* extension. In case of further question please contact the release management.
 
-Install
-=======
+Installation
+============
 
-The following documentation was tested with TYPO3 6.2.12. The extension is based on *goobi-presentation*. So before you can start to use the *dfg-viewer* in your TYPO3 installation, you have to install both extensions.
+The following documentation was tested with TYPO3 6.2.12. The extension is based on *Goobi.Presentation (dlf)*. So before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install both extensions.
 
-You can install the extension automatically via extension-manager or semiautomatically via GitHub. The automatic way is straight forward so in the following the GitHub process is explained.
+You can install the extension automatically via extension manager or semiautomatically via GitHub. The automatic way is straight forward so in the following the GitHub process is explained.
 At first checkout the repository:
 
 	git clone https://github.com/slub/dfg-viewer.git
@@ -18,23 +18,18 @@ After this create a symbolic link from your workspace to your TYPO3 extension fo
 
 	ln -s ~/dfg-viewer/dfgviewer/ /var/www/typo3conf/ext/
 
-Repeat this process for the *goobi-presentation* (https://github.com/goobi/goobi-presentation.git) extension.
+Repeat this process for the *Goobi.Presentation (dlf)* (https://github.com/goobi/goobi-presentation.git) extension.
 
-Now install both extensions via the extension-manager within TYPO3. Also check if you have install the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the
-installation was successful, the category `GOOBI.PRESENTATION` with a subitem `DFG-Viewer` will appear in the navigation tree on the left side of your TYPO3 Backend Manager.
+Now install both extensions via the extension manager within TYPO3. Also check if you have install the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `GOOBI.PRESENTATION` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
 
-Create a Page-Item in the category `WEB` as well as a configuration folder as a subitem of this page. The title of the page as well as the configuration file arbitrary.
+Create a Page-Item in the category `WEB` as well as a configuration folder as a subitem of this page. The title of the page as well as the configuration file is arbitrary.
 
-Go to the subitem `DFG Viewer` of the `GOOBI.PRESENTATION` category, choose the configuration folder and click both buttons (*Create structures*, *Create Metadata*).
-Add the following configurations to the *Constant* settings of the template of your created page.
+Go to the subitem `DFG Viewer` of the `GOOBI.PRESENTATION` category, choose the configuration folder and click both buttons (*Create structures*, *Create metadata*). This adds some basic configuration records in the configuration folder, which define METS structure type and MODS metadata fields.
 
-    plugin.tx_dfgviewer.storagePid = 22
-    plugin.tx_dfgviewer.baseURL = http://yourdomain.de
+Go to the `Template` tool, choose the page item, set the page to *Rootlevel* and add the *DFG Viewer (dfgviewer)* item to your *Selected Items* under *Includes*.
+Then select the `Constants editor` and set the `storagePid` and `baseURL`according to your setup (`storagePid` should be the page ID of the configuration folder).
 
-Set the page to *Rootlevel* and add the *DFG Viewer (dfgviewer)* item to your *Selected Items* under *Includes*. Before your installation will work
-you have to create an appropriate jQuery library. Go to the *T3 jQuery* extensions (could be found in the category *ADMIN TOOLS* and choose the first
-subitem *Process & Analyze t3jquery.txt in extensions*. Go to the dialog by choosing the following options: *select both extensions*, click *check*,
-click *Merge & Use* and finally click *Create jQuery Library* at the bottom of the page.
+Before your installation will work you have to create an appropriate jQuery library. Go to the *T3 jQuery* extensions (could be found in the category *ADMIN TOOLS* and choose the first subitem *Process & Analyze t3jquery.txt in extensions*. Go to the dialog by choosing the following options: *select both extensions*, click *check*, click *Merge & Use* and finally click *Create jQuery Library* at the bottom of the page.
 
 Now your installation should work. You can test this with the following url (replace *host* and *id* with the parameters of your installation):
 
@@ -45,10 +40,10 @@ Known Problems
 
 In TYPO3 6.2.12 there seems to be a *cHash* problem with the extension. For fixing it, add the following configuration parameters to *typo3conf\LocalConfiguration.php*:
 
-	'FE' => array(
-		...
-		'cHashRequiredParameters' => 'tx_dlf[id],',
+'FE' => array(
+	...
+	'cHashRequiredParameters' => 'tx_dlf[id],',
         'pageNotFoundOnCHashError' => '0',
         'pageNotFound_handling' => '',
         ...
-	),
+),
