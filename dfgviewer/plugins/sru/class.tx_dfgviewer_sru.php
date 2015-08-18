@@ -39,33 +39,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	public $scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru.php';
 
 	/**
-	 * Holds the OpenLayers files for the syntax-highlightning
-	 *
-	 * @var	array
-	 * @access protected
-	 */
-	protected $openLayersHighlightning = array (
-			// Geometry layer.
-			'OpenLayers/Geometry.js',
-			'OpenLayers/Geometry/Collection.js',
-			'OpenLayers/Geometry/Polygon.js',
-			'OpenLayers/Geometry/MultiPolygon.js',
-			'OpenLayers/Geometry/MultiPoint.js',
-			'OpenLayers/Geometry/Curve.js',
-			'OpenLayers/Geometry/LineString.js',
-			'OpenLayers/Geometry/LinearRing.js',
-			'OpenLayers/Geometry/Point.js',
-			'OpenLayers/Feature.js',
-			'OpenLayers/Feature/Vector.js',
-			'OpenLayers/Layer/Vector.js',
-			'OpenLayers/Renderer.js',
-			'OpenLayers/Renderer/Elements.js',
-			'OpenLayers/Renderer/SVG.js',
-			'OpenLayers/StyleMap.js',
-			'OpenLayers/Style.js',
-	);
-
-	/**
 	 * The main method of the PlugIn
 	 *
 	 * @access	public
@@ -188,12 +161,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 
 		if (!empty($this->piVars['highlight']) && !empty($this->piVars['origimage'])) {
-
-			// add necessary files for syntax highlightning to the header
-			// dlf_pageview will concat it with the other files from OpenLayers
-			$javascriptHeader = '<script type="text/javascript">var openLayerFilesHighlightning = ["' . implode('", "', $this->openLayersHighlightning) . '"];</script>';
-
-			$GLOBALS['TSFE']->additionalHeaderData['tx-dlf-header-sru'] = $javascriptHeader;
 
 			$highlight = unserialize(urldecode($this->piVars['highlight']));
 			$origImage = $this->piVars['origimage'];
