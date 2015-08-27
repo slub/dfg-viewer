@@ -39,33 +39,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	public $scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru.php';
 
 	/**
-	 * Holds the OpenLayers files for the syntax-highlightning
-	 *
-	 * @var	array
-	 * @access protected
-	 */
-	protected $openLayersHighlightning = array (
-			// Geometry layer.
-			'OpenLayers/Geometry.js',
-			'OpenLayers/Geometry/Collection.js',
-			'OpenLayers/Geometry/Polygon.js',
-			'OpenLayers/Geometry/MultiPolygon.js',
-			'OpenLayers/Geometry/MultiPoint.js',
-			'OpenLayers/Geometry/Curve.js',
-			'OpenLayers/Geometry/LineString.js',
-			'OpenLayers/Geometry/LinearRing.js',
-			'OpenLayers/Geometry/Point.js',
-			'OpenLayers/Feature.js',
-			'OpenLayers/Feature/Vector.js',
-			'OpenLayers/Layer/Vector.js',
-			'OpenLayers/Renderer.js',
-			'OpenLayers/Renderer/Elements.js',
-			'OpenLayers/Renderer/SVG.js',
-			'OpenLayers/StyleMap.js',
-			'OpenLayers/Style.js',
-	);
-
-	/**
 	 * The main method of the PlugIn
 	 *
 	 * @access	public
@@ -129,8 +102,6 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 		$this->addSearchFormJS();
 
-		$this->addSruOrigImageJS();
-
 		$this->addSruResultsJS();
 
 		// Configure @action URL for form.
@@ -186,48 +157,20 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	 * @return	string		Viewer script tags ready for output
 	 */
 
-	protected function addSruOrigImageJS() {
-
-		if (!empty($this->piVars['origimage'])) {
-			$origImage = $this->piVars['origimage'];
-			// Add SRU Results if any
-			$javascriptFooter[] = '
-			<script type="text/javascript">
-				tx_dlf_viewer.setOrigImage('.$origImage.');
-			</script>';
-
-			$GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] = implode("\n", $javascriptFooter);
-		}
-
-	}
-
-	/**
-	 * Adds SRU Search result javascript
-	 *
-	 * @access	protected
-	 *
-	 * @return	string		Viewer script tags ready for output
-	 */
-
 	protected function addSruResultsJS() {
 
 
-		if (!empty($this->piVars['highlight'])) {
-
-			// add necessary files for syntax highlightning to the header
-			// dlf_pageview will concat it with the other files from OpenLayers
-			$javascriptHeader = '<script type="text/javascript">var openLayerFilesHighlightning = ["' . implode('", "', $this->openLayersHighlightning) . '"];</script>';
-
-			$GLOBALS['TSFE']->additionalHeaderData['tx-dlf-header-sru'] = $javascriptHeader;
+		if (!empty($this->piVars['highlight']) && !empty($this->piVars['origimage'])) {
 
 			$highlight = unserialize(urldecode($this->piVars['highlight']));
+			$origImage = $this->piVars['origimage'];
 
 			// Add SRU Results if any
 			$javascriptFooter = '
 			<script type="text/javascript">';
 
 			foreach ($highlight as $field) {
-				$javascriptFooter .= 'tx_dlf_viewer.addHighlightField('.$field.');';
+				$javascriptFooter .= 'tx_dlf_viewer.addHighlightField(['.$field.'],'.$origImage.');';
 			}
 
 			$javascriptFooter .= '

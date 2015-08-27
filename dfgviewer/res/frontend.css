@@ -237,3 +237,6 @@ path[id *= "OpenLayers_Geometry_Polygon_"]:hover
 }
 */
 /* EOF */
+/* styles for proper working of ol3 */
+.tx-dlf-pageview { height: 100%; }
+#tx-dfgviewer-map { height: 100%; }
