@@ -154,7 +154,7 @@ plugin.tx_dfgviewer_sru {
 	targetPid.data = TSFE:page|uid
 }
 
-lib.info = HTML
+lib.info = TEXT
 lib.info {
 	value = DFG-Viewer
 	value.typolink.parameter = http://dfg-viewer.de/
@@ -179,7 +179,7 @@ lib.langswitcher {
 	1.NO.allWrap = <li>|</li>
 }
 
-lib.gridswitcher = HTML
+lib.gridswitcher = TEXT
 lib.gridswitcher {
 	value = Thumbnails
 	value.typolink.parameter = #
@@ -244,7 +244,7 @@ page.2.marks.SRU = TEXT
 [globalVar = GP:tx_dlf|pagegrid=1]
 page.2.marks.GUI < plugin.tx_dfgviewer_gridpager
 page.2.marks.IMAGE < plugin.tx_dlf_pagegrid
-page.2.marks.NAVIGATION = HTML
+page.2.marks.NAVIGATION = TEXT
 [else]
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
