@@ -145,7 +145,7 @@ plugin.tx_dlf_toolsFulltext {
 }
 
 plugin.tx_dlf_toolsImagemanipulation {
-	templateFile = {$plugin.tx_dfgViewer.templateFileToolImageManipulation}
+	templateFile = {$plugin.tx_dfgviewer.templateFileToolImageManipulation}
 }
 
 plugin.tx_dfgviewer_sru {
