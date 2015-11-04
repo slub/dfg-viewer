@@ -183,11 +183,13 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 							}
 
 							// use title attribute for tooltip
-							$dayLinksList = '<ul>';
-							foreach ($dayLinksText as $link) {
-								$dayLinksList .= '<li>'.$link.'</li>';
+							if (is_array($dayLinksText)) {
+								$dayLinksList = '<ul>';
+								foreach ($dayLinksText as $link) {
+									$dayLinksList .= '<li>'.$link.'</li>';
+								}
+								$dayLinksList .= '</ul>';
 							}
-							$dayLinksList .= '</ul>';
 
 							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
 
