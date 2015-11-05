@@ -54,9 +54,6 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
-		// Load translation files.
-		$LANG = t3lib_div::makeInstance('language');
-
 		$this->extKey = 'dfgviewer';
 
 		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
@@ -107,7 +104,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 					// there may be multiple hits on a page per search query
 					foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
 
-						unset($hitAttributes);
+						$hitAttributes = array();
 
 						foreach ($hit->attributes() as $key => $val) {
 
@@ -130,8 +127,11 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 					foreach ($hitFound as $key => $hit) {
 
 						$highlightField = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
+
 						if (!in_array($highlightField, $highlightParams)) {
+
 							$highlightParams[] = $highlightField;
+
 						}
 
 					}
@@ -139,6 +139,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 					foreach ($hitFound as $key => $hit) {
 
 						unset($spanPreview);
+
 						unset($spanText);
 
 						if (!empty($hit['attributes']['preview'])) {
@@ -164,6 +165,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 								}
 
 							}
+
 							$spanText .= '</span>';
 
 						}
