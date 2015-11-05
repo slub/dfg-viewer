@@ -102,7 +102,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					}
 
-					unset($hitFound);
+					$hitFound = array();
 
 					// there may be multiple hits on a page per search query
 					foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
@@ -123,7 +123,9 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 					// get logical page id of search result
 					$parentId = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->id;
 
-					unset($highlightParams);
+					// unset $hightlightParams but make sure, it's an array()
+					$highlightParams = array();
+
 					// get highlight boxes for all results of a page
 					foreach ($hitFound as $key => $hit) {
 
