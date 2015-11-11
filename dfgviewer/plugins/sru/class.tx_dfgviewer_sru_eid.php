@@ -117,8 +117,8 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					$page = (string)$pageAttributes['id'];
 
-					// get logical page id of search result
-					$parentId = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->id;
+					// get METS file of search hit
+					$parentUrl = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->url;
 
 					// unset $hightlightParams but make sure, it's an array()
 					$highlightParams = array();
@@ -174,7 +174,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 						unset($data);
 
-						$data['link'] = $parentId;
+						$data['link'] = $parentUrl;
 						$data['page'] = $page;
 						$data['text'] = $spanText;
 						$data['previewImage'] = $spanPreview;
