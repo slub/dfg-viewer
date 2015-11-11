@@ -62,7 +62,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$this->pi_loadLL();
 
-		$url = t3lib_div::_GP('sru').urlencode(t3lib_div::_GP('q'));
+		$url = t3lib_div::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;query=' . urlencode(t3lib_div::_GP('q'));
 
 		// make request to SRU service
 		$sruXML = simplexml_load_file($url);
