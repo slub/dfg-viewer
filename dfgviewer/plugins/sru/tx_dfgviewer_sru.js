@@ -54,28 +54,29 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 
 				for (var i=0; i < data.length; i++) {
 
-					var link = $( "a#" + data[i].link );
-					if (link.length == 0) {
-						// we take current url
-						link = $(location).attr('href');
+					var link_current = $(location).attr('href');
+
+					var link_base = link_current.substring(0, link_current.indexOf('?'));
+					var link_params = link_current.substring(link_base.length + 1, link_current.length);
+
+					var link_id = link_params.match(/id=(\d)*/g);
+
+					if (link_id) {
+
+						link_params = link_id + '&';
+
 					} else {
-						link = link[0].href;
+
+						link_params = '&';
+
 					}
-					// remove cHash as it's not valid afterwards
-					link = decodeURI(link).replace(/&cHash=(.)*[&]*/, '');
-
-					// remove page parameter
-					link = link.replace(/&tx_dlf\[page\]=(.)*[&]*/, '');
-					link = link.replace(/&tx_dlf\[highlight\]=(.)*[&]*/, '');
-					link = link.replace(/&tx_dlf\[origimage\]=(.)*[&]*/, '');
-
-					var link_base = link.substring(0, link.indexOf('?'));
-					var link_params = link.substring(link_base.length + 1, link.length);
 
 					var newlink = link_base + '?' + (link_params
+					+ 'tx_dlf[id]=' + data[i].link
 					+ '&tx_dlf[origimage]=' + data[i].origImage
 					+ '&tx_dlf[highlight]=' + encodeURIComponent(data[i].highlight)
 					+ '&tx_dlf[page]=' + (data[i].page));
+
 					if (data[i].previewImage) {
 						resultList += '<li><a href=\"' + newlink + '\">' + data[i].previewImage + '</li>';
 					}
