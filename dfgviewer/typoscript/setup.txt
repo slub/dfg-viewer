@@ -132,7 +132,7 @@ plugin.tx_dlf_toc {
 
 plugin.tx_dlf_toolbox {
 	pages = {$plugin.tx_dfgviewer.storagePid}
-	tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext
+	tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext,tx_dlf_toolsImagemanipulation
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolbox}
 }
 
@@ -142,6 +142,10 @@ plugin.tx_dlf_toolsPdf {
 
 plugin.tx_dlf_toolsFulltext {
 	templateFile = {$plugin.tx_dfgviewer.templateFileToolFulltext}
+}
+
+plugin.tx_dlf_toolsImagemanipulation {
+	templateFile = {$plugin.tx_dfgviewer.templateFileToolImageManipulation}
 }
 
 plugin.tx_dfgviewer_sru {

@@ -167,14 +167,14 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 			// Add SRU Results if any
 			$javascriptFooter = '
-			<script type="text/javascript">';
+			<script type="text/javascript">$(window).load(function(){';
 
 			foreach ($highlight as $field) {
 				$javascriptFooter .= 'tx_dlf_viewer.addHighlightField(['.$field.'],'.$origImage.');';
 			}
 
 			$javascriptFooter .= '
-			</script>';
+			})</script>';
 
 			$GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] .= $javascriptFooter;
 		}
