@@ -193,7 +193,9 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 			// Add SRU Results if any
 			$javascriptFooter[] = '
 			<script type="text/javascript">
-				tx_dlf_viewer.setOrigImage('.$origImage.');
+				if (typeof tx_dlf_viewer !== "undefined") {
+					tx_dlf_viewer.setOrigImage('.$origImage.');
+				}
 			</script>';
 
 			$GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] = implode("\n", $javascriptFooter);
@@ -224,13 +226,14 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 			// Add SRU Results if any
 			$javascriptFooter = '
-			<script type="text/javascript">';
+			<script type="text/javascript">
+			if (typeof tx_dlf_viewer !== "undefined") {';
 
 			foreach ($highlight as $field) {
 				$javascriptFooter .= 'tx_dlf_viewer.addHighlightField('.$field.');';
 			}
 
-			$javascriptFooter .= '
+			$javascriptFooter .= '}
 			</script>';
 
 			$GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] .= $javascriptFooter;

@@ -54,9 +54,6 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
-		// Load translation files.
-		$LANG = t3lib_div::makeInstance('language');
-
 		$this->extKey = 'dfgviewer';
 
 		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
@@ -65,7 +62,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		$this->pi_loadLL();
 
-		$url = t3lib_div::_GP('sru').urlencode(t3lib_div::_GP('q'));
+		$url = t3lib_div::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;recordSchema=dfg-viewer/page&amp;query=' . urlencode(t3lib_div::_GP('q'));
 
 		// make request to SRU service
 		$sruXML = simplexml_load_file($url);
@@ -102,12 +99,12 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					}
 
-					unset($hitFound);
+					$hitFound = array();
 
 					// there may be multiple hits on a page per search query
 					foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
 
-						unset($hitAttributes);
+						$hitAttributes = array();
 
 						foreach ($hit->attributes() as $key => $val) {
 
@@ -120,16 +117,21 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 					$page = (string)$pageAttributes['id'];
 
-					// get logical page id of search result
-					$parentId = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->id;
+					// get METS file of search hit
+					$parentUrl = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->url;
 
-					unset($highlightParams);
+					// unset $hightlightParams but make sure, it's an array()
+					$highlightParams = array();
+
 					// get highlight boxes for all results of a page
 					foreach ($hitFound as $key => $hit) {
 
 						$highlightField = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
+
 						if (!in_array($highlightField, $highlightParams)) {
+
 							$highlightParams[] = $highlightField;
+
 						}
 
 					}
@@ -137,6 +139,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 					foreach ($hitFound as $key => $hit) {
 
 						unset($spanPreview);
+
 						unset($spanText);
 
 						if (!empty($hit['attributes']['preview'])) {
@@ -162,6 +165,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 								}
 
 							}
+
 							$spanText .= '</span>';
 
 						}
@@ -170,7 +174,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 						unset($data);
 
-						$data['link'] = $parentId;
+						$data['link'] = $parentUrl;
 						$data['page'] = $page;
 						$data['text'] = $spanText;
 						$data['previewImage'] = $spanPreview;
