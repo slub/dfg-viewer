@@ -98,6 +98,7 @@
 			<label index="leavesCount">Leaves Count</label>
 			<label index="place">Place of Publication</label>
 			<label index="parentPlace">Place of Publication (Parent)</label>
+			<label index="publicationRun">Publication Run</label>
 			<label index="year">Year of Publication</label>
 			<label index="parentYear">Year of Publication (Parent)</label>
 			<label index="vd16">VD16</label>
@@ -196,6 +197,7 @@
 			<label index="leavesCount">Blattzahl</label>
 			<label index="place">Erscheinungsort</label>
 			<label index="parentPlace">Erscheinungsort (Gesamtheit)</label>
+			<label index="publicationRun">Erscheinungsverlauf</label>
 			<label index="year">Erscheinungsjahr</label>
 			<label index="parentYear">Erscheinungsjahr (Gesamtheit)</label>
 			<label index="vd16">VD16</label>
