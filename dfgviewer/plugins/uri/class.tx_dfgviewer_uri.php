@@ -120,11 +120,11 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 					if (strpos($uri, '/fragment/') === FALSE) {
 
-						$uris[] = '<a href="http://nbn-resolving.de/' . urlencode($uri) . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a href="http://nbn-resolving.de/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
 
 					} else {
 
-						$uris[] = '<a href="http://nbn-resolving.org/' . urlencode($uri) . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a href="http://nbn-resolving.org/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
 
 					}
 
@@ -157,11 +157,11 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 					if (strpos($uri, '/fragment/') === FALSE) {
 
-						$uris[] = '<a href="http://nbn-resolving.de/' . urlencode($uri) . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a href="http://nbn-resolving.de/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
 
 					} else {
 
-						$uris[] = '<a href="http://nbn-resolving.org/' . urlencode($uri) . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a href="http://nbn-resolving.org/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
 
 					}
 
