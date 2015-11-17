@@ -180,8 +180,21 @@ $metadata = array (
 		'wrap' => '',
 		'is_listed' => 0,
 	),
-	'year' => array (
+	'publicationRun' => array (
 		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => '',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifBlank.field = year\nvalue.ifBlank.field = parentYear\nvalue.required = 1\nvalue.replacement.1.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.1.replace = $3.$2.$1\nvalue.replacement.1.useRegExp = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
+		'is_listed' => 1,
+	),
+	'year' => array (
+		'hidden' => 1,
 		'format' => array (
 			array (
 				'encoded' => 2,
@@ -190,8 +203,8 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentYear\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
-		'is_listed' => 1,
+		'wrap' => '',
+		'is_listed' => 0,
 	),
 	'parentYear' => array (
 		'hidden' => 1,
