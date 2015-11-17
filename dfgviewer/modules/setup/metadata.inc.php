@@ -185,12 +185,12 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 1,
-				'xpath' => '',
+				'xpath' => 'concat(./mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="start"]," - ",./mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="end"])',
 				'xpath_sorting' => '',
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifBlank.field = year\nvalue.ifBlank.field = parentYear\nvalue.required = 1\nvalue.replacement.1.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.1.replace = $3.$2.$1\nvalue.replacement.1.useRegExp = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
 		'is_listed' => 1,
 	),
 	'year' => array (
