@@ -99,7 +99,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentTitle\nvalue.required = 1\nall.noTrimWrap = |<h2>|</h2> |",
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentTitle\nvalue.ifEmpty.wrap = [|]\nvalue.required = 1\nall.noTrimWrap = |<h2>|</h2> |",
 		'is_listed' => 1,
 	),
 	'parentTitle' => array (
@@ -125,7 +125,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.noTrimWrap = || |\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
+		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
 		'is_listed' => 1,
 	),
 	'material' => array (
