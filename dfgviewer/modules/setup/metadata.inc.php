@@ -128,6 +128,19 @@ $metadata = array (
 		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
 		'is_listed' => 1,
 	),
+	'issue' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => './mods:part/mods:detail/mods:number',
+				'xpath_sorting' => './mods:part[@type="host"]/@order',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = issue\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
+		'is_listed' => 1,
+	),
 	'material' => array (
 		'hidden' => 0,
 		'format' => array (

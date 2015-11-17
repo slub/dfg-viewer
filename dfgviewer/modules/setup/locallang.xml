@@ -94,6 +94,7 @@
 			<label index="title">Title</label>
 			<label index="parentTitle">Parent Title</label>
 			<label index="volume">Volume</label>
+			<label index="issue">Issue</label>
 			<label index="material">Material</label>
 			<label index="leavesCount">Leaves Count</label>
 			<label index="place">Place of Publication</label>
@@ -193,6 +194,7 @@
 			<label index="title">Titel</label>
 			<label index="parentTitle">Gesamttitel</label>
 			<label index="volume">Band</label>
+			<label index="issue">Ausgabe</label>
 			<label index="material">Beschreibstoff</label>
 			<label index="leavesCount">Blattzahl</label>
 			<label index="place">Erscheinungsort</label>
