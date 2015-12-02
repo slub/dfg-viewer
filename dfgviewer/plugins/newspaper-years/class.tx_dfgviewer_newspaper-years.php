@@ -68,7 +68,6 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 		}
 
 		$toc = $this->doc->tableOfContents;
-//~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
 
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
@@ -87,7 +86,6 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 
 		$years = $toc[0]['children'];
 
-		$subPartContent = '';
 		$subYearPartContent = '';
 
 		foreach($years as $id => $year) {
