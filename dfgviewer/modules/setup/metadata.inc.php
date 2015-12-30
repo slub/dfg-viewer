@@ -84,6 +84,19 @@ $metadata = array (
 		'wrap' => '',
 		'is_listed' => 0,
 	),
+	'shelfmark' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:idno',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
+		'is_listed' => 1,
+	),
 	'title' => array (
 		'hidden' => 0,
 		'format' => array (
@@ -94,12 +107,12 @@ $metadata = array (
 			),
 			array (
 				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:idno',
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title',
 				'xpath_sorting' => '',
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentTitle\nvalue.required = 1\nall.noTrimWrap = |<h2>|</h2> |",
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentTitle\nvalue.ifEmpty.wrap = [|]\nvalue.required = 1\nall.noTrimWrap = |<h2>|</h2> |",
 		'is_listed' => 1,
 	),
 	'parentTitle' => array (
@@ -125,7 +138,20 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.noTrimWrap = || |\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
+		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
+		'is_listed' => 1,
+	),
+	'issue' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => './mods:part/mods:detail/mods:number',
+				'xpath_sorting' => './mods:part[@type="host"]/@order',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = issue\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
 		'is_listed' => 1,
 	),
 	'material' => array (
@@ -154,6 +180,19 @@ $metadata = array (
 		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
 		'is_listed' => 1,
 	),
+	'format' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 2,
+				'xpath' => 'concat(./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type="leaves"]/teihdr:width,"x",./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type="leaves"]/teihdr:height,./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type="leaves"]/@unit)',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.if.value.field = format\nvalue.if.equals = x\nvalue.if.negate = 1\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
+		'is_listed' => 1,
+	),
 	'place' => array (
 		'hidden' => 0,
 		'format' => array (
@@ -180,9 +219,14 @@ $metadata = array (
 		'wrap' => '',
 		'is_listed' => 0,
 	),
-	'year' => array (
+	'publicationRun' => array (
 		'hidden' => 0,
 		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => 'concat(./mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="start"]," - ",./mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="end"])',
+				'xpath_sorting' => '',
+			),
 			array (
 				'encoded' => 2,
 				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate',
@@ -190,8 +234,15 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentYear\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
+		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
 		'is_listed' => 1,
+	),
+	'year' => array (
+		'hidden' => 1,
+		'format' => array (),
+		'default_value' => '',
+		'wrap' => '',
+		'is_listed' => 0,
 	),
 	'parentYear' => array (
 		'hidden' => 1,
