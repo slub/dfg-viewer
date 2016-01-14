@@ -10,7 +10,7 @@ config {
 	xhtml_cleaning = all
 	doctype = xhtml_strict
 	removeDefaultJS = 1
-	baseURL = {$plugin.tx_dfgviewer.baseURL}
+	absRefPrefix = /
 	linkVars = L
 	uniqueLinkVars = 1
 	cache_period = 86400
