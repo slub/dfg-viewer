@@ -39,5 +39,3 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 // Register eID handlers.
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = 'EXT:'.$_EXTKEY.'/plugins/sru/class.tx_dfgviewer_sru_eid.php';
-
-?>

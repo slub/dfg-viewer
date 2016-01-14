@@ -30,5 +30,3 @@ return array (
 	'tx_dfgviewer_gridpager' => $extensionPath.'plugins/gridpager/class.tx_dfgviewer_gridpager.php',
 	'tx_dfgviewer_uri' => $extensionPath.'plugins/uri/class.tx_dfgviewer_uri.php'
 );
-
-?>

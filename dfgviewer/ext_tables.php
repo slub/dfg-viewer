@@ -66,5 +66,3 @@ if (TYPO3_MODE == 'BE')	{
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup','EXT:dfgviewer/modules/setup/locallang_mod.xml');
 
 }
-
-?>

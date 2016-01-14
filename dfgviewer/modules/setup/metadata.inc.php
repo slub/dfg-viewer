@@ -284,5 +284,3 @@ $metadata = array (
 		'is_listed' => 1,
 	)
 );
-
-?>

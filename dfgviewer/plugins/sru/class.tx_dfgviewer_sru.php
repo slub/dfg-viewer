@@ -186,5 +186,3 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/sru/class.tx_dfgviewer_sru.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/sru/class.tx_dfgviewer_sru.php']);
 }
-
-?>
