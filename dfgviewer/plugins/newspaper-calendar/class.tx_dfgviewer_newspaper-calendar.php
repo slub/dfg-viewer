@@ -125,8 +125,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 			// max 6 calendar weeks in a month
 			for ($j = 0; $j <= 5; $j++) {
 
-				$weekArray = array();
-
 				$firstDayOfWeek = strtotime('+ ' . $j . ' Week', $firstOfMonthStart);
 
 				$weekArray = array(
