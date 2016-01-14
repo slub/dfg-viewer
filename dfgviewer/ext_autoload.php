@@ -22,7 +22,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-$extensionPath = t3lib_extMgm::extPath('dfgviewer');
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('dfgviewer');
 
 return array (
 	'tx_dfgviewer_modSetup' => $extensionPath.'modules/setup/index.php',

@@ -25,7 +25,7 @@
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 // Register static typoscript.
-t3lib_extMgm::addStaticFile($_EXTKEY, 'typoscript/', 'DFG Viewer');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'typoscript/', 'DFG Viewer');
 
 // Register plugins.
 \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tt_content');
@@ -35,35 +35,35 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_amd'] = '
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_amd'] = 'pi_flexform';
 
-t3lib_extMgm::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_amd', $_EXTKEY.'_amd'), 'list_type');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_amd', $_EXTKEY.'_amd'), 'list_type');
 
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_amd', 'FILE:EXT:'.$_EXTKEY.'/plugins/amd/flexform.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_amd', 'FILE:EXT:'.$_EXTKEY.'/plugins/amd/flexform.xml');
 
 // Plugin "gridpager".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_gridpager'] = 'layout,select_key,pages,recursive';
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_gridpager'] = 'pi_flexform';
 
-t3lib_extMgm::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_gridpager', $_EXTKEY.'_gridpager'), 'list_type');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_gridpager', $_EXTKEY.'_gridpager'), 'list_type');
 
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_gridpager', 'FILE:EXT:'.$_EXTKEY.'/plugins/gridpager/flexform.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_gridpager', 'FILE:EXT:'.$_EXTKEY.'/plugins/gridpager/flexform.xml');
 
 // Plugin "uri".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_uri'] = 'layout,select_key,pages,recursive';
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_uri'] = 'pi_flexform';
 
-t3lib_extMgm::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_uri', $_EXTKEY.'_uri'), 'list_type');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_uri', $_EXTKEY.'_uri'), 'list_type');
 
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/plugins/uri/flexform.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/plugins/uri/flexform.xml');
 
 // Register modules.
 if (TYPO3_MODE == 'BE')	{
 
 	// Module "setup".
-	t3lib_extMgm::addModule('txdlfmodules', 'txdfgviewersetup', '', t3lib_extMgm::extPath($_EXTKEY).'modules/setup/');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('txdlfmodules', 'txdfgviewersetup', '', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'modules/setup/');
 
-	t3lib_extMgm::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup','EXT:dfgviewer/modules/setup/locallang_mod.xml');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup','EXT:dfgviewer/modules/setup/locallang_mod.xml');
 
 }
 

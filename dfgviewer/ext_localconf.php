@@ -25,17 +25,17 @@
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 // Register plugins.
-t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/amd/class.tx_dfgviewer_amd.php', '_amd', 'list_type', TRUE);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/amd/class.tx_dfgviewer_amd.php', '_amd', 'list_type', TRUE);
 
-t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/gridpager/class.tx_dfgviewer_gridpager.php', '_gridpager', 'list_type', TRUE);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/gridpager/class.tx_dfgviewer_gridpager.php', '_gridpager', 'list_type', TRUE);
 
-t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/uri/class.tx_dfgviewer_uri.php', '_uri', 'list_type', TRUE);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/uri/class.tx_dfgviewer_uri.php', '_uri', 'list_type', TRUE);
 
-t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php', '_newspapercalendar', 'list_type', TRUE);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php', '_newspapercalendar', 'list_type', TRUE);
 
-t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php', '_newspaperyears', 'list_type', TRUE);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php', '_newspaperyears', 'list_type', TRUE);
 
-t3lib_extMgm::addPItoST43($_EXTKEY, 'plugins/sru/class.tx_dfgviewer_sru.php', '_sru', 'list_type', TRUE);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/sru/class.tx_dfgviewer_sru.php', '_sru', 'list_type', TRUE);
 
 // Register eID handlers.
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = 'EXT:'.$_EXTKEY.'/plugins/sru/class.tx_dfgviewer_sru_eid.php';

@@ -240,7 +240,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 			$markerArray['###SPONSORSITEURL###'] = $this->pi_getLL('dfgLink', '', TRUE);
 
-			$markerArray['###SPONSORLOGO###'] = t3lib_extMgm::siteRelPath($this->extKey).'res/images/dfglogo.png';
+			$markerArray['###SPONSORLOGO###'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey).'res/images/dfglogo.png';
 
 		}
 
