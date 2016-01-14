@@ -96,13 +96,13 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 		);
 
 		// Get persistent identifier of book.
-		$uriBook = t3lib_div::trimExplode(' ', $this->doc->physicalPagesInfo[$this->doc->physicalPages[0]]['contentIds'], TRUE);
+		$uriBook = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $this->doc->physicalPagesInfo[$this->doc->physicalPages[0]]['contentIds'], TRUE);
 
 		if (empty($uriBook)) {
 
 			$uriBook = $this->doc->getLogicalStructure($this->doc->toplevelId);
 
-			$uriBook = t3lib_div::trimExplode(' ', $uriBook['contentIds'], TRUE);
+			$uriBook = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
 
 		}
 
@@ -141,7 +141,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 		}
 
 		// Get persistent identifier of page.
-		$uriPage = t3lib_div::trimExplode(' ', $this->doc->physicalPagesInfo[$this->doc->physicalPages[$this->piVars['page']]]['contentIds'], TRUE);
+		$uriPage = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $this->doc->physicalPagesInfo[$this->doc->physicalPages[$this->piVars['page']]]['contentIds'], TRUE);
 
 		if (!empty($uriPage)) {
 
