@@ -45,12 +45,9 @@ class tx_dfgviewer_sru_eid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 *
 	 * @access	public
 	 *
-	 * @param	string		$content: The PlugIn content
-	 * @param	array		$conf: The PlugIn configuration
-	 *
-	 * @return	void
+	 * @return string JSON encoded return value
 	 */
-	public function main($content = '', $conf = array ()) {
+	public function main() {
 
 		$this->cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 
