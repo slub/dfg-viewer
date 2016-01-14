@@ -172,7 +172,7 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 		// Add javascript to page header.
 		if (tx_dlf_helper::loadJQuery()) {
 
-			$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.t3lib_extMgm::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
+			$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
 
 		}
 
