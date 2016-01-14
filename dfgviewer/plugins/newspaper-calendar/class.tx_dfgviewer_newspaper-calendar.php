@@ -68,7 +68,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		}
 
 		$toc = $this->doc->tableOfContents;
-//~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
 
 		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
 

@@ -32,7 +32,7 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_sru_eid extends tslib_pibase {
+class tx_dfgviewer_sru_eid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 	/**
 	 *
@@ -52,7 +52,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 	 */
 	public function main($content = '', $conf = array ()) {
 
-		$this->cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+		$this->cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 
 		$this->extKey = 'dfgviewer';
 
