@@ -52,17 +52,17 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 	 */
 	public function main($content = '', $conf = array ()) {
 
-		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+		$this->cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
 
 		$this->extKey = 'dfgviewer';
 
 		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
 
-		$this->LLkey = t3lib_div::_GP('L') ? t3lib_div::_GP('L') : 'default';
+		$this->LLkey = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('L') ? \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('L') : 'default';
 
 		$this->pi_loadLL();
 
-		$url = t3lib_div::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;recordSchema=dfg-viewer/page&amp;query=' . urlencode(t3lib_div::_GP('q'));
+		$url = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;recordSchema=dfg-viewer/page&amp;query=' . urlencode(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q'));
 
 		// make request to SRU service
 		$sruXML = simplexml_load_file($url);
@@ -75,7 +75,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 			if ($sruResponse === FALSE) {
 
-				$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+				$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q') ;
 
 			} else {
 
@@ -83,7 +83,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 				if ($sruRecords === FALSE || empty($sruRecords) ) {
 
-					$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+					$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q') ;
 
 				}
 
@@ -190,7 +190,7 @@ class tx_dfgviewer_sru_eid extends tslib_pibase {
 
 		} else {
 
-			$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . t3lib_div::_GP('q') ;
+			$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q') ;
 
 		}
 
@@ -204,7 +204,7 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgview
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/search/class.tx_dfgviewer_sru_eid.php']);
 }
 
-$cObj = t3lib_div::makeInstance('tx_dfgviewer_sru_eid');
+$cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_dfgviewer_sru_eid');
 
 $cObj->main();
 

@@ -28,7 +28,7 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
 t3lib_extMgm::addStaticFile($_EXTKEY, 'typoscript/', 'DFG Viewer');
 
 // Register plugins.
-t3lib_div::loadTCA('tt_content');
+\TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tt_content');
 
 // Plugin "amd".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_amd'] = 'layout,select_key,pages,recursive';
