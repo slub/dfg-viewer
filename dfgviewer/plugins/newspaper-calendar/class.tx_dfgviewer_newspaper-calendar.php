@@ -149,6 +149,8 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 						$currentMonth = date('n', $currentDayTime);
 
+						if ($toc[0]['children'][0]['children'][$month[$currentMonth]]['children']) {
+
 							foreach($toc[0]['children'][0]['children'][$month[$currentMonth]]['children'] as $id => $day) {
 
 								// prefer oderlabel over label
@@ -189,6 +191,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 							}
 
 							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
+						}
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
 							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
