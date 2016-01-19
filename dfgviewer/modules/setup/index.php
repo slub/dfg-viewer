@@ -116,7 +116,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 
 			// Fine.
 			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-				'\TYPO3\CMS\Core\Messaging\FlashMessage',
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.metadataAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.metadataAdded', TRUE),
 				\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
@@ -127,7 +127,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 
 			// Something went wrong.
 			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-				'\TYPO3\CMS\Core\Messaging\FlashMessage',
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.metadataNotAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.metadataNotAdded', TRUE),
 				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
@@ -172,7 +172,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 
 			// Fine.
 			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-				'\TYPO3\CMS\Core\Messaging\FlashMessage',
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.structureAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.structureAdded', TRUE),
 				\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
@@ -183,7 +183,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 
 			// Something went wrong.
 			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-				'\TYPO3\CMS\Core\Messaging\FlashMessage',
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.structureNotAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.structureNotAdded', TRUE),
 				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
@@ -214,7 +214,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 			if ($this->pageInfo['doktype'] != 254) {
 
 				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					$GLOBALS['LANG']->getLL('flash.wrongPageTypeMsg'),
 					$GLOBALS['LANG']->getLL('flash.wrongPageType', TRUE),
 					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
@@ -259,7 +259,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 
 				// Fine.
 				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					$GLOBALS['LANG']->getLL('flash.structureOkayMsg'),
 					$GLOBALS['LANG']->getLL('flash.structureOkay', TRUE),
 					\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
@@ -272,7 +272,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 				$_url = \TYPO3\CMS\Core\Utility\GeneralUtility::locationHeaderUrl(\TYPO3\CMS\Core\Utility\GeneralUtility::linkThisScript(array ('id' => $this->id, 'CMD' => 'addStructure')));
 
 				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					sprintf($GLOBALS['LANG']->getLL('flash.structureNotOkayMsg'), $_url),
 					$GLOBALS['LANG']->getLL('flash.structureNotOkay', TRUE),
 					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
@@ -294,7 +294,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 
 				// Fine.
 				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-					'\TYPO3\CMS\Core\Messaging\FlashMessage',
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					$GLOBALS['LANG']->getLL('flash.metadataOkayMsg'),
 					$GLOBALS['LANG']->getLL('flash.metadataOkay', TRUE),
 					\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
