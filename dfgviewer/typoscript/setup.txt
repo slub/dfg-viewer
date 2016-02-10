@@ -10,7 +10,7 @@ config {
 	xhtml_cleaning = all
 	doctype = xhtml_strict
 	removeDefaultJS = 1
-	baseURL = {$plugin.tx_dfgviewer.baseURL}
+	absRefPrefix = /
 	linkVars = L
 	uniqueLinkVars = 1
 	cache_period = 86400
@@ -259,7 +259,7 @@ plugin.tx_dfgviewer_newspaperyears {
 	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperYears}
 }
 
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_global_anchor)]
+[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}, newspaper_global_anchor)]
 page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
 page.2.marks.GRIDSWITCHER >
@@ -268,7 +268,7 @@ page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_year_anchor)]
+[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}, newspaper_year_anchor)]
 page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
 page.2.marks.GRIDSWITCHER >
@@ -277,14 +277,11 @@ page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}:newspaper_issue)]
+[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}, newspaper_issue)]
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 page.2.marks.SRU < plugin.tx_dfgviewer_sru
-
-#page.2.marks.GUI = TEXT
-#page.2.marks.GUI.value = Hallo Welt! newspaper_issue
 [global]
 
 

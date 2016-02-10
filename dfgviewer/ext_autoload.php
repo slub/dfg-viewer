@@ -22,7 +22,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-$extensionPath = t3lib_extMgm::extPath('dfgviewer');
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('dfgviewer');
 
 return array (
 	'tx_dfgviewer_modSetup' => $extensionPath.'modules/setup/index.php',
@@ -30,5 +30,3 @@ return array (
 	'tx_dfgviewer_gridpager' => $extensionPath.'plugins/gridpager/class.tx_dfgviewer_gridpager.php',
 	'tx_dfgviewer_uri' => $extensionPath.'plugins/uri/class.tx_dfgviewer_uri.php'
 );
-
-?>

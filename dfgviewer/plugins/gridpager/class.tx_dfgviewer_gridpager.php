@@ -71,7 +71,7 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 			// Set some variable defaults.
 			if (!empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = tx_dlf_helper::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
 
 				$this->piVars['pointer'] = intval(floor($this->piVars['page'] / $this->conf['limit']));
 
@@ -79,7 +79,7 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 
 			if (!empty($this->piVars['pointer'])) {
 
-				$this->piVars['pointer'] = tx_dlf_helper::intInRange($this->piVars['pointer'], 0, $maxPointer, 0);
+				$this->piVars['pointer'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['pointer'], 0, $maxPointer, 0);
 
 			} else {
 
@@ -181,5 +181,3 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/gridpager/class.tx_dfgviewer_gridpager.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/gridpager/class.tx_dfgviewer_gridpager.php']);
 }
-
-?>

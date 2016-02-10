@@ -63,12 +63,11 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 		} else {
 
 			// Set default values if not set.
-			$this->piVars['page'] = tx_dlf_helper::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+			$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
 
 		}
 
 		$toc = $this->doc->tableOfContents;
-//~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
 
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
@@ -87,7 +86,6 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 
 		$years = $toc[0]['children'];
 
-		$subPartContent = '';
 		$subYearPartContent = '';
 
 		foreach($years as $id => $year) {
@@ -134,5 +132,3 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php']);
 }
-
-?>

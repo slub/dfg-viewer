@@ -104,7 +104,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 				$markerArray['###OWNER###'] = htmlspecialchars(trim((string) $rights->owner));
 
 				// Get owner's site URL.
-				if (t3lib_div::isValidUrl(trim((string) $rights->ownerSiteURL))
+				if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $rights->ownerSiteURL))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -115,7 +115,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 				}
 
 				// Get owner's logo.
-				if (t3lib_div::isValidUrl(trim((string) $rights->ownerLogo))
+				if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $rights->ownerLogo))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -126,7 +126,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 				}
 
 				// Get owner's contact information.
-				if (t3lib_div::isValidUrl(trim((string) $rights->ownerContact))
+				if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $rights->ownerContact))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -134,7 +134,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 					$markerArray['###OWNERCONTACT###'] = htmlspecialchars(trim((string) $rights->ownerContact));
 
-				} elseif (t3lib_div::isValidUrl('mailto:'.trim((string) $rights->ownerContact))
+				} elseif (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl('mailto:'.trim((string) $rights->ownerContact))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -148,7 +148,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 				$markerArray['###SPONSOR###'] = htmlspecialchars(trim((string) $rights->sponsor));
 
 				// Get sponsor's site URL.
-				if (t3lib_div::isValidUrl(trim((string) $rights->sponsorSiteURL))
+				if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $rights->sponsorSiteURL))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -159,7 +159,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 				}
 
 				// Get sponsor's logo.
-				if (t3lib_div::isValidUrl(trim((string) $rights->sponsorLogo))
+				if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $rights->sponsorLogo))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -188,7 +188,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 				foreach ($links->reference as $reference) {
 
-					if (t3lib_div::isValidUrl(trim((string) $reference))
+					if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $reference))
 						// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 						// the function to validate URLs containing whitespaces and invalidate URLs containing
 						// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -219,7 +219,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 				// Get local view.
 				$markerArray['###LOCALVIEW###'] = $this->pi_getLL('localview', '', TRUE);
 
-				if (t3lib_div::isValidUrl(trim((string) $links->presentation))
+				if (\TYPO3\CMS\Core\Utility\GeneralUtility::isValidUrl(trim((string) $links->presentation))
 					// There is a bug in filter_var($var, FILTER_VALIDATE_URL) in PHP < 5.3.3 which causes
 					// the function to validate URLs containing whitespaces and invalidate URLs containing
 					// hyphens. (see https://bugs.php.net/bug.php?id=51192)
@@ -240,7 +240,7 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 
 			$markerArray['###SPONSORSITEURL###'] = $this->pi_getLL('dfgLink', '', TRUE);
 
-			$markerArray['###SPONSORLOGO###'] = t3lib_extMgm::siteRelPath($this->extKey).'res/images/dfglogo.png';
+			$markerArray['###SPONSORLOGO###'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey).'res/images/dfglogo.png';
 
 		}
 
@@ -253,5 +253,3 @@ class tx_dfgviewer_amd extends tx_dlf_plugin {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/amd/class.tx_dfgviewer_amd.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/amd/class.tx_dfgviewer_amd.php']);
 }
-
-?>

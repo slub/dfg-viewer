@@ -63,10 +63,10 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 	protected function cmdAddMetadata() {
 
 		// Include metadata definition file.
-		include_once(t3lib_extMgm::extPath($this->extKey).'modules/'.$this->modPath.'metadata.inc.php');
+		include_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($this->extKey).'modules/'.$this->modPath.'metadata.inc.php');
 
 		// Load table configuration array to get default field values.
-		t3lib_div::loadTCA('tx_dlf_metadata');
+		\TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tx_dlf_metadata');
 
 		$i = 0;
 
@@ -115,28 +115,28 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 		if (count($_ids) == $i) {
 
 			// Fine.
-			$_message = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
+			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.metadataAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.metadataAdded', TRUE),
-				t3lib_FlashMessage::OK,
+				\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
 				FALSE
 			);
 
 		} else {
 
 			// Something went wrong.
-			$_message = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
+			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.metadataNotAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.metadataNotAdded', TRUE),
-				t3lib_FlashMessage::ERROR,
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
 				FALSE
 			);
 
 		}
 
-		t3lib_FlashMessageQueue::addMessage($_message);
+		tx_dlf_helper::addMessage($_message);
 
 	}
 
@@ -150,7 +150,7 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 	protected function cmdAddStructure() {
 
 		// Include structure definition file.
-		include_once(t3lib_extMgm::extPath($this->extKey).'modules/'.$this->modPath.'structures.inc.php');
+		include_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($this->extKey).'modules/'.$this->modPath.'structures.inc.php');
 
 		// Build data array.
 		foreach ($structures as $index_name => $values) {
@@ -171,28 +171,28 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 		if (count($_ids) == count($structures)) {
 
 			// Fine.
-			$_message = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
+			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.structureAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.structureAdded', TRUE),
-				t3lib_FlashMessage::OK,
+				\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
 				FALSE
 			);
 
 		} else {
 
 			// Something went wrong.
-			$_message = t3lib_div::makeInstance(
-				't3lib_FlashMessage',
+			$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				$GLOBALS['LANG']->getLL('flash.structureNotAddedMsg'),
 				$GLOBALS['LANG']->getLL('flash.structureNotAdded', TRUE),
-				t3lib_FlashMessage::ERROR,
+				\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
 				FALSE
 			);
 
 		}
 
-		t3lib_FlashMessageQueue::addMessage($_message);
+		tx_dlf_helper::addMessage($_message);
 
 	}
 
@@ -213,17 +213,17 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 			// Check if page is sysfolder.
 			if ($this->pageInfo['doktype'] != 254) {
 
-				$_message = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
+				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					$GLOBALS['LANG']->getLL('flash.wrongPageTypeMsg'),
 					$GLOBALS['LANG']->getLL('flash.wrongPageType', TRUE),
-					t3lib_FlashMessage::ERROR,
+					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
 					FALSE
 				);
 
-				t3lib_FlashMessageQueue::addMessage($_message);
+				tx_dlf_helper::addMessage($_message);
 
-				$this->markerArray['CONTENT'] .= t3lib_FlashMessageQueue::renderFlashMessages();
+				$this->markerArray['CONTENT'] .= tx_dlf_helper::renderFlashMessages();
 
 				$this->printContent();
 
@@ -258,30 +258,30 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 			if ($GLOBALS['TYPO3_DB']->sql_num_rows($result)) {
 
 				// Fine.
-				$_message = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
+				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					$GLOBALS['LANG']->getLL('flash.structureOkayMsg'),
 					$GLOBALS['LANG']->getLL('flash.structureOkay', TRUE),
-					t3lib_FlashMessage::OK,
+					\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
 					FALSE
 				);
 
 			} else {
 
 				// Configuration missing.
-				$_url = t3lib_div::locationHeaderUrl(t3lib_div::linkThisScript(array ('id' => $this->id, 'CMD' => 'addStructure')));
+				$_url = \TYPO3\CMS\Core\Utility\GeneralUtility::locationHeaderUrl(\TYPO3\CMS\Core\Utility\GeneralUtility::linkThisScript(array ('id' => $this->id, 'CMD' => 'addStructure')));
 
-				$_message = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
+				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					sprintf($GLOBALS['LANG']->getLL('flash.structureNotOkayMsg'), $_url),
 					$GLOBALS['LANG']->getLL('flash.structureNotOkay', TRUE),
-					t3lib_FlashMessage::ERROR,
+					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
 					FALSE
 				);
 
 			}
 
-			t3lib_FlashMessageQueue::addMessage($_message);
+			tx_dlf_helper::addMessage($_message);
 
 			// Check for existing metadata configuration.
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -293,32 +293,32 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 			if ($GLOBALS['TYPO3_DB']->sql_num_rows($result)) {
 
 				// Fine.
-				$_message = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
+				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					$GLOBALS['LANG']->getLL('flash.metadataOkayMsg'),
 					$GLOBALS['LANG']->getLL('flash.metadataOkay', TRUE),
-					t3lib_FlashMessage::OK,
+					\TYPO3\CMS\Core\Messaging\FlashMessage::OK,
 					FALSE
 				);
 
 			} else {
 
 				// Configuration missing.
-				$_url = t3lib_div::locationHeaderUrl(t3lib_div::linkThisScript(array ('id' => $this->id, 'CMD' => 'addMetadata')));
+				$_url = \TYPO3\CMS\Core\Utility\GeneralUtility::locationHeaderUrl(\TYPO3\CMS\Core\Utility\GeneralUtility::linkThisScript(array ('id' => $this->id, 'CMD' => 'addMetadata')));
 
-				$_message = t3lib_div::makeInstance(
-					't3lib_FlashMessage',
+				$_message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+					'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 					sprintf($GLOBALS['LANG']->getLL('flash.metadataNotOkayMsg'), $_url),
 					$GLOBALS['LANG']->getLL('flash.metadataNotOkay', TRUE),
-					t3lib_FlashMessage::ERROR,
+					\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR,
 					FALSE
 				);
 
 			}
 
-			t3lib_FlashMessageQueue::addMessage($_message);
+			tx_dlf_helper::addMessage($_message);
 
-			$this->markerArray['CONTENT'] .= t3lib_FlashMessageQueue::renderFlashMessages();
+			$this->markerArray['CONTENT'] .= tx_dlf_helper::renderFlashMessages();
 
 		} else {
 
@@ -337,8 +337,6 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgview
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/modules/setup/index.php']);
 }
 
-$SOBE = t3lib_div::makeInstance('tx_dfgviewer_modSetup');
+$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_dfgviewer_modSetup');
 
 $SOBE->main();
-
-?>

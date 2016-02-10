@@ -63,12 +63,11 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		} else {
 
 			// Set default values if not set.
-			$this->piVars['page'] = tx_dlf_helper::intInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+			$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
 
 		}
 
 		$toc = $this->doc->tableOfContents;
-//~ t3lib_utility_Debug::debug($toc, 'tx_dfgviewer_newspaperyear: conf... ');
 
 		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
 
@@ -126,8 +125,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 			// max 6 calendar weeks in a month
 			for ($j = 0; $j <= 5; $j++) {
 
-				$weekArray = array();
-
 				$firstDayOfWeek = strtotime('+ ' . $j . ' Week', $firstOfMonthStart);
 
 				$weekArray = array(
@@ -151,6 +148,8 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 						$dayLinksText = '';
 
 						$currentMonth = date('n', $currentDayTime);
+
+						if ($toc[0]['children'][0]['children'][$month[$currentMonth]]['children']) {
 
 							foreach($toc[0]['children'][0]['children'][$month[$currentMonth]]['children'] as $id => $day) {
 
@@ -192,6 +191,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 							}
 
 							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
+						}
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
 							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
@@ -294,5 +294,3 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php']);
 }
-
-?>
