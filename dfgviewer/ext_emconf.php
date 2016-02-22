@@ -24,7 +24,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'DFG Viewer',
-	'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI2.',
+	'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.',
 	'category' => 'plugin',
 	'author' => 'Sebastian Meyer',
 	'author_email' => 'sebastian.meyer@slub-dresden.de',
@@ -42,9 +42,9 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '3.1.0',
 	'constraints' => array(
 		'depends' => array(
-			'php' => '5.4.0-',
+			'php' => '5.3.7-',
 			'typo3' => '6.2.0-6.2.99',
-			'dlf' => '1.3.0-',
+			'dlf' => '2.0.0-',
 		),
 		'conflicts' => array(
 		),
