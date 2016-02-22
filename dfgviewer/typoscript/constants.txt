@@ -58,6 +58,9 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Fulltext Tool template file
 	templateFileToolFulltext = EXT:dfgviewer/res/fulltext.tmpl
+	
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Image manipulation template file
+	templateFileToolImageManipulation = EXT:dfgviewer/res/imagemanipulation.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Calendar template file
 	templateFileNewspaperCalendar = EXT:dfgviewer/plugins/newspaper-calendar/template.tmpl
@@ -67,4 +70,5 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=SRU searchform template file
 	templateFileSru = EXT:dfgviewer/plugins/sru/template.tmpl
+	
 }
