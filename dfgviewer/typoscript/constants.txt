@@ -1,4 +1,5 @@
 plugin.tx_dfgviewer {
+
 	# cat=plugin.tx_dfgviewer/enable; type=int+; label=Storage PID
 	storagePid =
 
@@ -58,7 +59,7 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Fulltext Tool template file
 	templateFileToolFulltext = EXT:dfgviewer/res/fulltext.tmpl
-	
+
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Image manipulation template file
 	templateFileToolImageManipulation = EXT:dfgviewer/res/imagemanipulation.tmpl
 
@@ -70,5 +71,5 @@ plugin.tx_dfgviewer {
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=SRU searchform template file
 	templateFileSru = EXT:dfgviewer/plugins/sru/template.tmpl
-	
+
 }

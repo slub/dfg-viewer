@@ -30,9 +30,9 @@ plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
 [globalString = GP:set|mets=http*]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [global]
-#[globalVar = GP:set|image>0]
+[globalVar = GP:set|image>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
-#[global]
+[global]
 [globalVar = GP:set|double>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
@@ -47,6 +47,18 @@ plugin.tx_dfgviewer_gridpager {
 	limit = 24
 	pageStep = 5
 	templateFile = {$plugin.tx_dfgviewer.templateFilePager}
+}
+
+plugin.tx_dfgviewer_newspapercalendar {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	targetPid = #
+	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperCalendar}
+}
+
+plugin.tx_dfgviewer_newspaperyears {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	targetPid = #
+	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperYears}
 }
 
 plugin.tx_dfgviewer_uri {
@@ -251,19 +263,7 @@ page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 [global]
 
-plugin.tx_dfgviewer_newspapercalendar {
-	pages = {$plugin.tx_dfgviewer.storagePid}
-	targetPid = #
-	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperCalendar}
-}
-
-plugin.tx_dfgviewer_newspaperyears {
-	pages = {$plugin.tx_dfgviewer.storagePid}
-	targetPid = #
-	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperYears}
-}
-
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}, newspaper_global_anchor)]
+[userFunc = user_dlf_docTypeCheck(newspaper)]
 page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspaperyears
 page.2.marks.GRIDSWITCHER >
@@ -272,7 +272,7 @@ page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}, newspaper_year_anchor)]
+[userFunc = user_dlf_docTypeCheck(year)]
 page.2.template.file = {$plugin.tx_dfgviewer.templateFileNewspaper}
 page.2.marks.IMAGE < plugin.tx_dfgviewer_newspapercalendar
 page.2.marks.GRIDSWITCHER >
@@ -281,11 +281,9 @@ page.2.marks.SRU < plugin.tx_dfgviewer_sru
 page.2.marks.GUI = TEXT
 [global]
 
-[userFunc = user_dlf_docTypeCheck({$plugin.tx_dfgviewer.storagePid}, newspaper_issue)]
+[userFunc = user_dlf_docTypeCheck(issue)]
 page.2.marks.GUI < plugin.tx_dlf_navigation
 page.2.marks.IMAGE < plugin.tx_dlf_pageview
 page.2.marks.NAVIGATION < plugin.tx_dlf_toc
 page.2.marks.SRU < plugin.tx_dfgviewer_sru
 [global]
-
-
