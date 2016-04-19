@@ -22,11 +22,7 @@ a:hover, a:active { outline: 0; }
 
 
 /* structure elements */
-#sitespanner {
-	height: 100%;
-	width: 100%;
-	min-width: 800px;
-}
+#sitespanner { height: 100%; width: 100%; min-width: 800px; }
 #header { background: url(images/footnhead.png) repeat-x 0 0; }
 
 
@@ -128,6 +124,7 @@ h2 .volume { font-weight: normal; }
 #browser_bottom .moreFunctionsTrigger { top: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAAAAAAeW/F+AAAAb0lEQVR4AWNIQ4D/mGAApWdSTXctROhJZB5W3achIp0+qdh01/8Dizzy9dmDrBtT8x803ZiaT8J0Y9d8EqYbQ/MOkCxMBQO65oTfCGmEbqhzAnwWwGUJ6CZkN2GXE/Y3pnZSwhxTO4H4pjytDbxuAF9oqp1ABC50AAAAAElFTkSuQmCC'); }
 #browser_bottom .moreFunctionsTrigger.open { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAAAAAAeW/F+AAAAgklEQVR4AWNIQ4D/mGAApWfRQHd+xFN8utO8u/Dp3uft/RiP7j+pXt1gxmxM6VNAvNfLB6IdizREexc23aegeKc3RDsO6d8J3l2YLkfIL/Tyx6vbqwuP3bugTsd0+Wkkj8/C5W9vXP6GehtXqIE0g3yNW3cq/hjLi3hCh7Q2m6bpHAB6BZYY5DFNiQAAAABJRU5ErkJggg=='); }
 
+
 /* table of contents */
 .tx-dlf-toc { position: absolute; top: 100px; right: 30px; bottom: 65px; width: 300px; }
 .hideNav { position: absolute; top: 50%; right: -20px; margin-top: -13px; height: 27px; width: 13px; cursor: pointer; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAbCAAAAABHfcC3AAAAz0lEQVR4AX3Sb8oCIRDHcU+rFnmEeII2CCKCQOgEEb0IIYKiRex7sqx0/zwvZkCU+bDs7vhT+lMuvLwu5V/BfQ8/OkCqlODQ0yzCudIZ4qyjPbCotAD2lSZPCLqrAM9JoS2w6mkFbH9k73AzPZkb3O2X1sBGD2oDrD9krvCwQ7IPuJpMS2CXG01eZdsBy0wXaKdjmrZw0WoO+NJqmnLwwFydILr/5CKcVIJjlW7TR0jCU8K7hC8U/kuYhjBDYfLCfUm3XLPxN8qGlCg5h0J636A/Ya89KJNSAAAAAElFTkSuQmCC') no-repeat -13px 0; }
@@ -205,11 +202,11 @@ h2 .volume { font-weight: normal; }
 .tooltipster-content a { color: #333; font-size: 10px; padding: 4px 10px 4px 40px; line-height: 30px; margin: 2px 0; min-height: 30px; display: block; background: url(images/newspaperTooltipIcon.png) no-repeat 6px center; background-size: auto 24px; background /*\**/: transparent\9; padding-left /*\**/: 10px\9  }
 .tooltipster-content a:hover { background-color: #eee; text-decoration: none; }
 
+
 /* fullscreen functions */
 .fullscreenLogos { position: absolute; z-index: 20000; left: 90px; top: -60px; height: 50px; background: #fff; padding-left: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
 .fullscreenLogos a { position: relative; display: block; float: left; overflow: hidden; }
 .fullscreenLogos a.own { margin-right: 30px; }
-
 .tx-dfgviewer-sru .tx-dfgviewer-sru { position: absolute; top: 155px; right: 30px; z-index: 11; width: 300px; height: 22px; border-bottom: 1px dotted #999; padding-bottom: 4px; display: none; }
 .metanewspaper .tx-dfgviewer-sru .tx-dfgviewer-sru { top: 120px; }
 .tx-dfgviewer-sru label, .tx-dfgviewer-sru input[type="text"] { position: relative; float: left; }
@@ -224,31 +221,21 @@ h2 .volume { font-weight: normal; }
 #tx-dfgviewer-sru-results ul li a:hover { background: #f33; text-decoration: none; }
 #tx-dfgviewer-sru-results .sru-results-active-indicator { position: absolute; top: 15px; right: 60px; width: 0; height: 0; border: 10px solid transparent; border-bottom-color: rgba(31,31,31,0.8); border-top-width: 0; }
 #tx-dfgviewer-sru-results .sru-preview img { width: 100%; }
-
 #tx-dlf-fulltextselection { position: absolute; z-index: 11; right: 15px; top: 15px; bottom: 15px; width: 400px; overflow: scroll; background: #ccc; background: rgba(237,237,237,0.9); padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.4); font-size: 11px; color: #146; text-align: left; display: none; font-family: Georgia, 'Times-New-Roman', Times, serif; font-size: 14px; font-weight: 100; line-height: 23px; font-style: italic; }
 #tx-dlf-fulltextselection .ocrText { padding: 3px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAQAAABKIxwrAAAAFklEQVR4AWMAglEwCkbBKJDCCxlQ2QA4HwIjAB8nugAAAABJRU5ErkJggg==') repeat 0 0; }
 #tx-dlf-fulltextselection ::selection { background: rgb(255,68,68); color: #fff; }
 
-/*
-path[id *= "OpenLayers_Geometry_Polygon_"]:hover
-{
-	 stroke: black;
-	 fill: red;
-}
-*/
-/* EOF */
+
 /* styles for proper working of ol3 */
 .tx-dlf-pageview { height: 100%; }
 #tx-dfgviewer-map { height: 100%; }
 #tx-dfgviewer-map-manipulate { height: 100%; }
 
+
 /* styles for the image manipulation tool */
-/* image manipulation control */
-.image-manipulation { background: rgba(255,255,255,0.4); border-radius: 4px; padding: 2px;   position: absolute;
-  top: 50px; left: 50px;}
+.image-manipulation { background: rgba(255,255,255,0.4); border-radius: 4px; padding: 2px;   position: absolute; top: 50px; left: 50px;}
 .image-manipulation a.active { background-color: #f33; }  	
-.image-manipulation .slider-container { border: 5px solid transparent; content: "";	background: #355;
-	background: rgba(51,85,85,0.7); padding: 20px 20px 5px 35px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);}
+.image-manipulation .slider-container { border: 5px solid transparent; content: "";	background: #355; background: rgba(51,85,85,0.7); padding: 20px 20px 5px 35px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);}
 .image-manipulation .slider-container:before { position: absolute; left: -15px; top: 50%; margin-top: -15px; width: 0; height: 0; border: 10px solid transparent; border-left-width: 0; border-right-color: #355; border-right-color: rgba(51,85,85,0.7); content: ""; }
 .image-manipulation .slider-container .slider { position: relative; width: 200px; height: 20px; border: 0 none; border-radius: 0; background: transparent; -webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out; margin-right: 24px; }
 .image-manipulation .slider-container .slider:after { position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: #fff; content: ""; }
@@ -266,4 +253,6 @@ path[id *= "OpenLayers_Geometry_Polygon_"]:hover
 .slider-imagemanipulation.ui-slider-horizontal .ui-slider-handle { position: absolute; z-index: 2; top: -6px; width: 12px; height: 12px; background: rgb(0,177,158); border: 0 none; border-radius: 0; box-shadow: 1px 0px 2px rgba(0,0,0,0.2); cursor: col-resize; margin-left: -6px; }
 .slider-imagemanipulation.ui-slider-horizontal .ui-slider-handle:focus, .ui-slider-horizontal .ui-slider-handle:active { border: 0; outline: none; }
 .slider-imagemanipulation.ui-slider-horizontal .ui-slider-handle:after { position: absolute; bottom: -3px; left: 3px; width: 0; height: 0; content: ""; border: 3px solid transparent; border-bottom-width: 0; border-top-color: rgb(0,177,158); }
-.slider-imagemanipulation.ui-slider-horizontal .ui-slider-range { background: rgba(0,177,158,0.5);  }
+.slider-imagemanipulation.ui-slider-horizontal .ui-slider-range { background: rgba(0,177,158,0.5}; }
+
+/* EOF */
