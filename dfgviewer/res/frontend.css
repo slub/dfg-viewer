@@ -86,15 +86,15 @@ h2 .volume { font-weight: normal; }
 #browser_top, #browser_bottom { position: absolute; right: 20px; width: 370px; height: 26px; padding-left: 30px; background: #fff; z-Index: 10; border-style: solid; border-color: #fff; display: none; }
 #browser_top { border-width: 4px 0 0 0; bottom: 0; }
 #browser_bottom { border-width: 0 0 4px 0; top: 2px; }
-.doublepage, .grid, .downloads, .zoom, .backs, .fwds { height: 21px; border-right: 1px dotted #999; padding: 2px 4px; }
-.zoom, .backs, .fwds { position: relative; float: left; }
+.rotate, .doublepage, .grid, .downloads, .zoom, .backs, .fwds { height: 21px; border-right: 1px dotted #999; padding: 2px 4px; }
+.rotate, .zoom, .backs, .fwds { position: relative; float: left; }
 .doublepage, .grid, .downloads { position: absolute; top: 0; }
 .downloads { left: 30px; }
 .grid { left: 140px;  }
 .doublepage { left: 172px; }
 .tx-dlf-toolsImagemanipulation { margin: -2px -2px 0 6px; border-left: 1px dotted #999; padding: 2px 0; }
 .fwds { padding: 2px 0 2px 4px; border-right: none; }
-.doublepage *, .grid *, .switch *, .downloads span, .zoom *, .first *, .rwnd *, .prev *, .next *, .fwd *, .last * { position: relative; float: left; height: 20px; width: 22px; margin: 0 1px; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
+.doublepage *, .grid *, .switch *, .downloads span, .rotate *, .zoom *, .first *, .rwnd *, .prev *, .next *, .fwd *, .last * { position: relative; float: left; height: 20px; width: 22px; margin: 0 1px; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
 .downloads span a { position: relative; height: 20px; width: 22px; margin: 0; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
 .downloads>div { float: left; }
 .grid a { background-position: -308px 0; } .grid a:hover { background-position: -308px -20px; } .grid span { background-position: -308px -40px; }
@@ -104,6 +104,10 @@ h2 .volume { font-weight: normal; }
 .switch a { background-position: -286px 0; } .switch a:hover { background-position: -286px -20px; } .switch span { background-position: -286px -40px; }
 .downloads span.site a { background-position: -220px 0; } .downloads span.site a:hover { background-position: -220px -20px; } .downloads span.site { background-position: -220px -40px; }
 .downloads span.all a { background-position: -198px 0; } .downloads span.all a:hover { background-position: -198px -20px; } .downloads span.all { background-position: -198px -40px; }
+span.tx-dlf-tools-imagetools a { background-position: -418px 0; cursor: pointer; } span.tx-dlf-tools-imagetools a:hover { background-position: -418px -20px; } span.tx-dlf-tools-imagetools a.active { background-position: -418px -20px; }
+.rotate a.rotate-left { background-position: -440px 0; cursor: pointer; } .rotate a.rotate-left:hover { background-position: -440px -20px; }
+.rotate a.rotate-right { background-position: -462px 0; cursor: pointer; } .rotate a.rotate-right:hover { background-position: -462px -20px; }
+.rotate a.upend { background-position: -484px 0; cursor: pointer; } .rotate a.upend:hover { background-position: -484px -20px; } .rotate a.upend.off { background-position: -484px -40px; }
 .zoom a.in { background-position: -44px 0; } .zoom a.in:hover { background-position: -44px -20px; } .zoom span.in { background-position: -44px -40px; }
 .zoom a.out { background-position: -22px 0; } .zoom a.out:hover { background-position: -22px -20px; } .zoom span.out { background-position: -22px -40px; }
 .zoom .fullscreen { background-position: -352px 0; cursor: pointer; } .zoom .fullscreen:hover { background-position: -352px -20px; }
@@ -115,7 +119,7 @@ h2 .volume { font-weight: normal; }
 .next a { background-position: -132px 0; } .next a:hover { background-position: -132px -20px; } .next span { background-position: -132px -40px; }
 .fwd a { background-position: -88px 0; } .fwd a:hover { background-position: -88px -20px; } .fwd span { background-position: -88px -40px; }
 .last a { background-position: -176px 0; } .last a:hover { background-position: -176px -20px; } .last span { background-position: -176px -40px; }
-.pages { position: absolute; right: 290px; font-size: 11px; white-space: nowrap; }
+.pages { position: absolute; right: 370px; font-size: 11px; white-space: nowrap; }
 #toprow .pages { top: -4px; }
 #bottomrow .pages { top: 12px; }
 .pages label { color: #ccc; }
