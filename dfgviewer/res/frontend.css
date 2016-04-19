@@ -90,8 +90,9 @@ h2 .volume { font-weight: normal; }
 .zoom, .backs, .fwds { position: relative; float: left; }
 .doublepage, .grid, .downloads { position: absolute; top: 0; }
 .downloads { left: 30px; }
-.grid { left: 110px;  }
-.doublepage { left: 140px; }
+.grid { left: 140px;  }
+.doublepage { left: 172px; }
+.tx-dlf-toolsImagemanipulation { margin: -2px -2px 0 6px; border-left: 1px dotted #999; padding: 2px 0; }
 .fwds { padding: 2px 0 2px 4px; border-right: none; }
 .doublepage *, .grid *, .switch *, .downloads span, .zoom *, .first *, .rwnd *, .prev *, .next *, .fwd *, .last * { position: relative; float: left; height: 20px; width: 22px; margin: 0 1px; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
 .downloads span a { position: relative; height: 20px; width: 22px; margin: 0; display: block; text-indent: -9000px; overflow: hidden; background: url(images/ctrlIcons.png) no-repeat 0 0; }
