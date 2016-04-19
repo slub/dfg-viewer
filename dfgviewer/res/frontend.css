@@ -104,7 +104,7 @@ h2 .volume { font-weight: normal; }
 .switch a { background-position: -286px 0; } .switch a:hover { background-position: -286px -20px; } .switch span { background-position: -286px -40px; }
 .downloads span.site a { background-position: -220px 0; } .downloads span.site a:hover { background-position: -220px -20px; } .downloads span.site { background-position: -220px -40px; }
 .downloads span.all a { background-position: -198px 0; } .downloads span.all a:hover { background-position: -198px -20px; } .downloads span.all { background-position: -198px -40px; }
-span.tx-dlf-tools-imagetools a { background-position: -418px 0; cursor: pointer; } span.tx-dlf-tools-imagetools a:hover { background-position: -418px -20px; } span.tx-dlf-tools-imagetools a.active { background-position: -418px -20px; }
+.tx-dlf-toolsImagemanipulation span.tx-dlf-tools-imagetools a { background-position: -418px 0; cursor: pointer; } .tx-dlf-toolsImagemanipulation span.tx-dlf-tools-imagetools a:hover { background-position: -418px -20px; } .tx-dlf-toolsImagemanipulation span.tx-dlf-tools-imagetools a.active { background-position: -418px -20px; } .tx-dlf-toolsImagemanipulation span.tx-dlf-tools-imagetools { background-position: -418px -40px; }
 .rotate a.rotate-left { background-position: -440px 0; cursor: pointer; } .rotate a.rotate-left:hover { background-position: -440px -20px; }
 .rotate a.rotate-right { background-position: -462px 0; cursor: pointer; } .rotate a.rotate-right:hover { background-position: -462px -20px; }
 .rotate a.upend { background-position: -484px 0; cursor: pointer; } .rotate a.upend:hover { background-position: -484px -20px; } .rotate a.upend.off { background-position: -484px -40px; }
@@ -238,18 +238,18 @@ span.tx-dlf-tools-imagetools a { background-position: -418px 0; cursor: pointer;
 
 
 /* styles for the image manipulation tool */
-.image-manipulation { background: rgba(255,255,255,0.4); border-radius: 4px; padding: 2px;   position: absolute; top: 50px; left: 50px;}
+.image-manipulation { position: absolute; top: 38px; left: 50px; background: rgba(255,255,255,0.4); border-radius: 4px; padding: 2px; }
 .image-manipulation a.active { background-color: #f33; }  	
-.image-manipulation .slider-container { border: 5px solid transparent; content: "";	background: #355; background: rgba(51,85,85,0.7); padding: 20px 20px 5px 35px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);}
-.image-manipulation .slider-container:before { position: absolute; left: -15px; top: 50%; margin-top: -15px; width: 0; height: 0; border: 10px solid transparent; border-left-width: 0; border-right-color: #355; border-right-color: rgba(51,85,85,0.7); content: ""; }
+.image-manipulation .slider-container { border: 5px solid transparent; content: "";	background: #355; background: rgba(51, 51, 51, 0.8); padding: 20px 10px 20px 35px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);}
+.image-manipulation .slider-container:before { position: absolute; top: -13px; left: 60px; width: 0; height: 0; border: 15px solid transparent; border-bottom-color: #333; border-bottom-color: rgba(51, 51, 51, 0.8); border-top: 0 none;  content: ""; }
 .image-manipulation .slider-container .slider { position: relative; width: 200px; height: 20px; border: 0 none; border-radius: 0; background: transparent; -webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out; margin-right: 24px; }
-.image-manipulation .slider-container .slider:after { position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: #fff; content: ""; }
+.image-manipulation .slider-container .slider:after { position: absolute; top: 0; left: 0; width: 100%; height: 4px; border-radius: 2px; background: #fff; content: ""; }
 .image-manipulation .slider-container .slider .ui-slider-handle { border-radius: 0; border: 0 none; background: transparent; outline: 0; cursor: pointer; }
-.image-manipulation .slider-container .slider .ui-slider-handle:after { position: absolute; top: 0; left: 0; height: 12px; width: 12px; background: rgb(0,177,158); border: 1px solid #fff; content: ""; }
-.image-manipulation .slider-container .slider .tooltip { position: absolute; opacity: 1; top: -5px; left: 210px !important; color: #fff; font-size: 10px; text-align: left; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.image-manipulation .slider-container .slider .ui-slider-handle:after { position: absolute; top: 0; left: 0; height: 12px; width: 12px; background: #f33; border: 1px solid #fff; border-radius: 6px; content: ""; }
+.image-manipulation .slider-container .slider .tooltip { position: absolute; opacity: 1; top: -4px; left: 210px !important; color: #fff; font-size: 10px; text-align: left; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 .image-manipulation .slider-container .slider-contrast .tooltip, .image-manipulation .slider-container .slider-saturation .tooltip { left: 100%; }
 .image-manipulation .slider-container .slider-brightness .tooltip, .image-manipulation .slider-container .slider-hue .tooltip { left: 50%; }
-.image-manipulation .slider-container .slider:before { position: absolute; top: -6px; left: -20px; width: 14px; height: 14px; content: ""; }
+.image-manipulation .slider-container .slider:before { position: absolute; top: -5px; left: -20px; width: 14px; height: 14px; content: ""; }
 .image-manipulation .slider-container .slider-contrast:before { background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAf0lEQVR4AY3QsY2DMAAFUCpTHJmAaRgIswBTcUO4oIDMQoqkelFi4eKORPwvuXmyZf3qRARRwiaJgurV96G1yGl0fi3aHUMh+YbRqs7Y8wcrkz5jOsBOyvg4wIv7Z2xsJ56Nhx+KGet/OLqqywgFf3Qm6z5CbjCYcTMbyny+9AlLUvwEmygLfgAAAABJRU5ErkJggg==') no-repeat 0 0; }
 .image-manipulation .slider-container .slider-saturation:before { background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAIElEQVR4AWMgH/zHAxCS+8GwAQwdQHBYSeIPBHwQryQAzKgPDNGVUtYAAAAASUVORK5CYII=') no-repeat 0 0; }
 .image-manipulation .slider-container .slider-brightness:before { background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAcElEQVR4AZWPQQpCMQxEc8J+F9qCp+s+1wlexFXdPAvRDH8lzlDK8FLSsT8EmJyX0zIWbPgXHjw/WPnAFCedYBF0Zo5q+orUsTMMpBAEuLOQ1s7Az5fpG9I4w8Zk8OC1z0C/Va/yBfXEC1G9He0UlN8eX+sBaLOILAAAAABJRU5ErkJggg==') no-repeat 0 0; }
