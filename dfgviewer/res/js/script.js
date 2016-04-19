@@ -7,12 +7,12 @@ $(document).ready(function() {
 
 	// hide additional functions in page browser in a hidden menu
 	$('.downloads, .grid, .doublepage').addClass('hiddenFunctions').hide();
-	$('#browser_top, #browser_bottom').fadeIn(120).css({'width':'252px'}).prepend('<div class="moreFunctionsTrigger"></div>');
+	$('#browser_top, #browser_bottom').fadeIn(120).css({'width':'330px'}).prepend('<div class="moreFunctionsTrigger"></div>');
 	$('.moreFunctionsTrigger').click(function() { 
   	if($(this).hasClass('open')) {
-    	$(this).parent().find('.hiddenFunctions').hide('slide', {'direction':'right'}, 200, function() { $(this).parents('#whiteboxcontainer [id^="browser"]').animate({'padding-left':'30px'}, 200).find('.moreFunctionsTrigger').toggleClass('open').parent().find('.pages').animate({'right':'290px'},200)});
+    	$(this).parent().find('.hiddenFunctions').hide('slide', {'direction':'right'}, 200, function() { $(this).parents('#whiteboxcontainer [id^="browser"]').animate({'padding-left':'30px'}, 200).find('.moreFunctionsTrigger').toggleClass('open').parent().find('.pages').animate({'right':'370px'},200)});
   	} else {
-    	$(this).toggleClass('open').parent().animate({'padding-left':'197px'}, 200, function() { $(this).parent().find('.hiddenFunctions').show('slide', {'direction': 'left'}, 400) }).find('.pages').animate({'right':'465px'},200);
+    	$(this).toggleClass('open').parent().animate({'padding-left':'230px'}, 200, function() { $(this).parent().find('.hiddenFunctions').show('slide', {'direction': 'left'}, 400) }).find('.pages').animate({'right':'570px'},200);
     }
   });
   
