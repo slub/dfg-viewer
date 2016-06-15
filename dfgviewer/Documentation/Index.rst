@@ -20,7 +20,7 @@ After this create a symbolic link from your workspace to your TYPO3 extension fo
 
 Repeat this process for the *Goobi.Presentation (dlf)* (https://github.com/goobi/goobi-presentation.git) extension.
 
-Now install both extensions via the extension manager within TYPO3. Also check if you have install the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `GOOBI.PRESENTATION` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
+Now install both extensions via the extension manager within TYPO3. Also check if you have installed the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `GOOBI.PRESENTATION` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
 
 Create a Page-Item in the category `WEB` as well as a configuration folder as a subitem of this page. The title of the page as well as the configuration file is arbitrary.
 
