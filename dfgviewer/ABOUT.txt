@@ -15,7 +15,7 @@ About the DFG Viewer
 --------------------
 
 The DFG Viewer is based on the free CMS TYPO3 and the Digital Library Framework
-of Goobi.Presentation. It is open source software itself and can be used free of
+of Kitodo.Presentation. It is open source software itself and can be used free of
 charge by anyone interested. This can either be done via the web service
 operated by the Saxon State and University Library Dresden or by means of a
 local implementation. You can find comprehensive documentations, examples and

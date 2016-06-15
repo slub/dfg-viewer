@@ -7,7 +7,7 @@ The following document holds information about the installation of the *TYPO3 df
 Installation
 ============
 
-The following documentation was tested with TYPO3 6.2.12. The extension is based on *Goobi.Presentation (dlf)*. So before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install both extensions.
+The following documentation was tested with TYPO3 6.2.12. The extension is based on *Kitodo.Presentation (dlf)*. So before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install both extensions.
 
 You can install the extension automatically via extension manager or semiautomatically via GitHub. The automatic way is straight forward so in the following the GitHub process is explained.
 At first checkout the repository:
@@ -18,7 +18,7 @@ After this create a symbolic link from your workspace to your TYPO3 extension fo
 
 	ln -s ~/dfg-viewer/dfgviewer/ /var/www/typo3conf/ext/
 
-Repeat this process for the *Goobi.Presentation (dlf)* (https://github.com/goobi/goobi-presentation.git) extension.
+Repeat this process for the *Kitodo.Presentation (dlf)* (https://github.com/kitodo/kitodo-presentation.git) extension.
 
 Now install both extensions via the extension manager within TYPO3. Also check if you have installed the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `GOOBI.PRESENTATION` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
 
