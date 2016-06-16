@@ -166,6 +166,13 @@ plugin.tx_dfgviewer_sru {
 	targetPid.data = TSFE:page|uid
 }
 
+plugin.tx_dlf_audioplayer {
+	pages = {$plugin.tx_dfgviewer.storagePid}
+	excludeOther = 0
+	elementId = tx-dlf-audio
+#	templateFile = {$plugin.tx_dfgviewer.templateFilePage}
+}
+
 lib.info = TEXT
 lib.info {
 	value = DFG-Viewer
@@ -250,6 +257,7 @@ page.2.marks.LANGSWITCHER < lib.langswitcher
 page.2.marks.METADATA < plugin.tx_dlf_metadata
 page.2.marks.URI < plugin.tx_dfgviewer_uri
 page.2.marks.TOOLBOX < plugin.tx_dlf_toolbox
+page.2.marks.AUDIO < plugin.tx_dlf_audioplayer
 page.2.marks.GRIDSWITCHER < lib.gridswitcher
 page.2.marks.SRU = TEXT
 

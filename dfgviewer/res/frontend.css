@@ -262,7 +262,23 @@ h2 .volume { font-weight: normal; }
 .slider-imagemanipulation.ui-slider-horizontal .ui-slider-handle { position: absolute; z-index: 2; top: -6px; width: 12px; height: 12px; background: rgb(0,177,158); border: 0 none; border-radius: 0; box-shadow: 1px 0px 2px rgba(0,0,0,0.2); cursor: col-resize; margin-left: -6px; }
 .slider-imagemanipulation.ui-slider-horizontal .ui-slider-handle:focus, .ui-slider-horizontal .ui-slider-handle:active { border: 0; outline: none; }
 .slider-imagemanipulation.ui-slider-horizontal .ui-slider-handle:after { position: absolute; bottom: -3px; left: 3px; width: 0; height: 0; content: ""; border: 3px solid transparent; border-bottom-width: 0; border-top-color: rgb(0,177,158); }
-.slider-imagemanipulation.ui-slider-horizontal .ui-slider-range { background: rgba(0,177,158,0.5}; }
+.slider-imagemanipulation.ui-slider-horizontal .ui-slider-range { background: rgba(0,177,158,0.5); }
 
 
 /* EOF */
+#audio-player { bottom: 0px; position: absolute; z-index: 100; }
+#audio-player .jp-audio { width: 395px; }
+#audio-player .jp-details { display: none; }
+#audio-player .jp-audio .jp-type-single .jp-progress { width: 120px; }
+#audio-player .jp-audio .jp-type-single .jp-toggles { display: none; }
+#audio-player .jp-audio .jp-controls { padding: 10px 5px 0; }
+#audio-player .jp-stop { margin-left: 5px; }
+#audio-player .jp-audio .jp-type-single .jp-progress { left: 90px; top: 20px; }
+#audio-player .jp-current-time { position: absolute; top: 20px; left: 210px; width: 35px; float: right; text-align: end; }
+#audio-player .jp-duration-divider { position: absolute; top: 20px; left: 250px; font-size: .64em; font-style: oblique; display: inline;}
+#audio-player .jp-duration { position: absolute; top: 20px; left: 250px; width: 35px; float: left; }
+#audio-player .jp-volume-controls  { top: 12px; left: 300px; z-index: 101; }
+#audio-player .jp-volume-bar { width: 36px; }
+#audio-player .jp-volume-controls .jp-volume-max { left: 70px; }
+#audio-player .jp-audio .jp-interface, #audio-player .jp-audio-stream .jp-interface { height: 45px; background-color: white; }
+#audio-player .jp-audio, #audio-player .jp-audio-stream, #audio-player .jp-video { border: none; }
