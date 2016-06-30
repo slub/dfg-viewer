@@ -20,11 +20,11 @@ After this create a symbolic link from your workspace to your TYPO3 extension fo
 
 Repeat this process for the *Kitodo.Presentation (dlf)* (https://github.com/kitodo/kitodo-presentation.git) extension.
 
-Now install both extensions via the extension manager within TYPO3. Also check if you have installed the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `GOOBI.PRESENTATION` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
+Now install both extensions via the extension manager within TYPO3. Also check if you have installed the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `KITODO` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
 
 Create a Page-Item in the category `WEB` as well as a configuration folder as a subitem of this page. The title of the page as well as the configuration file is arbitrary.
 
-Go to the subitem `DFG Viewer` of the `GOOBI.PRESENTATION` category, choose the configuration folder and click both buttons (*Create structures*, *Create metadata*). This adds some basic configuration records in the configuration folder, which define METS structure type and MODS metadata fields.
+Go to the subitem `DFG Viewer` of the `KITODO` category, choose the configuration folder and click both buttons (*Create structures*, *Create metadata*). This adds some basic configuration records in the configuration folder, which define METS structure type and MODS metadata fields.
 
 Go to the `Template` tool, choose the page item, set the page to *Rootlevel* and add the *DFG Viewer (dfgviewer)* item to your *Selected Items* under *Includes*.
 Then select the `Constants editor` and set the `storagePid` and `baseURL`according to your setup (`storagePid` should be the page ID of the configuration folder).
