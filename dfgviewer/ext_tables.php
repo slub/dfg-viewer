@@ -25,7 +25,7 @@
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 // Register static typoscript.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'typoscript/', 'DFG Viewer');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'DFG Viewer');
 
 // Register plugins.
 \TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tt_content');
