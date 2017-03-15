@@ -1,3 +1,17 @@
+# Configuration
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Config/config.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Config/language.ts">
+
+# Plugin
+
+## Content
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Content/tt_content.ts">
+
+## Page
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Page/header.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Page/page.ts">
+
+
 config {
 	sys_language_uid = 0
 	htmlTag_langKey = de-DE
