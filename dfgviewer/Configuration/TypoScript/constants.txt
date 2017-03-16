@@ -1,13 +1,16 @@
 config {
 
-	# cat=plugin.tx_dfgviewer/enable; type=int+; label=Storage PID
+	# cat=plugin.tx_dfgviewer/links/010; type=int+; label=Storage PID
 	storagePid =
+
+	# cat=plugin.tx_dfgviewer/links/020; type=int+; label=Root PID
+	rootPid =
+
+	# cat=plugin.tx_dfgviewer/links/030; type=int+; label=Kitodo Page View
+	kitodoPageView =
 
 	# cat=plugin.tx_dfgviewer/enable; type=string; label=User Agent
 	useragent = DFG Viewer
-
-	# cat=plugin.tx_dfgviewer/links/010; type=int+; label=Kitodo Page View
-	kitodoPageView = 
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file newspaper
 	templateFileNewspaper = EXT:dfgviewer/res/template_newspaper.tmpl
