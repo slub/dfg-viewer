@@ -36,22 +36,8 @@ page {
 		}
 	}
 
-	meta {
-				keywords.field = keywords
-				description.field = description
-        author.field = author
-        robots = all
-    }
 }
 
 # -------------------------------
 # Diverses
 # -------------------------------
-[globalVar = TSFE:id = {$config.kitodoPageView}]
-page {
-  meta {
-    # the object view must be excluded from index
-    robots = noindex,nofollow
-  }
-}
-[global]
