@@ -5,7 +5,7 @@
 # Plugin
 
 ## Content
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Content/tt_content.ts">
+#<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Content/tt_content.ts">
 
 ## Page
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Page/header.ts">
