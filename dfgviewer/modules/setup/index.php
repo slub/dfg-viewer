@@ -65,9 +65,6 @@ class tx_dfgviewer_modSetup extends tx_dlf_module {
 		// Include metadata definition file.
 		include_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($this->extKey).'modules/'.$this->modPath.'metadata.inc.php');
 
-		// Load table configuration array to get default field values.
-		\TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tx_dlf_metadata');
-
 		$i = 0;
 
 		// Build data array.
