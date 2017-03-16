@@ -3,7 +3,7 @@
 # -------------------------------
 page {
   typeNum = 0
-  bodyTag = <body class="">
+  bodyTag = <body class="dfgviewer">
 
   adminPanelStyles = 0
   shortcutIcon = EXT:dfgviewer/Resources/Public/Images/favicon.png
