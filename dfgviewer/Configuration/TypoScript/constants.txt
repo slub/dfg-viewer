@@ -1,28 +1,13 @@
-plugin.tx_dfgviewer {
+config {
 
 	# cat=plugin.tx_dfgviewer/enable; type=int+; label=Storage PID
 	storagePid =
 
-	# cat=plugin.tx_dfgviewer/links; type=string; label=Base URL
-	baseURL = http://dfg-viewer.de/
-
 	# cat=plugin.tx_dfgviewer/enable; type=string; label=User Agent
 	useragent = DFG Viewer
 
-	# cat=plugin.tx_dfgviewer/file; type=file[css]; label=Main stylesheet file
-	stylesheet = EXT:dfgviewer/res/frontend.css
-
-	# cat=plugin.tx_dfgviewer/file; type=file[css]; label=Tooltipster stylesheet file
-	css_tooltipster = EXT:dfgviewer/res/tooltipster.css
-
-	# cat=plugin.tx_dfgviewer/file; type=file[js]; label=Main javascript file
-	javascript = EXT:dfgviewer/res/js/script.js
-
-	# cat=plugin.tx_dfgviewer/file; type=file[js]; label=Tooltipster javascript file
-	js_tooltipster = EXT:dfgviewer/res/js/jquery.tooltipster.min.js
-
-	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file
-	templateFile = EXT:dfgviewer/res/template.tmpl
+	# cat=plugin.tx_dfgviewer/links/010; type=int+; label=Kitodo Page View
+	kitodoPageView = 
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file newspaper
 	templateFileNewspaper = EXT:dfgviewer/res/template_newspaper.tmpl

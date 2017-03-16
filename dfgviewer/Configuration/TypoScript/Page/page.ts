@@ -30,6 +30,9 @@ page {
 			rootPageId = TEXT
 			rootPageId.value = {$config.rootPid}
 
+      kitodoPageView = TEXT
+			kitodoPageView.value = {$config.kitodoPageView}
+
 		}
 	}
 
@@ -37,12 +40,18 @@ page {
 				keywords.field = keywords
 				description.field = description
         author.field = author
-        #robots	 = all
-        # at least the object view must be excluded from index
-        robots noindex
+        robots = all
     }
 }
 
 # -------------------------------
 # Diverses
 # -------------------------------
+[globalVar = TSFE:id = {$config.kitodoPageView}]
+page {
+  meta {
+    # the object view must be excluded from index
+    robots = noindex,nofollow
+  }
+}
+[global]
