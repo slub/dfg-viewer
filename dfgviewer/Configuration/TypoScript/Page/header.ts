@@ -6,7 +6,7 @@ page = PAGE
 page {
 
 	includeCSS {
-		style = EXT:dfgviewer/Resources/Public/Css/allStyle.css
+		style = EXT:dfgviewer/Resources/Public/Css/allStyles.css
 	}
 
 	includeJSlibs {
