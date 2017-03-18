@@ -62,7 +62,7 @@ plugin.tx_dlf_toc {
 		expAll = 0
 		1 = TMENU
 		1.noBlur = 1
-		1.wrap = <div id="navcontainer"><div id="nav"><div id="navtop"></div><a id="skip2nav"></a><ul>|</ul><div id="navend"></div></div></div>
+		1.wrap = <ul class="toc">|</ul>
 		1.NO = 1
 		1.NO.stdWrap.crop = 55 | &nbsp;... | 1
 		1.NO.stdWrap.ifEmpty.field = type
