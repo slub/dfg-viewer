@@ -6,6 +6,9 @@ config {
 	# cat=plugin.tx_dfgviewer/links/020; type=int+; label=Root PID
 	rootPid =
 
+	# cat=plugin.tx_dfgviewer/links/030; type=int+; label= Headnavigation PID
+	headNavPid =
+
 	# cat=plugin.tx_dfgviewer/links/030; type=int+; label=Kitodo Page View
 	kitodoPageView =
 
