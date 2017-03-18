@@ -1,4 +1,4 @@
-plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
+plugin.tx_dlf.useragent = {$config.useragent}
 
 # map GET parameter set[mets] --> tx_dlf[id]
 [globalString = GP:set|mets = http*]
@@ -13,44 +13,51 @@ plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
 
+#lib.metadata = USER
+#lib.metadata {
+#	includeLibs = typo3conf/ext/dlf/plugins/metadata/class.tx_dlf_metadata.php
+#	userFunc = tx_dlf_metadata->main
+#	templateFile = {$config.templateFileMeta}
+#}
+
 plugin.tx_dlf_metadata {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	excludeOther = 0
 	linkTitle = 0
 	getTitle = 0
 	showFull = 0
 	rootline = 1
 	separator = #
-	templateFile = {$plugin.tx_dfgviewer.templateFileMeta}
+	templateFile = {$config.templateFileMeta}
 }
 
 plugin.tx_dlf_navigation {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	pageStep = 5
-	templateFile = {$plugin.tx_dfgviewer.templateFileNav}
+	templateFile = {$config.templateFileNav}
 }
 
 plugin.tx_dlf_pageview {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	excludeOther = 0
 	features =
 	elementId = tx-dfgviewer-map
-	templateFile = {$plugin.tx_dfgviewer.templateFilePage}
+	templateFile = {$config.templateFilePage}
 }
 
 plugin.tx_dlf_pagegrid {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	limit = 24
 	placeholder = EXT:dfgviewer/res/images/placeholder.jpg
 	targetPid = #
-	templateFile = {$plugin.tx_dfgviewer.templateFileGrid}
+	templateFile = {$config.templateFileGrid}
 }
 
 plugin.tx_dlf_toc {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	excludeOther = 0
 	targetPid.data = TSFE:page|uid
-	templateFile = {$plugin.tx_dfgviewer.templateFileToc}
+	templateFile = {$config.templateFileToc}
 	menuConf {
 		expAll = 0
 		1 = TMENU
@@ -90,27 +97,27 @@ plugin.tx_dlf_toc {
 }
 
 plugin.tx_dlf_toolbox {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext,tx_dlf_toolsImagemanipulation
-	templateFile = {$plugin.tx_dfgviewer.templateFileToolbox}
+	templateFile = {$config.templateFileToolbox}
 }
 
 plugin.tx_dlf_toolsPdf {
-	toolTemplateFile = {$plugin.tx_dfgviewer.templateFileToolPdf}
+	toolTemplateFile = {$config.templateFileToolPdf}
 }
 
 plugin.tx_dlf_toolsFulltext {
-	toolTemplateFile = {$plugin.tx_dfgviewer.templateFileToolFulltext}
+	toolTemplateFile = {$config.templateFileToolFulltext}
 }
 
 plugin.tx_dlf_toolsImagemanipulation {
-	toolTemplateFile = {$plugin.tx_dfgviewer.templateFileToolImageManipulation}
+	toolTemplateFile = {$config.templateFileToolImageManipulation}
 }
 
 
 plugin.tx_dlf_audioplayer {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	excludeOther = 0
 	elementId = tx-dlf-audio
-#	templateFile = {$plugin.tx_dfgviewer.templateFilePage}
+#	templateFile = {$config.templateFilePage}
 }
