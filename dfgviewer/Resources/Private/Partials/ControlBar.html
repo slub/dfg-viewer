@@ -2,20 +2,24 @@
 
 <f:section name="ControlBar">
   <div class="control-bar">
-        <div class="header-bar">
-          <f:link.page pageUid="{rootPageId}" title="DFG-Viewer" class="dfgviewer-logo">DFG-Viewer</f:link.page>
-          <nav>
-            <f:cObject typoscriptObjectPath="lib.menu.language" />
-            <f:cObject typoscriptObjectPath="lib.menu.secondary" />
-            <button type="button" class="nav-toggle">
-                  <span class="nav-label">Open Navigation</span>
-                  <span class="nav-button-bar"></span>
-                  <span class="nav-button-bar"></span>
-                  <span class="nav-button-bar"></span>
-                  <span class="nav-button-bar"></span>
-            </button>
-          </nav>
-        </div>
+      <div class="header-bar">
+        <f:link.page pageUid="{rootPageId}" title="DFG-Viewer" class="dfgviewer-logo">DFG-Viewer</f:link.page>
+        <nav>
+          <f:cObject typoscriptObjectPath="lib.menu.language" />
+          <f:cObject typoscriptObjectPath="lib.menu.secondary" />
+          <button type="button" class="nav-toggle">
+                <span class="nav-label">Open Navigation</span>
+                <span class="nav-button-bar"></span>
+                <span class="nav-button-bar"></span>
+                <span class="nav-button-bar"></span>
+                <span class="nav-button-bar"></span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="metadata-wrapper">
+        <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
+      </div>
   </div>
 </f:section>
 
