@@ -1,5 +1,5 @@
 # ----------------------------------------
-# Header Navigation
+# Header Language Navigation
 # ----------------------------------------
 
 lib.menu {

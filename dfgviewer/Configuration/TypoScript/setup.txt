@@ -4,6 +4,7 @@
 
 # Navigation
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/language.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/secondary.ts">
 
 # Plugin
 
