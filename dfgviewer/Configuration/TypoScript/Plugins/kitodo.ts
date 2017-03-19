@@ -13,19 +13,25 @@ plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
 
-#lib.metadata = USER
-#lib.metadata {
-#	includeLibs = typo3conf/ext/dlf/plugins/metadata/class.tx_dlf_metadata.php
-#	userFunc = tx_dlf_metadata->main
-#	templateFile = {$config.templateFileMeta}
-#}
+lib.metadata = USER
+lib.metadata {
+	includeLibs = typo3conf/ext/dlf/plugins/metadata/class.tx_dlf_metadata.php
+	userFunc = tx_dlf_metadata->main
+	excludeOther = 0
+	linkTitle = 1
+	getTitle = 1
+	showFull = 0
+	rootline = 1
+	separator = #
+	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/mobile-metadata.tmpl
+}
 
 plugin.tx_dlf_metadata {
 	pages = {$config.storagePid}
 	excludeOther = 0
 	linkTitle = 0
 	getTitle = 0
-	showFull = 0
+	showFull = 1
 	rootline = 1
 	separator = #
 	templateFile = {$config.templateFileMeta}
