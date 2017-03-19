@@ -8,6 +8,7 @@
 
 # Plugin
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Plugins/kitodo.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Plugins/dfgviewer.ts">
 
 ## Content
 #<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Content/tt_content.ts">

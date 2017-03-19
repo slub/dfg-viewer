@@ -1,34 +1,34 @@
 plugin.tx_dfgviewer_amd {
-	pages = {$plugin.tx_dfgviewer.storagePid}
-	templateFile = {$plugin.tx_dfgviewer.templateFileAmd}
+	pages = {$config.storagePid}
+	templateFile = {$config.templateFileAmd}
 }
 
 plugin.tx_dfgviewer_gridpager {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	limit = 24
 	pageStep = 5
-	templateFile = {$plugin.tx_dfgviewer.templateFilePager}
+	templateFile = {$config.templateFilePager}
 }
 
 plugin.tx_dfgviewer_newspapercalendar {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	targetPid = #
-	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperCalendar}
+	templateFile = {$config.templateFileNewspaperCalendar}
 }
 
 plugin.tx_dfgviewer_newspaperyears {
-	pages = {$plugin.tx_dfgviewer.storagePid}
+	pages = {$config.storagePid}
 	targetPid = #
-	templateFile = {$plugin.tx_dfgviewer.templateFileNewspaperYears}
+	templateFile = {$config.templateFileNewspaperYears}
 }
 
 plugin.tx_dfgviewer_uri {
-	pages = {$plugin.tx_dfgviewer.storagePid}
-	templateFile = {$plugin.tx_dfgviewer.templateFileUri}
+	pages = {$config.storagePid}
+	templateFile = {$config.templateFileUri}
 }
 
 plugin.tx_dfgviewer_sru {
-	pages = {$plugin.tx_dfgviewer.storagePid}
-	templateFile = {$plugin.tx_dfgviewer.templateFileSru}
+	pages = {$config.storagePid}
+	templateFile = {$config.templateFileSru}
 	targetPid.data = TSFE:page|uid
 }
