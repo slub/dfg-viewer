@@ -34,6 +34,12 @@
               <li>
                   <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="Lokale Präsentation anzeigen">Lokale Präsentation</f:link.external>
               </li>
+              <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="Lokaler Katalog anzeigen">Lokaler Katalog</f:link.external>
+              </li>
+              <li>
+                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="E-Mail an <dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />">E-Mail an Datenprovider</f:link.email>
+              </li>
             </ul>
           </li>
       </ul>
