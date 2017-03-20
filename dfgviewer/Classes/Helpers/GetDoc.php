@@ -55,6 +55,10 @@ class GetDoc {
 
     }
 
+//		$this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
+//		$this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
+		$this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
+
     return $this->doc->mets->xpath($xpath);
 
     //return $this;
