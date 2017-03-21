@@ -44,19 +44,20 @@ class PiVarsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelp
      * Return tx_dlf[]-GET variable
      *
      * @param string $var variable name
+     * @param string $default default value if variable is empty
      * @return string
      */
-    public function render($var) {
+    public function render($var, $default = '') {
       //debug($xpath, '$xpath');
       $piVars = GeneralUtility::_GP('tx_dlf');
 
       if (!isset($piVars[$var])) {
 
-        return '';
+        return $default;
 
       }
 
       return $piVars[$var];
-      
+
     }
 }
