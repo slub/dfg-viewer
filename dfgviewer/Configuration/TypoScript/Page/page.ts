@@ -41,3 +41,10 @@ page {
 # -------------------------------
 # Diverses
 # -------------------------------
+[globalVar = TSFE:id = {$config.kitodoPageView}]
+page {
+  10 {
+    file = EXT:dfgviewer/Resources/Private/Templates/Kitodo.html
+  }
+}
+[global]
