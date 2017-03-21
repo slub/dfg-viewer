@@ -121,7 +121,7 @@ plugin.tx_dlf_toc {
 }
 lib.downloadsPdf = USER
 lib.downloadsPdf {
-	includeLibs = typo3conf/ext/dlf/plugins/metadata/class.tx_dlf_toolbox.php
+	includeLibs = typo3conf/ext/dlf/plugins/toolbox/class.tx_dlf_toolbox.php
 	userFunc = tx_dlf_toolbox->main
 	pages = {$config.storagePid}
 	tools = tx_dlf_toolsPdf
@@ -140,6 +140,15 @@ plugin.tx_dlf_toolsPdf {
 
 plugin.tx_dlf_toolsFulltext {
 	toolTemplateFile = {$config.templateFileToolFulltext}
+}
+
+lib.tools.toolsImagemanipulation = USER
+lib.tools.toolsImagemanipulation {
+	includeLibs = typo3conf/ext/dlf/plugins/toolbox/tools/class.tx_dlf_toolbox.php
+	userFunc = tx_dlf_toolbox->main
+	pages = {$config.storagePid}
+	tools = tx_dlf_toolsImagemanipulation
+	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolbox.tmpl
 }
 
 plugin.tx_dlf_toolsImagemanipulation {
