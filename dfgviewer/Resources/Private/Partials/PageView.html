@@ -48,7 +48,7 @@
             <a href="#" title="Downloads">Downloads</a>
             <ul>
             <li>
-              <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[<dv:piVars var=\"page\" />]/mets:FLocat/@xlink:href' />" class="download-page" title="Seite herunterladen">Seite herunterladen</f:link.external>
+              <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[<dv:piVars var=\"page\" default=\"1\" />]/mets:FLocat/@xlink:href' />" class="download-page" title="Seite herunterladen">Seite herunterladen</f:link.external>
             </li>
             </ul>
           </li>
@@ -60,14 +60,17 @@
               <span class="fulltext">Keine Volltexte vorhanden</span>
           </li>
           <li class="grid">
-              <f:link.external uri="http://dfg-viewer.de/show&?tx_dlf[id]=<dv:piVars var=\"id\" />&tx_dlf[page]=<dv:piVars var=\"page\" />&tx_dlf[grid]=1" title="Thumbnail-Vorschau">Thumbnails</f:link.external>
+              <f:link.external uri="http://dfg-viewer.de/show&?tx_dlf[id]=<dv:piVars var=\"id\" />&tx_dlf[page]=<dv:piVars var=\"page\" default=\"1\"/>&tx_dlf[grid]=1" title="Thumbnail-Vorschau">Thumbnails</f:link.external>
           </li>
       </ul>
     </div>
     <div class="view-functions">
         <ul>
-          <f:cObject typoscriptObjectPath="plugin.tx_dlf_navigation" />
+          <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
         </ul>
+    </div>
+    <div class="page-control">
+          <f:cObject typoscriptObjectPath="lib.navigation_pagecontrol" />
     </div>
 
 </f:section>
