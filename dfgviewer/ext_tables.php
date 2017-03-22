@@ -25,10 +25,7 @@
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 // Register static typoscript.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'typoscript/', 'DFG Viewer');
-
-// Register plugins.
-\TYPO3\CMS\Core\Utility\GeneralUtility::loadTCA('tt_content');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'DFG Viewer');
 
 // Plugin "amd".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_amd'] = 'layout,select_key,pages,recursive';

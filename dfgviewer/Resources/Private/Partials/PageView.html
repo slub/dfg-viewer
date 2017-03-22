@@ -1,0 +1,109 @@
+{namespace dv=Slub\Dfgviewer\ViewHelpers}
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:section name="PageView">
+  <div class="document-view">
+    <f:if condition="{gp-pagegrid} == 1">
+      <f:then>
+
+        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
+      </f:then>
+      <f:else>
+        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+      </f:else>
+    </f:if>
+
+
+    <div class="document-functions">
+        <div class="provider">
+        <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL' />" title="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner' />">
+        <img src="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerLogo' />"
+          title="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />"
+          alt="Abbildung eines Logo"
+          />
+        </f:link.external>
+
+        <dl class="mobile-meta">
+
+          <dt class="tx-dlf-title">Titel</dt>
+          <dd class="tx-dlf-title">
+            <a href="#">
+              <dv:xpath xpath='//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName' />
+            </a>
+          </dd>
+          <dt>Autor</dt>
+          <dd><dv:xpath xpath='//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm' />
+          </dd>
+        </dl>
+      </div>
+
+      <ul>
+          <li class="submenu links">
+            <a href="#" title="Links">Links</a>
+            <ul>
+              <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="Lokale Präsentation anzeigen">Lokale Präsentation</f:link.external>
+              </li>
+              <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="Lokaler Katalog anzeigen">Lokaler Katalog</f:link.external>
+              </li>
+              <li>
+                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="E-Mail an <dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />">E-Mail an Datenprovider</f:link.email>
+              </li>
+                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
+            </ul>
+          </li>
+          <li class="submenu downloads">
+            <a href="#" title="Downloads">Downloads</a>
+            <ul>
+            <f:if condition="<dv:piVars var=\"double\" default=\"0\" /> == 1">
+              <f:then>
+                <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{gp-page}]/mets:FLocat/@xlink:href' />" class="download-page" title="linke Seite herunterladen">linke Seite herunterladen</f:link.external>
+                </li>
+                <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{dv:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}]/mets:FLocat/@xlink:href' />" class="download-page" title="rechte Seite herunterladen">rechte Seite herunterladen</f:link.external>
+                </li>
+              </f:then>
+              <f:else>
+                <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{gp-page}]/mets:FLocat/@xlink:href' />" class="download-page" title="Seite herunterladen">Seite herunterladen</f:link.external>
+                </li>
+            </f:else>
+            </f:if>
+            </ul>
+          </li>
+          <li class="doublepage">
+              <span class="double">
+                <f:if condition="{gp-double} == 1">
+                  <f:then>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}}" class="tx-dlf-navigation-doubleOff" title="Einzelseitenansicht">Einzelseitenansicht</f:link.page>
+                  </f:then>
+                  <f:else>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'1'}}}" class="tx-dlf-navigation-doubleOn" title="Doppelseitenansicht">Doppelseitenansicht</f:link.page>
+                </f:else>
+              </f:if>
+              </span>
+              <span class="switch"><span>Recto/Verso korrigieren</span></span>
+          </li>
+          <li class="fulltext">
+              <span class="fulltext">Keine Volltexte vorhanden</span>
+          </li>
+          <li class="grid">
+              <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'{gp-double}', id:'{gp-id}', pagegrid:'1'}}}" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
+          </li>
+      </ul>
+    </div>
+    <div class="view-functions">
+        <ul>
+          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
+          <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
+        </ul>
+    </div>
+    <div class="page-control">
+          <f:cObject typoscriptObjectPath="lib.navigation_pagecontrol" />
+    </div>
+
+</f:section>
+
+</div>
