@@ -44,6 +44,9 @@ page {
       gp-id = TEXT
       gp-id.data = GP:tx_dlf|id
 
+      gp-pagegrid = TEXT
+      gp-pagegrid.data = GP:tx_dlf|pagegrid
+
 		}
 	}
 
