@@ -3,7 +3,16 @@
 
 <f:section name="PageView">
   <div class="document-view">
-    <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+    <f:if condition="{gp-pagegrid} == 1">
+      <f:then>
+
+        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
+      </f:then>
+      <f:else>
+        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+      </f:else>
+    </f:if>
+
 
     <div class="document-functions">
         <div class="provider">
@@ -72,8 +81,7 @@
               <span class="fulltext">Keine Volltexte vorhanden</span>
           </li>
           <li class="grid">
-              <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'{gp-double}', id:'{gp-id}'}}}">Thumbnails</f:link.page>
-              <f:link.external uri="http://dfg-viewer.de/show&?tx_dlf[id]={gp-id}&tx_dlf[page]={gp-page}&tx_dlf[grid]=1" title="Thumbnail-Vorschau">Thumbnails</f:link.external>
+              <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'{gp-double}', id:'{gp-id}', pagegrid:'1'}}}" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
           </li>
       </ul>
     </div>
