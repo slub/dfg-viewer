@@ -15,6 +15,7 @@ page {
 	  partialRootPath = EXT:dfgviewer/Resources/Private/Partials/
 
 		variables {
+
 			pageTitle = TEXT
 			pageTitle.data = page:title
 
@@ -32,6 +33,16 @@ page {
 
       kitodoPageView = TEXT
 			kitodoPageView.value = {$config.kitodoPageView}
+
+      gp-page = TEXT
+      gp-page.data = GP:tx_dlf|page
+      gp-page.ifEmpty = 1
+
+      gp-double = TEXT
+      gp-double.data = GP:tx_dlf|double
+
+      gp-id = TEXT
+      gp-id.data = GP:tx_dlf|id
 
 		}
 	}
