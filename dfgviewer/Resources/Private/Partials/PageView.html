@@ -47,9 +47,21 @@
           <li class="submenu downloads">
             <a href="#" title="Downloads">Downloads</a>
             <ul>
-            <li>
-              <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[<dv:piVars var=\"page\" default=\"1\" />]/mets:FLocat/@xlink:href' />" class="download-page" title="Seite herunterladen">Seite herunterladen</f:link.external>
-            </li>
+            <f:if condition="<dv:piVars var=\"double\" default=\"0\" /> == 1">
+              <f:then>
+                <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{gp-page}]/mets:FLocat/@xlink:href' />" class="download-page" title="linke Seite herunterladen">linke Seite herunterladen</f:link.external>
+                </li>
+                <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{dv:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}]/mets:FLocat/@xlink:href' />" class="download-page" title="rechte Seite herunterladen">rechte Seite herunterladen</f:link.external>
+                </li>
+              </f:then>
+              <f:else>
+                <li>
+                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{gp-page}]/mets:FLocat/@xlink:href' />" class="download-page" title="Seite herunterladen">Seite herunterladen</f:link.external>
+                </li>
+            </f:else>
+            </f:if>
             </ul>
           </li>
           <li class="doublepage">
@@ -60,7 +72,8 @@
               <span class="fulltext">Keine Volltexte vorhanden</span>
           </li>
           <li class="grid">
-              <f:link.external uri="http://dfg-viewer.de/show&?tx_dlf[id]=<dv:piVars var=\"id\" />&tx_dlf[page]=<dv:piVars var=\"page\" default=\"1\"/>&tx_dlf[grid]=1" title="Thumbnail-Vorschau">Thumbnails</f:link.external>
+              <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'{gp-double}', id:'{gp-id}'}}}">Thumbnails</f:link.page>
+              <f:link.external uri="http://dfg-viewer.de/show&?tx_dlf[id]={gp-id}&tx_dlf[page]={gp-page}&tx_dlf[grid]=1" title="Thumbnail-Vorschau">Thumbnails</f:link.external>
           </li>
       </ul>
     </div>
