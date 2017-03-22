@@ -1,5 +1,6 @@
 <?php
 namespace Slub\Dfgviewer\ViewHelpers;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,20 +26,21 @@ namespace Slub\Dfgviewer\ViewHelpers;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * ViewHelper to get page info
+ * ViewHelper to get piVars (GET variables)
  *
  * # Example: Basic example
  * <code>
- * <si:pageInfo page="123">
- *	<span>123</span>
+ * <si:piVars var="page">
+ *	<span>1</span>
  * </code>
  * <output>
- * Will output the page record
+ * Will output the value of tx_dlf[page]
  * </output>
  *
  * @package TYPO3
  */
-class PiVarsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class PiVarsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
     /**
      * Return tx_dlf[]-GET variable
@@ -47,17 +49,14 @@ class PiVarsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelp
      * @param string $default default value if variable is empty
      * @return string
      */
-    public function render($var, $default = '') {
-      //debug($xpath, '$xpath');
-      $piVars = GeneralUtility::_GP('tx_dlf');
+    public function render($var, $default = '')
+    {
+        $piVars = GeneralUtility::_GP('tx_dlf');
 
-      if (!isset($piVars[$var])) {
+        if (!isset($piVars[$var])) {
+            return $default;
+        }
 
-        return $default;
-
-      }
-
-      return $piVars[$var];
-
+        return $piVars[$var];
     }
 }

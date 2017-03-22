@@ -1,5 +1,6 @@
 <?php
 namespace Slub\Dfgviewer\Helpers;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,12 +25,9 @@ namespace Slub\Dfgviewer\Helpers;
  ***************************************************************/
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-
-class GetDoc {
-
-	public $extKey = 'dfgviewer';
-
-	public $scriptRelPath = 'Classes/Helpers/GetDoc.php';
+class GetDoc
+{
+    public $extKey = 'dfgviewer';
 
   /**
    * The main method of the PlugIn
@@ -41,77 +39,59 @@ class GetDoc {
    *
    * @return	string		The content that is displayed on the website
    */
-  public function getXpath($xpath) {
-
-//    $this->init($conf);
+  public function getXpath($xpath)
+  {
 
     // Load current document.
     $this->loadDocument();
 
-    if ($this->doc === NULL) {
-//debug('doc is empty');
+      if ($this->doc === null) {
+
       // Quit without doing anything if required variables are not set.
       return $content;
+      }
 
-    }
+      $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
+      $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
+      $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
 
-//		$this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
-//		$this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
-		$this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
-
-    return $this->doc->mets->xpath($xpath);
-
-    //return $this;
-
+      return $this->doc->mets->xpath($xpath);
   }
 
   /**
-  	 * Loads the current document into $this->doc
-  	 *
-  	 * @access	protected
-  	 *
-  	 * @return	void
-  	 */
-  	protected function loadDocument() {
+     * Loads the current document into $this->doc
+     *
+     * @access	protected
+     *
+     * @return	void
+     */
+    protected function loadDocument()
+    {
+        $piVars = GeneralUtility::_GP('tx_dlf');
 
-      $piVars = GeneralUtility::_GP('tx_dlf');
+        // Check for required variable.
+        if (!empty($piVars['id'])) {
 
-  		// Check for required variable.
-  		if (!empty($piVars['id'])) {
+            // Get instance of tx_dlf_document.
+            $this->doc =& \tx_dlf_document::getInstance($piVars['id'], 0);
 
-  			// Should we exclude documents from other pages than $this->conf['pages']?
-  			$pid = (!empty($this->conf['excludeOther']) ? intval($this->conf['pages']) : 0);
+            if (!$this->doc->ready) {
 
-  			// Get instance of tx_dlf_document.
-  			$this->doc =& \tx_dlf_document::getInstance($piVars['id'], $pid);
+                // Destroy the incomplete object.
+                $this->doc = null;
 
-  			if (!$this->doc->ready) {
+                if (TYPO3_DLOG) {
+                    \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with UID "'.$piVars['id'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                }
+            } else {
 
-  				// Destroy the incomplete object.
-  				$this->doc = NULL;
-
-  				if (TYPO3_DLOG) {
-
-  					\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with UID "'.$piVars['id'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
-
-  				}
-
-  			} else {
-
-  				// Set configuration PID.
-  				$this->doc->cPid = $this->conf['pages'];
-
-  			}
-
-  		} else {
-
-  				if (TYPO3_DLOG) {
-
-  					\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with record ID "'.$this->piVars['recordId'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
-
-  				}
-
-  			}
-
-  		}
+                // Set configuration PID.
+                $this->doc->cPid = $this->conf['pages'];
+            }
+        } else {
+            if (TYPO3_DLOG) {
+                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with record ID "'.$this->piVars['recordId'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+            }
+        }
+    }
 }

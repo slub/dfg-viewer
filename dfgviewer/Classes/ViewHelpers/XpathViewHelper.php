@@ -1,5 +1,6 @@
 <?php
 namespace Slub\Dfgviewer\ViewHelpers;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -38,27 +39,22 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package TYPO3
  */
-class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
     /**
      * Return elements found
      *
      * @param string $xpath xpath of elements
-		 * @param string $type type of field requested
+         * @param string $type type of field requested
      * @return array
      */
-    public function render($xpath, $field = '') {
-      //debug($xpath, '$xpath');
+    public function render($xpath, $field = '')
+    {
+        $doc = GeneralUtility::makeInstance(\SLUB\Dfgviewer\Helpers\GetDoc::class);
 
-      $doc = GeneralUtility::makeInstance(\SLUB\Dfgviewer\Helpers\GetDoc::class);
+        $result = $doc->getXpath($xpath);
 
-      //$doc->main();
-
-      $result = $doc->getXpath($xpath);
-
-      //debug($result);
-
-      return htmlspecialchars(trim((string) $result[0]));
-
+        return htmlspecialchars(trim((string) $result[0]));
     }
 }
