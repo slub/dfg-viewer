@@ -23,33 +23,33 @@
 ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'DFG Viewer',
-	'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.',
-	'category' => 'plugin',
-	'author' => 'Sebastian Meyer',
-	'author_email' => 'sebastian.meyer@slub-dresden.de',
-	'author_company' => '<br /><a href="http://www.slub-dresden.de/en/" target="_blank">Saxon State and University Library Dresden</a><br /><a href="http://www.dfg.de/en/" target="_blank">German Research Foundation</a>',
-	'shy' => '',
-	'priority' => '',
-	'module' => '',
-	'state' => 'stable',
-	'internal' => '',
-	'uploadfolder' => FALSE,
-	'createDirs' => '',
-	'modify_tables' => '',
-	'clearCacheOnLoad' => FALSE,
-	'lockType' => '',
-	'version' => '4.0.0',
-	'constraints' => array(
-		'depends' => array(
-			'php' => '5.6.0-',
-			'typo3' => '6.2.0-6.2.99',
-			'dlf' => '2.1.0-',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-	'_md5_values_when_last_written' => '',
+    'title' => 'DFG Viewer',
+    'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.',
+    'category' => 'plugin',
+    'author' => 'Sebastian Meyer',
+    'author_email' => 'sebastian.meyer@slub-dresden.de',
+    'author_company' => '<br /><a href="http://www.slub-dresden.de/en/" target="_blank">Saxon State and University Library Dresden</a><br /><a href="http://www.dfg.de/en/" target="_blank">German Research Foundation</a>',
+    'shy' => '',
+    'priority' => '',
+    'module' => '',
+    'state' => 'stable',
+    'internal' => '',
+    'uploadfolder' => false,
+    'createDirs' => '',
+    'modify_tables' => '',
+    'clearCacheOnLoad' => false,
+    'lockType' => '',
+    'version' => '4.0.0',
+    'constraints' => array(
+        'depends' => array(
+            'php' => '5.6.0-',
+            'typo3' => '6.2.0-7.6.99',
+            'dlf' => '2.1.0-',
+        ),
+        'conflicts' => array(
+        ),
+        'suggests' => array(
+        ),
+    ),
+    '_md5_values_when_last_written' => '',
 );
