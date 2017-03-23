@@ -138,6 +138,14 @@ plugin.tx_dlf_toolsPdf {
 	toolTemplateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolboxPdf.tmpl
 }
 
+lib.tools.toolsFulltext = USER
+lib.tools.toolsFulltext {
+	includeLibs = typo3conf/ext/dlf/plugins/toolbox/tools/class.tx_dlf_toolbox.php
+	userFunc = tx_dlf_toolbox->main
+	pages = {$config.storagePid}
+	tools = tx_dlf_toolsFulltext
+	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolbox.tmpl
+}
 plugin.tx_dlf_toolsFulltext {
 	toolTemplateFile = {$config.templateFileToolFulltext}
 }
