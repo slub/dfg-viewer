@@ -27,13 +27,13 @@ config.language =
 
 plugin.tx_dlf.useragent = {$plugin.tx_dfgviewer.useragent}
 
-[globalString = GP:set|mets = http*]
+[globalString = GP:set|mets=http*]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [global]
-[globalString = GP:set|image != /^$/]
+[globalVar = GP:set|image>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [global]
-[globalVar = GP:set|double > 0]
+[globalVar = GP:set|double>0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [global]
 

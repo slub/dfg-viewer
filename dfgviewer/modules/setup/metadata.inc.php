@@ -211,7 +211,7 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 1,
-				'xpath' => './mods:relatedItem[@type="host"]/mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:place/mods:placeTerm',
+				'xpath' => './mods:relatedItem[@type="host"]/mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:place/mods:placeTerm',
 				'xpath_sorting' => '',
 			),
 		),
@@ -224,7 +224,7 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 1,
-				'xpath' => 'concat(./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="start"]," - ",./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="end"])',
+				'xpath' => 'concat(./mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="start"]," - ",./mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="end"])',
 				'xpath_sorting' => '',
 			),
 			array (
@@ -249,7 +249,7 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 1,
-				'xpath' => './mods:relatedItem[@type="host"]/mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@keyDate="yes"]',
+				'xpath' => './mods:relatedItem[@type="host"]/mods:originInfo[not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@keyDate="yes"]',
 				'xpath_sorting' => '',
 			),
 		),
