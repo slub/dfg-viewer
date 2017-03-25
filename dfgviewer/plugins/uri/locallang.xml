@@ -8,14 +8,14 @@
 		<languageKey index="default" type="array">
 			<label index="tt_content.pi_flexform.sheet_general">Options</label>
 			<label index="tt_content.pi_flexform.templateFile">Template file</label>
-			<label index="uriBook">Persistent Identifiers (Book): </label>
-			<label index="uriPage">Persistent Identifiers (Page): </label>
+			<label index="uriBook">Persistent Identifiers (Book)</label>
+			<label index="uriPage">Persistent Identifiers (Page)</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tt_content.pi_flexform.sheet_general">Einstellungen</label>
 			<label index="tt_content.pi_flexform.templateFile">HTML-Template</label>
-			<label index="uriBook">Persistente Identifier (Werk): </label>
-			<label index="uriPage">Persistente Identifier (Seite): </label>
+			<label index="uriBook">Persistente Identifier (Werk)</label>
+			<label index="uriPage">Persistente Identifier (Seite)</label>
 		</languageKey>
 	</data>
 </T3locallang>

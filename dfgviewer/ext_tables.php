@@ -22,10 +22,12 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-if (!defined ('TYPO3_MODE')) die ('Access denied.');
+if (!defined('TYPO3_MODE')) {
+    die('Access denied.');
+}
 
 // Register static typoscript.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'typoscript/', 'DFG Viewer');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'DFG Viewer');
 
 // Plugin "amd".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_amd'] = 'layout,select_key,pages,recursive';
@@ -55,11 +57,10 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_uri'] = 'pi_f
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/plugins/uri/flexform.xml');
 
 // Register modules.
-if (TYPO3_MODE == 'BE')	{
+if (TYPO3_MODE == 'BE') {
 
-	// Module "setup".
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('txdlfmodules', 'txdfgviewersetup', '', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'modules/setup/');
+    // Module "setup".
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('txdlfmodules', 'txdfgviewersetup', '', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'modules/setup/');
 
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup','EXT:dfgviewer/modules/setup/locallang_mod.xml');
-
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup', 'EXT:dfgviewer/modules/setup/locallang_mod.xml');
 }
