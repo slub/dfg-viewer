@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-27T13:04:24Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-27T13:16:48Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -8,6 +8,14 @@
 		<trans-unit id="double.RectoVerso" approved="yes">
 			<source>Adjust recto/verso</source>
 			<target>Recto/Verso korrigieren</target>
+		</trans-unit>
+		<trans-unit id="double.doublePageView" approved="yes">
+			<source>Show double pages</source>
+			<target>Doppelseitenansicht</target>
+		</trans-unit>
+		<trans-unit id="double.singlePageView" approved="yes">
+			<source>Show single page</source>
+			<target>Einzelseitenansicht</target>
 		</trans-unit>
 		<trans-unit id="download.leftPage" approved="yes">
 			<source>Download left page</source>
