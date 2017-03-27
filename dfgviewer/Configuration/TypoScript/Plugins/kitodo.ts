@@ -161,3 +161,25 @@ plugin.tx_dlf_audioplayer {
 	elementId = tx-dlf-audio
 #	templateFile = {$config.templateFilePage}
 }
+
+
+[userFunc = user_dlf_docTypeCheck(newspaper)]
+page.10.variables {
+	isNewspaper = TEXT
+	isNewspaper.value = newspaper_anchor
+}
+[global]
+
+[userFunc = user_dlf_docTypeCheck(year)]
+page.10.variables {
+	isNewspaper = TEXT
+	isNewspaper.value = newspaper_year
+}
+[global]
+
+[userFunc = user_dlf_docTypeCheck(issue)]
+page.10.variables {
+	isNewspaper = TEXT
+	isNewspaper.value = newspaper_issue
+}
+[global]
