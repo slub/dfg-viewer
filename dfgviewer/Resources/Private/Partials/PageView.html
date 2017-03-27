@@ -59,17 +59,26 @@
             <f:if condition="<dv:piVars var=\"double\" default=\"0\" /> == 1">
               <f:then>
                 <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{gp-page}]/mets:FLocat/@xlink:href' />" class="download-page" title="linke Seite herunterladen">linke Seite herunterladen</f:link.external>
+                  <f:link.external uri="<dv:downloadLinks type='page-left' pagenumber='{gp-page}' />" class="download-page" title="<f:translate key='download.leftPage' extensionName='dfgviewer' />"><f:translate key="download.leftPage"  extensionName="dfgviewer" /></f:link.external>
                 </li>
-                <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{dv:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}]/mets:FLocat/@xlink:href' />" class="download-page" title="rechte Seite herunterladen">rechte Seite herunterladen</f:link.external>
-                </li>
+                <f:if condition="<dv:downloadLinks type='page-right' pagenumber='{gp-page}' /> !=''">
+                  <li>
+                    <f:link.external uri="<dv:downloadLinks type='page-right' pagenumber='{gp-page}' />" class="download-page" title="<f:translate key='download.rightPage' extensionName='dfgviewer' />"><f:translate key="download.rightPage"  extensionName="dfgviewer" /></f:link.external>
+                  </li>
+                </f:if>
               </f:then>
               <f:else>
-                <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"DOWNLOAD\"]/mets:file[{gp-page}]/mets:FLocat/@xlink:href' />" class="download-page" title="Seite herunterladen">Seite herunterladen</f:link.external>
-                </li>
+                <f:if condition="<dv:downloadLinks type='page-left' pagenumber='{gp-page}' /> !=''">
+                  <li>
+                    <f:link.external uri="<dv:downloadLinks type='page-left' pagenumber='{gp-page}' />" class="download-page" title="<f:translate key='download.singlePage' extensionName='dfgviewer' />"><f:translate key="download.singlePage"  extensionName="dfgviewer" /></f:link.external>
+                  </li>
+                </f:if>
             </f:else>
+          </f:if>
+            <f:if condition="<dv:downloadLinks type='work' /> !=''">
+              <li>
+                <f:link.external uri="<dv:downloadLinks type='work' />" class="download-document" title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" /></f:link.external>
+              </li>
             </f:if>
             </ul>
           </li>

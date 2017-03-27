@@ -39,22 +39,33 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package TYPO3
  */
-class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class DownloadLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
     /**
      * Return elements found
      *
-     * @param string $xpath xpath of elements
-     * @param string $type type of field requested
-     * @return array
+     * @param string $type type of download ('page-left', 'page-right' or 'work')
+     * @param integer $pagenumber current page number
+     * @return string
      */
-    public function render($xpath, $field = '')
+    public function render($type = 'page-left', $pagenumber = 1)
     {
         $doc = GeneralUtility::makeInstance(\SLUB\Dfgviewer\Helpers\GetDoc::class);
 
-        $result = $doc->getXpath($xpath);
+        switch ($type) {
+          case 'page-right':
+                    $result = $doc->getPageLink((int)$pagenumber + 1);
+                    break;
+          case 'work':
+                    $result = $doc->getWorkLink((int)$pagenumber);
+                    break;
+          case 'page-left':
+          default:
+                    $result = $doc->getPageLink((int)$pagenumber);
+                    break;
+        }
 
-        return htmlspecialchars(trim((string) $result[0]));
+        return $result;
     }
 }

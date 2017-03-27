@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-27T11:20:32Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="download.leftPage" approved="yes">
+			<source>Download left page</source>
+			<target>Linke Seite herunterladen</target>
+		</trans-unit>
+		<trans-unit id="download.rightPage" approved="yes">
+			<source>Download right page</source>
+			<target>Rechte Seite herunterladen</target>
+		</trans-unit>
+		<trans-unit id="download.singlePage" approved="yes">
+			<source>Download single page</source>
+			<target>Einzelseite herunterladen</target>
+		</trans-unit>
+		<trans-unit id="download.work" approved="yes">
+			<source>Download whole work</source>
+			<target>Ganzes Werk herunterladen</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-27T11:20:32Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="download.leftPage">
+			<source>Download left page</source>
+		</trans-unit>
+		<trans-unit id="download.rightPage">
+			<source>Download right page</source>
+		</trans-unit>
+		<trans-unit id="download.singlePage">
+			<source>Download single page</source>
+		</trans-unit>
+		<trans-unit id="download.work">
+			<source>Download whole work</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>
