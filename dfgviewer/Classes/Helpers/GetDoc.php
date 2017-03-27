@@ -30,33 +30,117 @@ class GetDoc
     public $extKey = 'dfgviewer';
 
   /**
-   * The main method of the PlugIn
+  	 * This holds the current document
+  	 *
+  	 * @var	tx_dlf_document
+  	 * @access protected
+  	 */
+  	protected $doc;
+
+  /**
+   * Get page's download link
+   *
+   * @access	public
+   *
+   * @param	integer	$pagenumber:The current page numbert
+   *
+   * @return	string: The left and right download url
+   */
+  public function getPageLink($pagenumber)
+  {
+
+    if (!$this->init()) {
+      return '';
+    }
+
+    $details = $this->doc->physicalPagesInfo[$this->doc->physicalPages[$pagenumber]];
+		$file = $details['files']['DOWNLOAD'];
+
+		if (!empty($file)) {
+
+			$pageLink = $this->doc->getFileLocation($file);
+
+    }
+
+    return $pageLink;
+  }
+
+  /**
+   * Get work's download link
+   *
+   * @access	public
+   *
+   * @return	string: The left and right download url
+   */
+  public function getWorkLink()
+  {
+
+    if (!$this->init()) {
+      return '';
+    }
+
+    // Get work link.
+  		if (!empty($this->doc->physicalPagesInfo[$this->doc->physicalPages[0]]['files']['DOWNLOAD'])) {
+
+  			$workLink = $this->doc->getFileLocation($this->doc->physicalPagesInfo[$this->doc->physicalPages[0]]['files']['DOWNLOAD']);
+
+  		} else {
+
+  			$details = $this->doc->getLogicalStructure($this->doc->toplevelId);
+
+  			if (!empty($details['files']['DOWNLOAD'])) {
+
+  				$workLink = $this->doc->getFileLocation($details['files']['DOWNLOAD']);
+
+  			}
+
+  		}
+
+      return $workLink;
+  }
+
+  /**
+   * get xpath result
    *
    * @access	public
    *
    * @param	string		$content: The PlugIn content
-   * @param	array		$conf: The PlugIn configuration
    *
    * @return	string		The content that is displayed on the website
    */
   public function getXpath($xpath)
   {
+    if (!$this->init()) {
+      return '';
+    }
+      return $this->doc->mets->xpath($xpath);
+  }
 
-    // Load current document.
-    $this->loadDocument();
+  /**
+     * Initialize and load the document
+     *
+     * @access	protected
+     *
+     * @return	boolean
+     */
+    protected function init()
+    {
+      // Load current document.
+      $this->loadDocument();
 
       if ($this->doc === null) {
 
-      // Quit without doing anything if required variables are not set.
-      return $content;
+        // Quit without doing anything if required variables are not set.
+        return null;
+
       }
 
       $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
       $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
       $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
 
-      return $this->doc->mets->xpath($xpath);
-  }
+      return true;
+    }
 
   /**
      * Loads the current document into $this->doc

@@ -119,15 +119,6 @@ plugin.tx_dlf_toc {
 		7 < .6
 	}
 }
-lib.downloadsPdf = USER
-lib.downloadsPdf {
-	includeLibs = typo3conf/ext/dlf/plugins/toolbox/class.tx_dlf_toolbox.php
-	userFunc = tx_dlf_toolbox->main
-	pages = {$config.storagePid}
-	tools = tx_dlf_toolsPdf
-	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/downloadPdf.tmpl
-}
-
 plugin.tx_dlf_toolbox {
 	pages = {$config.storagePid}
 	tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext,tx_dlf_toolsImagemanipulation
