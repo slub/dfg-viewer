@@ -1,0 +1,16 @@
+<f:section name="Piwik">
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["setDomains", ["{piwik_domains}"]]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//{piwik_hostname}/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '{piwik_idsite}']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//{piwik_hostname}/piwik.php?idsite={piwik_idsite}" style="border:0;" alt="" /></p></noscript>
+</f:section>

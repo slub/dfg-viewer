@@ -34,6 +34,15 @@ page {
       kitodoPageView = TEXT
 			kitodoPageView.value = {$config.kitodoPageView}
 
+      piwik_hostname = TEXT
+			piwik_hostname.value = {$config.piwik_hostname}
+
+      piwik_idsite = TEXT
+			piwik_idsite.value = {$config.piwik_idsite}
+
+      piwik_domains = TEXT
+			piwik_domains.value = {$config.piwik_domains}
+
       gp-page = TEXT
       gp-page.data = GP:tx_dlf|page
       gp-page.ifEmpty = 1
