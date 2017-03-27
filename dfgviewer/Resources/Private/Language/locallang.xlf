@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-27T11:20:32Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-27T13:16:48Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
+		<trans-unit id="double.RectoVerso">
+			<source>Adjust recto/verso</source>
+		</trans-unit>
+		<trans-unit id="double.doublePageView">
+			<source>Show double pages</source>
+		</trans-unit>
+		<trans-unit id="double.singlePageView">
+			<source>Show single page</source>
+		</trans-unit>
 		<trans-unit id="download.leftPage">
 			<source>Download left page</source>
 		</trans-unit>

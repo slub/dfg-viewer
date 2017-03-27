@@ -86,14 +86,16 @@
               <span class="double">
                 <f:if condition="{gp-double} == 1">
                   <f:then>
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOff" title="Einzelseitenansicht">Einzelseitenansicht</f:link.page>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOff" title="<f:translate key='double.singlePageView'  extensionName='dfgviewer' />"><f:translate key="double.singlePageView"  extensionName="dfgviewer" /></f:link.page>
                   </f:then>
                   <f:else>
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOn" title="Doppelseitenansicht">Doppelseitenansicht</f:link.page>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOn" title="<f:translate key='double.doublePageView'  extensionName='dfgviewer' />"><f:translate key="double.doublePageView"  extensionName="dfgviewer" /></f:link.page>
                 </f:else>
               </f:if>
               </span>
-              <span class="switch"><span>Recto/Verso korrigieren</span></span>
+              <f:if condition="{gp-double} == 1">
+                <span class="switch"><span><f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{dv:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOff" title="<f:translate key='double.RectoVerso' extensionName='dfgviewer' />"><f:translate key="double.RectoVerso"  extensionName="dfgviewer" /></f:link.page></span></span>
+              </f:if>
           </li>
           <li class="fulltext">
               <f:cObject typoscriptObjectPath="lib.tools.toolsFulltext" />
