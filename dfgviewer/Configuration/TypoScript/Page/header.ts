@@ -4,30 +4,31 @@
 
 page = PAGE
 page {
-
 	includeCSS {
 		style = EXT:dfgviewer/Resources/Public/Css/allStyles.css
 	}
-
 	includeJSlibs {
-    # we include jquery by t3jquery on page.9 below
-    plugins = EXT:dfgviewer/Resources/Public/Js/allScripts.js
-  }
-
+		# we include jquery by t3jquery on page.9 below
+		plugins = EXT:dfgviewer/Resources/Public/Js/allScripts.js
+	}
 	meta {
-				keywords.field = keywords
-				description.field = description
-				author.field = author
-				robots = all
-				viewport = width=device-width, initial-scale=1
-		}
+		keywords.field = keywords
+		description.field = description
+		author.field = author
+		robots = all
+		viewport = width=device-width, initial-scale=1
+	}
+	headerData {
+		10 = TEXT
+		10.value = <link rel="shortcut icon" type="image/png" href="EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png">
+	}
 }
 
 [globalVar = TSFE:id = {$config.kitodoPageView}]
 page {
-  meta {
-    # the object view must be excluded from index
-    robots = noindex,nofollow
-  }
+	meta {
+		# the object view must be excluded from index
+		robots = noindex,nofollow
+	}
 }
 [global]
