@@ -22,6 +22,7 @@
                 <!-- it's an newspaper! -->
               </f:if>
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
             </f:else>
           </f:if>
         </f:else>
@@ -123,9 +124,10 @@
     </div>
     <div class="view-functions">
         <ul>
-          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
           <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
+          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
         </ul>
+        <div class="tx-dlf-toolbox"></div>
     </div>
     <div class="page-control">
           <f:cObject typoscriptObjectPath="lib.navigation_pagecontrol" />

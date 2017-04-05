@@ -18,10 +18,6 @@ page {
 		robots = all
 		viewport = width=device-width, initial-scale=1
 	}
-	headerData {
-		10 = TEXT
-		10.value = <link rel="shortcut icon" type="image/png" href="EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png">
-	}
 }
 
 [globalVar = TSFE:id = {$config.kitodoPageView}]
