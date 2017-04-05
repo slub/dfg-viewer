@@ -20,7 +20,7 @@ page {
 	}
 	headerData {
 		10 = TEXT
-		10.value = <link rel="shortcut icon" type="image/png" href="EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png">
+		10.value = <link rel="shortcut icon" type="image/png" href="/typo3conf/ext/dfgviewer/Resources/Public/Images/dfgviewerFavicon.png">
 	}
 }
 
