@@ -22,7 +22,7 @@
                 <!-- it's an newspaper! -->
               </f:if>
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                <div id="tx-dlf-fulltextselection"></div>
+                <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
             </f:else>
           </f:if>
         </f:else>
@@ -97,19 +97,15 @@
             </ul>
           </li>
           <li class="doublepage">
-              <span class="double">
-                <f:if condition="{gp-double} == 1">
-                  <f:then>
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOff" title="<f:translate key='double.singlePageView'  extensionName='dfgviewer' />"><f:translate key="double.singlePageView"  extensionName="dfgviewer" /></f:link.page>
-                  </f:then>
-                  <f:else>
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOn" title="<f:translate key='double.doublePageView'  extensionName='dfgviewer' />"><f:translate key="double.doublePageView"  extensionName="dfgviewer" /></f:link.page>
-                </f:else>
-              </f:if>
-              </span>
-              <f:if condition="{gp-double} == 1">
-                <span class="switch"><span><f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{dv:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOff" title="<f:translate key='double.RectoVerso' extensionName='dfgviewer' />"><f:translate key="double.RectoVerso"  extensionName="dfgviewer" /></f:link.page></span></span>
-              </f:if>
+            <f:if condition="{gp-double} == 1">
+              <f:then>
+                <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOff" title="<f:translate key='double.singlePageView'  extensionName='dfgviewer' />"><f:translate key="double.singlePageView"  extensionName="dfgviewer" /></f:link.page>
+                <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{dv:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doublePlusOne" title="<f:translate key='double.RectoVerso' extensionName='dfgviewer' />"><span><f:translate key="double.RectoVerso"  extensionName="dfgviewer" /></span></f:link.page>
+              </f:then>
+              <f:else>
+                <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}}" class="tx-dlf-navigation-doubleOn" title="<f:translate key='double.doublePageView'  extensionName='dfgviewer' />"><f:translate key="double.doublePageView"  extensionName="dfgviewer" /></f:link.page>
+              </f:else>
+            </f:if>
           </li>
           <li class="fulltext">
               <f:cObject typoscriptObjectPath="lib.tools.toolsFulltext" />
@@ -128,9 +124,10 @@
     </div>
     <div class="view-functions">
         <ul>
-          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
           <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
+          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
         </ul>
+        <div class="tx-dlf-toolbox"></div>
     </div>
     <div class="page-control">
           <f:cObject typoscriptObjectPath="lib.navigation_pagecontrol" />
