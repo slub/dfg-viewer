@@ -191,8 +191,8 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 							}
 
 							$dayLinkDiv = '<div class="contains-issues">' . strftime('%d', $currentDayTime) . '</div>' . $dayLinksList;
-							
-							
+
+
 						}
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
@@ -268,7 +268,6 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$this->template = $this->cObj->substituteSubpart($this->template, '###ISSUELIST###', $issueListTemplate);
 
 		$markerArray = array (
-			'###CALENDARVIEWACTIVE###' => $calendarViewActive,
 			'###CALYEAR###' => $yearLink,
 			'###CALALLYEARS###' => $allYearsLink
 		);
