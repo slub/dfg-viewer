@@ -68,7 +68,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentAuthor\nvalue.required = 1\nvalue.noTrimWrap = ||; |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"author\">|:</span> |",
+		'wrap' => "key.wrap = <dt>|</dt><dd>\nvalue.ifEmpty.field = parentAuthor\nvalue.required = 1\nvalue.noTrimWrap = ||; |\nall.substring = 0,-2\nall.wrap = |</dd>",
 		'is_listed' => 1,
 	),
 	'parentAuthor' => array (
