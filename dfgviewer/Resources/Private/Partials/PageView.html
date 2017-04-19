@@ -113,12 +113,12 @@
           <f:if condition="{gp-pagegrid} == 1">
             <f:then>
               <li class="grid">
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'{gp-double}', id:'{gp-id}', pagegrid:'0'}}}" class="active" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="active" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
               </li>
             </f:then>
             <f:else>
               <li class="grid">
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'{gp-double}', id:'{gp-id}', pagegrid:'1'}}}" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}}" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
               </li>
             </f:else>
           </f:if>
