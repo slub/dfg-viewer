@@ -267,20 +267,8 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 		$this->template = $this->cObj->substituteSubpart($this->template, '###ISSUELIST###', $issueListTemplate);
 
-		if ($allIssuesCount < 6) {
-
-
-			$listViewActive = 'active';
-
-		} else {
-
-			$calendarViewActive = 'active';
-
-		}
-
 		$markerArray = array (
 			'###CALENDARVIEWACTIVE###' => $calendarViewActive,
-			'###LISTVIEWACTIVE###' => $listViewActive,
 			'###CALYEAR###' => $yearLink,
 			'###CALALLYEARS###' => $allYearsLink
 		);
