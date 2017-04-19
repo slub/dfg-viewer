@@ -163,7 +163,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 									foreach($day['children'] as $id => $issue) {
 
-										$dayPoints    = $issue['points'];
+										$dayPoints	= $issue['points'];
 
 										$dayLinkLabel = empty($issue['label']) ? strftime('%x', $currentDayTime) : $issue['label'];
 
@@ -181,16 +181,18 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 							}
 
-							// use title attribute for tooltip
+							// render issues from that day in an unordered list
 							if (is_array($dayLinksText)) {
-								$dayLinksList = '<ul>';
+								$dayLinksList = '<ul class="issues">';
 								foreach ($dayLinksText as $link) {
 									$dayLinksList .= '<li>'.$link.'</li>';
 								}
 								$dayLinksList .= '</ul>';
 							}
 
-							$dayLinkDiv = '<div class="tooltip issues" title="'.htmlspecialchars($dayLinksList).'">' . strftime('%d', $currentDayTime) . '</div>';
+							$dayLinkDiv = '<div class="contains-issues">' . strftime('%d', $currentDayTime) . '</div>' . $dayLinksList;
+
+
 						}
 
 						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
@@ -265,20 +267,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 
 		$this->template = $this->cObj->substituteSubpart($this->template, '###ISSUELIST###', $issueListTemplate);
 
-		if ($allIssuesCount < 6) {
-
-
-			$listViewActive = 'active';
-
-		} else {
-
-			$calendarViewActive = 'active';
-
-		}
-
 		$markerArray = array (
-			'###CALENDARVIEWACTIVE###' => $calendarViewActive,
-			'###LISTVIEWACTIVE###' => $listViewActive,
 			'###CALYEAR###' => $yearLink,
 			'###CALALLYEARS###' => $allYearsLink
 		);
