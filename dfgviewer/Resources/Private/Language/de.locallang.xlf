@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-27T13:16:48Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-04-20T12:57:18Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -32,6 +32,18 @@
 		<trans-unit id="download.work" approved="yes">
 			<source>Download whole work</source>
 			<target>Ganzes Werk herunterladen</target>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_double" approved="yes">
+			<source>No fulltext in double page mode.</source>
+			<target>Keine Volltexte in der Doppelseitenansicht.</target>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_gridpage" approved="yes">
+			<source>No fulltext in gridpage mode.</source>
+			<target>Keine Volltexte in der Vorschau-Ansicht.</target>
+		</trans-unit>
+		<trans-unit id="gridpage.preview" approved="yes">
+			<source>Thumbnail Preview</source>
+			<target>Vorschaubilder</target>
 		</trans-unit>
 		</body>
 	</file>

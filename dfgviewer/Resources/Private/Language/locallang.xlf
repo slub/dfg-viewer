@@ -26,6 +26,15 @@
 		<trans-unit id="download.work">
 			<source>Download whole work</source>
 		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_gridpage">
+			<source>No fulltext in gridpage mode.</source>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_double">
+			<source>No fulltext in double page mode.</source>
+		</trans-unit>
+		<trans-unit id="gridpage.preview">
+			<source>Thumbnail Preview</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
