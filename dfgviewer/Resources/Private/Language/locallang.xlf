@@ -35,6 +35,15 @@
 		<trans-unit id="gridpage.preview">
 			<source>Thumbnail Preview</source>
 		</trans-unit>
+		<trans-unit id="provider.local_presentation">
+			<source>Show in local context</source>
+		</trans-unit>
+		<trans-unit id="provider.local_catalogue">
+			<source>Online Public Access Catalog</source>
+		</trans-unit>
+		<trans-unit id="provider.email_provider">
+			<source>Email to data provider</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

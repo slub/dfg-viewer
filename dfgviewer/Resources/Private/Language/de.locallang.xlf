@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-04-20T12:57:18Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-04-20T13:09:47Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -44,6 +44,18 @@
 		<trans-unit id="gridpage.preview" approved="yes">
 			<source>Thumbnail Preview</source>
 			<target>Vorschaubilder</target>
+		</trans-unit>
+		<trans-unit id="provider.email_provider" approved="yes">
+			<source>Email to data provider</source>
+			<target>Email an Datenprovider</target>
+		</trans-unit>
+		<trans-unit id="provider.local_catalogue" approved="yes">
+			<source>Online Public Access Catalog</source>
+			<target>Lokaler Katalog</target>
+		</trans-unit>
+		<trans-unit id="provider.local_presentation" approved="yes">
+			<source>Show in local context</source>
+			<target>Lokale Präsentation anzeigen</target>
 		</trans-unit>
 		</body>
 	</file>

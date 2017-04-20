@@ -56,13 +56,13 @@
             <a href="#" title="Links">Links</a>
             <ul>
               <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="Lokale Präsentation anzeigen">Lokale Präsentation</f:link.external>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
               </li>
               <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="Lokaler Katalog anzeigen">Lokaler Katalog</f:link.external>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="<f:translate key='provider.local_catalogue' extensionName='dfgviewer' />"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
               </li>
               <li>
-                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="E-Mail an <dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />">E-Mail an Datenprovider</f:link.email>
+                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="<f:translate key='provider.email_provider' extensionName='dfgviewer' /> (<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />)"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
               </li>
                 <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
             </ul>
