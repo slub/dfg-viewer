@@ -56,13 +56,13 @@
             <a href="#" title="Links">Links</a>
             <ul>
               <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="Lokale Präsentation anzeigen">Lokale Präsentation</f:link.external>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
               </li>
               <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="Lokaler Katalog anzeigen">Lokaler Katalog</f:link.external>
+                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="<f:translate key='provider.local_catalogue' extensionName='dfgviewer' />"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
               </li>
               <li>
-                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="E-Mail an <dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />">E-Mail an Datenprovider</f:link.email>
+                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="<f:translate key='provider.email_provider' extensionName='dfgviewer' /> (<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />)"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
               </li>
                 <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
             </ul>
@@ -107,18 +107,34 @@
               </f:else>
             </f:if>
           </li>
-          <li class="fulltext">
-              <f:cObject typoscriptObjectPath="lib.tools.toolsFulltext" />
-          </li>
+          <f:if condition="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"FULLTEXT\"]/mets:file[1]/mets:FLocat/@xlink:href' />">
+            <li class="fulltext">
+              <f:if condition="{gp-double} == 1">
+                <f:then>
+                  <span class="select switchoff" id="tx-dlf-tools-fulltext" title="<f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />"><f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' /></span>
+                </f:then>
+                <f:else>
+                  <f:if condition="{gp-pagegrid} == 1">
+                    <f:then>
+                      <span class="select switchoff" id="tx-dlf-tools-fulltext" title="<f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />"><f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' /></span>
+                    </f:then>
+                    <f:else>
+                      <f:cObject typoscriptObjectPath="lib.tools.toolsFulltext" />
+                    </f:else>
+                  </f:if>
+                </f:else>
+              </f:if>
+            </li>
+          </f:if>
           <f:if condition="{gp-pagegrid} == 1">
             <f:then>
               <li class="grid">
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="active" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="active" title="<f:translate key='double.singlePageView' extensionName='dfgviewer' />"><f:translate key='double.singlePageView' extensionName='dfgviewer' /></f:link.page>
               </li>
             </f:then>
             <f:else>
               <li class="grid">
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}}" title="Thumbnail-Vorschau">Thumbnails</f:link.page>
+                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}}" title="<f:translate key='gridpage.preview' extensionName='dfgviewer' />"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
               </li>
             </f:else>
           </f:if>
