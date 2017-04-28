@@ -16,6 +16,8 @@ page {
 
 		variables {
 
+      content < styles.content.get
+
 			pageTitle = TEXT
 			pageTitle.data = page:title
 
