@@ -8,7 +8,7 @@ page {
 		style = EXT:dfgviewer/Resources/Public/Css/allStyles.css
 	}
 	includeJSlibs {
-		# we include jquery by t3jquery on page.9 below
+		# we include jquery by t3jquery on by ViewHelpers
 		plugins = EXT:dfgviewer/Resources/Public/Js/allScripts.js
 	}
 	meta {
