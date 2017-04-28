@@ -5,11 +5,11 @@
 page = PAGE
 page {
 	includeCSS {
-		style = EXT:dfgviewer/Resources/Public/Css/allStyles.css
+		style = EXT:dfgviewer/Resources/Public/Css/webStyles.css
 	}
 	includeJSlibs {
-		# we include jquery by t3jquery on page.9 below
-		plugins = EXT:dfgviewer/Resources/Public/Js/allScripts.js
+		# we include jquery by t3jquery on by ViewHelpers
+		plugins = EXT:dfgviewer/Resources/Public/Js/webScripts.js
 	}
 	meta {
 		keywords.field = keywords
@@ -22,6 +22,13 @@ page {
 
 [globalVar = TSFE:id = {$config.kitodoPageView}]
 page {
+	includeCSS {
+		style = EXT:dfgviewer/Resources/Public/Css/allStyles.css
+	}
+	includeJSlibs {
+		# we include jquery by t3jquery on by ViewHelpers
+		plugins = EXT:dfgviewer/Resources/Public/Js/allScripts.js
+	}
 	meta {
 		# the object view must be excluded from index
 		robots = noindex,nofollow

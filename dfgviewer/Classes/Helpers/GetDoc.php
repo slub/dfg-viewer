@@ -151,7 +151,20 @@ class GetDoc
      */
     protected function loadDocument()
     {
-        $piVars = GeneralUtility::_GP('tx_dlf');
+      $piVarsSet = GeneralUtility::_GPmerged('set');
+
+      $piVars = GeneralUtility::_GPmerged('tx_dlf');
+
+      // overwrite tx_dlf[] parameters by (old) set[] ones
+      if (!empty($piVarsSet['mets'])) {
+        $piVars['id'] = $piVarsSet['mets'];
+      }
+      if (!empty($piVarsSet['double'])) {
+        $piVars['double'] = $piVarsSet['double'];
+      }
+      if (!empty($piVarsSet['image'])) {
+        $piVars['page'] = $piVarsSet['image'];
+      }
 
         // Check for required variable.
         if (!empty($piVars['id'])) {

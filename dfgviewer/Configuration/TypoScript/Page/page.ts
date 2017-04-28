@@ -3,7 +3,7 @@
 # -------------------------------
 page {
   typeNum = 0
-  bodyTag = <body class="dfgviewer">
+  bodyTag = <body class="website">
 
   adminPanelStyles = 0
   shortcutIcon = EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png
@@ -15,6 +15,8 @@ page {
 	  partialRootPath = EXT:dfgviewer/Resources/Private/Partials/
 
 		variables {
+
+      content < styles.content.get
 
 			pageTitle = TEXT
 			pageTitle.data = page:title
@@ -66,6 +68,7 @@ page {
 # -------------------------------
 [globalVar = TSFE:id = {$config.kitodoPageView}]
 page {
+  bodyTag = <body class="dfgviewer">
   10 {
     file = EXT:dfgviewer/Resources/Private/Templates/Kitodo.html
   }

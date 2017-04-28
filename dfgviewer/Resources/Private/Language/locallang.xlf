@@ -44,6 +44,15 @@
 		<trans-unit id="provider.email_provider">
 			<source>Email to data provider</source>
 		</trans-unit>
+		<trans-unit id="website.last_updated">
+			<source>Last updated</source>
+		</trans-unit>
+		<trans-unit id="website.totop">
+			<source>to top</source>
+		</trans-unit>
+		<trans-unit id="website.jump_totop">
+			<source>Jump to top of page</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>
