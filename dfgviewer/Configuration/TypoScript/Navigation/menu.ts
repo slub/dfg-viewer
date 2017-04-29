@@ -12,19 +12,12 @@ lib.menu {
 	  1 {
 	    expAll = 1
 	    wrap (
-	       <nav class="mainNav">
-	           <div class="navContainer">
-	              <div class="sizeContainer">
-	                 <ul>|</ul>
-	                 <div class="clearfix"></div>
-	              </div>
-	           </div>
-	       </nav>
+         <ul class="main-nav">|</ul>
 	    )
 	    noBlur = 1
 	    accessKey = 1
 	    NO {
-	      wrapItemAndSub = <li>|<div class="clearfix"></div></li>
+	      wrapItemAndSub = <li class="submenu">|</li>
 
 	      ATagParams =
 	      stdWrap.wrap =
