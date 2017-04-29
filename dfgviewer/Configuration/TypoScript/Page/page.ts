@@ -27,9 +27,6 @@ page {
 			pageHideInMenu = TEXT
 			pageHideInMenu.data = page:nav_hide
 
-			content < styles.content.get
-			contentRight < styles.content.getRight
-
 			rootPageId = TEXT
 			rootPageId.value = {$config.rootPid}
 
@@ -45,19 +42,6 @@ page {
       piwik_domains = TEXT
 			piwik_domains.value = {$config.piwik_domains}
 
-      gp-page = TEXT
-      gp-page.data = GP:tx_dlf|page
-      gp-page.ifEmpty = 1
-
-      gp-double = TEXT
-      gp-double.data = GP:tx_dlf|double
-
-      gp-id = TEXT
-      gp-id.data = GP:tx_dlf|id
-
-      gp-pagegrid = TEXT
-      gp-pagegrid.data = GP:tx_dlf|pagegrid
-
 		}
 	}
 
@@ -71,6 +55,21 @@ page {
   bodyTag = <body class="dfgviewer">
   10 {
     file = EXT:dfgviewer/Resources/Private/Templates/Kitodo.html
+
+    variables {
+      gp-page = TEXT
+      gp-page.data = GP:tx_dlf|page // GP:set|image
+      gp-page.ifEmpty = 1
+
+      gp-double = TEXT
+      gp-double.data = GP:tx_dlf|double // GP:set|image
+
+      gp-id = TEXT
+      gp-id.data = GP:tx_dlf|id // GP:set|mets
+
+      gp-pagegrid = TEXT
+      gp-pagegrid.data = GP:tx_dlf|pagegrid
+    }
   }
 }
 [global]
