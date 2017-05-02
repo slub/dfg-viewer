@@ -11,6 +11,10 @@ lib.menu {
 	    # show only Default and English
 	    special.value = 0,1
 
+      addQueryString = 1
+    	addQueryString.method = GET
+    	addQueryString.exclude = cHash
+
 	    1 = TMENU
 	    1 {
         wrap = <ul class="language-nav">|</ul>
