@@ -6,47 +6,47 @@ lib.menu {
 	main = HMENU
 	main {
 		excludeUidList =
-		maxItems = 6
+		maxItems = 8
 		entryLevel = 0
 	  1 = TMENU
 	  1 {
 	    expAll = 1
+			noBlur = 1
+	    accessKey = 1
 	    wrap (
          <ul class="main-nav">|</ul>
 	    )
-	    noBlur = 1
-	    accessKey = 1
 	    NO {
-	      wrapItemAndSub = <li class="submenu">|</li>
-
+	      #wrapItemAndSub = <li class="submenu">|</li>
+				allWrap = <li>|</li>
 	      ATagParams =
-	      stdWrap.wrap =
-	      stdWrap = upper
 	      ATagTitle.field = description // title
 	    }
 
-	    #ACT = 1
-	    ACT < .1.NO
-	    ACT {
-	      #wrapItemAndSub = <li class="act">|</li>
-	      stdWrap = upper
-	      ATagParams =
-	      stdWrap.wrap =
-	      #after = <div class="navact"></div>
-	      ATagTitle.field = description // title
-	        }
+			ACT = 1
+			ACT {
+				allWrap = <li class="active">|</li>
+				ATagTitle.field = description // title
+			}
 
-	    #CURIFSUB < .1.NO
-	    #CURIFSUB.allWrap = <li id="curifsub">|
+			IFSUB = 1
+			IFSUB {
+				wrapItemAndSub = <li class="submenu">|</li>
+				ATagTitle.field = description // title
+			}
 
-	    #ACTIFSUB < .1.CURIFSUB
+			ACTIFSUB = 1
+			ACTIFSUB {
+				wrapItemAndSub = <li class="submenu active">|</li>
+				ATagTitle.field = description // title
+			}
+    }
 
-	    }
 	  2 = TMENU
 	  2 {
 	    noBlur = 1
 	    accessKey = 1
-	    wrap = <ul>|</ul><div class="clearfix"></div>
+	    wrap = <ul>|</ul>
 
 	    NO = 1
 	    NO.ATagTitle.field = description // title
