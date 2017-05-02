@@ -19,6 +19,7 @@ lib.menu {
 	      NO {
 	        linkWrap=<li>|</li>
 	        stdWrap.override = DE || EN
+          ATagTitle.override = Sprache: Deutsch || Language: English
 	      }
 
 	      # active language

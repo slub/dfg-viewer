@@ -4,7 +4,7 @@
 
 # Navigation
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/language.ts">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/secondary.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/menu.ts">
 
 # Plugin
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Plugins/kitodo.ts">

@@ -6,8 +6,18 @@
       <f:link.page pageUid="{rootPageId}" class="dfgviewer-logo" title="DFG-Viewer">DFG-Viewer</f:link.page>
     </h1>
     <nav>
+      <f:cObject typoscriptObjectPath="lib.menu.main" />
+      <f:cObject typoscriptObjectPath="lib.menu.language" />
+      <button type="button" class="nav-toggle">
+          <span class="nav-label">Open Navigation</span>
+          <span class="nav-button-bar"></span>
+          <span class="nav-button-bar"></span>
+          <span class="nav-button-bar"></span>
+          <span class="nav-button-bar"></span>
+      </button>
     </nav>
   </div>
+  <f:cObject typoscriptObjectPath="lib.menu.breadCrumbNavigation" />
   <h2>{data.title}</h2>
 </div>
 </f:section>
