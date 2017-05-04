@@ -29,6 +29,13 @@ lib.menu {
 				ATagTitle.field = description // title
 			}
 
+			CUR = 1
+			CUR {
+				allWrap = <li class="active">|</li>
+				ATagParams = class=current
+				ATagTitle.field = description // title
+			}
+
 			IFSUB = 1
 			IFSUB {
 				wrapItemAndSub = <li class="submenu">|</li>
@@ -38,6 +45,14 @@ lib.menu {
 			ACTIFSUB = 1
 			ACTIFSUB {
 				wrapItemAndSub = <li class="submenu active">|</li>
+				ATagParams = class="current"
+				ATagTitle.field = description // title
+			}
+
+			CURIFSUB = 1
+			CURIFSUB {
+				wrapItemAndSub = <li class="submenu active">|</li>
+				ATagParams = class="current"
 				ATagTitle.field = description // title
 			}
     }
@@ -49,8 +64,16 @@ lib.menu {
 	    wrap = <ul>|</ul>
 
 	    NO = 1
-	    NO.ATagTitle.field = description // title
-	    NO.allWrap = <li>|</li>
+			NO {
+				allWrap = <li>|</li>
+				ATagTitle.field = description // title
+			}
+			CUR = 1
+			CUR {
+				allWrap = <li class="cur">|</li>
+				ATagParams = class=current
+				ATagTitle.field = description // title
+			}
 	  }
 	}
   secondary = COA
