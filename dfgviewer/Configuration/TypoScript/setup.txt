@@ -2,6 +2,9 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Config/config.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Config/language.ts">
 
+# Content
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Content/tt_content.ts">
+
 # Navigation
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/language.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TypoScript/Navigation/menu.ts">

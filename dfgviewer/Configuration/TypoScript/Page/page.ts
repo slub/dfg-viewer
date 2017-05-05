@@ -50,6 +50,10 @@ page {
 # -------------------------------
 # Diverses
 # -------------------------------
+[globalVar = TSFE:id = {$config.rootPid}]
+page.bodyTag = <body class="website home">
+[global]
+
 [globalVar = TSFE:id = {$config.kitodoPageView}]
 page {
   bodyTag = <body class="dfgviewer">
