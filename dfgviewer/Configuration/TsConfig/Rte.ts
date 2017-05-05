@@ -64,7 +64,7 @@ RTE {
 		showStatusBar = 1
 
 		// RTE stylesheet
-		contentCSS = typo3conf/ext/dfgviewer/Resources/Public/Css/webStyles.css
+		contentCSS = typo3conf/ext/dfgviewer/Resources/Public/Css/rte.css
 
 		// Remove HTML tags and their content
 		removeTagsAndContents =
