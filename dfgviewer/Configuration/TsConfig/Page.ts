@@ -1,3 +1,5 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TsConfig/Rte.ts">
+
 # PAGE DEFAULT PERMISSIONS
 TCEMAIN.permissions {
 
