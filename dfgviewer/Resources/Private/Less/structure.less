@@ -1,0 +1,176 @@
+/*
+ *
+ * Structure
+ * ================================================
+ * Basic definition of body, cotainers and other
+ * structural elements
+ *
+ * Author: Thomas Jung <thomas@tjwd.de>
+ * License: All rights reserved
+ *
+ */
+
+/* ==============[ first tings first. simple font import. ]=============================== */
+@import (css) url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+/* ==============[ basic html element settings ]========================================== */
+* {
+    box-sizing: border-box;
+}
+html, body {
+    position: relative;
+    height: 100%;
+}
+body {
+    text-align:center;
+    background: @light-blue;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    &:before {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url(../Images/fibonacciBg.svg) no-repeat right bottom;
+        background-size: cover;
+        content: " ";
+        opacity: 0.3;
+    }
+    &.hidden, &.static {
+        background: #fff;
+        &:before {
+            content: none;
+        }
+    }
+}
+a {
+    color: lighten(@base-blue,20%);
+    text-decoration: none;
+}
+
+/* ==============[ 'window' structure with small blue offset ]============================ */
+.main-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 12px;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+    .transition();
+    .hidden & {
+        opacity: 0;
+    }
+    .static & {
+        .transition(none);
+    }
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        top: 5px;
+        right: 5px;
+        bottom: 5px;
+        left: 5px;
+        .fullscreen & {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+    @media screen and (min-width: @desktopViewportWidth) {
+        top: 20px;
+        right: 20px;
+        bottom: 25px;
+        left: 20px;
+    }
+}
+
+.document-view {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 60px;
+    .transition();
+    .fullscreen & {
+        top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+    }
+    .static & {
+        .transition(none);
+    }
+    .tx-dlf-map {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .document-functions {
+        .provider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            text-align: left;
+            img {
+                margin-top: 5px;
+                width: 70px;
+                height: 33px;
+            }
+            .mobile-meta {
+                position: absolute;
+                top: 0;
+                left: 80px;
+                right: 15px;
+                bottom: 0;
+                font-size: 12px;
+                line-height: 1.3;
+                dt {
+                    display: none;
+                }
+                dd {
+                    color: @light-blue;
+                    &.tx-dlf-title a {
+                        position: relative;
+                        height: 30px;
+                        display: block;
+                        overflow: hidden;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        top: 0;
+        left: 33%;
+        padding: 0;
+        .tx-dlf-map {
+            top: 0;
+        }
+        .document-functions {
+            .provider {
+                top: 10px;
+                left: 10px;
+                img {
+                    width: 108px;
+                    height: 50px;
+                    border-radius: 4px;
+                }
+            }
+            .mobile-meta {
+                display: none;
+            }
+        }
+    }
+    @media screen and (min-width: @desktopViewportWidth) {
+        left: 25%;
+    }
+}
+
+// EOF

@@ -1,0 +1,59 @@
+/*
+ *
+ * Website - Structure
+ * ================================================
+ * All styles for the DFG Viewer website which
+ * embraces the viewer itself
+ *
+ * Author: Thomas Jung <thomas@tjwd.de>
+ * License: All rights reserved
+ *
+ */
+
+.website {
+    .main-wrapper {
+	    position: relative;
+	    padding: 0 15px;
+	    min-height: 95%;
+	    margin-bottom: 60px;
+	    @media screen and (min-width: @phoneLandscapeViewportWidth) {
+	        padding: 0 30px;
+	    }
+	    @media screen and (min-width: @tabletViewportWidth) {
+	        padding: 0 50px;
+	        margin: 30px 30px 60px 30px;
+	    }
+	    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+	        width: 900px;
+	        margin: 30px auto 60px auto;
+	        overflow: visible;
+	    }
+	    @media screen and (min-width: @desktopViewportWidth) {
+	        width: 1110px;
+	    }
+    }
+    .footer {
+        position: relative;
+        padding: 30px 0;
+        margin-top: 100px;
+        border-top: 1px solid @light-blue;
+        p {
+            font-size: 12px;
+            color: @light-blue;
+        }
+        a.totop {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            margin-left: -20px;
+            height: 40px;
+            width: 40px;
+            .text-hide();
+            border-radius: 20px;
+            border: 3px solid #fff;
+            background: @light-blue url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHN0eWxlPi5zdDB7ZmlsbDpub25lO3N0cm9rZTojMjQ2O3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMH08L3N0eWxlPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNSA3djE1LjZNOC42IDEzLjRMMTUgN2w2LjQgNi40Ii8+PC9zdmc+') no-repeat center center;
+        }
+    }
+}
+
+// EOF

@@ -1,0 +1,272 @@
+/*
+ *
+ * Website - Home
+ * ================================================
+ * All styles for the DFG Viewer website which
+ * embraces the viewer itself
+ *
+ * Author: Thomas Jung <thomas@tjwd.de>
+ * License: All rights reserved
+ *
+ */
+
+.website.home {
+    .sticky-header {
+        background: transparent;
+        .transition();
+        h1 {
+            opacity: 0;
+            .transform(translateY(-40px));
+            .transition();
+        }
+        nav ul.main-nav.open {
+            background: fade(@base-blue,95%);
+        }
+        .scrolled& {
+            background: fade(@base-blue,95%);
+            h1 {
+                opacity: 1;
+                .transform(translateY(0));
+            }
+        }
+    }
+    .header-image {
+        height: 310px;
+        top: 0;
+        &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: fade(@base-blue, 80%) url('../Images/dfgviewerLogo.svg') no-repeat center center;
+            background-size: 70% auto;
+            content: " ";
+        }
+    }
+    h2, ol.breadcrumb {
+        display: none;
+    }
+    .home-section {
+        text-align: center;
+        border-bottom: 1px solid @light-blue;
+        margin: 0;
+        padding: 50px 0;
+        h3 {
+            margin: 0;
+        }
+        a.more {
+            padding-right: 15px;
+            background: url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHN0eWxlPi5zdDB7ZmlsbDpub25lO3N0cm9rZTojM2M3N2IzO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMH08L3N0eWxlPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xOC4xIDkuOEgyTTkuMyAxbDguOCA4LjgtOC44IDguOCIvPjwvc3ZnPg==') no-repeat right center;
+            background-size: 12px 12px;
+            font-weight: bold;
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+        &:last-child {
+            border: 0;
+            padding-bottom: 0;
+        }
+        &.mission {
+            padding-top: 40px;
+            h3 {
+                display: none;
+            }
+            p {
+                margin-top: 0;
+            }
+        }
+        &.demo {
+            .demo-list {
+                li {
+                    position: relative;
+                    width: 100%;
+                    line-height: 1.4 !important;
+                    margin-bottom: 30px;
+                    &:before {
+                        display: none;
+                        content: none;
+                    }
+                    a {
+                        position: relative;
+                        padding-top: 290px;
+                        display: block;
+                        img {
+                            position: absolute;
+                            left: 50%;
+                            margin-left: -100px;
+                            top: 0;
+                            width: 200px;
+                            height: 270px;
+                            border: 1px solid rgba(0,0,0,0.17);
+                            z-index: 30;
+                        }
+                        &:before, &:after {
+                            position: absolute;
+                            left: 50%;
+                            width: 200px;
+                            height: 270px;
+                            background: #fff;
+                            border: 1px solid rgba(0,0,0,0.17);
+                            content: " ";
+                        }
+                        &:before {
+                            top: 0;
+                            margin-left: -100px;
+                            .transform(rotate(-3deg));
+                            z-index: 22;
+                        }
+                        &:after {
+                            top: 5px;
+                            margin-left: -94px;
+                            .transform(rotate(2deg));
+                            z-index: 21;
+                        }
+                        span {
+                            display: block;
+                            &.title {
+                                font-weight: bold;
+                            }
+                            &.uid {
+                                display: none;
+                            }
+                            &.institute {
+                                color: @light-blue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (min-width: @phoneLandscapeViewportWidth) {
+        .header-image {
+            height: 250px;
+        }
+        .home-section {
+            &.mission {
+                padding-top: 25px;
+                &:before {
+                    top: -70px;
+                }
+            }
+            &.demo {
+                .demo-list {
+                    margin: 0 -20px;
+                    li {
+                        width: 33%;
+                        float: left;
+                        margin: 0;
+                        a {
+                            padding-top: 230px;
+                            img {
+                                margin-left: -80px;
+                                width: 160px;
+                                height: 216px;
+                            }
+                            &:before, &:after {
+                                width: 160px;
+                                height: 216px;
+                            }
+                            &:before {
+                                margin-left: -80px;
+                            }
+                            &:after {
+                                margin-left: -74px;
+                            }
+                            span {
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                    .clearfix();
+                }
+            }
+        }
+    }
+    @media screen and (min-width: @tabletViewportWidth) {
+        .header-image {
+            height: 340px;
+            &:after {
+                background-size: 50% auto;
+            }
+        }
+        .sticky-header {
+            .scrolled& {
+                background: transparent;
+                h1 {
+                    opacity: 0;
+                    .transform(translateY(-40px));
+                }
+            }
+        }
+    }
+    @media screen and (min-width: @desktopViewportWidth) {
+        .header-image {
+            height: 440px;
+        }
+        .home-section {
+            position: relative;
+            text-align: left;
+            padding: 100px 0;
+            &:before {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 350px;
+                height: 350px;
+                opacity: 0.1;
+                background: url(../Images/homepageIllustrations.svg) no-repeat 0 0;
+                background-size: 700px 700px;
+                content: " ";
+                overflow: hidden;
+            }
+            &.demo {
+                &:before {
+                    content: none;
+                }
+                .demo-list {
+                    li {
+                        width: 33%;
+                        float: left;
+                        a {
+                            padding-top: 240px;
+                            img {
+                                left: 0;
+                                margin-left: 0;
+                            }
+                            &:before {
+                                left: 0;
+                                margin-left: 0;
+                            }
+                            &:after {
+                                left: 6px;
+                                margin-left: 0;
+                            }
+                            span.uid {
+                                color: @light-blue;
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+            &.metadata {
+                &:before {
+                    left: -130px;
+                    top: 40px;
+                    right: auto;
+                    background-position: 0 -350px;
+                }
+            }
+            &.mailinglist {
+                &:before {
+                    background-position: -350px -350px;
+                }
+            }
+        }
+    }
+}
+
+// EOF
