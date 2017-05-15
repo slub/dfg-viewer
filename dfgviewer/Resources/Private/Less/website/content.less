@@ -127,8 +127,68 @@
             overflow: hidden;
             overflow: scroll;
         }
+        form {
+            border: 1px solid @light-blue;
+            border-width: 1px 0;
+            padding: 20px 0;
+            margin: 50px 0;
+            br {
+                display: none;
+            }
+            h3 {
+                line-height: 1;
+                margin: 0;
+            }
+            fieldset {
+                min-width: 0;
+                legend {
+                    display: none;
+                }
+            }
+            label {
+                margin-top: 20px;
+                text-transform: uppercase;
+                color: @light-blue;
+                display: block;
+                font-size: 12px;
+                font-weight: bold;
+            }
+            input[type="text"], input[type="email"], input[type="password"], textarea {
+                position: relative;
+                border: 1px solid transparent;
+                border-color: @light-blue transparent transparent @light-blue;
+                background: lighten(@light-blue,18%);
+                width: 100%;
+                display: block;
+                padding: 10px;
+                font-size: 14px;
+                line-height: 1.7;
+                &:focus {
+                    background: lighten(@light-blue,22%);
+                    outline: 0 none;
+                }
+            }
+            input[type="submit"] {
+                position: relative;
+                width: 100%;
+                margin-top: 20px;
+                background: @base-blue;
+                color: #fff;
+                border: 0 none;
+                padding: 10px;
+                font-weight: bold;
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+        }
         @media screen and (min-width: @desktopViewportWidth) {
             padding: 0 150px;
+            form {
+                margin: 70px 0;
+                input[type="submit"] {
+                    width: 24%;
+                }
+            }
         }
     }
 }
