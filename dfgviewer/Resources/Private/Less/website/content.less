@@ -1,0 +1,136 @@
+/*
+ *
+ * Website - Header
+ * ================================================
+ * All styles for the DFG Viewer website which
+ * embraces the viewer itself
+ *
+ * Author: Thomas Jung <thomas@tjwd.de>
+ * License: All rights reserved
+ *
+ */
+
+.website {
+    .page-container {
+        text-align: left;
+        line-height: 1.7;
+        h3 {
+            margin: 40px 0 -15px 0;
+            color: @base-blue;
+            font-size: 22px;
+        }
+        p {
+            margin: 30px 0;
+            &.abstract {
+                padding: 12px 20px;
+                background: lighten(@light-blue,18%);
+            }
+        }
+        a[href$=".jpg"] {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            display: block;
+            background: lighten(@light-blue,20%);
+        }
+        span{
+            &.quote {
+                font-style:italic;
+                quotes:"\00BB" "\00AB" "\203A" "\2039";
+                &:before {
+                    content:open-quote;
+                }
+                &:after {
+                    content:close-quote;
+                }
+            }
+            &.information {
+                display: block;
+                padding: 8px 10px 8px 40px;
+                color: @base-blue;
+                background: url('data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCI+PHN0eWxlPi5zdDB7c3Ryb2tlLWxpbmVjYXA6cm91bmR9LnN0MCwuc3Qxe2ZpbGw6bm9uZTtzdHJva2U6IzI0NjtzdHJva2Utd2lkdGg6MS41O3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMH08L3N0eWxlPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjE0LjkiIGN5PSIxNSIgcj0iMTMuMSIvPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMi4zIDIyLjFoNi4zTTEzLjQgMTIuN2gyLjF2OC45Ii8+PHBhdGggY2xhc3M9InN0MSIgZD0iTTE0LjkgNy45Yy0uMyAwLS41LjItLjUuNXMuMi41LjUuNS41LS4yLjUtLjVjLjEtLjItLjItLjUtLjUtLjV6Ii8+PC9zdmc+') no-repeat 0 center;
+            }
+        }
+        ul {
+            li {
+                position: relative;
+                padding-left: 16px;
+                line-height: 1.7 !important;
+                &:before {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    content: "\00bb";
+                    color: @light-blue;
+                }
+            }
+        }
+        ol {
+            list-style: none;
+            li {
+                position: relative;
+                margin: 15px 0;
+                counter-increment: step-counter;
+                padding-left: 30px;
+                &:before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 10px;
+                    width: 1px;
+                    background: lighten(@light-blue, 12%);
+                    content: " ";
+                }
+                &:after {
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    height: 20px;
+                    width: 20px;
+                    margin-top: -10px;
+                    content: counter(step-counter);
+                    color: #fff;
+                    background: @light-blue;
+                    border-radius: 10px;
+                    display: block;
+                    line-height: 20px;
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+            }
+        }
+        table {
+            position: relative;
+            border: 1px solid @light-blue;
+            font-size: 14px;
+            width: 100%;
+            th, td {
+                padding: 5px;
+            }
+            th {
+                background: @light-blue;
+                color: #fff;
+            }
+            td {
+                border: 1px solid lighten(@light-blue,10%);
+            }
+            .no-touchevents & {
+                tr:hover {
+                    background: lighten(@light-blue,20%);
+                }
+            }
+        }
+        .responsive-table {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            overflow: scroll;
+        }
+        @media screen and (min-width: @desktopViewportWidth) {
+            padding: 0 150px;
+        }
+    }
+}
+
+// EOF
