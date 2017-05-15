@@ -56,7 +56,7 @@ page.bodyTag = <body class="website home">
 
 [globalVar = TSFE:id = {$config.kitodoPageView}]
 page {
-  bodyTag = <body class="dfgviewer">
+  bodyTag = <body class="dfgviewer hidden">
   10 {
     file = EXT:dfgviewer/Resources/Private/Templates/Kitodo.html
 
