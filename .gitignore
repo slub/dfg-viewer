@@ -6,10 +6,6 @@
 .idea/
 .DS_Store
 node_modules
-dfgviewer/Resources/Public/Css/allStyles.css
 dfgviewer/Resources/Public/Css/allStyles.css.map
-dfgviewer/Resources/Public/Css/webStyles.css
 dfgviewer/Resources/Public/Css/webStyles.css.map
-dfgviewer/Resources/Public/Js/allScripts.js
-dfgviewer/Resources/Public/Js/webScripts.js
 templates/
