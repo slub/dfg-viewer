@@ -51,13 +51,6 @@ $metadata = array (
 		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
 		'is_listed' => 1,
 	),
-	'type' => array (
-		'hidden' => 1,
-		'format' => array (),
-		'default_value' => '',
-		'wrap' => '',
-		'is_listed' => 1,
-	),
 	'author' => array (
 		'hidden' => 0,
 		'format' => array (
@@ -114,19 +107,6 @@ $metadata = array (
 		'default_value' => '',
 		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentTitle\nvalue.ifEmpty.wrap = [|]\nvalue.required = 1\nall.noTrimWrap = |<h2>|</h2> |",
 		'is_listed' => 1,
-	),
-	'parentTitle' => array (
-		'hidden' => 1,
-		'format' => array (
-			array (
-				'encoded' => 1,
-				'xpath' => 'concat(./mods:relatedItem[@type="host"]/mods:titleInfo[not(@type="alternative")]/mods:nonSort," ",./mods:relatedItem[@type="host"]/mods:titleInfo[not(@type="alternative")]/mods:title)',
-				'xpath_sorting' => '',
-			),
-		),
-		'default_value' => '',
-		'wrap' => '',
-		'is_listed' => 0,
 	),
 	'volume' => array (
 		'hidden' => 0,
@@ -282,5 +262,43 @@ $metadata = array (
 		'default_value' => '',
 		'wrap' => "key.wrap = |&nbsp;\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=8002&TRM=\nall.noTrimWrap = |<span class=\"catid\">[|]</span> |",
 		'is_listed' => 1,
-	)
+	),
+	'title' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => 'concat(./mods:titleInfo[not(@type="alternative")]/mods:nonSort," ",./mods:titleInfo[not(@type="alternative")]/mods:title," ",./mods:titleInfo[not(@type="alternative")]/mods:partNumber," ",./mods:titleInfo[not(@type="alternative")]/mods:partName)',
+				'xpath_sorting' => '',
+			),
+			array (
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt class=\"tx-dlf-title\">|</dt>\nvalue.ifEmpty.field = parentTitle\nvalue.ifEmpty.wrap = [|]\nvalue.required = 1\nvalue.wrap = <dd class=\"tx-dlf-title\">|</dd>",
+		'is_listed' => 1,
+	),
+	'parentTitle' => array (
+		'hidden' => 1,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => 'concat(./mods:relatedItem[@type="host"]/mods:titleInfo[not(@type="alternative")]/mods:nonSort," ",./mods:relatedItem[@type="host"]/mods:titleInfo[not(@type="alternative")]/mods:title)',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => '',
+		'is_listed' => 0,
+	),
+	'type' => array (
+		'hidden' => 1,
+		'format' => array (),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt class=\"tx-dlf-type\">|</dt>\nvalue.required = 1\nvalue.wrap = <dd class=\"tx-dlf-type\">|</dd>",
+		'is_listed' => 1,
+	),
 );

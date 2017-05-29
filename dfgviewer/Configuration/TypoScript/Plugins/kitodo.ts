@@ -93,7 +93,7 @@ plugin.tx_dlf_toc {
 		1.NO.stdWrap.ifEmpty.append = TEXT
 		1.NO.stdWrap.ifEmpty.append.fieldRequired = volume
 		1.NO.stdWrap.ifEmpty.append.field = volume
-		1.NO.stdWrap.ifEmpty.append.warp = &nbsp;|
+		1.NO.stdWrap.ifEmpty.append.wrap = &nbsp;|
 		1.NO.stdWrap.dataWrap = | <span class="pagination">{field:pagination}</span>
 		1.NO.doNotLinkIt.field = doNotLinkIt
 		1.NO.ATagTitle.field = type
