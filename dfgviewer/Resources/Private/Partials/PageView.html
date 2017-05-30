@@ -31,9 +31,9 @@
     </f:if>
     <div class="document-functions">
         <div class="provider">
-          <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL' />" title="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner' />">
-          <img src="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerLogo' />"
-            title="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />"
+          <f:link.external uri="<dv:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]' />" title="<dv:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]' />">
+          <img src="<dv:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerLogo)[1]' />"
+            title="<dv:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]' />"
             alt="Abbildung eines Logo"
             />
           </f:link.external>
@@ -42,11 +42,11 @@
             <dt class="tx-dlf-title">Titel</dt>
             <dd class="tx-dlf-title">
               <a href="#">
-                <dv:xpath xpath='//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName' />
+                <dv:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName)[1]' />
               </a>
             </dd>
             <dt>Autor</dt>
-            <dd><dv:xpath xpath='//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm' />
+            <dd><dv:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm)[1]' />
             </dd>
           </dl>
         </div>
@@ -56,13 +56,13 @@
             <a href="#" title="Links">Links</a>
             <ul>
               <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
+                  <f:link.external uri="<dv:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation)[1]' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
               </li>
               <li>
-                  <f:link.external uri="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference' />" class="local-catalog" title="<f:translate key='provider.local_catalogue' extensionName='dfgviewer' />"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
+                  <f:link.external uri="<dv:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference)[1]' />" class="local-catalog" title="<f:translate key='provider.local_catalogue' extensionName='dfgviewer' />"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
               </li>
               <li>
-                  <f:link.email email="<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact' />" class="local-contact" title="<f:translate key='provider.email_provider' extensionName='dfgviewer' /> (<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />)"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
+                  <f:link.email email="<dv:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact)[1]' />" class="local-contact" title="<f:translate key='provider.email_provider' extensionName='dfgviewer' /> (<dv:xpath xpath='//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner' />)"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
               </li>
                 <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
             </ul>
@@ -125,7 +125,7 @@
               </f:else>
             </f:if>
           </li>
-          <f:if condition="<dv:xpath xpath='//mets:fileSec/mets:fileGrp[@USE=\"FULLTEXT\"]/mets:file[1]/mets:FLocat/@xlink:href' />">
+          <f:if condition="<dv:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"FULLTEXT\"]/mets:file[1]/mets:FLocat/@xlink:href)[1]' />">
             <li class="fulltext">
               <f:if condition="{gp-double} == 1">
                 <f:then>
