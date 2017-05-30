@@ -139,12 +139,12 @@
             </f:else>
           </f:if>
           <f:if condition="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:sru' />">
-          <f:then>
-            <li class="submenu search">
-                <a href="#" title="Search">Search</a>
-                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
-            </li>
-          </f:then>
+            <f:then>
+              <li class="submenu search">
+                  <a href="#" title="Search">Search</a>
+                  <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
+              </li>
+            </f:then>
           </f:if>
       </ul>
     </div>
