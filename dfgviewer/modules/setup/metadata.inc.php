@@ -35,7 +35,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'repository' => array (
@@ -48,34 +48,8 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
-	),
-	'author' => array (
-		'hidden' => 0,
-		'format' => array (
-			array (
-				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title/teihdr:persName[@role="author"]',
-				'xpath_sorting' => '',
-			),
-		),
-		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt><dd>\nvalue.ifEmpty.field = parentAuthor\nvalue.required = 1\nvalue.noTrimWrap = ||; |\nall.substring = 0,-2\nall.wrap = |</dd>",
-		'is_listed' => 1,
-	),
-	'parentAuthor' => array (
-		'hidden' => 1,
-		'format' => array (
-			array (
-				'encoded' => 1,
-				'xpath' => './mods:relatedItem[@type="host"]/mods:name[./mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm',
-				'xpath_sorting' => '',
-			),
-		),
-		'default_value' => '',
-		'wrap' => '',
-		'is_listed' => 0,
 	),
 	'shelfmark' => array (
 		'hidden' => 0,
@@ -87,25 +61,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<h2>|,</h2> |",
-		'is_listed' => 1,
-	),
-	'title' => array (
-		'hidden' => 0,
-		'format' => array (
-			array (
-				'encoded' => 1,
-				'xpath' => 'concat(./mods:titleInfo[not(@type="alternative")]/mods:nonSort," ",./mods:titleInfo[not(@type="alternative")]/mods:title," ",./mods:titleInfo[not(@type="alternative")]/mods:partNumber," ",./mods:titleInfo[not(@type="alternative")]/mods:partName)',
-				'xpath_sorting' => '',
-			),
-			array (
-				'encoded' => 2,
-				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title',
-				'xpath_sorting' => '',
-			),
-		),
-		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentTitle\nvalue.ifEmpty.wrap = [|]\nvalue.required = 1\nall.noTrimWrap = |<h2>|</h2> |",
+		'wrap' => "key.wrap = <dt>|</dt>|: </span>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'volume' => array (
@@ -118,7 +74,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nall.noTrimWrap = |<dd>|</dd> |",
 		'is_listed' => 1,
 	),
 	'issue' => array (
@@ -131,7 +87,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.noTrimWrap = || |\nvalue.if.value.field = type\nvalue.if.equals = issue\nvalue.required = 1\nall.noTrimWrap = |<span class=\"volume\">|</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = type\nvalue.if.equals = issue\nvalue.required = 1\nall.noTrimWrap = |<dd>|</dd> |",
 		'is_listed' => 1,
 	),
 	'material' => array (
@@ -144,7 +100,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nall.noTrimWrap = |<dd>|,</dd> |",
 		'is_listed' => 1,
 	),
 	'leavesCount' => array (
@@ -157,7 +113,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nall.noTrimWrap = |<dd>|,</dd> |",
 		'is_listed' => 1,
 	),
 	'format' => array (
@@ -170,7 +126,33 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.if.value.field = format\nvalue.if.equals = x\nvalue.if.negate = 1\nvalue.required = 1\nall.noTrimWrap = |<span class=\"date\">|,</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = format\nvalue.if.equals = x\nvalue.if.negate = 1\nvalue.required = 1\nall.noTrimWrap = |<dd>|,</dd> |",
+		'is_listed' => 1,
+	),
+	'vd16' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => './mods:identifier[@type="vd16"]',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gateway-bayern.bib-bvb.de/aleph-cgi/bvb_suche?sid=VD16&find_code_1=WVD&find_request_1=\nall.noTrimWrap = |<dd>[|]</dd>|",
+		'is_listed' => 1,
+	),
+	'vd17' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => './mods:identifier[@type="vd17"]',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=8002&TRM=\nall.noTrimWrap = |<dd>[|]</dd>|",
 		'is_listed' => 1,
 	),
 	'place' => array (
@@ -183,7 +165,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.ifEmpty.field = parentPlace\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.ifEmpty.field = parentPlace\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<dd>|</dd> |",
 		'is_listed' => 1,
 	),
 	'parentPlace' => array (
@@ -214,7 +196,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <span style=\"display:none;\">|: </span>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<span class=\"date\">|</span> |",
+		'wrap' => "key.wrap = <dt>|</dt>|: </span>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<dd>|</dd> |",
 		'is_listed' => 1,
 	),
 	'year' => array (
@@ -237,31 +219,31 @@ $metadata = array (
 		'wrap' => '',
 		'is_listed' => 0,
 	),
-	'vd16' => array (
+	'author' => array (
 		'hidden' => 0,
 		'format' => array (
 			array (
-				'encoded' => 1,
-				'xpath' => './mods:identifier[@type="vd16"]',
+				'encoded' => 2,
+				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title/teihdr:persName[@role="author"]',
 				'xpath_sorting' => '',
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = |&nbsp;\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gateway-bayern.bib-bvb.de/aleph-cgi/bvb_suche?sid=VD16&find_code_1=WVD&find_request_1=\nall.noTrimWrap = |<span class=\"catid\">[|]</span> |",
+		'wrap' => "key.wrap = <dt>|</dt><dd>\nvalue.ifEmpty.field = parentAuthor\nvalue.required = 1\nvalue.noTrimWrap = ||; |\nall.substring = 0,-2\nall.wrap = |</dd>",
 		'is_listed' => 1,
 	),
-	'vd17' => array (
-		'hidden' => 0,
+	'parentAuthor' => array (
+		'hidden' => 1,
 		'format' => array (
 			array (
 				'encoded' => 1,
-				'xpath' => './mods:identifier[@type="vd17"]',
+				'xpath' => './mods:relatedItem[@type="host"]/mods:name[./mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm',
 				'xpath_sorting' => '',
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = |&nbsp;\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=8002&TRM=\nall.noTrimWrap = |<span class=\"catid\">[|]</span> |",
-		'is_listed' => 1,
+		'wrap' => '',
+		'is_listed' => 0,
 	),
 	'title' => array (
 		'hidden' => 0,
