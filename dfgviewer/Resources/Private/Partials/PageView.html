@@ -89,11 +89,29 @@
                 </f:if>
             </f:else>
           </f:if>
-            <f:if condition="<dv:downloadLinks type='work' /> !=''">
+          <f:if condition="<dv:downloadLinks type='work' /> !=''">
+            <f:then>
               <li>
-                <f:link.external uri="<dv:downloadLinks type='work' />" class="download-document" title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" /></f:link.external>
+                <f:link.external
+                  uri="<dv:downloadLinks type='work' />"
+                  class="download-document"
+                  target="_blank"
+                  title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" /></f:link.external>
               </li>
-            </f:if>
+            </f:then>
+            <f:else>
+              <f:if condition="<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />">
+                <li>
+                  <f:link.external
+                    uri="http://digital.slub-dresden.de/fileadmin/data/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />_tif/jpegs/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />.pdf"
+                    class="download-document"
+                    target="_blank"
+                    title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" />
+                  </f:link.external>
+                </li>
+              </f:if>
+            </f:else>
+          </f:if>
             </ul>
           </li>
           <li class="doublepage">
