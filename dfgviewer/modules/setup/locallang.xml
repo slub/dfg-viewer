@@ -129,6 +129,7 @@
 			<label index="parentYear">Year of Publication (Parent)</label>
 			<label index="vd16">VD16</label>
 			<label index="vd17">VD17</label>
+			<label index="format">Physical Form</label>
 			<label index="shelfmark">Shelfmark</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -256,6 +257,7 @@
 			<label index="vd16">VD16</label>
 			<label index="vd17">VD17</label>
 			<label index="shelfmark">Signatur</label>
-		</languageKey>
+			<label index="format">Format</label>
+	</languageKey>
 	</data>
 </T3locallang>
