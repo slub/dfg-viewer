@@ -47,7 +47,7 @@ class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
      *
      * @param string $xpath xpath of elements
      * @param string $type type of field requested
-     * @return array
+     * @return string
      */
     public function render($xpath, $field = '')
     {
