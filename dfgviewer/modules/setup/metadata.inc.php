@@ -61,7 +61,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>|: </span>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'volume' => array (
@@ -74,7 +74,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nall.noTrimWrap = |<dd>|</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = type\nvalue.if.equals = volume\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'issue' => array (
@@ -87,7 +87,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = type\nvalue.if.equals = issue\nvalue.required = 1\nall.noTrimWrap = |<dd>|</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = type\nvalue.if.equals = issue\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'material' => array (
@@ -100,7 +100,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nall.noTrimWrap = |<dd>|,</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'leavesCount' => array (
@@ -113,7 +113,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nall.noTrimWrap = |<dd>|,</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'format' => array (
@@ -126,7 +126,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = format\nvalue.if.equals = x\nvalue.if.negate = 1\nvalue.required = 1\nall.noTrimWrap = |<dd>|,</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.if.value.field = format\nvalue.if.equals = x\nvalue.if.negate = 1\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'vd16' => array (
@@ -139,7 +139,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gateway-bayern.bib-bvb.de/aleph-cgi/bvb_suche?sid=VD16&find_code_1=WVD&find_request_1=\nall.noTrimWrap = |<dd>[|]</dd>|",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gateway-bayern.bib-bvb.de/aleph-cgi/bvb_suche?sid=VD16&find_code_1=WVD&find_request_1=\nvalue.wrap = <dd>[|]</dd>",
 		'is_listed' => 1,
 	),
 	'vd17' => array (
@@ -152,7 +152,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=8002&TRM=\nall.noTrimWrap = |<dd>[|]</dd>|",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.setContentToCurrent = 1\nvalue.required = 1\nvalue.typolink.parameter.current = 1\nvalue.typolink.parameter.rawUrlEncode = 1\nvalue.typolink.parameter.prepend = TEXT\nvalue.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&IKT=8002&TRM=\nvalue.wrap = <dd>[|]</dd>",
 		'is_listed' => 1,
 	),
 	'place' => array (
@@ -165,7 +165,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.ifEmpty.field = parentPlace\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<dd>|</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.ifEmpty.field = parentPlace\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'parentPlace' => array (
@@ -196,7 +196,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>|: </span>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nall.noTrimWrap = |<dd>|</dd> |",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'year' => array (
