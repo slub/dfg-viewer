@@ -11,7 +11,7 @@ config {
 	sendCacheHeaders = 1
 	headerComment =
 
-	spamProtectEmailAddresses = 3
+	spamProtectEmailAddresses = ascii
 	spamProtectEmailAddresses_atSubst = &#64;
 
 	tx_realurl_enable = 1
