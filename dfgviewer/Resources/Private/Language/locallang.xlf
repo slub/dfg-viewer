@@ -29,6 +29,9 @@
 		<trans-unit id="fulltext.no_fulltext_gridpage">
 			<source>No fulltext in gridpage mode.</source>
 		</trans-unit>
+		<trans-unit id="fullscreen">
+			<source>Fullscreen Mode</source>
+		</trans-unit>
 		<trans-unit id="fulltext.no_fulltext_double">
 			<source>No fulltext in double page mode.</source>
 		</trans-unit>

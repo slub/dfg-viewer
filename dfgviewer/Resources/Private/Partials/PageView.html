@@ -182,11 +182,21 @@
       </ul>
     </div>
     <div class="view-functions">
-        <ul>
-          <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
-          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
-        </ul>
-        <div class="tx-dlf-toolbox"></div>
+      <f:if condition="{gp-pagegrid} == 1">
+        <f:then>
+          <ul>
+            <li class="zoom">
+              <a class="fullscreen" title="<f:translate key='fullscreen' extensionName='dfgviewer' />"><f:translate key='fullscreen' extensionName='dfgviewer' /></a>
+            </li>
+          </ul>
+        </f:then>
+        <f:else>
+          <ul>
+            <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
+            <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
+          </ul>
+        </f:else>
+      </f:if>
     </div>
     <div class="page-control">
       <f:if condition="{gp-pagegrid} == 1">
