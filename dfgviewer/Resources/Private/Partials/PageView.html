@@ -155,17 +155,21 @@
               </f:if>
             </li>
           </f:if>
-          <f:if condition="{gp-pagegrid} == 1">
+          <f:if condition="<dv:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"MIN\"]//mets:file/mets:FLocat/@xlink:href)[1]' />">
             <f:then>
-              <li class="grid">
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="active" title="<f:translate key='double.singlePageView' extensionName='dfgviewer' />"><f:translate key='double.singlePageView' extensionName='dfgviewer' /></f:link.page>
-              </li>
+              <f:if condition="{gp-pagegrid} == 1">
+                <f:then>
+                  <li class="grid">
+                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}}" class="active" title="<f:translate key='double.singlePageView' extensionName='dfgviewer' />"><f:translate key='double.singlePageView' extensionName='dfgviewer' /></f:link.page>
+                  </li>
+                </f:then>
+                <f:else>
+                  <li class="grid">
+                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}}" title="<f:translate key='gridpage.preview' extensionName='dfgviewer' />"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
+                  </li>
+                </f:else>
+              </f:if>
             </f:then>
-            <f:else>
-              <li class="grid">
-                  <f:link.page pageUid="{kitodoPageView}" additionalParams="{0: {tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}}" title="<f:translate key='gridpage.preview' extensionName='dfgviewer' />"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
-              </li>
-            </f:else>
           </f:if>
           <f:if condition="<dv:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:sru' />">
             <f:then>
