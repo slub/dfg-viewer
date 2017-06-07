@@ -478,6 +478,7 @@
     position: absolute;
     top: 70px;
     right: 15px;
+    z-index: 1010;
     .slider-container {
         background: fade(@base-blue,90%);
         padding: 30px 20px 10px 56px;
@@ -551,23 +552,37 @@
             background-position: -520px 0;
         }
         .checkbox, button.reset-btn {
+            position: relative;
             border: 0 none;
             color: #fff;
             font-size: 11px;
             margin-top: -15px;
             padding-left: 36px;
             line-height: 40px;
-            background: url(../Images/controlIcons.svg) no-repeat 0 0;
             display: inline-block;
+            background: transparent;
+            &:before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 40px;
+                height: 40px;
+                background: url(../Images/controlIcons.svg) no-repeat 0 0;
+                content: " ";
+            }
         }
         button.reset-btn {
             margin-left: 10px;
-            background-position: -520px -80px;
             outline: none;
+            &:before {
+                background-position: -520px -80px;
+            }
         }
         .checkbox {
             margin-left: -36px;
-            background-position: -520px -40px;
+            &:before {
+                background-position: -520px -40px;
+            }
             label input {
                 margin-right: 4px;
             }
@@ -610,10 +625,10 @@
     width: 290px;
     left: 50%;
     margin-left: -145px;
-    z-index: 20;
     > div {
         position: absolute;
         bottom: 0;
+        z-index: 1020;
         span {
             display: none;
             a, span {
