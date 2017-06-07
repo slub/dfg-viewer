@@ -155,7 +155,7 @@
               </f:if>
             </li>
           </f:if>
-          <f:if condition="<dv:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"MIN\"]//mets:file/mets:FLocat/@xlink:href)[1]' />">
+          <f:if condition="<dv:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"THUMBS\"]//mets:file/mets:FLocat/@xlink:href)[1]' />">
             <f:then>
               <f:if condition="{gp-pagegrid} == 1">
                 <f:then>
@@ -182,14 +182,32 @@
       </ul>
     </div>
     <div class="view-functions">
-        <ul>
-          <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
-          <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
-        </ul>
-        <div class="tx-dlf-toolbox"></div>
+      <f:if condition="{gp-pagegrid} == 1">
+        <f:then>
+          <ul>
+            <li class="zoom">
+              <a class="fullscreen" title="<f:translate key='fullscreen' extensionName='dfgviewer' />"><f:translate key='fullscreen' extensionName='dfgviewer' /></a>
+            </li>
+          </ul>
+        </f:then>
+        <f:else>
+          <ul>
+            <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
+            <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
+          </ul>
+        </f:else>
+      </f:if>
+      <div class="tx-dlf-toolbox"></div>
     </div>
     <div class="page-control">
+      <f:if condition="{gp-pagegrid} == 1">
+        <f:then>
+          <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_gridpager" />
+        </f:then>
+        <f:else>
           <f:cObject typoscriptObjectPath="lib.navigation_pagecontrol" />
+        </f:else>
+      </f:if>
     </div>
 
   </div>

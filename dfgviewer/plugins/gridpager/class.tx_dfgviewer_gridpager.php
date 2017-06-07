@@ -166,10 +166,6 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 
 		}
 
-		$markerArray['###ZOOM_IN###'] = $this->pi_getLL('zoom-in', '', TRUE);
-		$markerArray['###ZOOM_OUT###'] = $this->pi_getLL('zoom-out', '', TRUE);
-		$markerArray['###ZOOM_FULLSCREEN###'] = $this->pi_getLL('zoom-fullscreen', '', TRUE);
-
 		$content .= $this->cObj->substituteMarkerArray($this->template, $markerArray);
 
 		return $this->pi_wrapInBaseClass($content);
