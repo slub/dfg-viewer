@@ -54,6 +54,14 @@ lib.navigation_viewfunction {
 	pageStep = 10
 	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation-viewfunction.tmpl
 }
+lib.navigation_viewfunction_deactivated = USER
+lib.navigation_viewfunction_deactivated {
+	includeLibs = typo3conf/ext/dlf/plugins/navigation/class.tx_dlf_navigation.php
+	userFunc = tx_dlf_navigation->main
+	pages = {$config.storagePid}
+	pageStep = 10
+	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation-viewfunction-deactivated.tmpl
+}
 
 plugin.tx_dlf_navigation {
 	pages = {$config.storagePid}
