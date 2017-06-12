@@ -1,0 +1,143 @@
+/*
+ *
+ * SRU
+ * ================================================
+ * Inline search field with results and 
+ * additionals (placed in document functions)
+ *
+ * Author: Thomas Jung <thomas@tjwd.de>
+ * License: All rights reserved
+ *
+ */
+
+.document-functions .search {
+    a {
+        background-position: -560px 0;
+    }
+    display: none;
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        display: inline-block;
+        .sru-searchfield {
+            position: absolute;
+            top: 50px;
+            left: -20px;
+            right: auto;
+            bottom: auto;
+            width: auto;
+            font-size: 12px;
+            padding: 15px;
+            z-index: 3000;
+            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: left;
+            color: #fff;
+            transform-origin: center top;
+            opacity: 0;
+            background: fade(@base-blue,90%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            .transition();
+            .transform(scaleY(0) translateY(-100px));
+            label {
+                display: none;
+            }
+            input[type="text"] {
+                padding: 6px 10px;
+                font-size: 12px;
+                width: 280px;
+                color: @base-blue;
+                border: 0 none;
+                outline: none;
+                margin-right: 35px;
+                height: 30px;
+                line-height: 30px;
+                box-shadow: inset 1px 1px 2px fade(@base-blue,20%);
+                &::placeholder {
+                    color: lighten(@light-blue,10%);
+                }
+            }
+            input[type="submit"] {
+                position: absolute;
+                top: 15px;
+                right: 12px;
+                width: 30px;
+                height: 30px;
+                display: block;
+                border: 0 none;
+                .text-hide();
+                background: #fff url(../Images/controlIcons.svg) no-repeat -562px -3px;
+                border-radius: 15px;
+            }
+            #tx-dfgviewer-sru-results-clearing {
+                position: absolute;
+                top: 20px;
+                right: 55px;
+                width: 20px;
+                height: 20px;
+                border-radius: 10px;
+                .text-hide();
+                background: lighten(@light-blue,15%) url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDE1IDE1Ij48c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5zdDB7ZmlsbDpub25lO3N0cm9rZTojNjg4N0EzO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO308L3N0eWxlPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zLjUgMy41bDcgN00xMC41IDMuNWwtNyA3Ii8+PC9zdmc+') no-repeat center center;
+                cursor: pointer;
+            }
+            #tx-dfgviewer-sru-results {
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                background: fade(@base-blue,90%);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                .sru-results-active-indicator {
+                    position: absolute;
+                    top: -10px;
+                    left: 30px;
+                    width: 0;
+                    height: 0;
+                    border: 10px solid transparent;
+                    border-top-width: 0;
+                    border-bottom-color: fade(@base-blue,90%);
+                    content: " ";
+                }
+                ul {
+                    position: relative;
+                    padding: 10px;
+                    margin: 0;
+                    li {
+                        font-size: 12px;
+                        padding: 6px 0;
+                        border-bottom: 1px solid rgba(255,255,255,0.3);
+                        line-height: 1.6;
+                        .highlight {
+                            background: rgba(255,255,255,0.2);
+                            padding: 1px 3px;
+                        }
+                        img {
+                            position: relative;
+                            width: 100%;
+                            height: auto;
+                        }
+                        a {
+                            display: block;
+                            color: #fff;
+                            padding: 4px;
+                            .no-touchevents & {
+                                &:hover {
+                                    .transform(scale(1));
+                                    background: rgba(255,255,255,0.2);
+                                }
+                            }
+                        }
+                        &:last-child {
+                            border-bottom: 0 none;
+                        }
+                    }
+                }
+            }
+        }
+        &.open {
+            .sru-searchfield {
+                .transform(scaleY(1) translateY(0));
+                opacity: 1;
+            }
+        }
+    }
+}

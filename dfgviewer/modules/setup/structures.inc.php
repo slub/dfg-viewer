@@ -65,11 +65,19 @@ $structures = array (
 		'toplevel' => 0,
 		'oai_name' => ''
 	),
+	'bundle' => array (
+		'toplevel' => 0,
+		'oai_name' => ''
+	),
 	'cartulary' => array (
 		'toplevel' => 1,
 		'oai_name' => '',
 	),
 	'chapter' => array (
+		'toplevel' => 0,
+		'oai_name' => ''
+	),
+	'charter' => array (
 		'toplevel' => 0,
 		'oai_name' => ''
 	),

@@ -1,0 +1,72 @@
+config {
+
+	# cat=plugin.tx_dfgviewer/links/010; type=int+; label=Storage PID
+	storagePid =
+
+	# cat=plugin.tx_dfgviewer/links/020; type=int+; label=Root PID
+	rootPid =
+
+	# cat=plugin.tx_dfgviewer/links/030; type=int+; label= Headnavigation PID
+	headNavPid =
+
+	# cat=plugin.tx_dfgviewer/links/030; type=int+; label=Kitodo Page View
+	kitodoPageView =
+
+	# cat=plugin.tx_dfgviewer/piwik/010; type=string; label=Piwik Hostname
+	piwik_hostname =
+
+	# cat=plugin.tx_dfgviewer/piwik/020; type=string; label=Piwik Idsite
+	piwik_idsite =
+
+	# cat=plugin.tx_dfgviewer/piwik/030; type=string; label=Piwik Domains
+	piwik_domains =
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Main template file newspaper
+	templateFileNewspaper = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/template_newspaper.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Metadata template file
+	templateFileMeta = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/metadata.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Adm. Metadata template file
+	templateFileAmd = EXT:dfgviewer/plugins/amd/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Grid Pager template file
+	templateFilePager = EXT:dfgviewer/plugins/gridpager/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Pers. Identifier template file
+	templateFileUri = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/uri.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Page View template file
+	templateFilePage = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/pageview.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Page Grid template file
+	templateFileGrid = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/pagegrid.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Navigation template file
+	templateFileNav = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Table of Contents template file
+	templateFileToc = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toc.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Toolbox template file
+	templateFileToolbox = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolbox.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Download Tool template file
+	templateFileToolPdf = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/downloads.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Fulltext Tool template file
+	templateFileToolFulltext = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/fulltext.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Image manipulation template file
+	templateFileToolImageManipulation = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/imagemanipulation.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Calendar template file
+	templateFileNewspaperCalendar = EXT:dfgviewer/plugins/newspaper-calendar/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Year List template file
+	templateFileNewspaperYears = EXT:dfgviewer/plugins/newspaper-years/template.tmpl
+
+	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=SRU searchform template file
+	templateFileSru = EXT:dfgviewer/plugins/sru/template.tmpl
+
+}

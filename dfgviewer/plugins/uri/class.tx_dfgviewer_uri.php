@@ -114,17 +114,17 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 				if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
 
-					$uris[] = '<a href="'.htmlspecialchars($uri).'">'.htmlspecialchars($uri).'</a>';
+					$uris[] = '<a href="'.htmlspecialchars($uri).'">'.$this->pi_getLL('uriBook', '', TRUE).'</a>';
 
 				} elseif (strpos($uri, 'urn:') === 0) {
 
 					if (strpos($uri, '/fragment/') === FALSE) {
 
-						$uris[] = '<a href="http://nbn-resolving.de/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a class="persistence-document" href="http://nbn-resolving.de/' . $uri . '">' . $this->pi_getLL('uriBook', '', TRUE) . '</a>';
 
 					} else {
 
-						$uris[] = '<a href="http://nbn-resolving.org/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a class="persistence-document" href="http://nbn-resolving.org/' . $uri . '">' . $this->pi_getLL('uriBook', '', TRUE) . '</a>';
 
 					}
 
@@ -134,7 +134,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 			if (!empty($uris)) {
 
-				$markerArray['###URIBOOK###'] = $this->pi_getLL('uriBook', '', TRUE).implode(', ', $uris);
+				$markerArray['###URIBOOK###'] = implode(', ', $uris);
 
 			}
 
@@ -151,17 +151,17 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 				if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
 
-					$uris[] = '<a href="'.htmlspecialchars($uri).'">'.htmlspecialchars($uri).'</a>';
+					$uris[] = '<a class="persistence-page" href="'.htmlspecialchars($uri).'">'.$this->pi_getLL('uriPage', '', TRUE).'</a>';
 
 				} elseif (strpos($uri, 'urn:') === 0) {
 
 					if (strpos($uri, '/fragment/') === FALSE) {
 
-						$uris[] = '<a href="http://nbn-resolving.de/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a class="persistence-page" href="http://nbn-resolving.de/' . $uri . '">' . $this->pi_getLL('uriPage', '', TRUE) . '</a>';
 
 					} else {
 
-						$uris[] = '<a href="http://nbn-resolving.org/' . $uri . '">' . htmlspecialchars($uri) . '</a>';
+						$uris[] = '<a class="persistence-page" href="http://nbn-resolving.org/' . $uri . '">' . $this->pi_getLL('uriPage', '', TRUE) . '</a>';
 
 					}
 
@@ -171,7 +171,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 			if (!empty($uris)) {
 
-				$markerArray['###URIPAGE###'] = $this->pi_getLL('uriPage', '', TRUE).implode(', ', $uris);
+				$markerArray['###URIPAGE###'] = implode(', ', $uris);
 
 			}
 

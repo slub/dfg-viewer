@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-27T13:16:48Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="double.RectoVerso">
+			<source>Adjust recto/verso</source>
+		</trans-unit>
+		<trans-unit id="double.doublePageView">
+			<source>Show double pages</source>
+		</trans-unit>
+		<trans-unit id="double.singlePageView">
+			<source>Show single page</source>
+		</trans-unit>
+		<trans-unit id="download.leftPage">
+			<source>Download left page</source>
+		</trans-unit>
+		<trans-unit id="download.rightPage">
+			<source>Download right page</source>
+		</trans-unit>
+		<trans-unit id="download.singlePage">
+			<source>Download single page</source>
+		</trans-unit>
+		<trans-unit id="download.work">
+			<source>Download whole work</source>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_gridpage">
+			<source>No fulltext in gridpage mode.</source>
+		</trans-unit>
+		<trans-unit id="fullscreen">
+			<source>Fullscreen Mode</source>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_double">
+			<source>No fulltext in double page mode.</source>
+		</trans-unit>
+		<trans-unit id="gridpage.preview">
+			<source>Thumbnail Preview</source>
+		</trans-unit>
+		<trans-unit id="provider.local_presentation">
+			<source>Show in local context</source>
+		</trans-unit>
+		<trans-unit id="provider.local_catalogue">
+			<source>Online Public Access Catalog</source>
+		</trans-unit>
+		<trans-unit id="provider.email_provider">
+			<source>Email to data provider</source>
+		</trans-unit>
+		<trans-unit id="website.last_updated">
+			<source>Last updated</source>
+		</trans-unit>
+		<trans-unit id="website.totop">
+			<source>to top</source>
+		</trans-unit>
+		<trans-unit id="website.jump_totop">
+			<source>Jump to top of page</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

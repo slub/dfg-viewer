@@ -35,8 +35,10 @@
 			<label index="bachelor_thesis">Bachelor Thesis</label>
 			<label index="binding">Binding</label>
 			<label index="bookplate">Bookplate</label>
+			<label index="bundle">Bundle</label>
 			<label index="cartulary">Cartulary</label>
 			<label index="chapter">Chapter</label>
+			<label index="charter">Charter</label>
 			<label index="collation">Collation</label>
 			<label index="colophon">Colophon</label>
 			<label index="contained_work">Contained Work</label>
@@ -129,6 +131,8 @@
 			<label index="parentYear">Year of Publication (Parent)</label>
 			<label index="vd16">VD16</label>
 			<label index="vd17">VD17</label>
+			<label index="format">Physical Form</label>
+			<label index="shelfmark">Shelfmark</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="flash.wrongPageType">Seite ist kein SysOrdner!</label>
@@ -160,8 +164,10 @@
 			<label index="bachelor_thesis">Bachelorarbeit</label>
 			<label index="binding">Einband</label>
 			<label index="bookplate">Exlibris</label>
+			<label index="bundle">Konvolut</label>
 			<label index="cartulary">Kartular</label>
 			<label index="chapter">Kapitel</label>
+			<label index="charter">Urkunde</label>
 			<label index="collation">Bogensignatur</label>
 			<label index="colophon">Kolophon</label>
 			<label index="contained_work">Enthaltenes Werk</label>
@@ -209,7 +215,7 @@
 			<label index="ornament">Buchschmuck</label>
 			<label index="paper">Vortrag</label>
 			<label index="paste_down">Spiegel</label>
-			<label index="periodical">Peridica</label>
+			<label index="periodical">Periodica</label>
 			<label index="photograph">Fotografie</label>
 			<label index="plan">Plan</label>
 			<label index="poster">Plakat</label>
@@ -222,7 +228,7 @@
 			<label index="provenance">Besitznachweis</label>
 			<label index="register">Amtsbuch</label>
 			<label index="report">Bericht</label>
-			<label index="research_paper">Forschungsbericht</label>
+			<label index="research_paper">Forschungsarbeit</label>
 			<label index="scheme">Schema</label>
 			<label index="seal">Siegel</label>
 			<label index="section">Abschnitt</label>
@@ -254,6 +260,8 @@
 			<label index="parentYear">Erscheinungsjahr (Gesamtheit)</label>
 			<label index="vd16">VD16</label>
 			<label index="vd17">VD17</label>
-		</languageKey>
+			<label index="shelfmark">Signatur</label>
+			<label index="format">Format</label>
+	</languageKey>
 	</data>
 </T3locallang>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-06-06T13:48:15Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="double.RectoVerso" approved="yes">
+			<source>Adjust recto/verso</source>
+			<target>Recto/Verso korrigieren</target>
+		</trans-unit>
+		<trans-unit id="double.doublePageView" approved="yes">
+			<source>Show double pages</source>
+			<target>Doppelseitenansicht</target>
+		</trans-unit>
+		<trans-unit id="double.singlePageView" approved="yes">
+			<source>Show single page</source>
+			<target>Einzelseitenansicht</target>
+		</trans-unit>
+		<trans-unit id="download.leftPage" approved="yes">
+			<source>Download left page</source>
+			<target>Linke Seite herunterladen</target>
+		</trans-unit>
+		<trans-unit id="download.rightPage" approved="yes">
+			<source>Download right page</source>
+			<target>Rechte Seite herunterladen</target>
+		</trans-unit>
+		<trans-unit id="download.singlePage" approved="yes">
+			<source>Download single page</source>
+			<target>Einzelseite herunterladen</target>
+		</trans-unit>
+		<trans-unit id="download.work" approved="yes">
+			<source>Download whole work</source>
+			<target>Ganzes Werk herunterladen</target>
+		</trans-unit>
+		<trans-unit id="fullscreen" approved="yes">
+			<source>Fullscreen Mode</source>
+			<target>Vollansicht</target>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_double" approved="yes">
+			<source>No fulltext in double page mode.</source>
+			<target>Keine Volltexte in der Doppelseitenansicht.</target>
+		</trans-unit>
+		<trans-unit id="fulltext.no_fulltext_gridpage" approved="yes">
+			<source>No fulltext in gridpage mode.</source>
+			<target>Keine Volltexte in der Vorschau-Ansicht.</target>
+		</trans-unit>
+		<trans-unit id="gridpage.preview" approved="yes">
+			<source>Thumbnail Preview</source>
+			<target>Vorschaubilder</target>
+		</trans-unit>
+		<trans-unit id="provider.email_provider" approved="yes">
+			<source>Email to data provider</source>
+			<target>Email an Datenprovider</target>
+		</trans-unit>
+		<trans-unit id="provider.local_catalogue" approved="yes">
+			<source>Online Public Access Catalog</source>
+			<target>Lokaler Katalog</target>
+		</trans-unit>
+		<trans-unit id="provider.local_presentation" approved="yes">
+			<source>Show in local context</source>
+			<target>Lokale Präsentation anzeigen</target>
+		</trans-unit>
+		<trans-unit id="website.jump_totop" approved="yes">
+			<source>Jump to top of page</source>
+			<target>zum Seitenanfang springen</target>
+		</trans-unit>
+		<trans-unit id="website.last_updated" approved="yes">
+			<source>Last updated</source>
+			<target>Zuletzt aktualisiert</target>
+		</trans-unit>
+		<trans-unit id="website.totop" approved="yes">
+			<source>to top</source>
+			<target>nach oben</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>
