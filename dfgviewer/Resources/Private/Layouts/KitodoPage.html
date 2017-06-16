@@ -2,7 +2,7 @@
 {namespace dv=Slub\Dfgviewer\ViewHelpers}
 <t3jquery:AddJQuery />
 <dv:titleTag
-	title="<dv:xpath xpath='//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:partName' />"
+	title="<dv:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\"alternative\")]/mods:partName)[1]' />"
 />
 <div class="main-wrapper">
 	  <f:render section="ControlBar" partial="ControlBar" arguments="{_all}" />
