@@ -97,14 +97,14 @@ plugin.tx_dlf_toc {
 		1.wrap = <ul class="toc">|</ul>
 		1.NO = 1
 		1.NO.stdWrap.crop = 55 | &nbsp;... | 1
-		1.NO.stdWrap.ifEmpty.field = type
+		1.NO.stdWrap.ifEmpty.field = tyoe
 		1.NO.stdWrap.ifEmpty.append = TEXT
 		1.NO.stdWrap.ifEmpty.append.fieldRequired = volume
 		1.NO.stdWrap.ifEmpty.append.field = volume
 		1.NO.stdWrap.ifEmpty.append.wrap = &nbsp;|
 		1.NO.stdWrap.dataWrap = | <span class="pagination">{field:pagination}</span>
 		1.NO.doNotLinkIt.field = doNotLinkIt
-		1.NO.ATagTitle.field = type
+		1.NO.ATagTitle.field = title
 		1.NO.allWrap = <span class="a">|</span>
 		1.NO.allWrap.fieldRequired = doNotLinkIt
 		1.NO.wrapItemAndSub = <li>|</li>
