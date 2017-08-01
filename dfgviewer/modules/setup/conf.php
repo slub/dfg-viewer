@@ -28,6 +28,6 @@ $MCONF['access'] = 'admin';
 
 $MCONF['script'] = '_DISPATCH';
 
-$MLANG['default']['tabs_images']['tab'] = '../../res/icons/txdfgviewersetup.png';
+$MLANG['default']['tabs_images']['tab'] = 'EXT:dfgviewer/modules/setup/txdfgviewersetup.png';
 
 $MLANG['default']['ll_ref'] = 'LLL:EXT:dfgviewer/modules/setup/locallang_mod.xml';
