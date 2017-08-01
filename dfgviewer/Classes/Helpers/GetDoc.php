@@ -53,7 +53,7 @@ class GetDoc
       return '';
     }
 
-    $details = $this->doc->physicalPagesInfo[$this->doc->physicalPages[$pagenumber]];
+    $details = $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$pagenumber]];
 		$file = $details['files']['DOWNLOAD'];
 
 		if (!empty($file)) {
@@ -80,9 +80,9 @@ class GetDoc
     }
 
     // Get work link.
-  		if (!empty($this->doc->physicalPagesInfo[$this->doc->physicalPages[0]]['files']['DOWNLOAD'])) {
+  		if (!empty($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD'])) {
 
-  			$workLink = $this->doc->getFileLocation($this->doc->physicalPagesInfo[$this->doc->physicalPages[0]]['files']['DOWNLOAD']);
+  			$workLink = $this->doc->getFileLocation($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD']);
 
   		} else {
 
