@@ -120,6 +120,7 @@
 			<label index="parentAuthor">Author (Parent)</label>
 			<label index="title">Title</label>
 			<label index="parentTitle">Parent Title</label>
+			<label index="context">Context</label>
 			<label index="volume">Volume</label>
 			<label index="issue">Issue</label>
 			<label index="material">Material</label>
@@ -127,6 +128,8 @@
 			<label index="place">Place of Publication</label>
 			<label index="parentPlace">Place of Publication (Parent)</label>
 			<label index="publicationRun">Publication Run</label>
+			<label index="creationDateRun">Period</label>
+			<label index="creationDate">Creation Date</label>
 			<label index="year">Year of Publication</label>
 			<label index="parentYear">Year of Publication (Parent)</label>
 			<label index="vd16">VD16</label>
@@ -249,6 +252,7 @@
 			<label index="parentAuthor">Autor (Gesamtheit)</label>
 			<label index="title">Titel</label>
 			<label index="parentTitle">Gesamttitel</label>
+			<label index="context">Kontext</label>
 			<label index="volume">Band</label>
 			<label index="issue">Ausgabe</label>
 			<label index="material">Beschreibstoff</label>
@@ -256,6 +260,8 @@
 			<label index="place">Erscheinungsort</label>
 			<label index="parentPlace">Erscheinungsort (Gesamtheit)</label>
 			<label index="publicationRun">Erscheinungsverlauf</label>
+			<label index="creationDateRun">Laufzeit</label>
+			<label index="creationDate">Entstehungszeit</label>
 			<label index="year">Erscheinungsjahr</label>
 			<label index="parentYear">Erscheinungsjahr (Gesamtheit)</label>
 			<label index="vd16">VD16</label>

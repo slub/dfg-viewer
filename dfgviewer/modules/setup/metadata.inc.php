@@ -42,6 +42,11 @@ $metadata = array (
 		'hidden' => 0,
 		'format' => array (
 			array (
+				'encoded' => 1,
+				'xpath' => './mods:location/mods:physicalLocation',
+				'xpath_sorting' => '',
+			),
+			array (
 				'encoded' => 2,
 				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:repository',
 				'xpath_sorting' => '',
@@ -54,6 +59,11 @@ $metadata = array (
 	'shelfmark' => array (
 		'hidden' => 0,
 		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => './mods:location/mods:shelfLocator',
+				'xpath_sorting' => '',
+			),
 			array (
 				'encoded' => 2,
 				'xpath' => './teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:idno',
@@ -186,7 +196,33 @@ $metadata = array (
 		'format' => array (
 			array (
 				'encoded' => 1,
-				'xpath' => 'concat(./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="start"]," - ",./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="end"])',
+				'xpath' => 'concat(./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="start"]," ",./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateIssued[@point="end"])',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.replacement.1.search = /(\s)/\nvalue.replacement.1.replace = $1-$1\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nvalue.wrap = <dd>|</dd>",
+		'is_listed' => 1,
+	),
+	'creationDateRun' => array (
+		'hidden' => 1,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => 'concat(./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateCreated[@point="start"]," ",./mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateCreated[@point="end"])',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.replacement.1.search = /(\s)/\nvalue.replacement.1.replace = $1-$1\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nvalue.wrap = <dd>|</dd>",
+		'is_listed' => 1,
+	),
+	'creationDate' => array (
+		'hidden' => 1,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => './mods:originInfo[@eventType="production" or @eventType="publication" or not(./mods:edition="[Electronic ed.]")]/mods:dateCreated[not(@point)]',
 				'xpath_sorting' => '',
 			),
 			array (
@@ -196,7 +232,7 @@ $metadata = array (
 			),
 		),
 		'default_value' => '',
-		'wrap' => "key.wrap = <dt>|</dt>\nvalue.replacement.1.search = /^-$/\nvalue.replacement.1.replace.field = year // parentYear\nvalue.replacement.1.useRegExp = 1\nvalue.replacement.2.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.2.replace = $3.$2.$1\nvalue.replacement.2.useRegExp = 1\nvalue.required = 1\nvalue.noTrimWrap = ||, |\nall.substring = 0,-2\nvalue.wrap = <dd>|</dd>",
+		'wrap' => "key.wrap = <dt>|</dt>\nvalue.replacement.1.search = /([0-9]{4})-([0-1]?[0-9])-([0-3]?[0-9])/\nvalue.replacement.1.replace = $3.$2.$1\nvalue.replacement.1.useRegExp = 1\nvalue.required = 1\nvalue.wrap = <dd>|</dd>",
 		'is_listed' => 1,
 	),
 	'year' => array (
@@ -275,6 +311,19 @@ $metadata = array (
 		'default_value' => '',
 		'wrap' => '',
 		'is_listed' => 0,
+	),
+	'context' => array (
+		'hidden' => 0,
+		'format' => array (
+			array (
+				'encoded' => 1,
+				'xpath' => '//mods:relatedItem[@type="host"]/mods:titleInfo[not(@type="alternative")]/mods:title',
+				'xpath_sorting' => '',
+			),
+		),
+		'default_value' => '',
+		'wrap' => "key.wrap = <dt>|</dt><dd>\nvalue.required = 1\nvalue.noTrimWrap = || &gt; |\nall.substring = 0,-6\nall.wrap = |</dd>",
+		'is_listed' => 1,
 	),
 	'type' => array (
 		'hidden' => 1,
