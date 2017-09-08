@@ -1,3 +1,6 @@
+# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer 4.0
+config.disableWrapInBaseClass=1
+
 plugin.tx_dlf.useragent = {$config.useragent}
 
 # map GET parameter set[mets] --> tx_dlf[id]
