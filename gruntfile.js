@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                 }
             },
             js: {
-                files: ['dfgviewer/Resources/Private/Javascript/s*.js'],
+                files: ['dfgviewer/Resources/Private/Javascript/*.js'],
                 tasks: ['uglify']
             }
         }

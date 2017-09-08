@@ -1,3 +1,6 @@
+# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer 4.0
+config.disableWrapInBaseClass=1
+
 plugin.tx_dlf.useragent = {$config.useragent}
 
 # map GET parameter set[mets] --> tx_dlf[id]
@@ -80,7 +83,7 @@ plugin.tx_dlf_pageview {
 plugin.tx_dlf_pagegrid {
 	pages = {$config.storagePid}
 	limit = 24
-	placeholder = EXT:dfgviewer/res/images/placeholder.jpg
+	placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
 	targetPid = #
 	templateFile = {$config.templateFileGrid}
 }

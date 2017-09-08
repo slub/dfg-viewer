@@ -62,6 +62,20 @@ $(document).ready(function() {
         }
     });
 
+    // Avoid broken image display if METS definitions are wrong
+    $('.provider img').each(function() {
+        if((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0 ) || this.readyState == 'uninitialized' ) {
+            $(this).parents('.provider').addClass('missing-provider-image');
+        }
+    });
+
+    // Check if there are is a download list. Otherwise change a to span to disable button
+    if(!$('.submenu .downloads ul li')[0]) {
+      $("#tab-downloads").replaceWith(function() {
+        return $("<span title=\""+$(this).attr('title')+"\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">" + $(this).html() + "</span>");
+      });
+    }
+
     // if cookie for fullscreen view is present adapat initial page rendering
     if(Cookies.get('tx-dlf-pageview-zoomFullscreen')) {
         $('body').addClass('fullscreen static');
