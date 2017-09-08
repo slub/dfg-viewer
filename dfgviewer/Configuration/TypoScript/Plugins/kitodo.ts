@@ -83,7 +83,7 @@ plugin.tx_dlf_pageview {
 plugin.tx_dlf_pagegrid {
 	pages = {$config.storagePid}
 	limit = 24
-	placeholder = EXT:dfgviewer/res/images/placeholder.jpg
+	placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
 	targetPid = #
 	templateFile = {$config.templateFileGrid}
 }
