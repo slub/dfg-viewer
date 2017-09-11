@@ -69,17 +69,26 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 			$maxPointer = intval(ceil($this->doc->numPages / $this->conf['limit'])) - 1;
 
 			// Set some variable defaults.
-			if (!empty($this->piVars['page'])) {
+			// $this->piVars['page'] may be integer or string (physical structure @ID)
+			if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
 
-				$this->piVars['pointer'] = intval(floor($this->piVars['page'] / $this->conf['limit']));
+			} else {
+
+				$this->piVars['page'] = array_search($this->piVars['page'], $this->doc->physicalStructure);
 
 			}
 
-			if (!empty($this->piVars['pointer'])) {
+			if (!empty($this->piVars['page'])) {
 
-				$this->piVars['pointer'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['pointer'], 0, $maxPointer, 0);
+				$this->piVars['pointer'] = intval(floor(($this->piVars['page'] - 1) / $this->conf['limit']));
+
+			}
+
+			if (!empty($this->piVars['pointer']) && (($this->piVars['pointer'] * $this->conf['limit']) + 1) <= $this->doc->numPages) {
+
+				$this->piVars['pointer'] = max(intval($this->piVars['pointer']), 0);
 
 			} else {
 
@@ -103,8 +112,11 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 		// Link to first page.
 		if ($this->piVars['pointer'] > 0) {
 
-			$markerArray['###FIRST###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('firstPage', '', TRUE), array ('pointer' => 0, 'page' => NULL), TRUE);
-
+			$markerArray['###FIRST###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('firstPage', '', TRUE),
+				array (
+					'pointer' => 0,
+					'page' => NULL
+				), TRUE);
 		} else {
 
 			$markerArray['###FIRST###'] = '<span>'.$this->pi_getLL('firstPage', '', TRUE).'</span>';
@@ -114,8 +126,11 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 		// Link back X pages.
 		if ($this->piVars['pointer'] >= $this->conf['pageStep']) {
 
-			$markerArray['###BACK###'] = $this->pi_linkTP_keepPIvars(sprintf($this->pi_getLL('backXPages', '', TRUE), $this->conf['pageStep']), array ('pointer' => $this->piVars['pointer'] - $this->conf['pageStep'], 'page' => NULL), TRUE);
-
+			$markerArray['###BACK###'] = $this->pi_linkTP_keepPIvars(sprintf($this->pi_getLL('backXPages', '', TRUE), $this->conf['pageStep']),
+				array (
+					'pointer' => $this->piVars['pointer'] - $this->conf['pageStep'],
+					'page' => ($this->piVars['pointer'] - $this->conf['pageStep']) * $this->conf['limit'] + 1
+				), TRUE);
 		} else {
 
 			$markerArray['###BACK###'] = '<span>'.sprintf($this->pi_getLL('backXPages', '', TRUE), $this->conf['pageStep']).'</span>';
@@ -125,8 +140,11 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 		// Link to previous page.
 		if ($this->piVars['pointer'] > 0) {
 
-			$markerArray['###PREVIOUS###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('prevPage', '', TRUE), array ('pointer' => $this->piVars['pointer'] - 1, 'page' => NULL), TRUE);
-
+			$markerArray['###PREVIOUS###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('prevPage', '', TRUE),
+				array (
+					'pointer' => $this->piVars['pointer'] - 1,
+					'page' => (($this->piVars['pointer'] - 1) * $this->conf['limit']) + 1
+				), TRUE);
 		} else {
 
 			$markerArray['###PREVIOUS###'] = '<span>'.$this->pi_getLL('prevPage', '', TRUE).'</span>';
@@ -136,8 +154,11 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 		// Link to next page.
 		if ($this->piVars['pointer'] < $maxPointer) {
 
-			$markerArray['###NEXT###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('nextPage', '', TRUE), array ('pointer' => $this->piVars['pointer'] + 1, 'page' => NULL), TRUE);
-
+			$markerArray['###NEXT###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('nextPage', '', TRUE),
+				array (
+					'pointer' => $this->piVars['pointer'] + 1,
+					'page' => ($this->piVars['pointer'] + 1) * $this->conf['limit'] + 1
+				), TRUE);
 		} else {
 
 			$markerArray['###NEXT###'] = '<span>'.$this->pi_getLL('nextPage', '', TRUE).'</span>';
@@ -147,8 +168,11 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 		// Link forward X pages.
 		if ($this->piVars['pointer'] < $maxPointer - $this->conf['pageStep']) {
 
-			$markerArray['###FORWARD###'] = $this->pi_linkTP_keepPIvars(sprintf($this->pi_getLL('forwardXPages', '', TRUE), $this->conf['pageStep']), array ('pointer' => $this->piVars['pointer'] + $this->conf['pageStep'], 'page' => NULL), TRUE);
-
+			$markerArray['###FORWARD###'] = $this->pi_linkTP_keepPIvars(sprintf($this->pi_getLL('forwardXPages', '', TRUE), $this->conf['pageStep']),
+				array (
+					'pointer' => $this->piVars['pointer'] + $this->conf['pageStep'],
+					'page' => ($this->piVars['pointer'] + $this->conf['pageStep']) * $this->conf['limit'] + 1
+				), TRUE);
 		} else {
 
 			$markerArray['###FORWARD###'] = '<span>'.sprintf($this->pi_getLL('forwardXPages', '', TRUE), $this->conf['pageStep']).'</span>';
@@ -158,7 +182,11 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 		// Link to last page.
 		if ($this->piVars['pointer'] < $maxPointer) {
 
-			$markerArray['###LAST###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('lastPage', '', TRUE), array ('pointer' => $maxPointer, 'page' => NULL), TRUE);
+			$markerArray['###LAST###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('lastPage', '', TRUE),
+				array (
+					'pointer' => $maxPointer,
+					'page' => $maxPointer * $this->conf['limit'] + 1
+				), TRUE);
 
 		} else {
 
