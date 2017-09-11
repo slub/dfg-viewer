@@ -42,9 +42,6 @@ config {
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Page Grid template file
 	templateFileGrid = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/pagegrid.tmpl
 
-	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Navigation template file
-	templateFileNav = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation.tmpl
-
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Table of Contents template file
 	templateFileToc = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toc.tmpl
 

@@ -66,12 +66,6 @@ lib.navigation_viewfunction_deactivated {
 	templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation-viewfunction-deactivated.tmpl
 }
 
-plugin.tx_dlf_navigation {
-	pages = {$config.storagePid}
-	pageStep = 5
-	templateFile = {$config.templateFileNav}
-}
-
 plugin.tx_dlf_pageview {
 	pages = {$config.storagePid}
 	excludeOther = 0
