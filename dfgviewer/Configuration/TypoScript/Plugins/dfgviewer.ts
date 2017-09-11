@@ -6,7 +6,7 @@ plugin.tx_dfgviewer_amd {
 plugin.tx_dfgviewer_gridpager {
 	pages = {$config.storagePid}
 	limit = 24
-	pageStep = 5
+	pageStep = 10
 	templateFile = {$config.templateFilePager}
 }
 
