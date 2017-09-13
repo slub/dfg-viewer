@@ -70,7 +70,7 @@ $(document).ready(function() {
     });
 
     // Check if there are is a download list. Otherwise change a to span to disable button
-    if(!$('.submenu .downloads ul li')[0]) {
+    if(!$('.submenu.downloads ul li')[0]) {
       $("#tab-downloads").replaceWith(function() {
         return $("<span title=\""+$(this).attr('title')+"\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">" + $(this).html() + "</span>");
       });
