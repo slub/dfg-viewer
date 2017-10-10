@@ -1,0 +1,140 @@
+/*
+ *
+ * Audioplayer
+ * ================================================
+ * Styles for the jPlayer in 'Tonträger' section
+ *
+ * Author: Thomas Jung <thomas@tjwd.de>
+ * License: All rights reserved
+ *
+ */
+
+/* ==============[ general settings for jPlayer ]=============================== */
+.tx-dlf-audio {
+    display: none;
+}
+.jp-audio {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 80px;
+    left: 0;
+    background: transparent !important;
+    border: 0 none !important;
+    z-index: 9;
+    width: auto !important;
+    .jp-details {
+        display: none;
+    }
+    .jp-interface {
+        position: absolute;
+        bottom: 60px;
+        height: 40px !important;
+        background: fade(@base-blue,95%);
+        .jp-controls-holder {
+            top: 0;
+            width: 100%;
+            height: 30px;
+            overflow: visible;
+            .jp-toggles {
+                display: none; // temp
+            }
+            .jp-duration-divider {
+                display: none;
+            }
+            .jp-controls {
+                position: absolute;
+                top: -50%;
+                padding: 0;
+                overflow: visible;
+                .jp-play {
+                    position: absolute;
+                    top: 5px;
+                    left: 15px;
+                    width: 60px;
+                    height: 60px;
+                    background: fade(#fff,95%);
+                    border-radius: 30px;
+                    padding: 0;
+                    &:before {
+                        position: absolute;
+                        top: 23px;
+                        left: 23px;
+                        width: 0;
+                        height: 0;
+                        border: 10px solid transparent;
+                        border-width: 0 10px 15px 10px;
+                        border-bottom-color: @base-blue;
+                        .transform(rotate(90deg));
+                        content: " ";
+                        .transition();
+                    }
+                    &:after {
+                        position: absolute;
+                        top: 20px;
+                        left: 33px;
+                        width: 6px;
+                        height: 20px;
+                        background: @base-blue;
+                        opacity: 0;
+                        .transform(rotate(90deg));
+                        content: " ";
+                        .transition();
+                    }
+                    .jp-state-playing& {
+                        &:before {
+                            top: 20px;
+                            left: 23px;
+                            border-width: 0;
+                            width: 6px;
+                            height: 20px;
+                            background: @base-blue;
+                            .transform(rotate(0));
+                        }
+                        &:after {
+                            opacity: 1;
+                            .transform(rotate(0));
+                        }
+                    }
+                }
+                .jp-stop {
+                    display: none;
+                }
+            }
+            .jp-progress {
+                top: 16px;
+                left: 125px;
+                right: 55px;
+                width: auto;
+                height: 4px;
+                border-radius: 2px;
+                background: transparent;
+                .jp-seek-bar {
+                    background: fade(@light-blue,40%);
+                    .jp-play-bar {
+                        background: #fff;
+                        box-shadow: 2px 0 4px rgba(0,0,0,0.5);
+                    }
+                }
+            }
+            .jp-current-time, .jp-duration {
+                position: absolute;
+                top: 9px;
+                width: 50px;
+                font-style: normal;
+                font-size: 12px;
+                color: #fff;
+            }
+            .jp-current-time {
+                left: 70px;
+                text-align: right;
+            }
+            .jp-duration {
+                right: 0;
+                text-align: left;
+            }
+        }
+    }
+}
+
+// EOF
