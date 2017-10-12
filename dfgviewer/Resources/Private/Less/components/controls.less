@@ -137,7 +137,13 @@
                             }
                             &.persistence-page:before {
                                 background-position: -320px -80px;
-                            }                            
+                            }
+                            &.local-presentation[href="https://"],
+                            &.local-presentation[href="http://"],
+                            &.local-contact[href="mailto:"] {
+                                opacity: 0.5;
+                                pointer-events: none;
+                            }
                         }
                     }
                 }
