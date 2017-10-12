@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-06-06T13:48:15Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-10-12T13:32:36Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -60,6 +60,10 @@
 		<trans-unit id="provider.local_presentation" approved="yes">
 			<source>Show in local context</source>
 			<target>Lokale Präsentation anzeigen</target>
+		</trans-unit>
+		<trans-unit id="provider.no_local_presentation" approved="yes">
+			<source>No local presentation available</source>
+			<target>Keine lokale Präsentation verfügbar</target>
 		</trans-unit>
 		<trans-unit id="website.jump_totop" approved="yes">
 			<source>Jump to top of page</source>
