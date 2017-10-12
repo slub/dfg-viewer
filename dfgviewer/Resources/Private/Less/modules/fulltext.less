@@ -64,8 +64,13 @@
         #tx-dlf-fulltextselection {
             padding: 60px 100px 60px 30px;
             line-height: 1.8;
-            .highlight {
-                background: lighten(@light-blue,10%);
+            .textline {
+                &.highlight {
+                    background: lighten(@light-blue,10%);
+                }
+                &:after {
+                    content: " ";
+                }
             }
         }
     }
