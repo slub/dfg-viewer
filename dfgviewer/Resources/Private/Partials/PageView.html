@@ -56,9 +56,11 @@
           <li class="submenu links">
             <a href="#" title="Links">Links</a>
             <ul>
-              <li>
-                  <f:link.external uri="<dv:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation)[1]' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
-              </li>
+              <f:if condition="<dv:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation)[1]' />">
+                <li>
+                    <f:link.external uri="<dv:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation)[1]' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
+                </li>
+              </f:if>
               <f:for each="{0: '1', 1: '2', 2: '3'}" as="index">
                 <f:if condition="<dv:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference)[{index}]' />">
                   <li>
