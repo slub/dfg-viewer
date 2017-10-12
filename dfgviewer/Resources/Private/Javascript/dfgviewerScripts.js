@@ -25,6 +25,7 @@ $(document).ready(function() {
     $('li.submenu > a').on(mobileEvent, function(event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
+        return false;
     });
 
     // secondary nav toggle
