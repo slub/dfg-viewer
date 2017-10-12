@@ -97,7 +97,8 @@
                     opacity: 0;
                     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
                     li {
-                        a {
+                        a,
+                        span {
                             position: relative;
                             color: #fff;
                             display: block;
@@ -105,6 +106,7 @@
                             margin: 10px 0;
                             min-height: 40px;
                             line-height: 40px;
+                            white-space: nowrap;
                             &:before {
                                 position: absolute;
                                 top: 0;
@@ -138,12 +140,9 @@
                             &.persistence-page:before {
                                 background-position: -320px -80px;
                             }
-                            &.local-presentation[href="https://"],
-                            &.local-presentation[href="http://"],
-                            &.local-contact[href="mailto:"] {
-                                opacity: 0.5;
-                                pointer-events: none;
-                            }
+                        }
+                        span {
+                            opacity: 0.5;
                         }
                     }
                 }
