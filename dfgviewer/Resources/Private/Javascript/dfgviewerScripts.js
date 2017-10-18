@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     // active toggle for submenus
-    $('li.submenu > a').on(mobileEvent, function(event) {
+    $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
         return false;
