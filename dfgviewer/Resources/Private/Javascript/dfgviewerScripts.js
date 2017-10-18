@@ -66,7 +66,7 @@ $(document).ready(function() {
     // Avoid broken image display if METS definitions are wrong
     $('.provider img').each(function() {
         if((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0 ) || this.readyState == 'uninitialized' ) {
-            $(this).parents('.provider').addClass('missing-provider-image');
+            $(this).parents('.document-functions').addClass('missing-provider-image');
         }
     });
 
