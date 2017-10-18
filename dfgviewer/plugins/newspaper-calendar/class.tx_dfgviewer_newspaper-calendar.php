@@ -236,7 +236,7 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 		$linkConf = array (
 			'useCacheHash' => 1,
 			'parameter' => $this->conf['targetPid'],
-			'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($toc[0]['children'][0]['points']),
+			'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($this->piVars['id']),
 		);
 		$yearLink = $this->cObj->typoLink($year, $linkConf);
 
