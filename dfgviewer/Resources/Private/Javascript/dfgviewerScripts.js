@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     // active toggle for submenus
-    $('li.submenu > a').on(mobileEvent, function(event) {
+    $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
         return false;
@@ -66,7 +66,7 @@ $(document).ready(function() {
     // Avoid broken image display if METS definitions are wrong
     $('.provider img').each(function() {
         if((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0 ) || this.readyState == 'uninitialized' ) {
-            $(this).parents('.provider').addClass('missing-provider-image');
+            $(this).parents('.document-functions').addClass('missing-provider-image');
         }
     });
 

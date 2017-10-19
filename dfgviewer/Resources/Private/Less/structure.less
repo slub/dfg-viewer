@@ -123,9 +123,6 @@ a {
                 width: 70px;
                 height: 33px;
             }
-            &.missing-provider-image img {
-                  display: none;
-            }
             .mobile-meta {
                 position: absolute;
                 top: 0;
@@ -149,6 +146,16 @@ a {
                 }
             }
         }
+        &.missing-provider-image {
+            .provider {
+                img {
+                    display: none;
+                }
+                .mobile-meta {
+                    left: 15px;
+                }
+            }
+        }
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         top: 0;
@@ -167,12 +174,14 @@ a {
                     height: 50px;
                     border-radius: 4px;
                 }
-                &.missing-provider-image img {
-                      display: none;
+                .mobile-meta {
+                    display: none;
                 }
             }
-            .mobile-meta {
-                display: none;
+            &.missing-provider-image {
+                ul {
+                    left: 20px;
+                }
             }
         }
     }
