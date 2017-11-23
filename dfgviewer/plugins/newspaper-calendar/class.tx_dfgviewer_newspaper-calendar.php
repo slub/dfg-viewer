@@ -279,7 +279,3 @@ class tx_dfgviewer_newspapercalendar extends tx_dlf_plugin {
 	}
 
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php']);
-}

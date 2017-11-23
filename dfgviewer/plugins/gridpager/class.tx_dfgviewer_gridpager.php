@@ -201,7 +201,3 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 	}
 
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/gridpager/class.tx_dfgviewer_gridpager.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/gridpager/class.tx_dfgviewer_gridpager.php']);
-}
