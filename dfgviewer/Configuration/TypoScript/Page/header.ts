@@ -39,9 +39,8 @@ page {
 	includeCSS {
 		style = EXT:dfgviewer/Resources/Public/Css/allStyles.css
 	}
-	includeJSlibs {
-		# we include jquery by t3jquery on by ViewHelpers
-		plugins = EXT:dfgviewer/Resources/Public/Js/allScripts.js
+	includeJSFooterlibs {
+		dfgviewer = EXT:dfgviewer/Resources/Public/Js/allScripts.js
 	}
 	meta {
 		# the object view must be excluded from index
