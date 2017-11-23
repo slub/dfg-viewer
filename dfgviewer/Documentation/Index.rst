@@ -20,7 +20,7 @@ After this create a symbolic link from your workspace to your TYPO3 extension fo
 
 Repeat this process for the *Kitodo.Presentation (dlf)* (https://github.com/kitodo/kitodo-presentation.git) extension.
 
-Now install both extensions via the extension manager within TYPO3. Also check if you have installed the necessary dependencies (e.g. *t3jquery*, *static_info_tables*). If the installation was successful, the category `KITODO` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
+Now install both extensions via the extension manager within TYPO3. Also check if you have installed the necessary dependencies (e.g. *static_info_tables*). If the installation was successful, the category `KITODO` with a subitem `DFG Viewer` will appear in the navigation tree on the left side of your TYPO3 backend.
 
 Create a Page-Item in the category `WEB` as well as a configuration folder as a subitem of this page. The title of the page as well as the configuration file is arbitrary.
 
@@ -29,8 +29,6 @@ Go to the subitem `DFG Viewer` of the `KITODO` category, choose the configuratio
 Go to the `Template` tool, choose the page item, set the page to *Rootlevel* and add the *DFG Viewer (dfgviewer)* item to your *Selected Items* under *Includes*.
 Then select the `Constants editor` and set the `storagePid` and `baseURL`according to your setup (`storagePid` should be the page ID of the configuration folder).
 
-Before your installation will work you have to create an appropriate jQuery library. Go to the *T3 jQuery* extensions (could be found in the category *ADMIN TOOLS* and choose the first subitem *Process & Analyze t3jquery.txt in extensions*. Go to the dialog by choosing the following options: *select both extensions*, click *check*, click *Merge & Use* and finally click *Create jQuery Library* at the bottom of the page.
-
 Now your installation should work. You can test this with the following url (replace *host* and *id* with the parameters of your installation):
 
 http://localhost/index.php?id=21&tx_dlf%5Bid%5D=http%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
@@ -38,7 +36,7 @@ http://localhost/index.php?id=21&tx_dlf%5Bid%5D=http%3A%2F%2Fdigital.slub-dresde
 Known Problems
 --------------
 
-In TYPO3 6.2.12 there seems to be a *cHash* problem with the extension. For fixing it, add the following configuration parameters to *typo3conf\LocalConfiguration.php*:
+In TYPO3 6.2 you should use the following configuration in *typo3conf\LocalConfiguration.php*:
 
 'FE' => array(
 	...
