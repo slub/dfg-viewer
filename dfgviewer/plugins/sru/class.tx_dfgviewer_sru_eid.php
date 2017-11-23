@@ -197,10 +197,6 @@ class tx_dfgviewer_sru_eid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/search/class.tx_dfgviewer_sru_eid.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/search/class.tx_dfgviewer_sru_eid.php']);
-}
-
 $cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_dfgviewer_sru_eid');
 
 $cObj->main();

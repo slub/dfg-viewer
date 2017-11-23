@@ -128,7 +128,3 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 	}
 
 }
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/dfgviewer/plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php']);
-}
