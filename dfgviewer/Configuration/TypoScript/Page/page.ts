@@ -66,7 +66,7 @@ page {
       gp-page.ifEmpty = 1
 
       gp-double = TEXT
-      gp-double.data = GP:tx_dlf|double // GP:set|image
+      gp-double.data = GP:tx_dlf|double
 
       gp-id = TEXT
       gp-id.data = GP:tx_dlf|id // GP:set|mets
