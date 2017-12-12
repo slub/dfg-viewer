@@ -87,11 +87,10 @@ a {
 
 .document-view {
     position: absolute;
-    top: 65px;
+    top: 60px;
     right: 0;
     bottom: 0;
     left: 0;
-    padding-top: 60px;
     .transition();
     .fullscreen & {
         top: 0px;
@@ -104,7 +103,7 @@ a {
     }
     .tx-dlf-map {
         position: absolute;
-        top: 60px;
+        top: 0;
         right: 0;
         bottom: 0;
         left: 0;
@@ -115,22 +114,26 @@ a {
             top: 0;
             left: 0;
             right: 0;
-            height: 50px;
             text-align: left;
             z-index: 1000;
-            img {
-                margin-top: 5px;
-                width: 70px;
-                height: 33px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            a {
+                flex: 0 0 70px;
+                img {
+                    margin-top: 5px;
+                    width: 70px;
+                    height: 33px;
+                }
             }
             .mobile-meta {
-                position: absolute;
-                top: 0;
-                left: 80px;
-                right: 15px;
-                bottom: 0;
+                position: relative;
                 font-size: 12px;
                 line-height: 1.3;
+                flex: 0 1 auto;
+                padding-right: 60px;
                 dt {
                     display: none;
                 }
@@ -138,9 +141,6 @@ a {
                     color: @light-blue;
                     &.tx-dlf-title a {
                         position: relative;
-                        height: 30px;
-                        display: block;
-                        overflow: hidden;
                         font-weight: bold;
                     }
                 }
@@ -169,10 +169,14 @@ a {
                 top: 10px;
                 left: 10px;
                 right: auto;
-                img {
-                    width: 108px;
-                    height: 50px;
-                    border-radius: 4px;
+                background: transparent;
+                padding: 0;
+                a {
+                    img {
+                        width: 108px;
+                        height: 50px;
+                        border-radius: 4px;
+                    }
                 }
                 .mobile-meta {
                     display: none;
