@@ -70,6 +70,16 @@ $(document).ready(function() {
         }
     });
 
+    // Copy selected page number to mobile meta (in order to transform select field to ui button)
+    if($('.pages select option[selected]')[0]) {
+        $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number">'+$('.pages select option[selected]').text()+'</dd>');
+    }
+
+    // Move fullsize- and page select the amount of height from .mobile-meta down (cant get it from parent element. Dirty things happens here, i know...)
+    if($('.provider dl.mobile-meta').css('display') == 'block') {
+        $('.view-functions ul li.pages form select, .view-functions ul li.zoom .fullscreen').addClass('mobile-special').css('top',$('.provider').outerHeight());
+    }
+
     // Check if there are is a download list. Otherwise change a to span to disable button
     if(!$('.submenu.downloads ul li')[0]) {
       $("#tab-downloads").replaceWith(function() {
