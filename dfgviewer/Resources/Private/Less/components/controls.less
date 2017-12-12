@@ -626,15 +626,14 @@
 /* ==============[ page control buttons (fwd/back) ]====================================== */
 .page-control {
     position: absolute;
+    right: 40px;
     bottom: 15px;
+    left: 40px;
     height: 1px;
-    width: 290px;
-    left: 50%;
-    margin-left: -145px;
     > div {
         position: absolute;
         bottom: 0;
-        z-index: 1020;
+        z-index: 90;
         span {
             display: none;
             a, span {
@@ -675,6 +674,12 @@
     }
     .fwds {
         right: 0;
+    }
+    @media screen and (min-width: @phoneLandscapeViewportWidth) {
+        right: auto;
+        left: 50%;
+        width: 300px;
+        margin-left: -150px;
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         position: absolute;

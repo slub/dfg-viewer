@@ -244,9 +244,10 @@
         bottom: 0;
         width: 90%;
         background: fade(lighten(desaturate(@base-blue,25%),25%), 95%);
-        z-index: 102;
+        z-index: 1002;
         text-align: left;
         padding: 15px;
+        font-size: 14px;
         .transition();
         .offcanvas-toggle {
             position: absolute;
@@ -254,29 +255,39 @@
             width: 30px;
             height: 60px;
             background: fade(lighten(desaturate(@base-blue,25%),25%), 95%) url(../Images/controlIcons.svg) no-repeat 0 0;
+            border: 1px solid #fff;
         }
         &.open {
             .transform(translateX(0));
-            z-index: 1000;
+            z-index: 1003;
         }
     }
     .metadata-wrapper {
         right: 0;
         .transform(translateX(100%));
+        border-left: 1px solid #fff;
         .offcanvas-toggle {
             left: -30px;
             border-radius: 30px 0 0 30px;
             background-position: -442px 9px;
+            border-width: 1px 0 1px 1px;
         }
 
     }
     .toc-wrapper {
         left: 0;
         .transform(translateX(-100%));
+        border-right: 1px solid #fff;
         .offcanvas-toggle {
             right: -30px;
             border-radius: 0 30px 30px 0;
             background-position: -447px -30px;
+            border-width: 1px 1px 1px 0;
+        }
+    }
+    @media screen and (min-width: @phoneLandscapeViewportWidth) {
+        .metadata-wrapper, .toc-wrapper {
+            width: 45%;
         }
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
