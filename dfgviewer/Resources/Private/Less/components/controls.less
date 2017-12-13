@@ -17,7 +17,6 @@
         position: absolute;
         text-align: center;
         .text-hide();
-        z-index: 10;
         > li {
             position: relative;
             display: inline-block;
@@ -312,30 +311,6 @@
         position: relative;
         li {
             display: none;
-            &.pages {
-                position: absolute;
-                top: -7px;
-                right: 15px;
-                display: block;
-                z-index: 10000;
-                form {
-                    select {
-                        border: 1px solid desaturate(lighten(@light-blue,10%),20%);
-                        color: desaturate(lighten(@base-blue,20%),20%);
-                        background: #fff url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDIwIDEyIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5zdDB7ZmlsbDpub25lO3N0cm9rZTojNjg4N0EzO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9PC9zdHlsZT48ZyBpZD0iWE1MSURfMV8iPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMy40IDMuMmwtNi40IDYuNC02LjQtNi40Ii8+PC9nPjwvc3ZnPg==') no-repeat right center;
-                        background-size: 16px auto;
-                        padding: 7px 17px 7px 7px;
-                        font-weight: 700;
-                        font-size: 14px;
-                        line-height: 1.2;
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        &[disabled] {
-                            display: none;
-                        }
-                    }
-                }
-            }
         }
         @media screen and (min-width: @tabletLandscapeViewportWidth) {
             position: absolute;
@@ -358,13 +333,21 @@
                         top: 0;
                         right: 0;
                         select {
-                            padding: 10px 20px 10px 14px;
+                            color: desaturate(lighten(@base-blue,20%),20%);
+                            background: #fff url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDIwIDEyIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5zdDB7ZmlsbDpub25lO3N0cm9rZTojNjg4N0EzO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9PC9zdHlsZT48ZyBpZD0iWE1MSURfMV8iPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMy40IDMuMmwtNi40IDYuNC02LjQtNi40Ii8+PC9nPjwvc3ZnPg==') no-repeat right center;
                             background-size: 20px 12px;
-                            margin: 0 2px;
                             font-size: 16px;
+                            font-weight: 700;
+                            line-height: 1.2;
+                            width: auto;
+                            padding: 10px 20px 10px 14px;
+                            margin: 0 2px;
                             outline: none;
                             border-radius: 20px;
+                            border: 1px solid desaturate(lighten(@light-blue,10%),20%);
                             cursor: pointer;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
                             .no-touchevents & {
                                 .transition();
                                 &:hover {
@@ -375,7 +358,58 @@
                         }
                     }
                 }
+                &.zoom {
+                    position: relative;
+                    display: inline-block;
+                    .in {
+                        background-position: -360px 0;
+                    }
+                    .out {
+                        background-position: -400px 0;
+                    }
+                    .fullscreen {
+                        z-index: 1000;
+                        background: #fff;
+                        &:before,
+                        &:after {
+                            position: absolute;
+                            width: 12px;
+                            height: 12px;
+                            background: url(../Images/controlIcons.svg) no-repeat -538px -54px;
+                            background-size: 600px 120px;
+                            display: block;
+                            content: " ";
+                            .transition();
+                            pointer-events: none;
+                            .static & {
+                                .transition(none);
+                            }
+                        }
+                        &:before {
+                            top: 9px;
+                            right: 9px;
+                        }
+                        &:after {
+                            bottom: 9px;
+                            left: 9px;
+                            .transform(rotate(180deg));
+                        }
+                        &.active {
+                            &:before {
+                                .transform(rotate(180deg));
+                            }
+                            &:after {
+                                .transform(rotate(0));
+                            }
+                        }
+                        .fullscreen & {
+                            top: 5px !important;
+                        }
+                    }
+                }
                 &.tx-dlf-toolsImagemanipulation {
+                    position: relative;
+                    display: inline-block;
                     > span {
                         opacity: 1;
                         overflow: hidden;
@@ -416,48 +450,6 @@
                     }
                     .upend {
                         background-position: -280px 0;
-                    }
-                }
-                &.zoom {
-                    .in {
-                        background-position: -360px 0;
-                    }
-                    .out {
-                        background-position: -400px 0;
-                    }
-                    .fullscreen {
-                        background: #fff;
-                        &:before,
-                        &:after {
-                            position: absolute;
-                            width: 12px;
-                            height: 12px;
-                            background: url(../Images/controlIcons.svg) no-repeat -538px -54px;
-                            background-size: 600px 120px;
-                            display: block;
-                            content: " ";
-                            .transition();
-                            .static & {
-                                .transition(none);
-                            }
-                        }
-                        &:before {
-                            top: 9px;
-                            right: 9px;
-                        }
-                        &:after {
-                            bottom: 9px;
-                            left: 9px;
-                            .transform(rotate(180deg));
-                        }
-                        &.active {
-                            &:before {
-                                .transform(rotate(180deg));
-                            }
-                            &:after {
-                                .transform(rotate(0));
-                            }
-                        }
                     }
                 }
             }
@@ -626,15 +618,14 @@
 /* ==============[ page control buttons (fwd/back) ]====================================== */
 .page-control {
     position: absolute;
+    right: 40px;
     bottom: 15px;
+    left: 40px;
     height: 1px;
-    width: 290px;
-    left: 50%;
-    margin-left: -145px;
     > div {
         position: absolute;
         bottom: 0;
-        z-index: 1020;
+        z-index: 90;
         span {
             display: none;
             a, span {
@@ -675,6 +666,12 @@
     }
     .fwds {
         right: 0;
+    }
+    @media screen and (min-width: @phoneLandscapeViewportWidth) {
+        right: auto;
+        left: 50%;
+        width: 300px;
+        margin-left: -150px;
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         position: absolute;
