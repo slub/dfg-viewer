@@ -54,15 +54,6 @@ $(document).ready(function() {
         }
     });
 
-    // enable click on fullscreen button
-    $('a.fullscreen').on(mobileEvent, function() {
-        if($('body.fullscreen')[0]) {
-            exitFullscreen();
-        } else {
-            enterFullscreen();
-        }
-    });
-
     // Avoid broken image display if METS definitions are wrong
     $('.provider img').each(function() {
         if((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0 ) || this.readyState == 'uninitialized' ) {
@@ -74,10 +65,16 @@ $(document).ready(function() {
     if($('.pages select option[selected]')[0]) {
         $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number">'+$('.pages select option[selected]').text()+'</dd>');
     }
-
-    // Move fullsize- and page select the amount of height from .mobile-meta down (cant get it from parent element. Dirty things happens here, i know...)
-    if($('.provider dl.mobile-meta').css('display') == 'block') {
-        $('.view-functions ul li.pages form select, .view-functions ul li.zoom .fullscreen').addClass('mobile-special').css('top',$('.provider').outerHeight());
+    
+    $('.provider').append('<div class="mobile-controls" />');
+    $('.view-functions .pages form, .view-functions .zoom a.fullscreen').clone().appendTo('.provider .mobile-controls');
+    
+    // Shorten mobile meta title
+    shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
+    shortenMobileMetaTitle = shortenMobileMetaElement.text();
+    if(shortenMobileMetaTitle.length > 140) {
+        shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0,140) + '...';
+        shortenMobileMetaElement.text(shortenMobileMetaTitle);
     }
 
     // Check if there are is a download list. Otherwise change a to span to disable button
@@ -90,8 +87,17 @@ $(document).ready(function() {
     // if cookie for fullscreen view is present adapat initial page rendering
     if(Cookies.get('tx-dlf-pageview-zoomFullscreen')) {
         $('body').addClass('fullscreen static');
-        $('.zoom .fullscreen').addClass('active');
+        $('a.fullscreen').addClass('active');
     }
+
+    // enable click on fullscreen button
+    $('a.fullscreen').on(mobileEvent, function() {
+        if($('body.fullscreen')[0]) {
+            exitFullscreen();
+        } else {
+            enterFullscreen();
+        }
+    });
 
     // Finally all things are settled. Curtain up and bring back animations a second later.
     $('body').removeClass('hidden');
@@ -120,14 +126,14 @@ $(document).keyup(function(e) {
 // Activate fullscreen mode and set corresponding cookie
 function enterFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
-    $("body").addClass('fullscreen'); $('.zoom .fullscreen').addClass('active');
+    $("body").addClass('fullscreen'); $('a.fullscreen').addClass('active');
     Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true');
 }
 
 // Exit fullscreen mode and drop cookie
 function exitFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
-    $("body").removeClass('fullscreen'); $('.zoom .fullscreen').removeClass('active');
+    $("body").removeClass('fullscreen'); $('a.fullscreen').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
