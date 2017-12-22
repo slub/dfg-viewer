@@ -51,7 +51,7 @@ class DownloadLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
      */
     public function render($type = 'page-left', $pagenumber = 1)
     {
-        $doc = GeneralUtility::makeInstance(\SLUB\Dfgviewer\Helpers\GetDoc::class);
+        $doc = GeneralUtility::makeInstance(\Slub\Dfgviewer\Helpers\GetDoc::class);
 
         switch ($type) {
           case 'page-right':

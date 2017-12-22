@@ -51,7 +51,7 @@ class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
      */
     public function render($xpath, $field = '')
     {
-        $doc = GeneralUtility::makeInstance(\SLUB\Dfgviewer\Helpers\GetDoc::class);
+        $doc = GeneralUtility::makeInstance(\Slub\Dfgviewer\Helpers\GetDoc::class);
 
         $result = $doc->getXpath($xpath);
 
