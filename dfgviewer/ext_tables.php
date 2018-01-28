@@ -26,18 +26,6 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
-// Register static typoscript.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'DFG Viewer');
-
-// Plugin "amd".
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_amd'] = 'layout,select_key,pages,recursive';
-
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_amd'] = 'pi_flexform';
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_amd', $_EXTKEY.'_amd'), 'list_type');
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_amd', 'FILE:EXT:'.$_EXTKEY.'/plugins/amd/flexform.xml');
-
 // Plugin "gridpager".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_gridpager'] = 'layout,select_key,pages,recursive';
 
