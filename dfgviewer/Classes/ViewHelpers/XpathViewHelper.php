@@ -47,9 +47,10 @@ class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
      *
      * @param string $xpath xpath of elements
      * @param string $type type of field requested
+     * @param boolean $htmlspecialchars use htmlspecialchars() on the found result
      * @return string
      */
-    public function render($xpath, $field = '')
+    public function render($xpath, $field = '', $htmlspecialchars = TRUE)
     {
         $doc = GeneralUtility::makeInstance(\Slub\Dfgviewer\Helpers\GetDoc::class);
 
@@ -63,6 +64,10 @@ class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
           $output = trim($result);
         }
 
-        return htmlspecialchars(trim($output));
+        if ($htmlspecialchars) {
+          return htmlspecialchars(trim($output));
+        } else {
+          return trim($output);
+        }
     }
 }
