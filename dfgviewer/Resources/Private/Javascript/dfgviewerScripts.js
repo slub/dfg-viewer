@@ -31,7 +31,7 @@ $(document).ready(function() {
     // secondary nav toggle
     $('nav .nav-toggle').on(mobileEvent, function(event) {
         $(this).toggleClass('active');
-        $('nav .secondary-nav').toggleClass('open');
+        $('nav .viewer-nav').toggleClass('open');
     });
 
     // calendar dropdowns

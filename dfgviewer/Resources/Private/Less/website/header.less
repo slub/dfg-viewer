@@ -12,7 +12,7 @@
 
 .website {
     .header {
-        padding-top: 320px;
+        padding-top: 350px;
         text-align: left;
         ol.breadcrumb {
             margin-top: 20px;
@@ -74,6 +74,8 @@
                 }
             }
             nav {
+                position: relative;
+                max-height: 350px;
                 .nav-toggle {
                     position: absolute;
                     top: 15px;
@@ -169,13 +171,13 @@
                             display: block;
                             color: #fff;
                             border-top: 1px solid fade(#fff,10%);
-                            
                             &.submenu-toggle {
                                 position: absolute;
                                 top: 0;
                                 right: 0;
                                 bottom: 0;
                                 width: 60px;
+                                border: 0 none;
                                 .toggle-circle {
                                     position: absolute;
                                     top: 12px;
@@ -217,15 +219,13 @@
                         &:first-child > a {
                             border-top: 0 none;
                         }
-                        &:last-child > a {
-                            border-bottom: 1px solid fade(#fff,10%);
-                        }
                         &.submenu {
                             ul {
                                 position: relative;
                                 .transition();
                                 max-height: 0;
                                 opacity: 0;
+                                overflow: hidden;
                                 li {
                                     &:before {
                                         position: absolute;
@@ -241,7 +241,7 @@
                                         opacity: 0.3;
                                     }
                                     a {
-                                        border: 0 none;
+                                        border: 0 none !important;
                                         font-size: 14px;
                                         padding-left: 35px;
                                     }
@@ -253,6 +253,7 @@
                                 max-height: 500px;
                                 opacity: 1;
                                 margin-bottom: 10px;
+                                overflow: visible;
                             }
                             a.submenu-toggle .toggle-circle {
                                 opacity: 1;
@@ -271,9 +272,38 @@
                         }
                     }
                     &.open {
-                        padding-bottom: 65px;
                         max-height: 350px;
                         opacity: 1;
+                        padding-bottom: 95px;
+                    }
+                }
+                .secondary-nav {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    height: 0;
+                    background: fade(@base-blue,95%);
+                    opacity: 0;
+                    .transition();
+                    pointer-events: none;
+                    display: flex;
+                    align-items: center;
+                    border-top: 1px solid #fff;
+                    &.open {
+                        opacity: 1;
+                        height: 40px;
+                        pointer-events: all;
+                    }
+                    li {
+                        flex: 0 1 auto;
+                        margin: 0 15px;
+                        a {
+                            padding: 10px 0;
+                            color: #fff;
+                            font-size: 14px;
+                            opacity: 0.8;
+                        }
                     }
                 }
             }
@@ -344,14 +374,14 @@
                         overflow: visible;
                         > li {
                             display: inline-block;
-                            padding: 0 0 30px 0;
+                            padding: 0;
                             > a {
                                 padding: 0;
                                 border: 0 none;
                                 margin: 0 8px;
                                 text-transform: uppercase;
                                 font-weight: normal;
-                                font-size: 13px;
+                                font-size: 16px;
                                 &.submenu-toggle {
                                     pointer-events: none;
                                     width: 24px;
@@ -376,10 +406,14 @@
                                         }
                                     }
                                 }
+                                &.current {
+                                    background: transparent;
+                                    border: 0 none;
+                                }
                             }
                             &:last-child {
                                 a {
-                                    margin: 0;
+                                    margin-right: 0;
                                     border: 0 none;
                                 }
                             }
@@ -434,14 +468,14 @@
                                         content: " ";
                                     }
                                 }
-                            }
-                            &.active {
-                                a {
-                                    font-weight: bold;
-                                    &.submenu-toggle {
-                                        display: none;
+                                &.active a.submenu-toggle {
+                                    .toggle-circle {
+                                       .transform(rotate(135deg));
                                     }
                                 }
+                            }
+                            &.active > a {
+                                font-weight: bold;
                             }
                             .no-touchevents & {
                                 a {
@@ -450,7 +484,7 @@
                                 }
                                 &:hover {
                                     > a {
-                                        .transform(scale(1.2));
+                                        .transform(scale(1.12));
                                         &.submenu-toggle {
                                             .transform(scale(1));
                                         }
@@ -460,6 +494,24 @@
                                         .transform(scaleY(1));
                                     }
                                 }
+                            }
+                        }
+                    }
+                    .secondary-nav {
+                        top: -26px;
+                        right: 60px;
+                        bottom: auto;
+                        left: auto;
+                        height: auto;
+                        opacity: 1;
+                        pointer-events: all;
+                        background: transparent;
+                        border: 0 none;
+                        li {
+                            margin: 0 10px;
+                            a {
+                                opacity: 1;
+                                text-transform: uppercase;
                             }
                         }
                     }

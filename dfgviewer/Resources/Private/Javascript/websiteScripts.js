@@ -20,6 +20,7 @@ $(document).ready(function() {
     $('nav .nav-toggle').on(mobileEvent, function(event) {
         $(this).toggleClass('active');
         $('nav ul.main-nav').toggleClass('open');
+        $('nav ul.secondary-nav').toggleClass('open');
     });
     
     // setup submenus
