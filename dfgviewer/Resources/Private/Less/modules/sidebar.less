@@ -133,7 +133,7 @@
                     width: 10px;
                 }
             }
-            .secondary-nav {
+            .viewer-nav {
                 position: relative;
                 top: 55px;
                 width: 100%;
@@ -141,6 +141,7 @@
                 padding-bottom: 0;
                 max-height: 0;
                 opacity: 0;
+                overflow: auto;
                 .transition(all .3s ease-out);
                 li {
                     a {
@@ -148,6 +149,7 @@
                         display: block;
                         color: #fff;
                         border-bottom: 1px solid fade(#fff,10%);
+                        line-height: 1.4;
                     }
                     &:first-child {
                         a {
@@ -187,7 +189,7 @@
                     right: 60px;
                     top: 20px;
                 }
-                .secondary-nav {
+                .viewer-nav {
                     position: absolute;
                     top: 6px;
                     right: 0;
@@ -198,6 +200,7 @@
                     .transform(scaleX(0));
                     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
                     padding: 15px;
+                    overflow: visible;
                     &:before {
                         position: absolute;
                         top: 20px;
@@ -210,10 +213,10 @@
                         content: " ";
                     }
                     li {
+                        margin: 15px 0;
                         a {
                             padding: 0 10px;
                             border: 0 none;
-                            line-height: 40px;
                             .transition();
                             &:hover {
                                 background: rgba(255,255,255,0.2);
@@ -229,6 +232,7 @@
                         padding: 15px;
                         opacity: 1;
                         right: -220px;
+                        max-height: none;
                         .transform(scaleX(1));
                     }
                 }
