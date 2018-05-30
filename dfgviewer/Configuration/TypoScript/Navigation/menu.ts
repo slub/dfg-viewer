@@ -45,7 +45,6 @@ lib.menu {
       ACTIFSUB = 1
       ACTIFSUB {
         wrapItemAndSub = <li class="submenu active">|</li>
-        ATagParams = class="current"
         ATagTitle.field = description // title
       }
 
@@ -70,8 +69,8 @@ lib.menu {
       }
       CUR = 1
       CUR {
-        allWrap = <li class="cur">|</li>
-        ATagParams = class=current
+        allWrap = <li>|</li>
+        ATagParams = class="current"
         ATagTitle.field = description // title
       }
     }

@@ -374,14 +374,14 @@
                         overflow: visible;
                         > li {
                             display: inline-block;
-                            padding: 0 0 30px 0;
+                            padding: 0;
                             > a {
                                 padding: 0;
                                 border: 0 none;
                                 margin: 0 8px;
                                 text-transform: uppercase;
                                 font-weight: normal;
-                                font-size: 13px;
+                                font-size: 16px;
                                 &.submenu-toggle {
                                     pointer-events: none;
                                     width: 24px;
@@ -406,10 +406,14 @@
                                         }
                                     }
                                 }
+                                &.current {
+                                    background: transparent;
+                                    border: 0 none;
+                                }
                             }
                             &:last-child {
                                 a {
-                                    margin: 0;
+                                    margin-right: 0;
                                     border: 0 none;
                                 }
                             }
@@ -464,14 +468,14 @@
                                         content: " ";
                                     }
                                 }
-                            }
-                            &.active {
-                                a {
-                                    font-weight: bold;
-                                    &.submenu-toggle {
-                                        display: none;
+                                &.active a.submenu-toggle {
+                                    .toggle-circle {
+                                       .transform(rotate(135deg));
                                     }
                                 }
+                            }
+                            &.active > a {
+                                font-weight: bold;
                             }
                             .no-touchevents & {
                                 a {
@@ -480,7 +484,7 @@
                                 }
                                 &:hover {
                                     > a {
-                                        .transform(scale(1.2));
+                                        .transform(scale(1.12));
                                         &.submenu-toggle {
                                             .transform(scale(1));
                                         }
