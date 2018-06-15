@@ -97,9 +97,9 @@ a {
     .transition();
     .fullscreen & {
         top: 0px;
-		right: 0px;
-		bottom: 0px;
-		left: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
     }
     .static & {
         .transition(none);
@@ -220,7 +220,7 @@ a {
                     }
                 }
             }
-            .fullscreen & {                
+            .fullscreen & {
                 .transform(translateY(-100%));
             }
         }
@@ -246,6 +246,10 @@ a {
             .mobile-controls {
                 bottom: auto;
                 top: 10px;
+                .fullscreen & {
+                    bottom: -50px;
+                    top: unset;
+                }
             }
         }
     }
