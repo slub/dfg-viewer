@@ -1,82 +1,90 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-10-12T13:32:36Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-06-15T10:23:43Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
 		<body>
-		<trans-unit id="double.RectoVerso" approved="yes">
-			<source>Adjust recto/verso</source>
-			<target>Recto/Verso korrigieren</target>
-		</trans-unit>
-		<trans-unit id="double.doublePageView" approved="yes">
-			<source>Show double pages</source>
-			<target>Doppelseitenansicht</target>
-		</trans-unit>
-		<trans-unit id="double.singlePageView" approved="yes">
-			<source>Show single page</source>
-			<target>Einzelseitenansicht</target>
-		</trans-unit>
-		<trans-unit id="download.leftPage" approved="yes">
-			<source>Download left page</source>
-			<target>Linke Seite herunterladen</target>
-		</trans-unit>
-		<trans-unit id="download.rightPage" approved="yes">
-			<source>Download right page</source>
-			<target>Rechte Seite herunterladen</target>
-		</trans-unit>
-		<trans-unit id="download.singlePage" approved="yes">
-			<source>Download single page</source>
-			<target>Einzelseite herunterladen</target>
-		</trans-unit>
-		<trans-unit id="download.work" approved="yes">
-			<source>Download whole work</source>
-			<target>Ganzes Werk herunterladen</target>
-		</trans-unit>
-		<trans-unit id="fullscreen" approved="yes">
-			<source>Fullscreen Mode</source>
-			<target>Vollansicht</target>
-		</trans-unit>
-		<trans-unit id="fulltext.no_fulltext_double" approved="yes">
-			<source>No fulltext in double page mode.</source>
-			<target>Keine Volltexte in der Doppelseitenansicht.</target>
-		</trans-unit>
-		<trans-unit id="fulltext.no_fulltext_gridpage" approved="yes">
-			<source>No fulltext in gridpage mode.</source>
-			<target>Keine Volltexte in der Vorschau-Ansicht.</target>
-		</trans-unit>
-		<trans-unit id="gridpage.preview" approved="yes">
-			<source>Thumbnail Preview</source>
-			<target>Vorschaubilder</target>
-		</trans-unit>
-		<trans-unit id="provider.email_provider" approved="yes">
-			<source>Email to data provider</source>
-			<target>Email an Datenprovider</target>
-		</trans-unit>
-		<trans-unit id="provider.local_catalogue" approved="yes">
-			<source>Online Public Access Catalog</source>
-			<target>Lokaler Katalog</target>
-		</trans-unit>
-		<trans-unit id="provider.local_presentation" approved="yes">
-			<source>Show in local context</source>
-			<target>Lokale Präsentation anzeigen</target>
-		</trans-unit>
-		<trans-unit id="provider.no_local_presentation" approved="yes">
-			<source>No local presentation available</source>
-			<target>Keine lokale Präsentation verfügbar</target>
-		</trans-unit>
-		<trans-unit id="website.jump_totop" approved="yes">
-			<source>Jump to top of page</source>
-			<target>zum Seitenanfang springen</target>
-		</trans-unit>
-		<trans-unit id="website.last_updated" approved="yes">
-			<source>Last updated</source>
-			<target>Zuletzt aktualisiert</target>
-		</trans-unit>
-		<trans-unit id="website.totop" approved="yes">
-			<source>to top</source>
-			<target>nach oben</target>
-		</trans-unit>
+			<trans-unit id="double.RectoVerso" approved="yes">
+				<source><![CDATA[Adjust recto/verso]]></source>
+				<target><![CDATA[Recto/Verso korrigieren]]></target>
+			</trans-unit>
+			<trans-unit id="double.doublePageView" approved="yes">
+				<source><![CDATA[Show double pages]]></source>
+				<target><![CDATA[Doppelseitenansicht]]></target>
+			</trans-unit>
+			<trans-unit id="double.singlePageView" approved="yes">
+				<source><![CDATA[Show single page]]></source>
+				<target><![CDATA[Einzelseitenansicht]]></target>
+			</trans-unit>
+			<trans-unit id="download.leftPage" approved="yes">
+				<source><![CDATA[Download left page]]></source>
+				<target><![CDATA[Linke Seite herunterladen]]></target>
+			</trans-unit>
+			<trans-unit id="download.rightPage" approved="yes">
+				<source><![CDATA[Download right page]]></source>
+				<target><![CDATA[Rechte Seite herunterladen]]></target>
+			</trans-unit>
+			<trans-unit id="download.singlePage" approved="yes">
+				<source><![CDATA[Download single page]]></source>
+				<target><![CDATA[Einzelseite herunterladen]]></target>
+			</trans-unit>
+			<trans-unit id="download.work" approved="yes">
+				<source><![CDATA[Download whole work]]></source>
+				<target><![CDATA[Ganzes Werk herunterladen]]></target>
+			</trans-unit>
+			<trans-unit id="fullscreen" approved="yes">
+				<source><![CDATA[Fullscreen Mode]]></source>
+				<target><![CDATA[Vollansicht]]></target>
+			</trans-unit>
+			<trans-unit id="fulltext.no_fulltext_double" approved="yes">
+				<source><![CDATA[No fulltext in double page mode.]]></source>
+				<target><![CDATA[Keine Volltexte in der Doppelseitenansicht.]]></target>
+			</trans-unit>
+			<trans-unit id="fulltext.no_fulltext_gridpage" approved="yes">
+				<source><![CDATA[No fulltext in gridpage mode.]]></source>
+				<target><![CDATA[Keine Volltexte in der Vorschau-Ansicht.]]></target>
+			</trans-unit>
+			<trans-unit id="gridpage.preview" approved="yes">
+				<source><![CDATA[Thumbnail Preview]]></source>
+				<target><![CDATA[Vorschaubilder]]></target>
+			</trans-unit>
+			<trans-unit id="metadata" approved="yes">
+				<source><![CDATA[Metadata]]></source>
+				<target><![CDATA[Metadaten]]></target>
+			</trans-unit>
+			<trans-unit id="provider.email_provider" approved="yes">
+				<source><![CDATA[Email to data provider]]></source>
+				<target><![CDATA[Email an Datenprovider]]></target>
+			</trans-unit>
+			<trans-unit id="provider.local_catalogue" approved="yes">
+				<source><![CDATA[Online Public Access Catalog]]></source>
+				<target><![CDATA[Lokaler Katalog]]></target>
+			</trans-unit>
+			<trans-unit id="provider.local_presentation" approved="yes">
+				<source><![CDATA[Show in local context]]></source>
+				<target><![CDATA[Lokale Präsentation anzeigen]]></target>
+			</trans-unit>
+			<trans-unit id="provider.no_local_presentation" approved="yes">
+				<source><![CDATA[No local presentation available]]></source>
+				<target><![CDATA[Keine lokale Präsentation verfügbar]]></target>
+			</trans-unit>
+			<trans-unit id="toc" approved="yes">
+				<source><![CDATA[Table of Content]]></source>
+				<target><![CDATA[Inhaltsverzeichnis]]></target>
+			</trans-unit>
+			<trans-unit id="website.jump_totop" approved="yes">
+				<source><![CDATA[Jump to top of page]]></source>
+				<target><![CDATA[zum Seitenanfang springen]]></target>
+			</trans-unit>
+			<trans-unit id="website.last_updated" approved="yes">
+				<source><![CDATA[Last updated]]></source>
+				<target><![CDATA[Zuletzt aktualisiert]]></target>
+			</trans-unit>
+			<trans-unit id="website.totop" approved="yes">
+				<source><![CDATA[to top]]></source>
+				<target><![CDATA[nach oben]]></target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
