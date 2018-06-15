@@ -65,10 +65,10 @@ $(document).ready(function() {
     if($('.pages select option[selected]')[0]) {
         $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number">'+$('.pages select option[selected]').text()+'</dd>');
     }
-    
+
     $('.provider').append('<div class="mobile-controls" />');
     $('.view-functions .pages form, .view-functions .zoom a.fullscreen').clone().appendTo('.provider .mobile-controls');
-    
+
     // Shorten mobile meta title
     shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
     shortenMobileMetaTitle = shortenMobileMetaElement.text();
@@ -126,14 +126,16 @@ $(document).keyup(function(e) {
 // Activate fullscreen mode and set corresponding cookie
 function enterFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
-    $("body").addClass('fullscreen'); $('a.fullscreen').addClass('active');
+    $("body").addClass('fullscreen');
+    $('a.fullscreen').addClass('active');
     Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true');
 }
 
 // Exit fullscreen mode and drop cookie
 function exitFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
-    $("body").removeClass('fullscreen'); $('a.fullscreen').removeClass('active');
+    $("body").removeClass('fullscreen');
+    $('a.fullscreen').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 

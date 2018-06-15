@@ -12,8 +12,8 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "dfgviewer/Resources/Public/Css/allStyles.css" : "dfgviewer/Resources/Private/Less/all.less",
-                    "dfgviewer/Resources/Public/Css/webStyles.css" : "dfgviewer/Resources/Private/Less/website.less",
+                    "../Resources/Public/Css/allStyles.css" : "../Resources/Private/Less/all.less",
+                    "../Resources/Public/Css/webStyles.css" : "../Resources/Private/Less/website.less",
                 }
             }
         },
@@ -26,21 +26,21 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "dfgviewer/Resources/Public/Js/allScripts.js" : ['dfgviewer/Resources/Private/Javascript/modernizrCustom.js', 'dfgviewer/Resources/Private/Javascript/js.cookie.js', 'dfgviewer/Resources/Private/Javascript/dfgviewerScripts.js'],
-                    "dfgviewer/Resources/Public/Js/webScripts.js" : ['dfgviewer/Resources/Private/Javascript/modernizrCustom.js', 'dfgviewer/Resources/Private/Javascript/websiteScripts.js']
+                    "../Resources/Public/Js/allScripts.js" : ['../Resources/Private/Javascript/modernizrCustom.js', '../Resources/Private/Javascript/js.cookie.js', '../Resources/Private/Javascript/dfgviewerScripts.js'],
+                    "../Resources/Public/Js/webScripts.js" : ['../Resources/Private/Javascript/modernizrCustom.js', '../Resources/Private/Javascript/websiteScripts.js']
                 }
             }
         },
         watch: {
             styles: {
-                files: ['dfgviewer/Resources/Private/Less/**/*.less'],
+                files: ['../Resources/Private/Less/**/*.less'],
                 tasks: ['less'],
                 options: {
                     nospawn: true
                 }
             },
             js: {
-                files: ['dfgviewer/Resources/Private/Javascript/*.js'],
+                files: ['../Resources/Private/Javascript/*.js'],
                 tasks: ['uglify']
             }
         }

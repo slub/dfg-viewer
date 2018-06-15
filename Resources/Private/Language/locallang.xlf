@@ -59,6 +59,12 @@
 		<trans-unit id="website.jump_totop">
 			<source>Jump to top of page</source>
 		</trans-unit>
+		<trans-unit id="metadata">
+			<source>Metadata</source>
+		</trans-unit>
+		<trans-unit id="toc">
+			<source>Table of Content</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

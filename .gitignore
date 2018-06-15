@@ -1,11 +1,5 @@
-.buildpath
-.loadpath
-.metadata
-.project
-.settings/
 .idea/
 .DS_Store
 node_modules
-dfgviewer/Resources/Public/Css/allStyles.css.map
-dfgviewer/Resources/Public/Css/webStyles.css.map
-templates/
+Resources/Public/Css/allStyles.css.map
+Resources/Public/Css/webStyles.css.map
