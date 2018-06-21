@@ -7,16 +7,18 @@ The following document holds information about the installation of the *TYPO3 df
 Installation
 ============
 
-The following documentation was tested with TYPO3 6.2.12. The extension is based on *Kitodo.Presentation (dlf)*. So before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install both extensions.
+The following documentation was tested with TYPO3 6.2.x and 7.6.x. The extension is based on *Kitodo.Presentation (dlf)*.
+Before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install both extensions.
 
 You can install the extension automatically via extension manager or semiautomatically via GitHub. The automatic way is straight forward so in the following the GitHub process is explained.
 At first checkout the repository:
 
-	git clone https://github.com/slub/dfg-viewer.git
+	git clone https://github.com/slub/dfg-viewer.git dfgviewer
 
-After this create a symbolic link from your workspace to your TYPO3 extension folder:
+The extension key is "dfgviewer". Thus the following directory must keep the DFG-Viewer and Kitodo.Presentation in your document root:
 
-	ln -s ~/dfg-viewer/dfgviewer/ /var/www/typo3conf/ext/
+  typo3conf/ext/dfgviewer/
+  typo3conf/ext/dlf/
 
 Repeat this process for the *Kitodo.Presentation (dlf)* (https://github.com/kitodo/kitodo-presentation.git) extension.
 
@@ -36,7 +38,7 @@ http://localhost/index.php?id=21&tx_dlf%5Bid%5D=http%3A%2F%2Fdigital.slub-dresde
 Known Problems
 --------------
 
-In TYPO3 6.2 you should use the following configuration in *typo3conf\LocalConfiguration.php*:
+You should use the following configuration in *typo3conf\LocalConfiguration.php*:
 
 'FE' => array(
 	...
