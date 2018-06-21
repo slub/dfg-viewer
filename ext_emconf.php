@@ -28,7 +28,7 @@ $EM_CONF[$_EXTKEY] = array(
     'category' => 'plugin',
     'author' => 'Sebastian Meyer',
     'author_email' => 'sebastian.meyer@slub-dresden.de',
-    'author_company' => '<br /><a href="http://www.slub-dresden.de/en/" target="_blank">Saxon State and University Library Dresden</a><br /><a href="http://www.dfg.de/en/" target="_blank">German Research Foundation</a>',
+    'author_company' => 'Saxon State and University Library Dresden (SLUB)',
     'shy' => '',
     'priority' => '',
     'module' => '',
