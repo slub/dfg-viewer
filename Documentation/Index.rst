@@ -1,3 +1,5 @@
+.. include:: Includes.txt
+
 =============
 Documentation
 =============
@@ -40,10 +42,10 @@ Known Problems
 
 You should use the following configuration in *typo3conf\LocalConfiguration.php*:
 
-'FE' => array(
-	...
-	'cHashRequiredParameters' => 'tx_dlf[id],',
-        'pageNotFoundOnCHashError' => '0',
-        'pageNotFound_handling' => '',
-        ...
-),
+	'FE' => array(
+	  ...
+	  'cHashRequiredParameters' => 'tx_dlf[id],',
+	        'pageNotFoundOnCHashError' => '0',
+	        'pageNotFound_handling' => '',
+	        ...
+	),
