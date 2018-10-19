@@ -12,8 +12,8 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "../Resources/Public/Css/allStyles.css" : "../Resources/Private/Less/all.less",
-                    "../Resources/Public/Css/webStyles.css" : "../Resources/Private/Less/website.less",
+                    "Resources/Public/Css/allStyles.css" : "Resources/Private/Less/all.less",
+                    "Resources/Public/Css/webStyles.css" : "Resources/Private/Less/website.less",
                 }
             }
         },
@@ -26,24 +26,26 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "../Resources/Public/Js/allScripts.js" : ['../Resources/Private/Javascript/modernizrCustom.js', '../Resources/Private/Javascript/js.cookie.js', '../Resources/Private/Javascript/dfgviewerScripts.js'],
-                    "../Resources/Public/Js/webScripts.js" : ['../Resources/Private/Javascript/modernizrCustom.js', '../Resources/Private/Javascript/websiteScripts.js']
+                    "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js'],
+                    "Resources/Public/Js/webScripts.js" : ['Resources/Private/Javascript/websiteScripts.js']
                 }
             }
         },
         watch: {
             styles: {
-                files: ['../Resources/Private/Less/**/*.less'],
+                files: ['Resources/Private/Less/**/*.less'],
                 tasks: ['less'],
                 options: {
                     nospawn: true
                 }
             },
             js: {
-                files: ['../Resources/Private/Javascript/*.js'],
+                files: ['Resources/Private/Javascript/*.js'],
                 tasks: ['uglify']
             }
         }
     });
+    
+    grunt.file.setBase('../')
     grunt.registerTask('default', ['less','uglify','watch']);
 };
