@@ -15,8 +15,6 @@
   "homepage": "https://dfgviewer.de",
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-clean": "^0.4.0",
-    "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-less": "^2.0.0",
     "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "^1.0.0",
