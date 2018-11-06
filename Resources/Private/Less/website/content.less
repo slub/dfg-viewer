@@ -180,13 +180,29 @@
                 font-size: 14px;
                 text-transform: uppercase;
             }
+            select {
+                position: relative;
+                border: 1px solid transparent;
+                width: 100%;
+                border-color: @light-blue transparent transparent @light-blue;
+                background: lighten(@light-blue,18%);
+                width: 100%;
+                display: block;
+                padding: 10px;
+                font-size: 14px;
+                line-height: 1.7;
+                &:focus {
+                    background: lighten(@light-blue,22%);
+                    outline: 0 none;
+                }
+            }
         }
         @media screen and (min-width: @desktopViewportWidth) {
             padding: 0 150px;
             form {
                 margin: 70px 0;
                 input[type="submit"] {
-                    width: 24%;
+                    width: 32%;
                 }
             }
         }
