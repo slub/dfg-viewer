@@ -120,14 +120,16 @@
             </f:then>
             <f:else>
               <f:if condition="<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />">
-                <li>
-                  <f:link.external
-                    uri="http://digital.slub-dresden.de/fileadmin/data/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' htmlspecialchars='FALSE' />/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' htmlspecialchars='FALSE' />_tif/jpegs/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />.pdf"
-                    class="download-document"
-                    target="_blank"
-                    title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" />
-                  </f:link.external>
-                </li>
+                <f:alias map="{xpathDownload: '//mets:fileSec/mets:fileGrp[@USE=\'DOWNLOAD\']//mets:file/mets:FLocat/@xlink:href'}">
+                  <li>
+                    <f:link.external
+                      uri="<dv:format.subStringLast string=\"{dv:xpath(xpath:'(({xpathDownload})[1])')}\" needle=\"/\" />/<dv:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />.pdf"
+                      class="download-document"
+                      target="_blank"
+                      title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" />
+                    </f:link.external>
+                  </li>
+                </f:alias>
               </f:if>
             </f:else>
           </f:if>
