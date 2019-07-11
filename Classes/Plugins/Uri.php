@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -35,7 +37,7 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_uri extends tx_dlf_plugin {
+class Uri extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 

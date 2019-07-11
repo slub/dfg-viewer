@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -32,7 +34,7 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
+class NewspaperYears extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 

@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins\Sru;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -32,7 +34,7 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_sru_eid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
+class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 	/**
 	 *
