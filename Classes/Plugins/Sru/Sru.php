@@ -24,6 +24,8 @@ namespace Slub\Dfgviewer\Plugins\Sru;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 
 /**
  * Plugin 'DFG-Viewer: SRU Client' for the 'dfgviewer' extension.
@@ -142,7 +144,7 @@ class Sru extends tx_dlf_plugin {
 	 */
 	protected function addSearchFormJS() {
 
-		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.ExtensionManagementUtility::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
 
 	}
 

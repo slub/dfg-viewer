@@ -24,6 +24,9 @@ namespace Slub\Dfgviewer\Plugins;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\MathUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  */
@@ -71,7 +74,7 @@ class Uri extends tx_dlf_plugin {
 			// page may be integer or string (pyhsical page attribute)
 			if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
+				$this->piVars['page'] = MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
 
 			} else {
 
@@ -98,13 +101,13 @@ class Uri extends tx_dlf_plugin {
 		);
 
 		// Get persistent identifier of book.
-		$uriBook = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['contentIds'], TRUE);
+		$uriBook = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['contentIds'], TRUE);
 
 		if (empty($uriBook)) {
 
 			$uriBook = $this->doc->getLogicalStructure($this->doc->toplevelId);
 
-			$uriBook = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
+			$uriBook = GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
 
 		}
 
@@ -143,7 +146,7 @@ class Uri extends tx_dlf_plugin {
 		}
 
 		// Get persistent identifier of page.
-		$uriPage = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$this->piVars['page']]]['contentIds'], TRUE);
+		$uriPage = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$this->piVars['page']]]['contentIds'], TRUE);
 
 		if (!empty($uriPage)) {
 

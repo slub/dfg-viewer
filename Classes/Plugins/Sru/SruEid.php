@@ -24,6 +24,8 @@ namespace Slub\Dfgviewer\Plugins\Sru;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * Plugin 'DFG-Viewer: SRU Client eID script' for the 'dfgviewer' extension.
@@ -34,7 +36,7 @@ namespace Slub\Dfgviewer\Plugins\Sru;
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
+class SruEid extends AbstractPlugin {
 
 	/**
 	 *
@@ -51,17 +53,17 @@ class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 */
 	public function main() {
 
-		$this->cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
+		$this->cObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 
 		$this->extKey = 'dfgviewer';
 
 		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
 
-		$this->LLkey = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('L') ? \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('L') : 'default';
+		$this->LLkey = GeneralUtility::_GP('L') ? GeneralUtility::_GP('L') : 'default';
 
 		$this->pi_loadLL();
 
-		$url = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;recordSchema=dfg-viewer/page&amp;query=' . urlencode(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q'));
+		$url = GeneralUtility::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;recordSchema=dfg-viewer/page&amp;query=' . urlencode(GeneralUtility::_GP('q'));
 
 		// make request to SRU service
 		$sruXML = simplexml_load_file($url);
@@ -74,7 +76,7 @@ class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 			if ($sruResponse === FALSE) {
 
-				$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q') ;
+				$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . GeneralUtility::_GP('q') ;
 
 			} else {
 
@@ -82,7 +84,7 @@ class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 				if ($sruRecords === FALSE || empty($sruRecords) ) {
 
-					$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q') ;
+					$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . GeneralUtility::_GP('q') ;
 
 				}
 
@@ -189,7 +191,7 @@ class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 		} else {
 
-			$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('q') ;
+			$results['error'] =  $this->pi_getLL('label.noresults') . ' ' . GeneralUtility::_GP('q') ;
 
 		}
 
@@ -199,6 +201,6 @@ class SruEid extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
 }
 
-$cObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_dfgviewer_sru_eid');
+$cObj = GeneralUtility::makeInstance('tx_dfgviewer_sru_eid');
 
 $cObj->main();

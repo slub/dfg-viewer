@@ -24,6 +24,7 @@ namespace Slub\Dfgviewer\Plugins;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * Plugin 'DFG-Viewer: Newspaper Year Listing' for the 'dfgviewer' extension.
@@ -65,7 +66,7 @@ class NewspaperYears extends tx_dlf_plugin {
 		} else {
 
 			// Set default values if not set.
-			$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+			$this->piVars['page'] = MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
 
 		}
 

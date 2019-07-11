@@ -24,6 +24,8 @@ namespace Slub\Dfgviewer\Plugins;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\MathUtility;
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  */
@@ -74,7 +76,7 @@ class GridPager extends tx_dlf_plugin {
 			// $this->piVars['page'] may be integer or string (physical structure @ID)
 			if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
+				$this->piVars['page'] = MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
 
 			} else {
 
