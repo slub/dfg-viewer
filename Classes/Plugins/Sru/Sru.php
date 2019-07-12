@@ -40,7 +40,7 @@ class Sru extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru.php';
+	public $scriptRelPath = 'Classes/Plugins/Sru/Sru.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -100,7 +100,7 @@ class Sru extends tx_dlf_plugin {
 
 		} else {
 
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/sru/template.tmpl'), '###TEMPLATE###');
+			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Sru.tmpl'), '###TEMPLATE###');
 
 		}
 
@@ -144,7 +144,7 @@ class Sru extends tx_dlf_plugin {
 	 */
 	protected function addSearchFormJS() {
 
-		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.ExtensionManagementUtility::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.ExtensionManagementUtility::siteRelPath($this->extKey).'Resources/Private/Javascript/tx_dfgviewer_sru.js"></script>';
 
 	}
 

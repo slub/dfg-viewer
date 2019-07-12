@@ -57,7 +57,7 @@ class SruEid extends AbstractPlugin {
 
 		$this->extKey = 'dfgviewer';
 
-		$this->scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru_eid.php';
+		$this->scriptRelPath = 'Classes/Plugins/Sru/SruEid.php';
 
 		$this->LLkey = GeneralUtility::_GP('L') ? GeneralUtility::_GP('L') : 'default';
 

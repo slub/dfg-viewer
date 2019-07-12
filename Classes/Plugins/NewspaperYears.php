@@ -39,7 +39,7 @@ class NewspaperYears extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php';
+	public $scriptRelPath = 'Classes/Plugins/NewspaperYears.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -79,7 +79,7 @@ class NewspaperYears extends tx_dlf_plugin {
 
 		} else {
 
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/newspaper-years/template.tmpl'), '###TEMPLATE###');
+			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
 
 		}
 

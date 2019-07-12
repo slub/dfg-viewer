@@ -44,7 +44,7 @@ class Uri extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/uri/class.tx_dfgviewer_uri.php';
+	public $scriptRelPath = 'Classes/Plugins/Uri.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -91,7 +91,7 @@ class Uri extends tx_dlf_plugin {
 
 		} else {
 
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/uri/template.tmpl'), '###TEMPLATE###');
+			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
 
 		}
 

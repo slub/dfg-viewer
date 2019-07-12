@@ -39,7 +39,7 @@ class NewspaperCalendar extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/newspaper-calendar/class.tx_dfgviewer_newspaper-calendar.php';
+	public $scriptRelPath = 'Classes/Plugins/NewspaperCalendar.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -90,7 +90,7 @@ class NewspaperCalendar extends tx_dlf_plugin {
 
 		} else {
 
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/newspaper-calendar/template.tmpl'), '###TEMPLATE###');
+			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl'), '###TEMPLATE###');
 
 		}
 

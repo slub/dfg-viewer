@@ -43,7 +43,7 @@ class GridPager extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/gridpager/class.tx_dfgviewer_gridpager.php';
+	public $scriptRelPath = 'Classes/Plugins/GridPager.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -109,7 +109,7 @@ class GridPager extends tx_dlf_plugin {
 
 		} else {
 
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/gridpager/template.tmpl'), '###TEMPLATE###');
+			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/GridPager.tmpl'), '###TEMPLATE###');
 
 		}
 
