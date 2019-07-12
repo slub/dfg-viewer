@@ -24,8 +24,8 @@ namespace Slub\Dfgviewer\Plugins\Sru;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \tx_dlf_plugin;
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
 
 /**
  * Plugin 'DFG-Viewer: SRU Client' for the 'dfgviewer' extension.

@@ -24,6 +24,7 @@ namespace Slub\Dfgviewer\Plugins;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \tx_dlf_plugin;
 use \TYPO3\CMS\Core\Utility\MathUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
