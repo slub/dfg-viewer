@@ -27,8 +27,6 @@ use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 // Register plugins.
-ExtensionManagementUtility::addPItoST43($_EXTKEY, 'plugins/amd/class.tx_dfgviewer_amd.php', '_amd', 'list_type', TRUE);
-
 ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Plugins/GridPager.php', '_gridpager', 'list_type', TRUE);
 
 ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Plugins/Uri.php', '_uri', 'list_type', TRUE);

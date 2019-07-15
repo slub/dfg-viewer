@@ -30,9 +30,6 @@ config {
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Metadata template file
 	templateFileMeta = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/metadata.tmpl
 
-	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Adm. Metadata template file
-	templateFileAmd = EXT:dfgviewer/plugins/amd/template.tmpl
-
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Grid Pager template file
 	templateFilePager = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/GridPager.tmpl
 

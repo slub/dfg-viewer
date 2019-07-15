@@ -1,8 +1,3 @@
-plugin.tx_dfgviewer_amd {
-	pages = {$config.storagePid}
-	templateFile = {$config.templateFileAmd}
-}
-
 plugin.tx_dfgviewer_gridpager {
 	pages = {$config.storagePid}
 	limit = 24
