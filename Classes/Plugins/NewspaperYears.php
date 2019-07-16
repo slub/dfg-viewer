@@ -25,6 +25,8 @@ namespace Slub\Dfgviewer\Plugins;
 ***************************************************************/
 
 use \tx_dlf_plugin;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
@@ -73,20 +75,18 @@ class NewspaperYears extends tx_dlf_plugin {
 
 		$toc = $this->doc->tableOfContents;
 
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
 		} else {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
 		}
 
 		// Get subpart templates
 		$subparts['template'] = $this->template;
-		$subparts['year'] = $this->cObj->getSubpart($subparts['template'], '###LISTYEAR###');
+		$subparts['year'] = $templateService->getSubpart($subparts['template'], '###LISTYEAR###');
 
 		$years = $toc[0]['children'];
 
@@ -122,12 +122,12 @@ class NewspaperYears extends tx_dlf_plugin {
 				'###YEARNAME###' => $yearText,
 			);
 
-			$subYearPartContent .= $this->cObj->substituteMarkerArray($subparts['year'], $yearArray);
+			$subYearPartContent .= $templateService->substituteMarkerArray($subparts['year'], $yearArray);
 
 		}
 
 		// fill the week markers
-		return $this->cObj->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
+		return $templateService->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
 
 	}
 

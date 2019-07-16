@@ -25,8 +25,9 @@ namespace Slub\Dfgviewer\Plugins;
 ***************************************************************/
 
 use \tx_dlf_plugin;
-use \TYPO3\CMS\Core\Utility\MathUtility;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
@@ -85,15 +86,13 @@ class Uri extends tx_dlf_plugin {
 
 		}
 
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
 		} else {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
 		}
 
 		$markerArray = array (
@@ -183,7 +182,7 @@ class Uri extends tx_dlf_plugin {
 
 		}
 
-		return $this->cObj->substituteMarkerArray($this->template, $markerArray);
+		return $templateService->substituteMarkerArray($this->template, $markerArray);
 
 	}
 
