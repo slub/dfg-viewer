@@ -105,6 +105,8 @@ class NewspaperCalendar extends tx_dlf_plugin {
 
 		$subPartContent = '';
 
+        $allIssues[] = array();
+
 		for ($i = 0; $i <= 11; $i++) {
 
 			$markerArray = array (
