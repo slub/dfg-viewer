@@ -2,31 +2,29 @@
 namespace Slub\Dfgviewer\Plugins;
 
 /***************************************************************
-*  Copyright notice
-*
-*  (c) 2014 Alexander Bigga <alexander.bigga@slub-dresden.de>
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+ *  Copyright notice
+ *
+ *  (c) 2014 Alexander Bigga <alexander.bigga@slub-dresden.de>
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 use \tx_dlf_plugin;
-use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
@@ -40,248 +38,403 @@ use \TYPO3\CMS\Core\Utility\MathUtility;
  */
 class NewspaperCalendar extends tx_dlf_plugin {
 
-	public $extKey = 'dfgviewer';
+    public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'Classes/Plugins/NewspaperCalendar.php';
+    public $scriptRelPath = 'Classes/Plugins/NewspaperCalendar.php';
 
-	/**
-	 * The main method of the PlugIn
-	 *
-	 * @access	public
-	 *
-	 * @param	string		$content: The PlugIn content
-	 * @param	array		$conf: The PlugIn configuration
-	 *
-	 * @return	string		The content that is displayed on the website
-	 */
-	public function main($content, $conf) {
+    const CHILDREN = 'children';
+    const LABEL = 'label';
+    const ORDERLABEL = 'orderlabel';
+    const NBSP = '&nbsp;';
 
-		$this->init($conf);
+    /**
+     * The main method of the PlugIn
+     *
+     * @access	public
+     *
+     * @param	string		$content: The PlugIn content
+     * @param	array		$conf: The PlugIn configuration
+     *
+     * @return	string		The content that is displayed on the website
+     */
+    public function main($content, $conf) {
+        $this->init($conf);
 
-		// Load current document.
-		$this->loadDocument();
+        // Load current document.
+        $this->loadDocument();
 
-		if ($this->doc === NULL) {
+        if ($this->doc === NULL) {
+            // Quit without doing anything if required variables are not set.
+            return $content;
+        } else {
+            // Set default values if not set.
+            $this->piVars['page'] = MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+        }
 
-			// Quit without doing anything if required variables are not set.
-			return $content;
+        $toc = $this->doc->tableOfContents;
 
-		} else {
+        $months = array();
+        $monthLabel = '';
 
-			// Set default values if not set.
-			$this->piVars['page'] = MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+        foreach($toc[0][self::CHILDREN][0][self::CHILDREN] as $id => $month) {
+            // this variable is needed only for case where there is one month
+            $monthLabel = $this->getMonthLabel($month);
+            $monthNum = $this->getMonth($month);
+            $months[$monthNum] = $id;
+            $allIssuesCount += count($month[self::CHILDREN]);
+        }
 
-		}
+        // Load template file.
+        if (!empty($this->conf['templateFile'])) {
 
-		$toc = $this->doc->tableOfContents;
+            $this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
 
-		foreach($toc[0]['children'][0]['children'] as $id => $mo) {
+        } else {
 
-			// prefer oderlabel over label
-			$monthNum = isset($mo['orderlabel']) ? (int)$mo['orderlabel'] : $mo['label'];
+            $this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl'), '###TEMPLATE###');
 
-			$month[$monthNum] = $id;
+        }
 
-			$allIssuesCount += count($mo['children']);
+        // Get subpart templates
+        $subparts['template'] = $this->template;
 
-		}
+        $subPartContent = '';
 
-        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+        $years = $this->getYears($toc);
 
-		// Load template file.
-		if (!empty($this->conf['templateFile'])) {
-			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
-		} else {
-			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl'), '###TEMPLATE###');
-		}
+        if (count($years) == 1) {
+            $subPartContent .= $this->getTemplateForYear($subparts, $toc, (int)$years[0], $months, 1, 12, false);
+        } else if (count($years) == 2) {
+            if (count($months) == 1) {
+                $year = strpos($monthLabel, $years[0]) !== false ? $years[0] : $years[1];
+                $subPartContent .= $this->getTemplateForYear($subparts, $toc, (int)$year, $months, key($months), key($months));
+            } else {
+                $firstMonth = $this->getMonthForTemplate(key($months), true);
+                end($months);
+                $lastMonth = $this->getMonthForTemplate(key($months), false);
 
-		// Get subpart templates
-		$subparts['template'] = $this->template;
-		$subparts['month'] = $templateService->getSubpart($subparts['template'], '###CALMONTH###');
+                $subPartContent .= $this->getTemplateForYear($subparts, $toc, (int)$years[0], $months, $firstMonth, 12);
+                $subPartContent .= $this->getTemplateForYear($subparts, $toc, (int)$years[1], $months, 1, $lastMonth);
+            }
+        }
 
-		$subparts['singleissue'] = $templateService->getSubpart($subparts['issuelist'], '###SINGLEISSUE###');
+        return $this->cObj->substituteSubpart($this->template, '###CALYEARWRAPPER###', $subPartContent);
+    }
 
-		$year = (int)$toc[0]['children'][0]['label'];
-
-		$subPartContent = '';
+    /**
+     * Get template for given year.
+     *
+     * @access	private
+     *
+     * @param array $subparts of template
+     * @param array $toc table of content
+     * @param int $year for which template is going to be build
+     * @param array $months for which issues were found
+     * @param int $firstMonth - January - 1, February - 2, ..., December - 12
+     * @param int $lastMonth - January - 1, February - 2, ..., December - 12
+     * @param bool $hasMoreYears
+     *
+     * @return string
+     */
+    private function getTemplateForYear($subparts, $toc, $year, $months, $firstMonth, $lastMonth, $hasMoreYears = true) {
+        $subparts["year"] = $this->cObj->getSubpart($subparts['template'], '###CALYEARWRAPPER###');
+        $subparts['month'] = $this->cObj->getSubpart($subparts['year'], '###CALMONTH###');
+        $subparts['singleissue'] = $this->cObj->getSubpart($subparts['issuelist'], '###SINGLEISSUE###');
 
         $allIssues[] = array();
+        $subPartContent = '';
 
-		for ($i = 0; $i <= 11; $i++) {
+        for ($i = $firstMonth; $i <= $lastMonth; $i++) {
 
-			$markerArray = array (
-				'###DAYMON_NAME###' => strftime('%a', strtotime('last Monday')),
-				'###DAYTUE_NAME###' => strftime('%a', strtotime('last Tuesday')),
-				'###DAYWED_NAME###' => strftime('%a', strtotime('last Wednesday')),
-				'###DAYTHU_NAME###' => strftime('%a', strtotime('last Thursday')),
-				'###DAYFRI_NAME###' => strftime('%a', strtotime('last Friday')),
-				'###DAYSAT_NAME###' => strftime('%a', strtotime('last Saturday')),
-				'###DAYSUN_NAME###' => strftime('%a', strtotime('last Sunday')),
-				'###MONTHNAME###' 	=> strftime('%B', strtotime($year . '-' . ($i + 1) . '-1'))
-			);
+            $markerArray = array (
+                '###DAYMON_NAME###' => strftime('%a', strtotime('last Monday')),
+                '###DAYTUE_NAME###' => strftime('%a', strtotime('last Tuesday')),
+                '###DAYWED_NAME###' => strftime('%a', strtotime('last Wednesday')),
+                '###DAYTHU_NAME###' => strftime('%a', strtotime('last Thursday')),
+                '###DAYFRI_NAME###' => strftime('%a', strtotime('last Friday')),
+                '###DAYSAT_NAME###' => strftime('%a', strtotime('last Saturday')),
+                '###DAYSUN_NAME###' => strftime('%a', strtotime('last Sunday')),
+                '###MONTHNAME###' 	=> strftime('%B', strtotime($year . '-' . $i . '-1'))
+            );
 
-			// Get week subpart template
-			$subWeekTemplate = $templateService->getSubpart($subparts['month'], '###CALWEEK###');
-			$subWeekPartContent = '';
+            // Get week subpart template
+            $subWeekTemplate = $this->cObj->getSubpart($subparts['month'], '###CALWEEK###');
+            $subWeekPartContent = '';
 
-			$firstOfMonth = strtotime($year . '-' . ($i + 1) . '-1');
-			$lastOfMonth = strtotime('last day of', ($firstOfMonth));
-			$firstOfMonthStart = strtotime('last Monday', $firstOfMonth);
+            $firstOfMonth = strtotime($year . '-' . $i . '-1');
+            $lastOfMonth = strtotime('last day of', ($firstOfMonth));
+            $firstOfMonthStart = strtotime('last Monday', $firstOfMonth);
 
-			// max 6 calendar weeks in a month
-			for ($j = 0; $j <= 5; $j++) {
+            // max 6 calendar weeks in a month
+            for ($j = 0; $j <= 5; $j++) {
 
-				$firstDayOfWeek = strtotime('+ ' . $j . ' Week', $firstOfMonthStart);
+                $firstDayOfWeek = strtotime('+ ' . $j . ' Week', $firstOfMonthStart);
 
-				$weekArray = array(
-					'###DAYMON###' => '&nbsp;',
-					'###DAYTUE###' => '&nbsp;',
-					'###DAYWED###' => '&nbsp;',
-					'###DAYTHU###' => '&nbsp;',
-					'###DAYFRI###' => '&nbsp;',
-					'###DAYSAT###' => '&nbsp;',
-					'###DAYSUN###' => '&nbsp;',
-				);
+                $weekArray = array(
+                    '###DAYMON###' => self::NBSP,
+                    '###DAYTUE###' => self::NBSP,
+                    '###DAYWED###' => self::NBSP,
+                    '###DAYTHU###' => self::NBSP,
+                    '###DAYFRI###' => self::NBSP,
+                    '###DAYSAT###' => self::NBSP,
+                    '###DAYSUN###' => self::NBSP,
+                );
 
-				// 7 days per week ;-)
-				for ($k = 0; $k <= 6; $k++) {
+                // 7 days per week ;-)
+                for ($k = 0; $k <= 6; $k++) {
 
-					$currentDayTime = strtotime('+ '.$k.' Day', $firstDayOfWeek);
+                    $currentDayTime = strtotime('+ '.$k.' Day', $firstDayOfWeek);
 
-					if ( $currentDayTime >= $firstOfMonth && $currentDayTime <= $lastOfMonth ) {
+                    if ( $currentDayTime >= $firstOfMonth && $currentDayTime <= $lastOfMonth ) {
 
-						$dayLinks = '';
-						$dayLinksText = '';
+                        $dayLinks = '';
+                        $dayLinksText = '';
+                        $currentMonth = date('n', $currentDayTime);
 
-						$currentMonth = date('n', $currentDayTime);
+                        if ($toc[0][self::CHILDREN][0][self::CHILDREN][$months[$currentMonth]][self::CHILDREN]) {
 
-						if ($toc[0]['children'][0]['children'][$month[$currentMonth]]['children']) {
+                            foreach($toc[0][self::CHILDREN][0][self::CHILDREN][$months[$currentMonth]][self::CHILDREN] as $id => $day) {
 
-							foreach($toc[0]['children'][0]['children'][$month[$currentMonth]]['children'] as $id => $day) {
+                                $dayNum = $this->getDay($day);
 
-								// prefer oderlabel over label
-								$dayNum = isset($day['orderlabel']) ? (int)$day['orderlabel'] : $day['label'];
+                                if ($dayNum === (int)date('j', $currentDayTime) && $day['type'] === 'day') {
+                                    if ($hasMoreYears && strpos($this->getDayLabel($day), (string)$year) === false) {
+                                        continue;
+                                    }
 
-								if ($dayNum === (int)date('j', $currentDayTime)
-									&& $day['type'] === 'day') {
+                                    $dayLinks = $dayNum;
 
-									$dayLinks = $dayNum;
+                                    foreach($day[self::CHILDREN] as $id => $issue) {
+                                        $dayPoints	= $issue['points'];
+                                        $dayLinkLabel = empty($issue[self::LABEL]) ? strftime('%x', $currentDayTime) : $issue[self::LABEL];
 
-									foreach($day['children'] as $id => $issue) {
+                                        $linkConf = array (
+                                            'useCacheHash' => 1,
+                                            'parameter' => $this->conf['targetPid'],
+                                            'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints) . '&' . $this->prefixId . '[page]=1',
+                                            'ATagParams' => 'id=' . $issue['id'],
+                                        );
+                                        $dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
 
-										$dayPoints	= $issue['points'];
+                                        $allIssues[] = array(strftime('%A, %x', $currentDayTime), $this->cObj->typoLink($dayLinkLabel, $linkConf));
+                                    }
+                                }
 
-										$dayLinkLabel = empty($issue['label']) ? strftime('%x', $currentDayTime) : $issue['label'];
+                            }
 
-										$linkConf = array (
-											'useCacheHash' => 1,
-											'parameter' => $this->conf['targetPid'],
-											'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($dayPoints) . '&' . $this->prefixId . '[page]=1',
-											'ATagParams' => 'id=' . $issue['id'],
-										);
-										$dayLinksText[] = $this->cObj->typoLink($dayLinkLabel, $linkConf);
+                            $dayLinkDiv = '<div class="contains-issues">' . strftime('%d', $currentDayTime) . '</div>' . $this->renderIssues($dayLinksText);
+                        }
 
-										$allIssues[] = array(strftime('%A, %x', $currentDayTime), $this->cObj->typoLink($dayLinkLabel, $linkConf));
-									}
-								}
+                        switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
+                            case '1':
+                                $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                            case '2':
+                                $weekArray['###DAYTUE###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                            case '3':
+                                $weekArray['###DAYWED###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                            case '4':
+                                $weekArray['###DAYTHU###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                            case '5':
+                                $weekArray['###DAYFRI###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                            case '6':
+                                $weekArray['###DAYSAT###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                            case '7':
+                                $weekArray['###DAYSUN###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
+                                break;
+                        }
+                    }
+                }
+                // fill the weeks
+                $subWeekPartContent .= $this->cObj->substituteMarkerArray($subWeekTemplate, $weekArray);
+            }
 
-							}
+            // fill the month markers
+            $subPartContent .= $this->cObj->substituteMarkerArray($subparts['month'], $markerArray);
 
-							// render issues from that day in an unordered list
-							if (is_array($dayLinksText)) {
-								$dayLinksList = '<ul class="issues">';
-								foreach ($dayLinksText as $link) {
-									$dayLinksList .= '<li>'.$link.'</li>';
-								}
-								$dayLinksList .= '</ul>';
-							}
+            // fill the week markers
+            $subPartContent = $this->cObj->substituteSubpart($subPartContent, '###CALWEEK###', $subWeekPartContent);
+        }
 
-							$dayLinkDiv = '<div class="contains-issues">' . strftime('%d', $currentDayTime) . '</div>' . $dayLinksList;
+        // link to years overview
+        $linkConf = array (
+            'useCacheHash' => 1,
+            'parameter' => $this->conf['targetPid'],
+            'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($toc[0]['points']),
+        );
+        $allYearsLink = $this->cObj->typoLink($this->pi_getLL('allYears', '', TRUE) . ' ' .$toc[0][self::LABEL], $linkConf);
 
-
-						}
-
-						switch (strftime('%u', strtotime('+ '.$k.' Day', $firstDayOfWeek))) {
-							case '1': $weekArray['###DAYMON###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-							case '2': $weekArray['###DAYTUE###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-							case '3': $weekArray['###DAYWED###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-							case '4': $weekArray['###DAYTHU###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-							case '5': $weekArray['###DAYFRI###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-							case '6': $weekArray['###DAYSAT###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-							case '7': $weekArray['###DAYSUN###'] = ((int)$dayLinks === (int)date('j', $currentDayTime)) ? $dayLinkDiv : strftime('%d', $currentDayTime);
-									break;
-						}
-					}
-				}
-				// fill the weeks
-				$subWeekPartContent .= $templateService->substituteMarkerArray($subWeekTemplate, $weekArray);
-			}
-
-			// fill the month markers
-			$subPartContent .= $templateService->substituteMarkerArray($subparts['month'], $markerArray);
-
-			// fill the week markers
-			$subPartContent = $templateService->substituteSubpart($subPartContent, '###CALWEEK###', $subWeekPartContent);
-		}
-
-		// link to years overview
-		$linkConf = array (
-			'useCacheHash' => 1,
-			'parameter' => $this->conf['targetPid'],
-			'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($toc[0]['points']),
-		);
-		$allYearsLink = $this->cObj->typoLink($this->pi_getLL('allYears', '', TRUE) . ' ' .$toc[0]['label'], $linkConf);
-
-		// link to this year itself
-		$linkConf = array (
-			'useCacheHash' => 1,
-			'parameter' => $this->conf['targetPid'],
-			'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($this->piVars['id']),
-		);
-		$yearLink = $this->cObj->typoLink($year, $linkConf);
+        // link to this year itself
+        $linkConf = array (
+            'useCacheHash' => 1,
+            'parameter' => $this->conf['targetPid'],
+            'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($this->piVars['id']),
+        );
+        $yearLink = $this->cObj->typoLink($year, $linkConf);
 
 
-		// prepare list as alternative of the calendar view
-		$issueListTemplate = $templateService->getSubpart($subparts['template'], '###ISSUELIST###');
+        // prepare list as alternative of the calendar view
+        $issueListTemplate = $this->cObj->getSubpart($subparts['year'], '###ISSUELIST###');
 
-		$subparts['singleissue'] = $templateService->getSubpart($issueListTemplate, '###SINGLEISSUE###');
+        $subparts['singleissue'] = $this->cObj->getSubpart($issueListTemplate, '###SINGLEISSUE###');
 
-		$allDaysList = array();
+        $allDaysList = array();
+        $subPartContentList = '';
 
-		foreach($allIssues as $id => $issue) {
+        foreach($allIssues as $id => $issue) {
 
-			// only add date output, if not already done (multiple issues per day)
-			if (! in_array($issue[0], $allDaysList)) {
+            // only add date output, if not already done (multiple issues per day)
+            if (! in_array($issue[0], $allDaysList)) {
+                $allDaysList[] = $issue[0];
+                $subPartContentList .= $issue[0];
+            }
 
-				$allDaysList[] = $issue[0];
+            $subPartContentList .= $this->cObj->substituteMarker($subparts['singleissue'], '###ITEM###', $issue[1]);
+        }
 
-				$subPartContentList .= $issue[0];
+        $issueListTemplate = $this->cObj->substituteSubpart($issueListTemplate, '###SINGLEISSUE###', $subPartContentList);
 
-			}
+        $subparts['year'] = $this->cObj->substituteSubpart($subparts['year'], '###ISSUELIST###', $issueListTemplate);
 
-			$subPartContentList .= $templateService->substituteMarker($subparts['singleissue'], '###ITEM###', $issue[1]);
+        $markerArray = array (
+            '###CALYEAR###' => $yearLink,
+            '###CALALLYEARS###' => $allYearsLink
+        );
 
-		}
+        $subparts['year'] = $this->cObj->substituteMarkerArray($subparts['year'], $markerArray);
 
-		$issueListTemplate = $templateService->substituteSubpart($issueListTemplate, '###SINGLEISSUE###', $subPartContentList);
+        return $this->cObj->substituteSubpart($subparts['year'], '###CALMONTH###', $subPartContent);
+    }
 
-		$this->template = $templateService->substituteSubpart($this->template, '###ISSUELIST###', $issueListTemplate);
+    /**
+     * Get array for years. For concert programs it extracts 2 years from label.
+     *
+     * @access	private
+     *
+     * @param array $toc
+     *
+     * @return array
+     */
+    private function getYears($toc) {
+        $year = $toc[0][self::CHILDREN][0][self::LABEL];
+        if (empty($year)) {
+            $year = $toc[0][self::CHILDREN][0][self::ORDERLABEL];
+            if (strpos($year, '/') !== false) {
+                return explode('/', $year);
+            }
+        }
+        return array($year);
+    }
 
-		$markerArray = array (
-			'###CALYEAR###' => $yearLink,
-			'###CALALLYEARS###' => $allYearsLink
-		);
+    /**
+     * Get month number. For concert programs it extracts number from label.
+     *
+     * @access	private
+     *
+     * @param array $month
+     *
+     * @return int
+     */
+    private function getMonth($month) {
+        $monthLabel = $this->getMonthLabel($month);
 
-		$this->template = $templateService->substituteMarkerArray($this->template, $markerArray);
+        if (strpos($monthLabel, '-') !== false) {
+            $monthLabel = explode('-', $monthLabel)[1];
+        }
 
-		return $templateService->substituteSubpart($this->template, '###CALMONTH###', $subPartContent);
+        return (int)$monthLabel;
+    }
 
-	}
+    /**
+     * Get label for a month. It prefers orderlabel over label.
+     *
+     * @access	private
+     *
+     * @param array $month
+     *
+     * @return string
+     */
+    private function getMonthLabel($month) {
+        return isset($month[self::ORDERLABEL]) ? $month[self::ORDERLABEL] : $month[self::LABEL];
+    }
 
+    /**
+     * Get day number. For concert programs it extracts number from label.
+     *
+     * @access	private
+     *
+     * @param array $day
+     *
+     * @return int
+     */
+    private function getDay($day) {
+        $dayLabel = $this->getDayLabel($day);
+
+        if (strpos($dayLabel, '-') !== false) {
+            $dayLabel = explode('-', $dayLabel)[2];
+        }
+
+        return (int)$dayLabel;
+    }
+
+    /**
+     * Get label for a day. It prefers orderlabel over label.
+     *
+     * @access	private
+     *
+     * @param array $day
+     *
+     * @return string
+     */
+    private function getDayLabel($day) {
+        return isset($day[self::ORDERLABEL]) ? $day[self::ORDERLABEL] : $day[self::LABEL];
+    }
+
+    /**
+     * Get month to begin or end in calendar view.
+     *
+     * @access	private
+     *
+     * @param int $month
+     * @param bool $isFirstMonth
+     *
+     * @return string
+     */
+    private function getMonthForTemplate($month, $isFirstMonth) {
+        if ($month <= 4) {
+            return $isFirstMonth ? 1 : 4;
+        } else if ($month <= 8) {
+            return $isFirstMonth ? 5 : 8;
+        } else {
+            return $isFirstMonth ? 9 : 12;
+        }
+    }
+
+    /**
+     * Render issues from that day in an unordered list.
+     *
+     * @access	private
+     *
+     * @param $dayLinksText
+     *
+     * @return string
+     */
+    private function renderIssues($dayLinksText) {
+        $dayLinksList = '';
+
+        if (is_array($dayLinksText)) {
+            $dayLinksList = '<ul class="issues">';
+            foreach ($dayLinksText as $link) {
+                $dayLinksList .= '<li>'.$link.'</li>';
+            }
+            $dayLinksList .= '</ul>';
+        }
+
+        return $dayLinksList;
+    }
 }
