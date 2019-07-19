@@ -23,6 +23,8 @@ namespace Slub\Dfgviewer\Helpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use \tx_dlf_document;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class GetDoc
@@ -42,7 +44,7 @@ class GetDoc
    *
    * @access	public
    *
-   * @param	integer	$pagenumber:The current page numbert
+   * @param	integer	$pagenumber:The current page number
    *
    * @return	string: The left and right download url
    */
@@ -104,7 +106,7 @@ class GetDoc
    *
    * @access	public
    *
-   * @param	string		$content: The PlugIn content
+   * @param	string		$xpath: The PlugIn content
    *
    * @return	string		The content that is displayed on the website
    */
@@ -171,7 +173,7 @@ class GetDoc
         if (!empty($piVars['id'])) {
 
             // Get instance of tx_dlf_document.
-            $this->doc =& \tx_dlf_document::getInstance($piVars['id'], 0);
+            $this->doc =& tx_dlf_document::getInstance($piVars['id'], 0);
 
             if (!$this->doc->ready) {
 
@@ -179,7 +181,7 @@ class GetDoc
                 $this->doc = null;
 
                 if (TYPO3_DLOG) {
-                    \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with UID "'.$piVars['id'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                    GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with UID "'.$piVars['id'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
                 }
             } else {
 
@@ -188,7 +190,7 @@ class GetDoc
             }
         } else {
             if (TYPO3_DLOG) {
-                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with record ID "'.$this->piVars['recordId'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with record ID "'.$this->piVars['recordId'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
             }
         }
     }
