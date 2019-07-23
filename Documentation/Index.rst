@@ -9,7 +9,7 @@ The following document holds information about the installation of the *TYPO3 df
 Installation
 ============
 
-The following documentation was tested with TYPO3 6.2.x and 7.6.x. The extension is based on *Kitodo.Presentation (dlf)*.
+The following documentation was tested with 7.6.x. The extension is based on *Kitodo.Presentation (dlf)*.
 Before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install both extensions.
 
 You can install the extension automatically via extension manager or semiautomatically via GitHub. The automatic way is straight forward so in the following the GitHub process is explained.
