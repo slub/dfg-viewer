@@ -27,12 +27,12 @@
   ],
   "license": "GPL-3.0-or-later",
   "require": {
-    "typo3/cms-core": "~6.2.30|~7.6.28"
+    "typo3/cms-core": "~7.6.28|~8.7.27",
+    "kitodo/presentation": "2.x-dev"
   },
   "autoload": {
     "psr-4": {
       "Slub\\Dfgviewer\\": "Classes/"
-    },
-    "classmap": ["plugins/"]
+    }
   }
 }

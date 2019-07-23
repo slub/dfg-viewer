@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -22,6 +24,11 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \tx_dlf_plugin;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\MathUtility;
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  */
@@ -35,11 +42,11 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_uri extends tx_dlf_plugin {
+class Uri extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/uri/class.tx_dfgviewer_uri.php';
+	public $scriptRelPath = 'Classes/Plugins/Uri.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -69,7 +76,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 			// page may be integer or string (pyhsical page attribute)
 			if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
+				$this->piVars['page'] = MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
 
 			} else {
 
@@ -79,15 +86,13 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 		}
 
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
 		} else {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/uri/template.tmpl'), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
 		}
 
 		$markerArray = array (
@@ -96,13 +101,13 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 		);
 
 		// Get persistent identifier of book.
-		$uriBook = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['contentIds'], TRUE);
+		$uriBook = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['contentIds'], TRUE);
 
 		if (empty($uriBook)) {
 
 			$uriBook = $this->doc->getLogicalStructure($this->doc->toplevelId);
 
-			$uriBook = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
+			$uriBook = GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
 
 		}
 
@@ -141,7 +146,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 		}
 
 		// Get persistent identifier of page.
-		$uriPage = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$this->piVars['page']]]['contentIds'], TRUE);
+		$uriPage = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$this->piVars['page']]]['contentIds'], TRUE);
 
 		if (!empty($uriPage)) {
 
@@ -177,7 +182,7 @@ class tx_dfgviewer_uri extends tx_dlf_plugin {
 
 		}
 
-		return $this->cObj->substituteMarkerArray($this->template, $markerArray);
+		return $templateService->substituteMarkerArray($this->template, $markerArray);
 
 	}
 

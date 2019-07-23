@@ -22,6 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -31,24 +33,24 @@ $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_gridpager
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_gridpager'] = 'pi_flexform';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_gridpager', $_EXTKEY.'_gridpager'), 'list_type');
+ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_gridpager', $_EXTKEY.'_gridpager'), 'list_type');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_gridpager', 'FILE:EXT:'.$_EXTKEY.'/plugins/gridpager/flexform.xml');
+ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_gridpager', 'FILE:EXT:'.$_EXTKEY.'/Configuration/Flexforms/GridPager.xml');
 
 // Plugin "uri".
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_uri'] = 'layout,select_key,pages,recursive';
 
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_uri'] = 'pi_flexform';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_uri', $_EXTKEY.'_uri'), 'list_type');
+ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_uri', $_EXTKEY.'_uri'), 'list_type');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/plugins/uri/flexform.xml');
+ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/Configuration/Flexforms/Uri.xml');
 
 // Register modules.
 if (TYPO3_MODE == 'BE') {
 
     // Module "setup".
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('txdlfmodules', 'txdfgviewersetup', '', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'modules/setup/');
+    ExtensionManagementUtility::addModule('txdlfmodules', 'txdfgviewersetup', '', ExtensionManagementUtility::extPath($_EXTKEY).'modules/setup/');
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup', 'EXT:dfgviewer/modules/setup/locallang_mod.xml');
+    ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup', 'EXT:dfgviewer/modules/setup/locallang_mod.xml');
 }

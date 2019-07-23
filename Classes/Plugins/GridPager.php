@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -22,6 +24,11 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \tx_dlf_plugin;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\MathUtility;
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  */
@@ -35,11 +42,11 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_gridpager extends tx_dlf_plugin {
+class GridPager extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/gridpager/class.tx_dfgviewer_gridpager.php';
+	public $scriptRelPath = 'Classes/Plugins/GridPager.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -72,7 +79,7 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 			// $this->piVars['page'] may be integer or string (physical structure @ID)
 			if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
+				$this->piVars['page'] = MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
 
 			} else {
 
@@ -98,15 +105,13 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 
 		}
 
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
 		} else {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/gridpager/template.tmpl'), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/GridPager.tmpl'), '###TEMPLATE###');
 		}
 
 		// Link to first page.
@@ -194,7 +199,7 @@ class tx_dfgviewer_gridpager extends tx_dlf_plugin {
 
 		}
 
-		$content .= $this->cObj->substituteMarkerArray($this->template, $markerArray);
+		$content .= $templateService->substituteMarkerArray($this->template, $markerArray);
 
 		return $this->pi_wrapInBaseClass($content);
 

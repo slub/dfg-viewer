@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -22,6 +24,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \tx_dlf_plugin;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * Plugin 'DFG-Viewer: Newspaper Year Listing' for the 'dfgviewer' extension.
@@ -32,11 +38,11 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
+class NewspaperYears extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/newspaper-years/class.tx_dfgviewer_newspaper-years.php';
+	public $scriptRelPath = 'Classes/Plugins/NewspaperYears.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -63,26 +69,24 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 		} else {
 
 			// Set default values if not set.
-			$this->piVars['page'] = \TYPO3\CMS\Core\Utility\MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+			$this->piVars['page'] = MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
 
 		}
 
 		$toc = $this->doc->tableOfContents;
 
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
 		} else {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/newspaper-years/template.tmpl'), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
 		}
 
 		// Get subpart templates
 		$subparts['template'] = $this->template;
-		$subparts['year'] = $this->cObj->getSubpart($subparts['template'], '###LISTYEAR###');
+		$subparts['year'] = $templateService->getSubpart($subparts['template'], '###LISTYEAR###');
 
 		$years = $toc[0]['children'];
 
@@ -118,12 +122,12 @@ class tx_dfgviewer_newspaperyears extends tx_dlf_plugin {
 				'###YEARNAME###' => $yearText,
 			);
 
-			$subYearPartContent .= $this->cObj->substituteMarkerArray($subparts['year'], $yearArray);
+			$subYearPartContent .= $templateService->substituteMarkerArray($subparts['year'], $yearArray);
 
 		}
 
 		// fill the week markers
-		return $this->cObj->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
+		return $templateService->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
 
 	}
 

@@ -1,4 +1,6 @@
 <?php
+namespace Slub\Dfgviewer\Plugins\Sru;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -22,6 +24,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use \tx_dlf_plugin;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Plugin 'DFG-Viewer: SRU Client' for the 'dfgviewer' extension.
@@ -32,11 +38,11 @@
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class tx_dfgviewer_sru extends tx_dlf_plugin {
+class Sru extends tx_dlf_plugin {
 
 	public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'plugins/sru/class.tx_dfgviewer_sru.php';
+	public $scriptRelPath = 'Classes/Plugins/Sru/Sru.php';
 
 	/**
 	 * The main method of the PlugIn
@@ -89,15 +95,13 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 
 		}
 
+        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
 		// Load template file.
 		if (!empty($this->conf['templateFile'])) {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
 		} else {
-
-			$this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/plugins/sru/template.tmpl'), '###TEMPLATE###');
-
+			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Sru.tmpl'), '###TEMPLATE###');
 		}
 
 		$this->addSearchFormJS();
@@ -125,7 +129,7 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 		);
 
 		// Display search form.
-		$content .= $this->cObj->substituteSubpart($this->cObj->substituteMarkerArray($this->template, $markerArray), '###EXT_SEARCH_ENTRY###', $extendedSearch);
+		$content .= $templateService->substituteSubpart($templateService->substituteMarkerArray($this->template, $markerArray), '###EXT_SEARCH_ENTRY###', $extendedSearch);
 
 		return $this->pi_wrapInBaseClass($content);
 
@@ -140,7 +144,7 @@ class tx_dfgviewer_sru extends tx_dlf_plugin {
 	 */
 	protected function addSearchFormJS() {
 
-		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey).'plugins/sru/tx_dfgviewer_sru.js"></script>';
+		$GLOBALS['TSFE']->additionalHeaderData[$this->prefixId.'_sru'] = '<script type="text/javascript" src="'.ExtensionManagementUtility::siteRelPath($this->extKey).'Resources/Private/Javascript/tx_dfgviewer_sru.js"></script>';
 
 	}
 

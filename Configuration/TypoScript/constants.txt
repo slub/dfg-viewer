@@ -30,14 +30,11 @@ config {
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Metadata template file
 	templateFileMeta = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/metadata.tmpl
 
-	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Adm. Metadata template file
-	templateFileAmd = EXT:dfgviewer/plugins/amd/template.tmpl
-
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Grid Pager template file
-	templateFilePager = EXT:dfgviewer/plugins/gridpager/template.tmpl
+	templateFilePager = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/GridPager.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Pers. Identifier template file
-	templateFileUri = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/uri.tmpl
+	templateFileUri = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Page View template file
 	templateFilePage = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/pageview.tmpl
@@ -61,12 +58,12 @@ config {
 	templateFileToolImageManipulation = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/imagemanipulation.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Calendar template file
-	templateFileNewspaperCalendar = EXT:dfgviewer/plugins/newspaper-calendar/template.tmpl
+	templateFileNewspaperCalendar = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=Newspaper Year List template file
-	templateFileNewspaperYears = EXT:dfgviewer/plugins/newspaper-years/template.tmpl
+	templateFileNewspaperYears = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl
 
 	# cat=plugin.tx_dfgviewer/file; type=file[html,htm,tmpl]; label=SRU searchform template file
-	templateFileSru = EXT:dfgviewer/plugins/sru/template.tmpl
+	templateFileSru = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Sru.tmpl
 
 }
