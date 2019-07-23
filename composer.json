@@ -23,6 +23,11 @@
       "name": "Thomas Jung",
       "email": "thomas.jung@slub-dresden.de",
       "role": "Developer"
+    },
+    {
+      "name": "Beatrycze Volk",
+      "email": "beatrycze.volk@slub-dresden.de",
+      "role": "Developer"
     }
   ],
   "license": "GPL-3.0-or-later",
