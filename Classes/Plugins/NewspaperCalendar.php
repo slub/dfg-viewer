@@ -188,7 +188,7 @@ class NewspaperCalendar extends tx_dlf_plugin {
                     if ( $currentDayTime >= $firstOfMonth && $currentDayTime <= $lastOfMonth ) {
 
                         $dayLinks = '';
-                        $dayLinksText = '';
+                        $dayLinksText = [];
                         $currentMonth = date('n', $currentDayTime);
 
                         if ($toc[0][self::CHILDREN][0][self::CHILDREN][$months[$currentMonth]][self::CHILDREN]) {
@@ -420,14 +420,14 @@ class NewspaperCalendar extends tx_dlf_plugin {
      *
      * @access	private
      *
-     * @param $dayLinksText
+     * @param array $dayLinksText
      *
      * @return string
      */
     private function renderIssues($dayLinksText) {
         $dayLinksList = '';
 
-        if (is_array($dayLinksText)) {
+        if (is_array($dayLinksText) && count($dayLinksText) > 0) {
             $dayLinksList = '<ul class="issues">';
             foreach ($dayLinksText as $link) {
                 $dayLinksList .= '<li>'.$link.'</li>';
