@@ -36,154 +36,154 @@ use \TYPO3\CMS\Core\Utility\MathUtility;
 /**
  * Plugin 'DFG-Viewer: Persistent Identifier' for the 'dfgviewer' extension.
  *
- * @author	Sebastian Meyer <sebastian.meyer@slub-dresden.de>
- * @copyright	Copyright (c) 2012, Sebastian Meyer, SLUB Dresden
- * @package	TYPO3
- * @subpackage	tx_dfgviewer
- * @access	public
+ * @author  Sebastian Meyer <sebastian.meyer@slub-dresden.de>
+ * @copyright  Copyright (c) 2012, Sebastian Meyer, SLUB Dresden
+ * @package  TYPO3
+ * @subpackage  tx_dfgviewer
+ * @access  public
  */
 class Uri extends tx_dlf_plugin {
 
-	public $extKey = 'dfgviewer';
+  public $extKey = 'dfgviewer';
 
-	public $scriptRelPath = 'Classes/Plugins/Uri.php';
+  public $scriptRelPath = 'Classes/Plugins/Uri.php';
 
-	/**
-	 * The main method of the PlugIn
-	 *
-	 * @access	public
-	 *
-	 * @param	string		$content: The PlugIn content
-	 * @param	array		$conf: The PlugIn configuration
-	 *
-	 * @return	string		The content that is displayed on the website
-	 */
-	public function main($content, $conf) {
+  /**
+   * The main method of the PlugIn
+   *
+   * @access  public
+   *
+   * @param  string    $content: The PlugIn content
+   * @param  array    $conf: The PlugIn configuration
+   *
+   * @return  string    The content that is displayed on the website
+   */
+  public function main($content, $conf) {
 
-		$this->init($conf);
+    $this->init($conf);
 
-		// Load current document.
-		$this->loadDocument();
+    // Load current document.
+    $this->loadDocument();
 
-		if ($this->doc === NULL) {
+    if ($this->doc === NULL) {
 
-			// Quit without doing anything if required variables are not set.
-			return $content;
+      // Quit without doing anything if required variables are not set.
+      return $content;
 
-		} else {
+    } else {
 
-			// Set default values if not set.
-			// page may be integer or string (pyhsical page attribute)
-			if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
+      // Set default values if not set.
+      // page may be integer or string (pyhsical page attribute)
+      if ( (int)$this->piVars['page'] > 0 || empty($this->piVars['page'])) {
 
-				$this->piVars['page'] = MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
+        $this->piVars['page'] = MathUtility::forceIntegerInRange((int)$this->piVars['page'], 1, $this->doc->numPages, 1);
 
-			} else {
+      } else {
 
-				$this->piVars['page'] = array_search($this->piVars['page'], $this->doc->physicalStructure);
+        $this->piVars['page'] = array_search($this->piVars['page'], $this->doc->physicalStructure);
 
-			}
+      }
 
-		}
+    }
 
         $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
 
-		// Load template file.
-		if (!empty($this->conf['templateFile'])) {
-			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
-		} else {
-			$this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
-		}
+    // Load template file.
+    if (!empty($this->conf['templateFile'])) {
+      $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
+    } else {
+      $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
+    }
 
-		$markerArray = array (
-			'###URIBOOK###' => '',
-			'###URIPAGE###' => ''
-		);
+    $markerArray = array (
+      '###URIBOOK###' => '',
+      '###URIPAGE###' => ''
+    );
 
-		// Get persistent identifier of book.
-		$uriBook = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['contentIds'], TRUE);
+    // Get persistent identifier of book.
+    $uriBook = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['contentIds'], TRUE);
 
-		if (empty($uriBook)) {
+    if (empty($uriBook)) {
 
-			$uriBook = $this->doc->getLogicalStructure($this->doc->toplevelId);
+      $uriBook = $this->doc->getLogicalStructure($this->doc->toplevelId);
 
-			$uriBook = GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
+      $uriBook = GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
 
-		}
+    }
 
-		if (!empty($uriBook)) {
+    if (!empty($uriBook)) {
 
-			$uris = array ();
+      $uris = array ();
 
-			foreach ($uriBook as $uri) {
+      foreach ($uriBook as $uri) {
 
-				if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
+        if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
 
-					$uris[] = '<a href="'.htmlspecialchars($uri).'">'.$this->pi_getLL('uriBook', '', TRUE).'</a>';
+          $uris[] = '<a href="'.htmlspecialchars($uri).'">'.$this->pi_getLL('uriBook', '', TRUE).'</a>';
 
-				} elseif (strpos($uri, 'urn:') === 0) {
+        } elseif (strpos($uri, 'urn:') === 0) {
 
-					if (strpos($uri, '/fragment/') === FALSE) {
+          if (strpos($uri, '/fragment/') === FALSE) {
 
-						$uris[] = '<a class="persistence-document" href="http://nbn-resolving.de/' . $uri . '">' . $this->pi_getLL('uriBook', '', TRUE) . '</a>';
+            $uris[] = '<a class="persistence-document" href="http://nbn-resolving.de/' . $uri . '">' . $this->pi_getLL('uriBook', '', TRUE) . '</a>';
 
-					} else {
+          } else {
 
-						$uris[] = '<a class="persistence-document" href="http://nbn-resolving.org/' . $uri . '">' . $this->pi_getLL('uriBook', '', TRUE) . '</a>';
+            $uris[] = '<a class="persistence-document" href="http://nbn-resolving.org/' . $uri . '">' . $this->pi_getLL('uriBook', '', TRUE) . '</a>';
 
-					}
+          }
 
-				}
+        }
 
-			}
+      }
 
-			if (!empty($uris)) {
+      if (!empty($uris)) {
 
-				$markerArray['###URIBOOK###'] = implode(', ', $uris);
+        $markerArray['###URIBOOK###'] = implode(', ', $uris);
 
-			}
+      }
 
-		}
+    }
 
-		// Get persistent identifier of page.
-		$uriPage = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$this->piVars['page']]]['contentIds'], TRUE);
+    // Get persistent identifier of page.
+    $uriPage = GeneralUtility::trimExplode(' ', $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$this->piVars['page']]]['contentIds'], TRUE);
 
-		if (!empty($uriPage)) {
+    if (!empty($uriPage)) {
 
-			$uris = array ();
+      $uris = array ();
 
-			foreach ($uriPage as $uri) {
+      foreach ($uriPage as $uri) {
 
-				if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
+        if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
 
-					$uris[] = '<a class="persistence-page" href="'.htmlspecialchars($uri).'">'.$this->pi_getLL('uriPage', '', TRUE).'</a>';
+          $uris[] = '<a class="persistence-page" href="'.htmlspecialchars($uri).'">'.$this->pi_getLL('uriPage', '', TRUE).'</a>';
 
-				} elseif (strpos($uri, 'urn:') === 0) {
+        } elseif (strpos($uri, 'urn:') === 0) {
 
-					if (strpos($uri, '/fragment/') === FALSE) {
+          if (strpos($uri, '/fragment/') === FALSE) {
 
-						$uris[] = '<a class="persistence-page" href="http://nbn-resolving.de/' . $uri . '">' . $this->pi_getLL('uriPage', '', TRUE) . '</a>';
+            $uris[] = '<a class="persistence-page" href="http://nbn-resolving.de/' . $uri . '">' . $this->pi_getLL('uriPage', '', TRUE) . '</a>';
 
-					} else {
+          } else {
 
-						$uris[] = '<a class="persistence-page" href="http://nbn-resolving.org/' . $uri . '">' . $this->pi_getLL('uriPage', '', TRUE) . '</a>';
+            $uris[] = '<a class="persistence-page" href="http://nbn-resolving.org/' . $uri . '">' . $this->pi_getLL('uriPage', '', TRUE) . '</a>';
 
-					}
+          }
 
-				}
+        }
 
-			}
+      }
 
-			if (!empty($uris)) {
+      if (!empty($uris)) {
 
-				$markerArray['###URIPAGE###'] = implode(', ', $uris);
+        $markerArray['###URIPAGE###'] = implode(', ', $uris);
 
-			}
+      }
 
-		}
+    }
 
-		return $templateService->substituteMarkerArray($this->template, $markerArray);
+    return $templateService->substituteMarkerArray($this->template, $markerArray);
 
-	}
+  }
 
 }

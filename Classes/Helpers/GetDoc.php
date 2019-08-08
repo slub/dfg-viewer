@@ -32,21 +32,21 @@ class GetDoc
     public $extKey = 'dfgviewer';
 
   /**
-  	 * This holds the current document
-  	 *
-  	 * @var	tx_dlf_document
-  	 * @access protected
-  	 */
-  	protected $doc;
+     * This holds the current document
+     *
+     * @var  tx_dlf_document
+     * @access protected
+     */
+    protected $doc;
 
   /**
    * Get page's download link
    *
-   * @access	public
+   * @access  public
    *
-   * @param	integer	$pagenumber:The current page number
+   * @param  integer  $pagenumber:The current page number
    *
-   * @return	string: The left and right download url
+   * @return  string: The left and right download url
    */
   public function getPageLink($pagenumber)
   {
@@ -56,11 +56,11 @@ class GetDoc
     }
 
     $details = $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$pagenumber]];
-		$file = $details['files']['DOWNLOAD'];
+    $file = $details['files']['DOWNLOAD'];
 
-		if (!empty($file)) {
+    if (!empty($file)) {
 
-			$pageLink = $this->doc->getFileLocation($file);
+      $pageLink = $this->doc->getFileLocation($file);
 
     }
 
@@ -70,9 +70,9 @@ class GetDoc
   /**
    * Get work's download link
    *
-   * @access	public
+   * @access  public
    *
-   * @return	string: The left and right download url
+   * @return  string: The left and right download url
    */
   public function getWorkLink()
   {
@@ -82,21 +82,21 @@ class GetDoc
     }
 
     // Get work link.
-  		if (!empty($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD'])) {
+      if (!empty($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD'])) {
 
-  			$workLink = $this->doc->getFileLocation($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD']);
+        $workLink = $this->doc->getFileLocation($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD']);
 
-  		} else {
+      } else {
 
-  			$details = $this->doc->getLogicalStructure($this->doc->toplevelId);
+        $details = $this->doc->getLogicalStructure($this->doc->toplevelId);
 
-  			if (!empty($details['files']['DOWNLOAD'])) {
+        if (!empty($details['files']['DOWNLOAD'])) {
 
-  				$workLink = $this->doc->getFileLocation($details['files']['DOWNLOAD']);
+          $workLink = $this->doc->getFileLocation($details['files']['DOWNLOAD']);
 
-  			}
+        }
 
-  		}
+      }
 
       return $workLink;
   }
@@ -104,11 +104,11 @@ class GetDoc
   /**
    * get xpath result
    *
-   * @access	public
+   * @access  public
    *
-   * @param	string		$xpath: The PlugIn content
+   * @param  string    $xpath: The PlugIn content
    *
-   * @return	string		The content that is displayed on the website
+   * @return  string    The content that is displayed on the website
    */
   public function getXpath($xpath)
   {
@@ -121,9 +121,9 @@ class GetDoc
   /**
      * Initialize and load the document
      *
-     * @access	protected
+     * @access  protected
      *
-     * @return	boolean
+     * @return  boolean
      */
     protected function init()
     {
@@ -148,9 +148,9 @@ class GetDoc
   /**
      * Loads the current document into $this->doc
      *
-     * @access	protected
+     * @access  protected
      *
-     * @return	void
+     * @return  void
      */
     protected function loadDocument()
     {

@@ -15,7 +15,7 @@ Before you can start to use the *DFG Viewer (dfgviewer)* in your TYPO3 installat
 You can install the extension automatically via extension manager or semiautomatically via GitHub. The automatic way is straight forward so in the following the GitHub process is explained.
 At first checkout the repository:
 
-	git clone https://github.com/slub/dfg-viewer.git dfgviewer
+  git clone https://github.com/slub/dfg-viewer.git dfgviewer
 
 The extension key is "dfgviewer". Thus the following directory must keep the DFG-Viewer and Kitodo.Presentation in your document root:
 
@@ -42,10 +42,10 @@ Known Problems
 
 You should use the following configuration in *typo3conf\LocalConfiguration.php*:
 
-	'FE' => array(
-	  ...
-	  'cHashRequiredParameters' => 'tx_dlf[id],',
-	        'pageNotFoundOnCHashError' => '0',
-	        'pageNotFound_handling' => '',
-	        ...
-	),
+  'FE' => array(
+    ...
+    'cHashRequiredParameters' => 'tx_dlf[id],',
+          'pageNotFoundOnCHashError' => '0',
+          'pageNotFound_handling' => '',
+          ...
+  ),

@@ -8,42 +8,42 @@ page {
   adminPanelStyles = 0
   shortcutIcon = EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png
 
-	10 = FLUIDTEMPLATE
-	10 {
-	  file = EXT:dfgviewer/Resources/Private/Templates/Main.html
-	  layoutRootPath = EXT:dfgviewer/Resources/Private/Layouts/
-	  partialRootPath = EXT:dfgviewer/Resources/Private/Partials/
+  10 = FLUIDTEMPLATE
+  10 {
+    file = EXT:dfgviewer/Resources/Private/Templates/Main.html
+    layoutRootPath = EXT:dfgviewer/Resources/Private/Layouts/
+    partialRootPath = EXT:dfgviewer/Resources/Private/Partials/
 
-		variables {
+    variables {
 
       content < styles.content.get
 
-			pageTitle = TEXT
-			pageTitle.data = page:title
+      pageTitle = TEXT
+      pageTitle.data = page:title
 
-			productName = TEXT
-			productName.value = {$config.productName}
+      productName = TEXT
+      productName.value = {$config.productName}
 
-			pageHideInMenu = TEXT
-			pageHideInMenu.data = page:nav_hide
+      pageHideInMenu = TEXT
+      pageHideInMenu.data = page:nav_hide
 
-			rootPageId = TEXT
-			rootPageId.value = {$config.rootPid}
+      rootPageId = TEXT
+      rootPageId.value = {$config.rootPid}
 
       kitodoPageView = TEXT
-			kitodoPageView.value = {$config.kitodoPageView}
+      kitodoPageView.value = {$config.kitodoPageView}
 
       piwik_hostname = TEXT
-			piwik_hostname.value = {$config.piwik_hostname}
+      piwik_hostname.value = {$config.piwik_hostname}
 
       piwik_idsite = TEXT
-			piwik_idsite.value = {$config.piwik_idsite}
+      piwik_idsite.value = {$config.piwik_idsite}
 
       piwik_domains = TEXT
-			piwik_domains.value = {$config.piwik_domains}
+      piwik_domains.value = {$config.piwik_domains}
 
-		}
-	}
+    }
+  }
 
 }
 
