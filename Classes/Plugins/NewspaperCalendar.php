@@ -26,6 +26,8 @@ namespace Slub\Dfgviewer\Plugins;
 
 use \tx_dlf_plugin;
 use \TYPO3\CMS\Core\Utility\MathUtility;
+use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Plugin 'DFG-Viewer: Newspaper Calendar' for the 'dfgviewer' extension.
@@ -41,6 +43,8 @@ class NewspaperCalendar extends tx_dlf_plugin {
     public $extKey = 'dfgviewer';
 
     public $scriptRelPath = 'Classes/Plugins/NewspaperCalendar.php';
+
+    protected $templateService;
 
     const CHILDREN = 'children';
     const LABEL = 'label';
@@ -73,6 +77,8 @@ class NewspaperCalendar extends tx_dlf_plugin {
 
         $toc = $this->doc->tableOfContents;
 
+        $this->templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+
         $months = array();
         $monthLabel = '';
 
@@ -87,11 +93,11 @@ class NewspaperCalendar extends tx_dlf_plugin {
         // Load template file.
         if (!empty($this->conf['templateFile'])) {
 
-            $this->template = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
+            $this->template = $this->templateService->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
 
         } else {
 
-            $this->template = $this->cObj->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl'), '###TEMPLATE###');
+            $this->template = $this->templateService->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl'), '###TEMPLATE###');
 
         }
 
@@ -118,7 +124,7 @@ class NewspaperCalendar extends tx_dlf_plugin {
             }
         }
 
-        return $this->cObj->substituteSubpart($this->template, '###CALYEARWRAPPER###', $subPartContent);
+        return $this->templateService->substituteSubpart($this->template, '###CALYEARWRAPPER###', $subPartContent);
     }
 
     /**
@@ -137,9 +143,9 @@ class NewspaperCalendar extends tx_dlf_plugin {
      * @return string
      */
     private function getTemplateForYear($subparts, $toc, $year, $months, $firstMonth, $lastMonth, $hasMoreYears = true) {
-        $subparts["year"] = $this->cObj->getSubpart($subparts['template'], '###CALYEARWRAPPER###');
-        $subparts['month'] = $this->cObj->getSubpart($subparts['year'], '###CALMONTH###');
-        $subparts['singleissue'] = $this->cObj->getSubpart($subparts['issuelist'], '###SINGLEISSUE###');
+        $subparts["year"] = $this->templateService->getSubpart($subparts['template'], '###CALYEARWRAPPER###');
+        $subparts['month'] = $this->templateService->getSubpart($subparts['year'], '###CALMONTH###');
+        $subparts['singleissue'] = $this->templateService->getSubpart($subparts['issuelist'], '###SINGLEISSUE###');
 
         $allIssues[] = array();
         $subPartContent = '';
@@ -158,7 +164,7 @@ class NewspaperCalendar extends tx_dlf_plugin {
             );
 
             // Get week subpart template
-            $subWeekTemplate = $this->cObj->getSubpart($subparts['month'], '###CALWEEK###');
+            $subWeekTemplate = $this->templateService->getSubpart($subparts['month'], '###CALWEEK###');
             $subWeekPartContent = '';
 
             $firstOfMonth = strtotime($year . '-' . $i . '-1');
@@ -251,14 +257,14 @@ class NewspaperCalendar extends tx_dlf_plugin {
                     }
                 }
                 // fill the weeks
-                $subWeekPartContent .= $this->cObj->substituteMarkerArray($subWeekTemplate, $weekArray);
+                $subWeekPartContent .= $this->templateService->substituteMarkerArray($subWeekTemplate, $weekArray);
             }
 
             // fill the month markers
-            $subPartContent .= $this->cObj->substituteMarkerArray($subparts['month'], $markerArray);
+            $subPartContent .= $this->templateService->substituteMarkerArray($subparts['month'], $markerArray);
 
             // fill the week markers
-            $subPartContent = $this->cObj->substituteSubpart($subPartContent, '###CALWEEK###', $subWeekPartContent);
+            $subPartContent = $this->templateService->substituteSubpart($subPartContent, '###CALWEEK###', $subWeekPartContent);
         }
 
         // link to years overview
@@ -279,9 +285,9 @@ class NewspaperCalendar extends tx_dlf_plugin {
 
 
         // prepare list as alternative of the calendar view
-        $issueListTemplate = $this->cObj->getSubpart($subparts['year'], '###ISSUELIST###');
+        $issueListTemplate = $this->templateService->getSubpart($subparts['year'], '###ISSUELIST###');
 
-        $subparts['singleissue'] = $this->cObj->getSubpart($issueListTemplate, '###SINGLEISSUE###');
+        $subparts['singleissue'] = $this->templateService->getSubpart($issueListTemplate, '###SINGLEISSUE###');
 
         $allDaysList = array();
         $subPartContentList = '';
@@ -294,21 +300,21 @@ class NewspaperCalendar extends tx_dlf_plugin {
                 $subPartContentList .= $issue[0];
             }
 
-            $subPartContentList .= $this->cObj->substituteMarker($subparts['singleissue'], '###ITEM###', $issue[1]);
+            $subPartContentList .= $this->templateService->substituteMarker($subparts['singleissue'], '###ITEM###', $issue[1]);
         }
 
-        $issueListTemplate = $this->cObj->substituteSubpart($issueListTemplate, '###SINGLEISSUE###', $subPartContentList);
+        $issueListTemplate = $this->templateService->substituteSubpart($issueListTemplate, '###SINGLEISSUE###', $subPartContentList);
 
-        $subparts['year'] = $this->cObj->substituteSubpart($subparts['year'], '###ISSUELIST###', $issueListTemplate);
+        $subparts['year'] = $this->templateService->substituteSubpart($subparts['year'], '###ISSUELIST###', $issueListTemplate);
 
         $markerArray = array (
             '###CALYEAR###' => $yearLink,
             '###CALALLYEARS###' => $allYearsLink
         );
 
-        $subparts['year'] = $this->cObj->substituteMarkerArray($subparts['year'], $markerArray);
+        $subparts['year'] = $this->templateService->substituteMarkerArray($subparts['year'], $markerArray);
 
-        return $this->cObj->substituteSubpart($subparts['year'], '###CALMONTH###', $subPartContent);
+        return $this->templateService->substituteSubpart($subparts['year'], '###CALMONTH###', $subPartContent);
     }
 
     /**
