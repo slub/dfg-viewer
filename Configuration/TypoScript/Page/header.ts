@@ -17,7 +17,7 @@ page {
           # will work as of TYPO3 7.6
           integrity = sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=
           excludeFromConcatenation = 1
-          allWrap = |<script type="text/javascript">if (typeof jQuery == 'undefined') { document.write(unescape("%3Cscript src='/typo3conf/ext/dfgviewer/Resources/Public/Javascript/jquery-2.2.4.min.js' type='text/javascript'%3E%3C/script%3E"));}</script>
+          allWrap = |<script type="text/javascript">if (typeof jQuery == 'undefined') { document.write(unescape("%3Cscript src='/typo3conf/ext/dfgviewer/Resources/Public/Js/jquery-2.2.4.min.js' type='text/javascript'%3E%3C/script%3E"));}</script>
       }
   }
   includeJSFooterlibs {
