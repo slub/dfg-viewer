@@ -25,7 +25,7 @@
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'DFG Viewer',
     'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.',
-    'category' => 'plugin',
+    'category' => 'distribution',
     'author' => 'Sebastian Meyer',
     'author_email' => 'typo3@slub-dresden.de',
     'author_company' => 'Saxon State and University Library Dresden (SLUB)',

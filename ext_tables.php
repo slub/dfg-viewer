@@ -45,12 +45,3 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_uri'] = 'pi_f
 ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_uri', $_EXTKEY.'_uri'), 'list_type');
 
 ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/Configuration/Flexforms/Uri.xml');
-
-// Register modules.
-if (TYPO3_MODE == 'BE') {
-
-    // Module "setup".
-    ExtensionManagementUtility::addModule('txdlfmodules', 'txdfgviewersetup', '', ExtensionManagementUtility::extPath($_EXTKEY).'modules/setup/');
-
-    ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_txdlfmodules_txdfgviewersetup', 'EXT:dfgviewer/modules/setup/locallang_mod.xml');
-}
