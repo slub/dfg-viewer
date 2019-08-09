@@ -40,95 +40,95 @@ use \TYPO3\CMS\Core\Utility\MathUtility;
  */
 class NewspaperYears extends tx_dlf_plugin {
 
-  public $extKey = 'dfgviewer';
+    public $extKey = 'dfgviewer';
 
-  public $scriptRelPath = 'Classes/Plugins/NewspaperYears.php';
+    public $scriptRelPath = 'Classes/Plugins/NewspaperYears.php';
 
-  /**
-   * The main method of the PlugIn
-   *
-   * @access  public
-   *
-   * @param  string    $content: The PlugIn content
-   * @param  array    $conf: The PlugIn configuration
-   *
-   * @return  string    The content that is displayed on the website
-   */
-  public function main($content, $conf) {
+    /**
+     * The main method of the PlugIn
+     *
+     * @access  public
+     *
+     * @param  string    $content: The PlugIn content
+     * @param  array    $conf: The PlugIn configuration
+     *
+     * @return  string    The content that is displayed on the website
+     */
+    public function main($content, $conf) {
 
-    $this->init($conf);
+        $this->init($conf);
 
-    // Load current document.
-    $this->loadDocument();
+        // Load current document.
+        $this->loadDocument();
 
-    if ($this->doc === NULL) {
+        if ($this->doc === NULL) {
 
-      // Quit without doing anything if required variables are not set.
-      return $content;
+            // Quit without doing anything if required variables are not set.
+            return $content;
 
-    } else {
+        } else {
 
-      // Set default values if not set.
-      $this->piVars['page'] = MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
+            // Set default values if not set.
+            $this->piVars['page'] = MathUtility::forceIntegerInRange($this->piVars['page'], 1, $this->doc->numPages, 1);
 
-    }
+        }
 
-    $toc = $this->doc->tableOfContents;
+        $toc = $this->doc->tableOfContents;
 
         $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
 
-    // Load template file.
-    if (!empty($this->conf['templateFile'])) {
-      $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
-    } else {
-      $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
+        // Load template file.
+        if (!empty($this->conf['templateFile'])) {
+            $this->template = $templateService->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
+        } else {
+            $this->template = $templateService->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
+        }
+
+        // Get subpart templates
+        $subparts['template'] = $this->template;
+        $subparts['year'] = $templateService->getSubpart($subparts['template'], '###LISTYEAR###');
+
+        $years = $toc[0]['children'];
+
+        $subYearPartContent = '';
+
+        foreach($years as $id => $year) {
+
+            $yearLabel = empty($year['label']) ? $year['orderlabel'] : $year['label'];
+
+            if (empty($yearLabel)) {
+
+                // if neither order nor orderlabel is set, use the id...
+                $yearLabel = (string)$id;
+
+            }
+            if (strlen($year['points']) > 0) {
+
+                $linkConf = array (
+                    'useCacheHash' => 1,
+                    'parameter' => $this->conf['targetPid'],
+                    'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($year['points']),
+                    'title' => $yearLabel
+                );
+                $yearText = $this->cObj->typoLink($yearLabel, $linkConf);
+
+            } else {
+
+                $yearText = $yearLabel;
+
+            }
+
+            $yearArray = array(
+                '###YEARNAME###' => $yearText,
+            );
+
+            $subYearPartContent .= $templateService->substituteMarkerArray($subparts['year'], $yearArray);
+
+        }
+
+        // fill the week markers
+        return $templateService->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
+
     }
-
-    // Get subpart templates
-    $subparts['template'] = $this->template;
-    $subparts['year'] = $templateService->getSubpart($subparts['template'], '###LISTYEAR###');
-
-    $years = $toc[0]['children'];
-
-    $subYearPartContent = '';
-
-    foreach($years as $id => $year) {
-
-      $yearLabel = empty($year['label']) ? $year['orderlabel'] : $year['label'];
-
-      if (empty($yearLabel)) {
-
-        // if neither order nor orderlabel is set, use the id...
-        $yearLabel = (string)$id;
-
-      }
-      if (strlen($year['points']) > 0) {
-
-        $linkConf = array (
-          'useCacheHash' => 1,
-          'parameter' => $this->conf['targetPid'],
-          'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($year['points']),
-          'title' => $yearLabel
-        );
-        $yearText = $this->cObj->typoLink($yearLabel, $linkConf);
-
-      } else {
-
-        $yearText = $yearLabel;
-
-      }
-
-      $yearArray = array(
-        '###YEARNAME###' => $yearText,
-      );
-
-      $subYearPartContent .= $templateService->substituteMarkerArray($subparts['year'], $yearArray);
-
-    }
-
-    // fill the week markers
-    return $templateService->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
-
-  }
 
 }
