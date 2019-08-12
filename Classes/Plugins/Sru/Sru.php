@@ -24,7 +24,7 @@ namespace Slub\Dfgviewer\Plugins\Sru;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-use \tx_dlf_plugin;
+use \Kitodo\Dlf\Common\AbstractPlugin;
 use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -38,7 +38,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class Sru extends tx_dlf_plugin {
+class Sru extends AbstractPlugin {
 
 	public $extKey = 'dfgviewer';
 

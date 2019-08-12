@@ -24,7 +24,7 @@ namespace Slub\Dfgviewer\Plugins;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \tx_dlf_plugin;
+use \Kitodo\Dlf\Common\AbstractPlugin;
 use \TYPO3\CMS\Core\Utility\MathUtility;
 use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -38,7 +38,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class NewspaperCalendar extends tx_dlf_plugin {
+class NewspaperCalendar extends AbstractPlugin {
 
     public $extKey = 'dfgviewer';
 
