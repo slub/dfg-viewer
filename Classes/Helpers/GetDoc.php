@@ -25,8 +25,8 @@ namespace Slub\Dfgviewer\Helpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \Kitodo\Dlf\Common\Document;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use Kitodo\Dlf\Common\Document;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class GetDoc
 {

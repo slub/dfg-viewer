@@ -23,7 +23,10 @@ namespace Slub\Dfgviewer\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use Slub\Dfgviewer\Helpers\GetDoc;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to get page info
@@ -39,20 +42,20 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package TYPO3
  */
-class XpathViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class XpathViewHelper extends AbstractViewHelper
 {
 
     /**
      * Return elements found
      *
      * @param string $xpath xpath of elements
-     * @param string $type type of field requested
+     * @param string $field type of field requested
      * @param boolean $htmlspecialchars use htmlspecialchars() on the found result
      * @return string
      */
     public function render($xpath, $field = '', $htmlspecialchars = TRUE)
     {
-        $doc = GeneralUtility::makeInstance(\Slub\Dfgviewer\Helpers\GetDoc::class);
+        $doc = GeneralUtility::makeInstance(GetDoc::class);
 
         $result = $doc->getXpath($xpath);
 

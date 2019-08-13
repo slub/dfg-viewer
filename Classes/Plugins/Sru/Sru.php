@@ -24,10 +24,10 @@ namespace Slub\Dfgviewer\Plugins\Sru;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-use \Kitodo\Dlf\Common\AbstractPlugin;
-use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use Kitodo\Dlf\Common\AbstractPlugin;
+use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Plugin 'DFG-Viewer: SRU Client' for the 'dfgviewer' extension.

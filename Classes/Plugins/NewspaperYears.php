@@ -24,10 +24,10 @@ namespace Slub\Dfgviewer\Plugins;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-use \Kitodo\Dlf\Common\AbstractPlugin;
-use \TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Core\Utility\MathUtility;
+use Kitodo\Dlf\Common\AbstractPlugin;
+use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * Plugin 'DFG-Viewer: Newspaper Year Listing' for the 'dfgviewer' extension.
