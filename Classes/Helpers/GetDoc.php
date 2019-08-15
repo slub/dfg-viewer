@@ -45,23 +45,23 @@ class GetDoc
      *
      * @access  public
      *
-     * @param integer $pagenumber :The current page number
+     * @param integer $pageNumber :The current page number
      *
      * @return  string: The left and right download url
      */
-    public function getPageLink($pagenumber)
+    public function getPageLink($pageNumber)
     {
+        $pageLink = '';
+
         if (!$this->init()) {
-            return '';
+            return $pageLink;
         }
 
-        $details = $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$pagenumber]];
+        $details = $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$pageNumber]];
         $file = $details['files']['DOWNLOAD'];
 
         if (!empty($file)) {
-
             $pageLink = $this->doc->getFileLocation($file);
-
         }
 
         return $pageLink;
@@ -76,25 +76,25 @@ class GetDoc
      */
     public function getWorkLink()
     {
+        $workLink = '';
+
         if (!$this->init()) {
-            return '';
+            return $workLink;
         }
 
         // Get work link.
-        if (!empty($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD'])) {
+        $physicalStructure = $this->doc->physicalStructure[0];
+        $downloadFile = $this->doc->physicalStructureInfo[$physicalStructure]['files']['DOWNLOAD'];
 
-            $workLink = $this->doc->getFileLocation($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD']);
-
+        if (!empty($downloadFile)) {
+            $workLink = $this->doc->getFileLocation($downloadFile);
         } else {
-
             $details = $this->doc->getLogicalStructure($this->doc->toplevelId);
+            $downloadFile = $details['files']['DOWNLOAD'];
 
-            if (!empty($details['files']['DOWNLOAD'])) {
-
-                $workLink = $this->doc->getFileLocation($details['files']['DOWNLOAD']);
-
+            if (!empty($downloadFile)) {
+                $workLink = $this->doc->getFileLocation($downloadFile);
             }
-
         }
 
         return $workLink;
