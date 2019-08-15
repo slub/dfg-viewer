@@ -126,11 +126,11 @@ plugin.tx_dlf_tableofcontents {
 }
 plugin.tx_dlf_toolbox {
   pages = {$config.storagePid}
-  tools = tx_dlf_toolsPdf,tx_dlf_toolsFulltext,tx_dlf_toolsImagemanipulation
+  tools = tx_dlf_pdfdownloadtool,tx_dlf_fulltexttool,tx_dlf_imagemanipulationtool
   templateFile = {$config.templateFileToolbox}
 }
 
-plugin.tx_dlf_toolsPdf {
+plugin.tx_dlf_pdfdownloadtool {
   # this file does not exist
   toolTemplateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolboxPdf.tmpl
 }
@@ -140,10 +140,10 @@ lib.tools.toolsFulltext {
   includeLibs = Kitodo\Dlf\Plugin\Toolbox
   userFunc = Kitodo\Dlf\Plugin\Toolbox->main
   pages = {$config.storagePid}
-  tools = tx_dlf_toolsFulltext
+  tools = tx_dlf_fulltexttool
   templateFile = {$config.templateFileToolbox}
 }
-plugin.tx_dlf_toolsFulltext {
+plugin.tx_dlf_fulltexttool {
   toolTemplateFile = {$config.templateFileToolFulltext}
 }
 
@@ -152,11 +152,11 @@ lib.tools.toolsImagemanipulation {
   includeLibs = Kitodo\Dlf\Plugin\Toolbox
   userFunc = Kitodo\Dlf\Plugin\Toolbox->main
   pages = {$config.storagePid}
-  tools = tx_dlf_toolsImagemanipulation
+  tools = tx_dlf_imagemanipulationtool
   templateFile = {$config.templateFileToolbox}
 }
 
-plugin.tx_dlf_toolsImagemanipulation {
+plugin.tx_dlf_imagemanipulationtool {
   toolTemplateFile = {$config.templateFileToolImageManipulation}
 }
 
