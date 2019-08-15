@@ -26,7 +26,7 @@ lib.metadata {
   showFull = 0
   rootline = 1
   separator = #
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/mobile-metadata.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/MobileMetadata.tmpl
 }
 
 plugin.tx_dlf_metadata {
@@ -46,7 +46,7 @@ lib.navigation_pagecontrol {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation-pagecontrol.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/NavigationPageControl.tmpl
 }
 
 lib.navigation_viewfunction = USER
@@ -55,7 +55,7 @@ lib.navigation_viewfunction {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation-viewfunction.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/NavigationViewFunction.tmpl
 }
 lib.navigation_viewfunction_deactivated = USER
 lib.navigation_viewfunction_deactivated {
@@ -63,7 +63,7 @@ lib.navigation_viewfunction_deactivated {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/navigation-viewfunction-deactivated.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/NavigationViewFunctionDeactivated.tmpl
 }
 
 plugin.tx_dlf_pageview {
@@ -131,6 +131,7 @@ plugin.tx_dlf_toolbox {
 }
 
 plugin.tx_dlf_toolsPdf {
+  # this file does not exist
   toolTemplateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolboxPdf.tmpl
 }
 
@@ -140,7 +141,7 @@ lib.tools.toolsFulltext {
   userFunc = Kitodo\Dlf\Plugin\Toolbox->main
   pages = {$config.storagePid}
   tools = tx_dlf_toolsFulltext
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolbox.tmpl
+  templateFile = {$config.templateFileToolbox}
 }
 plugin.tx_dlf_toolsFulltext {
   toolTemplateFile = {$config.templateFileToolFulltext}
@@ -152,7 +153,7 @@ lib.tools.toolsImagemanipulation {
   userFunc = Kitodo\Dlf\Plugin\Toolbox->main
   pages = {$config.storagePid}
   tools = tx_dlf_toolsImagemanipulation
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolbox.tmpl
+  templateFile = {$config.templateFileToolbox}
 }
 
 plugin.tx_dlf_toolsImagemanipulation {
