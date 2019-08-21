@@ -26,8 +26,6 @@ namespace Slub\Dfgviewer\Plugins;
  ***************************************************************/
 
 use Kitodo\Dlf\Common\AbstractPlugin;
-use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
@@ -92,14 +90,8 @@ class GridPager extends AbstractPlugin
             $this->piVars['pointer'] = 0;
         }
 
-        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
-
         // Load template file.
-        if (!empty($this->conf['templateFile'])) {
-            $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
-        } else {
-            $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/GridPager.tmpl'), '###TEMPLATE###');
-        }
+        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
 
         // Link to first page.
         if ($this->piVars['pointer'] > 0) {
@@ -167,7 +159,7 @@ class GridPager extends AbstractPlugin
             $markerArray['###LAST###'] = '<span>' . $this->pi_getLL('lastPage', '', TRUE) . '</span>';
         }
 
-        $content .= $templateService->substituteMarkerArray($this->template, $markerArray);
+        $content .= $this->templateService->substituteMarkerArray($this->template, $markerArray);
 
         return $this->pi_wrapInBaseClass($content);
     }

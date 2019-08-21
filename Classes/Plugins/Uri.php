@@ -26,7 +26,6 @@ namespace Slub\Dfgviewer\Plugins;
  ***************************************************************/
 
 use Kitodo\Dlf\Common\AbstractPlugin;
-use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
@@ -79,14 +78,8 @@ class Uri extends AbstractPlugin
             $this->piVars['page'] = array_search($this->piVars['page'], $this->doc->physicalStructure);
         }
 
-        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
-
         // Load template file.
-        if (!empty($this->conf['templateFile'])) {
-            $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName($this->conf['templateFile']), '###TEMPLATE###');
-        } else {
-            $this->template = $templateService->getSubpart($GLOBALS['TSFE']->tmpl->getFileName('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl'), '###TEMPLATE###');
-        }
+        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
 
         $markerArray = array(
             '###URIBOOK###' => '',
@@ -155,7 +148,7 @@ class Uri extends AbstractPlugin
 
         }
 
-        return $templateService->substituteMarkerArray($this->template, $markerArray);
+        return $this->templateService->substituteMarkerArray($this->template, $markerArray);
     }
 
 }
