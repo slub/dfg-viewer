@@ -18,7 +18,6 @@ plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 
 lib.metadata = USER
 lib.metadata {
-  includeLibs = Kitodo\Dlf\Plugin\Metadata
   userFunc = Kitodo\Dlf\Plugin\Metadata->main
   excludeOther = 0
   linkTitle = 1
@@ -42,7 +41,6 @@ plugin.tx_dlf_metadata {
 
 lib.navigation_pagecontrol = USER
 lib.navigation_pagecontrol {
-  includeLibs = Kitodo\Dlf\Plugin\Navigation
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
@@ -51,7 +49,6 @@ lib.navigation_pagecontrol {
 
 lib.navigation_viewfunction = USER
 lib.navigation_viewfunction {
-  includeLibs = Kitodo\Dlf\Plugin\Navigation
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
@@ -59,7 +56,6 @@ lib.navigation_viewfunction {
 }
 lib.navigation_viewfunction_deactivated = USER
 lib.navigation_viewfunction_deactivated {
-  includeLibs = Kitodo\Dlf\Plugin\Navigation
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
@@ -135,29 +131,15 @@ plugin.tx_dlf_pdfdownloadtool {
   toolTemplateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolboxPdf.tmpl
 }
 
-lib.tools.toolsFulltext = USER
-lib.tools.toolsFulltext {
-  includeLibs = Kitodo\Dlf\Plugin\Toolbox
-  userFunc = Kitodo\Dlf\Plugin\Toolbox->main
-  pages = {$config.storagePid}
-  tools = tx_dlf_fulltexttool
-  templateFile = {$config.templateFileToolbox}
-}
 plugin.tx_dlf_fulltexttool {
-  toolTemplateFile = {$config.templateFileToolFulltext}
-}
-
-lib.tools.toolsImagemanipulation = USER
-lib.tools.toolsImagemanipulation {
-  includeLibs = Kitodo\Dlf\Plugin\Toolbox
-  userFunc = Kitodo\Dlf\Plugin\Toolbox->main
+  userFunc = Kitodo\Dlf\Plugin\Tools\FulltextTool->main
+  templateFile = {$config.templateFileToolFulltext}
   pages = {$config.storagePid}
-  tools = tx_dlf_imagemanipulationtool
-  templateFile = {$config.templateFileToolbox}
 }
 
 plugin.tx_dlf_imagemanipulationtool {
-  toolTemplateFile = {$config.templateFileToolImageManipulation}
+  userFunc = Kitodo\Dlf\Plugin\Tools\ImageManipulationTool->main
+  templateFile = {$config.templateFileToolImageManipulation}
 }
 
 

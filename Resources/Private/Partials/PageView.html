@@ -158,7 +158,7 @@
                       <span class="select switchoff" id="tx-dlf-tools-fulltext" title="<f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />"><f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' /></span>
                     </f:then>
                     <f:else>
-                      <f:cObject typoscriptObjectPath="lib.tools.toolsFulltext" />
+                      <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
                     </f:else>
                   </f:if>
                 </f:else>
@@ -202,7 +202,7 @@
         <f:else>
           <ul>
             <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
-            <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="lib.tools.toolsImagemanipulation" /></li>
+            <li class="tx-dlf-toolsImagemanipulation"><f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" /></li>
           </ul>
         </f:else>
       </f:if>
