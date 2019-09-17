@@ -9,7 +9,7 @@ page {
   }
   # jQuery 3.x doesn't work with Kitodo.Presentation!
   # Kitodo.Presentation Pageview Plugin requires jQuery to be loaded in head
-  includeJSlibs {
+  includeJSLibs {
       jQuery = //code.jquery.com/jquery-2.2.4.min.js
       jQuery {
           external = 1

@@ -10,7 +10,8 @@ namespace Slub\Dfgviewer\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to overwrite the page title tag
@@ -26,7 +27,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package TYPO3
  */
-class TitleTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class TitleTagViewHelper extends AbstractViewHelper
 {
     /**
      * Return elements found

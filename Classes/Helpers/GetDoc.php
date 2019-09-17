@@ -1,4 +1,5 @@
 <?php
+
 namespace Slub\Dfgviewer\Helpers;
 
 /***************************************************************
@@ -24,101 +25,99 @@ namespace Slub\Dfgviewer\Helpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \tx_dlf_document;
+use Kitodo\Dlf\Common\Document;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class GetDoc
 {
     public $extKey = 'dfgviewer';
 
-  /**
+    /**
      * This holds the current document
      *
-     * @var  tx_dlf_document
+     * @var    Document
      * @access protected
      */
     protected $doc;
 
-  /**
-   * Get page's download link
-   *
-   * @access  public
-   *
-   * @param  integer  $pagenumber:The current page number
-   *
-   * @return  string: The left and right download url
-   */
-  public function getPageLink($pagenumber)
-  {
+    /**
+     * Get page's download link
+     *
+     * @access  public
+     *
+     * @param integer $pageNumber :The current page number
+     *
+     * @return  string: The left and right download url
+     */
+    public function getPageLink($pageNumber)
+    {
+        $pageLink = '';
 
-    if (!$this->init()) {
-      return '';
-    }
-
-    $details = $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$pagenumber]];
-    $file = $details['files']['DOWNLOAD'];
-
-    if (!empty($file)) {
-
-      $pageLink = $this->doc->getFileLocation($file);
-
-    }
-
-    return $pageLink;
-  }
-
-  /**
-   * Get work's download link
-   *
-   * @access  public
-   *
-   * @return  string: The left and right download url
-   */
-  public function getWorkLink()
-  {
-
-    if (!$this->init()) {
-      return '';
-    }
-
-    // Get work link.
-      if (!empty($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD'])) {
-
-        $workLink = $this->doc->getFileLocation($this->doc->physicalStructureInfo[$this->doc->physicalStructure[0]]['files']['DOWNLOAD']);
-
-      } else {
-
-        $details = $this->doc->getLogicalStructure($this->doc->toplevelId);
-
-        if (!empty($details['files']['DOWNLOAD'])) {
-
-          $workLink = $this->doc->getFileLocation($details['files']['DOWNLOAD']);
-
+        if (!$this->init()) {
+            return $pageLink;
         }
 
-      }
+        $details = $this->doc->physicalStructureInfo[$this->doc->physicalStructure[$pageNumber]];
+        $file = $details['files']['DOWNLOAD'];
 
-      return $workLink;
-  }
+        if (!empty($file)) {
+            $pageLink = $this->doc->getFileLocation($file);
+        }
 
-  /**
-   * get xpath result
-   *
-   * @access  public
-   *
-   * @param  string    $xpath: The PlugIn content
-   *
-   * @return  string    The content that is displayed on the website
-   */
-  public function getXpath($xpath)
-  {
-    if (!$this->init()) {
-      return '';
+        return $pageLink;
     }
-      return $this->doc->mets->xpath($xpath);
-  }
 
-  /**
+    /**
+     * Get work's download link
+     *
+     * @access  public
+     *
+     * @return  string: The left and right download url
+     */
+    public function getWorkLink()
+    {
+        $workLink = '';
+
+        if (!$this->init()) {
+            return $workLink;
+        }
+
+        // Get work link.
+        $physicalStructure = $this->doc->physicalStructure[0];
+        $downloadFile = $this->doc->physicalStructureInfo[$physicalStructure]['files']['DOWNLOAD'];
+
+        if (!empty($downloadFile)) {
+            $workLink = $this->doc->getFileLocation($downloadFile);
+        } else {
+            $details = $this->doc->getLogicalStructure($this->doc->toplevelId);
+            $downloadFile = $details['files']['DOWNLOAD'];
+
+            if (!empty($downloadFile)) {
+                $workLink = $this->doc->getFileLocation($downloadFile);
+            }
+        }
+
+        return $workLink;
+    }
+
+    /**
+     * get xpath result
+     *
+     * @access  public
+     *
+     * @param string $xpath : The PlugIn content
+     *
+     * @return  string    The content that is displayed on the website
+     */
+    public function getXpath($xpath)
+    {
+        if (!$this->init()) {
+            return '';
+        }
+        return $this->doc->mets->xpath($xpath);
+    }
+
+    /**
      * Initialize and load the document
      *
      * @access  protected
@@ -127,25 +126,23 @@ class GetDoc
      */
     protected function init()
     {
-      // Load current document.
-      $this->loadDocument();
+        // Load current document.
+        $this->loadDocument();
 
-      if ($this->doc === null) {
+        if ($this->doc === null) {
+            // Quit without doing anything if required variables are not set.
+            return null;
+        }
 
-        // Quit without doing anything if required variables are not set.
-        return null;
+        $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
+        $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
+        $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
+        $this->doc->mets->registerXPathNamespace('slub', 'http://slub-dresden.de/');
 
-      }
-
-      $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
-      $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
-      $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
-      $this->doc->mets->registerXPathNamespace('slub', 'http://slub-dresden.de/');
-
-      return true;
+        return true;
     }
 
-  /**
+    /**
      * Loads the current document into $this->doc
      *
      * @access  protected
@@ -154,26 +151,26 @@ class GetDoc
      */
     protected function loadDocument()
     {
-      $piVarsSet = GeneralUtility::_GPmerged('set');
+        $piVarsSet = GeneralUtility::_GPmerged('set');
 
-      $piVars = GeneralUtility::_GPmerged('tx_dlf');
+        $piVars = GeneralUtility::_GPmerged('tx_dlf');
 
-      // overwrite tx_dlf[] parameters by (old) set[] ones
-      if (!empty($piVarsSet['mets'])) {
-        $piVars['id'] = $piVarsSet['mets'];
-      }
-      if (!empty($piVarsSet['double'])) {
-        $piVars['double'] = $piVarsSet['double'];
-      }
-      if (!empty($piVarsSet['image'])) {
-        $piVars['page'] = $piVarsSet['image'];
-      }
+        // overwrite tx_dlf[] parameters by (old) set[] ones
+        if (!empty($piVarsSet['mets'])) {
+            $piVars['id'] = $piVarsSet['mets'];
+        }
+        if (!empty($piVarsSet['double'])) {
+            $piVars['double'] = $piVarsSet['double'];
+        }
+        if (!empty($piVarsSet['image'])) {
+            $piVars['page'] = $piVarsSet['image'];
+        }
 
         // Check for required variable.
         if (!empty($piVars['id'])) {
 
             // Get instance of tx_dlf_document.
-            $this->doc =& tx_dlf_document::getInstance($piVars['id'], 0);
+            $this->doc =& Document::getInstance($piVars['id'], 0);
 
             if (!$this->doc->ready) {
 
@@ -181,7 +178,7 @@ class GetDoc
                 $this->doc = null;
 
                 if (TYPO3_DLOG) {
-                    GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with UID "'.$piVars['id'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                    GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with UID "' . $piVars['id'] . '"', $this->extKey, SYSLOG_SEVERITY_ERROR);
                 }
             } else {
 
@@ -190,7 +187,7 @@ class GetDoc
             }
         } else {
             if (TYPO3_DLOG) {
-                GeneralUtility::devLog('[tx_dlf_plugin->loadDocument()] Failed to load document with record ID "'.$this->piVars['recordId'].'"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with record ID "' . $piVars['recordId'] . '"', $this->extKey, SYSLOG_SEVERITY_ERROR);
             }
         }
     }

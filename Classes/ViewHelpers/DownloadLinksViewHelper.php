@@ -23,7 +23,10 @@ namespace Slub\Dfgviewer\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use Slub\Dfgviewer\Helpers\GetDoc;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to get page info
@@ -39,7 +42,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @package TYPO3
  */
-class DownloadLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class DownloadLinksViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -51,7 +54,7 @@ class DownloadLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
      */
     public function render($type = 'page-left', $pagenumber = 1)
     {
-        $doc = GeneralUtility::makeInstance(\Slub\Dfgviewer\Helpers\GetDoc::class);
+        $doc = GeneralUtility::makeInstance(GetDoc::class);
 
         switch ($type) {
           case 'page-right':

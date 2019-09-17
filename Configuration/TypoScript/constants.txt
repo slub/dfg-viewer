@@ -24,11 +24,8 @@ config {
   # cat=plugin.tx_dfgviewer/piwik/030; type=string; label=Piwik Domains
   piwik_domains =
 
-  # cat=plugin.tx_dfgviewer/file; type=string; label=Main template file newspaper
-  templateFileNewspaper = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/template_newspaper.tmpl
-
   # cat=plugin.tx_dfgviewer/file; type=string; label=Metadata template file
-  templateFileMeta = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/metadata.tmpl
+  templateFileMeta = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/Metadata.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Grid Pager template file
   templateFilePager = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/GridPager.tmpl
@@ -37,25 +34,22 @@ config {
   templateFileUri = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/Uri.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Page View template file
-  templateFilePage = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/pageview.tmpl
+  templateFilePage = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/PageView.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Page Grid template file
-  templateFileGrid = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/pagegrid.tmpl
+  templateFileGrid = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/PageGrid.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Table of Contents template file
-  templateFileToc = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toc.tmpl
+  templateFileToc = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/TableOfContents.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Toolbox template file
-  templateFileToolbox = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolbox.tmpl
-
-  # cat=plugin.tx_dfgviewer/file; type=string; label=Download Tool template file
-  templateFileToolPdf = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/downloads.tmpl
+  templateFileToolbox = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/Toolbox.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Fulltext Tool template file
-  templateFileToolFulltext = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/fulltext.tmpl
+  templateFileToolFulltext = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/FulltextTool.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Image manipulation template file
-  templateFileToolImageManipulation = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/imagemanipulation.tmpl
+  templateFileToolImageManipulation = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/ImageManipulationTool.tmpl
 
   # cat=plugin.tx_dfgviewer/file; type=string; label=Newspaper Calendar template file
   templateFileNewspaperCalendar = EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl
