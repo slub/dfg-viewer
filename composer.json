@@ -1,8 +1,4 @@
 {
-  "repositories": [
-    { "type": "composer", "url": "https://composer.typo3.org/" },
-    { "type": "git", "url": "https://github.com/Beacze/kitodo-presentation.git"}
-  ],
   "name": "slub/dfgviewer",
   "type": "typo3-cms-extension",
   "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.",
@@ -43,7 +39,5 @@
     "psr-4": {
       "Slub\\Dfgviewer\\": "Classes/"
     }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
