@@ -178,7 +178,7 @@ class GetDoc
                 $this->doc = null;
 
                 if (TYPO3_DLOG) {
-                    GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with UID "' . $piVars['id'] . '"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                    GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with UID "' . $piVars['id'] . '"', $this->extKey, 'SYSLOG_SEVERITY_ERROR');
                 }
             } else {
 
@@ -187,7 +187,7 @@ class GetDoc
             }
         } else {
             if (TYPO3_DLOG) {
-                GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with record ID "' . $piVars['recordId'] . '"', $this->extKey, SYSLOG_SEVERITY_ERROR);
+                GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with record ID "' . $piVars['recordId'] . '"', $this->extKey, 'SYSLOG_SEVERITY_ERROR');
             }
         }
     }
