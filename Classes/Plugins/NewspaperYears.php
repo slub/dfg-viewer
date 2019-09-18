@@ -25,8 +25,6 @@ namespace Slub\Dfgviewer\Plugins;
 ***************************************************************/
 
 use Kitodo\Dlf\Common\AbstractPlugin;
-use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
@@ -75,18 +73,12 @@ class NewspaperYears extends AbstractPlugin {
 
         $toc = $this->doc->tableOfContents;
 
-        $templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
-
         // Load template file.
-        if (!empty($this->conf['templateFile'])) {
-            $this->template = $templateService->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-        } else {
-            $this->template = $templateService->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperYears.tmpl'), '###TEMPLATE###');
-        }
+        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
 
         // Get subpart templates
         $subparts['template'] = $this->template;
-        $subparts['year'] = $templateService->getSubpart($subparts['template'], '###LISTYEAR###');
+        $subparts['year'] = $this->templateService->getSubpart($subparts['template'], '###LISTYEAR###');
 
         $years = $toc[0]['children'];
 
@@ -122,12 +114,12 @@ class NewspaperYears extends AbstractPlugin {
                 '###YEARNAME###' => $yearText,
             );
 
-            $subYearPartContent .= $templateService->substituteMarkerArray($subparts['year'], $yearArray);
+            $subYearPartContent .= $this->templateService->substituteMarkerArray($subparts['year'], $yearArray);
 
         }
 
         // fill the week markers
-        return $templateService->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
+        return $this->templateService->substituteSubpart($subparts['template'], '###LISTYEAR###', $subYearPartContent);
 
     }
 

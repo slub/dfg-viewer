@@ -26,8 +26,6 @@ namespace Slub\Dfgviewer\Plugins;
 
 use Kitodo\Dlf\Common\AbstractPlugin;
 use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Plugin 'DFG-Viewer: Newspaper Calendar' for the 'dfgviewer' extension.
@@ -43,8 +41,6 @@ class NewspaperCalendar extends AbstractPlugin {
     public $extKey = 'dfgviewer';
 
     public $scriptRelPath = 'Classes/Plugins/NewspaperCalendar.php';
-
-    protected $templateService;
 
     const CHILDREN = 'children';
     const LABEL = 'label';
@@ -77,8 +73,6 @@ class NewspaperCalendar extends AbstractPlugin {
 
         $toc = $this->doc->tableOfContents;
 
-        $this->templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
-
         $months = array();
         $monthLabel = '';
 
@@ -91,15 +85,7 @@ class NewspaperCalendar extends AbstractPlugin {
         }
 
         // Load template file.
-        if (!empty($this->conf['templateFile'])) {
-
-            $this->template = $this->templateService->getSubpart($this->cObj->fileResource($this->conf['templateFile']), '###TEMPLATE###');
-
-        } else {
-
-            $this->template = $this->templateService->getSubpart($this->cObj->fileResource('EXT:dfgviewer/Resources/Private/Templates/Plugins/Dfgviewer/NewspaperCalendar.tmpl'), '###TEMPLATE###');
-
-        }
+        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
 
         // Get subpart templates
         $subparts['template'] = $this->template;
