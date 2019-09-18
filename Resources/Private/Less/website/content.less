@@ -125,7 +125,6 @@
             position: relative;
             max-width: 100%;
             overflow: hidden;
-            overflow: scroll;
         }
         form {
             border: 1px solid @light-blue;
@@ -142,7 +141,12 @@
             fieldset {
                 min-width: 0;
                 legend {
-                    display: none;
+                    margin-top: 20px;
+                    text-transform: uppercase;
+                    color: @light-blue;
+                    display: block;
+                    font-size: 24px;
+                    font-weight: bold;
                 }
             }
             label {
@@ -168,7 +172,7 @@
                     outline: 0 none;
                 }
             }
-            input[type="submit"] {
+            input[type="submit"], button[type="submit"], button[type="button"] {
                 position: relative;
                 width: 100%;
                 margin-top: 20px;
@@ -179,6 +183,11 @@
                 font-weight: bold;
                 font-size: 14px;
                 text-transform: uppercase;
+            }
+            button[type="button"] {
+              background: #fff;
+              color: @base-blue;
+              border: 1px solid @base-blue;
             }
             select {
                 position: relative;
@@ -196,13 +205,25 @@
                     outline: 0 none;
                 }
             }
+            div.actions {
+                height: 48px;
+            }
+            span.help-block {
+                font-size: 90%;
+                font-style: italic;
+            }
         }
         @media screen and (min-width: @desktopViewportWidth) {
             padding: 0 150px;
             form {
                 margin: 70px 0;
-                input[type="submit"] {
+                input[type="submit"], button[type="submit"] {
                     width: 32%;
+                    float: right;
+                }
+                button[type="button"] {
+                  width: 32%;
+                  float: left;
                 }
             }
         }
