@@ -37,12 +37,20 @@ TCEFORM.tt_content {
       removeItems = 0,1,2,5
     }
 
-  section_frame {
+  frame_class {
     removeItems = 1,5,6,10,11,12,20,21
-    addItems.101 = DFG-Viewer: Mission
-    addItems.102 = DFG-Viewer: Demonstrator
-    addItems.103 = DFG-Viewer: Metadaten
-    addItems.104 = DFG-Viewer: Mailingliste
+    addItems {
+      mission = DFG-Viewer: Mission
+      demo = DFG-Viewer: Demonstrator
+      metadata = DFG-Viewer: Metadaten
+      mailinglist = DFG-Viewer: Mailingliste
+    }
+  }
+
+  layout {
+      addItems {
+          101 = Startseite
+      }
   }
 
 }
