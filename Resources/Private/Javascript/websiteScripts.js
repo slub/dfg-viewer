@@ -22,24 +22,24 @@ $(document).ready(function() {
         $('nav ul.main-nav').toggleClass('open');
         $('nav ul.secondary-nav').toggleClass('open');
     });
-    
+
     // setup submenus
     $('nav .main-nav li.submenu').each(function() {
         $(this).append('<a href="#" class="submenu-toggle"><span class="toggle-circle"></span></a>');
     });
-    
+
     // submenu toggle
     $('nav .main-nav li.submenu > a.submenu-toggle').on(mobileEvent, function(event) {
         $(this).parent().toggleClass('active');
         return false;
     });
-    
+
     // animated scroll to top
     $('a.totop').on(mobileEvent, function(event) {
         $('body').animate({ scrollTop: 0 }, 600);
         return false;
     });
-    
+
     // wrap all tables for responsive support
     $('.page-container table').each(function() {
         $(this).wrap('<div class="responsive-table" />');
