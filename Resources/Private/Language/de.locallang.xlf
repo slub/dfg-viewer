@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2018-06-15T10:23:43Z">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2019-09-19T08:24:26Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
@@ -64,6 +64,10 @@
 			<trans-unit id="provider.local_presentation" approved="yes">
 				<source><![CDATA[Show in local context]]></source>
 				<target><![CDATA[Lokale Präsentation anzeigen]]></target>
+			</trans-unit>
+			<trans-unit id="provider.no_local_contact" approved="yes">
+				<source><![CDATA[No email address given of data provider]]></source>
+				<target><![CDATA[Keine Kontakt-Emailadresse vorhanden]]></target>
 			</trans-unit>
 			<trans-unit id="provider.no_local_presentation" approved="yes">
 				<source><![CDATA[No local presentation available]]></source>

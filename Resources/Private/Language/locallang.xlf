@@ -44,6 +44,9 @@
 		<trans-unit id="provider.no_local_presentation">
 			<source>No local presentation available</source>
 		</trans-unit>
+    <trans-unit id="provider.no_local_contact">
+			<source>No email address given of data provider</source>
+		</trans-unit>
 		<trans-unit id="provider.local_catalogue">
 			<source>Online Public Access Catalog</source>
 		</trans-unit>
