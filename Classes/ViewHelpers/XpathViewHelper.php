@@ -57,6 +57,10 @@ class XpathViewHelper extends AbstractViewHelper
     {
         $doc = GeneralUtility::makeInstance(GetDoc::class);
 
+        // abort in case not METS is available --> hotfix to enable IIIF
+        if (!$doc->mets)
+          return '';
+
         $result = $doc->getXpath($xpath);
 
         if (is_array($result)) {

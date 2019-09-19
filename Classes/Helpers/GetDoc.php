@@ -134,10 +134,12 @@ class GetDoc
             return null;
         }
 
-        $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
-        $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
-        $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
-        $this->doc->mets->registerXPathNamespace('slub', 'http://slub-dresden.de/');
+        if ($doc->mets) {
+            $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
+            $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
+            $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
+            $this->doc->mets->registerXPathNamespace('slub', 'http://slub-dresden.de/');
+        }
 
         return true;
     }
