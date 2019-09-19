@@ -111,7 +111,7 @@ class GetDoc
      */
     public function getXpath($xpath)
     {
-        if (!$this->init()) {
+        if (!$this->init() || !is_object($this->doc->mets)) {
             return '';
         }
         return $this->doc->mets->xpath($xpath);
@@ -133,8 +133,7 @@ class GetDoc
             // Quit without doing anything if required variables are not set.
             return null;
         }
-
-        if ($doc->mets) {
+        if (is_object($this->doc->mets)) {
             $this->doc->mets->registerXPathNamespace('mets', 'http://www.loc.gov/METS/');
             $this->doc->mets->registerXPathNamespace('mods', 'http://www.loc.gov/mods/v3');
             $this->doc->mets->registerXPathNamespace('dv', 'http://dfg-viewer.de/');
