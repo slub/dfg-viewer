@@ -27,7 +27,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js'],
-                    "Resources/Public/Js/webScripts.js" : ['Resources/Private/Javascript/websiteScripts.js']
+                    "Resources/Public/Js/webScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/websiteScripts.js']
                 }
             }
         },
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
             }
         }
     });
-    
+
     grunt.file.setBase('../')
     grunt.registerTask('default', ['less','uglify','watch']);
 };
