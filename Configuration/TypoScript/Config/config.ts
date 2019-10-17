@@ -2,9 +2,15 @@ config {
   # Doctype HTML5
   doctype = html5
   renderCharset = utf-8
+
   # Externalize CSS and JS
   removeDefaultCss = 0
   removeDefaultJS = 1
+
+  # concatenate all JavaScript files by default
+  concatenateJs = 1
+  # concatenate all CSS files by default
+  concatenateCss = 1
 
   #Cache
   cache_clearAtMidnight = 1
