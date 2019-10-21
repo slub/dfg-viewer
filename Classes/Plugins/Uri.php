@@ -79,7 +79,7 @@ class Uri extends AbstractPlugin
         }
 
         // Load template file.
-        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
+        $this->getTemplate('###TEMPLATE###');
 
         $markerArray = array(
             '###URIBOOK###' => '',
