@@ -85,7 +85,7 @@ class Sru extends AbstractPlugin
         }
 
         // Load template file.
-        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
+        $this->getTemplate('###TEMPLATE###');
 
         $this->addSearchFormJS();
 

@@ -91,7 +91,7 @@ class GridPager extends AbstractPlugin
         }
 
         // Load template file.
-        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
+        $this->getTemplate('###TEMPLATE###');
 
         // Link to first page.
         if ($this->piVars['pointer'] > 0) {

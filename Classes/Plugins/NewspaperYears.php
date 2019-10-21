@@ -74,7 +74,7 @@ class NewspaperYears extends AbstractPlugin {
         $toc = $this->doc->tableOfContents;
 
         // Load template file.
-        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
+        $this->getTemplate('###TEMPLATE###');
 
         // Get subpart templates
         $subparts['template'] = $this->template;

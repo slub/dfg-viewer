@@ -85,7 +85,7 @@ class NewspaperCalendar extends AbstractPlugin {
         }
 
         // Load template file.
-        $this->getTemplate('###TEMPLATE###', 'Dfgviewer');
+        $this->getTemplate('###TEMPLATE###');
 
         // Get subpart templates
         $subparts['template'] = $this->template;
