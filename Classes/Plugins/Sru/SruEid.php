@@ -95,7 +95,7 @@ class SruEid extends AbstractPlugin
 
                     $fullTextHit = $record->xpath('//srw:recordData');
 
-                    $pageAttributes = '';
+                    $pageAttributes = [];
 
                     foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->attributes() as $key => $val) {
 
@@ -103,12 +103,12 @@ class SruEid extends AbstractPlugin
 
                     }
 
-                    $hitFound = array();
+                    $hitFound = [];
 
                     // there may be multiple hits on a page per search query
                     foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
 
-                        $hitAttributes = array();
+                        $hitAttributes = [];
 
                         foreach ($hit->attributes() as $key => $val) {
 
@@ -125,7 +125,7 @@ class SruEid extends AbstractPlugin
                     $parentUrl = (string)$fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->url;
 
                     // unset $hightlightParams but make sure, it's an array()
-                    $highlightParams = array();
+                    $highlightParams = [];
 
                     // get highlight boxes for all results of a page
                     foreach ($hitFound as $key => $hit) {
@@ -202,7 +202,3 @@ class SruEid extends AbstractPlugin
     }
 
 }
-
-$cObj = GeneralUtility::makeInstance('tx_dfgviewer_sru_eid');
-
-$cObj->main();
