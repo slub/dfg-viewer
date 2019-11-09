@@ -38,4 +38,4 @@ ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Plugins/NewspaperYear
 ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Plugins/Sru/Sru.php', '_sru', 'list_type', TRUE);
 
 // Register eID handlers.
-$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = 'EXT:'.$_EXTKEY.'/Classes/Plugins/Sru/SruEid.php';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = \Slub\Dfgviewer\Plugins\Sru\SruEid::class . '::main';

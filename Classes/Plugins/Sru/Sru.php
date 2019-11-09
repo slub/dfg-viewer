@@ -126,7 +126,10 @@ class Sru extends AbstractPlugin
      */
     protected function addSearchFormJS()
     {
-        $GLOBALS['TSFE']->additionalHeaderData[$this->prefixId . '_sru'] = '<script type="text/javascript" src="' . ExtensionManagementUtility::siteRelPath($this->extKey) . 'Resources/Private/Javascript/tx_dfgviewer_sru.js"></script>';
+        $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+
+        // Add SRU specific JavaScript.
+        $pageRenderer->addJsFooterFile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey) . 'Resources/Public/Js/tx_dfgviewer_sru.js');
     }
 
     /**
@@ -144,17 +147,16 @@ class Sru extends AbstractPlugin
             $origImage = $this->piVars['origimage'];
 
             // Add SRU Results if any
-            $javascriptFooter = '
-			<script type="text/javascript">$(window).load(function(){';
+            $javascriptFooter = '$(window).load(function(){';
 
             foreach ($highlight as $field) {
                 $javascriptFooter .= 'tx_dlf_viewer.addHighlightField([' . $field . '],' . $origImage . ');';
             }
 
-            $javascriptFooter .= '
-			})</script>';
+            $javascriptFooter .= '})';
 
-            $GLOBALS['TSFE']->additionalFooterData['tx-dfgviewer-footer'] .= $javascriptFooter;
+            $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+            $pageRenderer->addJsFooterInlineCode('tx-dfgviewer-footer', $javascriptFooter);
         }
     }
 
