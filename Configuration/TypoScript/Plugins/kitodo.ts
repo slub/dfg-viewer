@@ -151,7 +151,7 @@ plugin.tx_dlf_audioplayer {
 }
 
 
-[userFunc = user_dlf_docTypeCheck(newspaper)]
+[userFunc = user_dlf_docTypeCheck(newspaper)] || [userFunc = user_dlf_docTypeCheck(ephemera)]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
