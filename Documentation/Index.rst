@@ -10,47 +10,44 @@ dfgviewer* extension.
 Installation
 ============
 
-The current release 4.1 will only work with TYPO3 7.6. We will release a
-TYPO3 8.7 compatible version soon.
+The current release 5.x will only work with TYPO3 8.7 LTS.
 
 The extension is based on *Kitodo.Presentation (dlf)*. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
-both extensions. This is done preferable by composer.
+both extensions. The installation in only possible by composer.
+Kitodo.presentation will be installed and configured automatically.
 
-Install a fresh TYPO3 7.6
--------------------------
+Install a fresh TYPO3 8.7 LTS
+-----------------------------
 
-If you have no TYPO3 7.6 system running, you may install a fresh system by composer::
+If you have no TYPO3 8.7 system running, you may install a fresh system by composer::
 
-    # assume the installation directory will be /var/www/dfgviewer
-    cd /var/www/
-    # enable HTTP because some dependancies of TYPO3 7.6 refer to a non-HTTPS resource.
-    composer config -g secure-http false
-    composer create-project typo3/cms-base-distribution dfgviewer 7.6
+    # Assuming the following settings:
+    #   * the installation directory is /var/www/dfgviewer
+    #   * the Apache DocumentRoot is /var/www/dfgviewer/public
+    #   * Apache is running as user www-data with group www-data
+    #   * execution of all following commands as user www-data
+    www-data@localhost:~/> cd /var/www/
+    # remove /var/www/dfgviewer if it already exist
+    www-data@localhost:/var/www> rm -r dfgviewer/
+    # load full TYPO3 8.7 via composer
+    www-data@localhost:/var/www> composer create-project typo3/cms-base-distribution:^8.7 dfgviewer
+    # create FIRST_INSTALL file
+    www-data@localhost:/var/www> cd dfgviewer/
+    www-data@localhost:/var/www/dfgviewer> touch public/FIRST_INSTALL
 
-.. error::
+Now you can switch to the web-based installation of TYPO3 in your browser. Just
+follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
 
-    Unfortunately, this will end in an error message::
-
-        [RuntimeException]
-        Could not scan for classes inside "web/typo3/sysext/extbase/Tests/Unit/Object/Container/Fixtures/" which does not appear to be a file nor a folder
-
-    You have to edit the /var/www/dfgviewer/composer.json by hand and remove the line::
-
-        "classmap": ["web/typo3/sysext/extbase/Tests/Unit/Object/Container/Fixtures/"]
-
-Save and close the composer.json and run composer update in /var/www/dfgviewer::
-
-    composer update
-
-Create the FIRST_INSTALL file in the documentroot of your new installation::
-
-    touch web/FIRST_INSTALL
-
-Continue now in your webbrowser to install the TYPO3 7.6 CMS.
-
-At the end of the Install Tool, choose the option "Do nothing, just get me to
-the Backend.".
+    # continue with installation via webbrowser
+    http://example.com/
+    1. Step: "System environement"
+    2. Step: "Database connection"
+    3. Step: "Select database" --> Best is to create the database and user before.
+    4. Step: "Create admin user account"
+    5. Step: "Installation done!" --> Select "Do nothing, just get me to the Backend."
+    # Test your backend login:
+    http://example.com/typo3/
 
 The DFG-Viewer extension assumes the default language is German (&L=0) and you
 configure an additional "website-language" English (&L=1). This is only relevant
@@ -70,14 +67,35 @@ Your *typo3conf/LocalConfiguration.php* should contain this::
           'pageNotFoundOnCHashError' => '0',
   ],
 
+Now you have a working TYPO3 8.7 LTS installation and you can continue with composer
+to install DFG-Viewer extension.
+
+.. error::
+
+      If you are using e.g. Debian 10 with MariaDB 10.3 you have to force an
+      update of Doctrine/Dbal. This is due to a missing feature / bug in
+      doctring/dbal 2.5.13. TYPO3 8.7 did not changed the dependancies for doctrine/dbal.
+
+      This way is working for the DFG-Viewer::
+
+          www-data@localhost:/var/www/dfgviewer> composer require doctrine/dbal 2.5.13
+          # in composer.json, change the following line:
+          # "doctrine/dbal": "2.7.2 as 2.5.13"
+          www-data@localhost:/var/www/dfgviewer> composer update doctrine/dbal --with-dependencies
+
+
 Install DFG-Viewer and Kitodo.Presentation via Composer
 -------------------------------------------------------
 
 Composer commands::
 
-    composer require slub/dfgviewer:dev-master
+    composer require kitodo/presentation:^3.0
+    composer require slub/dfgviewer:^5.0
 
-This will install the DFG-Viewer extension and Kitodo.Presentation 2.2 from TER.
+This will install the DFG-Viewer 5.x extension and Kitodo.Presentation 3.0 from
+`Packagist <https://github.com/slub/dfg-viewer>`_.
+
+
 
 Now you have to install the extension "dfgviewer" via the extension manager. It
 will install "dlf" (Kitodo.Presentation) as dependancy automatically.

@@ -142,7 +142,6 @@ plugin.tx_dlf_imagemanipulationtool {
   templateFile = {$config.templateFileToolImageManipulation}
 }
 
-
 plugin.tx_dlf_audioplayer {
   pages = {$config.storagePid}
   excludeOther = 0
@@ -150,22 +149,21 @@ plugin.tx_dlf_audioplayer {
 #  templateFile = {$config.templateFilePage}
 }
 
-
-[userFunc = user_dlf_docTypeCheck(newspaper)] || [userFunc = user_dlf_docTypeCheck(ephemera)]
+[userFunc = user_dlf_docTypeCheck(newspaper, {$config.storagePid})] || [userFunc = user_dlf_docTypeCheck(ephemera, {$config.storagePid})]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
 }
 [global]
 
-[userFunc = user_dlf_docTypeCheck(year)]
+[userFunc = user_dlf_docTypeCheck(year, {$config.storagePid})]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_year
 }
 [global]
 
-[userFunc = user_dlf_docTypeCheck(issue)]
+[userFunc = user_dlf_docTypeCheck(issue, {$config.storagePid})]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_issue
