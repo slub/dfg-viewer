@@ -155,7 +155,7 @@
               </f:else>
             </f:if>
           </li>
-          <f:if condition="<dv:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"FULLTEXT\"]/mets:file[1]/mets:FLocat/@xlink:href)[1]' />">
+          <f:if condition="<dv:filegroup filegroup='FULLTEXT'/>">
             <li class="fulltext">
               <f:if condition="{gp-double} == 1">
                 <f:then>
@@ -175,7 +175,7 @@
             </li>
           </f:if>
           <li class="grid">
-            <f:if condition="<dv:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"THUMBS\"]//mets:file/mets:FLocat/@xlink:href)[1]' />">
+            <f:if condition="<dv:filegroup filegroup='THUMBS'/>">
               <f:then>
                 <f:if condition="{gp-pagegrid} == 1">
                   <f:then>

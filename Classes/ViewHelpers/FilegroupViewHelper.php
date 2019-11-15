@@ -30,27 +30,14 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class FilegroupViewHelper extends AbstractViewHelper {
 
-    const ANNOTATIONS = "ANNOTATIONS";
+    /**
+     * Check if requested filegroup exists in document
+     * @param string $filegroup
+     * @return boolean
+     */
+    public function render($filegroup) {
+        $doc = GeneralUtility::makeInstance(GetDoc::class);
 
-    const FULLTEXT = "FULLTEXT";
-
-    const THUMBS = "THUMBS";
-
-    public function render($filegroup = null) {
-        $doc = null;
-        $doc = GeneralUtility::makeInstance(GetDoc::class)->doc;
-
-        if ($filegroup == self::ANNOTATIONS) {
-
-        } else {
-            foreach ($doc->physicalStructureInfo as $physStructure) {
-                if (isset($physStructure['files'])
-                    && isset($physStructure['files'][$filegroup])
-                    && !empty($physStructure['files'][$filegroup])) {
-                        return true;
-                }
-            }
-        }
-        return false;
+        return $doc->isFilegroupAvailable($filegroup);
     }
 }
