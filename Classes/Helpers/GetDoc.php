@@ -144,6 +144,31 @@ class GetDoc
     }
 
     /**
+     * Check if fileGrp is available in physical structure array
+     *
+     * @param string $filegroup
+     * @return boolean
+     */
+    public function isFilegroupAvailable($filegroup) {
+        if (!$this->init()) {
+            return false;
+        }
+
+        if ($filegroup == 'ANNOTATIONS') {
+            // TODO check if $this->doc is IIIF manifest and any Canvas contains painting annotations
+        } else {
+            foreach ($this->doc->physicalStructureInfo as $physStructure) {
+                if (isset($physStructure['files'])
+                    && isset($physStructure['files'][$filegroup])
+                    && !empty($physStructure['files'][$filegroup])) {
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Loads the current document into $this->doc
      *
      * @access  protected
