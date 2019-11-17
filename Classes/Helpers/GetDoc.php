@@ -151,7 +151,7 @@ class GetDoc
      */
     public function isFilegroupAvailable($filegroup) {
         if (!$this->init()) {
-            return '';
+            return false;
         }
 
         if ($filegroup == 'ANNOTATIONS') {
