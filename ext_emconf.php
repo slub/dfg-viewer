@@ -42,7 +42,6 @@ $EM_CONF[$_EXTKEY] = array(
     'version' => '5.0.0',
     'constraints' => array(
         'depends' => array(
-            'php' => '7.0.0-',
             'typo3' => '8.7.0-8.7.99',
             'dlf' => '3.0.0-',
         ),
@@ -52,11 +51,4 @@ $EM_CONF[$_EXTKEY] = array(
         ),
     ),
     '_md5_values_when_last_written' => '',
-    'autoload' =>
-        array(
-            'psr-4' =>
-                array(
-                    'Slub\\Dfgviewer\\' => 'Classes'
-                )
-        )
 );

@@ -17,10 +17,22 @@ use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
 both extensions. The installation in only possible by composer.
 Kitodo.presentation will be installed and configured automatically.
 
+System Requirements
+-------------------
+
+You need a webserver stack with Apache2 or Ngnix, PHP >= 7.2 and MySQL / MariaDB.
+Debian 10 (buster) is known to work with Kitodo.Presentation 3.0 and DFG-Viewer 5.0.
+
+We recommend at least:
+
+* CPU: 1
+* Memory: 2 GB
+* Disk: 20 GB
+
 Install a fresh TYPO3 8.7 LTS
 -----------------------------
 
-If you have no TYPO3 8.7 system running, you may install a fresh system by composer::
+To install a fresh TYPO3 8.7 system, try the following installation procedure with composer::
 
     # Assuming the following settings:
     #   * the installation directory is /var/www/dfgviewer
@@ -49,17 +61,17 @@ follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
     # Test your backend login:
     http://example.com/typo3/
 
-The DFG-Viewer extension assumes the default language is German (&L=0) and you
-configure an additional "website-language" English (&L=1). This is only relevant
-for localization of the metadata and structures labels.
+The DFG-Viewer extension assumes the default language is German (&L=0). An
+additionial "website-language" English (&L=1) will be created automatically on
+installing the DFG-Viewer extension. This is only relevantfor localization of
+the metadata and structures labels.
 
 Recommended Steps after Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Go to the language module and install "German" as backend language.
 2. [optional] Change the backend language in your user settings to German.
-3. Create a new record "Website Language" on Page "0".
-4. Go to the Install Tool --> All Configurations and change the default settings of pageNotFoundOnCHashError to '0'.
+3. Go to the Install Tool --> All Configurations and change the default settings of pageNotFoundOnCHashError to '0'.
 
 Your *typo3conf/LocalConfiguration.php* should contain this::
 
@@ -95,10 +107,10 @@ Composer commands::
 This will install the DFG-Viewer 5.x extension and Kitodo.Presentation 3.0 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
+Install the Extension via extension manager or CLI::
 
-
-Now you have to install the extension "dfgviewer" via the extension manager. It
-will install "dlf" (Kitodo.Presentation) as dependancy automatically.
+    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extensionmanager:extension:install dlf
+    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extensionmanager:extension:install dfgviewer
 
 During the installation, three pages will be created: a root page, the "Kitodo
 Configuration" folder and the viewer itself.
@@ -106,13 +118,9 @@ Configuration" folder and the viewer itself.
 Configure DFG-Viewer and Kitodo.Presentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You have to open and save once the configuration of Kitodo.Presentation in the
-extension manager. This is necessary to write the default configuration to the
-LocalConfiguration.php file.
-
 The DFG-Viewer is almost configured. Only the Page-ID-constants have to be
-adjustet. Go to the template module and use the constant editor to fit your
-installation.
+checked and adjusted. Go to the template module and use the constant editor to
+fit your installation.
 
 Success
 -------
@@ -120,12 +128,16 @@ Success
 Now your installation should work. You can test this with the following url
 (replace *host* and *id* with the parameters of your installation):
 
-http://localhost/index.php?id=2&tx_dlf%5Bid%5D=http%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
+http://example.com/index.php?id=2&tx_dlf%5Bid%5D=https%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
+
+To pass a document to the viewer, use the tx_dlf[id] GET parameter. Don't forget to urlencode the value.::
+
+    &tx_dlf[id]=https%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
 
 Known Problems
 --------------
 
-You should use the following configuration in *typo3conf\LocalConfiguration.php*::
+You should use the following configuration in *typo3conf/LocalConfiguration.php*::
 
   'FE' => [
           'pageNotFoundOnCHashError' => '0',
