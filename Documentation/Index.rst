@@ -12,7 +12,7 @@ Installation
 
 The current release 5.x will only work with TYPO3 8.7 LTS.
 
-The extension is based on *Kitodo.Presentation (dlf)*. Before you can start to
+The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
 both extensions. The installation in only possible by composer.
 Kitodo.presentation will be installed and configured automatically.
