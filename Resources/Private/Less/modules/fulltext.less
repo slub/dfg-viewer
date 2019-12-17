@@ -2,7 +2,7 @@
  *
  * Fulltext
  * ================================================
- * Specials for the fulltext view 
+ * Specials for the fulltext view
  *
  * Author: Thomas Jung <thomas@tjwd.de>
  * License: All rights reserved
@@ -49,6 +49,11 @@
         &:empty {
             padding: 0;
         }
+        .textline {
+            &:after {
+                content: " ";
+            }
+        }
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         top: 0;
@@ -67,9 +72,6 @@
             .textline {
                 &.highlight {
                     background: lighten(@light-blue,10%);
-                }
-                &:after {
-                    content: " ";
                 }
             }
         }
