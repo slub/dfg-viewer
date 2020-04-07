@@ -25,7 +25,7 @@ namespace Slub\Dfgviewer\ViewHelpers;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to get piVars (GET variables)
@@ -44,16 +44,22 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class PiVarsViewHelper extends AbstractViewHelper
 {
 
+    public function initializeArguments()
+    {
+        $this->registerArgument('var', 'string', 'variable name', true);
+        $this->registerArgument('default', 'string', 'default value if variable is empty', false, '');
+    }
+
     /**
      * Return tx_dlf[]-GET variable
      *
-     * @param string $var variable name
-     * @param string $default default value if variable is empty
      * @return string
      */
-    public function render($var, $default = '')
+    public function render()
     {
         $piVars = GeneralUtility::_GP('tx_dlf');
+        $var = $this->arguments['var'];
+        $default = $this->arguments['default'];
 
         if (!isset($piVars[$var])) {
             return $default;

@@ -23,7 +23,7 @@ namespace Slub\Dfgviewer\ViewHelpers\Format;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Returns a substring up to last occurence of needle.
@@ -31,14 +31,23 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class SubStringLastViewHelper extends AbstractViewHelper
 {
+
     /**
+     * initialize arguments
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('string', 'string', 'string', true);
+        $this->registerArgument('needle', 'string', 'needle', true);
+    }
+
+    /**
+     * Returns a substring up to last occurence of needle.
      *
-     * @param string $string
-     * @param string needle
      * @return string
      */
-    public static function render(string $string, string $needle)
+    public function render()
     {
-        return substr($string, 0, strrpos($string, $needle));
+        return substr($this->arguments['string'], 0, strrpos($this->arguments['string'], $this->arguments['needle']));
     }
 }

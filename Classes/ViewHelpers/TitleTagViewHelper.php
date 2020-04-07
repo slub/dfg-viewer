@@ -11,7 +11,7 @@ namespace Slub\Dfgviewer\ViewHelpers;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to overwrite the page title tag
@@ -29,16 +29,24 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class TitleTagViewHelper extends AbstractViewHelper
 {
+
+    /**
+     * initialize arguments
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('title', 'string', 'the new page title', true);
+    }
+
     /**
      * Return elements found
      *
-     * @param string $title the new page title
-     *
      * @return void
      */
-    public function render($title)
+    public function render()
     {
-        $GLOBALS['TSFE']->page['title'] = $title;
+
+        $GLOBALS['TSFE']->page['title'] = $this->arguments['title'];
         // return first found result
         return;
     }

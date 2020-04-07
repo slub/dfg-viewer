@@ -26,18 +26,23 @@ namespace Slub\Dfgviewer\ViewHelpers;
 
 use Slub\Dfgviewer\Helpers\GetDoc;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 class FilegroupViewHelper extends AbstractViewHelper {
 
+    public function initializeArguments()
+    {
+        $this->registerArgument('filegroup', 'string', 'filegroup', true);
+    }
+
     /**
      * Check if requested filegroup exists in document
-     * @param string $filegroup
+     *
      * @return boolean
      */
-    public function render($filegroup) {
+    public function render() {
         $doc = GeneralUtility::makeInstance(GetDoc::class);
 
-        return $doc->isFilegroupAvailable($filegroup);
+        return $doc->isFilegroupAvailable($this->arguments['filegroup']);
     }
 }

@@ -24,7 +24,7 @@ namespace Slub\Dfgviewer\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to calculate two integers
@@ -44,26 +44,36 @@ class CalcViewHelper extends AbstractViewHelper
 {
 
     /**
-     * Return result of calculation
-     *
-     * @param string $val1 first value
-     * @param string $val2 second value
-     * @param string $operator operator
-     * @return string
+     * initialize arguments
      */
-    public function render($val1, $val2, $operator = '+')
+    public function initializeArguments()
     {
+        $this->registerArgument('val1', 'string', 'first value', true);
+        $this->registerArgument('val2', 'string', 'second value', true);
+        $this->registerArgument('operator', 'string', 'operator', false, '+');
+    }
+
+    /**
+     * Return result of calculation
+     * @return float|int
+     */
+    public function render()
+    {
+        $val1 = $this->arguments['val1'];
+        $val2 = $this->arguments['val2'];
+        $operator = $this->arguments['operator'];
+
         switch ($operator) {
-          case '+': $result = (int)$val1 + (int)$val2;
+            case '+': return (int)$val1 + (int)$val2;
                     break;
-          case '-': $result = (int)$val1 - (int)$val2;
+            case '-': return (int)$val1 - (int)$val2;
                     break;
-          case '*': $result = (int)$val1 * (int)$val2;
+            case '*': return (int)$val1 * (int)$val2;
                     break;
-          case '/': $result = (int)((int)$val1 / (int)$val2);
+            case '/': return (int)((int)$val1 / (int)$val2);
                     break;
         }
 
-        return $result;
+        return 0;
     }
 }
