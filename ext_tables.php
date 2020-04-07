@@ -22,26 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
-
-// Plugin "gridpager".
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_gridpager'] = 'layout,select_key,pages,recursive';
-
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_gridpager'] = 'pi_flexform';
-
-ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_gridpager', $_EXTKEY.'_gridpager'), 'list_type');
-
-ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_gridpager', 'FILE:EXT:'.$_EXTKEY.'/Configuration/Flexforms/GridPager.xml');
-
-// Plugin "uri".
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_uri'] = 'layout,select_key,pages,recursive';
-
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_uri'] = 'pi_flexform';
-
-ExtensionManagementUtility::addPlugin(array('LLL:EXT:dfgviewer/locallang.xml:tt_content.dfgviewer_uri', $_EXTKEY.'_uri'), 'list_type');
-
-ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_uri', 'FILE:EXT:'.$_EXTKEY.'/Configuration/Flexforms/Uri.xml');
