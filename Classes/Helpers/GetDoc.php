@@ -111,7 +111,7 @@ class GetDoc
      */
     public function getXpath($xpath)
     {
-        if (!$this->init() || !is_object($this->doc->mets)) {
+        if (!is_object($this->doc->mets) || !$this->init()) {
             return '';
         }
         return $this->doc->mets->xpath($xpath);
@@ -154,13 +154,11 @@ class GetDoc
             return false;
         }
 
-        if ($filegroup == 'ANNOTATIONS') {
+        if ($filegroup === 'ANNOTATIONS') {
             // TODO check if $this->doc is IIIF manifest and any Canvas contains painting annotations
         } else {
             foreach ($this->doc->physicalStructureInfo as $physStructure) {
-                if (isset($physStructure['files'])
-                    && isset($physStructure['files'][$filegroup])
-                    && !empty($physStructure['files'][$filegroup])) {
+                if (isset($physStructure['files'], $physStructure['files'][$filegroup]) && !empty($physStructure['files'][$filegroup])) {
                         return true;
                 }
             }
@@ -203,7 +201,7 @@ class GetDoc
                 // Destroy the incomplete object.
                 $this->doc = null;
 
-                if (TYPO3_DLOG) {
+                if ($GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors']) {
                     GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with UID "' . $piVars['id'] . '"', $this->extKey, 'SYSLOG_SEVERITY_ERROR');
                 }
             } else {
@@ -211,10 +209,8 @@ class GetDoc
                 // Set configuration PID.
                 $this->doc->cPid = $this->conf['pages'];
             }
-        } else {
-            if (TYPO3_DLOG) {
-                GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with record ID "' . $piVars['recordId'] . '"', $this->extKey, 'SYSLOG_SEVERITY_ERROR');
-            }
+        } else if ($GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors']) {
+            GeneralUtility::devLog('[AbstractPlugin->loadDocument()] Failed to load document with record ID "' . $piVars['recordId'] . '"', $this->extKey, 'SYSLOG_SEVERITY_ERROR');
         }
     }
 }
