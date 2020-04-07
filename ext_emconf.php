@@ -22,7 +22,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'DFG Viewer',
     'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.',
     'category' => 'distribution',
@@ -40,15 +40,15 @@ $EM_CONF[$_EXTKEY] = array(
     'clearCacheOnLoad' => false,
     'lockType' => '',
     'version' => '5.0.0',
-    'constraints' => array(
-        'depends' => array(
-            'typo3' => '8.7.0-8.7.99',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '8.7.0-9.5.99',
             'dlf' => '3.0.0-',
-        ),
-        'conflicts' => array(
-        ),
-        'suggests' => array(
-        ),
-    ),
+        ],
+        'conflicts' => [
+        ],
+        'suggests' => [
+        ],
+    ],
     '_md5_values_when_last_written' => '',
-);
+];
