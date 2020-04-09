@@ -111,7 +111,7 @@ class GetDoc
      */
     public function getXpath($xpath)
     {
-        if (!is_object($this->doc->mets) || !$this->init()) {
+        if (!$this->init() || !is_object($this->doc->mets)) {
             return '';
         }
         return $this->doc->mets->xpath($xpath);
