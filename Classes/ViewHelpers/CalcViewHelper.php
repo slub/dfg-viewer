@@ -67,9 +67,6 @@ class CalcViewHelper extends AbstractViewHelper
         RenderingContextInterface $renderingContext
     )
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments);
-        die();
-
         switch ($arguments['operator']) {
             case '+': return (int)$arguments['val1'] + (int)$arguments['val2'];
                     break;
@@ -80,7 +77,6 @@ class CalcViewHelper extends AbstractViewHelper
             case '/': return (int)((int)$arguments['val1'] / (int)$arguments['val2']);
                     break;
         }
-
         return 0;
     }
 }
