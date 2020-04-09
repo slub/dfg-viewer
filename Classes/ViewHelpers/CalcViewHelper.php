@@ -24,6 +24,8 @@ namespace Slub\Dfgviewer\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -43,6 +45,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class CalcViewHelper extends AbstractViewHelper
 {
 
+    use CompileWithRenderStatic;
+
     /**
      * initialize arguments
      */
@@ -57,20 +61,23 @@ class CalcViewHelper extends AbstractViewHelper
      * Return result of calculation
      * @return float|int
      */
-    public function render()
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    )
     {
-        $val1 = $this->arguments['val1'];
-        $val2 = $this->arguments['val2'];
-        $operator = $this->arguments['operator'];
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments);
+        die();
 
-        switch ($operator) {
-            case '+': return (int)$val1 + (int)$val2;
+        switch ($arguments['operator']) {
+            case '+': return (int)$arguments['val1'] + (int)$arguments['val2'];
                     break;
-            case '-': return (int)$val1 - (int)$val2;
+            case '-': return (int)$arguments['val1'] - (int)$arguments['val2'];
                     break;
-            case '*': return (int)$val1 * (int)$val2;
+            case '*': return (int)$arguments['val1'] * (int)$arguments['val2'];
                     break;
-            case '/': return (int)((int)$val1 / (int)$val2);
+            case '/': return (int)((int)$arguments['val1'] / (int)$arguments['val2']);
                     break;
         }
 
