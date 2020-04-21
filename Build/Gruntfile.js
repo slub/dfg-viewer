@@ -2,7 +2,18 @@
 module.exports = function(grunt) {
     require('jit-grunt')(grunt);
 
+    grunt.loadNpmTasks('grunt-iconfont');
+
     grunt.initConfig({
+        iconfont: {
+            development: {
+                options: {
+                },
+                fontName: "kitodo-iconfont", // overrides font name, would default to 'your_target' in this example
+                src: "Resources/Public/Images/Icons/*.svg",
+                dest: "Resources/Public/Fonts/IconFont/"
+            },
+        },
         less: {
             development: {
                 options: {
@@ -26,7 +37,7 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js'],
+                    "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js', 'Resources/Private/Javascript/mediaplayerScripts.js'],
                     "Resources/Public/Js/webScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/websiteScripts.js']
                 }
             }
@@ -41,11 +52,14 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['Resources/Private/Javascript/*.js'],
-                tasks: ['uglify']
+                tasks: ['uglify'],
+                options: {
+                    nospawn: true
+                }
             }
         }
     });
 
     grunt.file.setBase('../')
-    grunt.registerTask('default', ['less','uglify','watch']);
+    grunt.registerTask('default', ['iconfont','less','uglify','watch']);
 };

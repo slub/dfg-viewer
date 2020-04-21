@@ -4,3 +4,5 @@ node_modules
 Resources/Public/Css/allStyles.css.map
 Resources/Public/Css/webStyles.css.map
 Documentation-GENERATED-temp/
+*.mp4
+Resources/Public/Fonts/IconFont/*
