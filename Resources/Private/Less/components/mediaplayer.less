@@ -1,11 +1,80 @@
-.mediaplayer-container {
-  height: 100%;
-  width: 100%;
+.desktop-only {
+  @media screen and (min-width: @desktopViewportWidth) {
+    display: flex;
+  }
+  @media screen and (max-width: @tabletLandscapeViewportWidth) {
+    display: none !important;
+  }
+}
+
+.ol-viewport {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  #mediaplayer-viewport {
-    background-color: black;
+  .mediaplayer-container {
+    position: relative;
+    #mediaplayer-viewport {
+      background-color: black;
+    }
+
+    .control-bars {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 30%;
+      //background-color: ;
+      background: linear-gradient(to top, rgba(@base-blue,1), rgba(@base-blue,.7), rgba(@base-blue,0));
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: @light-blue;
+
+      .timeline-bar {
+        display: flex;
+        justify-content: space-between;
+        font-size: .6rem;
+        padding: 0 .5rem;
+      }
+      .button-bar {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        margin: 0 2rem;
+        font-size: 2rem;
+        .left-controls {
+          display: flex;
+        }
+        .center-controls {
+          display: flex;
+          justify-content: center;
+
+          .video-title {
+            line-height: 1.5rem;
+            font-size: .6rem;
+          }
+        }
+        .right-controls {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .control-button {
+          height: 100%;
+          padding: 0 .5rem;
+          cursor: pointer;
+          &:before {
+            height: 100%;
+            line-height: 1.5rem;
+          }
+          transition: .3s ease all;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
   }
 }
+

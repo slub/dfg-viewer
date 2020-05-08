@@ -131,13 +131,35 @@
     <!--TYPO3SEARCH_begin-->
 
     <div class="document-view">
-
-
         <div id="tx-dfgviewer-map" class="tx-dlf-map">
             <div class="ol-viewport" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
                 <div class="mediaplayer-container">
-                    <div id="mediaplayer-viewport">
-                        <span class="icon-play"></span>
+                    <div id="mediaplayer-viewport"></div>
+                    <div class="control-bars">
+                        <div class="timeline-bar">
+                            <div class="time-current">00:00</div>
+                            <div class="jp-progress">
+                                <div class="jp-seek-bar">
+                                    <div class="jp-play-bar"><span class="jp-play-bar-knob"></span></div>
+                                </div>
+                            </div>
+                            <div class="time-remaining">00:00</div>
+                        </div>
+                        <div class="button-bar">
+                            <div class="left-controls">
+                                <div class="control-button button-play icon-play"></div>
+                                <div class="control-button button-stop icon-stop"></div>
+                                <div class="control-button button-backward icon-backward"></div>
+                                <div class="control-button button-forward icon-forward"></div>
+                            </div>
+                            <div class="center-controls desktop-only">
+                                <span class="video-title">Big Buck Bunny</span>
+                            </div>
+                            <div class="right-controls">
+                                <div class="control-button button-fullscreen icon-maximize"></div>
+                                <div class="control-button button-mute icon-unmute"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="ol-overlaycontainer"></div>
