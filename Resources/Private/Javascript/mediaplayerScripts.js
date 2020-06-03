@@ -10,28 +10,6 @@ $(document).ready(function () {
 
 function bindPlayerFunctions() {
 
-//    $('.control-bars').hover(function() {
-//        $('.control-bars').animate({ opacity: 1 });
-//    }, function() {
-//        $('.control-bars').animate({ opacity: 0 });
-//    });
-
-//    $('.button-play').click(function() {
-//        buttonPlayPause();
-//    });
-
-//    $('.button-stop').click(function() {
-//        buttonStop();
-//    });
-
-//    $('.button-fullscreen').click(function() {
-//        buttonFullscreen();
-//    });
-
-//    $('.button-mute').click(function() {
-//        buttonMute();
-//    });
-
     var viewport = $("#mediaplayer-viewport");
     viewport.bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
@@ -64,7 +42,6 @@ function initializePlayer() {
             });
         },
         play: function() {
-            console.log('media set');
             $(this).jPlayer("option", "size", {
                 width: '100%',
                 height: 'auto'
@@ -112,10 +89,6 @@ function initializePlayer() {
                 }
             }
         },
-        // size: {
-        //     width: '100%',
-        //     height: 'auto'
-        // }
     });
     $("#mediaplayer-viewport").jPlayer( "load" )
 }
@@ -137,15 +110,12 @@ function generateChapters() {
             }
 
         }).appendTo(seekBar);
-        console.log(timecode);
     });
-    console.log('length: ' + length);
 }
 
 function getMediaLength() {
     return $("#mediaplayer-viewport").data("jPlayer").status.duration;
 }
 function play(seconds) {
-    console.log('play at: ' + seconds);
     $("#mediaplayer-viewport").jPlayer( "play", seconds );
 }
