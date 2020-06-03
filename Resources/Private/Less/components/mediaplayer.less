@@ -12,6 +12,12 @@
   justify-content: center;
   align-items: center;
 
+  &.jp-video-full {
+    .control-bars {
+      margin-top: -5rem;
+    }
+  }
+
   .mediaplayer-container {
     position: relative;
     #mediaplayer-viewport {
@@ -19,15 +25,15 @@
     }
 
     .control-bars {
-      position: absolute;
-      display: flex;
+      position: relative;
+      display: block;
       flex-direction: column;
       justify-content: flex-end;
-      height: 30%;
-      //background-color: ;
-      background: linear-gradient(to top, rgba(@base-blue,1), rgba(@base-blue,.7), rgba(@base-blue,0));
-      bottom: 0;
-      left: 0;
+      //height: 30%;
+      background-color: @base-blue;
+      // background: linear-gradient(to top, rgba(@base-blue,1), rgba(@base-blue,.7), rgba(@base-blue,0));
+      //bottom: 0;
+      //left: 0;
       width: 100%;
       color: @light-blue;
 
@@ -36,6 +42,32 @@
         justify-content: space-between;
         font-size: .6rem;
         padding: 0 .5rem;
+        align-items: center;
+        align-content: center;
+
+        .time-current, .time-remaining {
+          height: 2rem;
+          line-height: 2rem;
+        }
+        .jp-progress {
+          width: 100%;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          margin: 1rem 0;
+
+          .jp-seek-bar {
+            background-color: white;
+            height: 1rem;
+            border-radius: 5px;
+
+            .jp-play-bar {
+              background-color: @light-blue;
+              height: 1rem;
+              border-radius: 5px;
+            }
+          }
+        }
+
       }
       .button-bar {
         display: flex;
