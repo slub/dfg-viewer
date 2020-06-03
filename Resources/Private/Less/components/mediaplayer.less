@@ -59,11 +59,24 @@
             background-color: white;
             height: 1rem;
             border-radius: 5px;
-
+            position: relative;
             .jp-play-bar {
               background-color: @light-blue;
               height: 1rem;
               border-radius: 5px;
+            }
+
+            .jp-chapter-marker {
+              background-color: @base-blue;
+              height: 16px;
+              width: .2rem;
+              cursor: pointer;
+              top: 0;
+              transition: .3s ease all;
+
+              &:hover {
+                width: .5rem;
+              }
             }
           }
         }

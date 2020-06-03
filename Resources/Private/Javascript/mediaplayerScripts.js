@@ -32,10 +32,17 @@ function bindPlayerFunctions() {
 //        buttonMute();
 //    });
 
-    $("#mediaplayer-viewport").bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
+    var viewport = $("#mediaplayer-viewport");
+    viewport.bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
+    viewport.bind($.jPlayer.event.canplay, function(event) {
+        generateChapters();
+        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
+        $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
+    });
+
 }
 
 function bindKeyboardEvents() {
@@ -113,35 +120,32 @@ function initializePlayer() {
     $("#mediaplayer-viewport").jPlayer( "load" )
 }
 
-//function buttonPlayPause() {
-//    if(!mediaIsPlaying) {
-//        $("#mediaplayer-viewport").jPlayer('play');
-//        $('.button-play').removeClass('icon-play').addClass('icon-pause');
-//        mediaIsPlaying = true;
-//    } else {
-//        $("#mediaplayer-viewport").jPlayer('pause');
-//        $('.button-play').removeClass('icon-pause').addClass('icon-play');
-//        mediaIsPlaying = false
-//    }
-//}
+function generateChapters() {
+    var length = getMediaLength();
+    var seekBar = $('.jp-seek-bar');
+    var chapters = $('.chapter');
 
-// function buttonFullscreen() {
-//    $("#mediaplayer-viewport").jPlayer('fullScreen')
-//}
+    $('.chapter').each(function() {
+        var timecode = $(this).data('timecode');
+        var title = $(this).data('title');
+        $('<span />', {
+            'class': 'jp-chapter-marker',
+            title: $(this).data('title'),
+            style: 'position: absolute; left: ' + ((timecode -0.5) * 100 / length) + '%',
+            click: function() {
+                play(timecode);
+            }
 
-// function buttonMute() {
-//    if(!mediaIsMuted) {
-//        $("#mediaplayer-viewport").jPlayer('mute');
-//        $('.button-mute').removeClass('icon-unmute').addClass('icon-mute');
-//        mediaIsMuted = true;
-//    } else {
-//        $("#mediaplayer-viewport").jPlayer('unmute');
-//        $('.button-mute').removeClass('icon-mute').addClass('icon-unmute');
-//        mediaIsMuted = false;
-//    }
-//}
-//function buttonStop() {
-//    $("#mediaplayer-viewport").jPlayer('stop');
-//    $('.button-play').removeClass('icon-pause').addClass('icon-play');
-//    mediaIsPlaying = false
-//}
+        }).appendTo(seekBar);
+        console.log(timecode);
+    });
+    console.log('length: ' + length);
+}
+
+function getMediaLength() {
+    return $("#mediaplayer-viewport").data("jPlayer").status.duration;
+}
+function play(seconds) {
+    console.log('play at: ' + seconds);
+    $("#mediaplayer-viewport").jPlayer( "play", seconds );
+}
