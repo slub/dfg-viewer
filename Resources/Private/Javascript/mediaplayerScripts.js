@@ -8,7 +8,16 @@ $(document).ready(function () {
     bindKeyboardEvents();
 });
 
+/**
+ * binds all necessary video player functions
+ */
 function bindPlayerFunctions() {
+
+    $('.button-settings').bind('click', function() {
+        toggleSettingsMenu();
+    });
+
+    bindSettingsMenuItems();
 
     var viewport = $("#mediaplayer-viewport");
     viewport.bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
@@ -20,9 +29,43 @@ function bindPlayerFunctions() {
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
-
 }
 
+/**
+ * binds the settings menu items (outsourced for better overview)
+ */
+function bindSettingsMenuItems() {
+
+    // bind back buttons
+    $('.menu-item-back').bind('click', function() {
+        $('.viewport-menu').children().hide();
+        $('.settings-menu').show('fast');
+    });
+    // bind speed settings
+    $('.settings-menu-item-speed-menu').bind('click', function() {
+        $('.settings-menu').hide();
+        $('.speed-menu').show('fast');
+    });
+    // bind quality settings
+    $('.settings-menu-item-quality-menu').bind('click', function() {
+        $('.settings-menu').hide();
+        $('.quality-menu').show('fast');
+    });
+    // bind subtitle settings
+    $('.settings-menu-item-subtitle').bind('click', function() {
+        $('.settings-menu').hide();
+        $('.subtitle-menu').show('fast');
+    });
+    // bind subtitle settings
+    $('.settings-menu-item-language').bind('click', function() {
+        $('.settings-menu').hide();
+        $('.language-menu').show('fast');
+    });
+}
+
+/**
+ * binds keyboard events for player keyboard controls
+ */
 function bindKeyboardEvents() {
  $(document).keydown(function (e) {
      switch (e.keyCode) {
@@ -33,6 +76,9 @@ function bindKeyboardEvents() {
  });
 }
 
+/**
+ * initializes the jplayer
+ */
 function initializePlayer() {
     $("#mediaplayer-viewport").jPlayer( {
         ready: function() {
@@ -93,6 +139,9 @@ function initializePlayer() {
     $("#mediaplayer-viewport").jPlayer( "load" )
 }
 
+/**
+ * generates timeline markers for chapter selection
+ */
 function generateChapters() {
     var length = getMediaLength();
     var seekBar = $('.jp-seek-bar');
@@ -113,9 +162,29 @@ function generateChapters() {
     });
 }
 
+/**
+ * toggles the media player settings window
+ */
+function toggleSettingsMenu() {
+    var menuContainer = $('.viewport-menu');
+    menuContainer.children().hide();
+    $('.settings-menu').show();
+    menuContainer.toggle('fast');
+
+}
+
+/**
+ * returns the length from initialized media file
+ * @returns {string|number|string}
+ */
 function getMediaLength() {
     return $("#mediaplayer-viewport").data("jPlayer").status.duration;
 }
+
+/**
+ * plays the media from a individual position in media stream
+ * @param seconds
+ */
 function play(seconds) {
     $("#mediaplayer-viewport").jPlayer( "play", seconds );
 }

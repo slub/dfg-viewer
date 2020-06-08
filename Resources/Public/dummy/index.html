@@ -137,6 +137,46 @@
                 <div class="mediaplayer-container">
                     <div id="mediaplayer-viewport"></div>
                     <div class="control-bars">
+                        <div class="viewport-menu" style="display: none;">
+                            <ul class="settings-menu">
+                                <li class="settings-menu-item-speed-menu">Widergabegeschwindigkeit: <span class="speed-label">1x</span></li>
+                                <li class="settings-menu-item-quality-menu">Qualität: <span class="quality-label">1080p</span></li>
+                                <li class="settings-menu-item-subtitle">Untertitel: <span class="subtitle-label">aus</span></li>
+                                <li class="settings-menu-item-language">Sprache: <span class="language-label">default (deutsch)</span></li>
+                            </ul>
+                            <ul class="speed-menu" style="display: none;">
+                                <li class="menu-item-back">zurück</li>
+                                <li class="speed-menu-item" data-speed="0.25">0.25x</li>
+                                <li class="speed-menu-item" data-speed="0.5">0.5x</li>
+                                <li class="speed-menu-item" data-speed="0.75">0.75x</li>
+                                <li class="speed-menu-item" data-speed="1">1x</li>
+                                <li class="speed-menu-item" data-speed="1.25">1.25x</li>
+                                <li class="speed-menu-item" data-speed="1.5">1.5x</li>
+                                <li class="speed-menu-item" data-speed="1.75">1.75x</li>
+                                <li class="speed-menu-item" data-speed="2">2x</li>
+                            </ul>
+                            <ul class="quality-menu" style="display: none;">
+                                <li class="menu-item-back">zurück</li>
+                                <li class="quality-menu-item" data-resolution="1080">1080p</li>
+                                <li class="quality-menu-item" data-resolution="720">720p</li>
+                                <li class="quality-menu-item" data-resolution="360">360p</li>
+                            </ul>
+                            <ul class="subtitle-menu" style="display: none;">
+                                <li class="menu-item-back">zurück</li>
+                                <li class="subtitle-menu-item" data-language="none">aus</li>
+                                <li class="subtitle-menu-item" data-language="de">default (deutsch)</li>
+                                <li class="subtitle-menu-item" data-language="en">englisch</li>
+                                <li class="subtitle-menu-item" data-language="cs">tschechisch</li>
+                                <li class="subtitle-menu-item" data-language="pl">polnisch</li>
+                            </ul>
+                            <ul class="language-menu" style="display: none;">
+                                <li class="menu-item-back">zurück</li>
+                                <li class="language-menu-item" data-language="de">default (deutsch)</li>
+                                <li class="language-menu-item" data-language="en">englisch</li>
+                                <li class="language-menu-item" data-language="cs">tschechisch</li>
+                                <li class="language-menu-item" data-language="pl">polnisch</li>
+                            </ul>
+                        </div>
                         <div class="timeline-bar">
                             <div class="time-current">00:00</div>
                             <div class="jp-progress">

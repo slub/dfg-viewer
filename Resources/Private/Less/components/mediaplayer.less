@@ -26,6 +26,31 @@
       background-color: black;
     }
 
+    .viewport-menu {
+      position: absolute;
+      background-color: rgba(@base-blue, 0.9);
+      right: 2rem;
+      bottom: 6rem;
+      padding: 1.5rem;
+      text-align: left;
+      border-radius: 5px;
+
+      ul li {
+        padding-bottom: .5rem;
+        padding-top: .5rem;
+        border-bottom: 1px solid @light-blue;
+        color: @light-blue;
+        cursor: pointer;
+        transition: .3s ease all;
+        &:hover, &:active {
+          color: white;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
     .control-bars {
       position: relative;
       display: block;
