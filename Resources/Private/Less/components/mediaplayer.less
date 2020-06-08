@@ -34,6 +34,7 @@
       padding: 1.5rem;
       text-align: left;
       border-radius: 5px;
+      min-width: 12rem;
 
       ul li {
         padding-bottom: .5rem;
@@ -42,6 +43,9 @@
         color: @light-blue;
         cursor: pointer;
         transition: .3s ease all;
+        &.menu-item-back {
+          font-weight: bold;
+        }
         &:hover, &:active {
           color: white;
         }
