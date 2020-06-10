@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg62"
+   sodipodi:docname="icon-lastframe.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
+  <path
+     d="m256 512c-140.96875 0-256-115.050781-256-256 0-140.96875 115.050781-256 256-256 140.96875 0 256 115.050781 256 256 0 140.96875-115.050781 256-256 256zm0-482c-124.617188 0-226 101.382812-226 226s101.382812 226 226 226 226-101.382812 226-226-101.382812-226-226-226zm0 0"
+     />
+  <path
+          d="m 254.82519,249.09975 v 12.86294 c -68.14017,0 -45.78162,0 -97.00172,0 v -12.86294 c 91.04528,0 7.22286,0 97.00172,0 z"
+           />
+  <path
+          d="m 290.4631,291.2448 h 24.96925 v -86.18172 l -27.16351,5.44784 v -13.92224 l 27.01218,-5.44784 h 15.2842 V 291.2448 h 24.96924 v 12.86295 H 290.4631 Z"
+          />
+</svg>

@@ -1,8 +1,9 @@
 var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4';
-var mediaIsPlaying = false;
-var mediaIsMuted = false;
+var fps = 30;
+var viewport;
 
 $(document).ready(function () {
+    viewport = $("#mediaplayer-viewport");
     initializePlayer();
     bindPlayerFunctions();
     bindKeyboardEvents();
@@ -17,9 +18,24 @@ function bindPlayerFunctions() {
         toggleSettingsMenu();
     });
 
+    $('.button-nextframe').bind('click', function() {
+        frameForward();
+    });
+
+    $('.button-lastframe').bind('click', function() {
+        frameBackward();
+    });
+
+    $('.button-backward').bind('click', function() {
+        backward();
+    })
+
+    $('.button-forward').bind('click', function () {
+        forward();
+    })
+
     bindSettingsMenuItems();
 
-    var viewport = $("#mediaplayer-viewport");
     viewport.bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
@@ -80,7 +96,7 @@ function bindKeyboardEvents() {
  * initializes the jplayer
  */
 function initializePlayer() {
-    $("#mediaplayer-viewport").jPlayer( {
+    viewport.jPlayer( {
         ready: function() {
             $(this).jPlayer( "setMedia", {
                 m4v: demoMovieFile,
@@ -96,6 +112,10 @@ function initializePlayer() {
         backgroundColor: "#000000",
         supplied: "m4v",
         swfPath: "/typo3conf/ext/dlf/Resources/Public/Javascript/jPlayer/jquery.jplayer.swf",
+        size: {
+            width: "100%",
+            height: "auto"
+        },
         cssSelectorAncestor: ".ol-viewport",
         cssSelector: {
             videoPlay: ".button-play",
@@ -136,7 +156,7 @@ function initializePlayer() {
             }
         },
     });
-    $("#mediaplayer-viewport").jPlayer( "load" )
+    viewport.jPlayer( "load" )
 }
 
 /**
@@ -145,7 +165,6 @@ function initializePlayer() {
 function generateChapters() {
     var length = getMediaLength();
     var seekBar = $('.jp-seek-bar');
-    var chapters = $('.chapter');
 
     $('.chapter').each(function() {
         var timecode = $(this).data('timecode');
@@ -178,13 +197,54 @@ function toggleSettingsMenu() {
  * @returns {string|number|string}
  */
 function getMediaLength() {
-    return $("#mediaplayer-viewport").data("jPlayer").status.duration;
+    return viewport.data("jPlayer").status.duration;
 }
 
+/**
+ * shows the JPlayer informations in browserconsole - debugging only
+ * TODO: remove this function in production
+ */
+function getMediaInfo() {
+    console.log(viewport.data("jPlayer"));
+}
+
+/**
+ * shows next frame
+ */
+function frameForward() {
+    if(viewport.data("jPlayer").status.currentTime < viewport.data("jPlayer").status.duration) {
+        var timecode = viewport.data("jPlayer").status.currentTime + (1 / fps);
+        viewport.jPlayer( "pause", timecode );
+        $(".button-play").css("display", "block");
+    }
+}
+
+/**
+ * shows last frame
+ */
+function frameBackward() {
+    if(viewport.data("jPlayer").status.currentTime > 0) {
+        var timecode = viewport.data("jPlayer").status.currentTime - (1 / fps);
+        viewport.jPlayer( "pause", timecode );
+        $(".button-play").css("display", "block");
+    }
+}
+
+function forward() {
+    if((viewport.data("jPlayer").status.currentTime + 10) < viewport.data("jPlayer").status.duration) {
+        viewport.jPlayer( "play", viewport.data("jPlayer").status.currentTime + 10 );
+    }
+}
+
+function backward() {
+    if((viewport.data("jPlayer").status.currentTime - 10) > 0) {
+        viewport.jPlayer( "play", viewport.data("jPlayer").status.currentTime - 10 );
+    }
+}
 /**
  * plays the media from a individual position in media stream
  * @param seconds
  */
 function play(seconds) {
-    $("#mediaplayer-viewport").jPlayer( "play", seconds );
+    viewport.jPlayer( "play", seconds );
 }
