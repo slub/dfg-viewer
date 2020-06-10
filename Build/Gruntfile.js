@@ -24,7 +24,9 @@ module.exports = function(grunt) {
                 options: {
                     stylesheet: "less",
                     engine: "node",
-                    syntax: "bootstrap"
+                    syntax: "bootstrap",
+                    htmlDemo: false,
+                    font: "iconfont"
                 }
             }
         },
