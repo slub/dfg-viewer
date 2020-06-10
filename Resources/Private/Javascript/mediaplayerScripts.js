@@ -36,6 +36,8 @@ function bindPlayerFunctions() {
 
     bindSettingsMenuItems();
 
+    bindSpeedSettings();
+
     viewport.bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
@@ -76,6 +78,21 @@ function bindSettingsMenuItems() {
     $('.settings-menu-item-language').bind('click', function() {
         $('.settings-menu').hide();
         $('.language-menu').show('fast');
+    });
+}
+
+function bindSpeedSettings() {
+    $('.speed-menu').children().each(function() {
+        //menuItem = $(this);
+        //console.log($(this));
+        if($(this).data('speed')) {
+            $(this).bind('click', function() {
+                viewport.jPlayer('option', 'playbackRate', $(this).data('speed'));
+                $('.speed-label').text($(this).data('speed') + 'x');
+                $('.viewport-menu').children().hide();
+                $('.settings-menu').show();
+            });
+        }
     });
 }
 
