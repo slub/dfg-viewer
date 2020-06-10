@@ -2,17 +2,31 @@
 module.exports = function(grunt) {
     require('jit-grunt')(grunt);
 
-    grunt.loadNpmTasks('grunt-iconfont');
+//    grunt.loadNpmTasks('grunt-iconfont');
 
     grunt.initConfig({
-        iconfont: {
-            development: {
-                options: {
-                },
-                fontName: "kitodo-iconfont", // overrides font name, would default to 'your_target' in this example
+//        iconfont: {
+//            development: {
+//                options: {
+//                    stylesheet: 'scss'
+//                },
+//                fontName: "kitodo-iconfont", // overrides font name, would default to 'your_target' in this example
+//                src: "Resources/Public/Images/Icons/*.svg",
+//                dest: "Resources/Public/Fonts/IconFont/",
+//                destCss: "Resources/Public/Fonts/IconFont/css"
+//            },
+//        },
+        webfont: {
+            icons: {
                 src: "Resources/Public/Images/Icons/*.svg",
-                dest: "Resources/Public/Fonts/IconFont/"
-            },
+                dest: "Resources/Public/Fonts/IconFont/",
+                destCss: "Resources/Private/Less",
+                options: {
+                    stylesheet: "less",
+                    engine: "node",
+                    syntax: "bootstrap"
+                }
+            }
         },
         less: {
             development: {
@@ -61,5 +75,5 @@ module.exports = function(grunt) {
     });
 
     grunt.file.setBase('../')
-    grunt.registerTask('default', ['iconfont','less','uglify','watch']);
+    grunt.registerTask('default', ['webfont','less','uglify','watch']);
 };
