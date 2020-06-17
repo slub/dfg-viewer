@@ -55,6 +55,12 @@ function bindPlayerFunctions() {
  */
 function bindSettingsMenuItems() {
 
+    // right click on mediaplayer-viewport for settings menu
+
+    $('#mediaplayer-viewport').contextmenu(function(event) {
+        event.preventDefault();
+        $('.viewport-menu').show('fast');
+    });
     // bind back buttons
     $('.menu-item-back').bind('click', function() {
         $('.viewport-menu').children().hide();
@@ -92,8 +98,6 @@ function bindSettingsMenuItems() {
 
 function bindSpeedSettings() {
     $('.speed-menu').children().each(function() {
-        //menuItem = $(this);
-        //console.log($(this));
         if($(this).data('speed')) {
             $(this).bind('click', function() {
                 viewport.jPlayer('option', 'playbackRate', $(this).data('speed'));
