@@ -15,34 +15,44 @@ $(document).ready(function () {
  */
 function bindPlayerFunctions() {
 
+    // binding for settings button
     $('.button-settings').bind('click', function() {
         toggleSettingsMenu();
     });
 
+    // binding for next frame button
     $('.button-nextframe').bind('click', function() {
         frameForward();
     });
 
+    // binding for previous frame button
     $('.button-lastframe').bind('click', function() {
         frameBackward();
     });
 
+    // binding for fast backward button
     $('.button-backward').bind('click', function() {
         backward();
     })
 
+    // binding for fast forward button
     $('.button-forward').bind('click', function () {
         forward();
     })
 
+    // function for binding the settings menu button
     bindSettingsMenuItems();
 
+    // binds the speed options
     bindSpeedSettings();
 
-    viewport.bind($.jPlayer.event.timeupdate, function(event) { // Add a listener to report the time play began
+    // current time and time remaining counter
+    viewport.bind($.jPlayer.event.timeupdate, function(event) {
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
+
+    // initialize the counter with correct values after player initialization
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
@@ -55,47 +65,57 @@ function bindPlayerFunctions() {
  */
 function bindSettingsMenuItems() {
 
-    // right click on mediaplayer-viewport for settings menu
-
+    // right click on mediaplayer-viewport for toggle settings menu
     $('#mediaplayer-viewport').contextmenu(function(event) {
         event.preventDefault();
-        $('.viewport-menu').show('fast');
+        toggleSettingsMenu();
     });
+
     // bind back buttons
     $('.menu-item-back').bind('click', function() {
         $('.viewport-menu').children().hide();
         $('.settings-menu').show('fast');
     });
+
     // bind speed settings
     $('.settings-menu-item-speed-menu').bind('click', function() {
         $('.settings-menu').hide();
         $('.speed-menu').show('fast');
     });
+
     // bind quality settings
     $('.settings-menu-item-quality-menu').bind('click', function() {
         $('.settings-menu').hide();
         $('.quality-menu').show('fast');
     });
+
     // bind subtitle settings
     $('.settings-menu-item-subtitle').bind('click', function() {
         $('.settings-menu').hide();
         $('.subtitle-menu').show('fast');
     });
+
     // bind subtitle settings
     $('.settings-menu-item-language').bind('click', function() {
         $('.settings-menu').hide();
         $('.language-menu').show('fast');
     });
+
+    // binds the help button in settings menu
     $('.settings-menu-item-help').bind('click', function() {
         $('.viewport-menu').hide();
         $('.dfgplayer-help').show('fast');
     })
 
+    // binds the close action from help window to close button
     $('.modal-close').bind('click', function() {
         $('.dfgplayer-help').hide('fast');
     })
 }
 
+/**
+ * autobinds the possible speed options from dom
+ */
 function bindSpeedSettings() {
     $('.speed-menu').children().each(function() {
         if($(this).data('speed')) {
@@ -132,15 +152,17 @@ function bindKeyboardEvents() {
              (e.shiftKey === true) ? forward() : frameForward();
              break;
          case 72:
-             toggleHelp();
-             break;
-         case 112:
-             e.preventDefault();
+             // opens help window (key H)
              toggleHelp();
              break;
          case 77:
              // toggle volume - mute (m)
              viewport.data("jPlayer").options.muted ? viewport.jPlayer("option", "muted", false) : viewport.jPlayer("option", "muted", true);
+             break;
+         case 112:
+             // opens help window (key F1)
+             e.preventDefault();
+             toggleHelp();
              break;
      }
  });
@@ -241,14 +263,6 @@ function getMediaLength() {
 }
 
 /**
- * shows the JPlayer informations in browserconsole - debugging only
- * TODO: remove this function in production
- */
-function getMediaInfo() {
-    console.log(viewport.data("jPlayer"));
-}
-
-/**
  * shows next frame
  */
 function frameForward() {
@@ -260,7 +274,7 @@ function frameForward() {
 }
 
 /**
- * shows last frame
+ * shows previous frame
  */
 function frameBackward() {
     if(viewport.data("jPlayer").status.currentTime > 0) {
@@ -270,12 +284,18 @@ function frameBackward() {
     }
 }
 
+/**
+ * plays the current Position + 10sec
+ */
 function forward() {
     if((viewport.data("jPlayer").status.currentTime + 10) < viewport.data("jPlayer").status.duration) {
         viewport.jPlayer( "play", viewport.data("jPlayer").status.currentTime + 10 );
     }
 }
 
+/**
+ * jplays the current Position - 10sec
+ */
 function backward() {
     if((viewport.data("jPlayer").status.currentTime - 10) > 0) {
         viewport.jPlayer( "play", viewport.data("jPlayer").status.currentTime - 10 );
@@ -289,6 +309,9 @@ function play(seconds) {
     viewport.jPlayer( "play", seconds );
 }
 
+/**
+ * opens the help window
+ */
 function toggleHelp() {
     var helpModal = $('.dfgplayer-help');
     helpModal.css('display') === 'none' ? helpModal.show('fast') : helpModal.hide('fast');
