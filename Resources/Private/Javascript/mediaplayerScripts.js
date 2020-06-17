@@ -104,9 +104,26 @@ function bindSpeedSettings() {
 function bindKeyboardEvents() {
  $(document).keydown(function (e) {
      switch (e.keyCode) {
+         case 13:
+             // toggle Fullscreen (ALT + Return)
+             (e.altKey && viewport.data("jPlayer").options.fullScreen) ? viewport.jPlayer("option", "fullScreen", false) : viewport.jPlayer("option", "fullScreen", true);
+             break;
          case 32:
-            console.log('space');
+             // toggle Play / Pause (Space)
+             viewport.data("jPlayer").status.paused ? viewport.jPlayer( "play") : viewport.jPlayer( "pause");
             break;
+         case 37:
+             // frameskip backward / fast backward (left / shift left)
+             (e.shiftKey === true) ? backward() : frameBackward();
+             break;
+         case 39:
+             // frameskip forward / fast forward (right / shift right)
+             (e.shiftKey === true) ? forward() : frameForward();
+             break;
+         case 77:
+             // toggle volume - mute (m)
+             viewport.data("jPlayer").options.muted ? viewport.jPlayer("option", "muted", false) : viewport.jPlayer("option", "muted", true);
+             break;
      }
  });
 }
@@ -159,20 +176,6 @@ function initializePlayer() {
             repeatOff: ".jp-repeat-off",
             gui: ".control-bars",
             noSolution: ".jp-no-solution"
-        },
-        keyBindings: {
-            play: {
-                key: 32,
-                fn: function(f) {
-                    if(f.status.paused) {
-                        f.play();
-                        conole.log('plays');
-                    } else {
-                        f.pause();
-                        consle.log('stops');
-                    }
-                }
-            }
         },
     });
     viewport.jPlayer( "load" )
