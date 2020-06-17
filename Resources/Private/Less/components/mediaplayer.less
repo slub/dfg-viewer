@@ -2,6 +2,7 @@
   @media screen and (min-width: @desktopViewportWidth) {
     display: flex;
   }
+
   @media screen and (max-width: @tabletLandscapeViewportWidth) {
     display: none !important;
   }
@@ -22,6 +23,7 @@
 
   .mediaplayer-container {
     position: relative;
+
     #mediaplayer-viewport {
       background-color: black;
     }
@@ -68,6 +70,7 @@
       border-radius: 5px;
       padding: 3rem;
       z-index: 999999;
+
       .headline-container {
         position: relative;
 
@@ -78,21 +81,20 @@
           cursor: pointer;
         }
       }
+
       .help-container {
         padding: 2rem;
       }
+
       h3 {
         font-weight: 700;
       }
-
 
       table {
         width: 100%;
         padding: 5rem 0;
 
         tr {
-
-
           &:not(:last-child) {
             border-bottom: 1px dotted @light-blue;
           }
@@ -137,6 +139,7 @@
           height: 2rem;
           line-height: 2rem;
         }
+
         .jp-progress {
           width: 100%;
           padding-left: 1rem;
@@ -170,15 +173,18 @@
         }
 
       }
+
       .button-bar {
         display: flex;
         justify-content: space-between;
         padding-bottom: 1rem;
         margin: 0 2rem;
         font-size: 2rem;
+
         .left-controls {
           display: flex;
         }
+
         .center-controls {
           display: flex;
           justify-content: center;
@@ -188,6 +194,7 @@
             font-size: .6rem;
           }
         }
+
         .right-controls {
           display: flex;
           justify-content: flex-end;
@@ -197,11 +204,13 @@
           height: 100%;
           padding: 0 .5rem;
           cursor: pointer;
+
           &:before {
             height: 100%;
             line-height: 1.5rem;
           }
           transition: .3s ease all;
+
           &:hover {
             color: white;
           }
