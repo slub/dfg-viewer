@@ -1,7 +1,6 @@
 var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4';
 var fps = 30;
 var viewport;
-
 $(document).ready(function () {
     viewport = $("#mediaplayer-viewport");
     if(viewport && viewport.length > 0) {
@@ -81,6 +80,14 @@ function bindSettingsMenuItems() {
         $('.settings-menu').hide();
         $('.language-menu').show('fast');
     });
+    $('.settings-menu-item-help').bind('click', function() {
+        $('.viewport-menu').hide();
+        $('.dfgplayer-help').show('fast');
+    })
+
+    $('.modal-close').bind('click', function() {
+        $('.dfgplayer-help').hide('fast');
+    })
 }
 
 function bindSpeedSettings() {
@@ -119,6 +126,13 @@ function bindKeyboardEvents() {
          case 39:
              // frameskip forward / fast forward (right / shift right)
              (e.shiftKey === true) ? forward() : frameForward();
+             break;
+         case 72:
+             toggleHelp();
+             break;
+         case 112:
+             e.preventDefault();
+             toggleHelp();
              break;
          case 77:
              // toggle volume - mute (m)
@@ -269,4 +283,9 @@ function backward() {
  */
 function play(seconds) {
     viewport.jPlayer( "play", seconds );
+}
+
+function toggleHelp() {
+    var helpModal = $('.dfgplayer-help');
+    helpModal.css('display') === 'none' ? helpModal.show('fast') : helpModal.hide('fast');
 }

@@ -55,6 +55,63 @@
       }
     }
 
+    .dfgplayer-help {
+      position: absolute;
+      display: none;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      background-color: rgba(@base-blue, .9);
+      color: white;
+      left: 5rem;
+      right: 5rem;
+      border-radius: 5px;
+      padding: 3rem;
+      z-index: 999999;
+      .headline-container {
+        position: relative;
+
+        .modal-close {
+          position: absolute;
+          top: 0;
+          right: 0;
+          cursor: pointer;
+        }
+      }
+      .help-container {
+        padding: 2rem;
+      }
+      h3 {
+        font-weight: 700;
+      }
+
+
+      table {
+        width: 100%;
+        padding: 5rem 0;
+
+        tr {
+
+
+          &:not(:last-child) {
+            border-bottom: 1px dotted @light-blue;
+          }
+
+          &:first-child {
+            border-bottom: 1px solid @light-blue;
+          }
+
+          td {
+            color: white;
+            line-height: 2rem;
+            &.legend {
+              color: @light-blue;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
     .control-bars {
       position: relative;
       display: block;

@@ -5,10 +5,10 @@
 
 @font-face {
 	font-family:"iconfont";
-	src:url("../../Public/Fonts/IconFont/iconfont.eot?3a1933f3f776898351ae4ae768dd65b6");
-	src:url("../../Public/Fonts/IconFont/iconfont.eot?3a1933f3f776898351ae4ae768dd65b6#iefix") format("embedded-opentype"),
-		url("../../Public/Fonts/IconFont/iconfont.woff?3a1933f3f776898351ae4ae768dd65b6") format("woff"),
-		url("../../Public/Fonts/IconFont/iconfont.ttf?3a1933f3f776898351ae4ae768dd65b6") format("truetype");
+	src:url("../../Public/Fonts/IconFont/iconfont.eot?849d9a8f933c459e56dbc6fca16440ac");
+	src:url("../../Public/Fonts/IconFont/iconfont.eot?849d9a8f933c459e56dbc6fca16440ac#iefix") format("embedded-opentype"),
+		url("../../Public/Fonts/IconFont/iconfont.woff?849d9a8f933c459e56dbc6fca16440ac") format("woff"),
+		url("../../Public/Fonts/IconFont/iconfont.ttf?849d9a8f933c459e56dbc6fca16440ac") format("truetype");
 	font-weight:normal;
 	font-style:normal;
 }
@@ -33,6 +33,7 @@
 // Mixins
 
 .icon-backward, 
+.icon-close, 
 .icon-equalizer, 
 .icon-fbwd, 
 .icon-ffwd, 
@@ -72,7 +73,7 @@
 }
 
 
-.icon-equalizer {
+.icon-close {
 	&:before {
 		content:"\f102";
 	}
@@ -80,7 +81,7 @@
 }
 
 
-.icon-fbwd {
+.icon-equalizer {
 	&:before {
 		content:"\f103";
 	}
@@ -88,7 +89,7 @@
 }
 
 
-.icon-ffwd {
+.icon-fbwd {
 	&:before {
 		content:"\f104";
 	}
@@ -96,7 +97,7 @@
 }
 
 
-.icon-forward {
+.icon-ffwd {
 	&:before {
 		content:"\f105";
 	}
@@ -104,7 +105,7 @@
 }
 
 
-.icon-lastframe {
+.icon-forward {
 	&:before {
 		content:"\f106";
 	}
@@ -112,7 +113,7 @@
 }
 
 
-.icon-like {
+.icon-lastframe {
 	&:before {
 		content:"\f107";
 	}
@@ -120,7 +121,7 @@
 }
 
 
-.icon-loop {
+.icon-like {
 	&:before {
 		content:"\f108";
 	}
@@ -128,7 +129,7 @@
 }
 
 
-.icon-maximize {
+.icon-loop {
 	&:before {
 		content:"\f109";
 	}
@@ -136,7 +137,7 @@
 }
 
 
-.icon-minimize {
+.icon-maximize {
 	&:before {
 		content:"\f10a";
 	}
@@ -144,7 +145,7 @@
 }
 
 
-.icon-mute {
+.icon-minimize {
 	&:before {
 		content:"\f10b";
 	}
@@ -152,7 +153,7 @@
 }
 
 
-.icon-nextframe {
+.icon-mute {
 	&:before {
 		content:"\f10c";
 	}
@@ -160,7 +161,7 @@
 }
 
 
-.icon-pause {
+.icon-nextframe {
 	&:before {
 		content:"\f10d";
 	}
@@ -168,7 +169,7 @@
 }
 
 
-.icon-play {
+.icon-pause {
 	&:before {
 		content:"\f10e";
 	}
@@ -176,7 +177,7 @@
 }
 
 
-.icon-playlist {
+.icon-play {
 	&:before {
 		content:"\f10f";
 	}
@@ -184,7 +185,7 @@
 }
 
 
-.icon-rating {
+.icon-playlist {
 	&:before {
 		content:"\f110";
 	}
@@ -192,7 +193,7 @@
 }
 
 
-.icon-replay {
+.icon-rating {
 	&:before {
 		content:"\f111";
 	}
@@ -200,7 +201,7 @@
 }
 
 
-.icon-share {
+.icon-replay {
 	&:before {
 		content:"\f112";
 	}
@@ -208,7 +209,7 @@
 }
 
 
-.icon-stop {
+.icon-share {
 	&:before {
 		content:"\f113";
 	}
@@ -216,9 +217,17 @@
 }
 
 
-.icon-unmute {
+.icon-stop {
 	&:before {
 		content:"\f114";
+	}
+	
+}
+
+
+.icon-unmute {
+	&:before {
+		content:"\f115";
 	}
 	
 }
