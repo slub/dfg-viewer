@@ -57,6 +57,10 @@ function bindPlayerFunctions() {
         generateChapters();
         $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
+        $("video").css({
+            width: '100%',
+            height: 'auto'
+        });
     });
 }
 
@@ -218,7 +222,7 @@ function initializePlayer() {
             noSolution: ".jp-no-solution"
         },
     });
-    viewport.jPlayer( "load" )
+    viewport.jPlayer( "load" );
 }
 
 /**

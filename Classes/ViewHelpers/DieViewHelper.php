@@ -29,15 +29,11 @@ class DieViewHelper extends AbstractViewHelper
     use CompileWithRenderStatic;
 
     /**
-     * initialize arguments
-     */
-    public function initializeArguments()
-    {
-    }
-
-    /**
      * Return result of calculation
-     * @return float|int
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     * @return void
      */
     public static function renderStatic(
         array $arguments,
