@@ -4,9 +4,11 @@ var viewport;
 
 $(document).ready(function () {
     viewport = $("#mediaplayer-viewport");
-    initializePlayer();
-    bindPlayerFunctions();
-    bindKeyboardEvents();
+    if(viewport && viewport.length > 0) {
+        initializePlayer();
+        bindPlayerFunctions();
+        bindKeyboardEvents();
+    }
 });
 
 /**
