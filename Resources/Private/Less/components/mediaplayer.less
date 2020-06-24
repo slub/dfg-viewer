@@ -183,6 +183,34 @@
 
         .left-controls {
           display: flex;
+
+          .jp-volume-controls {
+            display: flex;
+            .jp-volume-bar {
+              background-color: white;
+              width: 8rem;
+              height: 1rem;margin-top: .2rem;
+              visibility: hidden;
+              opacity: 0;
+              transition: .3s ease all;
+
+              .jp-volume-bar-value {
+                background-color: @light-blue;
+                height: 100%;
+              }
+            }
+
+            &:hover, &:active {
+              .jp-volume-bar {
+                visibility: visible;
+                opacity: 1;
+              }
+
+              &.right-controls {
+                display: none !important;
+              }
+            }
+          }
         }
 
         .center-controls {
@@ -198,6 +226,7 @@
         .right-controls {
           display: flex;
           justify-content: flex-end;
+          position: relative;
         }
 
         .control-button {
