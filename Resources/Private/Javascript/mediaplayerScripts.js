@@ -48,15 +48,17 @@ function bindPlayerFunctions() {
 
     // current time and time remaining counter
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
-        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
+        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + Math.round(event.jPlayer.status.currentTime * (1000 / fps)));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
 
     // initialize the counter with correct values after player initialization
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
-        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime ));
+        var currentTime = event.jPlayer.status.currentTime;
+        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + Math.floor(currentTime * (1000 / fps)));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
+        console.log(event.jPlayer);
         $("video").css({
             width: '100%',
             height: 'auto'
@@ -138,6 +140,7 @@ function bindSpeedSettings() {
  */
 function bindKeyboardEvents() {
  $(document).keydown(function (e) {
+     console.log(e.keyCode);
      switch (e.keyCode) {
          case 13:
              // toggle Fullscreen (ALT + Return)
@@ -167,6 +170,12 @@ function bindKeyboardEvents() {
              // opens help window (key F1)
              e.preventDefault();
              toggleHelp();
+             break;
+         case 187:
+             // Volume Up (+ Key)
+             break;
+         case 189:
+             // Volume Down (- Key)
              break;
      }
  });
@@ -272,7 +281,7 @@ function getMediaLength() {
 function frameForward() {
     if(viewport.data("jPlayer").status.currentTime < viewport.data("jPlayer").status.duration) {
         var timecode = viewport.data("jPlayer").status.currentTime + (1 / fps);
-        viewport.jPlayer( "pause", timecode );
+        viewport.jPlayer( "pause", timecode);
         $(".button-play").css("display", "block");
     }
 }
