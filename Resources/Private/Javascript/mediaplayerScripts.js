@@ -58,7 +58,6 @@ function bindPlayerFunctions() {
         var currentTime = event.jPlayer.status.currentTime;
         $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + Math.floor(currentTime * (1000 / fps)));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
-        console.log(event.jPlayer);
         $("video").css({
             width: '100%',
             height: 'auto'
@@ -174,13 +173,11 @@ function bindKeyboardEvents() {
              // Volume Up (+ Key)
              toggleVolumeBar();
              viewport.jPlayer("option", "volume", (viewport.data("jPlayer").options.volume + 0.1));
-             console.log(viewport.data("jPlayer").options.volume);
              break;
          case 189:
              // Volume Down (- Key);
              toggleVolumeBar();
              viewport.jPlayer("option", "volume", (viewport.data("jPlayer").options.volume - 0.1));
-             console.log(viewport.data("jPlayer").options.volume);
              break;
      }
  });
