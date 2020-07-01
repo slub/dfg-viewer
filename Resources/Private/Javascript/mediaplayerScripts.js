@@ -1,6 +1,8 @@
 var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4'; // TODO: get source file and metadata from backend / dom
 var fps = 30;
 var viewport;
+
+var video;
 $(document).ready(function () {
     viewport = $("#mediaplayer-viewport");
     if(viewport && viewport.length > 0) {
@@ -8,6 +10,14 @@ $(document).ready(function () {
         bindPlayerFunctions();
         bindKeyboardEvents();
     }
+
+    video = VideoFrame({
+        id: 'jp_video_0',
+        frameRate: fps,
+        callback : function(response) {
+            console.log('callback response: ' + response);
+        }
+    });
 });
 
 /**
@@ -48,7 +58,7 @@ function bindPlayerFunctions() {
 
     // current time and time remaining counter
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
-        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + Math.round(event.jPlayer.status.currentTime * (1000 / fps)));
+        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + video.get());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
 
@@ -56,7 +66,7 @@ function bindPlayerFunctions() {
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
         var currentTime = event.jPlayer.status.currentTime;
-        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + Math.floor(currentTime * (1000 / fps)));
+        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + video.get());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
         $("video").css({
             width: '100%',
@@ -282,9 +292,10 @@ function getMediaLength() {
  */
 function frameForward() {
     if(viewport.data("jPlayer").status.currentTime < viewport.data("jPlayer").status.duration) {
-        var timecode = viewport.data("jPlayer").status.currentTime + (1 / fps);
-        viewport.jPlayer( "pause", timecode);
-        $(".button-play").css("display", "block");
+        // var timecode = viewport.data("jPlayer").status.currentTime + (1 / fps);
+        // viewport.jPlayer( "pause", timecode);
+        // $(".button-play").css("display", "block");
+        video.seekForward(1);
     }
 }
 
@@ -293,9 +304,10 @@ function frameForward() {
  */
 function frameBackward() {
     if(viewport.data("jPlayer").status.currentTime > 0) {
-        var timecode = viewport.data("jPlayer").status.currentTime - (1 / fps);
-        viewport.jPlayer( "pause", timecode );
-        $(".button-play").css("display", "block");
+        // var timecode = viewport.data("jPlayer").status.currentTime - (1 / fps);
+        // viewport.jPlayer( "pause", timecode );
+        // $(".button-play").css("display", "block");
+        video.seekBackward(1);
     }
 }
 

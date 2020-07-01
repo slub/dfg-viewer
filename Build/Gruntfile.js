@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js', 'Resources/Private/Javascript/mediaplayerScripts.js'],
+                    "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js', 'Resources/Private/Javascript/mediaplayerScripts.js', 'Resources/Private/Javascript/VideoFrame.min.js'],
                     "Resources/Public/Js/webScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/websiteScripts.js']
                 }
             }
