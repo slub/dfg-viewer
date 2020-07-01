@@ -10,14 +10,6 @@ $(document).ready(function () {
         bindPlayerFunctions();
         bindKeyboardEvents();
     }
-
-    video = VideoFrame({
-        id: 'jp_video_0',
-        frameRate: fps,
-        callback : function(response) {
-            console.log('callback response: ' + response);
-        }
-    });
 });
 
 /**
@@ -244,6 +236,14 @@ function initializePlayer() {
         },
     });
     viewport.jPlayer( "load" );
+
+    video = VideoFrame({
+        id: 'jp_video_0',
+        frameRate: fps,
+        callback : function(response) {
+            console.log('callback response: ' + response);
+        }
+    });
 }
 
 /**
@@ -292,9 +292,6 @@ function getMediaLength() {
  */
 function frameForward() {
     if(viewport.data("jPlayer").status.currentTime < viewport.data("jPlayer").status.duration) {
-        // var timecode = viewport.data("jPlayer").status.currentTime + (1 / fps);
-        // viewport.jPlayer( "pause", timecode);
-        // $(".button-play").css("display", "block");
         video.seekForward(1);
     }
 }
@@ -304,9 +301,6 @@ function frameForward() {
  */
 function frameBackward() {
     if(viewport.data("jPlayer").status.currentTime > 0) {
-        // var timecode = viewport.data("jPlayer").status.currentTime - (1 / fps);
-        // viewport.jPlayer( "pause", timecode );
-        // $(".button-play").css("display", "block");
         video.seekBackward(1);
     }
 }
