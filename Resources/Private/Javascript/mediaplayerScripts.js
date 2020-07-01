@@ -140,7 +140,6 @@ function bindSpeedSettings() {
  */
 function bindKeyboardEvents() {
  $(document).keydown(function (e) {
-     console.log(e.keyCode);
      switch (e.keyCode) {
          case 13:
              // toggle Fullscreen (ALT + Return)
@@ -173,9 +172,15 @@ function bindKeyboardEvents() {
              break;
          case 187:
              // Volume Up (+ Key)
+             toggleVolumeBar();
+             viewport.jPlayer("option", "volume", (viewport.data("jPlayer").options.volume + 0.1));
+             console.log(viewport.data("jPlayer").options.volume);
              break;
          case 189:
-             // Volume Down (- Key)
+             // Volume Down (- Key);
+             toggleVolumeBar();
+             viewport.jPlayer("option", "volume", (viewport.data("jPlayer").options.volume - 0.1));
+             console.log(viewport.data("jPlayer").options.volume);
              break;
      }
  });
@@ -328,4 +333,18 @@ function play(seconds) {
 function toggleHelp() {
     var helpModal = $('.dfgplayer-help');
     helpModal.css('display') === 'none' ? helpModal.show('fast') : helpModal.hide('fast');
+}
+
+function toggleVolumeBar() {
+    var volumeBar = $('.jp-volume-bar');
+    volumeBar.css({
+        visibility: 'visible',
+        opacity: 1
+    });
+    setTimeout(function() {
+        volumeBar.css({
+            visibility: 'hidden',
+            opacity: 0
+        });
+    }, 3000);
 }
