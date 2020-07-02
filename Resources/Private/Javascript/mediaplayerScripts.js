@@ -381,8 +381,6 @@ function drawCanvas() {
 
     infoString = fileName + ' / ' + 'duration: ' + $.jPlayer.convertTime(mediaStatus.duration) + ' / ' + 'current time: ' + $.jPlayer.convertTime(mediaStatus.currentTime) + ' / ' + ' frame: ' + video.get();
 
-    console.log(infoString);
-
     canvas.width = videoDomElement.videoWidth;
     canvas.height = videoDomElement.videoHeight;
 
