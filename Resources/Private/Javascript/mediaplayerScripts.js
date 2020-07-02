@@ -50,7 +50,7 @@ function bindPlayerFunctions() {
 
     // current time and time remaining counter
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
-        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + video.get());
+        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + video.get() % 30);
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
 
@@ -58,7 +58,7 @@ function bindPlayerFunctions() {
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
         var currentTime = event.jPlayer.status.currentTime;
-        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + video.get());
+        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + video.get() % 30);
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
         $("video").css({
             width: '100%',
@@ -112,12 +112,16 @@ function bindSettingsMenuItems() {
     $('.settings-menu-item-help').bind('click', function() {
         $('.viewport-menu').hide();
         $('.dfgplayer-help').show('fast');
-    })
+    });
+
+    $('.settings-menu-item-screenshot').bind('click', function() {
+        renderScreenshot();
+    });
 
     // binds the close action from help window to close button
     $('.modal-close').bind('click', function() {
         $('.dfgplayer-help').hide('fast');
-    })
+    });
 }
 
 /**
@@ -350,4 +354,49 @@ function toggleVolumeBar() {
             opacity: 0
         });
     }, 3000);
+}
+
+function renderScreenshot() {
+    toggleSettingsMenu();
+    // add canvas overlay to DOM
+    var domElement = $( "<div id='screenshot-overlay'><span class='close-screenshot-modal icon-close'></span><canvas id='screenshot-canvas'></canvas></div>" );
+    $('body').append(domElement);
+
+    // bind close action
+    $('.close-screenshot-modal').bind('click', function() {
+       $('#screenshot-overlay').detach();
+    });
+
+    // lets go
+    drawCanvas();
+}
+
+function drawCanvas() {
+    var videoDomElement, canvas, context, mediaStatus, fileName, infoString;
+
+    videoDomElement = document.getElementById('jp_video_0');
+    canvas = document.getElementById('screenshot-canvas');
+    mediaStatus = viewport.data("jPlayer").status;
+    fileName = mediaStatus.src.replace(/^.*[\\\/]/, '');
+
+    infoString = fileName + ' / ' + 'duration: ' + $.jPlayer.convertTime(mediaStatus.duration) + ' / ' + 'current time: ' + $.jPlayer.convertTime(mediaStatus.currentTime) + ' / ' + ' frame: ' + video.get();
+
+    console.log(infoString);
+
+    canvas.width = videoDomElement.videoWidth;
+    canvas.height = videoDomElement.videoHeight;
+
+    context = canvas.getContext('2d');
+
+    context.drawImage(videoDomElement, 0, 0, canvas.clientWidth, canvas.clientHeight);
+
+    context.font = '25px Arial';
+    context.textAlign = 'end';
+    context.fillStyle = "#FFFFFF";
+    context.shadowBlur = 5;
+    context.shadowColor = "black";
+    context.fillText(infoString, canvas.clientWidth - 10, canvas.clientHeight -10);
+
+    canvas.style.width = '80%';
+    canvas.style.height = 'auto';
 }

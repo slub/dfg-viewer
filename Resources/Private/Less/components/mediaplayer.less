@@ -249,3 +249,30 @@
   }
 }
 
+#screenshot-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  background-color: rgba(@base-blue, .9);
+
+  canvas {
+    background-color: black;
+  }
+  .close-screenshot-modal {
+    color: white;
+    font-size: 2rem;
+    line-height: 4rem;
+    position: absolute;
+    height: 4rem;
+    width: 4rem;
+    top: 5rem;
+    right: 5rem;
+    cursor: pointer;
+  }
+}
