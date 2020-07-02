@@ -379,7 +379,7 @@ function drawCanvas() {
     videoDomElement = document.getElementById('jp_video_0');
     canvas = document.getElementById('screenshot-canvas');
 
-    infoString = '© ' + copyright + ' / ' + ' SLUB ' + signature + ' / ' + getFormattedVideoCurrentTime();
+    infoString = '© ' + copyright + ' / ' + 'SLUB ' + signature + ' / ' + getFormattedVideoCurrentTime();
     canvas.width = videoDomElement.videoWidth;
     canvas.height = videoDomElement.videoHeight;
 
