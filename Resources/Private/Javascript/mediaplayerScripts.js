@@ -386,14 +386,14 @@ function drawCanvas() {
 
     context = canvas.getContext('2d');
 
-    context.drawImage(videoDomElement, 0, 0, canvas.clientWidth, canvas.clientHeight);
+    context.drawImage(videoDomElement, 0, 0, canvas.width, canvas.height);
 
     context.font = '25px Arial';
     context.textAlign = 'end';
     context.fillStyle = "#FFFFFF";
     context.shadowBlur = 5;
     context.shadowColor = "black";
-    context.fillText(infoString, canvas.clientWidth - 10, canvas.clientHeight -10);
+    context.fillText(infoString, canvas.width -10, canvas.height -10);
 
     canvas.style.width = '80%';
     canvas.style.height = 'auto';
