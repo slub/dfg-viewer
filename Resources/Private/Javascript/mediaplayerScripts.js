@@ -400,5 +400,5 @@ function drawCanvas() {
 
 function getFormattedVideoCurrentTime() {
     var mediaStatus = viewport.data("jPlayer").status;
-    return (mediaStatus.currentTime < 3600 ? '00:' : '') + $.jPlayer.convertTime(mediaStatus.currentTime) + ':' + ("0" + (video.get() % 30)).slice(-2);
+    return (mediaStatus.currentTime < 3600 ? '00:' : '') + $.jPlayer.convertTime(mediaStatus.currentTime) + ':' + ("0" + (video.get() % fps)).slice(-2);
 }
