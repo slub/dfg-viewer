@@ -50,7 +50,7 @@ function bindPlayerFunctions() {
 
     // current time and time remaining counter
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
-        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + video.get());
+        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + ("0" + (video.get() % 30)).slice(-2));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
 
@@ -58,7 +58,7 @@ function bindPlayerFunctions() {
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
         var currentTime = event.jPlayer.status.currentTime;
-        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + video.get());
+        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + ("0" + (video.get() % 30)).slice(-2));
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
         $("video").css({
             width: '100%',
