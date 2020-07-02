@@ -1,6 +1,8 @@
 var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4'; // TODO: get source file and metadata from backend / dom
 var fps = 30;
 var viewport;
+var copyright = 'Blender Foundation';
+var signature = 'BK 28';
 
 var video;
 $(document).ready(function () {
@@ -50,7 +52,7 @@ function bindPlayerFunctions() {
 
     // current time and time remaining counter
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
-        $(".time-current").text($.jPlayer.convertTime( event.jPlayer.status.currentTime) + ':' + ("0" + (video.get() % 30)).slice(-2));
+        $(".time-current").text(getFormattedVideoCurrentTime());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
 
@@ -58,7 +60,7 @@ function bindPlayerFunctions() {
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
         var currentTime = event.jPlayer.status.currentTime;
-        $(".time-current").text($.jPlayer.convertTime( currentTime ) + ':' + ("0" + (video.get() % 30)).slice(-2));
+        $(".time-current").text(getFormattedVideoCurrentTime());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
         $("video").css({
             width: '100%',
@@ -376,11 +378,8 @@ function drawCanvas() {
 
     videoDomElement = document.getElementById('jp_video_0');
     canvas = document.getElementById('screenshot-canvas');
-    mediaStatus = viewport.data("jPlayer").status;
-    fileName = mediaStatus.src.replace(/^.*[\\\/]/, '');
 
-    infoString = fileName + ' / ' + 'duration: ' + $.jPlayer.convertTime(mediaStatus.duration) + ' / ' + 'current time: ' + $.jPlayer.convertTime(mediaStatus.currentTime) + ' / ' + ' frame: ' + video.get();
-
+    infoString = '© ' + copyright + ' / ' + ' SLUB ' + signature + ' / ' + getFormattedVideoCurrentTime();
     canvas.width = videoDomElement.videoWidth;
     canvas.height = videoDomElement.videoHeight;
 
@@ -397,4 +396,9 @@ function drawCanvas() {
 
     canvas.style.width = '80%';
     canvas.style.height = 'auto';
+}
+
+function getFormattedVideoCurrentTime() {
+    var mediaStatus = viewport.data("jPlayer").status;
+    return (mediaStatus.currentTime < 3600 ? '00:' : '') + $.jPlayer.convertTime(mediaStatus.currentTime) + ':' + ("0" + (video.get() % 30)).slice(-2);
 }
