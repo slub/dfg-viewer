@@ -72,17 +72,19 @@
 
                 <dl class="tx-dlf-metadata-titledata">
                     <dt class="tx-dlf-title">Titel</dt>
-                    <dd class="tx-dlf-title">Big Buck Bunny</dd>
+                    <dd class="tx-dlf-title">Mein Filmtagebuch 1928 / Gerhard Schneider</dd>
                     <dt>Einrichtung</dt>
                     <dd>DE-14</dd>
                     <dt>Framerate</dt>
-                    <dd>30fps</dd>
+                    <dd>25fps</dd>
                     <dt>Länge</dt>
-                    <dd>634s</dd>
+                    <dd>15:36</dd>
                     <dt>Format</dt>
-                    <dd>16/9</dd>
+                    <dd>4/3</dd>
                     <dt>Auflösung</dt>
-                    <dd>1080p</dd>
+                    <dd>1920 x 1080</dd>
+                    <dt>Copyright</dt>
+                    <dd>Hirsch Film Filmproduktion</dd>
                     <dt>Lizenz</dt>
                     <dd>CC-BY</dd>
                 </dl>
@@ -96,30 +98,42 @@
 
             <ul class="toc">
                 <li class="current submenu">
-                    <a title="Big Buck Bunny"
+                    <a title="Mein Filmtagebuch 1928 / Gerhard Schneider"
                        class="chapter"
                        onclick="play(0)"
                        data-timecode="0"
-                       data-title="Big Buck Bunny">Big Buck Bunny</a>
+                       data-title="Big Buck Bunny">Mein Filmtagebuch 1928 / Gerhard Schneider</a>
                     <ul>
                         <li>
-                            <a title="Erwachen"
+                            <a title="Sommer 1928"
                                class="chapter"
-                               onclick="play(46)"
-                               data-timecode="46"
-                               data-title="Erwachen">Erwachen</a>
+                               onclick="play(182.76)"
+                               data-timecode="182.76"
+                               data-title="Erwachen">Sommer 1928</a>
                         </li>
                         <li>
-                            <a title="Abspann"
+                            <a title="Onkel Uffi"
                                class="chapter"
-                               onclick="play(496)" data-timecode="496"
-                               data-title="Abspann">Abspann</a>
+                               onclick="play(273.8)" data-timecode="273.8"
+                               data-title="Abspann">Onkel Uffi</a>
                         </li>
                         <li>
-                            <a title="Post Credit Scene"
+                            <a title="Ein Maisonntag auf dem Lilienstein"
                                class="chapter"
-                               onclick="play(617)" data-timecode="617"
-                               data-title="Post Credit Scene">Post Credit Scene</a>
+                               onclick="play(577.96)" data-timecode="577.96"
+                               data-title="Post Credit Scene">Ein Maisonntag auf dem Lilienstein</a>
+                        </li>
+                        <li>
+                            <a title="Das Odol-Luftschiff über Dresden"
+                               class="chapter"
+                               onclick="play(717.64)" data-timecode="717.64"
+                               data-title="Post Credit Scene">Das Odol-Luftschiff über Dresden</a>
+                        </li>
+                        <li>
+                            <a title="Die Invasion – Warnemünde 1929"
+                               class="chapter"
+                               onclick="play(741.24)" data-timecode="741.24"
+                               data-title="Post Credit Scene">Die Invasion – Warnemünde 1929</a>
                         </li>
                     </ul>
                 </li>
@@ -132,8 +146,8 @@
     <!--TYPO3SEARCH_begin-->
 
     <div class="document-view">
-        <div id="tx-dfgviewer-map" class="tx-dlf-map">
-            <div class="ol-viewport" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+        <div id="tx-dfgviewer-view" class="tx-dlf-view">
+            <div class="media-viewport">
                 <div class="mediaplayer-container">
                     <div id="mediaplayer-viewport"></div>
                     <div class="dfgplayer-help modal">
@@ -255,14 +269,10 @@
                                 <div class="control-button button-settings icon-equalizer" title="Einstellungen"></div>
                                 <div class="control-button button-fullscreen icon-maximize" title="maximieren"></div>
                                 <div class="control-button button-minimize icon-minimize" title="minimieren"></div>
-<!--                                <div class="control-button button-mute icon-unmute" title="lautlos"></div>-->
-<!--                                <div class="control-button button-unmute icon-mute"title="Ton an"></div>-->
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ol-overlaycontainer"></div>
-                <div class="ol-overlaycontainer-stopevent"></div>
             </div>
         </div>
 

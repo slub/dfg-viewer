@@ -1,7 +1,9 @@
-var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4'; // TODO: get source file and metadata from backend / dom
-var fps = 30;
+//var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4'; // TODO: get source file and metadata from backend / dom
+var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/vid_dig_x_000622.mp4';
+//var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/2019-3_33_Filmsplitter_von_einer_Konzertreise_Hamburg_1978.mp4';
+var fps = 25;
 var viewport;
-var copyright = 'Blender Foundation';
+var copyright = 'Hirsch Film Filmproduktion';
 var signature = 'BK 28';
 
 var video;
@@ -11,8 +13,38 @@ $(document).ready(function () {
         initializePlayer();
         bindPlayerFunctions();
         bindKeyboardEvents();
+        resizeVideoCanvas();
     }
 });
+
+$(window).resize(function() {
+    resizeVideoCanvas();
+});
+
+function resizeVideoCanvas() {
+    var view, player, video;
+    view = $('.media-viewport');
+    player = $('.mediaplayer-container');
+    console.log(player.height() > view.height());
+    video = $("video");
+    video.css({
+        width: '100%',
+        height: 'auto',
+    });
+    if(player.height() > view.height()) {
+        video.css({
+            width: '80%',
+            height: 'auto',
+        });
+    }
+    // } else {
+    //     console.log('change height 100');
+    //     $("video").css({
+    //         width: '100%',
+    //         height: 'auto',
+    //     });
+    // }
+}
 
 /**
  * binds all necessary video player functions
@@ -54,18 +86,18 @@ function bindPlayerFunctions() {
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
         $(".time-current").text(getFormattedVideoCurrentTime());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
+
     });
 
     // initialize the counter with correct values after player initialization
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
-        var currentTime = event.jPlayer.status.currentTime;
         $(".time-current").text(getFormattedVideoCurrentTime());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
-        $("video").css({
-            width: '100%',
-            height: 'auto'
-        });
+    });
+
+    viewport.bind($.jPlayer.event.loadeddata, function(event) {
+        resizeVideoCanvas();
     });
 }
 
@@ -202,12 +234,6 @@ function initializePlayer() {
 
             });
         },
-        play: function() {
-            $(this).jPlayer("option", "size", {
-                width: '100%',
-                height: 'auto'
-            } );
-        },
         backgroundColor: "#000000",
         supplied: "m4v",
         swfPath: "/typo3conf/ext/dlf/Resources/Public/Javascript/jPlayer/jquery.jplayer.swf",
@@ -215,7 +241,7 @@ function initializePlayer() {
             width: "100%",
             height: "auto"
         },
-        cssSelectorAncestor: ".ol-viewport",
+        cssSelectorAncestor: ".media-viewport",
         cssSelector: {
             videoPlay: ".button-play",
             play: ".button-play",
