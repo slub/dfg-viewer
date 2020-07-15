@@ -707,6 +707,23 @@
                     cursor: not-allowed;
                 }
             }
+            &.enable-touchevent {
+                span {
+                    a, span {
+                        .touchevents & {
+                            pointer-events: all;
+                        }
+                    }
+                }
+            }
+            &.no-transition {
+                a, span, a:before, span:before {
+                    -webkit-transition: none !important;
+                    -moz-transition: none !important;
+                    -o-transition: none !important;
+                    transition: none !important;
+                }
+            }
             bottom: 50%;
             margin-bottom: -20px;
             &.backs {
@@ -762,7 +779,7 @@
                         }
                     }
                 }
-                &:hover {
+                &.over {
                     span {
                         &.prev {
                             a, span {
@@ -847,7 +864,7 @@
                         }
                     }
                 }
-                &:hover {
+                &.over {
                     span {
                         &.next {
                             a, span {
