@@ -102,7 +102,7 @@ class Uri extends AbstractPlugin
                 $piUriBook = $this->pi_getLL('uriBook', '', TRUE);
 
                 if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
-                    $uris[] = '<a href="' . htmlspecialchars($uri) . '">' . $piUriBook . '</a>';
+                    $uris[] = '<a class="persistence-document" href="' . htmlspecialchars($uri) . '">' . $piUriBook . '</a>';
                 } elseif (strpos($uri, 'urn:') === 0) {
                     if (strpos($uri, '/fragment/') === FALSE) {
                         $uris[] = '<a class="persistence-document" href="https://nbn-resolving.de/' . $uri . '">' . $piUriBook . '</a>';
