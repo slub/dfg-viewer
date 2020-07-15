@@ -105,9 +105,9 @@ class Uri extends AbstractPlugin
                     $uris[] = '<a href="' . htmlspecialchars($uri) . '">' . $piUriBook . '</a>';
                 } elseif (strpos($uri, 'urn:') === 0) {
                     if (strpos($uri, '/fragment/') === FALSE) {
-                        $uris[] = '<a class="persistence-document" href="http://nbn-resolving.de/' . $uri . '">' . $piUriBook . '</a>';
+                        $uris[] = '<a class="persistence-document" href="https://nbn-resolving.de/' . $uri . '">' . $piUriBook . '</a>';
                     } else {
-                        $uris[] = '<a class="persistence-document" href="http://nbn-resolving.org/' . $uri . '">' . $piUriBook . '</a>';
+                        $uris[] = '<a class="persistence-document" href="https://nbn-resolving.org/' . $uri . '">' . $piUriBook . '</a>';
                     }
                 }
 
@@ -133,9 +133,9 @@ class Uri extends AbstractPlugin
                 } elseif (strpos($uri, 'urn:') === 0) {
 
                     if (strpos($uri, '/fragment/') === FALSE) {
-                        $uris[] = '<a class="persistence-page" href="http://nbn-resolving.de/' . $uri . '">' . $piUriPage . '</a>';
+                        $uris[] = '<a class="persistence-page" href="https://nbn-resolving.de/' . $uri . '">' . $piUriPage . '</a>';
                     } else {
-                        $uris[] = '<a class="persistence-page" href="http://nbn-resolving.org/' . $uri . '">' . $piUriPage . '</a>';
+                        $uris[] = '<a class="persistence-page" href="https://nbn-resolving.org/' . $uri . '">' . $piUriPage . '</a>';
                     }
 
                 }
