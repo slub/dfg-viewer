@@ -26,7 +26,7 @@ namespace Slub\Dfgviewer\ViewHelpers;
 
 use Slub\Dfgviewer\Helpers\GetDoc;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to get page info
@@ -45,16 +45,22 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class DownloadLinksViewHelper extends AbstractViewHelper
 {
 
+    public function initializeArguments()
+    {
+        $this->registerArgument('type', 'string', 'type of download (\'page-left\', \'page-right\' or \'work\')', false, 'page-left');
+        $this->registerArgument('pagenumber','int', 'current page number', false, 1);
+    }
+
     /**
      * Return elements found
      *
-     * @param string $type type of download ('page-left', 'page-right' or 'work')
-     * @param integer $pagenumber current page number
      * @return string
      */
-    public function render($type = 'page-left', $pagenumber = 1)
+    public function render()
     {
         $doc = GeneralUtility::makeInstance(GetDoc::class);
+        $type = $this->arguments['type'];
+        $pagenumber = $this->arguments['pagenumber'];
 
         switch ($type) {
           case 'page-right':

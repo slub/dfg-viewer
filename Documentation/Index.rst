@@ -10,7 +10,7 @@ dfgviewer* extension.
 Installation
 ============
 
-The current release 5.x will only work with TYPO3 8.7 LTS.
+The current release 5.x will only work with TYPO3 8.7 LTS or 9.5 LTS.
 
 The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
@@ -20,8 +20,8 @@ Kitodo.presentation will be installed and configured automatically.
 System Requirements
 -------------------
 
-You need a webserver stack with Apache2 or Ngnix, PHP >= 7.2 and MySQL / MariaDB.
-Debian 10 (buster) is known to work with Kitodo.Presentation 3.0 and DFG-Viewer 5.0.
+You need a webserver stack with Apache2 or Ngnix, PHP >= 7.3 and MySQL / MariaDB.
+Debian 10 (buster) is known to work with Kitodo.Presentation 3.1 and DFG-Viewer 5.0.
 
 We recommend at least:
 
@@ -32,7 +32,7 @@ We recommend at least:
 Install a fresh TYPO3 8.7 LTS
 -----------------------------
 
-To install a fresh TYPO3 8.7 system, try the following installation procedure with composer::
+To install a fresh TYPO3 (8.7 or 9.5) system, try the following installation procedure with composer::
 
     # Assuming the following settings:
     #   * the installation directory is /var/www/dfgviewer
@@ -42,8 +42,9 @@ To install a fresh TYPO3 8.7 system, try the following installation procedure wi
     www-data@localhost:~/> cd /var/www/
     # remove /var/www/dfgviewer if it already exist
     www-data@localhost:/var/www> rm -r dfgviewer/
-    # load full TYPO3 8.7 via composer
-    www-data@localhost:/var/www> composer create-project typo3/cms-base-distribution:^8.7 dfgviewer
+    # load full TYPO3 via composer
+    www-data@localhost:/var/www> composer create-project typo3/cms-base-distribution:^9.5 dfgviewer
+    # If you want to use TYPO3 8 LTS then use this command: "composer create-project typo3/cms-base-distribution:^8.7 dfgviewer"
     # create FIRST_INSTALL file
     www-data@localhost:/var/www> cd dfgviewer/
     www-data@localhost:/var/www/dfgviewer> touch public/FIRST_INSTALL
@@ -63,7 +64,7 @@ follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
 
 The DFG-Viewer extension assumes the default language is German (&L=0). An
 additionial "website-language" English (&L=1) will be created automatically on
-installing the DFG-Viewer extension. This is only relevantfor localization of
+installing the DFG-Viewer extension. This is only relevant for localization of
 the metadata and structures labels.
 
 Recommended Steps after Installation
@@ -79,12 +80,12 @@ Your *typo3conf/LocalConfiguration.php* should contain this::
           'pageNotFoundOnCHashError' => '0',
   ],
 
-Now you have a working TYPO3 8.7 LTS installation and you can continue with composer
+Now you have a working TYPO3 8.7 or 9.5 LTS installation and you can continue with composer
 to install DFG-Viewer extension.
 
 .. error::
 
-      If you are using e.g. Debian 10 with MariaDB 10.3 you have to force an
+      If you are using e.g. TYPO3 8.7 and Debian 10 with MariaDB 10.3 you have to force an
       update of Doctrine/Dbal. This is due to a missing feature / bug in
       doctring/dbal 2.5.13. TYPO3 8.7 did not changed the dependancies for doctrine/dbal.
 
@@ -101,10 +102,10 @@ Install DFG-Viewer and Kitodo.Presentation via Composer
 
 Composer commands::
 
-    composer require kitodo/presentation:^3.0
+    composer require kitodo/presentation:^3.1
     composer require slub/dfgviewer:^5.0
 
-This will install the DFG-Viewer 5.x extension and Kitodo.Presentation 3.0 from
+This will install the DFG-Viewer 5.x extension and Kitodo.Presentation 3.1 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
 Install the Extension via extension manager or CLI::

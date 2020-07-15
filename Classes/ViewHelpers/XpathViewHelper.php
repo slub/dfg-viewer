@@ -26,19 +26,10 @@ namespace Slub\Dfgviewer\ViewHelpers;
 
 use Slub\Dfgviewer\Helpers\GetDoc;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * ViewHelper to get page info
- *
- * # Example: Basic example
- * <code>
- * <si:pageInfo page="123">
- *	<span>123</span>
- * </code>
- * <output>
- * Will output the page record
- * </output>
+ * ViewHelper to get xpath elements
  *
  * @package TYPO3
  */
@@ -46,16 +37,27 @@ class XpathViewHelper extends AbstractViewHelper
 {
 
     /**
+     * initialize Arguments
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('xpath', 'string', 'xpath of elements', true);
+        $this->registerArgument('field', 'string', 'type of field requested', false, '');
+        $this->registerArgument('htmlspecialchars', 'bool', 'use htmlspecialchars() on the found result', false, true);
+    }
+
+    /**
      * Return elements found
      *
-     * @param string $xpath xpath of elements
-     * @param string $field type of field requested
-     * @param boolean $htmlspecialchars use htmlspecialchars() on the found result
      * @return string
      */
-    public function render($xpath, $field = '', $htmlspecialchars = TRUE)
+    public function render()
     {
         $doc = GeneralUtility::makeInstance(GetDoc::class);
+        $xpath = $this->arguments['xpath'];
+        $field = $this->arguments['field'];
+        $htmlspecialchars = $this->arguments['htmlspecialchars'];
+        $output = '';
 
         $result = $doc->getXpath($xpath);
 
