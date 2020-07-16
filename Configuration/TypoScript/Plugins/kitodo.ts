@@ -120,11 +120,6 @@ plugin.tx_dlf_tableofcontents {
     7 < .6
   }
 }
-plugin.tx_dlf_toolbox {
-  pages = {$config.storagePid}
-  tools = tx_dlf_pdfdownloadtool,tx_dlf_fulltexttool,tx_dlf_imagemanipulationtool
-  templateFile = {$config.templateFileToolbox}
-}
 
 plugin.tx_dlf_pdfdownloadtool {
   # this file does not exist
@@ -132,13 +127,11 @@ plugin.tx_dlf_pdfdownloadtool {
 }
 
 plugin.tx_dlf_fulltexttool {
-  userFunc = Kitodo\Dlf\Plugin\Tools\FulltextTool->main
   templateFile = {$config.templateFileToolFulltext}
   pages = {$config.storagePid}
 }
 
 plugin.tx_dlf_imagemanipulationtool {
-  userFunc = Kitodo\Dlf\Plugin\Tools\ImageManipulationTool->main
   templateFile = {$config.templateFileToolImageManipulation}
 }
 
