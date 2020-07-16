@@ -1,7 +1,8 @@
-{namespace dc=Slub\DigitalCollections\ViewHelpers}
-{namespace dv=Slub\Dfgviewer\ViewHelpers}
-
-<div xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
+      xmlns:dc="http://typo3.org/ns/Slub/DigitalCollections/ViewHelpers"
+      data-namespace-typo3-fluid="true"
+      lang="en">
 
 <f:section name="PageView">
   <div class="document-view">
@@ -34,10 +35,10 @@
     </f:if>
     <div class="document-functions">
         <div class="provider">
-          <f:link.external uri="<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]' htmlspecialchars='FALSE' />" title="<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]' />">
-          <img src="<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerLogo)[1]' />"
-            title="<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]' />"
-            alt="Abbildung eines Logo"
+          <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]', htmlspecialchars:'FALSE')}" title="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')}">
+            <img src="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerLogo)[1]')}"
+                 title="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')}"
+                 alt="Abbildung eines Logo"
             />
           </f:link.external>
 
@@ -59,38 +60,38 @@
             <a href="#" title="Links">Links</a>
             <ul>
               <li>
-                <f:if condition="<dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation)[1]' />">
+                <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]')}">
                   <f:then>
-                    <f:link.external uri="<dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:presentation)[1]' htmlspecialchars='FALSE' />" class="local-presentation" title="<f:translate key='provider.local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
+                    <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]', htmlspecialchars:'FALSE')}" class="local-presentation" title="{f:translate(key:'provider.local_presentation', extensionName:'dfgviewer')}"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
                   </f:then>
                   <f:else>
-                    <span class="local-presentation" title="<f:translate key='provider.no_local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></span>
+                    <span class="local-presentation" title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></span>
                   </f:else>
                 </f:if>
               </li>
               <f:for each="{0: '1', 1: '2', 2: '3'}" as="index">
-                <f:if condition="<dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference)[{index}]' />">
+                <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}">
                   <li>
-                    <f:if condition="<dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' />">
+                    <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]')}">
                       <f:then>
-                        <f:link.external uri="<dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference)[{index}]' htmlspecialchars='FALSE' />" class="local-catalog" title="<f:translate key='provider.local_catalogue' extensionName='dfgviewer' />"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' /></f:link.external>
+                        <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' /></f:link.external>
                       </f:then>
                       <f:else>
-                        <f:link.external uri="<dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:reference)[{index}]' htmlspecialchars='FALSE' />" class="local-catalog" title="<f:translate key='provider.local_catalogue' extensionName='dfgviewer' />"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
+                        <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
                       </f:else>
                     </f:if>
                   </li>
                 </f:if>
               </f:for>
-              <f:if condition="<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact)[1]' htmlspecialchars='FALSE' />">
+              <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars:'FALSE')}">
                 <f:then>
                   <li>
-                      <f:link.email email="<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerContact)[1]' htmlspecialchars='FALSE' />" class="local-contact" title="<f:translate key='provider.email_provider' extensionName='dfgviewer' /> (<dc:xpath xpath='(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]' />)"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
+                    <f:link.email email="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars: 'FALSE')}" class="local-contact" title="{f:translate(key:'provider.email_provider', extensionName:'dfgviewer')} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
                   </li>
                 </f:then>
                 <f:else>
                   <li>
-                    <span class="local-contact" title="<f:translate key='provider.no_local_presentation' extensionName='dfgviewer' />"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></span>
+                    <span class="local-contact" title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></span>
                   </li>
                 </f:else>
               </f:if>
@@ -103,57 +104,41 @@
               <f:if condition="{gp-double} == 1">
                 <f:then>
                 <li>
-                  <f:link.external
-                    uri="<dc:downloadLinks type='page-left' pagenumber='{gp-page}' />"
-                    class="download-page"
-                    title="<f:translate key='download.leftPage' extensionName='dfgviewer' />">
-                    <f:translate key="download.leftPage"  extensionName="dfgviewer" />
-                  </f:link.external>
+                  <f:link.external uri="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)}" class="download-page" title="{f:translate(key:'download.leftPage', extensionName:'dfgviewer')}"><f:translate key="download.leftPage"  extensionName="dfgviewer" /></f:link.external>
                 </li>
-                <f:if condition="<dc:downloadLinks type='page-right' pagenumber='{gp-page}' /> !=''">
+                <f:if condition="{dc:downloadLinks()type:'page-right', pagenumber:gp-page} !=''">
                   <li>
-                    <f:link.external
-                    uri="<dc:downloadLinks type='page-right' pagenumber='{gp-page}' />"
-                    class="download-page"
-                    title="<f:translate key='download.rightPage' extensionName='dfgviewer' />">
-                    <f:translate key="download.rightPage"  extensionName="dfgviewer" />
-                  </f:link.external>
+                    <f:link.external uri="{dc:downloadLinks()type:'page-right', pagenumber:gp-page}" class="download-page" title="{f:translate(key:'download.rightPage', extensionName:'dfgviewer')}"><f:translate key="download.rightPage"  extensionName="dfgviewer" /></f:link.external>
                   </li>
                 </f:if>
               </f:then>
               <f:else>
-                <f:if condition="<dc:downloadLinks type='page-left' pagenumber='{gp-page}' /> !=''">
+                <f:if condition="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)} !=''">
                   <li>
-                    <f:link.external
-                    uri="<dc:downloadLinks type='page-left' pagenumber='{gp-page}' />"
-                    class="download-page"
-                    title="<f:translate key='download.singlePage' extensionName='dfgviewer' />">
-                    <f:translate key="download.singlePage"  extensionName="dfgviewer" />
-                  </f:link.external>
+                    <f:link.external uri="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)}" class="download-page" title="{f:translate(key:'download.singlePage', extensionName:'dfgviewer')}"><f:translate key="download.singlePage"  extensionName="dfgviewer" /></f:link.external>
                   </li>
                 </f:if>
             </f:else>
           </f:if>
-          <f:if condition="<dc:downloadLinks type='work' /> !=''">
+          <f:if condition="{dc:downloadLinks(type:'work')} !=''">
             <f:then>
               <li>
                 <f:link.external
-                  uri="<dc:downloadLinks type='work' />"
+                  uri="{dc:downloadLinks(type:'work')}"
                   class="download-document"
                   target="_blank"
-                  title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" />
-                </f:link.external>
+                  title="{f:translate(key:'download.work', extensionName:'dfgviewer')}"><f:translate key="download.work"  extensionName="dfgviewer" /></f:link.external>
               </li>
             </f:then>
             <f:else>
-              <f:if condition="<dc:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />">
+              <f:if condition="{dc:xpath(xpath:'(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]')}">
                 <f:alias map="{xpathDownload: '//mets:fileSec/mets:fileGrp[@USE=\'DOWNLOAD\']//mets:file/mets:FLocat/@xlink:href'}">
                   <li>
                     <f:link.external
-                      uri="<dv:format.subStringLast string=\"{dc:xpath(xpath:'(({xpathDownload})[1])')}\" needle=\"/\" />/<dc:xpath xpath='(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]' />.pdf"
+                      uri="{dv:format.subStringLast(string:'{dc:xpath(xpath:\'(({xpathDownload})[1])\')}', needle:'/')}/{dc:xpath(xpath:'(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]')}.pdf"
                       class="download-document"
                       target="_blank"
-                      title="<f:translate key='download.work' extensionName='dfgviewer' />"><f:translate key="download.work"  extensionName="dfgviewer" />
+                      title="{f:translate(key:'download.work', extensionName:'dfgviewer')}"><f:translate key="download.work"  extensionName="dfgviewer" />
                     </f:link.external>
                   </li>
                 </f:alias>
@@ -165,24 +150,24 @@
           <li class="doublepage">
             <f:if condition="{gp-double} == 1">
               <f:then>
-                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doubleOff" title="<f:translate key='double.singlePageView'  extensionName='dfgviewer' />"><f:translate key="double.singlePageView"  extensionName="dfgviewer" /></f:link.page>
-                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doublePlusOne" title="<f:translate key='double.RectoVerso' extensionName='dfgviewer' />"><span><f:translate key="double.RectoVerso"  extensionName="dfgviewer" /></span></f:link.page>
+                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doubleOff" title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}"><f:translate key="double.singlePageView"  extensionName="dfgviewer" /></f:link.page>
+                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doublePlusOne" title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span><f:translate key="double.RectoVerso"  extensionName="dfgviewer" /></span></f:link.page>
               </f:then>
               <f:else>
-                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doubleOn" title="<f:translate key='double.doublePageView'  extensionName='dfgviewer' />"><f:translate key="double.doublePageView"  extensionName="dfgviewer" /></f:link.page>
+                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doubleOn" title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}"><f:translate key="double.doublePageView"  extensionName="dfgviewer" /></f:link.page>
               </f:else>
             </f:if>
           </li>
-          <f:if condition="<dc:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"FULLTEXT\"]/mets:file[1]/mets:FLocat/@xlink:href)[1]' />">
+          <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
             <li class="fulltext">
               <f:if condition="{gp-double} == 1">
                 <f:then>
-                  <span class="select switchoff" id="tx-dlf-tools-fulltext" title="<f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />"><f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' /></span>
+                  <span class="select switchoff" id="tx-dlf-tools-fulltext" title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}"><f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' /></span>
                 </f:then>
                 <f:else>
                   <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
-                      <span class="select switchoff" id="tx-dlf-tools-fulltext" title="<f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />"><f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' /></span>
+                      <span class="select switchoff" id="tx-dlf-tools-fulltext" title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}"><f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' /></span>
                     </f:then>
                     <f:else>
                       <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
@@ -193,23 +178,23 @@
             </li>
           </f:if>
           <li class="grid">
-            <f:if condition="<dc:xpath xpath='(//mets:fileSec/mets:fileGrp[@USE=\"THUMBS\"]/mets:file[1]/mets:FLocat/@xlink:href)[1]' />">
+            <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
               <f:then>
                 <f:if condition="{gp-pagegrid} == 1">
                   <f:then>
-                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}" class="active" title="<f:translate key='double.singlePageView' extensionName='dfgviewer' />"><f:translate key='double.singlePageView' extensionName='dfgviewer' /></f:link.page>
+                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}" class="active" title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}"><f:translate key='double.singlePageView' extensionName='dfgviewer' /></f:link.page>
                   </f:then>
                   <f:else>
-                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}" title="<f:translate key='gridpage.preview' extensionName='dfgviewer' />"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
+                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}" title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
                   </f:else>
                 </f:if>
               </f:then>
               <f:else>
-                 <span title="<f:translate key='gridpage.preview' extensionName='dfgviewer' />"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></span>
+                 <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></span>
               </f:else>
             </f:if>
           </li>
-          <f:if condition="<dc:xpath xpath='//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\"DVLINKS\"]/mets:xmlData/dv:links/dv:sru' />">
+          <f:if condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
             <f:then>
               <li class="submenu search">
                   <a href="#" title="Search">Search</a>
@@ -248,3 +233,4 @@
 
   </div>
 </f:section>
+</html>
