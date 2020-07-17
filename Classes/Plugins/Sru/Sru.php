@@ -128,8 +128,8 @@ class Sru extends AbstractPlugin
     {
         $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
 
-        // Add SRU specific JavaScript.
-        $pageRenderer->addJsFooterFile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey) . 'Resources/Public/Js/tx_dfgviewer_sru.js');
+        // Add SRU specific Javascript.
+        $pageRenderer->addJsFooterFile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey) . 'Resources/Public/Javascript/tx_dfgviewer_sru.js');
     }
 
     /**
