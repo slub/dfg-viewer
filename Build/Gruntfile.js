@@ -14,6 +14,7 @@ module.exports = function(grunt) {
                 files: {
                     "Resources/Public/Css/allStyles.css" : "Resources/Private/Less/all.less",
                     "Resources/Public/Css/webStyles.css" : "Resources/Private/Less/website.less",
+                    "Resources/Public/Css/rte.css" : "Resources/Private/Less/rte.less",
                 }
             }
         },
