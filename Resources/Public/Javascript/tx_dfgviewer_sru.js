@@ -43,12 +43,12 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 			action: $( "input[name='tx_dfgviewer[action]']" ).val(),
 		},
 		function(data) {
-
+			var resultItems = [];
 			var resultList = '<div class="sru-results-active-indicator"></div><ul>';
 
 			if (data.error) {
 
-				resultList += '<li>' + data.error + '</li>';
+				resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
 
 			} else {
 
@@ -78,13 +78,19 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 					+ '&tx_dlf[page]=' + (data[i].page));
 
 					if (data[i].previewImage) {
-						resultList += '<li><a href=\"' + newlink + '\">' + data[i].previewImage + '</li>';
+						resultItems.push('<a href=\"' + newlink + '\">' + data[i].previewImage);
 					}
 					if (data[i].previewText) {
-						resultList += '<li><a href=\"' + newlink + '\">' + data[i].previewText + '</li>';
+						resultItems.push('<a href=\"' + newlink + '\">' + data[i].previewText);
 					}
 				}
-
+				if (resultItems.length > 0) {
+                    resultItems.forEach(function(item, index){
+                        resultList += '<li>' + item + '</li>';
+                    });
+                } else {
+                    resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
+                }
 			}
 			resultList += '</ul>';
 
@@ -108,5 +114,3 @@ $('#tx-dfgviewer-sru-results-clearing').click(function() {
 
 
 });
-
-
