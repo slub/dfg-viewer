@@ -78,6 +78,7 @@ function bindPlayerFunctions() {
     // current time and time remaining counter
     viewport.bind($.jPlayer.event.timeupdate, function(event) {
         $(".time-current").text(getFormattedVideoCurrentTime());
+        $(".frame-current").text(video.get());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
 
     });
@@ -86,6 +87,7 @@ function bindPlayerFunctions() {
     viewport.bind($.jPlayer.event.canplay, function(event) {
         generateChapters();
         $(".time-current").text(getFormattedVideoCurrentTime());
+        $(".frame-current").text(video.get());
         $(".time-remaining").text($.jPlayer.convertTime( event.jPlayer.status.duration - event.jPlayer.status.currentTime ));
     });
 
