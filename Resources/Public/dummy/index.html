@@ -197,6 +197,10 @@
                         </div>
                     </div>
                     <div class="control-bars">
+                        <div id="url-container" style="display: none;">
+                            <input type="text" id="url-field" value="http://domain.ltd" onClick="this.select();">
+                            <span class="icon-close" onClick="$('#url-container').hide('fast')"></span>
+                        </div>
                         <div class="viewport-menu" style="display: none;">
                             <ul class="settings-menu">
                                 <li class="settings-menu-item-speed-menu">Wiedergabegeschwindigkeit: <span class="speed-label">1x</span></li>
@@ -204,6 +208,7 @@
                                 <li class="settings-menu-item-subtitle">Untertitel: <span class="subtitle-label">aus</span></li>
                                 <li class="settings-menu-item-language">Sprache: <span class="language-label">default (deutsch)</span></li>
                                 <li class="settings-menu-item-screenshot">Screenshot generieren</li>
+                                <li class="settings-menu-item-url">URL generieren</li>
                                 <li class="settings-menu-item-help">Hilfe</li>
                             </ul>
                             <ul class="speed-menu" style="display: none;">

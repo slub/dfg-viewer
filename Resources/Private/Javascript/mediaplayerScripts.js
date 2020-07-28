@@ -92,6 +92,9 @@ function bindPlayerFunctions() {
     });
 
     viewport.bind($.jPlayer.event.loadeddata, function(event) {
+        if(getParams(document.URL)['timecode']) {
+            viewport.jPlayer( "pause", parseFloat(getParams(document.URL)['timecode']) );
+        }
         resizeVideoCanvas();
     });
 }
@@ -145,6 +148,11 @@ function bindSettingsMenuItems() {
 
     $('.settings-menu-item-screenshot').bind('click', function() {
         renderScreenshot();
+    });
+
+    $('.settings-menu-item-url').click(function (e) {
+        $('.viewport-menu').hide();
+        generateUrl();
     });
 
     // binds the close action from help window to close button
@@ -295,6 +303,21 @@ function generateChapters() {
     });
 }
 
+function generateUrl() {
+    var $timecodeUrl = document.URL, $urlInput = $('#url-field'), urlContainer = $('#url-container');
+
+    $timecodeUrl
+
+    if(getParams($timecodeUrl)) {
+        $timecodeUrl = $timecodeUrl + '&timecode=' + viewport.data("jPlayer").status.currentTime;
+    } else {
+        $timecodeUrl = $timecodeUrl + '?timecode=' + viewport.data("jPlayer").status.currentTime;
+    }
+
+    $urlInput.val($timecodeUrl);
+    urlContainer.show('fast');
+}
+
 /**
  * toggles the media player settings window
  */
@@ -423,3 +446,31 @@ function getFormattedVideoCurrentTime() {
     var mediaStatus = viewport.data("jPlayer").status;
     return (mediaStatus.currentTime < 3600 ? '00:' : '') + $.jPlayer.convertTime(mediaStatus.currentTime) + ':' + ("0" + (video.get() % fps)).slice(-2);
 }
+
+// GENERAL FUNCTIONS
+
+/**
+ * Get the URL parameters - TODO: can be outsourced in seperate utility js file for general use
+ * source: https://css-tricks.com/snippets/javascript/get-url-variables/
+ * @param  {String} url The URL
+ * @return {Object}     The URL parameters
+ */
+var getParams = function (url) {
+    var params = {};
+    var parser = document.createElement('a');
+    parser.href = url;
+    var query = parser.search.substring(1);
+    var vars = query.split('&');
+    console.log(vars[0].length);
+    if(vars[0].length) {
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        return params;
+    } else {
+        return false;
+    }
+
+
+};
