@@ -305,9 +305,6 @@ function generateChapters() {
 
 function generateUrl() {
     var $timecodeUrl = document.URL, $urlInput = $('#url-field'), urlContainer = $('#url-container');
-
-    $timecodeUrl
-
     if(getParams($timecodeUrl)) {
         $timecodeUrl = $timecodeUrl + '&timecode=' + viewport.data("jPlayer").status.currentTime;
     } else {
@@ -461,7 +458,6 @@ var getParams = function (url) {
     parser.href = url;
     var query = parser.search.substring(1);
     var vars = query.split('&');
-    console.log(vars[0].length);
     if(vars[0].length) {
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split('=');
@@ -471,6 +467,4 @@ var getParams = function (url) {
     } else {
         return false;
     }
-
-
 };
