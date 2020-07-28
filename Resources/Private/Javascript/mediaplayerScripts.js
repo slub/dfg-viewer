@@ -1,6 +1,7 @@
 //var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4'; // TODO: get source file and metadata from backend / dom
-var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/vid_dig_x_000622.mp4';
+//var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/vid_dig_x_000622.mp4';
 //var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/2019-3_33_Filmsplitter_von_einer_Konzertreise_Hamburg_1978.mp4';
+var demoMovieFile = 'http://test.digital.slub-dresden.de:8096/emby/Videos/7/stream.webm?Static=true&api_key=7f845fc0c5f64d25bebcd817403c7b83';
 var fps = 25;
 var viewport;
 var copyright = 'Hirsch Film Filmproduktion';
@@ -25,7 +26,6 @@ function resizeVideoCanvas() {
     var view, player, video;
     view = $('.media-viewport');
     player = $('.mediaplayer-container');
-    console.log(player.height() > view.height());
     video = $("video");
     video.css({
         width: '100%',
@@ -37,13 +37,6 @@ function resizeVideoCanvas() {
             height: 'auto',
         });
     }
-    // } else {
-    //     console.log('change height 100');
-    //     $("video").css({
-    //         width: '100%',
-    //         height: 'auto',
-    //     });
-    // }
 }
 
 /**
