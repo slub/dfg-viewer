@@ -25,9 +25,10 @@ namespace Slub\Dfgviewer\Plugins\Sru;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * Plugin 'DFG-Viewer: SRU Client eID script' for the 'dfgviewer' extension.
@@ -38,82 +39,54 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @subpackage    tx_dfgviewer
  * @access    public
  */
-class SruEid extends AbstractPlugin
+class SruEid
 {
 
     /**
+     * The main method of the eID script
      *
+     * @access public
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
      */
-    public $cObj;
-
-
-    /**
-     * The main method of the eID-Script
-     *
-     * @access    public
-     *
-     * @return string JSON encoded return value
-     */
-    public function main()
+    public function main(ServerRequestInterface $request)
     {
-        $this->cObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+        // parameters are sent by POST --> use getParsedBody() instead of getQueryParams()
+        $parameters = $request->getParsedBody();
+        $sru = (string)$parameters['sru'];
+        $query = (string)$parameters['q'];
 
-        $this->extKey = 'dfgviewer';
-
-        $this->scriptRelPath = 'Classes/Plugins/Sru/SruEid.php';
-
-        $this->LLkey = GeneralUtility::_GP('L') ? GeneralUtility::_GP('L') : 'default';
-
-        $this->pi_loadLL();
-
-        $url = GeneralUtility::_GP('sru') . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&amp;recordSchema=dfg-viewer/page&amp;query=' . urlencode(GeneralUtility::_GP('q'));
+        $url = $sru . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&recordSchema=dfg-viewer/page&query=' . urlencode($query);
 
         // make request to SRU service
         $sruXML = simplexml_load_file($url);
 
         if ($sruXML !== FALSE) {
-
             // the result may be a valid <srw:searchRetrieveResponse> or some HTML code
-
             $sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
 
             if ($sruResponse === FALSE) {
-
-                $results['error'] = $this->pi_getLL('label.noresults') . ' ' . GeneralUtility::_GP('q');
-
+                $results['error'] = '';
             } else {
-
                 $sruRecords = $sruXML->xpath('/srw:searchRetrieveResponse/srw:records/srw:record');
-
                 if ($sruRecords === FALSE || empty($sruRecords)) {
-
-                    $results['error'] = $this->pi_getLL('label.noresults') . ' ' . GeneralUtility::_GP('q');
-
+                    $results['error'] = '';
                 }
 
                 foreach ($sruRecords as $id => $record) {
-
                     $fullTextHit = $record->xpath('//srw:recordData');
-
                     $pageAttributes = [];
-
                     foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->attributes() as $key => $val) {
-
                         $pageAttributes[$key] = $val;
-
                     }
 
                     $hitFound = [];
-
                     // there may be multiple hits on a page per search query
                     foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
-
                         $hitAttributes = [];
-
                         foreach ($hit->attributes() as $key => $val) {
-
                             $hitAttributes[$key] = $val;
-
                         }
 
                         $hitFound[] = array('text' => $hit->span, 'attributes' => $hitAttributes);
@@ -129,49 +102,29 @@ class SruEid extends AbstractPlugin
 
                     // get highlight boxes for all results of a page
                     foreach ($hitFound as $key => $hit) {
-
                         $highlightField = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
-
                         if (!in_array($highlightField, $highlightParams)) {
-
                             $highlightParams[] = $highlightField;
-
                         }
-
                     }
 
                     foreach ($hitFound as $key => $hit) {
-
                         unset($spanPreview);
-
                         unset($spanText);
-
                         if (!empty($hit['attributes']['preview'])) {
-
                             $spanPreview = '<span class="sru-preview"><img src="' . $hit['attributes']['preview'] . '"></span>';
-
                         }
 
                         if (is_object($hit['text'])) {
-
                             $spanText = '<span class="sru-textsnippet">';
-
                             foreach ($hit['text'] as $key => $text) {
-
                                 if ($text->attributes()->class[0] == 'highlight') {
-
                                     $spanText .= '<span class="highlight">' . $text . '</span>';
-
                                 } else {
-
                                     $spanText .= $text;
-
                                 }
-
                             }
-
                             $spanText .= '</span>';
-
                         }
 
                         $origImageParams = '0,' . $pageAttributes['width'] . ',' . $pageAttributes ['height'];
@@ -189,16 +142,13 @@ class SruEid extends AbstractPlugin
                         $results[] = $data;
                     }
                 }
-
             }
-
-        } else {
-
-            $results['error'] = $this->pi_getLL('label.noresults') . ' ' . GeneralUtility::_GP('q');
-
         }
 
-        echo json_encode($results);
+        // create response object
+        /** @var Response $response */
+        $response = GeneralUtility::makeInstance(Response::class);
+        $response->getBody()->write(json_encode($results));
+        return $response;
     }
-
 }

@@ -1,26 +1,3 @@
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:dfgviewer/Configuration/TsConfig/Rte.ts">
-
-# PAGE DEFAULT PERMISSIONS
-TCEMAIN.permissions {
-
-  # Configure default permission for new created pages.
-  # do anything (default):
-  #user = 31
-
-  # do anything (normally "delete" is disabled)
-  #group = 31
-
-  # (normally everybody can do nothing)
-  #everybody =
-
-  # user: default user
-  # userid = 6
-
-  # group _Users
-  # group: schrank-zwei == 30
-  #groupid = 30
-}
-
 TCEFORM.tt_content {
 
   // Full screen for bodytext (tt_content)

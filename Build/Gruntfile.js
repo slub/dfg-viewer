@@ -29,6 +29,7 @@ module.exports = function(grunt) {
                 files: {
                     "Resources/Public/Css/allStyles.css" : "Resources/Private/Less/all.less",
                     "Resources/Public/Css/webStyles.css" : "Resources/Private/Less/website.less",
+                    "Resources/Public/Css/rte.css" : "Resources/Private/Less/rte.less",
                 }
             }
         },
@@ -41,8 +42,8 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "Resources/Public/Js/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js', 'Resources/Private/Javascript/mediaplayerScripts.js', 'Resources/Private/Javascript/VideoFrame.min.js'],
-                    "Resources/Public/Js/webScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/websiteScripts.js']
+                    "Resources/Public/Javascript/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js'],
+                    "Resources/Public/Javascript/webScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/websiteScripts.js']
                 }
             }
         },

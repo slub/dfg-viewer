@@ -1,0 +1,169 @@
+# Load default processing options
+imports:
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Processing.yaml" }
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Base.yaml" }
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Plugins.yaml" }
+
+  # Add configuration for the editor
+  # For complete documentation see http://docs.ckeditor.com/#!/api/CKEDITOR.config
+editor:
+  config:
+    contentsCss: ["EXT:rte_ckeditor/Resources/Public/Css/contents.css", "EXT:dfgviewer/Resources/Public/Css/rte.css"]
+    resize_enabled: true
+    resize_dir: 'both'
+    resize_maxWidth: 1280
+    resize_minWidth: 400
+    uiColor: "#F8F8F8"
+
+    format_tags: "p;h2;h3;h4;div;pre"
+    stylesSet:
+      - { name: "Information", element: "span", attributes: { class: "information" } }
+      - { name: "Zitat", element: "span", attributes: { class: "quote" } }
+      - { name: "grauer Kasten", element: "p", attributes: { class: "abstract" } }
+
+    #      - { name: "align-center", element: ['h1', 'h2', 'h3', 'h4','h5', 'h6', 'p', 'td', 'th'], attributes: { 'class': 'align-center' }}
+    #      - { name: "align-right", element: ['h1', 'h2', 'h3', 'h4','h5', 'h6', 'p', 'td', 'th'], attributes: { 'class': 'align-right' }}
+    #      - { name: "align-justify", element: ['h1', 'h2', 'h3', 'h4','h5', 'h6', 'p', 'td', 'th'], attributes: { 'class': 'align-justify' }}
+    #      - { name: "Button", element: "p", attributes: { 'class': 'button' }}
+
+    # Inline styles
+    #      - { name: "Important", element: "span", attributes: { 'class': 'c-important' }}
+    #      - { name: "Tiny Word", element: "span", attributes: { 'class': 'c-tiny' }}
+
+    # List styles
+    #      - { name: 'UL Style 1', element: 'ul', attributes: { 'class': 'ul-style1' } }
+    #      - { name: 'UL Style 2', element: 'ol', attributes: { 'class': 'ul-style2' } }
+    #      - { name: 'No UL Bullets', element: 'ul', attributes: { 'class': 'no-bullet' } }
+
+    #    toolbar:
+    #      - [ 'Link', 'Unlink', 'Anchor', 'Table', 'SpecialChar', 'CodeSnippet', 'Smiley' ]
+    #      - [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
+    #      - [ 'NumberedList', 'BulletedList']
+    #      - [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord' ]
+    #      - [ 'Undo', 'Redo', 'RemoveFormat', 'ShowBlocks' ]
+    #      - "/"
+    #      - [ 'Format', 'Styles' ]
+    #      - [ 'Bold', 'Italic', 'Underline', 'Blockquote', 'Subscript', 'Superscript']
+    #      - [ 'Source', 'Maximize', 'About']
+
+    toolbarGroups:
+      - { name: clipboard, groups: [clipboard, undo] }
+      - { name: editing,   groups: [find, selection] }
+      - { name: document,  groups: [ mode ] }
+      - { name: tools, groups: [tools] }
+      - "/"
+      - { name: basicstyles, groups: [ basicstyles ] }
+      - { name: paragraph,   groups: [ align, indent, list, blocks ] }
+      - "/"
+      - { name: styles }
+      - { name: links }
+      - { name: insert, groups: [ insertcharacters ]  }
+      - { name: cleanup, groups: [ cleanup ]  }
+
+    extraPlugins:
+      - justify
+      - showblocks
+      - codesnippet
+      - find
+      - selectall
+
+    justifyClasses:
+      - align-left
+      - align-center
+      - align-right
+      - align-justify
+
+    codeSnippet_theme: 'obsidian'
+    codeSnippet_languages:
+      bash: 'Bash'
+      html: 'HTML'
+      json: 'Json'
+      javascript: 'JavaScript'
+      php: 'PHP'
+      css: 'CSS'
+      scss: 'Scss'
+      typoscript: 'TypoScript'
+      yaml: 'Yaml'
+
+    removePlugins:
+      - image
+
+    removeButtons:
+      - Font
+      - FontSize
+      - Underline
+      - Strike
+      - Anchor
+      - softHyphen
+
+processing:
+  allowTags:
+    - iframe
+    - s
+    - u
+
+  # Button config and defaults
+buttons:
+  link:
+    relAttribute:
+      enabled: true
+    properties:
+      class:
+        allowedClasses: 'link-internal,link-internal-arrow,link-internal-blank,link-download,link-folder,link-external,link-external-arrow,link-external-blank,link-mail'
+    page:
+      properties:
+        class:
+          default: 'link-internal'
+    file:
+      properties:
+        class:
+          default: 'link-download'
+    folder:
+      properties:
+        class:
+          default: 'link-folder'
+    url:
+      properties:
+        class:
+          default: 'link-external-blank'
+    mail:
+      properties:
+        class:
+          default: 'link-mail'
+
+  # Classes config
+classesAnchor:
+  linkInternal:
+    class: 'link-internal'
+    type: 'page'
+#    titleText: 'LLL:EXT:slub_web_boersenblatt/Resources/Private/Language/locallang.xlf:link_internal_titleText'
+  linkInternalArrow:
+    class: 'link-internal-arrow'
+    type: 'page'
+  linkInternalBlank:
+    class: 'link-internal-blank'
+    type: 'page'
+    target: '_blank'
+  linkDownload:
+    class: 'link-download'
+    type: 'file'
+  linkFolder:
+    class: 'link-folder'
+    type: 'folder'
+  linkExternal:
+    class: 'link-external'
+    type: 'url'
+  linkExternalArrow:
+    class: 'link-external-arrow'
+    type: 'url'
+  linkExternalBlank:
+    class: 'link-external-blank'
+    type: 'url'
+    target: '_blank'
+  linkMail:
+    class: 'link-mail'
+    type: 'mail'
+
+#classes:
+#  link-internal:
+#    name: 'LLL:EXT:slub_web_boersenblatt/Resources/Private/Language/locallang.xlf:link_internal_altText'
