@@ -12,7 +12,7 @@
 			<label index="label.delete_search">Delete Search</label>
 			<label index="label.loading">Loading Results</label>
 			<label index="label.submit">Search</label>
-			<label index="label.noresults">No results for your search: </label>
+			<label index="label.noresult">No results found for your search.</label>
 			<label index="search">Search</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -22,7 +22,7 @@
 			<label index="label.delete_search">Suche löschen</label>
 			<label index="label.loading">Lade Ergebnisse</label>
 			<label index="label.submit">Suchen</label>
-			<label index="label.noresults">Kein Ergebnis für Ihre Suche: </label>
+			<label index="label.noresult">Kein Ergebnis für Ihre Suche gefunden.</label>
 			<label index="search">Suche</label>
 		</languageKey>
 	</data>

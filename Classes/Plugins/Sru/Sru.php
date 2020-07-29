@@ -106,6 +106,7 @@ class Sru extends AbstractPlugin
             '###SRU_URL###' => $sruLink,
             '###LANG_ID###' => $this->LLkey,
             '###LABEL_SUBMIT###' => $this->pi_getLL('label.submit'),
+            '###LABEL_NORESULT###' => htmlspecialchars($this->pi_getLL('label.noresult')),
             '###FIELD_QUERY###' => $this->prefixId . '[query]',
             '###QUERY###' => htmlspecialchars($lastQuery),
             '###CURRENT_DOCUMENT###' => $this->doc->location,
@@ -127,9 +128,8 @@ class Sru extends AbstractPlugin
     protected function addSearchFormJS()
     {
         $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
-
-        // Add SRU specific JavaScript.
-        $pageRenderer->addJsFooterFile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey) . 'Resources/Public/Js/tx_dfgviewer_sru.js');
+        // Add SRU specific Javascript.
+        $pageRenderer->addJsFooterFile(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->extKey) . 'Resources/Public/Javascript/tx_dfgviewer_sru.js');
     }
 
     /**
@@ -142,22 +142,18 @@ class Sru extends AbstractPlugin
     protected function addSruResultsJS()
     {
         if (!empty($this->piVars['highlight']) && !empty($this->piVars['origimage'])) {
-
             $highlight = unserialize(urldecode($this->piVars['highlight']));
             $origImage = $this->piVars['origimage'];
 
             // Add SRU Results if any
             $javascriptFooter = '$(window).load(function(){';
-
             foreach ($highlight as $field) {
                 $javascriptFooter .= 'tx_dlf_viewer.addHighlightField([' . $field . '],' . $origImage . ');';
             }
-
             $javascriptFooter .= '})';
 
             $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
             $pageRenderer->addJsFooterInlineCode('tx-dfgviewer-footer', $javascriptFooter);
         }
     }
-
 }

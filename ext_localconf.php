@@ -39,3 +39,7 @@ ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Plugins/Sru/Sru.php',
 
 // Register eID handlers.
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = \Slub\Dfgviewer\Plugins\Sru\SruEid::class . '::main';
+
+//register rte settings
+$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['dfgviewer'] =
+    'EXT:' . $_EXTKEY . '/Configuration/Yaml/Rte/Default.yaml';
