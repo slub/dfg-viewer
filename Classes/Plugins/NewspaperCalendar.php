@@ -259,7 +259,7 @@ class NewspaperCalendar extends AbstractPlugin {
             'parameter' => $this->conf['targetPid'],
             'additionalParams' => '&' . $this->prefixId . '[id]=' . urlencode($toc[0]['points']),
         );
-        $allYearsLink = $this->cObj->typoLink($this->pi_getLL('allYears', '', TRUE) . ' ' .$toc[0][self::LABEL], $linkConf);
+        $allYearsLink = $this->cObj->typoLink(htmlspecialchars($this->pi_getLL('allYears', '')) . ' ' .$toc[0][self::LABEL], $linkConf);
 
         // link to this year itself
         $linkConf = array (

@@ -95,7 +95,7 @@ class GridPager extends AbstractPlugin
 
         // Link to first page.
         if ($this->piVars['pointer'] > 0) {
-            $markerArray['###FIRST###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('firstPage', '', TRUE),
+            $markerArray['###FIRST###'] = $this->pi_linkTP_keepPIvars(htmlspecialchars($this->pi_getLL('firstPage', '')),
                 array(
                     'pointer' => 0,
                     'page' => NULL
@@ -106,57 +106,57 @@ class GridPager extends AbstractPlugin
 
         // Link back X pages.
         if ($this->piVars['pointer'] >= $this->conf['pageStep']) {
-            $markerArray['###BACK###'] = $this->pi_linkTP_keepPIvars(sprintf($this->pi_getLL('backXPages', '', TRUE), $this->conf['pageStep']),
+            $markerArray['###BACK###'] = $this->pi_linkTP_keepPIvars(htmlspecialchars(sprintf($this->pi_getLL('backXPages', ''), $this->conf['pageStep'])),
                 array(
                     'pointer' => $this->piVars['pointer'] - $this->conf['pageStep'],
                     'page' => ($this->piVars['pointer'] - $this->conf['pageStep']) * $this->conf['limit'] + 1
                 ), TRUE);
         } else {
-            $markerArray['###BACK###'] = '<span>' . sprintf($this->pi_getLL('backXPages', '', TRUE), $this->conf['pageStep']) . '</span>';
+            $markerArray['###BACK###'] = '<span>' . htmlspecialchars(sprintf($this->pi_getLL('backXPages', ''), $this->conf['pageStep'])) . '</span>';
         }
 
         // Link to previous page.
         if ($this->piVars['pointer'] > 0) {
-            $markerArray['###PREVIOUS###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('prevPage', '', TRUE),
+            $markerArray['###PREVIOUS###'] = $this->pi_linkTP_keepPIvars(htmlspecialchars($this->pi_getLL('prevPage', '')),
                 array(
                     'pointer' => $this->piVars['pointer'] - 1,
                     'page' => (($this->piVars['pointer'] - 1) * $this->conf['limit']) + 1
                 ), TRUE);
         } else {
-            $markerArray['###PREVIOUS###'] = '<span>' . $this->pi_getLL('prevPage', '', TRUE) . '</span>';
+            $markerArray['###PREVIOUS###'] = '<span>' . htmlspecialchars($this->pi_getLL('prevPage', '')) . '</span>';
         }
 
         // Link to next page.
         if ($this->piVars['pointer'] < $maxPointer) {
-            $markerArray['###NEXT###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('nextPage', '', TRUE),
+            $markerArray['###NEXT###'] = $this->pi_linkTP_keepPIvars(htmlspecialchars($this->pi_getLL('nextPage', '')),
                 array(
                     'pointer' => $this->piVars['pointer'] + 1,
                     'page' => ($this->piVars['pointer'] + 1) * $this->conf['limit'] + 1
                 ), TRUE);
         } else {
-            $markerArray['###NEXT###'] = '<span>' . $this->pi_getLL('nextPage', '', TRUE) . '</span>';
+            $markerArray['###NEXT###'] = '<span>' . htmlspecialchars($this->pi_getLL('nextPage', '')) . '</span>';
         }
 
         // Link forward X pages.
         if ($this->piVars['pointer'] < $maxPointer - $this->conf['pageStep']) {
-            $markerArray['###FORWARD###'] = $this->pi_linkTP_keepPIvars(sprintf($this->pi_getLL('forwardXPages', '', TRUE), $this->conf['pageStep']),
+            $markerArray['###FORWARD###'] = $this->pi_linkTP_keepPIvars(htmlspecialchars(sprintf($this->pi_getLL('forwardXPages', ''), $this->conf['pageStep'])),
                 array(
                     'pointer' => $this->piVars['pointer'] + $this->conf['pageStep'],
                     'page' => ($this->piVars['pointer'] + $this->conf['pageStep']) * $this->conf['limit'] + 1
                 ), TRUE);
         } else {
-            $markerArray['###FORWARD###'] = '<span>' . sprintf($this->pi_getLL('forwardXPages', '', TRUE), $this->conf['pageStep']) . '</span>';
+            $markerArray['###FORWARD###'] = '<span>' . htmlspecialchars(sprintf($this->pi_getLL('forwardXPages', ''), $this->conf['pageStep'])) . '</span>';
         }
 
         // Link to last page.
         if ($this->piVars['pointer'] < $maxPointer) {
-            $markerArray['###LAST###'] = $this->pi_linkTP_keepPIvars($this->pi_getLL('lastPage', '', TRUE),
+            $markerArray['###LAST###'] = $this->pi_linkTP_keepPIvars(htmlspecialchars($this->pi_getLL('lastPage', '')),
                 array(
                     'pointer' => $maxPointer,
                     'page' => $maxPointer * $this->conf['limit'] + 1
                 ), TRUE);
         } else {
-            $markerArray['###LAST###'] = '<span>' . $this->pi_getLL('lastPage', '', TRUE) . '</span>';
+            $markerArray['###LAST###'] = '<span>' . htmlspecialchars($this->pi_getLL('lastPage', '')) . '</span>';
         }
 
         $content .= $this->templateService->substituteMarkerArray($this->template, $markerArray);

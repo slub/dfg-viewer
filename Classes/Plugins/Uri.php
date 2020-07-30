@@ -99,7 +99,7 @@ class Uri extends AbstractPlugin
             $uris = array();
 
             foreach ($uriBook as $uri) {
-                $piUriBook = $this->pi_getLL('uriBook', '', TRUE);
+                $piUriBook = htmlspecialchars($this->pi_getLL('uriBook', ''));
 
                 if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
                     $uris[] = '<a class="persistence-document" href="' . htmlspecialchars($uri) . '">' . $piUriBook . '</a>';
@@ -126,7 +126,7 @@ class Uri extends AbstractPlugin
             $uris = array();
 
             foreach ($uriPage as $uri) {
-                $piUriPage = $this->pi_getLL('uriPage', '', TRUE);
+                $piUriPage = htmlspecialchars($this->pi_getLL('uriPage', ''));
 
                 if (strpos($uri, 'http:') === 0 || strpos($uri, 'https:') === 0) {
                     $uris[] = '<a class="persistence-page" href="' . htmlspecialchars($uri) . '">' . $piUriPage . '</a>';
