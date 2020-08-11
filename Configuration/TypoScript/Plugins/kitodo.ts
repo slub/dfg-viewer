@@ -142,6 +142,13 @@ plugin.tx_dlf_audioplayer {
 #  templateFile = {$config.templateFilePage}
 }
 
+plugin.tx_dlf_videoplayer {
+  pages = {$config.storagePid}
+  excludeOther = 0
+  elementId = tx-dlf-video
+  #  templateFile = {$config.templateFilePage}
+}
+
 [userFunc = user_dlf_docTypeCheck(newspaper, {$config.storagePid})] || [userFunc = user_dlf_docTypeCheck(ephemera, {$config.storagePid})]
 page.10.variables {
   isNewspaper = TEXT

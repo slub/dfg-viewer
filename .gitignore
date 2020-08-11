@@ -6,4 +6,6 @@ Resources/Public/Css/webStyles.css.map
 Documentation-GENERATED-temp/
 *.mp4
 Resources/Public/Fonts/IconFont/*
-/Resources/Public/dummy/content/beispiel3.xml
+/Resources/Public/dummy/content/audio.xml
+/Resources/Public/dummy/content/video.xml
+/Resources/Public/dummy/content/

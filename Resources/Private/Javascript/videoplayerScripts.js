@@ -1,7 +1,7 @@
 //var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/bbb_sunflower_1080p_30fps_normal.mp4'; // TODO: get source file and metadata from backend / dom
 //var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/vid_dig_x_000622.mp4';
 //var demoMovieFile = '/typo3conf/ext/dfgviewer/Resources/Public/dummy/content/2019-3_33_Filmsplitter_von_einer_Konzertreise_Hamburg_1978.mp4';
-var demoMovieFile = 'http://test.digital.slub-dresden.de:8096/emby/Videos/7/stream.webm?Static=true&api_key=7f845fc0c5f64d25bebcd817403c7b83';
+var demoMovieFile = '';
 var fps = 25;
 var viewport;
 var copyright = 'Hirsch Film Filmproduktion';
@@ -10,6 +10,8 @@ var signature = 'BK 28';
 var video;
 $(document).ready(function () {
     var isVideo = $(".mime-type-video");
+    //demoMovieFile = decodeURI($(".mime-type-video").data('url'));
+    demoMovieFile = $(".mime-type-video").data('url');
     if(isVideo && isVideo.length > 0) {
         viewport = $("#mediaplayer-viewport");
         initializePlayer();
