@@ -9,8 +9,9 @@ var signature = 'BK 28';
 
 var video;
 $(document).ready(function () {
-    viewport = $("#mediaplayer-viewport");
-    if(viewport && viewport.length > 0) {
+    var isVideo = $(".mime-type-video");
+    if(isVideo && isVideo.length > 0) {
+        viewport = $("#mediaplayer-viewport");
         initializePlayer();
         bindPlayerFunctions();
         bindKeyboardEvents();
@@ -444,27 +445,3 @@ function getFormattedVideoCurrentTime() {
     return (mediaStatus.currentTime < 3600 ? '00:' : '') + $.jPlayer.convertTime(mediaStatus.currentTime) + ':' + ("0" + (video.get() % fps)).slice(-2);
 }
 
-// GENERAL FUNCTIONS
-
-/**
- * Get the URL parameters - TODO: can be outsourced in seperate utility js file for general use
- * source: https://css-tricks.com/snippets/javascript/get-url-variables/
- * @param  {String} url The URL
- * @return {Object}     The URL parameters
- */
-var getParams = function (url) {
-    var params = {};
-    var parser = document.createElement('a');
-    parser.href = url;
-    var query = parser.search.substring(1);
-    var vars = query.split('&');
-    if(vars[0].length) {
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split('=');
-            params[pair[0]] = decodeURIComponent(pair[1]);
-        }
-        return params;
-    } else {
-        return false;
-    }
-};
