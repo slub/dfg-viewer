@@ -10,7 +10,7 @@ dfgviewer* extension.
 Installation
 ============
 
-The current release 5.x will only work with TYPO3 8.7 LTS or 9.5 LTS.
+The current release 5.x will only work with 9.5 LTS.
 
 The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
@@ -29,10 +29,10 @@ We recommend at least:
 * Memory: 2 GB
 * Disk: 20 GB
 
-Install a fresh TYPO3 8.7 LTS
+Install a fresh TYPO3 9.5 LTS
 -----------------------------
 
-To install a fresh TYPO3 (8.7 or 9.5) system, try the following installation procedure with composer::
+To install a fresh TYPO3 9.5 system, try the following installation procedure with composer::
 
     # Assuming the following settings:
     #   * the installation directory is /var/www/dfgviewer
@@ -44,7 +44,6 @@ To install a fresh TYPO3 (8.7 or 9.5) system, try the following installation pro
     www-data@localhost:/var/www> rm -r dfgviewer/
     # load full TYPO3 via composer
     www-data@localhost:/var/www> composer create-project typo3/cms-base-distribution:^9.5 dfgviewer
-    # If you want to use TYPO3 8 LTS then use this command: "composer create-project typo3/cms-base-distribution:^8.7 dfgviewer"
     # create FIRST_INSTALL file
     www-data@localhost:/var/www> cd dfgviewer/
     www-data@localhost:/var/www/dfgviewer> touch public/FIRST_INSTALL
@@ -80,21 +79,8 @@ Your *typo3conf/LocalConfiguration.php* should contain this::
           'pageNotFoundOnCHashError' => '0',
   ],
 
-Now you have a working TYPO3 8.7 or 9.5 LTS installation and you can continue with composer
+Now you have a working TYPO3 9.5 LTS installation and you can continue with composer
 to install DFG-Viewer extension.
-
-.. error::
-
-      If you are using e.g. TYPO3 8.7 and Debian 10 with MariaDB 10.3 you have to force an
-      update of Doctrine/Dbal. This is due to a missing feature / bug in
-      doctring/dbal 2.5.13. TYPO3 8.7 did not changed the dependancies for doctrine/dbal.
-
-      This way is working for the DFG-Viewer::
-
-          www-data@localhost:/var/www/dfgviewer> composer require doctrine/dbal 2.5.13
-          # in composer.json, change the following line:
-          # "doctrine/dbal": "2.7.2 as 2.5.13"
-          www-data@localhost:/var/www/dfgviewer> composer update doctrine/dbal --with-dependencies
 
 
 Install DFG-Viewer and Kitodo.Presentation via Composer
@@ -102,10 +88,9 @@ Install DFG-Viewer and Kitodo.Presentation via Composer
 
 Composer commands::
 
-    composer require kitodo/presentation:^3.1
-    composer require slub/dfgviewer:^5.0
+    composer require slub/dfgviewer:^5.1
 
-This will install the DFG-Viewer 5.x extension and Kitodo.Presentation 3.1 from
+This will install the DFG-Viewer 5.1 extension and Kitodo.Presentation 3.1 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
 Install the Extension via extension manager or CLI::
