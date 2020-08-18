@@ -101,7 +101,7 @@ class GridPager extends AbstractPlugin
                     'page' => NULL
                 ), TRUE);
         } else {
-            $markerArray['###FIRST###'] = '<span>' . $this->pi_getLL('firstPage', '', TRUE) . '</span>';
+            $markerArray['###FIRST###'] = '<span>' . htmlspecialchars($this->pi_getLL('firstPage', '')) . '</span>';
         }
 
         // Link back X pages.
