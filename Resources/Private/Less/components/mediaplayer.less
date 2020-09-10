@@ -7,6 +7,17 @@
     display: none !important;
   }
 }
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 .chapter {
   cursor: pointer;
 }
@@ -166,9 +177,20 @@
         align-items: center;
         align-content: center;
 
-        .time-remaining {
-          height: 2rem;
+        .time-counters {
+          cursor: pointer;
+          width: 6rem;
           line-height: 2rem;
+          text-align: left;
+          display: block;
+          position: relative;
+          &:before {
+            position: absolute;
+            left: 3.5rem;
+            font-size: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
 
         .jp-progress {
