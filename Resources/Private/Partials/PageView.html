@@ -77,7 +77,7 @@
                         <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' /></f:link.external>
                       </f:then>
                       <f:else>
-                        <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
+                        <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
                       </f:else>
                     </f:if>
                   </li>
