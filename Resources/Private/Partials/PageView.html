@@ -86,7 +86,7 @@
               <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars:'FALSE')}">
                 <f:then>
                   <li>
-                    <f:link.email email="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars: 'FALSE')}" class="local-contact" title="{f:translate(key:'provider.email_provider', extensionName:'dfgviewer')} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.email>
+                    <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars: 'FALSE')}" class="local-contact" title="{f:translate(key:'provider.email_provider', extensionName:'dfgviewer')} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.external>
                   </li>
                 </f:then>
                 <f:else>
