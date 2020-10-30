@@ -31,7 +31,7 @@
     @media screen and (min-width: @desktopViewportWidth) {
         width: 25%;
     }
-    
+
 /* ==============[ header bar (with logo, secondary navigation and language switch) ]===== */
     .header-bar {
         position: fixed;
@@ -244,7 +244,7 @@
             }
         }
     }
-    
+
 /* ==============[ metadata and table of contents (as offcanvas elements in mobile) ]===== */
     .metadata-wrapper, .toc-wrapper {
         position: absolute;
@@ -349,6 +349,36 @@ ul.toc {
         opacity: 0.5;
         font-weight: normal;
     }
+    li {
+        position: relative;
+        &.submenu {
+            &:before {
+                position: absolute;
+                top: 12px;
+                left: 10px;
+                width: 0;
+                height: 0;
+                content: " ";
+                border: 5px solid transparent;
+                border-right-width: 0;
+                border-left-color: #fff;
+            }
+        }
+        &.active {
+            background: rgba(255,255,255,0.1);
+            &:before {
+                left: 8px;
+                .transform(rotate(90deg));
+            }
+        }
+        .current {
+            & > a, & > span.a {
+                background: rgba(255,255,255,0.6);
+                color: @base-blue;
+                font-weight: 700;
+            }
+        }
+    }
     ul {
         position: relative;
         &:before {
@@ -383,8 +413,8 @@ ul.toc {
                 }
             }
             .current {
-                background: rgba(255,255,255,0.6);
-                a, span.a {
+                & > a, & > span.a {
+                    background: rgba(255,255,255,0.6);
                     color: @base-blue;
                     font-weight: 700;
                 }
