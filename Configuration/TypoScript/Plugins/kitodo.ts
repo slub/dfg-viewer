@@ -118,6 +118,9 @@ plugin.tx_dlf_tableofcontents {
     5 < .4
     6 < .5
     7 < .6
+    8 < .7
+    9 < .8
+    10 < .9
   }
 }
 

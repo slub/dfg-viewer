@@ -116,7 +116,7 @@
                   <f:if condition="{dc:downloadLinks(type:'page-right', pagenumber:gp-page)} !=''">
                     <li>
                       <f:link.external
-                        uri="{dc:downloadLinks()type:'page-right', pagenumber:gp-page}"
+                        uri="{dc:downloadLinks(type:'page-right', pagenumber:gp-page)}"
                         class="download-page"
                         title="{f:translate(key:'download.rightPage', extensionName:'dfgviewer')}">
                           <f:translate key="download.rightPage"  extensionName="dfgviewer" />
