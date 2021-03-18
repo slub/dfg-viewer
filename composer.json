@@ -37,13 +37,18 @@
   ],
   "license": "GPL-3.0-or-later",
   "require": {
-    "typo3/cms-core": "~9.5.20",
+    "typo3/cms-core": "~9.5.26",
     "kitodo/presentation": "~3.1.2",
     "slub/slub-digitalcollections": "~1.1.0"
   },
   "autoload": {
     "psr-4": {
       "Slub\\Dfgviewer\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "dfgviewer"
     }
   }
 }
