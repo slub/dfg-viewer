@@ -1,0 +1,11 @@
+# Configuration
+<INCLUDE_TYPOSCRIPT: source=""DIR:./Config/config.ts" extensions="typoscript">
+
+# Navigation
+<INCLUDE_TYPOSCRIPT: source=""DIR:./Navigation/language.ts" extensions="typoscript">
+
+# Plugin
+<INCLUDE_TYPOSCRIPT: source="DIR:./Plugins/" extensions="typoscript">
+
+## Page
+<INCLUDE_TYPOSCRIPT: source=""DIR:./Page/header.ts" extensions="typoscript">

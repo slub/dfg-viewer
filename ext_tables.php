@@ -1,4 +1,6 @@
 <?php
+defined('TYPO3_MODE') or die();
+
 /***************************************************************
 *  Copyright notice
 *
@@ -21,9 +23,3 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
-
-
-
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
