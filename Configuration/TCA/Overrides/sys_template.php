@@ -5,5 +5,17 @@ defined('TYPO3_MODE') or die();
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
     'dfgviewer',
     'Configuration/TypoScript',
-    'DFG Viewer'
+    'DFG-Viewer: Main TypoScript'
+);
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'dfgviewer',
+    'Configuration/TypoScript/Plugins/News/changelog.typoscript',
+    'DFG-Viewer: News: Changelog Configuration'
+);
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'dfgviewer',
+    'Configuration/TypoScript/Plugins/News/faq.typoscript',
+    'DFG-Viewer: News: FAQ Configuration'
 );

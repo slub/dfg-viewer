@@ -25,7 +25,7 @@ lib.metadata {
   showFull = 0
   rootline = 1
   separator = #
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/MobileMetadata.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/MobileMetadata.tmpl
 }
 
 plugin.tx_dlf_metadata {
@@ -44,7 +44,7 @@ lib.navigation_pagecontrol {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/NavigationPageControl.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationPageControl.tmpl
 }
 
 lib.navigation_viewfunction = USER
@@ -52,14 +52,14 @@ lib.navigation_viewfunction {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/NavigationViewFunction.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunction.tmpl
 }
 lib.navigation_viewfunction_deactivated = USER
 lib.navigation_viewfunction_deactivated {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
   pages = {$config.storagePid}
   pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/NavigationViewFunctionDeactivated.tmpl
+  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunctionDeactivated.tmpl
 }
 
 plugin.tx_dlf_pageview {
@@ -126,7 +126,7 @@ plugin.tx_dlf_tableofcontents {
 
 plugin.tx_dlf_pdfdownloadtool {
   # this file does not exist
-  toolTemplateFile = EXT:dfgviewer/Resources/Private/Templates/Plugins/Kitodo/toolboxPdf.tmpl
+  toolTemplateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/toolboxPdf.tmpl
 }
 
 plugin.tx_dlf_fulltexttool {
