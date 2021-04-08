@@ -5,6 +5,9 @@ plugin.tx_news {
         templateRootPaths.110=EXT:dfgviewer/Resources/Private/Plugins/News/Faq/Templates/
         partialRootPaths.110=EXT:dfgviewer/Resources/Private/Plugins/News/Faq/Partials/
     }
+    features {
+        skipDefaultArguments = 1
+    }
     settings {
         listPid = {$config.newsListPid}
         displayDummyIfNoMedia = 0
@@ -34,13 +37,7 @@ plugin.tx_news {
         }
         cropMaxCharacters = 270
         link {
-          hrDate = 1
-          hrDate {
-            # months with leading 0: 01 .. 12
-            month = m
-            # days with leading 0: 01 .. 31
-            day = d
-          }
+          hrDate = 0
         }
     }
 }
