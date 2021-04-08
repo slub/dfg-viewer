@@ -47,14 +47,19 @@ page {
 
 }
 
+# overwrite setting from fluid_styled_content
+# this avoids extra <p>&nbsp;</p> around every <pre>-tag
+lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.innerStdWrap_all.ifBlank >
+lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.nonWrappedTag >
+
 # -------------------------------
 # Diverses
 # -------------------------------
-[globalVar = TSFE:id = {$config.rootPid}]
+[getTSFE().id == {$config.rootPid}]
 page.bodyTag = <body class="website home">
 [global]
 
-[globalVar = TSFE:id = {$config.kitodoPageView}]
+[getTSFE().id == {$config.kitodoPageView}]
 page {
   bodyTag = <body class="dfgviewer hidden">
   10 {

@@ -12,7 +12,7 @@
   sys_language_overlay = hideNonTranslated
 }
 
-[globalVar = GP:L=1]
+[siteLanguage("languageId") == "1"]
 config {
   sys_language_uid = 1
   language = en

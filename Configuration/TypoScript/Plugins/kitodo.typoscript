@@ -145,23 +145,23 @@ plugin.tx_dlf_audioplayer {
 #  templateFile = {$config.templateFilePage}
 }
 
-[userFunc = user_dlf_docTypeCheck(newspaper, {$config.storagePid})] || [userFunc = user_dlf_docTypeCheck(ephemera, {$config.storagePid})]
+[getDocumentType("{$config.storagePid}") == "ephemera"] || [getDocumentType("{$config.storagePid}") == "newspaper"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
 }
-[global]
+[END]
 
-[userFunc = user_dlf_docTypeCheck(year, {$config.storagePid})]
+[getDocumentType("{$config.storagePid}") == "year"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_year
 }
-[global]
+[END]
 
-[userFunc = user_dlf_docTypeCheck(issue, {$config.storagePid})]
+[getDocumentType("{$config.storagePid}") == "issue"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_issue
 }
-[global]
+[END]
