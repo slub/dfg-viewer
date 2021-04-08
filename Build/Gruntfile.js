@@ -18,17 +18,22 @@ module.exports = function(grunt) {
                 }
             }
         },
-        uglify: {
+        terser: {
             development: {
                 options: {
-                    compress: true,
-                    preserveComments: false,
-                    yuicompress: true,
-                    optimization: 2
+                    compress: false,
                 },
                 files: {
-                    "Resources/Public/Javascript/allScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/js.cookie.js', 'Resources/Private/Javascript/dfgviewerScripts.js'],
-                    "Resources/Public/Javascript/webScripts.js" : ['Resources/Private/Javascript/modernizrCustom.js', 'Resources/Private/Javascript/websiteScripts.js']
+                    "Resources/Public/JavaScript/allScripts.js" : [
+                        'Resources/Private/JavaScript/modernizrCustom.js',
+                        'Resources/Private/JavaScript/js.cookie.js',
+                        'Resources/Private/JavaScript/dfgviewerScripts.js',
+                    ],
+                    "Resources/Public/JavaScript/webScripts.js" : [
+                        'Resources/Private/JavaScript/modernizrCustom.js',
+                        'Resources/Public/JavaScript/Highlight/highlight.pack.js',
+                        'Resources/Private/JavaScript/websiteScripts.js',
+                    ],
                 }
             }
         },
@@ -41,12 +46,12 @@ module.exports = function(grunt) {
                 }
             },
             js: {
-                files: ['Resources/Private/Javascript/*.js'],
-                tasks: ['uglify']
+                files: ['Resources/Private/JavaScript/*.js'],
+                tasks: ['terser']
             }
         }
     });
 
     grunt.file.setBase('../')
-    grunt.registerTask('default', ['less','uglify','watch']);
+    grunt.registerTask('default', ['less','terser','watch']);
 };
