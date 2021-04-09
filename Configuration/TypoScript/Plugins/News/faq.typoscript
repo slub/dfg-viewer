@@ -1,0 +1,43 @@
+# This adds optional news configuration
+
+plugin.tx_news {
+    view {
+        templateRootPaths.110=EXT:dfgviewer/Resources/Private/Plugins/News/Faq/Templates/
+        partialRootPaths.110=EXT:dfgviewer/Resources/Private/Plugins/News/Faq/Partials/
+    }
+    features {
+        skipDefaultArguments = 1
+    }
+    settings {
+        listPid = {$config.newsListPid}
+        displayDummyIfNoMedia = 0
+        analytics {
+            social {
+                facebookLike = 0
+                facebookShare = 0
+                twitter = 0
+            }
+        }
+        startingpoint = {$config.newsStoragePid}
+        list {
+            media {
+                image {
+                    maxWidth = 500
+                    maxHeight = 600
+                }
+            }
+        }
+        detail {
+            media {
+                image {
+                    maxWidth = 1200
+                    maxHeight = 900
+                }
+            }
+        }
+        cropMaxCharacters = 270
+        link {
+          hrDate = 0
+        }
+    }
+}

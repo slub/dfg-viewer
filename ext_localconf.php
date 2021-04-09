@@ -1,4 +1,6 @@
 <?php
+defined('TYPO3_MODE') or die();
+
 /***************************************************************
 *  Copyright notice
 *
@@ -23,8 +25,6 @@
 ***************************************************************/
 
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
-if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 // Register plugins.
 ExtensionManagementUtility::addPItoST43($_EXTKEY, 'Classes/Plugins/GridPager.php', '_gridpager', 'list_type', TRUE);

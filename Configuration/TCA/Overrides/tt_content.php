@@ -1,7 +1,5 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
 // Plugin "gridpager".
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$extKey.'_gridpager'] = 'layout,select_key,pages,recursive';

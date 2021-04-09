@@ -73,7 +73,7 @@ editor:
       - align-right
       - align-justify
 
-    codeSnippet_theme: 'obsidian'
+    codeSnippet_theme: 'magula'
     codeSnippet_languages:
       bash: 'Bash'
       html: 'HTML'
@@ -81,9 +81,9 @@ editor:
       javascript: 'JavaScript'
       php: 'PHP'
       css: 'CSS'
-      scss: 'Scss'
       typoscript: 'TypoScript'
       yaml: 'Yaml'
+      xml: 'XML'
 
     removePlugins:
       - image

@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+	  data-namespace-typo3-fluid="true">
+<!--
+	=====================
+		Partials/List/Item.html
+-->
+<tr>
+    <td>
+        <!-- date -->
+        <span class="news-list-date">
+            <time itemprop="datePublished" datetime="{f:format.date(date:newsItem.datetime, format:'Y-m-d')}">
+                <f:format.date format="{f:translate(key:'dateFormat')}">{newsItem.datetime}</f:format.date>
+            </time>
+        </span>
+    </td>
+    <td>
+        <n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}">
+            <span itemprop="headline">{newsItem.title}</span>
+        </n:link>
+    </td>
+</tr>
+</html>
