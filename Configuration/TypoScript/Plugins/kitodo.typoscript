@@ -54,6 +54,16 @@ lib.navigation_viewfunction {
   pageStep = 10
   templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunction.tmpl
 }
+
+# reduced mobile navigation (page select, fullscreen-button)
+lib.navigation_viewfunction_mobile = USER
+lib.navigation_viewfunction_mobile {
+  userFunc = Kitodo\Dlf\Plugin\Navigation->main
+  pages = {$config.storagePid}
+  pageStep = 10
+  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunctionMobile.tmpl
+}
+
 lib.navigation_viewfunction_deactivated = USER
 lib.navigation_viewfunction_deactivated {
   userFunc = Kitodo\Dlf\Plugin\Navigation->main
