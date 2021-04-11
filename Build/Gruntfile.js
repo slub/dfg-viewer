@@ -42,12 +42,15 @@ module.exports = function(grunt) {
                 files: ['Resources/Private/Less/**/*.less'],
                 tasks: ['less'],
                 options: {
-                    nospawn: true
+                    spawn: false
                 }
             },
             js: {
                 files: ['Resources/Private/JavaScript/*.js'],
-                tasks: ['terser']
+                tasks: ['terser'],
+                options: {
+                    spawn: false
+                }
             }
         }
     });
