@@ -4,10 +4,10 @@
 
 <div class="main-wrapper">
 		<f:render section="Header" partial="Header" arguments="{_all}" />
-		<!--TYPO3SEARCH_begin-->
-		<f:render section="Content" />
-		<!--TYPO3SEARCH_end-->
-		<f:render section="Footer" partial="Footer" arguments="{_all}" />
+
+        <f:render section="Content" />
+
+        <f:render section="Footer" partial="Footer" arguments="{_all}" />
 </div>
 <f:if condition="{piwik_idsite}">
 	<f:render section="Piwik" partial="Piwik" arguments="{_all}" />

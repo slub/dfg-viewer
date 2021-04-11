@@ -44,7 +44,7 @@
 		<trans-unit id="provider.no_local_presentation">
 			<source>No local presentation available</source>
 		</trans-unit>
-    <trans-unit id="provider.no_local_contact">
+        <trans-unit id="provider.no_local_contact">
 			<source>No email address given of data provider</source>
 		</trans-unit>
 		<trans-unit id="provider.local_catalogue">
@@ -67,6 +67,12 @@
 		</trans-unit>
 		<trans-unit id="toc">
 			<source>Table of Content</source>
+		</trans-unit>
+		<trans-unit id="browser-hint.outdated_browser">
+			<source>Outdated Browser</source>
+		</trans-unit>
+		<trans-unit id="browser-hint.outdated_browser.description">
+			<source>You use an outdated browser which lacks the support for modern JavaScript. Some features may not work as expected (e.g. images views). Please update to a current browser.</source>
 		</trans-unit>
 		</body>
 	</file>

@@ -905,4 +905,42 @@
     }
 }
 
+/* ==============[ browser hint e.g. for old IE11 and older Firefox browsers ]====================================== */
+#browser-hint {
+    &.hidden {
+        display: none;
+    }
+    padding: 10px 50px;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    z-index: 10;
+    width: 80%;
+    .alert {
+        padding: 20px;
+        background-color: @warning-red;
+        color: white;
+        margin-bottom: 15px;
+        p {
+            padding: 10px 0;
+            line-height: normal;
+        }
+    }
+    /* The close button */
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 40px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    /* When moving the mouse over the close button */
+    .closebtn:hover {
+        color: black;
+    }
+}
 // EOF

@@ -139,10 +139,10 @@ $(document).ready(function() {
         }
     }
 
-    // Finally all things are settled. Curtain up and bring back animations a second later.
-    $('body').removeClass('hidden');
-    setTimeout(function() { $('body').removeClass('static'); }, 1000);
-
+    // hide outdated browser hint, if cookie was found
+    if (Cookies.get('tx-dlf-pageview-hidebrowseralert') === 'true') {
+        $('#browser-hint').addClass('hidden');
+    }
 });
 
 $(document).keyup(function(e) {
@@ -179,5 +179,12 @@ function exitFullscreen() {
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
+// hide warning about outdated browser and save decission to cookie
+function hideBrowserAlert(){
+
+    $('#browser-hint').addClass('hidden');
+    Cookies.set('tx-dlf-pageview-hidebrowseralert', true, { sameSite: 'lax' });
+
+}
 
 // EOF
