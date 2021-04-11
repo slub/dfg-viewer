@@ -33,14 +33,6 @@ page {
   includeJSFooterlibs {
     dfgviewer = EXT:dfgviewer/Resources/Public/JavaScript/allScripts.js
   }
-  jsFooterInline {
-    10 = TEXT
-    10.value (
-        $(document).ready(function() {
-            showBrowserAlert();
-        });
-    )
-  }
   meta {
     # the object view must be excluded from index
     robots = noindex,nofollow
