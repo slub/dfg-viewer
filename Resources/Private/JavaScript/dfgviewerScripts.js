@@ -68,8 +68,6 @@ $(document).ready(function() {
         $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number">'+$('.pages select option[selected]').text()+'</dd>');
     }
 
-//    $('.view-functions .pages form, .view-functions .zoom a.fullscreen').clone().appendTo('.provider .mobile-controls');
-
     // Shorten mobile meta title
     shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
     shortenMobileMetaTitle = shortenMobileMetaElement.text();
