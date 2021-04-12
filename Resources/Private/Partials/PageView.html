@@ -6,6 +6,14 @@
 
 <f:section name="PageView">
   <div class="document-view">
+    <div id="browser-hint" class="hidden">
+        <div class="alert">
+            <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
+            <h2><f:translate key='browser-hint.outdated_browser' extensionName='dfgviewer' /></h2>
+            <p><f:translate key='browser-hint.outdated_browser.description' extensionName='dfgviewer' /></p>
+        </div>
+    </div>
+
     <f:if condition="{gp-pagegrid} == 1">
       <f:then>
         <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
@@ -299,7 +307,6 @@
         </f:else>
       </f:if>
     </div>
-
   </div>
 </f:section>
 </html>

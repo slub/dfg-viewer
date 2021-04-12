@@ -84,7 +84,7 @@ $(document).ready(function() {
     }
 
     // if cookie for fullscreen view is present adapat initial page rendering
-    if(Cookies.get('tx-dlf-pageview-zoomFullscreen')) {
+    if (Cookies.get('tx-dlf-pageview-zoomFullscreen') === 'true') {
         $('body').addClass('fullscreen static');
         $('a.fullscreen').addClass('active');
     }
@@ -139,9 +139,17 @@ $(document).ready(function() {
         }
     }
 
-    // Finally all things are settled. Curtain up and bring back animations a second later.
-    $('body').removeClass('hidden');
-    setTimeout(function() { $('body').removeClass('static'); }, 1000);
+    // hide outdated browser hint, if cookie was found
+    if (Cookies.get('tx-dlf-pageview-hidebrowseralert') === 'true') {
+        $('#browser-hint').addClass('hidden');
+    }
+
+    // Finally all things are settled. Bring back animations a second later.
+    setTimeout(function () {
+        localStorage.clear();
+        $('.fwds, .backs').removeClass('no-transition');
+        $('body').removeClass('static');
+    }, 1000);
 
 });
 
@@ -168,7 +176,7 @@ function enterFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").addClass('fullscreen');
     $('a.fullscreen').addClass('active');
-    Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true');
+    Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true', { sameSite: 'lax' });
 }
 
 // Exit fullscreen mode and drop cookie
@@ -179,5 +187,12 @@ function exitFullscreen() {
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
+// hide warning about outdated browser and save decission to cookie
+function hideBrowserAlert(){
+
+    $('#browser-hint').addClass('hidden');
+    Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
+
+}
 
 // EOF
