@@ -143,18 +143,19 @@ plugin.tx_dlf_pdfdownloadtool {
 }
 
 plugin.tx_dlf_fulltexttool {
-  templateFile = {$config.templateFileToolFulltext}
-  pages = {$config.storagePid}
+    pages = {$config.storagePid}
+    templateFile = {$config.templateFileToolFulltext}
 }
 
 plugin.tx_dlf_imagemanipulationtool {
-  templateFile = {$config.templateFileToolImageManipulation}
+    pages = {$config.storagePid}
+    templateFile = {$config.templateFileToolImageManipulation}
 }
 
 plugin.tx_dlf_audioplayer {
-  pages = {$config.storagePid}
-  excludeOther = 0
-  elementId = tx-dlf-audio
+    pages = {$config.storagePid}
+    excludeOther = 0
+    elementId = tx-dlf-audio
 #  templateFile = {$config.templateFilePage}
 }
 
