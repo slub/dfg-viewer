@@ -9,7 +9,7 @@ plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
 # map GET parameter set[image] --> tx_dlf[page]
-[request.getQueryParams()['set']['image'] > 1]
+[request.getQueryParams()['set']['image']]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [END]
 
