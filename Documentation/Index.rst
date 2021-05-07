@@ -14,14 +14,14 @@ The current release 5.x will only work with 9.5 LTS.
 
 The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
-both extensions. The installation in only possible by composer.
+both extensions. The installation is only supported via composer.
 Kitodo.presentation will be installed and configured automatically.
 
 System Requirements
 -------------------
 
 You need a webserver stack with Apache2 or Ngnix, PHP >= 7.3 and MySQL / MariaDB.
-Debian 10 (buster) is known to work with Kitodo.Presentation 3.1 and DFG-Viewer 5.0.
+Debian 10 (buster) is known to work with Kitodo.Presentation 3.2 and DFG-Viewer 5.2.
 
 We recommend at least:
 
@@ -40,16 +40,16 @@ To install a fresh TYPO3 9.5 system, try the following installation procedure wi
     #   * Apache is running as user www-data with group www-data
     #   * execution of all following commands as user www-data
     www-data@localhost:~/> cd /var/www/
-    # remove /var/www/dfgviewer if it already exist
+    # remove /var/www/dfgviewer if it already exist or make sure it's really empty by ls -la dfgviewer/
     www-data@localhost:/var/www> rm -r dfgviewer/
     # load full TYPO3 via composer
     www-data@localhost:/var/www> composer create-project typo3/cms-base-distribution:^9.5 dfgviewer
-    # create FIRST_INSTALL file
+    # Install the TYPO3 system with the TYPO3-console
     www-data@localhost:/var/www> cd dfgviewer/
-    www-data@localhost:/var/www/dfgviewer> touch public/FIRST_INSTALL
+    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3cms install:setup
 
-Now you can switch to the web-based installation of TYPO3 in your browser. Just
-follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
+Instead of using the TYPO3-console, you can you can switch to the web-based installation of TYPO3 in your
+browser. Just follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
 
     # continue with installation via webbrowser
     http://example.com/
@@ -73,11 +73,15 @@ Recommended Steps after Installation
 2. [optional] Change the backend language in your user settings to German.
 3. Go to the Install Tool --> All Configurations and change the default settings of pageNotFoundOnCHashError to '0'.
 
-Your *typo3conf/LocalConfiguration.php* should contain this::
+Your *typo3conf/LocalConfiguration.php* must contain this::
 
   'FE' => [
-          'pageNotFoundOnCHashError' => '0',
+          'pageNotFoundOnCHashError' => false,
   ],
+
+You can set this easily with the TYPO3-console::
+
+    ./vendor/bin/typo3cms configuration:set 'FE/pageNotFoundOnCHashError' 0
 
 Now you have a working TYPO3 9.5 LTS installation and you can continue with composer
 to install DFG-Viewer extension.
@@ -88,15 +92,18 @@ Install DFG-Viewer and Kitodo.Presentation via Composer
 
 Composer commands::
 
-    composer require slub/dfgviewer:^5.1
+    # make sure you haven't set the platform php version to 7.2
+    composer config platform.php 7.3
+    # install DFG-Viewer extension
+    composer require slub/dfgviewer:^5.2
 
-This will install the DFG-Viewer 5.1 extension and Kitodo.Presentation 3.1 from
+This will install the DFG-Viewer 5.2 extension and Kitodo.Presentation 3.2 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
 Install the Extension via extension manager or CLI::
 
-    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extensionmanager:extension:install dlf
-    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extensionmanager:extension:install dfgviewer
+    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extension:activate dlf
+    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extension:activate dfgviewer
 
 During the installation, three pages will be created: a root page, the "Kitodo
 Configuration" folder and the viewer itself.
@@ -126,8 +133,7 @@ Known Problems
 You should use the following configuration in *typo3conf/LocalConfiguration.php*::
 
   'FE' => [
-          'pageNotFoundOnCHashError' => '0',
-          'pageNotFound_handling' => '',
+          'pageNotFoundOnCHashError' => false,
   ],
 
 If you want to reinstall the DFG-Viewer extension, the metadata and structure
