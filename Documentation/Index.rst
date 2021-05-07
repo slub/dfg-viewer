@@ -138,7 +138,7 @@ You should use the following configuration in *typo3conf/LocalConfiguration.php*
 
 If you want to reinstall the DFG-Viewer extension, the metadata and structure
 records won't be created a second time. To force this, you have to delete the
-entry in table 'sys_references'.
+entry in table 'sys_registry'.
 
 Contact and Issues
 ------------------
