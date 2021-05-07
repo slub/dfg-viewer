@@ -38,4 +38,4 @@ page {
     robots = noindex,nofollow
   }
 }
-[global]
+[END]

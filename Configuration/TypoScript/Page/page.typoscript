@@ -62,7 +62,7 @@ lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.nonWrappedTag >
 # -------------------------------
 [getTSFE().id == {$config.rootPid}]
 page.bodyTag = <body class="website home">
-[global]
+[END]
 
 [getTSFE().id == {$config.kitodoPageView}]
 page {
@@ -86,4 +86,4 @@ page {
     }
   }
 }
-[global]
+[END]
