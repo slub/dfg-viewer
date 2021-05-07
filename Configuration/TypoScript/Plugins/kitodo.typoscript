@@ -78,6 +78,7 @@ plugin.tx_dlf_pageview {
   features =
   elementId = tx-dfgviewer-map
   templateFile = {$config.templateFilePage}
+  fileGrpImages = MIN,MAX,DEFAULT
 }
 
 plugin.tx_dlf_pagegrid {
