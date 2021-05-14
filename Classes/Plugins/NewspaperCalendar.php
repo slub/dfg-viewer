@@ -36,7 +36,8 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  * @subpackage	tx_dfgviewer
  * @access	public
  */
-class NewspaperCalendar extends AbstractPlugin {
+class NewspaperCalendar extends AbstractPlugin 
+{
 
     public $extKey = 'dfgviewer';
 
@@ -57,7 +58,8 @@ class NewspaperCalendar extends AbstractPlugin {
      *
      * @return	string		The content that is displayed on the website
      */
-    public function main($content, $conf) {
+    public function main($content, $conf) 
+    {
         $this->init($conf);
 
         // Load current document.
