@@ -4,17 +4,17 @@ config.disableWrapInBaseClass=1
 plugin.tx_dlf.useragent = {$config.useragent}
 
 # map GET parameter set[mets] --> tx_dlf[id]
-[like(request.getQueryParams()['set']['mets'], 'http*')]
+[like(traverse(request.getQueryParams(), 'set/mets'), 'http*')]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
 # map GET parameter set[image] --> tx_dlf[page]
-[request.getQueryParams()['set']['image']]
+[traverse(request.getQueryParams(), 'set/image')]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [END]
 
 # map GET parameter set[double] --> tx_dlf[double]
-[request.getQueryParams()['set']['double'] > 0]
+[traverse(request.getQueryParams(), 'set/double') > 0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [END]
 
