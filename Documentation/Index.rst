@@ -130,11 +130,51 @@ To pass a document to the viewer, use the tx_dlf[id] GET parameter. Don't forget
 Known Problems
 --------------
 
-You should use the following configuration in *typo3conf/LocalConfiguration.php*::
+404 - Page Not Found
+~~~~~~~~~~~~~~~~~~~~
 
-  'FE' => [
-          'pageNotFoundOnCHashError' => false,
-  ],
+If you get a "404 - Page Not Found" error on calling the viewer you are missing
+the following configuration in *typo3conf/LocalConfiguration.php*::
+
+    'FE' => [
+        'pageNotFoundOnCHashError' => false,
+    ],
+
+Background is the parameter you pass with :code:`tx_dlf[id]` contains no cHash.
+The default behaviour of TYPO3 is to throw an 404 exception. As it is impossible
+to calculate the cHash from outside the TYPO3 system, we have to disable this
+security feature by the setting above.
+
+This will cause now an uncached delivery of the viewer page.
+
+Empty Viewer Page
+~~~~~~~~~~~~~~~~~
+
+You may notice from time to time, the viewer page keeps empty even though you
+pass the :code:`tx_dlf[id]` parameter.
+
+This happens, if someone called the viewer page without any parameters. In this
+case, TYPO3 saves the page to it's cache. If you call the viewer page again with
+any parameter and without a cHash, the (empty) cached page is delivered.
+
+To avoid this, you must configure :code:`tx_dlf[id]` to require a cHash. Of
+course this is impossible to achieve so the system will process the page uncached.
+
+Add this setting to your *typo3conf/LocalConfiguration.php*::
+
+    'FE' => [
+        'cacheHash' => [
+            'requireCacheHashPresenceParameters' => [
+                'tx_dlf[id]',
+                'set[mets]',
+            ],
+        ],
+    ]
+
+Tip: Use the admin backend module: Settings -> Configure Installation-Wide Options
+
+Re-Install the DFG-Viewer extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to reinstall the DFG-Viewer extension, the metadata and structure
 records won't be created a second time. To force this, you have to delete the
