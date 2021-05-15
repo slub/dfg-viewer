@@ -4045,7 +4045,7 @@
 				<field index="type">MODS</field>
 				<field index="root">mods</field>
 				<field index="namespace">http://www.loc.gov/mods/v3</field>
-				<field index="class">Kitodo\\Dlf\\Format\\Mods</field>
+				<field index="class">Kitodo\Dlf\Format\Mods</field>
 			</fieldlist>
 			<related index="rels" type="array"></related>
 		</tablerow>
@@ -4060,7 +4060,7 @@
 				<field index="type">TEIHDR</field>
 				<field index="root">teiHeader</field>
 				<field index="namespace">http://www.tei-c.org/ns/1.0</field>
-				<field index="class">Kitodo\\Dlf\\Format\\TeiHeader</field>
+				<field index="class">Kitodo\Dlf\Format\TeiHeader</field>
 			</fieldlist>
 			<related index="rels" type="array"></related>
 		</tablerow>

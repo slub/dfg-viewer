@@ -1,4 +1,4 @@
-# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer 4.0
+# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer >4.0
 config.disableWrapInBaseClass=1
 
 plugin.tx_dlf.useragent = {$config.useragent}
@@ -159,7 +159,7 @@ plugin.tx_dlf_audioplayer {
 #  templateFile = {$config.templateFilePage}
 }
 
-[getDocumentType("{$config.storagePid}") == "ephemera"] || [getDocumentType("{$config.storagePid}") == "newspaper"]
+[getDocumentType("{$config.storagePid}") == "ephemera" or getDocumentType("{$config.storagePid}") == "newspaper"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
