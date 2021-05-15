@@ -1,20 +1,20 @@
-# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer 4.0
+# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer >4.0
 config.disableWrapInBaseClass=1
 
 plugin.tx_dlf.useragent = {$config.useragent}
 
 # map GET parameter set[mets] --> tx_dlf[id]
-[like(request.getQueryParams()['set']['mets'], 'http*')]
+[like(traverse(request.getQueryParams(), 'set/mets'), 'http*')]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
 # map GET parameter set[image] --> tx_dlf[page]
-[request.getQueryParams()['set']['image']]
+[traverse(request.getQueryParams(), 'set/image')]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [END]
 
 # map GET parameter set[double] --> tx_dlf[double]
-[request.getQueryParams()['set']['double'] > 0]
+[traverse(request.getQueryParams(), 'set/double') > 0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [END]
 
@@ -159,7 +159,7 @@ plugin.tx_dlf_audioplayer {
 #  templateFile = {$config.templateFilePage}
 }
 
-[getDocumentType("{$config.storagePid}") == "ephemera"] || [getDocumentType("{$config.storagePid}") == "newspaper"]
+[getDocumentType("{$config.storagePid}") == "ephemera" or getDocumentType("{$config.storagePid}") == "newspaper"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
