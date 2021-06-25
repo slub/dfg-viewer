@@ -64,13 +64,13 @@ config {
     templateFileSru = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/Sru.tmpl
 
     news {
-        # cat=plugin.tx_dfgviewer/links/020; type=int+; label=Changelog Storage Pid
+        # cat=plugin.tx_dfgviewer/links/020; type=int+; label=News Storage Pid
         storagePid =
 
-        # cat=plugin.tx_dfgviewer/links/020; type=int+; label=Changelog List Pid
+        # cat=plugin.tx_dfgviewer/links/020; type=int+; label=News List Pid
         listPid =
 
-        # cat=plugin.tx_dfgviewer/links/020; type=int+; label=Changelog Detail Pid
+        # cat=plugin.tx_dfgviewer/links/020; type=int+; label=News Detail Pid
         detailPid =
     }
 }

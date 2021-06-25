@@ -2938,7 +2938,7 @@
 				<rec index="56" type="array">
 					<uid>56</uid>
 					<pid>3</pid>
-					<title>Peridica</title>
+					<title>Periodica</title>
 					<relations index="rels" type="array"></relations>
 					<softrefs type="array"></softrefs>
 				</rec>
@@ -12095,7 +12095,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 				<field index="hidden" type="integer">0</field>
 				<field index="l10n_state" type="NULL"></field>
 				<field index="toplevel" type="integer">1</field>
-				<field index="label">Peridica</field>
+				<field index="label">Periodica</field>
 				<field index="index_name">periodical</field>
 				<field index="oai_name"></field>
 				<field index="thumbnail" type="integer">0</field>
