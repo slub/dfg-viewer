@@ -6,10 +6,10 @@ plugin.tx_news {
         partialRootPaths.110=EXT:dfgviewer/Resources/Private/Plugins/News/Changelog/Partials/
     }
     features {
-        skipDefaultArguments = 1
+        skipDefaultArguments = 0
     }
     settings {
-        listPid = {$config.newsListPid}
+        listPid = {$config.news.listPid}
         displayDummyIfNoMedia = 0
         analytics {
             social {
@@ -18,7 +18,7 @@ plugin.tx_news {
                 twitter = 0
             }
         }
-        startingpoint = {$config.newsStoragePid}
+        startingpoint = {$config.news.storagePid}
         list {
             media {
                 image {
