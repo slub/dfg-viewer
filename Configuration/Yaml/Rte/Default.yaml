@@ -109,11 +109,11 @@ buttons:
       enabled: true
     properties:
       class:
-        allowedClasses: 'link-internal,link-internal-arrow,link-internal-blank,link-download,link-folder,link-external,link-external-arrow,link-external-blank,link-mail'
+        allowedClasses: 'link-more,link-download,link-folder,link-external,link-external-arrow,link-external-blank,link-mail'
     page:
       properties:
         class:
-          default: 'link-internal'
+          default: ''
     file:
       properties:
         class:
@@ -134,16 +134,8 @@ buttons:
   # Classes config
 classesAnchor:
   linkInternal:
-    class: 'link-internal'
+    class: 'link-more'
     type: 'page'
-#    titleText: 'LLL:EXT:slub_web_boersenblatt/Resources/Private/Language/locallang.xlf:link_internal_titleText'
-  linkInternalArrow:
-    class: 'link-internal-arrow'
-    type: 'page'
-  linkInternalBlank:
-    class: 'link-internal-blank'
-    type: 'page'
-    target: '_blank'
   linkDownload:
     class: 'link-download'
     type: 'file'
@@ -163,7 +155,3 @@ classesAnchor:
   linkMail:
     class: 'link-mail'
     type: 'mail'
-
-#classes:
-#  link-internal:
-#    name: 'LLL:EXT:slub_web_boersenblatt/Resources/Private/Language/locallang.xlf:link_internal_altText'
