@@ -6048,7 +6048,7 @@ value.required = 1
 value.typolink.parameter.current = 1
 value.typolink.parameter.rawUrlEncode = 1
 value.typolink.parameter.prepend = TEXT
-value.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=8002&amp;TRM=
+value.typolink.parameter.prepend.value = https://kxp.k10plus.de/DB=1.28/CMD?ACT=SRCHA&amp;IKT=8079&amp;TRM=
 value.wrap = &lt;dd&gt;[|]&lt;/dd&gt;</field>
 				<field index="index_tokenized" type="integer">0</field>
 				<field index="index_stored" type="integer">1</field>
@@ -6096,7 +6096,7 @@ value.required = 1
 value.typolink.parameter.current = 1
 value.typolink.parameter.rawUrlEncode = 1
 value.typolink.parameter.prepend = TEXT
-value.typolink.parameter.prepend.value = http://gso.gbv.de/xslt/DB=1.28/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=8002&amp;TRM=
+value.typolink.parameter.prepend.value = https://kxp.k10plus.de/DB=1.28/CMD?ACT=SRCHA&amp;IKT=8079&amp;TRM=
 value.wrap = &lt;dd&gt;[|]&lt;/dd&gt;</field>
 				<field index="index_tokenized" type="integer">0</field>
 				<field index="index_stored" type="integer">1</field>
