@@ -11,26 +11,107 @@
       <xs:documentation>Root element for metadata which describe the rights to the digital representation of the digitally represented work</xs:documentation>
     </xs:annotation>
     <!-- references:
-         - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/Resources
+         - https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf
+         - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/src/main/java/org/kitodo/production/services/schema/SchemaService.java
          - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Resources/Private/Partials/PageView.html
     -->
     <xs:complexType>
-      <!-- order is irrelevant -->
-      <xs:all>
+      <xs:sequence>
         <!-- todo: add documentation -->
-        <xs:element name="owner" type="xs:string" minOccurs="0"/>
-        <xs:element name="ownerLogo" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="ownerSiteURL" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="ownerContact" type="xs:string" minOccurs="0"/>
-        <xs:element name="aggregator" type="xs:string" minOccurs="0"/>
-        <xs:element name="aggregatorLogo" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="aggregatorSiteURL" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="aggregatorContact" type="xs:string" minOccurs="0"/>
-        <xs:element name="sponsor" type="xs:string" minOccurs="0"/>
-        <xs:element name="sponsorLogo" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="sponsorSiteURL" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="sponsorContact" type="xs:string" minOccurs="0"/>
-      </xs:all>
+        <xs:element name="owner" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>name of the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ownerLogo" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>logo URL of the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ownerSiteURL" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>website URL of the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ownerContact" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>contact (email/webform) at the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregator" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>name of the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregatorLogo" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>logo URL of the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregatorSiteURL" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>website URL of the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregatorContact" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>contact (email/webform) at the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsor" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>name of the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsorLogo" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>logo URL of the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsorSiteURL" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>website URL of the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsorContact" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>contact (email/webform) at the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="license" minOccurs="0" default="reserved">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="pdm">
+                <xs:annotation><xs:documentation>Marking as public domain</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc0">
+                <xs:annotation><xs:documentation>Licensing as a CCO-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-sa">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-SA-license,</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nd">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-ND-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nc">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-NC-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nc-sa">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-NC-SA-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nc-nd">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-NC-ND-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="reserved">
+                <xs:annotation><xs:documentation>other rights reserved</xs:documentation></xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
       <xs:attribute name="schemaVersion" type="xs:decimal" default="1.0"/>
     </xs:complexType>
   </xs:element>
@@ -41,27 +122,47 @@
       <xs:documentation>Root element for metadata which describe the development of the digital representation of the digitally represented work.</xs:documentation>
     </xs:annotation>
     <xs:complexType>
-      <!-- order is irrelevant -->
-      <xs:all>
-        <!-- todo: add documentation -->
+      <xs:sequence>
         <!-- references: 
-             - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Classes/Plugins/Sru/SruEid.php
+             - https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf
+             - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/src/main/java/org/kitodo/production/services/schema/SchemaService.java
              - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Resources/Private/Partials/PageView.html
         -->
-        <xs:element name="presentation" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="reference" minOccurs="0">
+        <xs:element name="reference" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>reference to a catalogue or search guide</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:simpleContent>
               <xs:extension base="xs:anyURI">
-                <!-- fixme: is this correct? -->
                 <xs:attribute name="linktext" type="xs:string"/>
               </xs:extension>
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="iiif" type="xs:anyURI" minOccurs="0"/>
-        <xs:element name="sru" type="xs:anyURI" minOccurs="0"/>
-      </xs:all>
+        <xs:element name="presentation" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>reference to a local presentation website</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sru" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>link to the Search/Retrieve via URL.
+            The specification has to be made in form of a valid URL but without URL parameter.
+            The DFG viewer adds the required SRU-parameters necessary for the query of the interface
+            automatically. The SRU/ALTO application profile in version 1.0 describes  which  parameter
+            the interface has to support as a minimum.</xs:documentation>
+            <xs:appinfo>http://www.loc.gov/standards/sru/</xs:appinfo>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="iiif" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>link to an IIIF manifest of the digital object
+            Has to be a valid URI of a Presentation API of the International Image Interoperability Framework (IIIF).</xs:documentation>
+            <xs:appinfo>https://iiif.io/api/presentation/</xs:appinfo>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
       <xs:attribute name="schemaVersion" type="xs:decimal" default="1.0"/>
     </xs:complexType>
   </xs:element>
@@ -69,7 +170,8 @@
   <!-- to be included in mets:amdSec/mets:techMD -->
   <!-- fixme: root name unknown
        references: 
-       - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Classes/Plugins/Sru/SruEid.php
+       - https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf
+       - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/src/main/java/org/kitodo/production/services/schema/SchemaService.java
   <xs:element name="?">
     <xs:annotation>
       <xs:documentation>Root element for metadata that is necessary for the technical processing in any way and therefore needs to be stored somewhere.</xs:documentation>
