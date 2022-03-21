@@ -15,9 +15,6 @@ config {
     # cat=plugin.tx_dfgviewer/links/050; type=int+; label=Kitodo Page View
     kitodoPageView =
 
-    # cat=plugin.tx_dfgviewer/string/051; type=string; label=User-Agent string for HTTP requests
-    useragent = DFG-Viewer, https://dfg-viewer.de
-
     # cat=plugin.tx_dfgviewer/piwik/010; type=string; label=Piwik Hostname
     piwik_hostname =
 

@@ -1,45 +1,70 @@
-# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer >4.0
-config.disableWrapInBaseClass=1
+# -----------------------------------
+# Map GET paramter set[] --> tx_dlf[]
+# -----------------------------------
 
-plugin.tx_dlf.useragent = {$config.useragent}
-
-# map GET parameter set[mets] --> tx_dlf[id]
+# map set[mets] --> tx_dlf[id]
 [like(traverse(request.getQueryParams(), 'set/mets'), 'http*')]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
-# map GET parameter set[image] --> tx_dlf[page]
+# map set[image] --> tx_dlf[page]
 [traverse(request.getQueryParams(), 'set/image')]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [END]
 
-# map GET parameter set[double] --> tx_dlf[double]
+# map set[double] --> tx_dlf[double]
 [traverse(request.getQueryParams(), 'set/double') > 0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [END]
 
-lib.metadata = USER
-lib.metadata {
-  userFunc = Kitodo\Dlf\Plugin\Metadata->main
-  excludeOther = 0
-  linkTitle = 1
-  getTitle = 1
-  showFull = 0
-  rootline = 1
-  separator = #
-  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/MobileMetadata.tmpl
+
+# --------------------------------------------------------------------------------------------------------------------
+# plugin configuration
+# --------------------------------------------------------------------------------------------------------------------
+
+plugin.tx_dlf {
+    persistence {
+        storagePid = {$config.storagePid}
+    }
+	view {
+		partialRootPaths {
+			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
+			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Partials
+		}
+		templateRootPaths {
+			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates
+			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Templates
+		}
+	}
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# metadata
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_metadata < tt_content.list.20.dlf_metadata
 plugin.tx_dlf_metadata {
-  pages = {$config.storagePid}
-  excludeOther = 0
-  linkTitle = 0
-  getTitle = 0
-  showFull = 1
-  rootline = 1
-  separator = #
-  templateFile = {$config.templateFileMeta}
+    settings {
+        excludeOther = 0
+        linkTitle = 0
+        getTitle = 0
+        showFull = 1
+        rootline = 1
+        separator = #
+    }
 }
+
+# --------------------------------------------------------------------------------------------------------------------
+# pageview / workview
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
+plugin.tx_dlf_pageview {
+    settings {
+        excludeOther = {$config.kitodo.excludeOther}
+        features =
+        elementId = tx-dlf-map
+    }
+}
+
 
 lib.navigation_pagecontrol = USER
 lib.navigation_pagecontrol {
@@ -91,7 +116,20 @@ plugin.tx_dlf_pagegrid {
   templateFile = {$config.templateFileGrid}
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# table of contents
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_tableofcontents < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_tableofcontents {
+    settings {
+        excludeOther = 0
+        targetPid = {$config.kitodoPageView}
+        menuConf {
+            expAll = 1
+        }
+    }
+}
+plugin.tx_dlf_tableofcontentss {
   pages = {$config.storagePid}
   excludeOther = 0
   targetPid.data = TSFE:page|uid
@@ -137,27 +175,57 @@ plugin.tx_dlf_tableofcontents {
   }
 }
 
-plugin.tx_dlf_pdfdownloadtool {
-  # this file does not exist
-  toolTemplateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/toolboxPdf.tmpl
+# --------------------------------------------------------------------------------------------------------------------
+# Tools like imagemanipulation, fulltext and downloads eg.
+# --------------------------------------------------------------------------------------------------------------------
+
+# available tools:
+
+# fulltexttool
+# annotationtool
+# fulltextdownloadtool
+# imagedownloadtool
+# imagemanipulationtool
+# pdfdownloadtool
+# searchindocumenttool
+
+plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
+plugin.tx_dlf_toolbox {
+    settings {
+#        fileGrpsImageDownload = MIN,DEFAULT,MAX
+    }
 }
 
+plugin.tx_dlf_fulltexttool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_fulltexttool {
-    pages = {$config.storagePid}
-    templateFile = {$config.templateFileToolFulltext}
+    settings {
+        tools = fulltexttool
+        activateFullTextInitially = 0
+        fullTextScrollElement = html, body
+    }
 }
 
+plugin.tx_dlf_imagemanipulationtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_imagemanipulationtool {
-    pages = {$config.storagePid}
-    templateFile = {$config.templateFileToolImageManipulation}
+    settings {
+        tools = imagemanipulationtool
+    }
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# Audio player
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_audioplayer < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_audioplayer {
-    pages = {$config.storagePid}
-    excludeOther = 0
-    elementId = tx-dlf-audio
-#  templateFile = {$config.templateFilePage}
+    settings {
+        excludeOther = 0
+        elementId = tx-dlf-audio
+    }
 }
+
+# --------------------------------------------------------------------------------------------------------------------
+# newspaper navigation
+# --------------------------------------------------------------------------------------------------------------------
 
 [getDocumentType("{$config.storagePid}") == "ephemera" or getDocumentType("{$config.storagePid}") == "newspaper"]
 page.10.variables {

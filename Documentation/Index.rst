@@ -102,8 +102,8 @@ This will install the DFG-Viewer 5.2 extension and Kitodo.Presentation 3.2 from
 
 Install the Extension via extension manager or CLI::
 
-    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extension:activate dlf
-    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3 extension:activate dfgviewer
+    ./vendor/bin/typo3 extension:activate dlf
+    ./vendor/bin/typo3 extension:activate dfgviewer
 
 During the installation, three pages will be created: a root page, the "Kitodo
 Configuration" folder and the viewer itself.
