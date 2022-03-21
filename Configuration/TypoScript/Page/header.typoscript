@@ -9,7 +9,7 @@ page {
     highlight = EXT:dfgviewer/Resources/Public/JavaScript/Highlight/styles/magula.css
   }
   includeJSFooterlibs {
-    jQuery = EXT:dfgviewer/Resources/Public/JavaScript/jQuery/jquery-3.5.1.min.js
+    jQuery = EXT:dfgviewer/Resources/Public/JavaScript/jQuery/jquery-3.6.0.min.js
     jQuery.forceOnTop = 1
     jQueryUiMouseSlider = EXT:dlf/Resources/Public/Javascript/jQueryUI/jquery-ui-mouse-slider-resizable-autocomplete.js
     dfgviewer = EXT:dfgviewer/Resources/Public/JavaScript/webScripts.js

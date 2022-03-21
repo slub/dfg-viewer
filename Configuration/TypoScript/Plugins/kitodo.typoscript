@@ -108,12 +108,25 @@ plugin.tx_dlf_pageview {
   fileGrpImages = MIN,MAX,DEFAULT
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# thumbnail previews
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_pagegrid < tt_content.list.20.dlf_pagegrid
 plugin.tx_dlf_pagegrid {
-  pages = {$config.storagePid}
-  limit = 24
-  placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
-  targetPid = #
-  templateFile = {$config.templateFileGrid}
+    settings {
+        targetPid = #
+        placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
+        paginate {
+            itemsPerPage = 24
+            insertAbove = 0
+            insertBelow = 1
+            lessPages = 1
+            forcedNumberOfLinks = 5
+            pagesBefore = 3
+            pagesAfter = 3
+            section =
+        }
+    }
 }
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -129,6 +142,8 @@ plugin.tx_dlf_tableofcontents {
         }
     }
 }
+
+
 plugin.tx_dlf_tableofcontentss {
   pages = {$config.storagePid}
   excludeOther = 0
@@ -212,10 +227,17 @@ plugin.tx_dlf_imagemanipulationtool {
     }
 }
 
+plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_pdfdownloadtool {
+    settings {
+        tools = pdfdownloadtool
+    }
+}
+
 # --------------------------------------------------------------------------------------------------------------------
 # Audio player
 # --------------------------------------------------------------------------------------------------------------------
-plugin.tx_dlf_audioplayer < tt_content.list.20.dlf_tableofcontents
+plugin.tx_dlf_audioplayer < tt_content.list.20.dlf_audioplayer
 plugin.tx_dlf_audioplayer {
     settings {
         excludeOther = 0
