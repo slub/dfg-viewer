@@ -27,8 +27,6 @@ defined('TYPO3_MODE') or die();
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 // Register plugins.
-ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/Uri.php', '_uri', 'list_type', TRUE);
-
 ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/NewspaperCalendar.php', '_newspapercalendar', 'list_type', TRUE);
 
 ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/NewspaperYears.php', '_newspaperyears', 'list_type', TRUE);
@@ -38,6 +36,14 @@ ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/Sru/Sru.ph
 // Register eID handlers.
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['tx_dfgviewer_sru_eid'] = \Slub\Dfgviewer\Plugins\Sru\SruEid::class . '::main';
 
-//register rte settings
-$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['dfgviewer'] =
-    'EXT:dfgviewer/Configuration/Yaml/Rte/Default.yaml';
+// Register Extbase plugins
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Slub.Dfgviewer',
+    'Uri',
+    [
+        Uri::class => 'main'
+    ],
+    // non-cacheable actions
+    [
+    ]
+);
