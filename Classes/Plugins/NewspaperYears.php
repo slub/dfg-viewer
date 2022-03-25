@@ -4,7 +4,7 @@ namespace Slub\Dfgviewer\Plugins;
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2014 Alexander Bigga <alexander.bigga@slub-dresden.de>
+*  (c) 2014 Alexander Bigga <typo3@slub-dresden.de>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,7 +30,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 /**
  * Plugin 'DFG-Viewer: Newspaper Year Listing' for the 'dfgviewer' extension.
  *
- * @author  Alexander Bigga <alexander.bigga@slub-dresden.de>
+ * @author  Alexander Bigga <typo3@slub-dresden.de>
  * @copyright  Copyright (c) 2014, Alexander Bigga, SLUB Dresden
  * @package  TYPO3
  * @subpackage  tx_dfgviewer
