@@ -39,14 +39,14 @@ To install a fresh TYPO3 9.5 system, try the following installation procedure wi
     #   * the Apache DocumentRoot is /var/www/dfgviewer/public
     #   * Apache is running as user www-data with group www-data
     #   * execution of all following commands as user www-data
-    www-data@localhost:~/> cd /var/www/
+    cd /var/www/
     # remove /var/www/dfgviewer if it already exist or make sure it's really empty by ls -la dfgviewer/
-    www-data@localhost:/var/www> rm -r dfgviewer/
+    rm -r dfgviewer/
     # load full TYPO3 via composer
-    www-data@localhost:/var/www> composer create-project typo3/cms-base-distribution:^9.5 dfgviewer
+    composer create-project typo3/cms-base-distribution:^9.5 dfgviewer
     # Install the TYPO3 system with the TYPO3-console
-    www-data@localhost:/var/www> cd dfgviewer/
-    www-data@localhost:/var/www/dfgviewer> ./vendor/bin/typo3cms install:setup
+    cd dfgviewer/
+    ./vendor/bin/typo3cms install:setup
 
 Instead of using the TYPO3-console, you can you can switch to the web-based installation of TYPO3 in your
 browser. Just follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
