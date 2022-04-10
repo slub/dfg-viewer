@@ -22,6 +22,12 @@ plugin.tx_dfgviewer_uri {
     }
 }
 
+plugin.tx_dfgviewer_calendar < tt_content.list.20.dfgviewer_calendar
+plugin.tx_dfgviewer_calendar {
+    settings {
+    }
+}
+
 plugin.tx_dfgviewer_newspapercalendar {
   userFunc = Slub\Dfgviewer\Plugins\NewspaperCalendar->main
   pages = {$config.storagePid}

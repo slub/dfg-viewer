@@ -44,7 +44,6 @@ plugin.tx_dlf {
 plugin.tx_dlf_metadata < tt_content.list.20.dlf_metadata
 plugin.tx_dlf_metadata {
     settings {
-        excludeOther = 0
         linkTitle = 0
         getTitle = 0
         showFull = 1
@@ -59,7 +58,6 @@ plugin.tx_dlf_metadata {
 plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
 plugin.tx_dlf_pageview {
     settings {
-        excludeOther = 0
         features =
         elementId = tx-dfgviewer-map
     }
@@ -92,7 +90,6 @@ plugin.tx_dlf_pagegrid {
 plugin.tx_dlf_tableofcontents < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_tableofcontents {
     settings {
-        excludeOther = 0
         targetPid = {$config.kitodoPageView}
         menuConf {
             expAll = 1
@@ -176,7 +173,6 @@ plugin.tx_dlf_pdfdownloadtool {
 plugin.tx_dlf_audioplayer < tt_content.list.20.dlf_audioplayer
 plugin.tx_dlf_audioplayer {
     settings {
-        excludeOther = 0
         elementId = tx-dlf-audio
     }
 }
