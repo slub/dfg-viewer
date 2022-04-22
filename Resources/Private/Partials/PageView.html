@@ -1,184 +1,263 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
-      xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers"
-      data-namespace-typo3-fluid="true"
-      lang="en">
+  xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
+  xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-  <div class="document-view">
-    <div id="browser-hint" class="hidden">
-        <div class="alert">
-            <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
-            <h2><f:translate key='browser-hint.outdated_browser' extensionName='dfgviewer' /></h2>
-            <p><f:translate key='browser-hint.outdated_browser.description' extensionName='dfgviewer' /></p>
-        </div>
+  <f:if condition="{isObject3D} == 'collection'">
+    <f:then>
+      <div class="document-view" style="overflow-y: auto;">
+    </f:then>
+    <f:else>
+      <div class="document-view">
+    </f:else>
+  </f:if>
+  <div id="browser-hint" class="hidden">
+    <div class="alert">
+      <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
+      <h2>
+        <f:translate key='browser-hint.outdated_browser' extensionName='dfgviewer' />
+      </h2>
+      <p>
+        <f:translate key='browser-hint.outdated_browser.description' extensionName='dfgviewer' />
+      </p>
     </div>
+  </div>
 
-    <f:if condition="{gp-pagegrid} == 1">
-      <f:then>
-        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
-      </f:then>
-      <f:else>
-        <f:if condition="{isNewspaper} == 'newspaper_anchor'">
-          <f:then>
-            <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspaperyears" />
-          </f:then>
-          <f:else>
-          <f:if condition="{isNewspaper} == 'newspaper_year'">
+  <f:if condition="{gp-pagegrid} == 1">
+    <f:then>
+      <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
+    </f:then>
+    <f:else>
+      <f:if condition="{isNewspaper} == 'newspaper_anchor'">
+        <f:then>
+          <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspaperyears" />
+        </f:then>
+        <f:else>
+          <f:if condition="{isObject3D} == 'collection'">
             <f:then>
-              <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
+              <div class="toc-wrapper">
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
+                <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
+              </div>
             </f:then>
             <f:else>
-              <f:if condition="{isNewspaper} == 'newspaper_issue'">
-                <!-- it's a newspaper! -->
+              <f:if condition="{isObject3D} == 'object'">
+                <f:then>
+                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d" />
+                </f:then>
+                <f:else>
+                  <f:if condition="{isNewspaper} == 'newspaper_issue'">
+                    <!-- it's an newspaper! -->
+                  </f:if>
+                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
+                  <div class="fulltext-container">
+                    <div id="tx-dlf-fulltextselection"></div>
+                  </div>
+                </f:else>
               </f:if>
-                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
-                <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
             </f:else>
           </f:if>
         </f:else>
       </f:if>
-      </f:else>
-    </f:if>
-    <div class="document-functions">
+    </f:else>
+  </f:if>
+  <f:if condition="{isObject3D} == 'collection' or {isObject3D} == 'object'">
+    <f:then>
+      <!-- it's a 3D object view - no need for document, view or page control functions here! -->
+    </f:then>
+    <f:else>
+      <div class="document-functions">
         <div class="provider">
-            <f:if condition="{settings.showProviderLogo}">
-                <ul>
-                    <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerLogo)[1]\')}',
-                        logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]\')}',
-                        logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]\', htmlspecialchars:\'FALSE\')}'}">
-                        <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                            <li>
-                                <f:link.external
-                                    uri="{logoUri}"
-                                    title="{logoTitle}">
-                                    <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                        title="{logoTitle}"
-                                        alt="Logo von {logoTitle}"
-                                    />
-                                </f:link.external>
-                            </li>
-                        </f:if>
-                    </f:alias>
-                    <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorLogo)[1]\')}',
-                        logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregator)[1]\')}',
-                        logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorSiteURL)[1]\', htmlspecialchars:\'FALSE\')}'}">
-                        <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                            <li>
-                                <f:link.external
-                                    uri="{logoUri}"
-                                    title="{logoTitle}">
-                                    <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                        title="{logoTitle}"
-                                        alt="Logo von {logoTitle}"
-                                    />
-                                </f:link.external>
-                            </li>
-                        </f:if>
-                    </f:alias>
-                    <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorLogo)[1]\')}',
-                        logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsor)[1]\')}',
-                        logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorSiteURL)[1]\', htmlspecialchars:\'FALSE\')}'}">
-                        <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                            <li>
-                                <f:link.external
-                                    uri="{logoUri}"
-                                    title="{logoTitle}">
-                                    <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                        title="{logoTitle}"
-                                        alt="Logo von {logoTitle}"
-                                    />
-                                </f:link.external>
-                            </li>
-                        </f:if>
-                    </f:alias>
-                </ul>
-            </f:if>
+          <f:if condition="{settings.showProviderLogo}">
+            <ul>
+              <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"
+                DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]\')}',
+                logoUri: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]\',
+                htmlspecialchars:\'FALSE\')}'}">
+                <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
+                  <li>
+                    <f:link.external uri="{logoUri}" title="{logoTitle}">
+                      <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" title="{logoTitle}"
+                        alt="Logo von {logoTitle}" />
+                    </f:link.external>
+                  </li>
+                </f:if>
+              </f:alias>
+              <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"
+                DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregator)[1]\')}',
+                logoUri: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorSiteURL)[1]\',
+                htmlspecialchars:\'FALSE\')}'}">
+                <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
+                  <li>
+                    <f:link.external uri="{logoUri}" title="{logoTitle}">
+                      <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" title="{logoTitle}"
+                        alt="Logo von {logoTitle}" />
+                    </f:link.external>
+                  </li>
+                </f:if>
+              </f:alias>
+              <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"
+                DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsor)[1]\')}',
+                logoUri: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorSiteURL)[1]\',
+                htmlspecialchars:\'FALSE\')}'}">
+                <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
+                  <li>
+                    <f:link.external uri="{logoUri}" title="{logoTitle}">
+                      <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" title="{logoTitle}"
+                        alt="Logo von {logoTitle}" />
+                    </f:link.external>
+                  </li>
+                </f:if>
+              </f:alias>
+            </ul>
+          </f:if>
 
-            <dl class="mobile-meta">
-                <dt class="tx-dlf-title">Titel</dt>
-                <dd class="tx-dlf-title">
-                    <a href="#">
-                        <dc:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName)' />
-                    </a>
-                </dd>
-                <dt>Autor</dt>
-                <dd><dc:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm)[1]' />
-                </dd>
-            </dl>
+          <dl class="mobile-meta">
+            <dt class="tx-dlf-title">Titel</dt>
+            <dd class="tx-dlf-title">
+              <a href="#">
+                <dc:xpath
+                  xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName)' />
+              </a>
+            </dd>
+            <dt>Autor</dt>
+            <dd>
+              <dc:xpath
+                xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm)[1]' />
+            </dd>
+          </dl>
         </div>
 
-      <ul>
+        <ul>
           <li class="submenu links">
             <a href="#" title="Links">Links</a>
             <ul>
               <li>
-                <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]')}">
+                <f:if
+                  condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]')}">
                   <f:then>
-                    <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]', htmlspecialchars:'FALSE')}" class="local-presentation" title="{f:translate(key:'provider.local_presentation', extensionName:'dfgviewer')}"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:link.external>
+                    <f:link.external
+                      uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]', htmlspecialchars:'FALSE')}"
+                      class="local-presentation"
+                      title="{f:translate(key:'provider.local_presentation', extensionName:'dfgviewer')}">
+                      <f:translate key='provider.local_presentation' extensionName='dfgviewer' />
+                    </f:link.external>
                   </f:then>
                   <f:else>
-                    <span class="local-presentation" title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></span>
+                    <span class="local-presentation"
+                      title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}">
+                      <f:translate key='provider.no_local_presentation' extensionName='dfgviewer' />
+                    </span>
                   </f:else>
                 </f:if>
               </li>
               <f:for each="{0: '1', 1: '2', 2: '3'}" as="index">
-                <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}">
+                <f:if
+                  condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}">
                   <li>
-                    <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]')}">
+                    <f:if
+                      condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]')}">
                       <f:then>
-                        <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' /></f:link.external>
+                        <f:link.external
+                          uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}"
+                          class="local-catalog"
+                          title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}">
+                          <dc:xpath
+                            xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' />
+                        </f:link.external>
                       </f:then>
                       <f:else>
-                        <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}" class="local-catalog" title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}"><f:translate key='provider.local_catalogue' extensionName='dfgviewer' /></f:link.external>
+                        <f:link.external
+                          uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}"
+                          class="local-catalog"
+                          title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}">
+                          <f:translate key='provider.local_catalogue' extensionName='dfgviewer' />
+                        </f:link.external>
                       </f:else>
                     </f:if>
                   </li>
                 </f:if>
               </f:for>
-              <f:if condition="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars:'FALSE')}">
+              <f:if
+                condition="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars:'FALSE')}">
                 <f:then>
                   <li>
-                    <f:link.external uri="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars: 'FALSE')}" class="local-contact" title="{f:translate(key:'provider.email_provider', extensionName:'dfgviewer')} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:link.external>
+                    <f:link.external
+                      uri="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars: 'FALSE')}"
+                      class="local-contact"
+                      title="{f:translate(key:'provider.email_provider', extensionName:'dfgviewer')} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})">
+                      <f:translate key='provider.email_provider' extensionName='dfgviewer' />
+                    </f:link.external>
                   </li>
                 </f:then>
                 <f:else>
                   <li>
-                    <span class="local-contact" title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></span>
+                    <span class="local-contact"
+                      title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}">
+                      <f:translate key='provider.no_local_presentation' extensionName='dfgviewer' />
+                    </span>
                   </li>
                 </f:else>
               </f:if>
-            <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
+              <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
             </ul>
           </li>
           <li class="submenu downloads">
             <a href="#" id="tab-downloads" title="Downloads">Downloads</a>
             <ul>
-                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pdfdownloadtool" />
+              <f:cObject typoscriptObjectPath="plugin.tx_dlf_pdfdownloadtool" />
             </ul>
           </li>
           <li class="doublepage">
             <f:if condition="{gp-double} == 1">
               <f:then>
-                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doubleOff" title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}"><f:translate key="double.singlePageView"  extensionName="dfgviewer" /></f:link.page>
-                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doublePlusOne" title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span><f:translate key="double.RectoVerso"  extensionName="dfgviewer" /></span></f:link.page>
+                <f:link.page pageUid="{kitodoPageView}"
+                  additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
+                  class="tx-dlf-navigation-doubleOff"
+                  title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
+                  <f:translate key="double.singlePageView" extensionName="dfgviewer" />
+                </f:link.page>
+                <f:link.page pageUid="{kitodoPageView}"
+                  additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                  class="tx-dlf-navigation-doublePlusOne"
+                  title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span>
+                    <f:translate key="double.RectoVerso" extensionName="dfgviewer" />
+                  </span></f:link.page>
               </f:then>
               <f:else>
-                <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}" class="tx-dlf-navigation-doubleOn" title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}"><f:translate key="double.doublePageView"  extensionName="dfgviewer" /></f:link.page>
+                <f:link.page pageUid="{kitodoPageView}"
+                  additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                  class="tx-dlf-navigation-doubleOn"
+                  title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}">
+                  <f:translate key="double.doublePageView" extensionName="dfgviewer" />
+                </f:link.page>
               </f:else>
             </f:if>
           </li>
-          <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+          <f:if
+            condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
             <li class="fulltext">
               <f:if condition="{gp-double} == 1">
                 <f:then>
-                  <span class="select switchoff" id="tx-dlf-tools-fulltext" title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}"><f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' /></span>
+                  <span class="select switchoff" id="tx-dlf-tools-fulltext"
+                    title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}">
+                    <f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />
+                  </span>
                 </f:then>
                 <f:else>
                   <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
-                      <span class="select switchoff" id="tx-dlf-tools-fulltext" title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}"><f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' /></span>
+                      <span class="select switchoff" id="tx-dlf-tools-fulltext"
+                        title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}">
+                        <f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />
+                      </span>
                     </f:then>
                     <f:else>
                       <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
@@ -189,49 +268,66 @@
             </li>
           </f:if>
           <li class="grid">
-            <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+            <f:if
+              condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
               <f:then>
                 <f:if condition="{gp-pagegrid} == 1">
                   <f:then>
-                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}" class="active" title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}"><f:translate key='double.singlePageView' extensionName='dfgviewer' /></f:link.page>
+                    <f:link.page pageUid="{kitodoPageView}"
+                      additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
+                      class="active" title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
+                      <f:translate key='double.singlePageView' extensionName='dfgviewer' />
+                    </f:link.page>
                   </f:then>
                   <f:else>
-                      <f:link.page pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}" title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
+                    <f:link.page pageUid="{kitodoPageView}"
+                      additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
+                      title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
+                      <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                    </f:link.page>
                   </f:else>
                 </f:if>
               </f:then>
               <f:else>
-                 <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></span>
+                <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
+                  <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                </span>
               </f:else>
             </f:if>
           </li>
-          <f:if condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
+          <f:if
+            condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
             <f:then>
               <li class="submenu search">
-                  <a href="#" title="Search">Search</a>
-                  <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
+                <a href="#" title="Search">Search</a>
+                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
               </li>
             </f:then>
           </f:if>
-      </ul>
-    </div>
-    <div class="view-functions">
-      <f:if condition="{gp-pagegrid} == 1">
-        <f:else>
-          <ul>
-            <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
-            <li class="tx-dlf-imagemanipulationtool"><f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" /></li>
-          </ul>
-        </f:else>
-      </f:if>
-    </div>
-    <div class="page-control">
-      <f:if condition="{gp-pagegrid} == 1">
-        <f:else>
-          <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
-        </f:else>
-      </f:if>
-    </div>
+        </ul>
+      </div>
+      <div class="view-functions">
+        <f:if condition="{gp-pagegrid} == 1">
+          <f:else>
+            <ul>
+              <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
+              <li class="tx-dlf-imagemanipulationtool">
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
+              </li>
+            </ul>
+          </f:else>
+        </f:if>
+      </div>
+      <div class="page-control">
+        <f:if condition="{gp-pagegrid} == 1">
+          <f:else>
+            <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
+          </f:else>
+        </f:if>
+      </div>
+    </f:else>
+  </f:if>
   </div>
 </f:section>
+
 </html>

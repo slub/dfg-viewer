@@ -19,17 +19,31 @@
         </nav>
       </div>
 
-      <div class="metadata-wrapper">
-        <div class="tx-dlf-metadata">
-            <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
-        </div>
-        <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
-      </div>
+      <f:if condition="{isObject3D} == 'collection'">
+        <f:then>
+          <!-- it's a collection - no need for Metadata here! -->
+        </f:then>
+        <f:else>
+          <div class="metadata-wrapper">
+            <div class="tx-dlf-metadata">
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
+            </div>
+            <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
+          </div>
+        </f:else>
+      </f:if>
 
-      <div class="toc-wrapper">
-          <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
-          <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
-      </div>
+      <f:if condition="{isObject3D} == 'collection' or {isObject3D} == 'object'">
+        <f:then>
+          <!-- it's a collection or 3D object - no need for ToC here! -->
+        </f:then>
+        <f:else>
+          <div class="toc-wrapper">
+              <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
+              <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
+          </div>
+        </f:else>
+      </f:if>
   </div>
 </f:section>
 

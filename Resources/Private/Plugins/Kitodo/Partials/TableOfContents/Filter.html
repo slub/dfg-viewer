@@ -1,0 +1,28 @@
+<f:comment>
+<!--
+ * (c) Kitodo. Key to digital objects e.V. <contact@kitodo.org>
+ *
+ * This file is part of the Kitodo and TYPO3 projects.
+ *
+ * @license GNU General Public License version 3 or later.
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+-->
+</f:comment>
+<form action="{f:uri.page(pageUid='{viewData.requestData.pageUid}')}" name="filterParameter" method="get" class="tx-dlf-filter-form">
+    <input type="hidden" id="tx-dlf-filter-id" name="tx_dlf[id]" value="{currentList}" />
+    <label for="tx-dlf-filter-title">
+        {f:translate(key: 'title')}
+    </label>
+    <input id="tx-dlf-filter-title" name="tx_dlf[title]" />
+    <label for="tx-dlf-filter-type">
+        {f:translate(key: 'type')}
+    </label>
+    <select id="tx-dlf-filter-type" name="tx_dlf[types]" >
+        <option value=""></option>
+        <f:for each="{types}" as="type">
+            <option value="{type}">{type}</option>
+        </f:for>
+    </select>
+    <f:form.submit value="{f:translate(key: 'filter.submit')}" />
+</form>

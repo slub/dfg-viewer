@@ -19,8 +19,10 @@
         </div>
     </f:then>
     <f:else>
-        <ul class="toc">
-            <f:render partial="TableOfContents/Children" arguments="{children: toc}"/>
-        </ul>
+        <div class="tx-dlf-tableofcontents">
+            <ul>
+                <f:render partial="TableOfContents/Children" arguments="{children: toc}"/>
+            </ul>
+        </div>
     </f:else>
 </f:if>
