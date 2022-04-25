@@ -131,6 +131,7 @@ plugin.tx_dlf_pageview {
         features =
         elementId = tx-dfgviewer-map-0
         multiViewType = composition
+        progressElementId = tx-dfgviewer-page-progress
     }
 }
 
@@ -203,7 +204,7 @@ lib.kitodo.navigation.pagecontrol < tt_content.list.20.dlf_navigation
 lib.kitodo.navigation.pagecontrol {
     settings {
         pageStep = 10
-        features = measureBack,measureForward,pageFirst,pageStepBack, pageBack,pageForward,pageStepForward,pageLast
+        features = measureBack,measureForward,pageFirst,pageStepBack,pageBack,pageForward,pageStepForward,pageLast
     }
 }
 

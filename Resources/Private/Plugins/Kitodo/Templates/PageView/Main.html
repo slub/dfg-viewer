@@ -26,7 +26,6 @@
       data-namespace-typo3-fluid="true">
 <f:if condition="{multiview} == 1">
     <f:then>
-
         <div class="page-control-multiview">
             <div class="backs">
                 <span class="prev">
@@ -128,7 +127,9 @@
         </div>
     </f:then>
     <f:else>
-        <div id="tx-dfgviewer-map-0" class="tx-dlf-map"></div>
+        <div id="tx-dfgviewer-map-0" class="tx-dlf-map">
+            <progress id="tx-dfgviewer-page-progress" class="tx-dlf-page-progress"></progress>
+        </div>
         <div id="svg_panel">
             <f:asset.script identifier="wildwebmidi-remote-package-base" priority="true">
                 const WILDWEBMIDI_REMOTE_PACKAGE_BASE = '{viewData.publicResourcePath}/JavaScript/WildWebMidi/wildwebmidi.data';
