@@ -44,6 +44,12 @@
                   <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
                 </f:else>
               </f:if>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
+                <div class="fulltext-container">
+                    <div id="tx-dlf-fulltextselection"></div>
+                    <div id="tx-dlf-score"></div>
+                </div>
             </f:else>
           </f:if>
         </f:else>
@@ -249,6 +255,25 @@
                     </f:then>
                     <f:else>
                       <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
+                    </f:else>
+                  </f:if>
+                </f:else>
+              </f:if>
+            </li>
+          </f:if>
+          <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+            <li class="score">
+              <f:if condition="{gp-double} == 1">
+                <f:then>
+                  <span class="select switchoff" id="tx-dlf-tools-score" title="{f:translate(key:'score.no_score_double', extensionName:'dfgviewer')}"><f:translate key='score.no_score_double' extensionName='dfgviewer' /></span>
+                </f:then>
+                <f:else>
+                  <f:if condition="{gp-pagegrid} == 1">
+                    <f:then>
+                      <span class="select switchoff" id="tx-dlf-tools-score" title="{f:translate(key:'score.no_score_gridpage', extensionName:'dfgviewer')}"><f:translate key='score.no_score_gridpage' extensionName='dfgviewer' /></span>
+                    </f:then>
+                    <f:else>
+                      <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
                     </f:else>
                   </f:if>
                 </f:else>

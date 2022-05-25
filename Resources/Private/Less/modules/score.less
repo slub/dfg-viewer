@@ -1,15 +1,15 @@
 /*
  *
- * Fulltext
+ * Score
  * ================================================
- * Specials for the fulltext view
+ * Specials for the Score view
  *
  * Author: Thomas Jung <thomas@tjwd.de>
  * License: All rights reserved
  *
  */
 
-.fulltext-container {
+.score-container {
     position: absolute;
     top: 60px;
     right: 0;
@@ -33,7 +33,7 @@
         height: 120px;
         .vertgrad(rgba(255,255,255,0), rgba(255,255,255,1),0,40%);
     }
-    #tx-dlf-fulltextselection {
+    #tx-dlf-score {
         position: relative;
         top: 0;
         right: 0;
@@ -46,7 +46,6 @@
         line-height: 1.6em;
         font-size: 16px;
         color: @font-grey;
-        display: none;
         &:empty {
             padding: 0;
         }
@@ -61,9 +60,6 @@
         .sp {
             word-spacing: -4px;
         }
-        .fulltext-visible & {
-            display: block;
-        }
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         top: 0;
@@ -76,7 +72,7 @@
             height: 80px;
             .vertgrad(rgba(255,255,255,0), rgba(255,255,255,1),0,80%);
         }
-        #tx-dlf-fulltextselection {
+        #tx-dlf-score {
             padding: 60px 100px 60px 30px;
             line-height: 1.8;
             .textline {
