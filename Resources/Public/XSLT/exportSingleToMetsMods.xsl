@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:mets="http://www.loc.gov/METS/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:mods="http://www.loc.gov/mods/v3"
     xmlns:dv="http://dfg-viewer.de/"
-    xmlns:xlink="http://www.w3.org/1999/xlink" version="2.0">
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0">
 
     <xsl:output indent="yes"/>
 
@@ -94,7 +94,7 @@
                         <mods:relatedItem type="original">
                             <mods:titleInfo>
                                 <mods:title>
-                                    <xsl:value-of select="object_title/text()"/>
+                                    <xsl:value-of select="object_name/text()"/>
                                 </mods:title>
                             </mods:titleInfo>
                             <!-- probably type will need to be value taken from source file -->
@@ -187,7 +187,7 @@
             </mets:fileGrp>
             <mets:fileGrp USE="THUMBS">
                 <mets:file ID="FILE_0001_THUMBS" MIMETYPE="image/jpeg">
-                    <xsl:apply-templates select="images_upload/text()" />
+                    <xsl:apply-templates select="preview_image/text()" />
                 </mets:file>
             </mets:fileGrp>
         </mets:fileSec>
@@ -213,14 +213,17 @@
 
     </xsl:template>
 
-    <xsl:template match="images_upload/text()">
-        <xsl:variable select="tokenize(.,'&#x22;')" name="previewImage" />
+    <xsl:template match="preview_image/text()">
+        <xsl:variable select="substring-after(.,'&#x22;')" name="previewImage" />
 
-        <mets:FLocat LOCTYPE="URL">
-            <xsl:attribute name="xlink:href">
-                <xsl:value-of select="$previewImage[2]"/>
-            </xsl:attribute>
-        </mets:FLocat>
+        <xsl:if test="$previewImage != ''">
+            <xsl:variable select="substring-before($previewImage,'&quot;')" name="url" />
+            <mets:FLocat LOCTYPE="URL">
+                <xsl:attribute name="xlink:href">
+                    <xsl:value-of select="normalize-space($url)"/>
+                </xsl:attribute>
+            </mets:FLocat>
+        </xsl:if>
     </xsl:template>
 
-</xsl:transform>
+</xsl:stylesheet>

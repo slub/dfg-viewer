@@ -1,9 +1,10 @@
-<xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:mets="http://www.loc.gov/METS/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:mods="http://www.loc.gov/mods/v3"
     xmlns:dv="http://dfg-viewer.de/"
-    xmlns:xlink="http://www.w3.org/1999/xlink" version="2.0">
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0">
 
     <xsl:output indent="yes"/>
 
@@ -122,18 +123,14 @@
                         <xsl:attribute name="LABEL">
                             <xsl:value-of select="normalize-space(title/text())"/>
                         </xsl:attribute>
-                        <mets:mptr LOCTYPE="URL">
-                            <xsl:attribute name="xlink:href">
-                                <xsl:text>http://sdvtypo3dfgviewer3ddev.slub-dresden.de/typo3conf/ext/dfgviewer/Resources/Public/single_object_</xsl:text><xsl:value-of select="@key"/><xsl:text>.xml</xsl:text>
-                            </xsl:attribute>
-                        </mets:mptr>
+                        <xsl:apply-templates select="single_export/text()" />
                     </mets:div>
                 </xsl:for-each>
             </mets:div>
         </mets:structMap>
 
         <mets:structMap TYPE="PHYSICAL">
-            <mets:div ID="PHYS_0000" LABEL="3D Objects" TYPE="collection">
+            <mets:div ID="PHYS_0000" LABEL="3D Objects" TYPE="physSequence">
                 <xsl:for-each select="response/item">
                     <mets:div ORDERLABEL="1" TYPE="object">
                         <xsl:attribute name="ID">
@@ -197,13 +194,26 @@
     </xsl:template>
 
     <xsl:template match="preview_image/text()">
-        <xsl:variable select="tokenize(.,'&#x22;')" name="previewImage" />
+        <xsl:variable select="substring-after(.,'&#x22;')" name="previewImage" />
 
-        <mets:FLocat LOCTYPE="URL">
-            <xsl:attribute name="xlink:href">
-                <xsl:value-of select="$previewImage[2]"/>
-            </xsl:attribute>
-        </mets:FLocat>
+        <xsl:if test="$previewImage != ''">
+            <xsl:variable select="substring-before($previewImage,'&quot;')" name="url" />
+            <mets:FLocat LOCTYPE="URL">
+                <xsl:attribute name="xlink:href">
+                    <xsl:value-of select="normalize-space($url)"/>
+                </xsl:attribute>
+            </mets:FLocat>
+        </xsl:if>
     </xsl:template>
 
-</xsl:transform>
+    <xsl:template match="single_export/text()">
+        <xsl:if test=". != '&#10;'">
+            <mets:mptr LOCTYPE="URL">
+                <xsl:attribute name="xlink:href">
+                    <xsl:value-of select="normalize-space(.)"/>
+                </xsl:attribute>
+            </mets:mptr>
+        </xsl:if>
+    </xsl:template>
+
+</xsl:stylesheet>
