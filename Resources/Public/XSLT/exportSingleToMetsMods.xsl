@@ -97,6 +97,11 @@
                                     <xsl:value-of select="object_name/text()"/>
                                 </mods:title>
                             </mods:titleInfo>
+                            <mods:titleInfo type="alternative">
+                                <mods:title>
+                                    <xsl:value-of select="object_alternative_name/text()"/>
+                                </mods:title>
+                            </mods:titleInfo>
                             <!-- probably type will need to be value taken from source file -->
                             <mods:name type="personal">
                                 <!-- inserted conditionally depending on existence in source file  -->
@@ -128,6 +133,15 @@
                                 <mods:physicalLocation valueURI="">
                                     <xsl:value-of select="city/text()"/>
                                 </mods:physicalLocation>
+                                <mods:url displayLabel="geonames">
+                                    <xsl:value-of select="geonames/text()"/>
+                                </mods:url>
+                                <mods:url displayLabel="wikidata">
+                                    <xsl:value-of select="wikidata/text()"/>
+                                </mods:url>
+                                <mods:url displayLabel="wikipedia">
+                                    <xsl:value-of select="wikipedia/text()"/>
+                                </mods:url>
                             </mods:location>
                         </mods:relatedItem>
                         <mods:identifier type="gettyaat">
