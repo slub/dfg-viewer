@@ -51,11 +51,22 @@
                             <mods:identifier type="gettyaat">
                                 <xsl:value-of select="object_type/text()"/>
                             </mods:identifier>
-                            <mods:recordInfo>
-                                <mods:recordInfoNote>
-                                    <xsl:value-of select="description/text()"/>
-                                </mods:recordInfoNote>
-                        </mods:recordInfo>
+                            <mods:name type="personal">
+                                <mods:displayForm>
+                                    <xsl:value-of select="author_name/text()"/>
+                                </mods:displayForm>
+                                <mods:role>
+                                    <mods:roleTerm authority="marcrelator" type="code">aut</mods:roleTerm>
+                                </mods:role>
+                            </mods:name>
+                            <mods:accessCondition type="license">
+                                <xsl:value-of select="model_license/text()"/>
+                            </mods:accessCondition>
+                            <mods:physicalDescription>
+                                <mods:note type="software">
+                                    <xsl:value-of select="used_software/text()"/>
+                                </mods:note>
+                            </mods:physicalDescription>
                         </mods:mods>
                     </mets:xmlData>
                 </mets:mdWrap>
