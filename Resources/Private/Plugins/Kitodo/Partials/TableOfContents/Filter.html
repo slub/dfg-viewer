@@ -11,17 +11,58 @@
 </f:comment>
 <form action="{f:uri.page(pageUid='{viewData.requestData.pageUid}')}" name="filterParameter" method="get" class="tx-dlf-filter-form">
     <input type="hidden" id="tx-dlf-filter-id" name="tx_dlf[id]" value="{currentList}" />
+    <f:if condition="{transform} != ''">
+        <f:then>
+            <input type="hidden" id="tx-dlf-filter-transform" name="tx_dlf[transform]" value="{transform}" />
+        </f:then>
+    </f:if>
     <label for="tx-dlf-filter-title">
-        {f:translate(key: 'title')}
+        <f:format.case mode="capital">{f:translate(key: 'title')}</f:format.case>
     </label>
-    <input id="tx-dlf-filter-title" name="tx_dlf[title]" />
+    <input id="tx-dlf-filter-title" name="tx_dlf[title]" list="titles" value="{viewData.requestData.title}" size="15" />
+    <datalist id="titles" style="display: none;">
+        <f:for each="{titles}" as="title">
+            <option value="{title}">
+        </f:for>
+    </datalist>
+    <label for="tx-dlf-filter-reconstruction-year">
+        <f:format.case mode="capital">{f:translate(key: 'reconstructionYear')}</f:format.case>
+    </label>
+    <input id="tx-dlf-filter-reconstruction-year" name="tx_dlf[reconstructionYear]" type="number" size="5" min="-2001" max="2022" value="{viewData.requestData.reconstructionYear}" />
+    <label for="tx-dlf-filter-author">
+        <f:format.case mode="capital">{f:translate(key: 'author')}</f:format.case>
+    </label>
+    <input id="tx-dlf-filter-author" name="tx_dlf[author]" list="authors" value="{viewData.requestData.author}" size="15" />
+    <datalist id="authors" style="display: none;">
+        <f:for each="{authors}" as="author">
+            <option value="{author}">
+        </f:for>
+    </datalist>
+    <label for="tx-dlf-filter-license">
+        <f:format.case mode="capital">{f:translate(key: 'license')}</f:format.case>
+    </label>
+    <select id="tx-dlf-filter-license" name="tx_dlf[license]" style="width: 150px;" >
+        <option value=""></option>
+        <f:for each="{licenses}" as="license">
+            <option value="{license}">{license}</option>
+        </f:for>
+    </select>
     <label for="tx-dlf-filter-type">
-        {f:translate(key: 'type')}
+        <f:format.case mode="capital">{f:translate(key: 'type')}</f:format.case>
     </label>
-    <select id="tx-dlf-filter-type" name="tx_dlf[types]" >
+    <select id="tx-dlf-filter-type" name="tx_dlf[type]" >
         <option value=""></option>
         <f:for each="{types}" as="type">
             <option value="{type}">{type}</option>
+        </f:for>
+    </select>
+    <label for="tx-dlf-filter-software">
+        <f:format.case mode="capital">{f:translate(key: 'software')}</f:format.case>
+    </label>
+    <select id="tx-dlf-filter-type" name="tx_dlf[software]" >
+        <option value=""></option>
+        <f:for each="{softwares}" as="software">
+            <option value="{software}">{software}</option>
         </f:for>
     </select>
     <f:form.submit value="{f:translate(key: 'filter.submit')}" />
