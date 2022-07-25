@@ -54,6 +54,9 @@
                             </mods:namePart>
                             <mods:namePart type="given">
                             </mods:namePart>
+                            <mods:affiliation>
+                                <xsl:value-of select="author_affiliation/text()"/>
+                            </mods:affiliation>
                             <mods:displayForm>
                                 <xsl:value-of select="author_name/text()"/>
                             </mods:displayForm>
