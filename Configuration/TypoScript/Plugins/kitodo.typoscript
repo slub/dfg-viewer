@@ -26,6 +26,9 @@ plugin.tx_dlf {
     persistence {
         storagePid = {$config.storagePid}
     }
+    settings {
+        storagePid = {$config.storagePid}
+    }
 	view {
 		partialRootPaths {
 			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
