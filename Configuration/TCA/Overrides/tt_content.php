@@ -9,3 +9,9 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['dfgviewe
     'Uri',
     'LLL:EXT:dlf/Resources/Private/Language/locallang_be.xlf:plugins.search.title',
 );
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Slub.Dfgviewer',
+    'SRU',
+    'LLL:EXT:dfgviewer/Resources/Private/Language/locallang_be.xlf:plugins.sru.title',
+);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\Dfgviewer\Plugins\Sru;
+namespace Slub\Dfgviewer\Eid;
 
 /***************************************************************
  *  Copyright notice

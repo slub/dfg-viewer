@@ -7,7 +7,7 @@
     <sDEF>
       <ROOT>
         <TCEforms>
-          <sheetTitle>LLL:EXT:dfgviewer/Resources/Private/Language/Sru.xml:tt_content.pi_flexform.sheet_general</sheetTitle>
+          <sheetTitle>LLL:EXT:dfgviewer/Resources/Private/Language/locallang_be.xml:sheet_general</sheetTitle>
         </TCEforms>
         <type>array</type>
         <el>

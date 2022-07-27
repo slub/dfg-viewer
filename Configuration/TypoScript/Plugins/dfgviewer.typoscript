@@ -48,9 +48,9 @@ plugin.tx_dfgviewer_newspapercalendar {
     }
 }
 
+plugin.tx_dfgviewer_sru < tt_content.list.20.dfgviewer_sru
 plugin.tx_dfgviewer_sru {
-  userFunc = Slub\Dfgviewer\Plugins\Sru\Sru->main
-  pages = {$config.storagePid}
-  templateFile = {$config.templateFileSru}
-  targetPid.data = TSFE:page|uid
+    settings {
+        //
+    }
 }

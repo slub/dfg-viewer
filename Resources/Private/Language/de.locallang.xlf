@@ -81,6 +81,30 @@
 				<source><![CDATA[No local presentation available]]></source>
 				<target><![CDATA[Keine lokale Präsentation verfügbar]]></target>
 			</trans-unit>
+            <trans-unit id="sru.label.query" approved="yes">
+                <source><![CDATA[Search for:]]></source>
+                <target><![CDATA[Suchen nach:]]></target>
+            </trans-unit>
+			<trans-unit id="sru.label.delete_search" approved="yes">
+                <source><![CDATA[Delete Search]]></source>
+                <target><![CDATA[Suche löschen]]></target>
+            </trans-unit>
+			<trans-unit id="sru.label.loading" approved="yes">
+                <source><![CDATA[Loading Results]]></source>
+                <target><![CDATA[Lade Ergebnisse]]></target>
+            </trans-unit>
+			<trans-unit id="sru.label.submit" approved="yes">
+                <source><![CDATA[Search]]></source>
+                <target><![CDATA[Suchen]]></target>
+            </trans-unit>
+			<trans-unit id="sru.label.noresult" approved="yes">
+                <source><![CDATA[No results found for your search.]]></source>
+                <target><![CDATA[Kein Ergebnis für Ihre Suche gefunden.]]></target>
+            </trans-unit>
+			<trans-unit id="sru.search" approved="yes">
+                <source><![CDATA[Search]]></source>
+                <target><![CDATA[Suche]]></target>
+            </trans-unit>
 			<trans-unit id="toc" approved="yes">
 				<source><![CDATA[Table of Content]]></source>
 				<target><![CDATA[Inhaltsverzeichnis]]></target>

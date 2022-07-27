@@ -24,9 +24,6 @@ config {
     # cat=plugin.tx_dfgviewer/piwik/030; type=string; label=Piwik Domains
     piwik_domains =
 
-    # cat=plugin.tx_dfgviewer/file; type=string; label=SRU searchform template file
-    templateFileSru = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/Sru.tmpl
-
     news {
         # cat=plugin.tx_dfgviewer/links/020; type=int+; label=News Storage Pid
         storagePid =
