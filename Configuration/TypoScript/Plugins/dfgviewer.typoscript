@@ -22,24 +22,30 @@ plugin.tx_dfgviewer_uri {
     }
 }
 
-plugin.tx_dfgviewer_calendar < tt_content.list.20.dfgviewer_calendar
-plugin.tx_dfgviewer_calendar {
+plugin.tx_dfgviewer_newspaperyears < tt_content.list.20.dlf_calendar
+plugin.tx_dfgviewer_newspaperyears {
+    switchableControllerActions {
+        Calendar {
+            1 = years
+        }
+    }
     settings {
+        targetPid = #
     }
 }
 
+plugin.tx_dfgviewer_newspapercalendar < tt_content.list.20.dlf_calendar
 plugin.tx_dfgviewer_newspapercalendar {
-  userFunc = Slub\Dfgviewer\Plugins\NewspaperCalendar->main
-  pages = {$config.storagePid}
-  targetPid = #
-  templateFile = {$config.templateFileNewspaperCalendar}
-}
-
-plugin.tx_dfgviewer_newspaperyears {
-  userFunc = Slub\Dfgviewer\Plugins\NewspaperYears->main
-  pages = {$config.storagePid}
-  targetPid = #
-  templateFile = {$config.templateFileNewspaperYears}
+    switchableControllerActions {
+        Calendar {
+            1 = calendar
+        }
+    }
+    settings {
+        targetPid = {$config.kitodoPageView}
+        showEmptyMonths = 1
+        showEmptyTertialMonths = 0
+    }
 }
 
 plugin.tx_dfgviewer_sru {

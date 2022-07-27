@@ -27,10 +27,6 @@ defined('TYPO3_MODE') or die();
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 // Register plugins.
-ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/NewspaperCalendar.php', '_newspapercalendar', 'list_type', TRUE);
-
-ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/NewspaperYears.php', '_newspaperyears', 'list_type', TRUE);
-
 ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/Sru/Sru.php', '_sru', 'list_type', TRUE);
 
 // Register eID handlers.
