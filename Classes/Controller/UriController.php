@@ -49,6 +49,10 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
         // Load current document.
         $this->loadDocument($this->requestData);
 
+        if ($this->document === null) {
+            return;
+        }
+
         $doc = $this->document->getDoc();
 
         // Get persistent identifier of book.
