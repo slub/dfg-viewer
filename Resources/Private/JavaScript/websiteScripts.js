@@ -36,7 +36,7 @@ $(document).ready(function() {
 
     // animated scroll to top
     $('a.totop').on(mobileEvent, function(event) {
-        $('body').animate({ scrollTop: 0 }, 600);
+        $('html,body').animate({ scrollTop: 0 }, 600);
         return false;
     });
 
