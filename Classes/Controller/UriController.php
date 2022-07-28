@@ -59,7 +59,7 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);
 
         if (empty($uriBook)) {
-            $uriBook = $doc->getLogicalStructure($this->doc->toplevelId);
+            $uriBook = $doc->getLogicalStructure($doc->toplevelId);
             $uriBook = GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
         }
 
