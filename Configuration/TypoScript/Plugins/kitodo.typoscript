@@ -72,7 +72,7 @@ plugin.tx_dlf_pageview {
 plugin.tx_dlf_pagegrid < tt_content.list.20.dlf_pagegrid
 plugin.tx_dlf_pagegrid {
     settings {
-        targetPid = #
+        targetPid = {$config.kitodoPageView}
         placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
         paginate {
             itemsPerPage = 24
