@@ -762,6 +762,10 @@
                             left: 20px;
                         }
                     }
+                    a.disabled {
+                        opacity: 0.3;
+                        cursor: not-allowed;
+                    }
                     &.prev {
                         a, span {
                             top: 0;
@@ -806,6 +810,10 @@
                 }
                 &.over {
                     span {
+                        a.disabled {
+                            opacity: 0.3;
+                            cursor: not-allowed;
+                        }
                         &.prev {
                             a, span {
                                 color: @base-blue;
@@ -824,7 +832,7 @@
                                 }
                             }
                             span {
-                                opacity: .3;
+                                opacity: 0.3;
                             }
                         }
                         &.first {
@@ -834,8 +842,9 @@
                             a {
                                 opacity: 1;
                             }
-                            span {
+                            a.disabled, span {
                                 opacity: 0.3;
+                                cursor: not-allowed;
                             }
                         }
                     }
@@ -851,6 +860,10 @@
                         &:before {
                             right: 20px;
                         }
+                    }
+                    a.disabled {
+                        opacity: 0.3;
+                        cursor: not-allowed;
                     }
                     &.next {
                         a, span {
@@ -916,8 +929,9 @@
                             a {
                                 opacity: 1;
                             }
-                            span {
+                            a.disabled, span {
                                 opacity: 0.3;
+                                cursor: not-allowed;
                             }
                         }
                     }
