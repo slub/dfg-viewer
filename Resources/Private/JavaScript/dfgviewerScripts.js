@@ -29,7 +29,7 @@
 
 !*/
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // check mobile device to specify click events
     function mobileCheck() {
@@ -42,12 +42,12 @@ $(document).ready(function() {
     var mobileEvent = mobileCheck() ? 'touchend' : 'click';
 
     // menu toggles for offcanvas toc and metadata
-    $('.offcanvas-toggle').on(mobileEvent, function(event) {
+    $('.offcanvas-toggle').on(mobileEvent, function (event) {
         $(this).parent().toggleClass('open');
     });
 
     // active toggle for submenus
-    $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
+    $('.document-functions li.submenu > a').on(mobileEvent, function (event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
         return false;
@@ -97,13 +97,13 @@ $(document).ready(function() {
     });
 
     // secondary nav toggle
-    $('nav .nav-toggle').on(mobileEvent, function(event) {
+    $('nav .nav-toggle').on(mobileEvent, function (event) {
         $(this).toggleClass('active');
         $('nav .viewer-nav').toggleClass('open');
     });
 
     // calendar dropdowns
-    $('.calendar-view .contains-issues').on(mobileEvent, function(event) {
+    $('.calendar-view .contains-issues').on(mobileEvent, function (event) {
         $('.calendar-view table td.open').not($(this).parent()).removeClass('open');
         $(this).parent().toggleClass('open');
     });
@@ -114,18 +114,18 @@ $(document).ready(function() {
 
     // Inject view switch functions for calendar/list view (initial show calendar)
     $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a.select-calendar-view, .tx-dfgviewer-newspaper-calendar .calendar-view').addClass('active');
-    $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a').on(mobileEvent, function(event) {
-        if(!$(this).hasClass('active')) {
-        var targetElement = '.'+$(this).attr('class').replace('select-','');
-        $('.tx-dfgviewer-newspaper-calendar .active').removeClass('active');
-        $(this).addClass('active');
-        $(targetElement).addClass('active');
+    $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a').on(mobileEvent, function (event) {
+        if (!$(this).hasClass('active')) {
+            var targetElement = '.' + $(this).attr('class').replace('select-', '');
+            $('.tx-dfgviewer-newspaper-calendar .active').removeClass('active');
+            $(this).addClass('active');
+            $(targetElement).addClass('active');
         }
     });
 
     // Avoid broken image display if METS definitions are wrong
-    $('.provider img').each(function() {
-        if((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0 ) || this.readyState == 'uninitialized' ) {
+    $('.provider img').each(function () {
+        if ((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0) || this.readyState == 'uninitialized') {
             $(this).parents('.document-functions').addClass('missing-provider-image');
         }
     });
@@ -144,12 +144,13 @@ $(document).ready(function() {
     // Shorten mobile meta title
     shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
     shortenMobileMetaTitle = shortenMobileMetaElement.text();
-    if(shortenMobileMetaTitle.length > 140) {
-        shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0,140) + '...';
+    if (shortenMobileMetaTitle.length > 140) {
+        shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0, 140) + '...';
         shortenMobileMetaElement.text(shortenMobileMetaTitle);
     }
 
     // Check if there are is a download list. Otherwise change a to span to disable button
+<<<<<<< HEAD
     if(!$('.submenu.downloads ul li')[0]) {
         $("#tab-downloads").replaceWith(function () {
             // Create a new element using jQuery with sanitized content
@@ -159,6 +160,11 @@ $(document).ready(function() {
                 "id": $(this).attr('id'),
                 "text": $(this).html() // Use "text" to set the text content, escaping it
             });
+=======
+    if (!$('.submenu.downloads ul li')[0]) {
+        $("#tab-downloads").replaceWith(function () {
+            return $("<span title=\"" + $(this).attr('title') + "\" class=\"" + $(this).attr('class') + "\" id=\"" + $(this).attr('id') + "\">" + $(this).html() + "</span>");
+>>>>>>> a508a60 (Simplify: Merge `pageChanged` and `configChanged` events)
         });
     }
 
@@ -169,8 +175,8 @@ $(document).ready(function() {
     }
 
     // enable click on fullscreen button
-    $('a.fullscreen').on(mobileEvent, function() {
-        if($('body.fullscreen')[0]) {
+    $('a.fullscreen').on(mobileEvent, function () {
+        if ($('body.fullscreen')[0]) {
             exitFullscreen();
         } else {
             enterFullscreen();
@@ -226,7 +232,7 @@ $(document).ready(function() {
     $('.tx-dlf-navigation-doubleOn').click(function (e) {
         e.preventDefault();
         tx_dlf_loaded.state.simultaneousPages = 2;
-        document.body.dispatchEvent(new CustomEvent('tx-dlf-configChanged', {
+        document.body.dispatchEvent(new CustomEvent('tx-dlf-stateChanged', {
             detail: {
                 source: 'navigation',
                 simultaneousPages: 2,
@@ -237,7 +243,7 @@ $(document).ready(function() {
     $('.tx-dlf-navigation-doubleOff').click(function (e) {
         e.preventDefault();
         tx_dlf_loaded.state.simultaneousPages = 1;
-        document.body.dispatchEvent(new CustomEvent('tx-dlf-configChanged', {
+        document.body.dispatchEvent(new CustomEvent('tx-dlf-stateChanged', {
             detail: {
                 source: 'navigation',
                 simultaneousPages: 1,
@@ -256,17 +262,12 @@ $(document).ready(function() {
 
         // TODO: Avoid redundancy
         tx_dlf_loaded.state.page = newPageNo;
-        document.body.dispatchEvent(
-            new CustomEvent(
-                'tx-dlf-pageChanged',
-                {
-                    'detail': {
-                        'source': 'navigation',
-                        'page': newPageNo,
-                    }
-                }
-            )
-        );
+        document.body.dispatchEvent(new CustomEvent('tx-dlf-stateChanged', {
+            'detail': {
+                'source': 'navigation',
+                'page': newPageNo,
+            }
+        }));
     });
 
     // Finally all things are settled. Bring back animations a second later.
@@ -278,14 +279,14 @@ $(document).ready(function() {
 
 });
 
-$(document).keyup(function(e) {
+$(document).keyup(function (e) {
 
     // Check if ESC key is pressed. Then end fullscreen mode or close SRU form.
     if (e.keyCode == 27) {
-        if($('body.fullscreen')[0]) {
+        if ($('body.fullscreen')[0]) {
             return exitFullscreen();
         }
-        if($('.document-functions .search.open')[0]) {
+        if ($('.document-functions .search.open')[0]) {
             $('.document-functions .search').removeClass('open');
         }
     }
@@ -298,7 +299,7 @@ $(document).keyup(function(e) {
 
 // Activate fullscreen mode and set corresponding cookie
 function enterFullscreen() {
-    setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
+    setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").addClass('fullscreen');
     $('a.fullscreen').addClass('active');
     Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true', { sameSite: 'lax' });
@@ -306,14 +307,14 @@ function enterFullscreen() {
 
 // Exit fullscreen mode and drop cookie
 function exitFullscreen() {
-    setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
+    setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").removeClass('fullscreen');
     $('a.fullscreen').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
 // hide warning about outdated browser and save decision to cookie
-function hideBrowserAlert(){
+function hideBrowserAlert() {
 
     $('#browser-hint').addClass('hidden');
     Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
