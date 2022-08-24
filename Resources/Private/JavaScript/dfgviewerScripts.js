@@ -263,8 +263,6 @@ $(document).ready(function() {
                     'detail': {
                         'source': 'navigation',
                         'page': newPageNo,
-                        'pageObj': tx_dlf_loaded.document.pages[newPageNo - 1],
-                        'target': e.target
                     }
                 }
             )
