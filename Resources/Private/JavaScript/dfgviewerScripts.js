@@ -233,6 +233,54 @@ $(document).ready(function() {
         $('#browser-hint').addClass('hidden');
     }
 
+    $('.tx-dlf-navigation-doubleOn').click(function (e) {
+        e.preventDefault();
+        tx_dlf_loaded.state.simultaneousPages = 2;
+        document.body.dispatchEvent(new CustomEvent('tx-dlf-configChanged', {
+            detail: {
+                source: 'navigation',
+                simultaneousPages: 2,
+            },
+        }))
+    });
+
+    $('.tx-dlf-navigation-doubleOff').click(function (e) {
+        e.preventDefault();
+        tx_dlf_loaded.state.simultaneousPages = 1;
+        document.body.dispatchEvent(new CustomEvent('tx-dlf-configChanged', {
+            detail: {
+                source: 'navigation',
+                simultaneousPages: 1,
+            },
+        }))
+    });
+
+    $('.tx-dlf-navigation-doublePlusOne').click(function (e) {
+        e.preventDefault();
+        const pageIdx = tx_dlf_loaded.state.page - 1;
+        const simultaneousPages = tx_dlf_loaded.state.simultaneousPages;
+
+        const rectoVerso = pageIdx % simultaneousPages;
+        const newRectoVerso = (rectoVerso + 1) % simultaneousPages;
+        const newPageNo = (pageIdx - rectoVerso + newRectoVerso) + 1;
+
+        // TODO: Avoid redundancy
+        tx_dlf_loaded.state.page = newPageNo;
+        document.body.dispatchEvent(
+            new CustomEvent(
+                'tx-dlf-pageChanged',
+                {
+                    'detail': {
+                        'source': 'navigation',
+                        'page': newPageNo,
+                        'pageObj': tx_dlf_loaded.document.pages[newPageNo - 1],
+                        'target': e.target
+                    }
+                }
+            )
+        );
+    });
+
     // Finally all things are settled. Bring back animations a second later.
     setTimeout(function () {
         localStorage.clear();
