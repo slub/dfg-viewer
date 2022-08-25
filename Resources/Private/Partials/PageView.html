@@ -168,7 +168,7 @@
           </li>
           <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
             <li class="fulltext shown-if-double">
-              <span class="select switchoff" id="tx-dlf-tools-fulltext" title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}"><f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' /></span>
+              <span class="select switchoff" title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}"><f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' /></span>
             </li>
             <li class="fulltext shown-if-single">
               <f:if condition="{gp-pagegrid} == 1">
