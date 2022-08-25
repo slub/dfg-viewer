@@ -102,6 +102,7 @@ plugin.tx_dlf_tableofcontents < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_tableofcontents {
     settings {
         targetPid = {$plugin.tx_dfgviewer.kitodoPageView}
+        showFull = 1
         menuConf {
             expAll = 1
         }
