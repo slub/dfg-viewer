@@ -233,52 +233,6 @@ $(document).ready(function () {
         $('#browser-hint').addClass('hidden');
     }
 
-    $('.tx-dlf-navigation-doubleOn').click(function (e) {
-        e.preventDefault();
-        tx_dlf_loaded.state.simultaneousPages = 2;
-        document.body.dispatchEvent(new CustomEvent('tx-dlf-stateChanged', {
-            detail: {
-                source: 'navigation',
-                simultaneousPages: 2,
-            },
-        }))
-    });
-
-    $('.tx-dlf-navigation-doubleOff').click(function (e) {
-        e.preventDefault();
-        tx_dlf_loaded.state.simultaneousPages = 1;
-        document.body.dispatchEvent(new CustomEvent('tx-dlf-stateChanged', {
-            detail: {
-                source: 'navigation',
-                simultaneousPages: 1,
-            },
-        }))
-    });
-
-    $('.tx-dlf-navigation-doublePlusOne').click(function (e) {
-        e.preventDefault();
-        const pageIdx = tx_dlf_loaded.state.page - 1;
-        const simultaneousPages = tx_dlf_loaded.state.simultaneousPages;
-
-        const rectoVerso = pageIdx % simultaneousPages;
-        const newRectoVerso = (rectoVerso + 1) % simultaneousPages;
-        const newPageNo = (pageIdx - rectoVerso + newRectoVerso) + 1;
-
-        // TODO: Avoid redundancy
-        tx_dlf_loaded.state.page = newPageNo;
-        document.body.dispatchEvent(new CustomEvent('tx-dlf-stateChanged', {
-            'detail': {
-                'source': 'navigation',
-                'page': newPageNo,
-            }
-        }));
-    });
-
-    // Update URL in page grid button
-    document.body.addEventListener('tx-dlf-stateChanged', e => {
-        $('#dfgviewer-enable-grid-view')
-            .attr('href', tx_dlf_loaded.makePageUrl(e.detail.page, true));
-    });
 
     // Finally all things are settled. Bring back animations a second later.
     setTimeout(function () {
@@ -288,6 +242,66 @@ $(document).ready(function () {
     }, 1000);
 
 });
+
+(function () {
+    let docController = null;
+    window.addEventListener('tx-dlf-documentLoaded', e => {
+        docController = e.detail.docController;
+    });
+
+    $('.tx-dlf-navigation-doubleOn').click(function (e) {
+        if (docController === null) {
+            return;
+        }
+
+        e.preventDefault();
+        docController.changeState({
+            source: 'navigation',
+            simultaneousPages: 2,
+        });
+    });
+
+    $('.tx-dlf-navigation-doubleOff').click(function (e) {
+        if (docController === null) {
+            return;
+        }
+
+        e.preventDefault();
+        docController.changeState({
+            source: 'navigation',
+            simultaneousPages: 1,
+        });
+    });
+
+    $('.tx-dlf-navigation-doublePlusOne').click(function (e) {
+        if (docController === null) {
+            return;
+        }
+
+        e.preventDefault();
+        const pageIdx = tx_dlf_loaded.state.page - 1;
+        const simultaneousPages = tx_dlf_loaded.state.simultaneousPages;
+
+        const rectoVerso = pageIdx % simultaneousPages;
+        const newRectoVerso = (rectoVerso + 1) % simultaneousPages;
+        const newPageNo = (pageIdx - rectoVerso + newRectoVerso) + 1;
+
+        docController.changeState({
+            'source': 'navigation',
+            'page': newPageNo,
+        });
+    });
+
+    // Update URL in page grid button
+    document.body.addEventListener('tx-dlf-stateChanged', e => {
+        if (docController === null) {
+            return;
+        }
+
+        $('#dfgviewer-enable-grid-view')
+            .attr('href', docController.makePageUrl(e.detail.page, true));
+    });
+})();
 
 $(document).keyup(function (e) {
 
