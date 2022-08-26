@@ -154,7 +154,6 @@ $(document).ready(function () {
     }
 
     // Check if there are is a download list. Otherwise change a to span to disable button
-<<<<<<< HEAD
     if(!$('.submenu.downloads ul li')[0]) {
         $("#tab-downloads").replaceWith(function () {
             // Create a new element using jQuery with sanitized content
@@ -164,11 +163,6 @@ $(document).ready(function () {
                 "id": $(this).attr('id'),
                 "text": $(this).html() // Use "text" to set the text content, escaping it
             });
-=======
-    if (!$('.submenu.downloads ul li')[0]) {
-        $("#tab-downloads").replaceWith(function () {
-            return $("<span title=\"" + $(this).attr('title') + "\" class=\"" + $(this).attr('class') + "\" id=\"" + $(this).attr('id') + "\">" + $(this).html() + "</span>");
->>>>>>> a508a60 (Simplify: Merge `pageChanged` and `configChanged` events)
         });
     }
 
@@ -278,6 +272,12 @@ $(document).ready(function () {
                 'page': newPageNo,
             }
         }));
+    });
+
+    // Update URL in page grid button
+    document.body.addEventListener('tx-dlf-stateChanged', e => {
+        $('#dfgviewer-enable-grid-view')
+            .attr('href', tx_dlf_loaded.makePageUrl(e.detail.page, true));
     });
 
     // Finally all things are settled. Bring back animations a second later.

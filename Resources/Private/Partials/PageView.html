@@ -194,11 +194,7 @@
                     </f:link.page>
                   </f:then>
                   <f:else>
-                    <f:link.page pageUid="{kitodoPageView}"
-                      additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
-                      title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
-                      <f:translate key='gridpage.preview' extensionName='dfgviewer' />
-                    </f:link.page>
+                      <f:link.page id="dfgviewer-enable-grid-view" pageUid="{kitodoPageView}" additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}" title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
                   </f:else>
 >>>>>>> 25c001d (Start implementing client-side double page mode)
                 </f:if>
