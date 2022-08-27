@@ -245,8 +245,18 @@ $(document).ready(function () {
 
 (function () {
     let docController = null;
-    window.addEventListener('tx-dlf-documentLoaded', e => {
+    window.addEventListener('tx-dlf-documentLoaded', (e) => {
         docController = e.detail.docController;
+
+        // Update URL in page grid button
+        docController.eventTarget.addEventListener('tx-dlf-stateChanged', e => {
+            if (docController === null) {
+                return;
+            }
+
+            $('#dfgviewer-enable-grid-view')
+                .attr('href', docController.makePageUrl(e.detail.page, true));
+        });
     });
 
     $('.tx-dlf-navigation-doubleOn').click(function (e) {
@@ -290,16 +300,6 @@ $(document).ready(function () {
             'source': 'navigation',
             'page': newPageNo,
         });
-    });
-
-    // Update URL in page grid button
-    document.body.addEventListener('tx-dlf-stateChanged', e => {
-        if (docController === null) {
-            return;
-        }
-
-        $('#dfgviewer-enable-grid-view')
-            .attr('href', docController.makePageUrl(e.detail.page, true));
     });
 })();
 
