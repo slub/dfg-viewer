@@ -289,8 +289,8 @@ $(document).ready(function () {
         }
 
         e.preventDefault();
-        const pageIdx = tx_dlf_loaded.state.page - 1;
-        const simultaneousPages = tx_dlf_loaded.state.simultaneousPages;
+        const pageIdx = docController.currentPageNo - 1;
+        const simultaneousPages = docController.simultaneousPages;
 
         const rectoVerso = pageIdx % simultaneousPages;
         const newRectoVerso = (rectoVerso + 1) % simultaneousPages;
