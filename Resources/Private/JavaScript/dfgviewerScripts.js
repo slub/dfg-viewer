@@ -296,10 +296,7 @@ $(document).ready(function () {
         const newRectoVerso = (rectoVerso + 1) % simultaneousPages;
         const newPageNo = (pageIdx - rectoVerso + newRectoVerso) + 1;
 
-        docController.changeState({
-            'source': 'navigation',
-            'page': newPageNo,
-        });
+        docController.changePage(newPageNo);
     });
 })();
 
