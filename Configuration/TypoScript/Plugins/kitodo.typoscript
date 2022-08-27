@@ -55,12 +55,20 @@ plugin.tx_dlf_metadata {
     }
 }
 
+plugin.tx_dlf_metadata_prerender < plugin.tx_dlf_metadata
+plugin.tx_dlf_metadata_prerender {
+    settings {
+        prerenderAllSections = 1
+    }
+}
+
 # --------------------------------------------------------------------------------------------------------------------
 # document
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_document < tt_content.list.20.dlf_document
 plugin.tx_dlf_document {
     settings {
+        targetPidMetadata = {$config.prerenderMetadataPid}
     }
 }
 
