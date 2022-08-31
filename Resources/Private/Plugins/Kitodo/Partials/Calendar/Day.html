@@ -1,0 +1,39 @@
+<f:comment>
+<!--
+ * (c) Kitodo. Key to digital objects e.V. <contact@kitodo.org>
+ *
+ * This file is part of the Kitodo and TYPO3 projects.
+ *
+ * @license GNU General Public License version 3 or later.
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+-->
+</f:comment>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{day}">
+    <f:then>
+        <f:if condition="{day.issues}">
+            <f:then>
+                <div class="contains-issues">
+                    {day.dayValue -> f:format.html()}
+                </div>
+                <ul class="issues">
+                    <ul>
+                        <f:for each="{day.issues}" as="item">
+                            <li>
+                                <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}">
+                                    {item.text}
+                                </f:link.page>
+                            </li>
+                        </f:for>
+                    </ul>
+                </ul>
+            </f:then>
+            <f:else>
+                {day.dayValue -> f:format.html()}
+            </f:else>
+        </f:if>
+    </f:then>
+</f:if>

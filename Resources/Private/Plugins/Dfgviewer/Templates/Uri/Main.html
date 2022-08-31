@@ -1,0 +1,37 @@
+<f:comment>
+    /***************************************************************
+     *  Copyright notice
+     *
+     *  (c) 2022 Alexander Bigga <typo3@slub-dresden.de>
+     *  All rights reserved
+     *
+     *  This script is part of the TYPO3 project. The TYPO3 project is
+     *  free software; you can redistribute it and/or modify
+     *  it under the terms of the GNU General Public License as published by
+     *  the Free Software Foundation; either version 2 of the License, or
+     *  (at your option) any later version.
+     *
+     *  The GNU General Public License can be found at
+     *  http://www.gnu.org/copyleft/gpl.html.
+     *
+     *  This script is distributed in the hope that it will be useful,
+     *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     *  GNU General Public License for more details.
+     *
+     *  This copyright notice MUST APPEAR in all copies of the script!
+     ***************************************************************/
+</f:comment>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:for each="{uriBooks}" as="uri">
+    <li><f:link.external class="persistence-document" uri="{uri}"><f:translate key="uri.book" /></f:link.external></li>
+</f:for>
+
+<f:for each="{uriPages}" as="uri">
+    <li><f:link.external class="persistence-page" uri="{uri}"><f:translate key="uri.page" /></f:link.external></li>
+</f:for>
+
+</html>

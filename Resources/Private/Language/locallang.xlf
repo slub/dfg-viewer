@@ -74,6 +74,30 @@
 		<trans-unit id="browser-hint.outdated_browser.description">
 			<source>You use an outdated browser which lacks the support for modern JavaScript. Some features may not work as expected (e.g. images views). Please update to a current browser.</source>
 		</trans-unit>
+        <trans-unit id="sru.label.query">
+            <source><![CDATA[Search for:]]></source>
+        </trans-unit>
+        <trans-unit id="sru.label.delete_search">
+            <source><![CDATA[Delete Search]]></source>
+        </trans-unit>
+        <trans-unit id="sru.label.loading">
+            <source><![CDATA[Loading Results]]></source>
+        </trans-unit>
+        <trans-unit id="sru.label.submit">
+            <source><![CDATA[Search]]></source>
+        </trans-unit>
+        <trans-unit id="sru.label.noresult">
+            <source><![CDATA[No results found for your search.]]></source>
+        </trans-unit>
+        <trans-unit id="sru.search">
+            <source><![CDATA[Search]]></source>
+        </trans-unit>
+		<trans-unit id="uri.book">
+            <source>Persistent Identifiers (Book)</source>
+        </trans-unit>
+		<trans-unit id="uri.page">
+            <source>Persistent Identifiers (Page)</source>
+        </trans-unit>
 		</body>
 	</file>
 </xliff>

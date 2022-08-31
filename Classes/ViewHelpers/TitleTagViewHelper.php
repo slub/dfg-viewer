@@ -55,7 +55,10 @@ class TitleTagViewHelper extends AbstractViewHelper
       ) {
         $title = $arguments['title'];
 
-        $GLOBALS['TSFE']->page['title'] = $title;
+        if ($title !== null) {
+            $GLOBALS['TSFE']->page['title'] = $title;
+        }
+
         // return first found result
         return;
     }

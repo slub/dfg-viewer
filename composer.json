@@ -16,7 +16,7 @@
     },
     {
       "name": "Alexander Bigga",
-      "email": "alexander.bigga@slub-dresden.de",
+      "email": "typo3@slub-dresden.de",
       "role": "Developer"
     },
     {
@@ -37,9 +37,9 @@
   ],
   "license": "GPL-3.0-or-later",
   "require": {
-    "typo3/cms-core": "~9.5.31",
-    "kitodo/presentation": "~3.3.4|dev-master",
-    "slub/slub-digitalcollections": "^2.1"
+    "typo3/cms-core": "~9.5.31|^10.4",
+    "kitodo/presentation": "^4.0|dev-master",
+    "slub/slub-digitalcollections": "^3.0|dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -50,5 +50,10 @@
     "typo3/cms": {
       "extension-key": "dfgviewer"
     }
+  },
+  "scripts": {
+    "docs:setup": "./Build/Documentation/sphinx.sh install",
+    "docs:serve": "./Build/Documentation/sphinx.sh serve",
+    "docs:t3": "docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs"
   }
 }

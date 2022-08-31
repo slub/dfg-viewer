@@ -1,0 +1,36 @@
+<f:comment>
+<!--
+ * (c) Kitodo. Key to digital objects e.V. <contact@kitodo.org>
+ *
+ * This file is part of the Kitodo and TYPO3 projects.
+ *
+ * @license GNU General Public License version 3 or later.
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+-->
+</f:comment>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <div class="tx-dfgviewer-newspaper-years">
+        <h4>{allYearDocTitle}</h4>
+        <ul>
+            <f:for each="{yearName}" as="yearEntry">
+                <li class="year">
+                    <f:if condition="{yearEntry.documentId}">
+                        <f:then>
+                            <f:link.page additionalParams="{'tx_dlf[id]': yearEntry.documentId}">
+                                {yearEntry.title}
+                            </f:link.page>
+                        </f:then>
+                        <f:else>
+                            <a href="#" style="cursor: default;" onclick="event.preventDefault()">
+                                {yearEntry.title}
+                            </a>
+                        </f:else>
+                    </f:if>
+                </li>
+            </f:for>
+        </ul>
+    </div>
+</html>

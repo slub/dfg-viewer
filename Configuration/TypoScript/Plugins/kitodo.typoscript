@@ -1,163 +1,188 @@
-# don't use wrapInBaseClass as it breaks the layout of new DFG-Viewer >4.0
-config.disableWrapInBaseClass=1
+# -----------------------------------
+# Map GET paramter set[] --> tx_dlf[]
+# -----------------------------------
 
-plugin.tx_dlf.useragent = {$config.useragent}
-
-# map GET parameter set[mets] --> tx_dlf[id]
+# map set[mets] --> tx_dlf[id]
 [like(traverse(request.getQueryParams(), 'set/mets'), 'http*')]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
-# map GET parameter set[image] --> tx_dlf[page]
+# map set[image] --> tx_dlf[page]
 [traverse(request.getQueryParams(), 'set/image')]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [END]
 
-# map GET parameter set[double] --> tx_dlf[double]
+# map set[double] --> tx_dlf[double]
 [traverse(request.getQueryParams(), 'set/double') > 0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [END]
 
-lib.metadata = USER
-lib.metadata {
-  userFunc = Kitodo\Dlf\Plugin\Metadata->main
-  excludeOther = 0
-  linkTitle = 1
-  getTitle = 1
-  showFull = 0
-  rootline = 1
-  separator = #
-  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/MobileMetadata.tmpl
+
+# --------------------------------------------------------------------------------------------------------------------
+# plugin configuration
+# --------------------------------------------------------------------------------------------------------------------
+
+plugin.tx_dlf {
+    persistence {
+        storagePid = {$config.storagePid}
+    }
+    settings {
+        storagePid = {$config.storagePid}
+    }
+	view {
+		partialRootPaths {
+			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
+			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Partials
+		}
+		templateRootPaths {
+			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates
+			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Templates
+		}
+	}
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# metadata
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_metadata < tt_content.list.20.dlf_metadata
 plugin.tx_dlf_metadata {
-  pages = {$config.storagePid}
-  excludeOther = 0
-  linkTitle = 0
-  getTitle = 0
-  showFull = 1
-  rootline = 1
-  separator = #
-  templateFile = {$config.templateFileMeta}
+    settings {
+        linkTitle = 0
+        getTitle = 0
+        showFull = 1
+        rootline = 1
+        separator = #
+    }
 }
 
-lib.navigation_pagecontrol = USER
-lib.navigation_pagecontrol {
-  userFunc = Kitodo\Dlf\Plugin\Navigation->main
-  pages = {$config.storagePid}
-  pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationPageControl.tmpl
-}
-
-lib.navigation_viewfunction = USER
-lib.navigation_viewfunction {
-  userFunc = Kitodo\Dlf\Plugin\Navigation->main
-  pages = {$config.storagePid}
-  pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunction.tmpl
-}
-
-# reduced mobile navigation (page select, fullscreen-button)
-lib.navigation_viewfunction_mobile = USER
-lib.navigation_viewfunction_mobile {
-  userFunc = Kitodo\Dlf\Plugin\Navigation->main
-  pages = {$config.storagePid}
-  pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunctionMobile.tmpl
-}
-
-lib.navigation_viewfunction_deactivated = USER
-lib.navigation_viewfunction_deactivated {
-  userFunc = Kitodo\Dlf\Plugin\Navigation->main
-  pages = {$config.storagePid}
-  pageStep = 10
-  templateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/NavigationViewFunctionDeactivated.tmpl
-}
-
+# --------------------------------------------------------------------------------------------------------------------
+# pageview / workview
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
 plugin.tx_dlf_pageview {
-  pages = {$config.storagePid}
-  excludeOther = 0
-  features =
-  elementId = tx-dfgviewer-map
-  templateFile = {$config.templateFilePage}
-  fileGrpImages = MIN,MAX,DEFAULT
+    settings {
+        features =
+        elementId = tx-dfgviewer-map
+    }
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# thumbnail previews
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_pagegrid < tt_content.list.20.dlf_pagegrid
 plugin.tx_dlf_pagegrid {
-  pages = {$config.storagePid}
-  limit = 24
-  placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
-  targetPid = #
-  templateFile = {$config.templateFileGrid}
+    settings {
+        targetPid = {$config.kitodoPageView}
+        placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
+        paginate {
+            itemsPerPage = 24
+            insertAbove = 0
+            insertBelow = 1
+            lessPages = 1
+            forcedNumberOfLinks = 5
+            pagesBefore = 3
+            pagesAfter = 3
+            section =
+        }
+    }
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# table of contents
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_tableofcontents < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_tableofcontents {
-  pages = {$config.storagePid}
-  excludeOther = 0
-  targetPid.data = TSFE:page|uid
-  templateFile = {$config.templateFileToc}
-  menuConf {
-    expAll = 0
-    1 = TMENU
-    1.noBlur = 1
-    1.wrap = <ul class="toc">|</ul>
-    1.NO = 1
-    1.NO.stdWrap.crop = 55 | &nbsp;... | 1
-    1.NO.stdWrap.ifEmpty.field = type
-    1.NO.stdWrap.ifEmpty.append = TEXT
-    1.NO.stdWrap.ifEmpty.append.fieldRequired = volume
-    1.NO.stdWrap.ifEmpty.append.field = volume
-    1.NO.stdWrap.ifEmpty.append.wrap = &nbsp;|
-    1.NO.stdWrap.dataWrap = | <span class="pagination">{field:pagination}</span>
-    1.NO.doNotLinkIt.field = doNotLinkIt
-    1.NO.ATagTitle.field = title // type
-    1.NO.allWrap = <span class="a">|</span>
-    1.NO.allWrap.fieldRequired = doNotLinkIt
-    1.NO.wrapItemAndSub = <li>|</li>
-    1.IFSUB < .1.NO
-    1.IFSUB.wrapItemAndSub = <li class="submenu">|</li>
-    1.CUR < .1.NO
-    1.CUR.wrapItemAndSub = <li class="current">|</li>
-    1.CURIFSUB < .1.NO
-    1.CURIFSUB.wrapItemAndSub = <li class="current submenu">|</li>
-    1.ACT < .1.NO
-    1.ACT.wrapItemAndSub = <li class="active">|</li>
-    1.ACTIFSUB < .1.NO
-    1.ACTIFSUB.wrapItemAndSub = <li class="active submenu">|</li>
-    2 < .1
-    2.wrap = <ul>|</ul>
-    3 < .2
-    4 < .3
-    5 < .4
-    6 < .5
-    7 < .6
-    8 < .7
-    9 < .8
-    10 < .9
-  }
+    settings {
+        targetPid = {$config.kitodoPageView}
+        menuConf {
+            expAll = 1
+        }
+    }
 }
 
-plugin.tx_dlf_pdfdownloadtool {
-  # this file does not exist
-  toolTemplateFile = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/toolboxPdf.tmpl
+# --------------------------------------------------------------------------------------------------------------------
+# navigation
+# --------------------------------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------------------------------
+# foward and back buttons in page view
+# --------------------------------------------------------------------------------------------------------------------
+lib.kitodo.navigation.pagecontrol < tt_content.list.20.dlf_navigation
+lib.kitodo.navigation.pagecontrol {
+    settings {
+        pageStep = 10
+        features = pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+    }
 }
 
+# --------------------------------------------------------------------------------------------------------------------
+# rotate and zoom buttons in page view
+# --------------------------------------------------------------------------------------------------------------------
+lib.kitodo.navigation.viewfunction < tt_content.list.20.dlf_navigation
+lib.kitodo.navigation.viewfunction {
+    settings {
+        pages = {$config.kitodo.storagePid}
+        features = pageselect,rotation,zoom
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
+# Tools like imagemanipulation, fulltext and downloads eg.
+# --------------------------------------------------------------------------------------------------------------------
+
+# available tools:
+
+# fulltexttool
+# annotationtool
+# fulltextdownloadtool
+# imagedownloadtool
+# imagemanipulationtool
+# pdfdownloadtool
+# searchindocumenttool
+
+plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
+plugin.tx_dlf_toolbox {
+    settings {
+#        fileGrpsImageDownload = MIN,DEFAULT,MAX
+    }
+}
+
+plugin.tx_dlf_fulltexttool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_fulltexttool {
-    pages = {$config.storagePid}
-    templateFile = {$config.templateFileToolFulltext}
+    settings {
+        tools = fulltexttool
+        activateFullTextInitially = 0
+        fullTextScrollElement = html, body
+    }
 }
 
+plugin.tx_dlf_imagemanipulationtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_imagemanipulationtool {
-    pages = {$config.storagePid}
-    templateFile = {$config.templateFileToolImageManipulation}
+    settings {
+        tools = imagemanipulationtool
+    }
 }
 
-plugin.tx_dlf_audioplayer {
-    pages = {$config.storagePid}
-    excludeOther = 0
-    elementId = tx-dlf-audio
-#  templateFile = {$config.templateFilePage}
+plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_pdfdownloadtool {
+    settings {
+        tools = pdfdownloadtool
+    }
 }
+
+# --------------------------------------------------------------------------------------------------------------------
+# Audio player
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_audioplayer < tt_content.list.20.dlf_audioplayer
+plugin.tx_dlf_audioplayer {
+    settings {
+        elementId = tx-dlf-audio
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
+# newspaper navigation
+# --------------------------------------------------------------------------------------------------------------------
 
 [getDocumentType("{$config.storagePid}") == "ephemera" or getDocumentType("{$config.storagePid}") == "newspaper"]
 page.10.variables {

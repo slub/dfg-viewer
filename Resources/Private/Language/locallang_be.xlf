@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2021-10-25T09:43:48Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+			<trans-unit id="sheet_general">
+				<source><![CDATA[Options]]></source>
+			</trans-unit>
+			<trans-unit id="plugins.sru.title">
+				<source><![CDATA[SRU Search Bar]]></source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

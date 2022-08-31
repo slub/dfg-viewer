@@ -1,0 +1,19 @@
+<div class="sru-searchfield">
+	<form id="tx-dfgviewer-sru-form" action="{actionUrl}" method="post">
+		<label for="tx-dfgviewer-sru-query"><f:translate key='sru.label.query' extensionName='dfgviewer' /></label>
+		<!-- Never change the @id of this input field! Otherwise search suggestions won't work! -->
+		<input type="text" id="tx-dfgviewer-sru-query" name="tx_dlf[query]" value="" placeholder="<f:translate key='sru.label.query' extensionName='dfgviewer' />" />
+		<input type="submit" value="<f:translate key='sru.label.submit' extensionName='dfgviewer' />" />
+		<input type="hidden" name="tx_dfgviewer[L]" value="###LANG_ID###" />
+		<input type="hidden" name="tx_dfgviewer[sru]" value="{sruLink}" />
+		<input type="hidden" name="tx_dfgviewer[id]" value="{currentDocument}" />
+		<input type="hidden" name="tx_dfgviewer[action]" value="{actionUrl}" />
+	</form>
+	<!-- The following element is needed for the result list -->
+	<div id="tx-dfgviewer-sru-results-loading" style="display: none;"><f:translate key='sru.label.loading' extensionName='dfgviewer' />...</div>
+	<div id="tx-dfgviewer-sru-results-clearing"><f:translate key='sru.label.delete_search' extensionName='dfgviewer' />...</div>
+	<div id="tx-dfgviewer-sru-results"></div>
+	<div id="tx-dfgviewer-sru-labels" style="display:none;">
+		<span id="tx-dfgviewer-sru-label-noresult"><f:translate key='sru.label.noresult' extensionName='dfgviewer' /></span>
+	</div>
+</div>

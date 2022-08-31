@@ -107,9 +107,6 @@
                 <dd><dc:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm)[1]' />
                 </dd>
             </dl>
-            <div class="mobile-controls">
-                <f:cObject typoscriptObjectPath="lib.navigation_viewfunction_mobile" />
-            </div>
         </div>
 
       <ul>
@@ -152,73 +149,13 @@
                   </li>
                 </f:else>
               </f:if>
-                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
+            <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
             </ul>
           </li>
           <li class="submenu downloads">
             <a href="#" id="tab-downloads" title="Downloads">Downloads</a>
             <ul>
-              <f:if condition="{gp-double} == 1">
-                <f:then>
-                  <f:if condition="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)} !=''">
-                    <li>
-                        <f:link.external
-                        uri="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)}"
-                        class="download-page"
-                        title="{f:translate(key:'download.leftPage', extensionName:'dfgviewer')}">
-                          <f:translate key="download.leftPage"  extensionName="dfgviewer" />
-                      </f:link.external>
-                    </li>
-                  </f:if>
-                  <f:if condition="{dc:downloadLinks(type:'page-right', pagenumber:gp-page)} !=''">
-                    <li>
-                      <f:link.external
-                        uri="{dc:downloadLinks(type:'page-right', pagenumber:gp-page)}"
-                        class="download-page"
-                        title="{f:translate(key:'download.rightPage', extensionName:'dfgviewer')}">
-                          <f:translate key="download.rightPage"  extensionName="dfgviewer" />
-                      </f:link.external>
-                    </li>
-                  </f:if>
-                </f:then>
-                <f:else>
-                  <f:if condition="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)} !=''">
-                    <li>
-                      <f:link.external
-                        uri="{dc:downloadLinks(type:'page-left', pagenumber:gp-page)}"
-                        class="download-page"
-                        title="{f:translate(key:'download.singlePage', extensionName:'dfgviewer')}">
-                          <f:translate key="download.singlePage"  extensionName="dfgviewer" />
-                      </f:link.external>
-                    </li>
-                  </f:if>
-                </f:else>
-              </f:if>
-              <f:if condition="{dc:downloadLinks(type:'work')} !=''">
-                <f:then>
-                  <li>
-                    <f:link.external
-                      uri="{dc:downloadLinks(type:'work')}"
-                      class="download-document"
-                      target="_blank"
-                      title="{f:translate(key:'download.work', extensionName:'dfgviewer')}"><f:translate key="download.work"  extensionName="dfgviewer" /></f:link.external>
-                  </li>
-                </f:then>
-                <f:else>
-                  <f:if condition="{dc:xpath(xpath:'(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]')}">
-                    <f:alias map="{xpathDownload: '//mets:fileSec/mets:fileGrp[@USE=\'DOWNLOAD\']//mets:file/mets:FLocat/@xlink:href'}">
-                      <li>
-                        <f:link.external
-                          uri="{dv:format.subStringLast(string:'{dc:xpath(xpath:\'(({xpathDownload})[1])\')}', needle:'/')}/{dc:xpath(xpath:'(//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:extension/slub:slub/slub:id[@type=\'digital\'])[1]')}.pdf"
-                          class="download-document"
-                          target="_blank"
-                          title="{f:translate(key:'download.work', extensionName:'dfgviewer')}"><f:translate key="download.work"  extensionName="dfgviewer" />
-                        </f:link.external>
-                      </li>
-                    </f:alias>
-                  </f:if>
-                </f:else>
-              </f:if>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pdfdownloadtool" />
             </ul>
           </li>
           <li class="doublepage">
@@ -280,14 +217,9 @@
     </div>
     <div class="view-functions">
       <f:if condition="{gp-pagegrid} == 1">
-        <f:then>
-        <ul>
-          <f:cObject typoscriptObjectPath="lib.navigation_viewfunction_deactivated" />
-        </ul>
-        </f:then>
         <f:else>
           <ul>
-            <f:cObject typoscriptObjectPath="lib.navigation_viewfunction" />
+            <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
             <li class="tx-dlf-imagemanipulationtool"><f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" /></li>
           </ul>
         </f:else>
@@ -295,11 +227,8 @@
     </div>
     <div class="page-control">
       <f:if condition="{gp-pagegrid} == 1">
-        <f:then>
-          <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_gridpager" />
-        </f:then>
         <f:else>
-          <f:cObject typoscriptObjectPath="lib.navigation_pagecontrol" />
+          <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
         </f:else>
       </f:if>
     </div>

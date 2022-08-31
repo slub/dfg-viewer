@@ -6,11 +6,9 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tt_content.dfgviewer_gridpager">DFG-Viewer: Grid Pager</label>
 			<label index="tt_content.dfgviewer_uri">DFG Viewer: Persistent Identifier</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index="tt_content.dfgviewer_gridpager">DFG-Viewer: Grid Pager</label>
 			<label index="tt_content.dfgviewer_uri">DFG-Viewer: Persistente Identifier</label>
 		</languageKey>
 	</data>

@@ -3,6 +3,8 @@
   "description": "This TYPO3 extension provides the configuration and setup for the DFG-Viewer",
   "main": "gruntfile.js",
   "scripts": {
+    "watch": "grunt watch",
+    "build": "grunt terser less",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

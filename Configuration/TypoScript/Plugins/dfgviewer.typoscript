@@ -1,34 +1,56 @@
-plugin.tx_dfgviewer_gridpager {
-  userFunc = Slub\Dfgviewer\Plugins\GridPager->main
-  pages = {$config.storagePid}
-  limit = 24
-  pageStep = 10
-  templateFile = {$config.templateFilePager}
+# --------------------------------------------------------------------------------------------------------------------
+# plugin configuration
+# --------------------------------------------------------------------------------------------------------------------
+
+plugin.tx_dfgviewer {
+    persistence {
+        storagePid = {$config.storagePid}
+    }
+	view {
+		partialRootPaths {
+			10 = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/Partials
+		}
+		templateRootPaths {
+			10 = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/Templates
+		}
+	}
 }
 
-plugin.tx_dfgviewer_newspapercalendar {
-  userFunc = Slub\Dfgviewer\Plugins\NewspaperCalendar->main
-  pages = {$config.storagePid}
-  targetPid = #
-  templateFile = {$config.templateFileNewspaperCalendar}
-}
-
-plugin.tx_dfgviewer_newspaperyears {
-  userFunc = Slub\Dfgviewer\Plugins\NewspaperYears->main
-  pages = {$config.storagePid}
-  targetPid = #
-  templateFile = {$config.templateFileNewspaperYears}
-}
-
+plugin.tx_dfgviewer_uri < tt_content.list.20.dfgviewer_uri
 plugin.tx_dfgviewer_uri {
-  userFunc = Slub\Dfgviewer\Plugins\Uri->main
-  pages = {$config.storagePid}
-  templateFile = {$config.templateFileUri}
+    settings {
+    }
 }
 
+plugin.tx_dfgviewer_newspaperyears < tt_content.list.20.dlf_calendar
+plugin.tx_dfgviewer_newspaperyears {
+    switchableControllerActions {
+        Calendar {
+            1 = years
+        }
+    }
+    settings {
+        targetPid = #
+    }
+}
+
+plugin.tx_dfgviewer_newspapercalendar < tt_content.list.20.dlf_calendar
+plugin.tx_dfgviewer_newspapercalendar {
+    switchableControllerActions {
+        Calendar {
+            1 = calendar
+        }
+    }
+    settings {
+        targetPid = {$config.kitodoPageView}
+        showEmptyMonths = 1
+        showEmptyTertialMonths = 0
+    }
+}
+
+plugin.tx_dfgviewer_sru < tt_content.list.20.dfgviewer_sru
 plugin.tx_dfgviewer_sru {
-  userFunc = Slub\Dfgviewer\Plugins\Sru\Sru->main
-  pages = {$config.storagePid}
-  templateFile = {$config.templateFileSru}
-  targetPid.data = TSFE:page|uid
+    settings {
+        //
+    }
 }

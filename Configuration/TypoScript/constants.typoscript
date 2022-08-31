@@ -15,9 +15,6 @@ config {
     # cat=plugin.tx_dfgviewer/links/050; type=int+; label=Kitodo Page View
     kitodoPageView =
 
-    # cat=plugin.tx_dfgviewer/string/051; type=string; label=User-Agent string for HTTP requests
-    useragent = DFG-Viewer, https://dfg-viewer.de
-
     # cat=plugin.tx_dfgviewer/piwik/010; type=string; label=Piwik Hostname
     piwik_hostname =
 
@@ -26,42 +23,6 @@ config {
 
     # cat=plugin.tx_dfgviewer/piwik/030; type=string; label=Piwik Domains
     piwik_domains =
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Metadata template file
-    templateFileMeta = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Metadata.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Grid Pager template file
-    templateFilePager = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/GridPager.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Pers. Identifier template file
-    templateFileUri = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/Uri.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Page View template file
-    templateFilePage = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/PageView.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Page Grid template file
-    templateFileGrid = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/PageGrid.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Table of Contents template file
-    templateFileToc = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/TableOfContents.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Toolbox template file
-    templateFileToolbox = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Toolbox.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Fulltext Tool template file
-    templateFileToolFulltext = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/FulltextTool.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Image manipulation template file
-    templateFileToolImageManipulation = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/ImageManipulationTool.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Newspaper Calendar template file
-    templateFileNewspaperCalendar = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/NewspaperCalendar.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=Newspaper Year List template file
-    templateFileNewspaperYears = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/NewspaperYears.tmpl
-
-    # cat=plugin.tx_dfgviewer/file; type=string; label=SRU searchform template file
-    templateFileSru = EXT:dfgviewer/Resources/Private/Plugins/Dfgviewer/Sru.tmpl
 
     news {
         # cat=plugin.tx_dfgviewer/links/020; type=int+; label=News Storage Pid
