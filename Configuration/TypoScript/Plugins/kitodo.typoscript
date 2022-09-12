@@ -1,6 +1,6 @@
-# -----------------------------------
-# Map GET paramter set[] --> tx_dlf[]
-# -----------------------------------
+# ------------------------------------
+# Map GET parameter set[] --> tx_dlf[]
+# ------------------------------------
 
 # map set[mets] --> tx_dlf[id]
 [like(traverse(request.getQueryParams(), 'set/mets'), 'http*')]
@@ -105,7 +105,7 @@ plugin.tx_dlf_tableofcontents {
 # --------------------------------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------------------------------
-# foward and back buttons in page view
+# forward and back buttons in page view
 # --------------------------------------------------------------------------------------------------------------------
 lib.kitodo.navigation.pagecontrol < tt_content.list.20.dlf_navigation
 lib.kitodo.navigation.pagecontrol {
