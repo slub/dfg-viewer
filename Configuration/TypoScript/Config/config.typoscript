@@ -21,7 +21,6 @@ config {
   spamProtectEmailAddresses_atSubst = &#64;
 
   prefixLocalAnchors = all
-  absRefPrefix = /
   simulateStaticDocuments = 0
 
   meaningfulTempFilePrefix = 1
