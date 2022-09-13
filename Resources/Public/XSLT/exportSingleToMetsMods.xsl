@@ -150,7 +150,7 @@
                         <mods:identifier type="gettyaat">
                             <xsl:value-of select="object_type/text()"/>
                         </mods:identifier>
-                        <mods:accessCondition type="license">
+                        <mods:accessCondition type="use and reproduction">
                             <xsl:value-of select="license/text()"/>
                         </mods:accessCondition>
                         <mods:recordInfo>

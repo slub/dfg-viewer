@@ -59,7 +59,7 @@
                                     <mods:roleTerm authority="marcrelator" type="code">aut</mods:roleTerm>
                                 </mods:role>
                             </mods:name>
-                            <mods:accessCondition type="license">
+                            <mods:accessCondition type="use and reproduction">
                                 <xsl:value-of select="model_license/text()"/>
                             </mods:accessCondition>
                             <mods:physicalDescription>
