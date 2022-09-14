@@ -85,10 +85,10 @@
                                 <xsl:value-of select="model_publisher/text()"/>
                             </mods:publisher>
                             <mods:dateCreated point="start" encoding="iso8601">
-                                <xsl:value-of select="publication_period_start/text()"/>
+                                <xsl:value-of select="creation_start/text()"/>
                             </mods:dateCreated>
                             <mods:dateCreated point="end" encoding="iso8601">
-                                <xsl:value-of select="publication_period_end/text()"/>
+                                <xsl:value-of select="creation_end/text()"/>
                             </mods:dateCreated>
                             <mods:dateIssued encoding="iso8601">
                                 <xsl:value-of select="publication_date/text()"/>
@@ -153,6 +153,11 @@
                         <mods:accessCondition type="use and reproduction">
                             <xsl:value-of select="license/text()"/>
                         </mods:accessCondition>
+                        <mods:physicalDescription>
+                            <mods:note type="software">
+                                <xsl:value-of select="creation_software/text()"/>
+                            </mods:note>
+                        </mods:physicalDescription>
                         <mods:recordInfo>
                             <mods:recordIdentifier source="[Unique Repository Identifier]">
                             </mods:recordIdentifier>
