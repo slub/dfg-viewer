@@ -26,7 +26,7 @@ namespace Slub\Dfgviewer\ViewHelpers\Format;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Returns a substring up to last occurence of needle.
+ * Returns a substring up to last occurrence of needle.
  *
  */
 class SubStringLastViewHelper extends AbstractViewHelper
@@ -42,7 +42,7 @@ class SubStringLastViewHelper extends AbstractViewHelper
     }
 
     /**
-     * Returns a substring up to last occurence of needle.
+     * Returns a substring up to last occurrence of needle.
      *
      * @return string
      */

@@ -53,7 +53,7 @@ browser. Just follow the 4 steps. You need your MySQL/MariaDB credentials of cou
 
     # continue with installation via webbrowser
     http://example.com/
-    1. Step: "System environement"
+    1. Step: "System environment"
     2. Step: "Database connection"
     3. Step: "Select database" --> Best is to create the database and user before.
     4. Step: "Create admin user account"

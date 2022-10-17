@@ -191,7 +191,7 @@ function exitFullscreen() {
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
-// hide warning about outdated browser and save decission to cookie
+// hide warning about outdated browser and save decision to cookie
 function hideBrowserAlert(){
 
     $('#browser-hint').addClass('hidden');
