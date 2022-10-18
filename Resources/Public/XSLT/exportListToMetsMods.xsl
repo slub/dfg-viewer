@@ -67,6 +67,16 @@
                                     <xsl:value-of select="used_software/text()"/>
                                 </mods:note>
                             </mods:physicalDescription>
+                            <mods:relatedItem type="original">
+                                <mods:originInfo>
+                                    <mods:dateCreated point="start" encoding="iso8601">
+                                        <xsl:value-of select="reconstructed_period_start/text()"/>
+                                    </mods:dateCreated>
+                                    <mods:dateCreated point="end" encoding="iso8601">
+                                        <xsl:value-of select="reconstructed_period_end/text()"/>
+                                    </mods:dateCreated>
+                                </mods:originInfo>
+                            </mods:relatedItem>
                         </mods:mods>
                     </mets:xmlData>
                 </mets:mdWrap>
