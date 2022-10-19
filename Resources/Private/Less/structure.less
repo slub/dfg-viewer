@@ -165,32 +165,32 @@ a {
         left: 0;
     }
     .toc-wrapper {
-        .tx-dlf-toc-preview-items {
-            display: grid;
-            grid-template-columns: 20% 20% 20% 20% 20%;
-            margin-top: 20px;
-            .tx-dlf-toc-preview-item {
-                width: 90%;
-                margin-bottom: 20px;
-                margin-left: 5%;
-                margin-right: 5%;
-                a > .tx-dlf-toc-preview-image {
-                    width: auto;
-                    max-width: 100%;
-                    height: auto;
-                    margin-right: auto;
-                    margin-left: auto;
-                }
-                a > .tx-dlf-toc-preview-type {
-                    font-size: 0.7em;
-                }
-                a > .tx-dlf-toc-preview-description {
-                    font-size: 0.8em;
+        .tx-dlf-toc-preview {
+            .tx-dlf-toc-preview-items {
+                display: grid;
+                grid-template-columns: 25% 25% 25% 25%;
+                margin-top: 20px;
+                .tx-dlf-toc-preview-item {
+                    width: 90%;
+                    margin-bottom: 20px;
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    a > .tx-dlf-toc-preview-image {
+                        width: auto;
+                        min-width: 70%;
+                        max-width: 100%;
+                        height: auto;
+                        margin-right: auto;
+                        margin-left: auto;
+                    }
+                    a > .tx-dlf-toc-preview-data {
+                        font-size: 0.8em;
+                    }
                 }
             }
-        }
-        h2 {
-            margin: 15px;
+            h2 {
+                margin: 15px;
+            }
         }
     }
     .document-functions {
