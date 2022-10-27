@@ -207,6 +207,15 @@
                     </mets:FLocat>
                 </mets:file>
             </mets:fileGrp>
+            <mets:fileGrp USE="CONVERTED">
+                <mets:file ID="FILE_0001_CONVERTED" MIMETYPE="model/gltf-binary">
+                    <mets:FLocat LOCTYPE="URL">
+                        <xsl:attribute name="xlink:href">
+                            <xsl:value-of select="converted_file_name/text()"/>
+                        </xsl:attribute>
+                    </mets:FLocat>
+                </mets:file>
+            </mets:fileGrp>
             <mets:fileGrp USE="THUMBS">
                 <mets:file ID="FILE_0001_THUMBS" MIMETYPE="image/jpeg">
                     <xsl:apply-templates select="preview_image/text()" />
@@ -225,6 +234,7 @@
             <mets:div ID="PHYS_0000" TYPE="physSequence">
                 <mets:div ID="PHYS_0001" ORDER="1" ORDERLABEL="1" TYPE="object">
                     <mets:fptr FILEID="FILE_0001_DEFAULT"/>
+                    <mets:fptr FILEID="FILE_0001_CONVERTED"/>
                     <mets:fptr FILEID="FILE_0001_THUMBS"/>
                 </mets:div>
             </mets:div>
