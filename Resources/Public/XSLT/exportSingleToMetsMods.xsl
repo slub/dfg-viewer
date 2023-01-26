@@ -133,16 +133,16 @@
                                 </mods:dateOther>
                             </mods:originInfo>
                             <mods:location>
-                                <mods:physicalLocation valueURI="">
+                                <mods:physicalLocation authority="geonames">
+                                    <xsl:attribute name="valueURI">
+                                        <xsl:value-of select="geonames/text()"/>
+                                    </xsl:attribute>
                                     <xsl:value-of select="city/text()"/>
                                 </mods:physicalLocation>
-                                <mods:url displayLabel="geonames">
-                                    <xsl:value-of select="geonames/text()"/>
-                                </mods:url>
-                                <mods:url displayLabel="wikidata">
+                                <mods:url note="wikidata">
                                     <xsl:value-of select="wikidata/text()"/>
                                 </mods:url>
-                                <mods:url displayLabel="wikipedia">
+                                <mods:url note="wikipedia">
                                     <xsl:value-of select="wikipedia/text()"/>
                                 </mods:url>
                             </mods:location>
