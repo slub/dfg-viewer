@@ -47,9 +47,7 @@
                             </mods:title>
                         </mods:titleInfo>
                         <mods:name type="personal">
-                            <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid">
-                                <xsl:value-of select="author_orcid/text()"/>                            
-                            </mods:nameIdentifier>
+                            <xsl:apply-templates select="author_orcid/text()" />
                             <mods:namePart type="family">
                             </mods:namePart>
                             <mods:namePart type="given">
@@ -66,9 +64,7 @@
                         </mods:name>
                         <!-- probably type will need to be value taken from source file -->
                         <mods:name type="corporate">
-                            <mods:nameIdentifier type="viaf" typeURI="http://id.loc.gov/vocabulary/identifiers/viaf">
-                                <xsl:value-of select="holder_viaf/text()"/> 
-                            </mods:nameIdentifier>
+                            <xsl:apply-templates select="holder_viaf/text()" />
                             <mods:namePart type="family">
                             </mods:namePart>
                             <mods:namePart type="given">
@@ -243,6 +239,26 @@
             <mets:smLink xlink:to="PHYS_0001" xlink:from="LOG_0001"/>
         </mets:structLink>
 
+    </xsl:template>
+
+    <xsl:template match="author_orcid/text()">
+        <xsl:variable select="substring-after(.,'https://orcid.org/')" name="orcid" />
+
+        <xsl:if test="$orcid != ''">
+            <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid">
+                <xsl:value-of select="normalize-space($orcid)"/>                            
+            </mods:nameIdentifier>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="holder_viaf/text()">
+        <xsl:variable select="substring-after(.,'http://viaf.org/viaf/')" name="viaf" />
+
+        <xsl:if test="$viaf != ''">
+            <mods:nameIdentifier type="viaf" typeURI="http://id.loc.gov/vocabulary/identifiers/viaf">
+                <xsl:value-of select="normalize-space($viaf)"/> 
+            </mods:nameIdentifier>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="preview_image/text()">
