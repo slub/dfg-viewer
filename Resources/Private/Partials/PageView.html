@@ -3,14 +3,7 @@
   xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-  <f:if condition="{isObject3D} == 'collection'">
-    <f:then>
-      <div class="document-view" style="overflow-y: auto;">
-    </f:then>
-    <f:else>
-      <div class="document-view">
-    </f:else>
-  </f:if>
+<div class="document-view">
   <div id="browser-hint" class="hidden">
     <div class="alert">
       <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
@@ -38,27 +31,17 @@
               <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
             </f:then>
             <f:else>
-              <f:if condition="{isObject3D} == 'collection'">
+              <f:if condition="{isObject3D} == 'object'">
                 <f:then>
-                  <div class="toc-wrapper">
-                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
-                    <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
-                  </div>
+                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d" />
                 </f:then>
                 <f:else>
-                  <f:if condition="{isObject3D} == 'object'">
-                    <f:then>
-                      <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d" />
-                    </f:then>
-                    <f:else>
-                      <f:if condition="{isNewspaper} == 'newspaper_issue'">
-                        <!-- it's a newspaper! -->
-                      </f:if>
-                      <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                      <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
-                      <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
-                    </f:else>
+                  <f:if condition="{isNewspaper} == 'newspaper_issue'">
+                    <!-- it's a newspaper! -->
                   </f:if>
+                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
+                  <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
                 </f:else>
               </f:if>
             </f:else>
@@ -67,7 +50,7 @@
       </f:if>
     </f:else>
   </f:if>
-  <f:if condition="{isObject3D} == 'collection' or {isObject3D} == 'object'">
+  <f:if condition="{isObject3D} == 'object'">
     <f:then>
       <!-- it's a 3D object view - no need for document, view or page control functions here! -->
     </f:then>

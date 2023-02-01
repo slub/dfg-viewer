@@ -26,9 +26,9 @@
         <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
       </div>
 
-      <f:if condition="{isObject3D} == 'collection' or {isObject3D} == 'object'">
+      <f:if condition="{isObject3D} == 'object'">
         <f:then>
-          <!-- it's a collection - no need for ToC here! -->
+          <!-- it's a 3D object - no need for ToC here! -->
         </f:then>
         <f:else>
           <div class="toc-wrapper">

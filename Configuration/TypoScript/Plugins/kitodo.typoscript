@@ -217,13 +217,6 @@ page.10.variables {
 }
 [END]
 
-[getDocumentType("{$config.storagePid}") == "collection"]
-page.10.variables {
-  isObject3D = TEXT
-  isObject3D.value = collection
-}
-[END]
-
 [getDocumentType("{$config.storagePid}") == "object"]
 page.10.variables {
   isObject3D = TEXT
