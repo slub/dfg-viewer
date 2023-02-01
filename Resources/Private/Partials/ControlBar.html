@@ -19,7 +19,14 @@
         </nav>
       </div>
 
-      <div class="metadata-wrapper">
+      <f:if condition="{isObject3D} == 'object'">
+        <f:then>
+          <div class="metadata-wrapper" style="height: 100%">
+        </f:then>
+        <f:else>
+          <div class="metadata-wrapper">
+        </f:else>
+      </f:if>
         <div class="tx-dlf-metadata">
             <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
         </div>
