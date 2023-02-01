@@ -67,6 +67,18 @@ plugin.tx_dlf_pageview {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
+# 3D objects view
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_view3d < tt_content.list.20.dlf_view3d
+plugin.tx_dlf_view3d {
+  pages = {$config.storagePid}
+  excludeOther = 0
+  features =
+  elementId = tx-dfgviewer-3d-view
+  fileGrpImages = THUMBS,DEFAULT
+}
+
+# --------------------------------------------------------------------------------------------------------------------
 # thumbnail previews
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_pagegrid < tt_content.list.20.dlf_pagegrid
@@ -202,5 +214,12 @@ page.10.variables {
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_issue
+}
+[END]
+
+[getDocumentType("{$config.storagePid}") == "object"]
+page.10.variables {
+  isObject3D = TEXT
+  isObject3D.value = object
 }
 [END]

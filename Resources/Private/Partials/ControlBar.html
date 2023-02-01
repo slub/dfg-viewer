@@ -26,10 +26,17 @@
         <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
       </div>
 
-      <div class="toc-wrapper">
-          <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
-          <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
-      </div>
+      <f:if condition="{isObject3D} == 'object'">
+        <f:then>
+          <!-- it's a 3D object - no need for ToC here! -->
+        </f:then>
+        <f:else>
+          <div class="toc-wrapper">
+              <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
+              <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
+          </div>
+        </f:else>
+      </f:if>
   </div>
 </f:section>
 
