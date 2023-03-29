@@ -11,104 +11,106 @@
 
  .website {
     .page-container {
-        ol.tx-dlf-abstracts {
-            li {
-                display: flex;
-                flex-wrap: wrap;
-
-                a {
+        div.tx-dlf-listview {
+            ol.tx-dlf-abstracts {
+                li {
                     display: flex;
                     flex-wrap: wrap;
-
-                    /* Thumbnail: main */
-                    div.tx-dlf-listview-thumbnail {
-                        position: relative;
-                        margin: 0 25px 0 0;
-                        line-height: 0;
-                        flex: 0 1 10px;
-        
-                        img {
-                            width: 140px;
-                            height: auto;
-                        }
-                    }
-
-                    /* Metadata: main */
-                    dl {
-                        width: 70%; /* container width */
-                        overflow: hidden;
-                        padding: 0;
-                        margin: 0;
+    
+                    a {
                         display: flex;
                         flex-wrap: wrap;
-                        align-content: flex-start;
-                        dt {
-                            flex: 0 0 30%;
-                            text-overflow: ellipsis;
-                            overflow: hidden;
+
+                        /* Thumbnail: main */
+                        div.tx-dlf-listview-thumbnail {
+                            position: relative;
+                            margin: 0 25px 0 0;
+                            line-height: 0;
+                            flex: 0 1 10px;
+            
+                            img {
+                                width: 140px;
+                                height: auto;
+                            }
                         }
-                        dd {
-                            flex: 0 0 70%;
-                            margin-left: auto;
-                            text-align: left;
-                            text-overflow: ellipsis;
+    
+                        /* Metadata: main */
+                        dl {
+                            width: 70%; /* container width */
                             overflow: hidden;
-                            &:after {
-                                display: block;
-                                content: '';
+                            padding: 0;
+                            margin: 0;
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-content: flex-start;
+                            dt {
+                                flex: 0 0 30%;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            dd {
+                                flex: 0 0 70%;
+                                margin-left: auto;
+                                text-align: left;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                &:after {
+                                    display: block;
+                                    content: '';
+                                }
                             }
                         }
                     }
-                }
 
-                /* Subelements */
-                ol {
-                    background-color:#d4e2f1;
-                    width: 100%;
-                    list-style: none;
-
-                    li {
-                        a {
-                            // border-bottom: 1px solid #fff;
-                            // padding-bottom: 15px;
-                            // padding-top: 15px;
-
-                            /* Thumbnail: sub */
-                            div.tx-dlf-listview-thumbnail {
-                                position: relative;
-                                margin: 0 25px 0 0;
-                                line-height: 0;
-                                flex: 0 1 80px;
-
-                                img {
-                                    width: 85px;
-                                    height: auto;
+                    /* Subelements */
+                    ol {
+                        background-color:#d4e2f1;
+                        width: 100%;
+                        list-style: none;
+    
+                        li {
+                            a {
+                                // border-bottom: 1px solid #fff;
+                                // padding-bottom: 15px;
+                                // padding-top: 15px;
+    
+                                /* Thumbnail: sub */
+                                div.tx-dlf-listview-thumbnail {
+                                    position: relative;
+                                    margin: 0 25px 0 0;
+                                    line-height: 0;
+                                    flex: 0 1 80px;
+    
+                                    img {
+                                        width: 85px;
+                                        height: auto;
+                                    }
                                 }
-                            }
-
-                            /* Metadata: sub */
-                            dl {
-                                width: 60%; /* container width */
-                                overflow: hidden;
-                                padding: 0;
-                                margin: 0;
-                                display: flex;
-                                flex-wrap: wrap;
-                                align-content: flex-start;
-                                dt {
-                                    flex: 0 0 30%;
-                                    text-overflow: ellipsis;
+    
+                                /* Metadata: sub */
+                                dl {
+                                    width: 60%; /* container width */
                                     overflow: hidden;
-                                }
-                                dd {
-                                    flex: 0 0 70%;
-                                    margin-left: auto;
-                                    text-align: left;
-                                    text-overflow: ellipsis;
-                                    overflow: hidden;
-                                    &:after {
-                                        display: block;
-                                        content: '';
+                                    padding: 0;
+                                    margin: 0;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    align-content: flex-start;
+                                    dt {
+                                        flex: 0 0 30%;
+                                        text-overflow: ellipsis;
+                                        overflow: hidden;
+                                    }
+                                    dd {
+                                        flex: 0 0 70%;
+                                        margin-left: auto;
+                                        text-align: left;
+                                        text-overflow: ellipsis;
+                                        overflow: hidden;
+                                        &:after {
+                                            display: block;
+                                            content: '';
+                                        }
                                     }
                                 }
                             }
