@@ -29,6 +29,7 @@
                     a {
                         display: flex;
                         flex-wrap: wrap;
+                        width: 90%;
 
                         /* Thumbnail: main */
                         div.tx-dlf-listview-thumbnail {
@@ -53,12 +54,12 @@
                             flex-wrap: wrap;
                             align-content: flex-start;
                             dt {
-                                flex: 0 0 30%;
+                                flex: 0 0 35%;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                             }
                             dd {
-                                flex: 0 0 70%;
+                                flex: 0 0 65%;
                                 margin-left: auto;
                                 text-align: left;
                                 text-overflow: ellipsis;
@@ -68,6 +69,9 @@
                                     content: '';
                                 }
                             }
+                            dd + dd { //if two dd elements follow one after the other
+                                margin-left: 35%; //see dt flex value
+                            } 
                         }
                     }
 
@@ -76,7 +80,7 @@
                         background-color:#d4e2f1;
                         width: 100%;
                         list-style: none;
-    
+
                         li {
                             a {
                                 /* Thumbnail: sub */
@@ -102,12 +106,12 @@
                                     flex-wrap: wrap;
                                     align-content: flex-start;
                                     dt {
-                                        flex: 0 0 30%;
+                                        flex: 0 0 35%;
                                         text-overflow: ellipsis;
                                         overflow: hidden;
                                     }
                                     dd {
-                                        flex: 0 0 70%;
+                                        flex: 0 0 65%;
                                         margin-left: auto;
                                         text-align: left;
                                         text-overflow: ellipsis;
