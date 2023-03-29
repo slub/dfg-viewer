@@ -9,14 +9,23 @@
  *
  */
 
- .website {
+.website {
     .page-container {
         div.tx-dlf-listview {
+
+            form.tx-dlf-search-form {
+                // sort select items:
+                select {
+                    width: 30%;
+                    display: inline;
+                }
+            }
+
             ol.tx-dlf-abstracts {
                 li {
                     display: flex;
                     flex-wrap: wrap;
-    
+
                     a {
                         display: flex;
                         flex-wrap: wrap;
@@ -33,7 +42,7 @@
                                 height: auto;
                             }
                         }
-    
+
                         /* Metadata: main */
                         dl {
                             width: 70%; /* container width */
@@ -70,23 +79,19 @@
     
                         li {
                             a {
-                                // border-bottom: 1px solid #fff;
-                                // padding-bottom: 15px;
-                                // padding-top: 15px;
-    
                                 /* Thumbnail: sub */
                                 div.tx-dlf-listview-thumbnail {
                                     position: relative;
                                     margin: 0 25px 0 0;
                                     line-height: 0;
                                     flex: 0 1 80px;
-    
+
                                     img {
                                         width: 85px;
                                         height: auto;
                                     }
                                 }
-    
+
                                 /* Metadata: sub */
                                 dl {
                                     width: 60%; /* container width */
