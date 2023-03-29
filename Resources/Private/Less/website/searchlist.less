@@ -1,0 +1,138 @@
+/*
+ *
+ * Website - Search
+ * ================================================
+ * Search page, copied from home.less
+ *
+ * Author: Bernd Fallert <bernd.fallert@uni-mannheim.de>
+ * License: All rights reserved
+ *
+ */
+
+.website.listview {
+
+    .page-container {
+
+        ol.tx-dlf-listview-list {
+
+            li {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            div.tx-dlf-listview-thumbnail {
+                position: relative;
+                margin: 0 25px 0 0;
+                line-height: 0;
+                flex: 0 1 auto;
+
+                img {
+                    width: 90px;
+                    height: auto;
+                }
+            }
+
+            /* Metadata Labels und Value in eine Zeile rücken */
+            /* Variante ohne float mit flex */
+            dl {
+                width: 83%; /* container breite setzen */
+                overflow: hidden;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-wrap: wrap;
+
+                dt {
+                    flex: 0 0 30%;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                dd {
+                    flex: 0 0 70%;
+                    margin-left: auto;
+                    text-align: left;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    &:after {
+                        display: block;
+                        content: '';
+                    }
+                }
+            }
+
+            /* unterelemente kennzeichnen */
+            ol {
+                background-color:#d4e2f1;
+                width: 100%;
+                list-style: none;
+
+                /* in Unterelementen im kleiner machen */
+                li {
+                    border-bottom: 1px solid #fff;
+                    padding-bottom: 15px;
+                    padding-top: 15px;
+
+                    div.tx-dlf-listview-thumbnail img {
+                        width: 60px;
+                        height: auto;
+                    }
+
+                    /* in Unterelementen abstände und sonstige Formatierungen */
+                    &:first-child  {
+                        border-top: 1px solid #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* Variante mit float */
+/*
+div.page-container ol.tx-dlf-listview-list dl {
+    width: 83%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+div.page-container ol.tx-dlf-listview-list dl dt {
+    float: left;
+    width: 30%;
+    padding: 0;
+    margin: 0;
+}
+div.page-container ol.tx-dlf-listview-list dl dd {
+    float: left;
+    width: 70%;
+    padding: 0;
+    margin: 0;
+}
+*/
+
+/* Variante ohne float */
+/*
+div.page-container ol.tx-dlf-listview-list dl {
+    width: 83%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+div.page-container ol.tx-dlf-listview-list dl dt {
+    display: inline-block;
+    margin: 0;
+    min-width: 9em;
+}
+div.page-container ol.tx-dlf-listview-list dl dd {
+    display: inline;
+    margin: 0;
+}
+div.page-container ol.tx-dlf-listview-list dl dd:after {
+    display: block;
+    content: '';
+}
+*/
+
+// EOF
