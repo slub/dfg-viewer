@@ -123,7 +123,7 @@ lib.kitodo.navigation.pagecontrol < tt_content.list.20.dlf_navigation
 lib.kitodo.navigation.pagecontrol {
     settings {
         pageStep = 10
-        features = pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+        features = measureBack,measureForward,pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
     }
 }
 
