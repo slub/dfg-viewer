@@ -1,0 +1,44 @@
+.annotation-bar {
+    position: absolute;
+    left: 75%;
+    top: 0;
+    bottom: 0;
+    width: 25%;
+    background-color: lightgray;
+    padding: 30px;
+    overflow: scroll;
+    text-align: left;
+}
+
+.annotation-bar .annotation-list {
+    border-top:solid 2px;
+}
+
+.annotation-bar .annotation-list-item {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom:solid 2px;
+}
+
+.annotation-bar .annotation-title:hover {
+    background-color: gray;
+}
+
+
+.annotation-bar .annotation-body {
+    background-color: #ffffff;
+}
+
+.annotation-bar .annotation-creator {
+    background-color: #ffffff;
+    padding: 10px 0 10px 0;
+}
+
+.annotation-bar .annotation-date {
+    background-color: #ffffff;
+    padding: 10px 0 10px 0;
+}
+
+.document-view {
+    right: 25%;
+}
