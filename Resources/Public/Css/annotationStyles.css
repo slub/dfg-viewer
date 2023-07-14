@@ -42,3 +42,28 @@
 .document-view {
     right: 25%;
 }
+
+.annotation-list-item details.hover {
+    background-color: #aaa9a9;
+}
+
+.annotation-list-item details.active {
+    background-color: #8ebfff;
+}
+
+rect.hover {
+    stroke: black;
+}
+
+rect.active {
+    stroke: red;
+}
+
+.drag {
+    cursor: move;
+    min-height: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
