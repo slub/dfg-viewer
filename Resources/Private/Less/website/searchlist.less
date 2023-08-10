@@ -75,9 +75,17 @@
                         }
                     }
 
+                    .tx-dlf-volume{
+                        display: none;
+                    }
+
+                    &.tx-dlf-volumes-open .tx-dlf-morevolumes {
+                        transform: rotate(-90deg);
+                    }
+
                     /* Button: open/unhide parent listelement */
                     button.tx-dlf-morevolumes {
-                        transform: rotate(-90deg);
+                        transform: rotate(+90deg);
 
                         // color: transparent;
                         text-shadow: none;
@@ -105,7 +113,7 @@
                             font-size: 40px;
                             line-height: 40px;
                             font-family: 'VistaSansBold','Calibri-Bold','Helvetica',Sans-serif;
-                            color: rgb(119, 37, 17);
+                            color: @light-blue;
                             display: block;
                             letter-spacing: -0.1em;
                         }

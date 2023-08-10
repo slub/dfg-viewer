@@ -58,6 +58,11 @@ $(document).ready(function() {
 
     // switch on code highlighting
     hljs.highlightAll();
+
+    // hide/show volumes
+    $(".tx-dlf-morevolumes, .tx-dlf-hidevolumes").on(mobileEvent, (function(e) {
+        $(this).parent().toggleClass("tx-dlf-volumes-open").find(".tx-dlf-volume").slideToggle();
+    }));
 });
 
 // EOF
