@@ -12,9 +12,107 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
       data-namespace-typo3-fluid="true">
+<f:if condition="{docType}=='multivolume_work'">
+    <f:then>
 
-<div id="tx-dfgviewer-map" class="tx-dlf-map">
-</div>
+        <div class="grid-stack">
+            <div class="grid-stack-item" gs-w="5" gs-h="2">
+                <div class="grid-stack-item-content">
+                    <div class="drag">Drag</div>
+                    <f:form method="post" action="addDocument" addQueryString="1" name="formAddDocument" object="{formAddDocument}">
+                        <f:form.textfield property="location"/>
+                        <f:form.submit value="Submit" />
+                    </f:form>
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllPagePrev}"
+                                   argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                        <f:translate key="prevPage"/>
+                    </f:link.action>
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllPageNext}"
+                                   argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                        <f:translate key="nextPage"/>
+                    </f:link.action>
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllMeasurePrev}"
+                                   argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                        <f:translate key="prevMeasure"/>
+                    </f:link.action>
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllMeasureNext}"
+                                   argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                        <f:translate key="nextMeasure"/>
+                    </f:link.action>
+                </div>
+            </div>
+
+            <f:for each="{docArray}" as="document" iteration="iterator">
+                <div class="grid-stack-item" gs-w="5" gs-h="5">
+                    <div class="grid-stack-item-content">
+                        <div class="drag">Drag</div>
+                        <div id="tx-dfgviewer-map-{iterator.index}" data-viewercount="{iterator.index}" class="tx-dlf-map">
+                        </div>
+                        <div id="svg_panel" >
+                            <div id="player" style="z-index: 0; position: absolute;"></div>
+                            <div id="svg_output" style="overflow:hidden;"></div>
+                        </div>
+                        <div class="score-container">
+                            <div id="tx-dlf-score-{iterator.index}"></div>
+                        </div>
+                        <f:variable name="curDocPage" value="{docPage.{iterator.index}}" />
+                        <div class="tx-dlf-navigation-prev">
+                            <f:if condition="{docPage.{iterator.index}} > 1">
+                                <f:then>
+                                    <f:link.action addQueryString="1" additionalParams="{navigationArray.{iterator.index}.prev}"
+                                                   argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                        <f:translate key="prevPage"/>
+                                    </f:link.action>
+                                </f:then>
+                                <f:else>
+                                    <span title="{f:translate(key: 'prevPage')}">
+                                        <f:translate key="prevPage"/>
+                                    </span>
+                                </f:else>
+                            </f:if>
+
+                            <f:link.action addQueryString="1" additionalParams="{navigationMeasureArray.{iterator.index}.prev}"
+                                           argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                <f:translate key="prevMeasure"/>
+                            </f:link.action>
+                        </div>
+
+                        <div class="tx-dlf-navigation-next">
+                            <f:if condition="{docPage.{iterator.index}} < {docNumPage.{iterator.index}}">
+                                <f:then>
+                                    <f:link.action addQueryString="1" additionalParams="{navigationArray.{iterator.index}.next}"
+                                                   argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                        <f:translate key="nextPage"/>
+                                    </f:link.action>
+                                </f:then>
+                                <f:else>
+                                    <span title="{f:translate(key: 'nextPage')}">
+                                        <f:translate key="nextPage"/>
+                                    </span>
+                                </f:else>
+                            </f:if>
+                            <f:link.action addQueryString="1" additionalParams="{navigationMeasureArray.{iterator.index}.next}"
+                                           argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                <f:translate key="nextMeasure"/>
+                            </f:link.action>
+                        </div>
+                    </div>
+                </div>
+            </f:for>
+        </div>
+    </f:then>
+    <f:else>
+        <div id="tx-dfgviewer-map" class="tx-dlf-map">
+        </div>
+        <div id="svg_panel" >
+            <div id="player" style="z-index: 0; position: absolute;"></div>
+            <div id="svg_output" style="overflow:hidden;"></div>
+        </div>
+        <div class="score-container">
+            <div id="tx-dlf-score-0"></div>
+        </div>
+    </f:else>
+</f:if>
 
 <kitodo:jsFooter inlineCode="{viewerConfiguration}" />
 

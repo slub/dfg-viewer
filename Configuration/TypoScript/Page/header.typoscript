@@ -9,6 +9,7 @@ page {
     highlight = EXT:dfgviewer/Resources/Public/JavaScript/Highlight/styles/magula.css
     3DViewer = EXT:dfgviewer/Resources/Public/Css/3DViewer/main.css
     3DViewerSpinner = EXT:dfgviewer/Resources/Public/Css/3DViewer/spinner.css
+    annotations = EXT:dfgviewer/Resources/Public/Css/annotationStyles.css
   }
   includeJSFooterlibs {
     jQuery = EXT:dfgviewer/Resources/Public/JavaScript/jQuery/jquery-3.6.0.min.js
