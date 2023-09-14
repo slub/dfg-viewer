@@ -198,5 +198,3 @@ function hideBrowserAlert(){
     Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
 
 }
-
-// EOF

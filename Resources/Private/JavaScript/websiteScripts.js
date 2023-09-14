@@ -59,5 +59,3 @@ $(document).ready(function() {
     // switch on code highlighting
     hljs.highlightAll();
 });
-
-// EOF
