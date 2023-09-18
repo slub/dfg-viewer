@@ -142,6 +142,8 @@
                         }
                         ul.issues {
                             opacity: 1;
+                            // In the calendar view, with an open day, display date above the underlying text completely.
+                            z-index: 100;
                             .transform(scaleY(1));
                             li {
                                 margin: 10px 0;
