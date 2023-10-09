@@ -64,5 +64,3 @@ $(document).ready(function() {
         $(this).parent().toggleClass("tx-dlf-volumes-open").find(".tx-dlf-volume").slideToggle();
     }));
 });
-
-// EOF
