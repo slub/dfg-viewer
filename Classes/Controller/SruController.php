@@ -65,9 +65,9 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
     /**
      * Adds SRU Search result javascript
      *
-     * @access    protected
+     * @access protected
      *
-     * @return    string        Viewer script tags ready for output
+     * @return void
      */
     protected function addSruResultsJS()
     {

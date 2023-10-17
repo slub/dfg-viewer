@@ -62,6 +62,8 @@ class SruEid
         // make request to SRU service
         $sruXML = simplexml_load_file($url);
 
+        $results = [];
+
         if ($sruXML !== FALSE) {
             // the result may be a valid <srw:searchRetrieveResponse> or some HTML code
             $sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
@@ -109,8 +111,8 @@ class SruEid
                     }
 
                     foreach ($hitFound as $key => $hit) {
-                        unset($spanPreview);
-                        unset($spanText);
+                        $spanPreview = '';
+                        $spanText = '';
                         if (!empty($hit['attributes']['preview'])) {
                             $spanPreview = '<span class="sru-preview"><img src="' . $hit['attributes']['preview'] . '"></span>';
                         }
