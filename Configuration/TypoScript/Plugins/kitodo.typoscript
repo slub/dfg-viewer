@@ -162,7 +162,7 @@ plugin.tx_dlf_toolbox {
 plugin.tx_dlf_fulltexttool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_fulltexttool {
     settings {
-        tools = fulltexttool
+        tool = fulltexttool
         activateFullTextInitially = 0
         fullTextScrollElement = html, body
     }
@@ -171,14 +171,14 @@ plugin.tx_dlf_fulltexttool {
 plugin.tx_dlf_imagemanipulationtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_imagemanipulationtool {
     settings {
-        tools = imagemanipulationtool
+        tool = imagemanipulationtool
     }
 }
 
 plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
-        tools = pdfdownloadtool
+        tool = pdfdownloadtool
     }
 }
 
