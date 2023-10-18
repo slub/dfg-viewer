@@ -28,7 +28,8 @@ class CalendarDataVariableViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
-     * @return null
+     *
+     * @return void
      */
     public static function renderStatic(
         array $arguments,
