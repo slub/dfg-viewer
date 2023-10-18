@@ -57,7 +57,7 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
             $this->requestData['double'] = MathUtility::forceIntegerInRange($this->requestData['double'], 0, 1, 0);
         }
 
-        $doc = $this->document->getDoc();
+        $doc = $this->document->getCurrentDocument();
 
         // Get persistent identifier of book.
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);

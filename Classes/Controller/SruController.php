@@ -25,16 +25,15 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
         // Load current document.
         $this->loadDocument($this->requestData);
         if (
-            $this->document === null
-            || $this->document->getDoc() === null
-            || !$this->document->getDoc() instanceof MetsDocument
+            $this->isDocMissing()
+            || !$this->document->getCurrentDocument() instanceof MetsDocument
         ) {
             // Quit without doing anything if required variables are not set.
             return '';
         }
 
         // Get digital provenance information.
-        $digiProv = $this->document->getDoc()->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
+        $digiProv = $this->document->getCurrentDocument()->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
 
         if ($digiProv) {
             $links = $digiProv[0]->children('http://dfg-viewer.de/')->links;
