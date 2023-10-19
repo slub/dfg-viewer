@@ -47,13 +47,17 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
     public function mainAction()
     {
         // Load current document.
-        $this->loadDocument($this->requestData);
+        $this->loadDocument();
 
-        if ($this->document === null) {
+        if ($this->isDocMissingOrEmpty()) {
+            // Quit without doing anything if required variables are not set.
             return;
+        } else {
+            $this->setPage();
+            $this->requestData['double'] = MathUtility::forceIntegerInRange($this->requestData['double'], 0, 1, 0);
         }
 
-        $doc = $this->document->getDoc();
+        $doc = $this->document->getCurrentDocument();
 
         // Get persistent identifier of book.
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);

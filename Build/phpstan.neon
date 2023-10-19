@@ -1,0 +1,8 @@
+parameters:
+    ignoreErrors:
+            - '#Call to an undefined method Kitodo\\Dlf\\Domain\\Model\\Document::getCurrentDocument\(\)\.#'
+            - '#Parameter \#1 \$documentId of method Kitodo\\Dlf\\Controller\\AbstractController::loadDocument\(\) expects int, array given\.#'
+    level: 5
+    paths:
+        - ../Classes/
+    treatPhpDocTypesAsCertain: false
