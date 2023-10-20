@@ -35,7 +35,7 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 	$.post(
 		"/",
 		{
-			eID: "tx_dfgviewer_sru_eid",
+			middleware: "dfgviewer/sru",
 			q: $( "input[name='tx_dlf[query]']" ).val(),
 			L: $( "input[name='tx_dfgviewer[L]']" ).val(),
 			id: $( "input[name='tx_dfgviewer[id]']" ).val(),
