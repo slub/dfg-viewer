@@ -1,5 +1,7 @@
 # DFG Viewer
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b5dfd6975d174d8a8033825fb640ba7c)](https://app.codacy.com/gh/slub/dfg-viewer?utm_source=github.com&utm_medium=referral&utm_content=slub/dfg-viewer&utm_campaign=Badge_Grade)
+
 The DFG Viewer is a free browser web service for displaying digitized books from remote library repositories in a rich and dynamic environment. It has an [OAI-PMH interface](http://www.openarchives.org/OAI/openarchivesprotocol.html) for exchanging meta- and structural data in the [METS](http://www.loc.gov/standards/mets/) and [IIIF](https://iiif.io/technical-details/) formats.
 
 As a result, users are provided with a uniform interface for viewing and interacting with digitized media. They can browse documents, view and download the individual digital representations (images and text) in various resolutions and use further enhanced options if the library provides additional data.
