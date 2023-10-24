@@ -67,3 +67,18 @@ rect.active {
     left: 0;
     z-index: 9;
 }
+
+.tx-dlf-navigation-next {
+    position: absolute;
+    top: 40px;
+}
+
+.tx-dlf-navigation-prev {
+    position: absolute;
+    top: 20px;
+}
+
+.sync-views {
+    position: absolute;
+    left: 10%;
+}
