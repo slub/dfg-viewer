@@ -1,0 +1,173 @@
+/*
+ *
+ * Website - Searchlist
+ * ================================================
+ *
+ *
+ */
+
+.website {
+    .page-container {
+        div.tx-dlf-listview {
+
+            form.tx-dlf-search-form {
+                // sort select items:
+                select {
+                    width: 30%;
+                    display: inline;
+                }
+            }
+
+            ol.tx-dlf-abstracts {
+                li {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    a {
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 90%;
+
+                        /* Thumbnail: main */
+                        div.tx-dlf-listview-thumbnail {
+                            position: relative;
+                            margin: 0 25px 0 0;
+                            line-height: 0;
+                            flex: 0 1 10px;
+            
+                            img {
+                                width: 140px;
+                                height: auto;
+                            }
+                        }
+
+                        /* Metadata: main */
+                        dl {
+                            width: 70%; /* container width */
+                            overflow: hidden;
+                            padding: 0;
+                            margin: 0;
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-content: flex-start;
+                            dt {
+                                flex: 0 0 35%;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                            }
+                            dd {
+                                flex: 0 0 65%;
+                                margin-left: auto;
+                                text-align: left;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                &:after {
+                                    display: block;
+                                    content: '';
+                                }
+                            }
+                            dd + dd { //if two dd elements follow one after the other
+                                margin-left: 35%; //see dt flex value
+                            } 
+                        }
+                    }
+
+                    .tx-dlf-volume{
+                        display: none;
+                    }
+
+                    &.tx-dlf-volumes-open .tx-dlf-morevolumes {
+                        transform: rotate(-90deg);
+                    }
+
+                    /* Button: open/unhide parent listelement */
+                    button.tx-dlf-morevolumes {
+                        transform: rotate(+90deg);
+
+                        // color: transparent;
+                        text-shadow: none;
+                        background-color: transparent;
+                        border-color: currentcolor;
+
+                        position: relative;
+                        width: 40px;
+                        height: 40px;
+                        // font: 0/0 'Open Sans',Helvetica,Arial,sans-serif;
+                        border: 0;
+                        display: inline-block;
+                        transition: all .3s ease-out;
+                        transform-origin: center center;
+                        cursor: pointer;
+
+                        text-shadow: none;
+
+                        &:before {
+                            // color: rgb(146, 251, 255);
+                            position: absolute;
+                            top: -5px;
+                            left: 5px;
+                            content: ">>";
+                            font-size: 40px;
+                            line-height: 40px;
+                            font-family: 'VistaSansBold','Calibri-Bold','Helvetica',Sans-serif;
+                            color: @light-blue;
+                            display: block;
+                            letter-spacing: -0.1em;
+                        }
+                    }
+
+                    /* Subelements */
+                    ol {
+                        background-color:#d4e2f1;
+                        width: 100%;
+                        list-style: none;
+
+                        li {
+                            a {
+                                /* Thumbnail: sub */
+                                div.tx-dlf-listview-thumbnail {
+                                    position: relative;
+                                    margin: 0 25px 0 0;
+                                    line-height: 0;
+                                    flex: 0 1 80px;
+
+                                    img {
+                                        width: 85px;
+                                        height: auto;
+                                    }
+                                }
+
+                                /* Metadata: sub */
+                                dl {
+                                    width: 60%; /* container width */
+                                    overflow: hidden;
+                                    padding: 0;
+                                    margin: 0;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    align-content: flex-start;
+                                    dt {
+                                        flex: 0 0 35%;
+                                        text-overflow: ellipsis;
+                                        overflow: hidden;
+                                    }
+                                    dd {
+                                        flex: 0 0 65%;
+                                        margin-left: auto;
+                                        text-align: left;
+                                        text-overflow: ellipsis;
+                                        overflow: hidden;
+                                        &:after {
+                                            display: block;
+                                            content: '';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
