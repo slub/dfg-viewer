@@ -9,3 +9,5 @@ The DFG Viewer is based on the free CMS [TYPO3](https://typo3.org/) and the Digi
 Older releases can be found on [Launchpad](https://launchpad.net/dfg-viewer).
 
 The development of the DFG Viewer is predominantly funded by the [German Research Foundation](https://www.dfg.de/).
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b5dfd6975d174d8a8033825fb640ba7c)](https://app.codacy.com/gh/slub/dfg-viewer?utm_source=github.com&utm_medium=referral&utm_content=slub/dfg-viewer&utm_campaign=Badge_Grade)
