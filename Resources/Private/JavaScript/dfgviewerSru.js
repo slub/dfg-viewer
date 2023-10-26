@@ -51,40 +51,33 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 				resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
 
 			} else {
+                for (var i=0; i < data.length; i++) {
+                    var linkCurrent = $(location).attr('href');
+                    var linkBase = linkCurrent.substring(0, linkCurrent.indexOf('?'));
+                    var linkParams = linkCurrent.substring(linkBase.length + 1, linkCurrent.length);
+                    var linkId = linkParams.match(/id=(\d)*/g);
 
-				for (var i=0; i < data.length; i++) {
+                    if (linkId) {
+                        linkParams = linkId + '&';
+                    } else {
+                        linkParams = '&';
+                    }
 
-					var link_current = $(location).attr('href');
+                    var linkNew = linkBase + '?' + (linkParams
+                        + 'tx_dlf[id]=' + data[i].link
+                        + '&tx_dlf[origimage]=' + data[i].origImage
+                        + '&tx_dlf[highlight]=' + encodeURIComponent(data[i].highlight)
+                        + '&tx_dlf[page]=' + (data[i].page));
 
-					var link_base = link_current.substring(0, link_current.indexOf('?'));
-					var link_params = link_current.substring(link_base.length + 1, link_current.length);
+                    if (data[i].previewImage) {
+                        resultItems.push('<a href=\"' + linkNew + '\">' + data[i].previewImage);
+                    }
+                    if (data[i].previewText) {
+                        resultItems.push('<a href=\"' + linkNew + '\">' + data[i].previewText);
+                    }
+                }
 
-					var link_id = link_params.match(/id=(\d)*/g);
-
-					if (link_id) {
-
-						link_params = link_id + '&';
-
-					} else {
-
-						link_params = '&';
-
-					}
-
-					var newlink = link_base + '?' + (link_params
-					+ 'tx_dlf[id]=' + data[i].link
-					+ '&tx_dlf[origimage]=' + data[i].origImage
-					+ '&tx_dlf[highlight]=' + encodeURIComponent(data[i].highlight)
-					+ '&tx_dlf[page]=' + (data[i].page));
-
-					if (data[i].previewImage) {
-						resultItems.push('<a href=\"' + newlink + '\">' + data[i].previewImage);
-					}
-					if (data[i].previewText) {
-						resultItems.push('<a href=\"' + newlink + '\">' + data[i].previewText);
-					}
-				}
-				if (resultItems.length > 0) {
+                if (resultItems.length > 0) {
                     resultItems.forEach(function(item, index){
                         resultList += '<li>' + item + '</li>';
                     });
