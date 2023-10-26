@@ -65,7 +65,9 @@ $(document).ready(function() {
 
     // Copy selected page number to mobile meta (in order to transform select field to ui button)
     if($('.pages select option[selected]')[0]) {
-        $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number">'+$('.pages select option[selected]').text()+'</dd>');
+        const pageNumberText = $('.pages select option[selected]').text();
+        $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number"></dd>');
+        $('dl.mobile-meta dd.mobile-page-number').text(pageNumberText);
     }
 
     // Copy some controls for mobile (page select, fullscreen)
@@ -82,9 +84,15 @@ $(document).ready(function() {
 
     // Check if there are is a download list. Otherwise change a to span to disable button
     if(!$('.submenu.downloads ul li')[0]) {
-      $("#tab-downloads").replaceWith(function() {
-        return $("<span title=\""+$(this).attr('title')+"\" class=\""+$(this).attr('class')+"\" id=\""+$(this).attr('id')+"\">" + $(this).html() + "</span>");
-      });
+        $("#tab-downloads").replaceWith(function () {
+            // Create a new element using jQuery with sanitized content
+            return $("<span/>", {
+                "title": $(this).attr('title'),
+                "class": $(this).attr('class'),
+                "id": $(this).attr('id'),
+                "text": $(this).html() // Use "text" to set the text content, escaping it
+            });
+        });
     }
 
     // if cookie for fullscreen view is present adapat initial page rendering
