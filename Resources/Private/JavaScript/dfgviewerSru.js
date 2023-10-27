@@ -44,14 +44,15 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 		},
 		function(data) {
 			var resultItems = [];
-			var resultList = '<div class="sru-results-active-indicator"></div><ul>';
+            var resultList = $('<div class="sru-results-active-indicator"></div><ul>');
 
-			if (data.error) {
-
-				resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
-
-			} else {
-                for (var i=0; i < data.length; i++) {
+            if (data.error) {
+                $('<li/>', {
+                    class: "noresult",
+                    text: $('#tx-dfgviewer-sru-label-noresult').text()
+                }).appendTo(resultList);
+            } else {
+                for (var i = 0; i < data.length; i++) {
                     var linkCurrent = $(location).attr('href');
                     var linkBase = linkCurrent.substring(0, linkCurrent.indexOf('?'));
                     var linkParams = linkCurrent.substring(linkBase.length + 1, linkCurrent.length);
@@ -70,25 +71,32 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
                         + '&tx_dlf[page]=' + (data[i].page));
 
                     if (data[i].previewImage) {
-                        resultItems.push('<a href=\"' + linkNew + '\">' + data[i].previewImage);
+                        $('<li/>').append(
+                            $('<a/>', {
+                                href: linkNew,
+                                text: data[i].previewImage
+                            })
+                        ).appendTo(resultList);
                     }
                     if (data[i].previewText) {
-                        resultItems.push('<a href=\"' + linkNew + '\">' + data[i].previewText);
+                        $('<li/>').append(
+                            $('<a/>', {
+                                href: linkNew,
+                                text: data[i].previewText
+                            })
+                        ).appendTo(resultList);
                     }
                 }
 
-                if (resultItems.length > 0) {
-                    resultItems.forEach(function(item, index){
-                        resultList += '<li>' + item + '</li>';
-                    });
-                } else {
-                    resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
+                if (resultItems.length === 0) {
+                    $('<li/>', {
+                        class: "noresult",
+                        text: $('#tx-dfgviewer-sru-label-noresult').text()
+                    }).appendTo(resultList);
                 }
-			}
-			resultList += '</ul>';
+            }
 
-			$('#tx-dfgviewer-sru-results').html(resultList);
-
+            $('#tx-dfgviewer-sru-results').empty().append(resultList);
 		},
 		"json"
 	)
