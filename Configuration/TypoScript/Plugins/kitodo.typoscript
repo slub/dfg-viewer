@@ -109,6 +109,16 @@ plugin.tx_dlf_tableofcontents {
         menuConf {
             expAll = 1
         }
+        titleReplacements {
+            0 {
+                type = issue
+                fields = type,year
+            }
+            1 {
+                type = volume
+                fields = type,volume
+            }
+        }
     }
 }
 
