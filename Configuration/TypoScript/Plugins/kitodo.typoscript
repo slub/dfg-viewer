@@ -40,6 +40,45 @@ plugin.tx_dlf {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
+# search
+# --------------------------------------------------------------------------------------------------------------------
+
+plugin.tx_dlf_search < tt_content.list.20.dlf_search
+
+lib.kitodo.fulltext.search < plugin.tx_dlf_search
+lib.kitodo.fulltext.search {
+    view {
+		templateRootPaths {
+			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates/Fulltext
+		}
+	}
+    settings {
+        // UID of dlfCore0
+        solrcore = {$config.kitodo.solr.core}
+        limit = {$config.kitodo.solr.searchLimit}
+        // we activate fulltext here and search only in fulltext (see template)
+        fulltext = 1
+        // search only in current document
+        searchIn = document
+        // doesn't work due to javascript inclusion of autocomplete in header
+        suggest = 0
+        targetPid = {$config.kitodo.listView}
+        // this feature doesn't work in our case. It always jumps to page 1
+        showSingleResult = 0
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
+# collections
+# --------------------------------------------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------------------------------------------
+# listview
+# --------------------------------------------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------------------------------------------
 # metadata
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_metadata < tt_content.list.20.dlf_metadata
@@ -173,6 +212,29 @@ plugin.tx_dlf_imagemanipulationtool {
     }
 }
 
+plugin.tx_dlf_fulltextdownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_fulltextdownloadtool {
+    settings {
+        tools = fulltextdownloadtool
+    }
+}
+
+plugin.tx_dlf_searchindocumenttool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_searchindocumenttool {
+    settings {
+        tools = searchindocumenttool
+        idInputName = tx_dlf[id]
+        pidInputName = tx_dlf[pid]
+        queryInputName = tx_dlf[query]
+        startInputName = tx_dlf[start]
+        pageInputName = tx_dlf[page]
+        highlightWordInputName = tx_dlf[highlight_word]
+        encryptedInputName = tx_dlf[encrypted]
+        // UID of dlfCore0
+        solrcore = {$config.kitodo.solr.core}
+    }
+}
+
 plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
@@ -193,31 +255,79 @@ plugin.tx_dlf_audioplayer {
 # --------------------------------------------------------------------------------------------------------------------
 # newspaper navigation
 # --------------------------------------------------------------------------------------------------------------------
+lib.kitodo.newspaper.years < tt_content.list.20.dlf_calendar
+lib.kitodo.newspaper.years {
+    switchableControllerActions {
+        Calendar {
+            1 = years
+        }
+    }
+    settings {
+        targetPid = {$config.kitodo.pageView}
+    }
+}
 
-[getDocumentType("{$config.storagePid}") == "ephemera" or getDocumentType("{$config.storagePid}") == "newspaper"]
+lib.kitodo.newspaper.calendar < tt_content.list.20.dlf_calendar
+lib.kitodo.newspaper.calendar {
+    switchableControllerActions {
+        Calendar {
+            1 = calendar
+        }
+    }
+    settings {
+        targetPid = {$config.kitodo.pageView}
+        showEmptyMonths = 0
+    }
+}
+
+[getDocumentType({$config.kitodo.storagePid}) === 'ephemera' or getDocumentType({$config.kitodo.storagePid}) === 'newspaper']
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
 }
 [END]
 
-[getDocumentType("{$config.storagePid}") == "year"]
+[getDocumentType({$config.kitodo.storagePid}) === 'year']
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_year
 }
+# in year files, the full year is only in mets_orderlabel - not year field in Kitodo.Presentation 3.0
+page.2 {
+    # if year is set
+    yearDate {
+      cObject = TEXT
+      cObject {
+        dataWrap = DB:tx_dlf_documents:{GP:tx_dlf|id}:mets_orderlabel
+        wrap3={|}
+        insertData=1
+      }
+    }
+}
+page.2.postTitle.cObject {
+    30 = TEXT
+    30 {
+        data = register:yearDate
+        required = 1
+        noTrimWrap = |: ||
+    }
+}
 [END]
 
-[getDocumentType("{$config.storagePid}") == "issue"]
+[getDocumentType({$config.kitodo.storagePid}) === 'issue']
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_issue
 }
-[END]
-
-[getDocumentType("{$config.storagePid}") == "object"]
-page.10.variables {
-  isObject3D = TEXT
-  isObject3D.value = object
+# The issue has YYYY-MM-DD as dateformat for the publishing date. We can format it in a localized format:
+page.2.postTitle.cObject {
+    30 = TEXT
+    30 {
+        data = register:yearDate
+        required = 1
+        strtotime = 1
+        strftime = %d.%m.%Y
+        noTrimWrap = |: ||
+    }
 }
 [END]

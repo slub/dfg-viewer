@@ -12,6 +12,13 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<ul class="toc">
-    <f:render partial="TableOfContents/Children" arguments="{children: toc}"/>
-</ul>
+<div class="tx-dlf-toc tx-dlf-window tx-dlf-leftwin tx-dlf-open">
+    <div class="tx-dlf-minimize"></div>
+    <div class="tx-dlf-wincontainer">
+        <div class="tx-dlf-wincontent tx-dlf-scrollbar">
+            <ul class="toc">
+                <f:render partial="TableOfContents/Children" arguments="{children: toc}"/>
+            </ul>
+        </div>
+    </div>
+</div>
