@@ -31,11 +31,9 @@ plugin.tx_dlf {
     }
 	view {
 		partialRootPaths {
-			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
 			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Partials
 		}
 		templateRootPaths {
-			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates
 			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Templates
 		}
 	}
