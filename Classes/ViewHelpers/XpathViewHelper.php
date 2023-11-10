@@ -31,7 +31,6 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 use Kitodo\Dlf\Common\MetsDocument;
-use Kitodo\Dlf\Domain\Model\Document;
 use Kitodo\Dlf\Domain\Repository\DocumentRepository;
 
 /**
@@ -113,26 +112,26 @@ class XpathViewHelper extends AbstractViewHelper
 
         $result = $currentDocument->mets->xpath($xpath);
 
-        if (is_array($result)) {
-          foreach ($result as $row) {
-            if ($returnArray) {
-              $output[] = $htmlspecialchars ? htmlspecialchars(trim($row)) : trim($row);
-            } else {
-              $output .= $htmlspecialchars ? htmlspecialchars(trim($row)) : trim($row) . ' ';
-            }
-          }
+        if ($returnArray) {
+            $output = [];
         } else {
-          if ($returnArray) {
-            $output[] = $htmlspecialchars ? htmlspecialchars(trim($row)) : trim($row);
-          } else {
-            $output = $htmlspecialchars ? htmlspecialchars(trim($row)) : trim($row);
-          }
+            $output = '';
         }
 
-        if (! $returnArray) {
-            return trim($output);
-        } else {
+        if (is_array($result)) {
+            foreach ($result as $row) {
+                if ($returnArray) {
+                    $output[] = $htmlspecialchars ? htmlspecialchars(trim($row)) : trim($row);
+                } else {
+                    $output .= $htmlspecialchars ? htmlspecialchars(trim($row)) : trim($row) . ' ';
+                }
+            }
+        }
+
+        if ($returnArray) {
             return $output;
+        } else {
+            return trim($output);
         }
     }
 

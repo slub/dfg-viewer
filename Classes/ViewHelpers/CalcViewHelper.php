@@ -23,7 +23,6 @@ namespace Slub\Dfgviewer\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -66,6 +65,7 @@ class CalcViewHelper extends AbstractViewHelper
         $val1 = $arguments['val1'];
         $val2 = $arguments['val2'];
         $operator = $arguments['operator'];
+        $result = '';
 
         switch ($operator) {
           case '+': $result = (int)$val1 + (int)$val2;
