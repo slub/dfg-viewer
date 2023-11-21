@@ -25,15 +25,12 @@ defined('TYPO3_MODE') or die();
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-// Register plugins.
-// ExtensionManagementUtility::addPItoST43('dfgviewer', 'Classes/Plugins/Sru/Sru.php', '_sru', 'list_type', TRUE);
-
 // Register Extbase plugins
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Slub.Dfgviewer',
+    'Dfgviewer',
     'Uri',
     [
-        Uri::class => 'main'
+        \Slub\Dfgviewer\Controller\UriController::class => 'main'
     ],
     // non-cacheable actions
     [
@@ -41,10 +38,10 @@ defined('TYPO3_MODE') or die();
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Slub.Dfgviewer',
+    'Dfgviewer',
     'Sru',
     [
-        Sru::class => 'main'
+        \Slub\Dfgviewer\Controller\SruController::class => 'main'
     ],
     // non-cacheable actions
     [
