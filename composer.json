@@ -38,8 +38,8 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "typo3/cms-core": "~9.5.31|^10.4",
-    "kitodo/presentation": "^4.0|dev-master",
-    "slub/slub-digitalcollections": "^3.0|dev-master"
+    "kitodo/presentation": "^4.0|dev-master|dev-sprint",
+    "slub/slub-digitalcollections": "^3.0|dev-master|dev-sprint"
   },
   "autoload": {
     "psr-4": {

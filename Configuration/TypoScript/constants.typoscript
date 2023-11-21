@@ -15,6 +15,9 @@ config {
     # cat=plugin.tx_dfgviewer/links/050; type=int+; label=Kitodo Page View
     kitodoPageView =
 
+    # cat=plugin.tx_dfgviewer/links/051; type=int+; label=PID for Prerendered Metadata
+    prerenderMetadataPid =
+
     # cat=plugin.tx_dfgviewer/piwik/010; type=string; label=Piwik Hostname
     piwik_hostname =
 

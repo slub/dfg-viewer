@@ -15,3 +15,9 @@
 <ul class="toc">
     <f:render partial="TableOfContents/Children" arguments="{children: toc}"/>
 </ul>
+
+<script>
+    window.addEventListener('tx-dlf-documentLoaded', (e) => {
+        new dlfTableOfContents(e.detail.docController);
+    });
+</script>

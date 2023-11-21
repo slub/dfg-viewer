@@ -15,24 +15,30 @@
 <f:for each="{children}" as="child">
     <f:switch expression="{child.ITEM_STATE}">
         <f:case value="ACT">
-            <li class="active">
+            <f:variable name="tocItemClass" value="active" />
         </f:case>
         <f:case value="CUR">
-            <li class="current">
+            <f:variable name="tocItemClass" value="current" />
         </f:case>
         <f:case value="ACTIFSUB">
-            <li class="active submenu">
+            <f:variable name="tocItemClass" value="active submenu" />
         </f:case>
         <f:case value="CURIFSUB">
-            <li class="current submenu">
+            <f:variable name="tocItemClass" value="current submenu" />
         </f:case>
         <f:case value="IFSUB">
-            <li class="submenu">
+            <f:variable name="tocItemClass" value="submenu" />
         </f:case>
         <f:defaultCase>
-            <li>
+            <f:variable name="tocItemClass" value="" />
         </f:defaultCase>
     </f:switch>
+
+    <f:if condition="!{child.isCurrentlyExpanded}">
+        <f:variable name="tocItemClass" value="{tocItemClass} dlf-toc-collapsed" />
+    </f:if>
+
+    <li class="{tocItemClass}" data-toc-item data-dlf-section="{child.logId}" data-toc-expand-always="{child.isAlwaysExpanded}">
 
     <f:if condition="{child.doNotLinkIt}">
         <f:then>
@@ -47,6 +53,7 @@
                 additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}"
                 addQueryString="1"
                 addQueryStringMethod="GET"
+                additionalAttributes="{'data-document-id':child.id, 'data-page':child.page, 'data-toc-link':1}"
                 title="{f:if(condition:'{child.title}', then: '{child.title}', else: '{child.type}')}">
                     <f:render partial="TableOfContents/Title" arguments="{child: child}"/>
             </f:link.action>
