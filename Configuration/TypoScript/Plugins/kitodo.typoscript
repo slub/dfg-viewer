@@ -188,7 +188,8 @@ plugin.tx_dlf_imagemanipulationtool {
 plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
-        tools = pdfdownloadtool
+        fileGrpsImageDownload = DEFAULT
+        tools = tx_dlf_pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
     }
 }
 
