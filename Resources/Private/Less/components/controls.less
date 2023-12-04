@@ -940,3 +940,19 @@
         color: black;
     }
 }
+
+/* ==============[ hide page elements in calendar view ]====================================== */
+body.dfgviewer.calendar {
+    .document-functions {
+        display: none;
+    }
+
+    .view-functions {
+        display: none;
+    }
+
+    .tx-dfgviewer-newspaper-calendar, .tx-dfgviewer-newspaper-years {
+        position: relative;
+        top: -80px;
+    }
+}
