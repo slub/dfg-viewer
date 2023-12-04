@@ -189,7 +189,7 @@ plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
         fileGrpsImageDownload = DEFAULT
-        tools = tx_dlf_pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
+        tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
     }
 }
 
