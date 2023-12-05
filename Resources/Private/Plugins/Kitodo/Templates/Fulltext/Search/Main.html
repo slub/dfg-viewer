@@ -1,0 +1,51 @@
+<f:comment>
+<!--
+ * (c) Kitodo. Key to digital objects e.V. <contact@kitodo.org>
+ *
+ * This file is part of the Kitodo and TYPO3 projects.
+ *
+ * @license GNU General Public License version 3 or later.
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+-->
+</f:comment>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:form action="search" controller="Search" name="searchParameter" method="get">
+
+    <label for="tx-dlf-search-query">
+        <f:if condition="{lastSearch.query}">
+            <f:then>{lastSearch.query -> f:format.htmlspecialchars()}</f:then>
+            <f:else><f:translate key="search.query"/></f:else>
+        </f:if>
+    </label>
+
+    <f:form.textfield id="tx-dlf-search-query" property="query" value="{lastSearch.query}" />
+
+    <f:form.submit value="{f:translate(key: 'search.submit')}" />
+
+    <!-- Fulltext switch -->
+    <f:form.hidden property="fulltext" value="1" />
+
+    <f:if condition="{settings.searchIn} == 'collection' || {settings.searchIn} == 'all'">
+        <f:form.hidden property="collections" value="{settings.collections}" />
+    </f:if>
+
+    <f:if condition="{settings.searchIn} == 'document' || {settings.searchIn} == 'all'">
+        <f:form.hidden property="documentId" value="{currentDocument.uid}" />
+        <input type="hidden" name="tx_dlf[id]" value="{currentDocument.uid}" />
+    </f:if>
+
+    <!-- Add current collection if using on collection single view -->
+    <f:if condition="{lastSearch.collection}">
+        <f:then>
+            <input type="hidden" name="collection" value="{lastSearch.collection}" />
+        </f:then>
+    </f:if>
+
+</f:form>
+
+
+
+</html>
