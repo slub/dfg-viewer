@@ -58,7 +58,7 @@
 }
 
 
-.tx-dlf-pagegrid .f3-widget-paginator {
+.tx-dlf-pagegrid .pagination {
     position: absolute;
     bottom: 15px;
     height: 1px;
@@ -139,6 +139,14 @@
                 display: none;
             }
         }
+        li.next, li.previous {
+            a,
+            a:first-child,
+            a:last-child {
+                width: 60px;
+                height: 30px;
+            }
+        }
     }
     @media screen and (min-width: @desktopViewportWidth) {
         font-size: 18px;
@@ -148,6 +156,14 @@
         a:last-child {
             width: 40px;
             height: 40px;
+        }
+        li.next, li.previous {
+            a,
+            a:first-child,
+            a:last-child {
+                width: 90px;
+                height: 40px;
+            }
         }
     }
 }
