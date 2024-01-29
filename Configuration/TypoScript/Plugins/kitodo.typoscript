@@ -227,10 +227,3 @@ page.10.variables {
   isNewspaper.value = newspaper_issue
 }
 [END]
-
-[getDocumentType({$config.storagePid}) == "object"]
-page.10.variables {
-  isObject3D = TEXT
-  isObject3D.value = object
-}
-[END]
