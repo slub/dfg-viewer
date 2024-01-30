@@ -44,11 +44,7 @@
       </f:if>
     </f:else>
   </f:if>
-  <f:if condition="{isObject3D} == 'object'">
-    <f:then>
-      <!-- it's a 3D object view - no need for document, view or page control functions here! -->
-    </f:then>
-    <f:else>
+
       <div class="document-functions">
         <div class="provider">
           <f:if condition="{settings.showProviderLogo}">
@@ -301,8 +297,6 @@
           </f:else>
         </f:if>
       </div>
-    </f:else>
-  </f:if>
   </div>
 </f:section>
 
