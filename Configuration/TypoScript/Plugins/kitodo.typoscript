@@ -174,7 +174,7 @@ plugin.tx_dlf_fulltexttool {
     settings {
         tools = fulltexttool
         activateFullTextInitially = 0
-        fullTextScrollElement = html, body
+        fullTextScrollElement = #tx-dlf-fulltextselection
     }
 }
 
