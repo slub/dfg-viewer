@@ -26,7 +26,7 @@
 return [
     'frontend' => [
         'dfgviewer/sru' => [
-            'target' => \Kitodo\Dlf\Middleware\SruMiddleware::class,
+            'target' => Slub\Dfgviewer\Middleware\SruMiddleware::class,
             'after' => [
                 'typo3/cms-frontend/prepare-tsfe-rendering'
             ]

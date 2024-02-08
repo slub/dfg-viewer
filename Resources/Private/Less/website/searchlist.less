@@ -168,6 +168,58 @@
                     }
                 }
             }
+
+            .pagination {
+                // Pagination elements
+                li {
+                    display: inline-block;
+                    text-align: center;
+                    vertical-align: middle;
+                    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+                    font-weight: bold;
+                    font-size: 14px;
+                    transform-origin: center bottom;
+                    border: 1px solid @base-blue;
+                    border-radius: 15px;
+                    width: 40px;
+                    height: 40px;
+                    padding-left: 0px;
+                }
+
+                li::before {
+                    display: none;
+                }
+
+                 li span,  li a {
+                    display: inline-block;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    width: 100%;
+                    padding-top: 7px;
+                }
+
+                // Pagination elements: previous and next
+                 li.previous,  li.next {
+                    width: 140px;
+                    height: 40px;
+                }
+    
+                // Pagination elements: disabled
+                 li.disabled {
+                    opacity: 0.3;
+                }
+
+                // Pagination elements: current
+                 li.current a {
+                    color: white;
+                    background-color: @light-blue;
+                    opacity: 0.5;
+                    border: 1px solid @base-blue;
+                    border-radius: 15px;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
         }
     }
 }

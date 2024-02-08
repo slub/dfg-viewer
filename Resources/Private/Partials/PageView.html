@@ -31,19 +31,13 @@
               <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
             </f:then>
             <f:else>
-              <f:if condition="{isObject3D} == 'object'">
-                <f:then>
-                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d" />
-                </f:then>
-                <f:else>
-                  <f:if condition="{isNewspaper} == 'newspaper_issue'">
+                <f:if condition="{isNewspaper} == 'newspaper_issue'">
                     <!-- it's a newspaper! -->
-                  </f:if>
-                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                  <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
-                  <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
-                </f:else>
-              </f:if>
+                </f:if>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d" />
+                <div class="fulltext-container"><div id="tx-dlf-fulltextselection"></div></div>
             </f:else>
           </f:if>
         </f:else>

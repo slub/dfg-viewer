@@ -58,7 +58,7 @@
 }
 
 
-.tx-dlf-pagegrid .f3-widget-paginator {
+.tx-dlf-pagegrid .pagination {
     position: absolute;
     bottom: 15px;
     height: 1px;
@@ -139,6 +139,14 @@
                 display: none;
             }
         }
+        li.next, li.previous {
+            a,
+            a:first-child,
+            a:last-child {
+                width: 60px;
+                height: 30px;
+            }
+        }
     }
     @media screen and (min-width: @desktopViewportWidth) {
         font-size: 18px;
@@ -149,5 +157,73 @@
             width: 40px;
             height: 40px;
         }
+        li.next, li.previous {
+            a,
+            a:first-child,
+            a:last-child {
+                width: 90px;
+                height: 40px;
+            }
+        }
     }
+}
+
+// Pagination Box
+.tx-dlf-pagegrid ul.pagination {
+    position: absolute;
+    left: 25px;
+    right: 40px;
+    bottom: 12px;
+    padding-top: 8px;
+    opacity: .95;
+    background-color: @base-blue;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+// Pagination elements
+.tx-dlf-pagegrid ul.pagination li {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.4;
+    transform-origin: center bottom;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    border: 1px solid @base-blue;
+    border-radius: 20px;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+}
+
+.tx-dlf-pagegrid ul.pagination li span, .tx-dlf-pagegrid ul.pagination li a {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+// Pagination elements: previous and next
+.tx-dlf-pagegrid ul.pagination li.previous, .tx-dlf-pagegrid ul.pagination li.next {
+    width: 140px;
+    height: 40px;
+}
+
+// Pagination elements: disabled
+.tx-dlf-pagegrid ul.pagination li.disabled {
+    opacity: 0.4;
+}
+
+// Pagination elements: current
+.tx-dlf-pagegrid ul.pagination li.current a {
+    color: white;
+    background-color: @light-blue;
+    border: 1px solid white;
+    border-radius: 20px;
 }

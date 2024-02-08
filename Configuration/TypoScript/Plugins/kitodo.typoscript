@@ -109,6 +109,16 @@ plugin.tx_dlf_tableofcontents {
         menuConf {
             expAll = 1
         }
+        titleReplacements {
+            0 {
+                type = issue
+                fields = type,year
+            }
+            1 {
+                type = volume
+                fields = type,volume
+            }
+        }
     }
 }
 
@@ -164,7 +174,7 @@ plugin.tx_dlf_fulltexttool {
     settings {
         tools = fulltexttool
         activateFullTextInitially = 0
-        fullTextScrollElement = html, body
+        fullTextScrollElement = #tx-dlf-fulltextselection
     }
 }
 
@@ -178,7 +188,8 @@ plugin.tx_dlf_imagemanipulationtool {
 plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
-        tools = pdfdownloadtool
+        fileGrpsImageDownload = DEFAULT
+        tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
     }
 }
 
@@ -196,30 +207,23 @@ plugin.tx_dlf_audioplayer {
 # newspaper navigation
 # --------------------------------------------------------------------------------------------------------------------
 
-[getDocumentType("{$config.storagePid}") == "ephemera" or getDocumentType("{$config.storagePid}") == "newspaper"]
+[getDocumentType({$config.storagePid}) == "ephemera" or getDocumentType({$config.storagePid}) == "newspaper"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_anchor
 }
 [END]
 
-[getDocumentType("{$config.storagePid}") == "year"]
+[getDocumentType({$config.storagePid}) == "year"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_year
 }
 [END]
 
-[getDocumentType("{$config.storagePid}") == "issue"]
+[getDocumentType({$config.storagePid}) == "issue"]
 page.10.variables {
   isNewspaper = TEXT
   isNewspaper.value = newspaper_issue
-}
-[END]
-
-[getDocumentType("{$config.storagePid}") == "object"]
-page.10.variables {
-  isObject3D = TEXT
-  isObject3D.value = object
 }
 [END]
