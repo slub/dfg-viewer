@@ -1,0 +1,72 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
+    xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
+
+<div class="provider">
+    <f:if condition="{settings.showProviderLogo}">
+        <ul>
+            <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"
+                DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]\')}',
+                logoUri: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]\',
+                htmlspecialchars:\'FALSE\')}'}">
+                <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
+                    <li>
+                        <f:link.external uri="{logoUri}" title="{logoTitle}">
+                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
+                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                        </f:link.external>
+                    </li>
+                </f:if>
+            </f:alias>
+            <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"
+                DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregator)[1]\')}',
+                logoUri: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorSiteURL)[1]\',
+                htmlspecialchars:\'FALSE\')}'}">
+                <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
+                    <li>
+                        <f:link.external uri="{logoUri}" title="{logoTitle}">
+                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
+                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                        </f:link.external>
+                    </li>
+                </f:if>
+            </f:alias>
+            <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"
+                DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsor)[1]\')}',
+                logoUri: '{dc:xpath(xpath:\'
+                (//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorSiteURL)[1]\',
+                htmlspecialchars:\'FALSE\')}'}">
+                <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
+                    <li>
+                        <f:link.external uri="{logoUri}" title="{logoTitle}">
+                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
+                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                        </f:link.external>
+                    </li>
+                </f:if>
+            </f:alias>
+        </ul>
+    </f:if>
+
+    <dl class="mobile-meta">
+        <dt class="tx-dlf-title">Titel</dt>
+        <dd class="tx-dlf-title">
+            <a href="#">
+                <dc:xpath
+                    xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName)' />
+            </a>
+        </dd>
+        <dt>Autor</dt>
+        <dd>
+            <dc:xpath
+                xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm)[1]' />
+        </dd>
+    </dl>
+</div>
+
+</html>

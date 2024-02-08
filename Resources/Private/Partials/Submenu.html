@@ -1,0 +1,177 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
+    xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
+
+<ul>
+    <li class="submenu links">
+        <a href="#" title="Links">Links</a>
+        <ul>
+            <li>
+                <f:if
+                    condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]')}">
+                    <f:then>
+                        <f:link.external
+                            uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]', htmlspecialchars:'FALSE')}"
+                            class="local-presentation"
+                            title="{f:translate(key:'provider.local_presentation', extensionName:'dfgviewer')}">
+                            <f:translate key='provider.local_presentation' extensionName='dfgviewer' />
+                        </f:link.external>
+                    </f:then>
+                    <f:else>
+                        <span class="local-presentation"
+                            title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}">
+                            <f:translate key='provider.no_local_presentation' extensionName='dfgviewer' />
+                        </span>
+                    </f:else>
+                </f:if>
+            </li>
+            <f:for each="{0: '1', 1: '2', 2: '3'}" as="index">
+                <f:if
+                    condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}">
+                    <li>
+                        <f:if
+                            condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]')}">
+                            <f:then>
+                                <f:link.external
+                                    uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}"
+                                    class="local-catalog"
+                                    title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}">
+                                    <dc:xpath
+                                        xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:reference/@linktext)[{index}]' />
+                                </f:link.external>
+                            </f:then>
+                            <f:else>
+                                <f:link.external
+                                    uri="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]', htmlspecialchars:'FALSE')}"
+                                    class="local-catalog"
+                                    title="{f:translate(key:'provider.local_catalogue', extensionName:'dfgviewer')}">
+                                    <f:translate key='provider.local_catalogue' extensionName='dfgviewer' />
+                                </f:link.external>
+                            </f:else>
+                        </f:if>
+                    </li>
+                </f:if>
+            </f:for>
+            <f:if
+                condition="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars:'FALSE')}">
+                <f:then>
+                    <li>
+                        <f:link.external
+                            uri="{dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:ownerContact)[1]', htmlspecialchars: 'FALSE')}"
+                            class="local-contact"
+                            title="{f:translate(key:'provider.email_provider', extensionName:'dfgviewer')} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})">
+                            <f:translate key='provider.email_provider' extensionName='dfgviewer' />
+                        </f:link.external>
+                    </li>
+                </f:then>
+                <f:else>
+                    <li>
+                        <span class="local-contact"
+                            title="{f:translate(key:'provider.no_local_presentation', extensionName:'dfgviewer')}">
+                            <f:translate key='provider.no_local_presentation' extensionName='dfgviewer' />
+                        </span>
+                    </li>
+                </f:else>
+            </f:if>
+            <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
+        </ul>
+    </li>
+    <li class="submenu downloads">
+        <a href="#" id="tab-downloads" title="Downloads">Downloads</a>
+        <ul>
+            <f:cObject typoscriptObjectPath="plugin.tx_dlf_pdfdownloadtool" />
+        </ul>
+    </li>
+    <li class="doublepage">
+        <f:if condition="{gp-double} == 1">
+            <f:then>
+                <f:link.page pageUid="{kitodoPageView}"
+                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
+                    class="tx-dlf-navigation-doubleOff"
+                    title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
+                    <f:translate key="double.singlePageView" extensionName="dfgviewer" />
+                </f:link.page>
+                <f:link.page pageUid="{kitodoPageView}"
+                    additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                    class="tx-dlf-navigation-doublePlusOne"
+                    title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span>
+                        <f:translate key="double.RectoVerso" extensionName="dfgviewer" />
+                    </span></f:link.page>
+            </f:then>
+            <f:else>
+                <f:link.page pageUid="{kitodoPageView}"
+                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                    class="tx-dlf-navigation-doubleOn"
+                    title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}">
+                    <f:translate key="double.doublePageView" extensionName="dfgviewer" />
+                </f:link.page>
+            </f:else>
+        </f:if>
+    </li>
+    <f:if
+        condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+        <li class="fulltext">
+            <f:if condition="{gp-double} == 1">
+                <f:then>
+                    <span class="select switchoff" id="tx-dlf-tools-fulltext"
+                        title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}">
+                        <f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />
+                    </span>
+                </f:then>
+                <f:else>
+                    <f:if condition="{gp-pagegrid} == 1">
+                        <f:then>
+                            <span class="select switchoff" id="tx-dlf-tools-fulltext"
+                                title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}">
+                                <f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />
+                            </span>
+                        </f:then>
+                        <f:else>
+                            <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
+                        </f:else>
+                    </f:if>
+                </f:else>
+            </f:if>
+        </li>
+    </f:if>
+    <li class="grid">
+        <f:if
+            condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+            <f:then>
+                <f:if condition="{gp-pagegrid} == 1">
+                    <f:then>
+                        <f:link.page pageUid="{kitodoPageView}"
+                            additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
+                            class="active"
+                            title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
+                            <f:translate key='double.singlePageView' extensionName='dfgviewer' />
+                        </f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.page pageUid="{kitodoPageView}"
+                            additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
+                            title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
+                            <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                        </f:link.page>
+                    </f:else>
+                </f:if>
+            </f:then>
+            <f:else>
+                <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
+                    <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                </span>
+            </f:else>
+        </f:if>
+    </li>
+    <f:if
+        condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
+        <f:then>
+            <li class="submenu search">
+                <a href="#" title="Search">Search</a>
+                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
+            </li>
+        </f:then>
+    </f:if>
+</ul>
+
+</html>
