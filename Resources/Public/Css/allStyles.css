@@ -2021,6 +2021,11 @@ a {
   -o-transition: all 0.18s ease-in-out;
   transition: all 0.18s ease-in-out;
 }
+
+.document-view.multiview {
+  overflow: scroll;
+}
+
 .fullscreen .document-view {
   top: 0px;
   right: 0px;
