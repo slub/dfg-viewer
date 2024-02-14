@@ -3,7 +3,7 @@
   xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-<div class="document-view">
+<div class="document-view {f:if(condition:'{gp-multiview}', then:'multiview')}">
   <div id="browser-hint" class="hidden">
     <div class="alert">
       <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
@@ -269,7 +269,7 @@
                 <f:else>
                   <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
-                      <span class="select switchoff" id="tx-dlf-tools-score" title="{f:translate(key:'score.no_score_gridpage', extensionName:'dfgviewer')}"><f:translate key='score.no_score_gridpage' extensionName='dfgviewer' /></span>
+                      <span class="select switchoff" id="tx-dlf-tools-score-0" title="{f:translate(key:'score.no_score_gridpage', extensionName:'dfgviewer')}"><f:translate key='score.no_score_gridpage' extensionName='dfgviewer' /></span>
                     </f:then>
                     <f:else>
                       <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />

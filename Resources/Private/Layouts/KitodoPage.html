@@ -11,6 +11,8 @@
 <div class="main-wrapper">
     <f:if condition="{gp-multiview}">
         <f:then>
+            <f:render section="ControlBar" partial="ControlBar" arguments="{_all}" />
+
             <f:render section="PageView" partial="PageView" arguments="{_all}" />
         </f:then>
         <f:else>
