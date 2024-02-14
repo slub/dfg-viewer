@@ -48,7 +48,7 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
     {
         // Load current document.
 
-        $this->loadDocument($this->requestData);
+        $this->loadDocument();
 
         if ($this->document === null) {
             return;
