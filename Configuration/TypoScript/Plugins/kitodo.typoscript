@@ -62,7 +62,7 @@ plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
 plugin.tx_dlf_pageview {
     settings {
         features =
-        elementId = tx-dfgviewer-map
+        elementId = tx-dfgviewer-map-0
     }
 }
 
