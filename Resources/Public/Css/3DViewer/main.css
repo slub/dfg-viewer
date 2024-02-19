@@ -36,7 +36,7 @@ a.wisski-inline-iip > div#wisski-iip-cont > img {
     visibility: hidden;
 }
 
-canvas {
+.tx-dlf-view-3d canvas {
     display: block;
     z-index: 0;
     position: absolute;
