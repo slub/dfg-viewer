@@ -79,6 +79,5 @@ rect.active {
 }
 
 .sync-views {
-    position: absolute;
-    left: 10%;
+    display: none;
 }
