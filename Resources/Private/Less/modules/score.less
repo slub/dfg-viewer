@@ -11,7 +11,7 @@
     top: 60px;
     right: 0;
     bottom: 0;
-    background: white;
+    background: rgb(243, 238, 230);
     text-align: left;
     display: none;
 
@@ -20,87 +20,143 @@
         width: 50%;
     }
 
-    &::before, &::after {
-        position: absolute;
-        right: 0;
-        left: 0;
-        content: " ";
-        z-index: 1;
-    }
-
-    &::before {
-        top: 0;
-        height: 60px;
-        .vertgrad(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), 40%, 100%);
-    }
-
-    &::after {
-        bottom: 0;
-        height: 120px;
-        .vertgrad(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), 0, 40%);
-    }
-
     *[id^="tx-dlf-score"] {
         position: relative;
         top: 0;
         right: 0;
         width: 100%;
         height: 100%;
-        padding: 60px 20px;
-        overflow: hidden;
-        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        line-height: 1.6em;
-        font-size: 16px;
-        color: @font-grey;
-
-        &:empty {
-            padding: 0;
-        }
-
-        .textline {
-            &::after {
-                content: " ";
-            }
-        }
-
-        .string {
-            padding-right: 4px;
-        }
-
-        .sp {
-            word-spacing: -4px;
-        }
 
         .score-visible & {
             display: block;
+        }
+
+        .ol-zoom {
+            display: none;
         }
     }
 
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         top: 0;
         max-width: 50%;
+    }
 
-        &::before {
-            height: 100px;
-            .vertgrad(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), 60%, 100%);
+}
+
+
+#player {
+    position: absolute;
+    z-index: 10;
+    inset: auto 15px 0 15px;
+    background: white;
+    padding: 7px;
+    border-radius: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .25s ease-in-out;
+
+    .midi-active.score-visible & {
+        opacity: 1;
+        pointer-events: auto;
+        bottom: 80px;
+    }
+
+    #midiPlayer_div {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        #midiPlayer_playingTime,
+        #midiPlayer_totalTime {
+            font-size: 12px;
+            color: #6887a3;
+            margin: 0 5px;
         }
 
-        &::after {
-            height: 80px;
-            .vertgrad(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), 0, 80%);
-        }
+        #midiPlayer_bar {
+            position: relative;
+            flex-grow: 1;
+            margin: 0 5px;
 
-        #tx-dlf-score {
-            padding: 90px 80px 30px 30px;
-            line-height: 1.8;
+            &::before {
+                position: absolute;
+                inset: 50% 0 auto 0;
+                height: 1px;
+                background-color: #ccc;
+                content: " ";
+            }
 
-            .textline {
-                &.highlight {
-                    background: lighten(@light-blue, 10%);
+            #midiPlayer_progress {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                height: 4px;
+                margin-top: -2px;
+                background-color: #ff9a23 !important;
+                width: 0;
+
+                &::after {
+                    position: absolute;
+                    inset: -3px 0 -3px auto;
+                    width: 2px;
+                    background-color: #af742d;
+                    content: " ";
+                    border-radius: 2px;
                 }
             }
         }
-    }
 
+        a.icon {
+            position: relative;
+            display: inline-block;
+            background: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            border: 2px solid #6887a3;
+            margin: 0 5px;
+
+            &.play::before {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                margin: -5px 0 0 -3px;
+                border: solid transparent;
+                border-width: 5px 0 5px 8px;
+                border-left-color: #6887a3;
+                content: " ";
+            }
+
+            &.pause {
+                &::before, &::after {
+                    position: relative;
+                    width: 4px;
+                    height: 12px;
+                    margin: 7px 1px;
+                    background-color: #6887a3;
+                    display: inline-block;
+                    content: " ";
+                    border-radius: 2px;
+                }
+            }
+
+            &.stop::before {
+                position: relative;
+                width: 10px;
+                height: 10px;
+                background-color: #6887a3;
+                margin-bottom: -4px;
+                border-radius: 2px;
+                display: inline-block;
+                content: " ";
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
 }

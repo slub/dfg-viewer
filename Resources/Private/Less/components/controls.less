@@ -236,8 +236,16 @@
                 }
             }
             &.score {
-                span.score {
-                    a.select {
+                a {
+                    &#tx-dlf-tools-score-0 {
+                        background-position: -640px -40px;
+                    }
+                    &#tx-dlf-tools-midi {
+                        background-position: -640px 0;
+                        .midi-active & {
+                            background-position: -680px 0;
+                        }
+                    }
                         &.active:before {
                             position: absolute;
                             top: 2px;
@@ -250,7 +258,6 @@
                             display: block;
                             content: " ";
                         }
-                    }
                 }
             }
             &.grid {
