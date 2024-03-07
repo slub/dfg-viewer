@@ -172,7 +172,7 @@
             }
             &.score {
                 > a, > span {
-                    background-position: -120px 0;
+                    background-position: -640px -40px;
                 }
             }
             &.doublepage {
@@ -236,28 +236,24 @@
                 }
             }
             &.score {
-                a {
-                    &#tx-dlf-tools-score-0 {
-                        background-position: -640px -40px;
+                a#tx-dlf-tools-midi {
+                    background-position: -640px 0;
+                    .midi-active & {
+                        background-position: -680px 0;
                     }
-                    &#tx-dlf-tools-midi {
-                        background-position: -640px 0;
-                        .midi-active & {
-                            background-position: -680px 0;
-                        }
+                }
+                    &.active:before {
+                        position: absolute;
+                        top: 2px;
+                        right: 0px;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 8px;
+                        border: 2px solid #fff;
+                        background: @okay-green;
+                        display: block;
+                        content: " ";
                     }
-                        &.active:before {
-                            position: absolute;
-                            top: 2px;
-                            right: 0px;
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 8px;
-                            border: 2px solid #fff;
-                            background: @okay-green;
-                            display: block;
-                            content: " ";
-                        }
                 }
             }
             &.grid {
