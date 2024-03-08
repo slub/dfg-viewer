@@ -557,6 +557,25 @@
                         background-position: -280px 0;
                     }
                 }
+
+                &.sync-view {
+                    .sync-view-toggle {
+                        background-position: -720px 0;
+
+                        &.active:before {
+                            position: absolute;
+                            top: 2px;
+                            right: 0px;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 8px;
+                            border: 2px solid #fff;
+                            background: @okay-green;
+                            display: block;
+                            content: " ";
+                        }
+                    }
+                }
             }
         }
 
