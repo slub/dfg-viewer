@@ -13,6 +13,7 @@
     bottom: 0;
     text-align: left;
     display: none;
+    border-left: 1px solid #eee;
 
     &:has(> .score-visible) {
         display: block;
@@ -85,6 +86,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all .25s ease-in-out;
+    border: 1px solid #eee;
 
     .midi-active.score-visible & {
         opacity: 1;

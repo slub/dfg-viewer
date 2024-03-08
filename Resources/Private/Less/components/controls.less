@@ -428,8 +428,7 @@
                             border-radius: 20px;
                             border: 1px solid desaturate(lighten(@light-blue, 10%), 20%);
                             cursor: pointer;
-                            -webkit-appearance: none;
-                            -moz-appearance: none;
+                            appearance: none;
 
                             .no-touchevents & {
                                 .transition();
@@ -885,6 +884,10 @@
                     }
                 }
 
+                span {
+                    opacity: 0;
+                }
+
                 .no-touchevents & {
                     a:hover {
                         .transform(scale(1.1));
@@ -893,6 +896,12 @@
 
                 span {
                     cursor: not-allowed;
+                }
+            }
+
+            &.over {
+                span span {
+                    opacity: .3;
                 }
             }
 
@@ -962,10 +971,6 @@
                                 background-position: -86px -43px;
                             }
                         }
-
-                        span {
-                            opacity: 0;
-                        }
                     }
 
                     &.first {
@@ -1001,10 +1006,6 @@
                                     height: 40px;
                                     background-position: -80px -40px;
                                 }
-                            }
-
-                            span {
-                                opacity: .3;
                             }
                         }
 
@@ -1128,7 +1129,7 @@
                 display: block;
                 transition: all .25s ease-in-out;
 
-                a {
+                a, span {
                     color: transparent;
 
                     &:hover {
