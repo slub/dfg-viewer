@@ -11,13 +11,13 @@
 }
 
 .annotation-bar .annotation-list {
-    border-top:solid 2px;
+    border-top: solid 2px;
 }
 
 .annotation-bar .annotation-list-item {
     padding-bottom: 10px;
     padding-top: 10px;
-    border-bottom:solid 2px;
+    border-bottom: solid 2px;
 }
 
 .annotation-bar .annotation-title:hover {
@@ -39,10 +39,6 @@
     padding: 10px 0 10px 0;
 }
 
-.document-view {
-/*    right: 25%; */
-}
-
 .annotation-list-item details.hover {
     background-color: #aaa9a9;
 }
@@ -51,12 +47,19 @@
     background-color: #8ebfff;
 }
 
-rect.hover {
-    stroke: black;
+rect.hover[fill] {
+    stroke: white;
+    stroke-width: 40px;
+    stroke-opacity: .3;
+    fill: #6887a3;
+    fill-opacity: .3;
 }
 
 rect.active {
-    stroke: red;
+    stroke: white;
+    stroke-width: 40px;
+    fill: #ff9a23;
+    fill-opacity: .3;
 }
 
 .drag {
@@ -79,6 +82,5 @@ rect.active {
 }
 
 .sync-views {
-    position: absolute;
-    left: 10%;
+    display: none;
 }

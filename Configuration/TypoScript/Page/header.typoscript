@@ -36,6 +36,11 @@ page {
   includeJSFooterlibs {
     dfgviewer = EXT:dfgviewer/Resources/Public/JavaScript/allScripts.js
   }
+  footerData {
+    # Add OpenLayers styling for the scores (This is 'dirty' integrated via footerData to ensure that it overrides the styles brought by DLF and other extensions)
+    999 = TEXT
+    999.value = <script type="text/javascript" src="/typo3conf/ext/dfgviewer/Resources/Public/JavaScript/OLStyles.js"></script>
+  }
   meta {
     # the object view must be excluded from index
     robots = noindex,nofollow
