@@ -42,10 +42,10 @@
 
         <div class="grid-stack">
             <f:for each="{docArray}" as="document" iteration="iterator">
-                <div class="grid-stack-item" gs-w="5" gs-h="5" gs-min-w="2" gs-min-h="2" gs-id="{iterator.index}">
+                <div class="grid-stack-item" gs-w="5" gs-h="5" gs-id="{iterator.index}">
                     <div class="grid-stack-item-content">
                         <div class="drag">Drag</div>
-                        <div style="position: absolute; right: 0px;">
+                        <div class="removeDocument" style="position: absolute; right: 0px;">
                             <f:if condition="{removeDocumentButton.{iterator.index}} || {removeDocumentButton.{iterator.index}} === '0'">
                                 <f:then>
                                     <f:link.action addQueryString="1" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{removeDocumentButton.{iterator.index}}]'}">
