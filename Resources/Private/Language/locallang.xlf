@@ -56,6 +56,9 @@
         <trans-unit id="multiview.reset_layout">
             <source>Reset Layout</source>
         </trans-unit>
+        <trans-unit id="multiview.dragging_label">
+            <source>Drag view to another position</source>
+        </trans-unit>
 		<trans-unit id="provider.local_presentation">
 			<source>Show in local context</source>
 		</trans-unit>

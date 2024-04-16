@@ -81,6 +81,10 @@
                 <source>Reset Layout</source>
                 <target>Layout zurücksetzen</target>
             </trans-unit>
+        <trans-unit id="multiview.dragging_label">
+            <source>Drag view to another position</source>
+            <target>Ansicht an eine andere Position ziehen</target>
+        </trans-unit>
 			<trans-unit id="metadata" approved="yes">
 				<source><![CDATA[Metadata]]></source>
 				<target><![CDATA[Metadaten]]></target>
