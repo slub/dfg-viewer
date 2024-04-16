@@ -105,6 +105,48 @@
             }
         }
     }
+
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        .document-functions {
+            > ul > li {
+                &.add-multiview-document {
+                    &.submenu {
+                        > form {
+                            position: absolute;
+                            inset: 50px auto auto -20px;
+                            width: 450px;
+                            transform-origin: center top;
+                            transform: scaleY(0) translateY(-100px);
+
+                            p.add-document-description {
+                                margin-bottom: 10px;
+                            }
+
+                            input[type="text"] {
+                                padding: 6px 10px;
+                                height: 24px;
+                                line-height: 24px;
+                            }
+
+                            button[type="submit"] {
+                                width: 24px;
+                                height: 24px;
+                                line-height: 24px;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    &.submenu.open {
+                        > form {
+                            .transform(scaleY(1) translateY(0));
+                        }
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 /* ==============[ the stack layout itself ]================= */
