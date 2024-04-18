@@ -1,43 +1,78 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      data-namespace-typo3-fluid="true"
-      lang="en">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
 <f:section name="ControlBar">
-  <div class="control-bar {f:if(condition:'{gp-multiview}', then:'multiview')}">
-      <div class="header-bar">
-        <h1><f:link.page pageUid="{rootPageId}" title="DFG-Viewer" class="dfgviewer-logo">DFG-Viewer</f:link.page></h1>
-        <nav>
-          <f:cObject typoscriptObjectPath="lib.menu.language" />
-          <f:cObject typoscriptObjectPath="lib.menu.viewernav" />
-          <button type="button" class="nav-toggle">
-                <span class="nav-label">Open Navigation</span>
-                <span class="nav-button-bar"></span>
-                <span class="nav-button-bar"></span>
-                <span class="nav-button-bar"></span>
-                <span class="nav-button-bar"></span>
-          </button>
-        </nav>
-      </div>
+    <div class="control-bar {f:if(condition:'{gp-multiview}', then:'multiview')}">
 
-      <div class="metadata-wrapper">
-        <div class="tx-dlf-metadata">
-            <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
+        <div class="header-bar">
+
+            <h1>
+                <f:link.page pageUid="{rootPageId}" title="DFG-Viewer" class="dfgviewer-logo">DFG-Viewer</f:link.page>
+            </h1>
+            <nav>
+                <f:cObject typoscriptObjectPath="lib.menu.language" />
+                <f:cObject typoscriptObjectPath="lib.menu.viewernav" />
+                <button type="button" class="nav-toggle">
+                    <span class="nav-label">Open Navigation</span>
+                    <span class="nav-button-bar"></span>
+                    <span class="nav-button-bar"></span>
+                    <span class="nav-button-bar"></span>
+                    <span class="nav-button-bar"></span>
+                </button>
+            </nav>
         </div>
-        <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
-      </div>
 
-      <f:if condition="{isObject3D} == 'object'">
-        <f:then>
-          <!-- it's a 3D object - no need for ToC here! -->
-        </f:then>
-        <f:else>
-          <div class="toc-wrapper">
-              <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
-              <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
-          </div>
-        </f:else>
-      </f:if>
-  </div>
+        <div class="control-bar-content">
+
+            <div class="metadata-wrapper">
+                <div class="tx-dlf-metadata">
+
+                    <div class="metadata-title">
+                        <h2>
+                            <f:comment><!-- Render full metadata title here --></f:comment>
+                        </h2>
+                    </div>
+                    <div class="control-bar-container metadata-basic">
+                        <h3>
+                            <span class="sidebar-heading-label">{f:translate(key:'metadata', extensionName:'dfgviewer')}</span>
+                            <span class="sidebar-heading-state"></span>
+                        </h3>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
+                        <f:comment><!-- The plugin above should render one or more clean definition elements (DL) --></f:comment>
+                    </div>
+
+                    <div class="control-bar-container metdata-digitisation">
+                        <h3>
+                            <span class="sidebar-heading-label">{f:translate(key:'digitisation', extensionName:'dfgviewer')}</span>
+                            <span class="sidebar-heading-state"></span>
+                        </h3>
+                        <f:comment><!-- Another plugin (?!) is intended to provide all information on digitisation at this point as an DL element --></f:comment>
+                    </div>
+
+                </div>
+                <div class="offcanvas-toggle" title="{f:translate(key:'metadata', extensionName:'dfgviewer')}"></div>
+            </div>
+
+            <f:if condition="{isObject3D} == 'object'">
+                <f:then>
+                    <!-- it's a 3D object - no need for ToC here! -->
+                </f:then>
+                <f:else>
+                    <div class="toc-wrapper">
+                        <div class="control-bar-container">
+                            <h3>
+                                <span class="sidebar-heading-label">{f:translate(key:'toc', extensionName:'dfgviewer')}</span>
+                                <span class="sidebar-heading-state"></span>
+                            </h3>
+                            <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
+                        </div>
+                        <div class="offcanvas-toggle" title="{f:translate(key:'toc', extensionName:'dfgviewer')}"></div>
+                    </div>
+                </f:else>
+            </f:if>
+
+        </div>
+
+    </div>
 </f:section>
 
 </html>
