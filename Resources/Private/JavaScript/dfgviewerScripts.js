@@ -23,6 +23,33 @@ $(document).ready(function () {
         $(this).parent().toggleClass('open');
     });
 
+    // section toggle inside the sidebar on larger screens
+    $('.control-bar .control-bar-container h3').on('click', function () {
+        $(this).parent().toggleClass('section-hidden');
+    });
+
+    // toggle for full metadata display in sidebar
+    if ($('.control-bar .metadata-basic dl.tx-dlf-metadata-titledata').length > 1) {
+        metadataToggleLabelMore = ($('html[lang^="de"]')[0]) ? 'mehr Metadaten anzeigen' : 'more Metadata';
+        metadataToggleLabelLess = ($('html[lang^="de"]')[0]) ? 'weniger Metadaten anzeigen' : 'less Metadata';
+        $('.control-bar .metadata-basic').append('<div class="metadata-toggle">' + metadataToggleLabelMore + '</div>');
+        if (Cookies.get('tx-dlf-allmetadata') === 'true') {
+            $('.control-bar .metadata-basic').addClass('all-metadata').find('.metadata-toggle').text(metadataToggleLabelLess);
+            $('.control-bar .metadata-basic').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').show();
+        }
+        $('.metadata-toggle').on('click', function () {
+            if (!$('.control-bar .metadata-basic').hasClass('all-metadata')) {
+                Cookies.set('tx-dlf-allmetadata', 'true', { sameSite: 'lax' });
+                $(this).text(metadataToggleLabelLess);
+            } else {
+                Cookies.remove('tx-dlf-allmetadata');
+                $(this).text(metadataToggleLabelMore);
+            }
+            $('.control-bar .metadata-basic').toggleClass('all-metadata').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').slideToggle();
+
+        });
+    }
+
     // active toggle for submenus
     $('.document-functions li.submenu > a').on(mobileEvent, function (event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
