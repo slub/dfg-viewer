@@ -57,6 +57,34 @@
 				<source><![CDATA[Thumbnail Preview]]></source>
 				<target><![CDATA[Vorschaubilder]]></target>
 			</trans-unit>
+            <trans-unit id="multiview.add_document.description">
+                <source>To add another document to this view, enter the entire URL of the METS/MODS file here.</source>
+                <target>Um dieser Ansicht ein weiteres Dokument hinzuzufügen geben Sie hier die gesamte URL der METS/MODS-Datei an.</target>
+            </trans-unit>
+            <trans-unit id="multiview.add_document.label">
+                <source>Add Document</source>
+                <target>Dokument hinzufügen</target>
+            </trans-unit>
+        <trans-unit id="multiview.add_document.placeholder">
+            <source>Document URL</source>
+            <target>Dokument URL</target>
+        </trans-unit>
+            <trans-unit id="multiview.add_document.submit">
+                <source>Add now</source>
+                <target>Jetzt hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="multiview.remove_document">
+                <source>Remove Document from view</source>
+                <target>Dokument aus der Ansicht entfernen</target>
+            </trans-unit>
+            <trans-unit id="multiview.reset_layout">
+                <source>Reset Layout</source>
+                <target>Layout zurücksetzen</target>
+            </trans-unit>
+        <trans-unit id="multiview.dragging_label">
+            <source>Drag view to another position</source>
+            <target>Ansicht an eine andere Position ziehen</target>
+        </trans-unit>
 			<trans-unit id="metadata" approved="yes">
 				<source><![CDATA[Metadata]]></source>
 				<target><![CDATA[Metadaten]]></target>
