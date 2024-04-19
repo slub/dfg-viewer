@@ -89,6 +89,9 @@
 		<trans-unit id="toc">
 			<source>Table of Content</source>
 		</trans-unit>
+        <trans-unit id="digitisation">
+            <source>Digitisation</source>
+        </trans-unit>
 		<trans-unit id="browser-hint.outdated_browser">
 			<source>Outdated Browser</source>
 		</trans-unit>

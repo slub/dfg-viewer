@@ -137,6 +137,10 @@
 				<source><![CDATA[Table of Content]]></source>
 				<target><![CDATA[Inhaltsverzeichnis]]></target>
 			</trans-unit>
+            <trans-unit id="digitisation">
+                <source>Digitisation</source>
+                <target>Digitalisierung</target>
+            </trans-unit>
 			<trans-unit id="uri.book" approved="yes">
 				<source><![CDATA[Persistent Identifiers (Book)]]></source>
 				<target><![CDATA[Persistente Identifier (Werk)]]></target>
