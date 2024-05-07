@@ -25,12 +25,6 @@
 
             <div class="metadata-wrapper">
                 <div class="tx-dlf-metadata">
-
-                    <div class="metadata-title">
-                        <h2>
-                            <f:comment><!-- Render full metadata title here --></f:comment>
-                        </h2>
-                    </div>
                     <div class="control-bar-container metadata-basic">
                         <h3>
                             <span class="sidebar-heading-label">{f:translate(key:'metadata', extensionName:'dfgviewer')}</span>
@@ -39,15 +33,6 @@
                         <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
                         <f:comment><!-- The plugin above should render one or more clean definition elements (DL) --></f:comment>
                     </div>
-
-                    <div class="control-bar-container metdata-digitisation">
-                        <h3>
-                            <span class="sidebar-heading-label">{f:translate(key:'digitisation', extensionName:'dfgviewer')}</span>
-                            <span class="sidebar-heading-state"></span>
-                        </h3>
-                        <f:comment><!-- Another plugin (?!) is intended to provide all information on digitisation at this point as an DL element --></f:comment>
-                    </div>
-
                 </div>
                 <div class="offcanvas-toggle" title="{f:translate(key:'metadata', extensionName:'dfgviewer')}"></div>
             </div>
