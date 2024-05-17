@@ -50,6 +50,16 @@ $(document).ready(function () {
         });
     }
 
+    // extract title information from the meta data and add it to the top of the sidebar
+    ($('.tx-dlf-metadata dl.tx-dlf-metadata-titledata dd.tx-dlf-title')[0]) && $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().find('dd.tx-dlf-title').text() + '</h2></div>');
+
+    // add a toggle function for sub meta data "(+ n more)"
+    $('dl.tx-dlf-metadata-titledata dd > dl').each(function () { $(this).parent().addClass('has-submetadata').prepend('<span class="submetadata-toggle">+' + $(this).find('dt').length + (($('html[lang^="de"]')[0]) ? ' weitere' : ' more') + '</span>').prev().addClass('has-submetadata'); });
+    $('.submetadata-toggle').on('click', function () { $(this).parent().toggleClass('open'); });
+
+    // insert dd tag between two dt tags if necessary
+    $('dl.tx-dlf-metadata-titledata dt').each(function () { $(this).after($(this).next('dt').length > 0 && $('<dd/>')) });
+
     // active toggle for submenus
     $('.document-functions li.submenu > a').on(mobileEvent, function (event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');

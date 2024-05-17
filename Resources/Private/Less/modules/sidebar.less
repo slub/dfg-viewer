@@ -649,6 +649,78 @@ ul.toc {
             display: none;
         }
 
+        dd {
+            > dl {
+                position: relative;
+                max-height: 0;
+                background-color: rgb(white, .15);
+                padding: 0 15px;
+                margin: 0;
+                overflow: hidden;
+                transition: max-height .3s ease-out, padding .5s ease-out, margin .5s ease-out;
+
+                &::before {
+                    position: absolute;
+                    top: -10px;
+                    left: 25px;
+                    width: 0;
+                    height: 0;
+                    border: 10px solid transparent;
+                    border-bottom-color: rgb(white, .15);
+                    border-top-width: 0;
+                    content: " ";
+                }
+            }
+
+            .submetadata-toggle {
+                position: relative;
+                padding: 1px 20px 1px 10px;
+                border-radius: 20px;
+                background-color: rgb(white, .20);
+                margin-left: 3px;
+                cursor: pointer;
+
+                &::after {
+                    position: absolute;
+                    top: 6px;
+                    right: 8px;
+                    width: 5px;
+                    height: 5px;
+                    border: solid white;
+                    border-width: 2px 2px 0 0;
+                    content: " ";
+                    transition: all .25s ease-in-out;
+                    transform: rotate(135deg);
+                }
+            }
+
+            &.open {
+                > dl {
+                    max-height: 1500px;
+                    overflow: visible;
+                    padding: 15px;
+                    margin: 15px 0;
+                    transition: max-height .5s ease-in, padding .25s ease-in-out, margin .25s ease-in-out, overflow 15s ease-out;
+                }
+
+                .submetadata-toggle {
+                    background-color: white;
+                    color: @base-blue;
+
+                    &::after {
+                        top: 9px;
+                        border-color: @base-blue;
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+
+        & + dl {
+            border-left: 1px solid rgb(white, .5);
+            padding-left: 15px;
+        }
+
     }
 
     .metadata-basic {
@@ -691,6 +763,7 @@ ul.toc {
 
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         padding-bottom: 0;
+        overflow: visible;
 
         .metadata-title {
             position: relative;
