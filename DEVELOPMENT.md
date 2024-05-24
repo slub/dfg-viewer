@@ -19,25 +19,32 @@ npm run build
 Build the DFG-Viewer documentation with the documentation rendering tool for Typo3.
 
 ```bash
-docker run --rm -v $(pwd):/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation
+docker run --rm -v $(pwd):/project -it ghcr.io/typo3-documentation/render-guides:latest \
+--config ./Documentation
 ```
 
-Take a look at the documentation by opening the file `Index.html` in the folder `Documentation-GENERATED-temp` in your browser.
+Take a look at the documentation by opening the file `Index.html` in the folder
+`Documentation-GENERATED-temp` in your browser.
 
 ### Troubleshooting
 
 #### Permission
 
-The container runs as a non-root user. If there are some problem regarding the permission of container user you can link the UID and GID of host into the container using the `--user` parameter.
+The container runs as a non-root user. If there are some problem regarding the
+permission of container user you can link the UID and GID of host into the
+container using the `--user` parameter.
 
 **Example:**
+
 ```
 docker run --rm --user=$(id -u):$(id -g) [...]
 ```
 
 #### Output directory
 
-The default documentation directory name is `Documentation-GENERATED-temp`. If you want to change the directory name add the `--output` parameter at the end of the building command.
+The default documentation directory name is `Documentation-GENERATED-temp`.
+If you want to change the directory name add the `--output` parameter at the
+end of the building command.
 
 **Example:**
 ```
@@ -46,11 +53,13 @@ The default documentation directory name is `Documentation-GENERATED-temp`. If y
 
 ### Provide with http.server module
 
-If Python 3 is installed on your system you can provide the documentation via the `http.server` module.
+If Python 3 is installed on your system you can provide the documentation via
+the `http.server` module.
 
 ```
 cd Documentation-GENERATED-temp
 python3 -m http.server 9000
 ```
 
-Take a look at the documentation by opening http://localhost:9000/Index.html in your browser.
+Take a look at the documentation by opening <http://localhost:9000/Index.html>
+in your browser.
