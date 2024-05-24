@@ -19,8 +19,10 @@ npm run build
 Build the DFG-Viewer documentation with the documentation rendering tool for Typo3.
 
 ```bash
-docker run --rm -v $(pwd):/project -it ghcr.io/typo3-documentation/render-guides:latest \
---config ./Documentation
+docker run --rm \
+  -v $(pwd):/project -it \
+  ghcr.io/typo3-documentation/render-guides:latest \
+  --config ./Documentation
 ```
 
 Take a look at the documentation by opening the file `Index.html` in the folder
@@ -36,7 +38,7 @@ container using the `--user` parameter.
 
 **Example:**
 
-```
+```bash
 docker run --rm --user=$(id -u):$(id -g) [...]
 ```
 
@@ -47,7 +49,8 @@ If you want to change the directory name add the `--output` parameter at the
 end of the building command.
 
 **Example:**
-```
+
+```bash
 [...] --config ./Documentation --output="My_Documentation_Directory"
 ```
 
@@ -56,7 +59,7 @@ end of the building command.
 If Python 3 is installed on your system you can provide the documentation via
 the `http.server` module.
 
-```
+```bash
 cd Documentation-GENERATED-temp
 python3 -m http.server 9000
 ```
