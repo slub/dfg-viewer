@@ -16,35 +16,41 @@ npm run build
 
 ## Documentation
 
-### Local Preview Server
-
-To preview the rendered output and automatically rebuild documentation on changes, you may spawn a local server. This supports auto-refresh and is faster than the official preview build, but omits some features such as syntax highlighting.
-
-This requires Python 2 to be installed.
+Build the DFG-Viewer documentation with the documentation rendering tool for Typo3.
 
 ```bash
-# First start: Setup Sphinx in a virtualenv
-composer docs:setup
-
-# Spawn server
-composer docs:serve
-composer docs:serve -- -E  # Don't use a saved environment (useful when changing toctree)
-composer docs:serve -- -p 8000  # Port may be specified
+docker run --rm -v $(pwd):/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation
 ```
 
-By default, the output is served to http://127.0.0.1:8000.
+Take a look at the documentation by opening the file `Index.html` in the folder `Documentation-GENERATED-temp` in your browser.
 
-### Official Preview Build
+### Troubleshooting
 
-Build documentation using the [official Docker image](https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/RenderingDocs/Quickstart.html):
+#### Permission
 
-```bash
-# Full build
-composer docs:t3 makehtml
+The container runs as a non-root user. If there are some problem regarding the permission of container user you can link the UID and GID of host into the container using the `--user` parameter.
 
-# Only run sphinx-build
-composer docs:t3 just1sphinxbuild
-
-# (Alternative) Run docker-compose manually
-docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs makehtml
+**Example:**
 ```
+docker run --rm --user=$(id -u):$(id -g) [...]
+```
+
+#### Output directory
+
+The default documentation directory name is `Documentation-GENERATED-temp`. If you want to change the directory name add the `--output` parameter at the end of the building command.
+
+**Example:**
+```
+[...] --config ./Documentation --output="My_Documentation_Directory"
+```
+
+### Provide with http.server module
+
+If Python 3 is installed on your system you can provide the documentation via the `http.server` module.
+
+```
+cd Documentation-GENERATED-temp
+python3 -m http.server 9000
+```
+
+Take a look at the documentation by opening http://localhost:9000/Index.html in your browser.
