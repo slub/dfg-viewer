@@ -38,17 +38,7 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "typo3/cms-core": "^10.4.36|^11.5",
-    "kitodo/presentation": "^4.1|dev-master",
-    "slub/slub-digitalcollections": "^3.0|dev-master",
-    "typo3/cms-backend": "^10.4",
-    "typo3/cms-extbase": "^10.4",
-    "typo3/cms-extensionmanager": "^10.4",
-    "typo3/cms-filelist": "^10.4",
-    "typo3/cms-fluid": "^10.4",
-    "typo3/cms-frontend": "^10.4",
-    "typo3/cms-install": "^10.4",
-    "typo3/cms-recordlist": "^10.4",
-    "typo3/minimal": "^10"
+    "kitodo/presentation": "^4.1|dev-master"
   },
   "autoload": {
     "psr-4": {
