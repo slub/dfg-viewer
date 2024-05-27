@@ -58,7 +58,12 @@
       "cp ./Build/Documentation/index.html ./Documentation-GENERATED-temp"
     ],
     "docs:start": "docker run -d --name dfgviewer_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 8000:8000 jdkelley/simple-http-server:latest",
-    "docs:stop": "docker stop dfgviewer_docs"
+    "docs:stop": "docker stop dfgviewer_docs",
+    "docs:rebuild": [
+      "@composer docs:stop",
+      "@composer docs:build",
+      "@composer docs:start"
+    ]
   },
   "config": {
     "allow-plugins": {
