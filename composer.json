@@ -53,7 +53,7 @@
   },
   "scripts": {
     "docs:build": "docker run --user=$(id -u):$(id -g) --rm -v ./:/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation",
-    "docs:start": "docker run -d --name dfgviewer_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 9000:8000 jdkelley/simple-http-server:latest",
+    "docs:start": "docker run -d --name dfgviewer_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 8000:8000 jdkelley/simple-http-server:latest",
     "docs:stop": "docker stop dfgviewer_docs"
   },
   "config": {

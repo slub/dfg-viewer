@@ -27,17 +27,15 @@ composer docs:build
 Take a look at the documentation by opening the file `Index.html` in the folder
 `Documentation-GENERATED-temp` in your browser.
 
-(optional)
+### Provide via Http Server (optional)
 
-**Provide documentation with simple HTTP Server**
-
-Start the http server and mount the mandatory directory `Documentation-GENERATED-temp`.
+Starts the http server and mounts the mandatory directory `Documentation-GENERATED-temp`.
 
 ```bash
 composer docs:start
 ```
 
-Take a look at the documentation by opening <http://localhost:9000/Index.html>
+Take a look at the documentation by opening <http://localhost:8000/Index.html>
 in your browser.
 
 The server runs in detached mode, so you will need to stop the http server manually.
@@ -60,8 +58,8 @@ using the `--user` parameter.
 docker run --rm --user=$(id -u):$(id -g) [...]
 ```
 
-_In the `docs:build` Composer script, this parameter is already included. If any issues
-arise, you can adjust or remove it as needed._
+_In the `docs:build` Composer script, this parameter is already included.
+If any issues arise, you can adjust or remove it as needed._
 
 #### Output directory
 
