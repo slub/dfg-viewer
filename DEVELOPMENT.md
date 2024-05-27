@@ -50,15 +50,18 @@ composer docs:stop
 
 #### Permission
 
-The container runs as a non-root user. If there are some problem regarding the
-permission of container user you can link the UID and GID of host into the
-container using the `--user` parameter.
+The documentation container runs as a non-root user. If there are some problem regarding
+the permission of container user you can link the UID and GID of host into the container
+using the `--user` parameter.
 
 **Example:**
 
 ```bash
 docker run --rm --user=$(id -u):$(id -g) [...]
 ```
+
+_In the `docs:build` Composer script, this parameter is already included. If any issues
+arise, you can adjust or remove it as needed._
 
 #### Output directory
 
