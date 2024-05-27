@@ -35,7 +35,7 @@ Starts the http server and mounts the mandatory directory `Documentation-GENERAT
 composer docs:start
 ```
 
-Take a look at the documentation by opening <http://localhost:8000/Index.html>
+Take a look at the documentation by opening <http://localhost:8000>
 in your browser.
 
 The server runs in detached mode, so you will need to stop the http server manually.
