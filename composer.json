@@ -39,7 +39,16 @@
   "require": {
     "typo3/cms-core": "^10.4.36|^11.5",
     "kitodo/presentation": "^4.1|dev-master",
-    "slub/slub-digitalcollections": "^3.0|dev-master"
+    "slub/slub-digitalcollections": "^3.0|dev-master",
+    "typo3/cms-backend": "^10.4",
+    "typo3/cms-extbase": "^10.4",
+    "typo3/cms-extensionmanager": "^10.4",
+    "typo3/cms-filelist": "^10.4",
+    "typo3/cms-fluid": "^10.4",
+    "typo3/cms-frontend": "^10.4",
+    "typo3/cms-install": "^10.4",
+    "typo3/cms-recordlist": "^10.4",
+    "typo3/minimal": "^10"
   },
   "autoload": {
     "psr-4": {
@@ -52,9 +61,9 @@
     }
   },
   "scripts": {
-    "docs:setup": "./Build/Documentation/sphinx.sh install",
-    "docs:serve": "./Build/Documentation/sphinx.sh serve",
-    "docs:t3": "docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs"
+    "docs:build": "docker run --user=$(id -u):$(id -g) --rm -v ./:/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation",
+    "docs:start": "docker run -d --name dfgviewer_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 9000:8000 jdkelley/simple-http-server:latest",
+    "docs:stop": "docker stop dfgviewer_docs"
   },
   "config": {
     "allow-plugins": {

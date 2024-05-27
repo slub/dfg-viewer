@@ -16,17 +16,35 @@ npm run build
 
 ## Documentation
 
-Build the DFG-Viewer documentation with the documentation rendering tool for Typo3.
+Build the DFG-Viewer documentation using the `docs:build` script with Composer.
+This script generates the documentation using the rendering tool for Typo3 and
+places it in the `Documentation-GENERATED-temp` folder.
 
 ```bash
-docker run --rm \
-  -v $(pwd):/project -it \
-  ghcr.io/typo3-documentation/render-guides:latest \
-  --config ./Documentation
+composer docs:build
 ```
 
 Take a look at the documentation by opening the file `Index.html` in the folder
 `Documentation-GENERATED-temp` in your browser.
+
+(optional)
+
+**Provide documentation with simple HTTP Server**
+
+Start the http server and mount the mandatory directory `Documentation-GENERATED-temp`.
+
+```bash
+composer docs:start
+```
+
+Take a look at the documentation by opening <http://localhost:9000/Index.html>
+in your browser.
+
+The server runs in detached mode, so you will need to stop the http server manually.
+
+```bash
+composer docs:stop
+```
 
 ### Troubleshooting
 
@@ -53,16 +71,3 @@ end of the building command.
 ```bash
 [...] --config ./Documentation --output="My_Documentation_Directory"
 ```
-
-### Provide with http.server module
-
-If Python 3 is installed on your system you can provide the documentation via
-the `http.server` module.
-
-```bash
-cd Documentation-GENERATED-temp
-python3 -m http.server 9000
-```
-
-Take a look at the documentation by opening <http://localhost:9000/Index.html>
-in your browser.
