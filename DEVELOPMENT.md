@@ -16,35 +16,59 @@ npm run build
 
 ## Documentation
 
-### Local Preview Server
-
-To preview the rendered output and automatically rebuild documentation on changes, you may spawn a local server. This supports auto-refresh and is faster than the official preview build, but omits some features such as syntax highlighting.
-
-This requires Python 2 to be installed.
+Build the DFG-Viewer documentation using the `docs:build` script with Composer.
+This script generates the documentation using the rendering tool for Typo3 and
+places it in the `Documentation-GENERATED-temp` folder.
 
 ```bash
-# First start: Setup Sphinx in a virtualenv
-composer docs:setup
-
-# Spawn server
-composer docs:serve
-composer docs:serve -- -E  # Don't use a saved environment (useful when changing toctree)
-composer docs:serve -- -p 8000  # Port may be specified
+composer docs:build
 ```
 
-By default, the output is served to http://127.0.0.1:8000.
+Take a look at the documentation by opening the file `Index.html` in the folder
+`Documentation-GENERATED-temp` in your browser.
 
-### Official Preview Build
+### Provide via Http Server (optional)
 
-Build documentation using the [official Docker image](https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/RenderingDocs/Quickstart.html):
+Starts the http server and mounts the mandatory directory `Documentation-GENERATED-temp`.
 
 ```bash
-# Full build
-composer docs:t3 makehtml
+composer docs:start
+```
 
-# Only run sphinx-build
-composer docs:t3 just1sphinxbuild
+Take a look at the documentation by opening <http://localhost:8000>
+in your browser.
 
-# (Alternative) Run docker-compose manually
-docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs makehtml
+The server runs in detached mode, so you will need to stop the http server manually.
+
+```bash
+composer docs:stop
+```
+
+### Troubleshooting
+
+#### Permission
+
+The documentation container runs as a non-root user. If there are some problem regarding
+the permission of container user you can link the UID and GID of host into the container
+using the `--user` parameter.
+
+**Example:**
+
+```bash
+docker run --rm --user=$(id -u):$(id -g) [...]
+```
+
+_In the `docs:build` Composer script, this parameter is already included.
+If any issues arise, you can adjust or remove it as needed._
+
+#### Output directory
+
+The default documentation directory name is `Documentation-GENERATED-temp`.
+If you want to change the directory name add the `--output` parameter at the
+end of the building command.
+
+**Example:**
+
+```bash
+[...] --config ./Documentation --output="My_Documentation_Directory"
 ```
