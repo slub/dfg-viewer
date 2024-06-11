@@ -9,6 +9,12 @@
 />
 
 <div class="main-wrapper">
+    <div id="overlay">
+        <div class="ajax-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+
     <f:if condition="{gp-multiview}">
         <f:then>
             <f:render section="ControlBar" partial="ControlBar" arguments="{_all}" />

@@ -175,12 +175,18 @@ $(document).ready(function () {
             })
             .on('click', function () {
                 localStorage.txDlfFromPage = $(this).attr('class').split(' ')[0];
+                showLoadingAnimation();
             });
         if (localStorage.txDlfFromPage) {
             $('.' + localStorage.txDlfFromPage).addClass('no-transition over');
             localStorage.clear();
         }
     }
+
+    $('.measureBacks, .measureFwds').on('click', function (evt)
+    {
+        showLoadingAnimation();
+    });
 
     // hide outdated browser hint, if cookie was found
     if (Cookies.get('tx-dlf-pageview-hidebrowseralert') === 'true') {
@@ -236,6 +242,10 @@ function hideBrowserAlert() {
     $('#browser-hint').addClass('hidden');
     Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
 
+}
+
+function showLoadingAnimation() {
+    $("#overlay").fadeIn(300);
 }
 
 // EOF
