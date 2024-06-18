@@ -1,0 +1,47 @@
+name: GruntComparison
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: npm
+        cache-dependency-path: './Build/package-lock.json'
+
+    - name: Install and run Grunt
+      working-directory: ./Build
+      run: |
+        npm install -g grunt-cli
+        npm audit fix
+        echo "Running `grunt less`"
+        grunt less
+        echo "Running `grunt terser`"
+        grunt terser
+
+    - name: Test for changes
+      working-directory: ./
+      run: |
+        git diff -- ./Resources/Public/
+        if [ -n "$(git status --porcelain -- ./Resources/Public/)" ]; then
+            echo "Changes detected in compiled files"
+            exit 1
+        else 
+            echo "No changes detected in compiled files"
+        fi

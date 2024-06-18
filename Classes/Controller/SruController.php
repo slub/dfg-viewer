@@ -2,10 +2,8 @@
 
 namespace Slub\Dfgviewer\Controller;
 
-use Kitodo\Dlf\Domain\Model\Document;
 use Kitodo\Dlf\Common\MetsDocument;
-use Kitodo\Dlf\Domain\Repository\StructureRepository;
-use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -14,27 +12,31 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Checks if the METS document contains a link to an SRU endpoint, and if so,
  * adds a search form to the pageview.
  *
- * @package    TYPO3
- * @subpackage    tx_dfgviewer
- * @access    public
+ * @package TYPO3
+ * @subpackage tx_dfgviewer
+ * @access public
  */
 class SruController extends \Kitodo\Dlf\Controller\AbstractController
 {
+    /**
+     * The main method of the controller
+     *
+     * @return void
+     */
     public function mainAction()
     {
         // Load current document.
-        $this->loadDocument($this->requestData);
+        $this->loadDocument();
         if (
-            $this->document === null
-            || $this->document->getDoc() === null
-            || !$this->document->getDoc() instanceof MetsDocument
+            $this->isDocMissing()
+            || !$this->document->getCurrentDocument() instanceof MetsDocument
         ) {
             // Quit without doing anything if required variables are not set.
-            return '';
+            return;
         }
 
         // Get digital provenance information.
-        $digiProv = $this->document->getDoc()->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
+        $digiProv = $this->document->getCurrentDocument()->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
 
         if ($digiProv) {
             $links = $digiProv[0]->children('http://dfg-viewer.de/')->links;
@@ -46,8 +48,8 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
         }
 
         if (empty($sruLink)) {
-            // Quit without doing anything if required variables are not set.
-            return '';
+            // Quit without doing anything if link is not set.
+            return;
         }
 
         $actionUrl = $this->uriBuilder->reset()
@@ -65,9 +67,9 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
     /**
      * Adds SRU Search result javascript
      *
-     * @access    protected
+     * @access protected
      *
-     * @return    string        Viewer script tags ready for output
+     * @return void
      */
     protected function addSruResultsJS()
     {
@@ -82,7 +84,7 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
             }
             $javascriptFooter .= '})';
 
-            $pageRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
+            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
             $pageRenderer->addJsFooterInlineCode('tx-dfgviewer-footer', $javascriptFooter);
         }
     }

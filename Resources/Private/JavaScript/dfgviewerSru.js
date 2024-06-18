@@ -35,7 +35,7 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 	$.post(
 		"/",
 		{
-			eID: "tx_dfgviewer_sru_eid",
+			middleware: "dfgviewer/sru",
 			q: $( "input[name='tx_dlf[query]']" ).val(),
 			L: $( "input[name='tx_dfgviewer[L]']" ).val(),
 			id: $( "input[name='tx_dfgviewer[id]']" ).val(),
@@ -44,58 +44,59 @@ $("#tx-dfgviewer-sru-form").submit(function( event ) {
 		},
 		function(data) {
 			var resultItems = [];
-			var resultList = '<div class="sru-results-active-indicator"></div><ul>';
+            var resultList = $('<div class="sru-results-active-indicator"></div><ul>');
 
-			if (data.error) {
+            if (data.error) {
+                $('<li/>', {
+                    class: "noresult",
+                    text: $('#tx-dfgviewer-sru-label-noresult').text()
+                }).appendTo(resultList);
+            } else {
+                for (var i = 0; i < data.length; i++) {
+                    var linkCurrent = $(location).attr('href');
+                    var linkBase = linkCurrent.substring(0, linkCurrent.indexOf('?'));
+                    var linkParams = linkCurrent.substring(linkBase.length + 1, linkCurrent.length);
+                    var linkId = linkParams.match(/id=(\d)*/g);
 
-				resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
+                    if (linkId) {
+                        linkParams = linkId + '&';
+                    } else {
+                        linkParams = '&';
+                    }
 
-			} else {
+                    var linkNew = linkBase + '?' + (linkParams
+                        + 'tx_dlf[id]=' + data[i].link
+                        + '&tx_dlf[origimage]=' + data[i].origImage
+                        + '&tx_dlf[highlight]=' + encodeURIComponent(data[i].highlight)
+                        + '&tx_dlf[page]=' + (data[i].page));
 
-				for (var i=0; i < data.length; i++) {
-
-					var link_current = $(location).attr('href');
-
-					var link_base = link_current.substring(0, link_current.indexOf('?'));
-					var link_params = link_current.substring(link_base.length + 1, link_current.length);
-
-					var link_id = link_params.match(/id=(\d)*/g);
-
-					if (link_id) {
-
-						link_params = link_id + '&';
-
-					} else {
-
-						link_params = '&';
-
-					}
-
-					var newlink = link_base + '?' + (link_params
-					+ 'tx_dlf[id]=' + data[i].link
-					+ '&tx_dlf[origimage]=' + data[i].origImage
-					+ '&tx_dlf[highlight]=' + encodeURIComponent(data[i].highlight)
-					+ '&tx_dlf[page]=' + (data[i].page));
-
-					if (data[i].previewImage) {
-						resultItems.push('<a href=\"' + newlink + '\">' + data[i].previewImage);
-					}
-					if (data[i].previewText) {
-						resultItems.push('<a href=\"' + newlink + '\">' + data[i].previewText);
-					}
-				}
-				if (resultItems.length > 0) {
-                    resultItems.forEach(function(item, index){
-                        resultList += '<li>' + item + '</li>';
-                    });
-                } else {
-                    resultList += '<li class="noresult">' + $('#tx-dfgviewer-sru-label-noresult').text() + '</li>';
+                    if (data[i].previewImage) {
+                        $('<li/>').append(
+                            $('<a/>', {
+                                href: linkNew,
+                                text: data[i].previewImage
+                            })
+                        ).appendTo(resultList);
+                    }
+                    if (data[i].previewText) {
+                        $('<li/>').append(
+                            $('<a/>', {
+                                href: linkNew,
+                                text: data[i].previewText
+                            })
+                        ).appendTo(resultList);
+                    }
                 }
-			}
-			resultList += '</ul>';
 
-			$('#tx-dfgviewer-sru-results').html(resultList);
+                if (resultItems.length === 0) {
+                    $('<li/>', {
+                        class: "noresult",
+                        text: $('#tx-dfgviewer-sru-label-noresult').text()
+                    }).appendTo(resultList);
+                }
+            }
 
+            $('#tx-dfgviewer-sru-results').empty().append(resultList);
 		},
 		"json"
 	)

@@ -37,8 +37,8 @@
   ],
   "license": "GPL-3.0-or-later",
   "require": {
-    "typo3/cms-core": "~9.5.31|^10.4",
-    "kitodo/presentation": "^4.0|dev-master",
+    "typo3/cms-core": "^10.4.36|^11.5",
+    "kitodo/presentation": "^4.1|dev-master",
     "slub/slub-digitalcollections": "^3.0|dev-master"
   },
   "autoload": {
@@ -52,8 +52,23 @@
     }
   },
   "scripts": {
-    "docs:setup": "./Build/Documentation/sphinx.sh install",
-    "docs:serve": "./Build/Documentation/sphinx.sh serve",
-    "docs:t3": "docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs"
+    "docs:build": [
+      "rm -Rf ./Documentation-GENERATED-temp",
+      "docker run --user=$(id -u):$(id -g) --rm -v ./:/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation",
+      "cp ./Build/Documentation/index.html ./Documentation-GENERATED-temp"
+    ],
+    "docs:start": "docker run -d --name dfgviewer_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 8000:8000 jdkelley/simple-http-server:latest",
+    "docs:stop": "docker stop dfgviewer_docs",
+    "docs:rebuild": [
+      "@composer docs:stop",
+      "@composer docs:build",
+      "@composer docs:start"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
+    }
   }
 }

@@ -5,9 +5,6 @@
  * Control elements like next and previous buttons,
  * download buttons and so on...
  *
- * Author: Thomas Jung <thomas@tjwd.de>
- * License: All rights reserved
- *
  */
 
 /* ==============[ basic settings for document control and view buttons ]================= */
@@ -143,6 +140,10 @@
                                 background-position: -280px -40px;
                             }
 
+                            &.no-fulltext:before {
+                                background-position: -280px -40px;
+                            }
+
                             &.local-presentation:before {
                                 background-position: -440px -80px;
                             }
@@ -162,10 +163,26 @@
                             &.persistence-page:before {
                                 background-position: -320px -80px;
                             }
+                            &.tx-dlf-tools-imagedownload:before {
+                                background-position: -320px -40px;
+                            }
+                            &.tx-dlf-tools-imagedownload {
+                                // override opacity from span
+                                // because tx-dlf-tools-imagedownload is the only one here with span
+                                opacity: 1;
+                                // move over the empty space the hidden `::before` left:
+                                a {
+                                    position: relative;
+                                    left: -40px;
+                                }
+                            }
                         }
 
                         span {
                             opacity: 0.5;
+                            ::before {
+                                display: none;
+                            }
                         }
                     }
                 }
@@ -455,7 +472,7 @@
                     }
 
                     .fullscreen {
-                        z-index: 1000;
+                        z-index: auto;
                         background: #fff;
 
                         &:before,
@@ -1224,4 +1241,18 @@
     }
 }
 
-// EOF
+/* ==============[ hide page elements in calendar view ]====================================== */
+body.dfgviewer.calendar {
+    .document-functions {
+        display: none;
+    }
+
+    .view-functions {
+        display: none;
+    }
+
+    .tx-dfgviewer-newspaper-calendar, .tx-dfgviewer-newspaper-years {
+        position: relative;
+        top: -80px;
+    }
+}

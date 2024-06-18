@@ -81,6 +81,7 @@ $(document).ready(function () {
 
     // add body class if any calendar is present
     $('.tx-dfgviewer-newspaper-calendar').parents('body').addClass('calendar');
+    $('.tx-dfgviewer-newspaper-years').parents('body').addClass('calendar');
 
     // Inject view switch functions for calendar/list view (initial show calendar)
     $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a.select-calendar-view, .tx-dfgviewer-newspaper-calendar .calendar-view').addClass('active');
@@ -101,8 +102,10 @@ $(document).ready(function () {
     });
 
     // Copy selected page number to mobile meta (in order to transform select field to ui button)
-    if ($('.pages select option[selected]')[0]) {
-        $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number">' + $('.pages select option[selected]').text() + '</dd>');
+    if($('.pages select option[selected]')[0]) {
+        const pageNumberText = $('.pages select option[selected]').text();
+        $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number"></dd>');
+        $('dl.mobile-meta dd.mobile-page-number').text(pageNumberText);
     }
 
     // Copy some controls for mobile (page select, fullscreen)
@@ -118,9 +121,15 @@ $(document).ready(function () {
     }
 
     // Check if there are is a download list. Otherwise change a to span to disable button
-    if (!$('.submenu.downloads ul li')[0]) {
+    if(!$('.submenu.downloads ul li')[0]) {
         $("#tab-downloads").replaceWith(function () {
-            return $("<span title=\"" + $(this).attr('title') + "\" class=\"" + $(this).attr('class') + "\" id=\"" + $(this).attr('id') + "\">" + $(this).html() + "</span>");
+            // Create a new element using jQuery with sanitized content
+            return $("<span/>", {
+                "title": $(this).attr('title'),
+                "class": $(this).attr('class'),
+                "id": $(this).attr('id'),
+                "text": $(this).html() // Use "text" to set the text content, escaping it
+            });
         });
     }
 
@@ -247,5 +256,3 @@ function hideBrowserAlert() {
 function showLoadingAnimation() {
     $("#overlay").fadeIn(300);
 }
-
-// EOF
