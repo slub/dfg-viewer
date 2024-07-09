@@ -176,8 +176,6 @@ $(document).ready(function () {
         $('.fwds, .backs')
             .on('mouseenter', function () {
                 $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
-
-
             })
             .on('mouseleave', function () {
                 $(this).removeClass('over').siblings('.measureBacks, .measureFwds').removeClass('over');
