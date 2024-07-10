@@ -26,16 +26,16 @@
 
 
 .annotation-bar .annotation-body {
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 .annotation-bar .annotation-creator {
-    background-color: #ffffff;
-    padding: 10px 0 10px 0;
+    background-color: #fff;
+    padding: 10px 0;
 }
 
 .annotation-bar .annotation-date {
-    background-color: #ffffff;
+    background-color: #fff;
     padding: 10px 0 10px 0;
 }
 
