@@ -30,8 +30,8 @@ $(document).ready(function () {
 
     // toggle for full metadata display in sidebar
     if ($('.control-bar .metadata-basic dl.tx-dlf-metadata-titledata').length > 1) {
-        metadataToggleLabelMore = ($('html[lang^="de"]')[0]) ? 'mehr Metadaten anzeigen' : 'more Metadata';
-        metadataToggleLabelLess = ($('html[lang^="de"]')[0]) ? 'weniger Metadaten anzeigen' : 'less Metadata';
+        var metadataToggleLabelMore = ($('html[lang^="de"]')[0]) ? 'mehr Metadaten anzeigen' : 'more Metadata';
+        var metadataToggleLabelLess = ($('html[lang^="de"]')[0]) ? 'weniger Metadaten anzeigen' : 'less Metadata';
         $('.control-bar .metadata-basic').append('<div class="metadata-toggle">' + metadataToggleLabelMore + '</div>');
         if (Cookies.get('tx-dlf-allmetadata') === 'true') {
             $('.control-bar .metadata-basic').addClass('all-metadata').find('.metadata-toggle').text(metadataToggleLabelLess);
