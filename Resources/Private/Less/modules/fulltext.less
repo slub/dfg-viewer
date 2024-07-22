@@ -13,6 +13,14 @@
     bottom: 0;
     background: #fff;
     text-align: left;
+
+    display: none;
+
+    &:has(> .score-visible) {
+        display: block;
+        width: 50%;
+    }
+
     &:before, &:after {
         position: absolute;
         right: 0;
@@ -43,6 +51,7 @@
         line-height: 1.6em;
         font-size: 16px;
         color: @font-grey;
+        display: none;
         &:empty {
             padding: 0;
         }
@@ -57,10 +66,14 @@
         .sp {
             word-spacing: -4px;
         }
+        .fulltext-visible & {
+            display: block;
+        }
     }
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         top: 0;
         max-width: 50%;
+        width: 50%;
         &:before {
             height: 100px;
             .vertgrad(rgba(255,255,255,1), rgba(255,255,255,0),60%,100%);
