@@ -1,6 +1,9 @@
 .idea/
 .vscode/
+public/
+vendor/
 .DS_Store
 node_modules
 *.css.map
 Documentation-GENERATED-temp/
+composer.lock
