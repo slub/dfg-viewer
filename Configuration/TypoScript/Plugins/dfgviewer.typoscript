@@ -34,6 +34,12 @@ plugin.tx_dfgviewer_newspaperyears {
     }
 }
 
+plugin.tx_dlf_annotation < tt_content.list.20.dlf_annotation
+plugin.tx_dlf_annotation {
+    settings {
+    }
+}
+
 plugin.tx_dfgviewer_newspapercalendar < tt_content.list.20.dlf_calendar
 plugin.tx_dfgviewer_newspapercalendar {
     switchableControllerActions {

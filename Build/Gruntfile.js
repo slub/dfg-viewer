@@ -1,5 +1,5 @@
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     require('jit-grunt')(grunt);
 
     grunt.initConfig({
@@ -12,25 +12,26 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "Resources/Public/Css/allStyles.css" : "Resources/Private/Less/all.less",
-                    "Resources/Public/Css/webStyles.css" : "Resources/Private/Less/website.less",
-                    "Resources/Public/Css/rte.css" : "Resources/Private/Less/rte.less",
+                    "Resources/Public/Css/allStyles.css": "Resources/Private/Less/all.less",
+                    "Resources/Public/Css/webStyles.css": "Resources/Private/Less/website.less",
+                    "Resources/Public/Css/rte.css": "Resources/Private/Less/rte.less",
                 }
             }
         },
         terser: {
+            options: {
+                compress: true,
+                mangle: true,
+            },
             development: {
-                options: {
-                    compress: false,
-                },
                 files: {
-                    "Resources/Public/JavaScript/allScripts.js" : [
+                    "Resources/Public/JavaScript/allScripts.js": [
                         'Resources/Private/JavaScript/modernizrCustom.js',
                         'Resources/Private/JavaScript/js.cookie.js',
                         'Resources/Private/JavaScript/dfgviewerSru.js',
                         'Resources/Private/JavaScript/dfgviewerScripts.js',
                     ],
-                    "Resources/Public/JavaScript/webScripts.js" : [
+                    "Resources/Public/JavaScript/webScripts.js": [
                         'Resources/Private/JavaScript/modernizrCustom.js',
                         'Resources/Public/JavaScript/Highlight/highlight.pack.js',
                         'Resources/Private/JavaScript/websiteScripts.js',
@@ -57,5 +58,5 @@ module.exports = function(grunt) {
     });
 
     grunt.file.setBase('../')
-    grunt.registerTask('default', ['less','terser','watch']);
+    grunt.registerTask('default', ['less', 'terser', 'watch']);
 };

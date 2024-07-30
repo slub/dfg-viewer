@@ -9,12 +9,156 @@
  * LICENSE.txt file that was distributed with this source code.
 -->
 </f:comment>
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-      xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
-      data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{docArray -> f:count()} > 1">
+    <f:then>
 
-<div id="tx-dfgviewer-map" class="tx-dlf-map">
-</div>
+        <div class="page-control-multiview">
+            <div class="backs">
+                <span class="prev">
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllPagePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                        <f:translate key="prevPage" />
+                    </f:link.action>
+                </span>
+            </div>
+            <div class="measureBacks">
+                <span class="prev">
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllMeasurePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                        <f:translate key="prevMeasure" />
+                    </f:link.action>
+                </span>
+            </div>
+            <div class="fwds">
+                <span class="next">
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllPageNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                        <f:translate key="nextPage" />
+                    </f:link.action>
+                </span>
+            </div>
+            <div class="measureFwds">
+                <span class="next">
+                    <f:link.action addQueryString="1" additionalParams="{navigateAllMeasureNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                        <f:translate key="nextMeasure" />
+                    </f:link.action>
+                </span>
+            </div>
+        </div>
+
+        <div class="grid-stack-wrapper">
+            <div class="grid-stack">
+                <f:for each="{docArray}" as="document" iteration="iterator">
+                    <div class="grid-stack-item" gs-w="6" gs-h="6" gs-id="{iterator.index}">
+                        <div class="grid-stack-item-content">
+
+                            <div id="tx-dfgviewer-map-{iterator.index}" data-viewercount="{iterator.index}" class="tx-dlf-map"></div>
+
+                            <div id="svg_panel">
+                                <div id="player" style="z-index: 0; position: absolute;"></div>
+                                <div id="svg_output" style="overflow:hidden;"></div>
+                            </div>
+
+                            <div class="score-container">
+                                <div id="tx-dlf-score-{iterator.index}"></div>
+                            </div>
+
+                            <f:variable name="curDocPage" value="{docPage.{iterator.index}}" />
+
+                            <div class="score-tool">
+                                <f:if condition="{scoreAvailable.{iterator.index}}">
+                                    <f:then>
+                                        <a class="select switchoff" id="tx-dlf-tools-score-{iterator.index}" title="" data-dic="fulltext:{f:translate(key: 'tools.score')}
+                            ;fulltext-on:{f:translate(key: 'tools.score.on')}
+                            ;fulltext-off:{f:translate(key: 'tools.score.off')}
+                            ;activate-score-initially:{activateScoreInitially}
+                            ;score-scroll-element:{settings.scoreScrollElement}
+                            ;search-hl-parameters:{settings.searchHlParameters}">
+                                            Score &nbsp;
+                                        </a>
+                                        <a class="select switchoff" id="tx-dlf-tools-midi" title="" data-dic=""> Midi &nbsp;
+                                        </a>
+                                    </f:then>
+                                    <f:else>
+                                        <span class="no-score">
+                                            <f:translate key="tools.fulltext.not-available" />
+                                        </span>
+                                    </f:else>
+                                </f:if>
+                                <f:comment>
+                                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
+                                </f:comment>
+                            </div>
+
+                            <div class="tx-dlf-navigation-prev">
+                                <f:if condition="{docPage.{iterator.index}} > 1">
+                                    <f:then>
+                                        <f:link.action title="{f:translate(key: 'prevPage')}" class="prev" addQueryString="1" additionalParams="{navigationArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                            <f:translate key="prevPage" />
+                                        </f:link.action>
+                                    </f:then>
+                                    <f:else>
+                                        <span class="prev" title="{f:translate(key: 'prevPage')}">
+                                            <f:translate key="prevPage" />
+                                        </span>
+                                    </f:else>
+                                </f:if>
+
+                                <f:link.action class="prevMeasure" title="{f:translate(key: 'prevMeasure')}" addQueryString="1" additionalParams="{navigationMeasureArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                    <f:translate key="prevMeasure" />
+                                </f:link.action>
+                            </div>
+
+                            <div class="tx-dlf-navigation-next">
+                                <f:if condition="{docPage.{iterator.index}} < {docNumPage.{iterator.index}}">
+                                    <f:then>
+                                        <f:link.action title="{f:translate(key: 'nextPage')}" class="next" addQueryString="1" additionalParams="{navigationArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                            <f:translate key="nextPage" />
+                                        </f:link.action>
+                                    </f:then>
+                                    <f:else>
+                                        <span class="next" title="{f:translate(key: 'nextPage')}">
+                                            <f:translate key="nextPage" />
+                                        </span>
+                                    </f:else>
+                                </f:if>
+
+                                <f:link.action class="nextMeasure"title="{f:translate(key: 'nextMeasure')}" addQueryString="1" additionalParams="{navigationMeasureArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                    <f:translate key="nextMeasure" />
+                                </f:link.action>
+                            </div>
+
+                        </div>
+
+                        <div class="gridstack-dragging-handle" title="{f:translate(key: 'multiview.dragging_label', extensionName: 'dfgviewer')}"></div>
+
+                        <f:if condition="{removeDocumentButton.{iterator.index}} || {removeDocumentButton.{iterator.index}} === '0'">
+                            <div class="removeDocument">
+                                <f:link.action addQueryString="1" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{removeDocumentButton.{iterator.index}}]'}">
+                                    <f:translate key="multiview.remove_document" extensionName="dfgviewer" />
+                                </f:link.action>
+                            </div>
+                        </f:if>
+
+                    </div>
+                </f:for>
+            </div>
+        </div>
+    </f:then>
+    <f:else>
+        <div id="tx-dfgviewer-map-0" class="tx-dlf-map"></div>
+        <div id="svg_panel">
+            <div id="player"></div>
+            <div id="svg_output" style="overflow:hidden;"></div>
+        </div>
+
+        <f:comment>
+            <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
+        </f:comment>
+
+        <div class="score-container">
+            <div id="tx-dlf-score-0"></div>
+        </div>
+    </f:else>
+</f:if>
 
 <kitodo:jsFooter inlineCode="{viewerConfiguration}" />
 
