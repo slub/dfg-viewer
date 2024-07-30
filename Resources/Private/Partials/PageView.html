@@ -18,11 +18,11 @@
 
         <f:if condition="{is3dObject} == 1">
             <f:then>
-                <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d"/>
-
                 <div class="document-functions">
                     <f:render partial="Provider" arguments="{_all}"/>
+                    <f:render partial="Submenu" arguments="{_all}"/>
                 </div>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_embedded3dviewer"/>
             </f:then>
             <f:else>
                 <f:if condition="{gp-pagegrid} == 1">
