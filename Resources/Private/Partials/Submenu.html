@@ -134,26 +134,6 @@
             </f:if>
         </li>
     </f:if>
-    <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
-        <li class="score">
-            <f:if condition="{gp-double} == 1">
-                <f:then>
-                </f:then>
-                <f:else>
-                    <f:if condition="{gp-pagegrid} == 1">
-                        <f:then>
-                            <span class="select switchoff" id="tx-dlf-tools-score-0" title="{f:translate(key:'score.no_score_gridpage', extensionName:'dfgviewer')}">
-                                <f:translate key='score.no_score_gridpage' extensionName='dfgviewer' />
-                            </span>
-                        </f:then>
-                        <f:else>
-                            <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
-                        </f:else>
-                    </f:if>
-                </f:else>
-            </f:if>
-        </li>
-    </f:if>
     <li class="grid">
         <f:if
             condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
@@ -191,22 +171,6 @@
                 <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
             </li>
         </f:then>
-    </f:if>
-    <f:if condition="{gp-multiview}">
-        <li class="submenu add-multiview-document">
-            <a href="#" title="{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}">{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}</a>
-            <f:form method="post" pluginName="pageview" action="addDocument" addQueryString="1" name="formAddDocument" object="{formAddDocument}" extensionName="dlf" controller="PageView">
-                <p class="add-document-description">{f:translate(key:'multiview.add_document.description', extensionName:'dfgviewer')}</p>
-                <label for="location-field">{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}</label>
-                <f:form.textfield property="location" id="location-field" placeholder="{f:translate(key:'multiview.add_document.placeholder', extensionName:'dfgviewer')}" />
-                <f:form.button>{f:translate(key:'multiview.add_document.submit', extensionName:'dfgviewer')}</f:form.button>
-            </f:form>
-        </li>
-        <li>
-            <a href="#" class="reset-gridstack-layout" title="{f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}">
-                {f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}
-            </a>
-        </li>
     </f:if>
 </ul>
 

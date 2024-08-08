@@ -217,8 +217,8 @@ a {
                         width: 40px;
                         height: 40px;
                         padding-left: 40px;
-                        background: #fff url(../Images/controlIcons.svg) no-repeat -600px -80px;
-                        background-size: auto 120px;
+                        background: #fff url(../Images/controlIcons.svg) no-repeat -560px -77px;
+                        background-size: 600px 120px;
                         outline: none;
                         border-radius: 20px;
                         -webkit-appearance: none;
@@ -241,8 +241,8 @@ a {
                         position: absolute;
                         width: 12px;
                         height: 12px;
-                        background: url(../Images/controlIcons.svg) no-repeat -574px -54px;
-                        background-size: auto 120px;
+                        background: url(../Images/controlIcons.svg) no-repeat -538px -54px;
+                        background-size: 600px 120px;
                         display: block;
                         content: " ";
                         .transition();
@@ -332,40 +332,6 @@ a {
             &.missing-provider-image {
                 ul {
                     left: 20px;
-                }
-            }
-        }
-    }
-    @media screen and (min-width: @tabletLandscapeViewportWidth) {
-        .tx-dlf-map {
-            .score-visible & {
-                .custom-zoom {
-                    position: absolute;
-                    inset: auto 50% 20px auto;
-                    transform: translateX(50%);
-                    display: block;
-                    background-color: transparent;
-                    display: flex;
-
-                    a {
-                        position: relative;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 20px;
-                        margin: 0 4px;
-                        .text-hide();
-                        background: white url(../Images/controlIcons.svg) no-repeat -360px 0;
-                        background-size: auto 120px;
-                        &.in {
-                            background-position: -360px 0;
-                        }
-                        &.out {
-                            background-position: -400px 0;
-                        }
-                        &.fullscreen {
-                            display: none;
-                        }
-                    }
                 }
             }
         }
