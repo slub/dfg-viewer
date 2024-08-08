@@ -8,7 +8,7 @@ config {
   removeDefaultJS = 1
 
   # concatenate all Javascript files by default
-  concatenateJs = 0
+  concatenateJs = 1
   # concatenate all CSS files by default
   concatenateCss = 1
 

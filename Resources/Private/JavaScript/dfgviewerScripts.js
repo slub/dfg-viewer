@@ -6,7 +6,7 @@
 
 !*/
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     // check mobile device to specify click events
     function mobileCheck() {
@@ -19,62 +19,25 @@ $(document).ready(function () {
     var mobileEvent = mobileCheck() ? 'touchend' : 'click';
 
     // menu toggles for offcanvas toc and metadata
-    $('.offcanvas-toggle').on(mobileEvent, function (event) {
+    $('.offcanvas-toggle').on(mobileEvent, function(event) {
         $(this).parent().toggleClass('open');
     });
 
-    // section toggle inside the sidebar on larger screens
-    $('.control-bar .control-bar-container h3').on('click', function () {
-        $(this).parent().toggleClass('section-hidden');
-    });
-
-    // toggle for full metadata display in sidebar
-    if ($('.control-bar .metadata-basic dl.tx-dlf-metadata-titledata').length > 1) {
-        var metadataToggleLabelMore = ($('html[lang^="de"]')[0]) ? 'mehr Metadaten anzeigen' : 'more Metadata';
-        var metadataToggleLabelLess = ($('html[lang^="de"]')[0]) ? 'weniger Metadaten anzeigen' : 'less Metadata';
-        $('.control-bar .metadata-basic').append('<div class="metadata-toggle">' + metadataToggleLabelMore + '</div>');
-        if (Cookies.get('tx-dlf-allmetadata') === 'true') {
-            $('.control-bar .metadata-basic').addClass('all-metadata').find('.metadata-toggle').text(metadataToggleLabelLess);
-            $('.control-bar .metadata-basic').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').show();
-        }
-        $('.metadata-toggle').on('click', function () {
-            if (!$('.control-bar .metadata-basic').hasClass('all-metadata')) {
-                Cookies.set('tx-dlf-allmetadata', 'true', { sameSite: 'lax' });
-                $(this).text(metadataToggleLabelLess);
-            } else {
-                Cookies.remove('tx-dlf-allmetadata');
-                $(this).text(metadataToggleLabelMore);
-            }
-            $('.control-bar .metadata-basic').toggleClass('all-metadata').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').slideToggle();
-
-        });
-    }
-
-    // extract title information from the meta data and add it to the top of the sidebar
-    ($('.tx-dlf-metadata dl.tx-dlf-metadata-titledata dd.tx-dlf-title')[0]) && $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().find('dd.tx-dlf-title').text() + '</h2></div>');
-
-    // add a toggle function for sub meta data "(+ n more)"
-    $('dl.tx-dlf-metadata-titledata dd > dl').each(function () { $(this).parent().addClass('has-submetadata').prepend('<span class="submetadata-toggle">+' + $(this).find('dt').length + (($('html[lang^="de"]')[0]) ? ' weitere' : ' more') + '</span>').prev().addClass('has-submetadata'); });
-    $('.submetadata-toggle').on('click', function () { $(this).parent().toggleClass('open'); });
-
-    // insert dd tag between two dt tags if necessary
-    $('dl.tx-dlf-metadata-titledata dt').each(function () { $(this).after($(this).next('dt').length > 0 && $('<dd/>')) });
-
     // active toggle for submenus
-    $('.document-functions li.submenu > a').on(mobileEvent, function (event) {
+    $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
         return false;
     });
 
     // secondary nav toggle
-    $('nav .nav-toggle').on(mobileEvent, function (event) {
+    $('nav .nav-toggle').on(mobileEvent, function(event) {
         $(this).toggleClass('active');
         $('nav .viewer-nav').toggleClass('open');
     });
 
     // calendar dropdowns
-    $('.calendar-view .contains-issues').on(mobileEvent, function (event) {
+    $('.calendar-view .contains-issues').on(mobileEvent, function(event) {
         $('.calendar-view table td.open').not($(this).parent()).removeClass('open');
         $(this).parent().toggleClass('open');
     });
@@ -85,18 +48,18 @@ $(document).ready(function () {
 
     // Inject view switch functions for calendar/list view (initial show calendar)
     $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a.select-calendar-view, .tx-dfgviewer-newspaper-calendar .calendar-view').addClass('active');
-    $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a').on(mobileEvent, function (event) {
-        if (!$(this).hasClass('active')) {
-            var targetElement = '.' + $(this).attr('class').replace('select-', '');
-            $('.tx-dfgviewer-newspaper-calendar .active').removeClass('active');
-            $(this).addClass('active');
-            $(targetElement).addClass('active');
+    $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a').on(mobileEvent, function(event) {
+        if(!$(this).hasClass('active')) {
+        var targetElement = '.'+$(this).attr('class').replace('select-','');
+        $('.tx-dfgviewer-newspaper-calendar .active').removeClass('active');
+        $(this).addClass('active');
+        $(targetElement).addClass('active');
         }
     });
 
     // Avoid broken image display if METS definitions are wrong
-    $('.provider img').each(function () {
-        if ((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0) || this.readyState == 'uninitialized') {
+    $('.provider img').each(function() {
+        if((typeof this.naturalWidth != "undefined" && this.naturalWidth == 0 ) || this.readyState == 'uninitialized' ) {
             $(this).parents('.document-functions').addClass('missing-provider-image');
         }
     });
@@ -115,8 +78,8 @@ $(document).ready(function () {
     // Shorten mobile meta title
     shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
     shortenMobileMetaTitle = shortenMobileMetaElement.text();
-    if (shortenMobileMetaTitle.length > 140) {
-        shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0, 140) + '...';
+    if(shortenMobileMetaTitle.length > 140) {
+        shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0,140) + '...';
         shortenMobileMetaElement.text(shortenMobileMetaTitle);
     }
 
@@ -140,8 +103,8 @@ $(document).ready(function () {
     }
 
     // enable click on fullscreen button
-    $('a.fullscreen').on(mobileEvent, function () {
-        if ($('body.fullscreen')[0]) {
+    $('a.fullscreen').on(mobileEvent, function() {
+        if($('body.fullscreen')[0]) {
             exitFullscreen();
         } else {
             enterFullscreen();
@@ -152,7 +115,7 @@ $(document).ready(function () {
     if (Modernizr.touchevents) {
         $('.fwds, .backs')
             .on('touchstart', function () {
-                $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
+                $(this).addClass('over');
                 triggeredElement = $(this);
                 setTimeout(function () {
                     triggeredElement.addClass('enable-touchevent');
@@ -164,7 +127,7 @@ $(document).ready(function () {
         $('body').on('touchstart', function (event) {
             target = $(event.target);
             if (!target.closest('.page-control')[0]) {
-                $('.fwds, .backs').removeClass('over enable-touchevent').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').removeClass('over');
+                $('.fwds, .backs').removeClass('over enable-touchevent');
                 localStorage.clear();
             }
         });
@@ -175,25 +138,19 @@ $(document).ready(function () {
     } else {
         $('.fwds, .backs')
             .on('mouseenter', function () {
-                $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
+                $(this).addClass('over');
             })
             .on('mouseleave', function () {
-                $(this).removeClass('over').siblings('.measureBacks, .measureFwds').removeClass('over');
+                $(this).removeClass('over');
             })
             .on('click', function () {
                 localStorage.txDlfFromPage = $(this).attr('class').split(' ')[0];
-                showLoadingAnimation();
             });
         if (localStorage.txDlfFromPage) {
             $('.' + localStorage.txDlfFromPage).addClass('no-transition over');
             localStorage.clear();
         }
     }
-
-    $('.measureBacks, .measureFwds').on('click', function (evt)
-    {
-        showLoadingAnimation();
-    });
 
     // hide outdated browser hint, if cookie was found
     if (Cookies.get('tx-dlf-pageview-hidebrowseralert') === 'true') {
@@ -209,14 +166,14 @@ $(document).ready(function () {
 
 });
 
-$(document).keyup(function (e) {
+$(document).keyup(function(e) {
 
     // Check if ESC key is pressed. Then end fullscreen mode or close SRU form.
     if (e.keyCode == 27) {
-        if ($('body.fullscreen')[0]) {
+        if($('body.fullscreen')[0]) {
             return exitFullscreen();
         }
-        if ($('.document-functions .search.open')[0]) {
+        if($('.document-functions .search.open')[0]) {
             $('.document-functions .search').removeClass('open');
         }
     }
@@ -229,7 +186,7 @@ $(document).keyup(function (e) {
 
 // Activate fullscreen mode and set corresponding cookie
 function enterFullscreen() {
-    setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 220);
+    setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").addClass('fullscreen');
     $('a.fullscreen').addClass('active');
     Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true', { sameSite: 'lax' });
@@ -237,20 +194,16 @@ function enterFullscreen() {
 
 // Exit fullscreen mode and drop cookie
 function exitFullscreen() {
-    setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 220);
+    setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").removeClass('fullscreen');
     $('a.fullscreen').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
 // hide warning about outdated browser and save decision to cookie
-function hideBrowserAlert() {
+function hideBrowserAlert(){
 
     $('#browser-hint').addClass('hidden');
     Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
 
-}
-
-function showLoadingAnimation() {
-    $("#overlay").fadeIn(300);
 }
