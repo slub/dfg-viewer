@@ -16,49 +16,46 @@
             </div>
         </div>
 
-        <f:if condition="{gp-pagegrid} == 1">
+        <div class="document-functions">
+            <f:render partial="Provider" arguments="{_all}"/>
+            <f:render partial="Submenu" arguments="{_all}"/>
+        </div>
+
+        <f:if condition="{is3dObject} == 1">
             <f:then>
-                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_embedded3dviewer"/>
             </f:then>
             <f:else>
-                <f:if condition="{isNewspaper} == 'newspaper_anchor'">
+                <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
-                        <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspaperyears" />
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
                     </f:then>
                     <f:else>
-                        <f:if condition="{isNewspaper} == 'newspaper_year'">
+                        <f:if condition="{isNewspaper} == 'newspaper_anchor'">
                             <f:then>
-                                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
+                                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspaperyears" />
                             </f:then>
                             <f:else>
-                                <f:if condition="{isNewspaper} == 'newspaper_issue'">
-                                    <!-- it's a newspaper! -->
+                                <f:if condition="{isNewspaper} == 'newspaper_year'">
+                                    <f:then>
+                                        <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
+                                    </f:then>
+                                    <f:else>
+                                        <f:if condition="{isNewspaper} == 'newspaper_issue'">
+                                            <!-- it's a newspaper! -->
+                                        </f:if>
+                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
+                                        <div class="fulltext-container">
+                                            <div id="tx-dlf-fulltextselection"></div>
+                                        </div>
+                                    </f:else>
                                 </f:if>
-                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
-                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_view3d" />
-                                <div class="fulltext-container">
-                                    <div id="tx-dlf-fulltextselection"></div>
-                                </div>
                             </f:else>
                         </f:if>
                     </f:else>
                 </f:if>
-            </f:else>
-        </f:if>
 
-        <div class="document-functions">
-            <f:render partial="Provider" arguments="{_all}"/>
-
-            <f:if condition="{3d}">
-                <f:else>
-                    <f:render partial="Submenu" arguments="{_all}"/>
-                </f:else>
-            </f:if>
-        </div>
-
-        <f:if condition="{3d}">
-            <f:else>
                 <div class="view-functions">
                     <f:if condition="{gp-pagegrid} == 1">
                         <f:else>

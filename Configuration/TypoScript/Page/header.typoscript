@@ -7,8 +7,6 @@ page {
   includeCSS {
     style = EXT:dfgviewer/Resources/Public/Css/webStyles.css
     highlight = EXT:dfgviewer/Resources/Public/JavaScript/Highlight/styles/magula.css
-    3DViewer = EXT:dfgviewer/Resources/Public/Css/3DViewer/main.css
-    3DViewerSpinner = EXT:dfgviewer/Resources/Public/Css/3DViewer/spinner.css
   }
   includeJSFooterlibs {
     jQuery = EXT:dfgviewer/Resources/Public/JavaScript/jQuery/jquery-3.6.0.min.js

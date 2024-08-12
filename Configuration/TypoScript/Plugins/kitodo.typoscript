@@ -67,15 +67,10 @@ plugin.tx_dlf_pageview {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# 3D objects view
+# embedded 3D viewer
 # --------------------------------------------------------------------------------------------------------------------
-plugin.tx_dlf_view3d < tt_content.list.20.dlf_view3d
-plugin.tx_dlf_view3d {
-  pages = {$config.storagePid}
-  excludeOther = 0
-  features =
-  elementId = tx-dfgviewer-3d-view
-  fileGrpImages = THUMBS,DEFAULT
+plugin.tx_dlf_embedded3dviewer < tt_content.list.20.dlf_embedded3dviewer
+plugin.tx_dlf_embedded3dviewer {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -159,6 +154,7 @@ lib.kitodo.navigation.viewfunction {
 # fulltextdownloadtool
 # imagedownloadtool
 # imagemanipulationtool
+# modeldownloadtool
 # pdfdownloadtool
 # searchindocumenttool
 
@@ -166,6 +162,14 @@ plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
 plugin.tx_dlf_toolbox {
     settings {
 #        fileGrpsImageDownload = MIN,DEFAULT,MAX
+    }
+}
+
+plugin.tx_dlf_modeldownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_modeldownloadtool {
+    settings {
+        fileGrpsModelDownload = DEFAULT
+        tools = modeldownloadtool
     }
 }
 
@@ -204,9 +208,18 @@ plugin.tx_dlf_audioplayer {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
+# 3d object
+# --------------------------------------------------------------------------------------------------------------------
+[getDocumentType({$config.storagePid}) == "object"]
+    page.10.variables {
+        is3dObject = TEXT
+        is3dObject.value = 1
+    }
+[END]
+
+# --------------------------------------------------------------------------------------------------------------------
 # newspaper navigation
 # --------------------------------------------------------------------------------------------------------------------
-
 [getDocumentType({$config.storagePid}) == "ephemera" or getDocumentType({$config.storagePid}) == "newspaper"]
 page.10.variables {
   isNewspaper = TEXT
