@@ -76,101 +76,113 @@
             <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
         </ul>
     </li>
-    <li class="submenu downloads">
-        <a href="#" id="tab-downloads" title="Downloads">Downloads</a>
-        <ul>
-            <f:cObject typoscriptObjectPath="plugin.tx_dlf_pdfdownloadtool" />
-        </ul>
-    </li>
-    <li class="doublepage">
-        <f:if condition="{gp-double} == 1">
-            <f:then>
-                <f:link.page pageUid="{kitodoPageView}"
-                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
-                    class="tx-dlf-navigation-doubleOff"
-                    title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
-                    <f:translate key="double.singlePageView" extensionName="dfgviewer" />
-                </f:link.page>
-                <f:link.page pageUid="{kitodoPageView}"
-                    additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
-                    class="tx-dlf-navigation-doublePlusOne"
-                    title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span>
-                        <f:translate key="double.RectoVerso" extensionName="dfgviewer" />
-                    </span></f:link.page>
-            </f:then>
-            <f:else>
-                <f:link.page pageUid="{kitodoPageView}"
-                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
-                    class="tx-dlf-navigation-doubleOn"
-                    title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}">
-                    <f:translate key="double.doublePageView" extensionName="dfgviewer" />
-                </f:link.page>
-            </f:else>
-        </f:if>
-    </li>
-    <f:if
-        condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
-        <li class="fulltext">
-            <f:if condition="{gp-double} == 1">
-                <f:then>
-                    <span class="select switchoff" id="tx-dlf-tools-fulltext"
-                        title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}">
-                        <f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />
-                    </span>
-                </f:then>
-                <f:else>
-                    <f:if condition="{gp-pagegrid} == 1">
-                        <f:then>
-                            <span class="select switchoff" id="tx-dlf-tools-fulltext"
-                                title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}">
-                                <f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />
-                            </span>
-                        </f:then>
-                        <f:else>
-                            <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
-                        </f:else>
-                    </f:if>
-                </f:else>
-            </f:if>
-        </li>
-    </f:if>
-    <li class="grid">
-        <f:if
-            condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
-            <f:then>
-                <f:if condition="{gp-pagegrid} == 1">
+    <f:if condition="{is3dObject} == 1">
+        <f:then>
+            <li class="submenu downloads">
+                <a href="#" id="tab-download-model" title="Downloads">Downloads</a>
+                <ul>
+                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_modeldownloadtool"/>
+                </ul>
+            </li>
+        </f:then>
+        <f:else>
+            <li class="submenu downloads">
+                <a href="#" id="tab-downloads" title="Downloads">Downloads</a>
+                <ul>
+                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_pdfdownloadtool" />
+                </ul>
+            </li>
+            <li class="doublepage">
+                <f:if condition="{gp-double} == 1">
                     <f:then>
                         <f:link.page pageUid="{kitodoPageView}"
                             additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
-                            class="active"
+                            class="tx-dlf-navigation-doubleOff"
                             title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
-                            <f:translate key='double.singlePageView' extensionName='dfgviewer' />
+                            <f:translate key="double.singlePageView" extensionName="dfgviewer" />
                         </f:link.page>
+                        <f:link.page pageUid="{kitodoPageView}"
+                            additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                            class="tx-dlf-navigation-doublePlusOne"
+                            title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span>
+                                <f:translate key="double.RectoVerso" extensionName="dfgviewer" />
+                            </span></f:link.page>
                     </f:then>
                     <f:else>
                         <f:link.page pageUid="{kitodoPageView}"
-                            additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
-                            title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
-                            <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                            additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                            class="tx-dlf-navigation-doubleOn"
+                            title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}">
+                            <f:translate key="double.doublePageView" extensionName="dfgviewer" />
                         </f:link.page>
                     </f:else>
                 </f:if>
-            </f:then>
-            <f:else>
-                <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
-                    <f:translate key='gridpage.preview' extensionName='dfgviewer' />
-                </span>
-            </f:else>
-        </f:if>
-    </li>
-    <f:if
-        condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
-        <f:then>
-            <li class="submenu search">
-                <a href="#" title="Search">Search</a>
-                <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
             </li>
-        </f:then>
+            <f:if
+                condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+                <li class="fulltext">
+                    <f:if condition="{gp-double} == 1">
+                        <f:then>
+                            <span class="select switchoff" id="tx-dlf-tools-fulltext"
+                                title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}">
+                                <f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />
+                            </span>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{gp-pagegrid} == 1">
+                                <f:then>
+                                    <span class="select switchoff" id="tx-dlf-tools-fulltext"
+                                        title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}">
+                                        <f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />
+                                    </span>
+                                </f:then>
+                                <f:else>
+                                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
+                                </f:else>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </li>
+            </f:if>
+            <li class="grid">
+                <f:if
+                    condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+                    <f:then>
+                        <f:if condition="{gp-pagegrid} == 1">
+                            <f:then>
+                                <f:link.page pageUid="{kitodoPageView}"
+                                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
+                                    class="active"
+                                    title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
+                                    <f:translate key='double.singlePageView' extensionName='dfgviewer' />
+                                </f:link.page>
+                            </f:then>
+                            <f:else>
+                                <f:link.page pageUid="{kitodoPageView}"
+                                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
+                                    title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
+                                    <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                                </f:link.page>
+                            </f:else>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
+                            <f:translate key='gridpage.preview' extensionName='dfgviewer' />
+                        </span>
+                    </f:else>
+                </f:if>
+            </li>
+            <f:if
+                condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
+                <f:then>
+                    <li class="submenu search">
+                        <a href="#" title="Search">Search</a>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
+                    </li>
+                </f:then>
+            </f:if>
+        </f:else>
     </f:if>
 </ul>
 
