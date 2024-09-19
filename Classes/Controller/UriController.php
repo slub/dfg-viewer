@@ -52,10 +52,9 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
         if ($this->isDocMissingOrEmpty()) {
             // Quit without doing anything if required variables are not set.
             return;
-        } else {
-            $this->setPage();
-            $this->requestData['double'] = MathUtility::forceIntegerInRange($this->requestData['double'], 0, 1, 0);
         }
+
+        $this->setPage();
 
         $doc = $this->document->getCurrentDocument();
 
