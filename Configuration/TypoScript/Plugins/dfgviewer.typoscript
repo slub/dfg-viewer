@@ -4,7 +4,7 @@
 
 plugin.tx_dfgviewer {
     persistence {
-        storagePid = {$config.storagePid}
+        storagePid = {$plugin.tx_dlf.persistence.storagePid}
     }
 	view {
 		partialRootPaths {
