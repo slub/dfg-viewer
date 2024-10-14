@@ -17,8 +17,29 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout repository and submodules
+            - name: Checkout repository
               uses: actions/checkout@v4
+
+            - name: Checkout DFG-Viewer repository
+              uses: actions/checkout@v4
+              with:
+                  repository: ${{ env.GIT_OWNER }}/${{ env.GIT_REPO }}
+                  ref: ${{ env.GIT_REF }}
+                  path: ./Docker/extensions/dfg-viewer
+
+            - name: Checkout Kitodo.Presentation repository
+              uses: actions/checkout@v4
+              with:
+                repository: ${{ env.GIT_OWNER }}/kitodo-presentation
+                ref: fix-get-document-type
+                path: ./Docker/extensions/kitodo-presentation
+
+            - name: Checkout SLUB Digital Collections repository
+              uses: actions/checkout@v4
+              with:
+                  repository: ${{ env.GIT_OWNER }}/slub_digitalcollections
+                  ref: dev-main
+                  path: ./Docker/extensions/slub_digitalcollections
 
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
