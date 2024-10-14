@@ -58,13 +58,13 @@ RUN cd /var/www/html && \
     touch ./dfg-viewer/public/FIRST_INSTALL && \
     chown -R www-data:www-data ./dfg-viewer
 
-WORKDIR /var/www/html/dfg-viewer   
+WORKDIR /var/www/html/dfg-viewer
 
-# Configure Apache  
+# Configure Apache
 COPY apache2-dfg-viewer.conf /etc/apache2/sites-available/dfg-viewer.conf
 RUN a2ensite dfg-viewer.conf && \
 # Disable default behaviour
-    a2dissite 000-default.conf 
+    a2dissite 000-default.conf
 
 # Install extension path
 RUN mkdir -p /var/www/extensions/ && \
@@ -72,7 +72,10 @@ RUN mkdir -p /var/www/extensions/ && \
 
 COPY extensions /var/www/extensions
 
-# Install scripts    
+# Sites configuration
+COPY sites/dfgviewer/config.yaml ./sites/dfgviewer/config.yaml
+
+# Install scripts
 COPY startup.sh /usr/bin/
 COPY wait-for-it.sh /wait-for-it.sh
 
@@ -81,7 +84,7 @@ ENV DB_PORT=3306
 ENV DB_NAME=typo3
 ENV DB_USER=typo3
 ENV DB_PASSWORD=password
-ENV T3_USER=admin   
+ENV T3_USER=admin
 ENV T3_PASSWORD=adminslub
 
 RUN chmod +x /usr/bin/startup.sh && \
