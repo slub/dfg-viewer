@@ -73,7 +73,7 @@ RUN mkdir -p /var/www/extensions/ && \
 COPY extensions /var/www/extensions
 
 # Sites configuration
-COPY sites/dfgviewer/config.yaml ./sites/dfgviewer/config.yaml
+COPY site/dfgviewer/config.yaml ./site/dfgviewer/config.yaml
 
 # Install scripts
 COPY startup.sh /usr/bin/
