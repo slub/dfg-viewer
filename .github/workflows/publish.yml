@@ -62,13 +62,10 @@ jobs:
               with:
                   context: ./Docker
                   push: true
-                  tags: ${{ env.REGISTRY_PATH }}/dfg-viewer:${{ env.IMAGE_TAG }}
+                  tags: ${{ env.REGISTRY_PATH }}:${{ env.IMAGE_TAG }}
                   build-args: |
                       BUILD_DATE=${{ env.build_date }}
                       VCS_REF=${{ env.vcs_ref }}
                       VCS_URL=https://github.com/${{ env.GIT_OWNER }}/${{ env.GIT_REPO }}/tree/${{ env.GIT_REF }}/
-                      BUILDER_TYPE=git
-                      BUILDER_GIT_COMMIT=${{ env.GIT_REF }}
-                      BUILDER_GIT_SOURCE_URL=https://github.com/${{ env.GIT_OWNER }}/${{ env.GIT_REPO }}/
                   cache-from: type=gha,scope=${{ env.vcs_ref }}-image
                   cache-to: type=gha,mode=max,scope=${{ env.vcs_ref }}-image
