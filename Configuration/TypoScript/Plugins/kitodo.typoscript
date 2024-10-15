@@ -79,7 +79,7 @@ plugin.tx_dlf_embedded3dviewer {
 plugin.tx_dlf_pagegrid < tt_content.list.20.dlf_pagegrid
 plugin.tx_dlf_pagegrid {
     settings {
-        targetPid = {$config.kitodoPageView}
+        targetPid = {$plugin.tx_dfgviewer.kitodoPageView}
         placeholder = EXT:dfgviewer/Resources/Public/Images/GridPlaceHolder.jpg
         paginate {
             itemsPerPage = 24
@@ -100,7 +100,7 @@ plugin.tx_dlf_pagegrid {
 plugin.tx_dlf_tableofcontents < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_tableofcontents {
     settings {
-        targetPid = {$config.kitodoPageView}
+        targetPid = {$plugin.tx_dfgviewer.kitodoPageView}
         menuConf {
             expAll = 1
         }

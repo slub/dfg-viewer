@@ -4194,9 +4194,9 @@
 				<field index="include_static_file">EXT:fluid_styled_content/Configuration/TypoScript/,EXT:dlf/Configuration/TypoScript/,EXT:dfgviewer/Configuration/TypoScript</field>
 				<field index="constants"># Please set at least the following constants via the TypoScript Constant Editor
 plugin.tx_dlf.persistence.storagePid = 3
-config.rootPid = 1
-config.headNavPid = 0
-config.kitodoPageView = 2</field>
+plugin.tx_dfgviewer.rootPid = 1
+plugin.tx_dfgviewer.headNavPid = 0
+plugin.tx_dfgviewer.kitodoPageView = 2</field>
 				<field index="config"></field>
 				<field index="nextLevel"></field>
 				<field index="basedOn"></field>
