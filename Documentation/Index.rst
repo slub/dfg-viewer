@@ -10,9 +10,9 @@ dfgviewer* extension.
 Installation
 ============
 
-The current release 6.0 may be used with TYPO3 9.5 LTS or TYPO3 10.4 LTS.
+The current release 6.1 may be used with TYPO3 10.4 or TYPO3 11.5 LTS.
 
-The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_. Before you can start to
+The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_ and `SLUB DigitalCollections (slub_digitalcollections) <https://github.com/slub/slub_digitalcollections>`. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
 both extensions. The installation is only supported via Composer.
 Kitodo.Presentation will be installed and configured automatically.
@@ -20,8 +20,7 @@ Kitodo.Presentation will be installed and configured automatically.
 System Requirements
 -------------------
 
-You need a webserver stack with Apache2 or Ngnix, PHP >= 7.3 and MySQL / MariaDB.
-Debian 10 (buster) is known to work with Kitodo.Presentation 3.2 and DFG-Viewer 5.2.
+You need a webserver stack with Apache2 or Nginx, PHP >= 7.4 and MySQL / MariaDB.
 
 We recommend at least:
 
@@ -29,10 +28,10 @@ We recommend at least:
 * Memory: 2 GB
 * Disk: 20 GB
 
-Install a fresh TYPO3 9.5 LTS
+Install a fresh TYPO3 11.5 LTS
 -----------------------------
 
-To install a fresh TYPO3 9.5 system, try the following installation procedure with composer::
+To install a fresh TYPO3 11.5 system, try the following installation procedure with composer::
 
     # Assuming the following settings:
     #   * the installation directory is /var/www/dfgviewer
@@ -43,7 +42,7 @@ To install a fresh TYPO3 9.5 system, try the following installation procedure wi
     # remove /var/www/dfgviewer if it already exist or make sure it's really empty by ls -la dfgviewer/
     rm -r dfgviewer/
     # load full TYPO3 via composer
-    composer create-project typo3/cms-base-distribution:^9.5 dfgviewer
+    composer create-project typo3/cms-base-distribution:^11 dfgviewer
     # Install the TYPO3 system with the TYPO3-console
     cd dfgviewer/
     ./vendor/bin/typo3cms install:setup
@@ -93,17 +92,18 @@ Install DFG-Viewer and Kitodo.Presentation via Composer
 Composer commands::
 
     # make sure you haven't set the platform php version to 7.2
-    composer config platform.php 7.3
+    composer config platform.php 7.4
     # install DFG-Viewer extension
-    composer require slub/dfgviewer:^6.0
+    composer require slub/dfgviewer:^6.1
 
-This will install the DFG-Viewer 6.0 extension and Kitodo.Presentation 4.0 from
+This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 4.0 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
 Install the Extension via extension manager or CLI::
 
     ./vendor/bin/typo3 extension:activate dlf
     ./vendor/bin/typo3 extension:activate dfgviewer
+    ./vendor/bin/typo3 extension:activate slub_digitalcollections
 
 During the installation, three pages will be created: a root page, the "Kitodo
 Configuration" folder and the viewer itself.
