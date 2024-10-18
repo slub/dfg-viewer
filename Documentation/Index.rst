@@ -82,7 +82,7 @@ You can set this easily with the TYPO3-console::
 
     ./vendor/bin/typo3cms configuration:set 'FE/pageNotFoundOnCHashError' 0
 
-Now you have a working TYPO3 9.5 LTS installation and you can continue with composer
+Now you have a working TYPO3 11.5 LTS installation and you can continue with composer
 to install DFG-Viewer extension.
 
 
@@ -96,7 +96,7 @@ Composer commands::
     # install DFG-Viewer extension
     composer require slub/dfgviewer:^6.1
 
-This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 4.0 from
+This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 5.0 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
 Install the Extension via extension manager or CLI::
