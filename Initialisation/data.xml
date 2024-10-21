@@ -159,8 +159,7 @@
 					<title>Title</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:32" type="array">
 							<id>32</id>
@@ -183,8 +182,7 @@
 					<title>Author</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:36" type="array">
 							<id>36</id>
@@ -243,8 +241,7 @@
 					<title>Settlement</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:46" type="array">
 							<id>46</id>
@@ -275,8 +272,7 @@
 					<title>Period</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:44" type="array">
 							<id>44</id>
@@ -323,8 +319,7 @@
 					<title>Creation Date</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:42" type="array">
 							<id>42</id>
@@ -347,8 +342,7 @@
 					<title>Year of Publication (Parent)</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:38" type="array">
 							<id>38</id>
@@ -379,8 +373,7 @@
 					<title>Author (Parent)</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:34" type="array">
 							<id>34</id>
@@ -411,8 +404,7 @@
 					<title>Parent Title</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:30" type="array">
 							<id>30</id>
@@ -443,8 +435,7 @@
 					<title>Context</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:28" type="array">
 							<id>28</id>
@@ -617,8 +608,7 @@
 					<title>VD16</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:7" type="array">
 							<id>7</id>
@@ -649,8 +639,7 @@
 					<title>VD17</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:5" type="array">
 							<id>5</id>
@@ -669,8 +658,7 @@
 					<title>Document Type</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:26" type="array">
 							<id>26</id>
@@ -685,8 +673,7 @@
 					<title>Publication Run</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:25" type="array">
 							<id>25</id>
@@ -705,8 +692,7 @@
 					<title>Place of Publication (Parent)</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:23" type="array">
 							<id>23</id>
@@ -725,8 +711,7 @@
 					<title>Repository</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:21" type="array">
 							<id>21</id>
@@ -749,8 +734,7 @@
 					<title>Shelfmark</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:19" type="array">
 							<id>19</id>
@@ -773,8 +757,7 @@
 					<title>Volume</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:17" type="array">
 							<id>17</id>
@@ -793,8 +776,7 @@
 					<title>Issue</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:15" type="array">
 							<id>15</id>
@@ -813,8 +795,7 @@
 					<title>Material</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:13" type="array">
 							<id>13</id>
@@ -833,8 +814,7 @@
 					<title>Leaves Count</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:11" type="array">
 							<id>11</id>
@@ -853,8 +833,7 @@
 					<title>Physical Form</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:9" type="array">
 							<id>9</id>
@@ -873,8 +852,8 @@
 					<title>Place of Publication</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>
+                            <table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:3" type="array">
 							<id>3</id>
@@ -893,8 +872,7 @@
 					<title>Year of Publication</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_metadata:40" type="array">
 							<id>40</id>
@@ -1520,8 +1498,7 @@
 					<title>Act</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:173" type="array">
 							<id>173</id>
@@ -1536,8 +1513,7 @@
 					<title>Additional</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:157" type="array">
 							<id>157</id>
@@ -1552,8 +1528,7 @@
 					<title>Address</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:167" type="array">
 							<id>167</id>
@@ -1582,8 +1557,7 @@
 					<title>Album</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:171" type="array">
 							<id>171</id>
@@ -1612,8 +1586,7 @@
 					<title>Annotation</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:168" type="array">
 							<id>168</id>
@@ -1635,8 +1608,7 @@
 					<title>Article</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:165" type="array">
 							<id>165</id>
@@ -1665,8 +1637,7 @@
 					<title>Atlas</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:163" type="array">
 							<id>163</id>
@@ -1688,8 +1659,7 @@
 					<title>Bachelor Thesis</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:160" type="array">
 							<id>160</id>
@@ -1711,8 +1681,7 @@
 					<title>Back Cover</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:36" type="array">
 							<id>36</id>
@@ -1774,8 +1743,7 @@
 					<title>Binding</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:124" type="array">
 							<id>124</id>
@@ -1797,8 +1765,7 @@
 					<title>Bookplate</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:117" type="array">
 							<id>117</id>
@@ -1834,8 +1801,7 @@
 					<title>Bundle</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:148" type="array">
 							<id>148</id>
@@ -1850,8 +1816,7 @@
 					<title>Cartulary</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:84" type="array">
 							<id>84</id>
@@ -1866,8 +1831,7 @@
 					<title>Chapter</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:87" type="array">
 							<id>87</id>
@@ -1882,8 +1846,7 @@
 					<title>Charter</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:14" type="array">
 							<id>14</id>
@@ -1898,8 +1861,7 @@
 					<title>Collation</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:152" type="array">
 							<id>152</id>
@@ -1914,8 +1876,7 @@
 					<title>Colophon</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:85" type="array">
 							<id>85</id>
@@ -1930,8 +1891,7 @@
 					<title>Contained Work</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:120" type="array">
 							<id>120</id>
@@ -1946,8 +1906,7 @@
 					<title>Corrigenda</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:118" type="array">
 							<id>118</id>
@@ -1962,8 +1921,7 @@
 					<title>Cover</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:136" type="array">
 							<id>136</id>
@@ -1985,8 +1943,7 @@
 					<title>Day</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:19" type="array">
 							<id>19</id>
@@ -2008,8 +1965,7 @@
 					<title>Dedication</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:3" type="array">
 							<id>3</id>
@@ -2024,8 +1980,7 @@
 					<title>Diploma Thesis</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:133" type="array">
 							<id>133</id>
@@ -2047,8 +2002,7 @@
 					<title>Doctoral Thesis</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:130" type="array">
 							<id>130</id>
@@ -2063,8 +2017,7 @@
 					<title>Document</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:129" type="array">
 							<id>129</id>
@@ -2100,8 +2053,7 @@
 					<title>Dossier</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:127" type="array">
 							<id>127</id>
@@ -2123,8 +2075,7 @@
 					<title>Edge</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:32" type="array">
 							<id>32</id>
@@ -2153,8 +2104,7 @@
 					<title>Endsheet</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:5" type="array">
 							<id>5</id>
@@ -2169,8 +2119,7 @@
 					<title>Engraved Titlepage</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:83" type="array">
 							<id>83</id>
@@ -2192,8 +2141,7 @@
 					<title>Entry</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:123" type="array">
 							<id>123</id>
@@ -2222,8 +2170,7 @@
 					<title>Fascicle</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:115" type="array">
 							<id>115</id>
@@ -2245,8 +2192,7 @@
 					<title>File</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:138" type="array">
 							<id>138</id>
@@ -2268,8 +2214,7 @@
 					<title>Folder</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:75" type="array">
 							<id>75</id>
@@ -2305,8 +2250,7 @@
 					<title>Fragment</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:108" type="array">
 							<id>108</id>
@@ -2321,8 +2265,7 @@
 					<title>Front Cover</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:8" type="array">
 							<id>8</id>
@@ -2344,8 +2287,7 @@
 					<title>Ground Plan</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:103" type="array">
 							<id>103</id>
@@ -2374,8 +2316,7 @@
 					<title>Habilitation Thesis</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:101" type="array">
 							<id>101</id>
@@ -2411,8 +2352,7 @@
 					<title>Illustration</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:98" type="array">
 							<id>98</id>
@@ -2427,8 +2367,7 @@
 					<title>Image</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:154" type="array">
 							<id>154</id>
@@ -2450,8 +2389,7 @@
 					<title>Imprint</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:96" type="array">
 							<id>96</id>
@@ -2466,8 +2404,7 @@
 					<title>Index</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:40" type="array">
 							<id>40</id>
@@ -2489,8 +2426,7 @@
 					<title>Initial Decoration</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:91" type="array">
 							<id>91</id>
@@ -2512,8 +2448,7 @@
 					<title>Inventory</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:180" type="array">
 							<id>180</id>
@@ -2532,8 +2467,7 @@
 					<title>Issue</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:162" type="array">
 							<id>162</id>
@@ -2555,8 +2489,7 @@
 					<title>Judgement</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:13" type="array">
 							<id>13</id>
@@ -2606,8 +2539,7 @@
 					<title>Leaflet</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:113" type="array">
 							<id>113</id>
@@ -2622,8 +2554,7 @@
 					<title>Lecture</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:6" type="array">
 							<id>6</id>
@@ -2638,8 +2569,7 @@
 					<title>Letter</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:150" type="array">
 							<id>150</id>
@@ -2654,8 +2584,7 @@
 					<title>Magister Thesis</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:78" type="array">
 							<id>78</id>
@@ -2677,8 +2606,7 @@
 					<title>Manuscript</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:100" type="array">
 							<id>100</id>
@@ -2693,8 +2621,7 @@
 					<title>Map</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:86" type="array">
 							<id>86</id>
@@ -2716,8 +2643,7 @@
 					<title>Master Thesis</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:73" type="array">
 							<id>73</id>
@@ -2753,8 +2679,7 @@
 					<title>Monograph</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:69" type="array">
 							<id>69</id>
@@ -2776,8 +2701,7 @@
 					<title>Month</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:71" type="array">
 							<id>71</id>
@@ -2792,8 +2716,7 @@
 					<title>Multivolume Work</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:72" type="array">
 							<id>72</id>
@@ -2808,8 +2731,7 @@
 					<title>Musical Notation</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:65" type="array">
 							<id>65</id>
@@ -2831,8 +2753,7 @@
 					<title>Newspaper</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:1" type="array">
 							<id>1</id>
@@ -2847,8 +2768,7 @@
 					<title>Note</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:170" type="array">
 							<id>170</id>
@@ -2863,8 +2783,7 @@
 					<title>Official Notification</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:61" type="array">
 							<id>61</id>
@@ -2886,8 +2805,7 @@
 					<title>Ornament</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:149" type="array">
 							<id>149</id>
@@ -2902,8 +2820,7 @@
 					<title>Paper</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:58" type="array">
 							<id>58</id>
@@ -2925,8 +2842,7 @@
 					<title>Paste Down</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:28" type="array">
 							<id>28</id>
@@ -2948,8 +2864,7 @@
 					<title>Periodical</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:56" type="array">
 							<id>56</id>
@@ -2964,8 +2879,7 @@
 					<title>Photograph</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:110" type="array">
 							<id>110</id>
@@ -2994,8 +2908,7 @@
 					<title>Plan</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:51" type="array">
 							<id>51</id>
@@ -3010,8 +2923,7 @@
 					<title>Poster</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:53" type="array">
 							<id>53</id>
@@ -3026,8 +2938,7 @@
 					<title>Preface</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:4" type="array">
 							<id>4</id>
@@ -3042,8 +2953,7 @@
 					<title>Preprint</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:9" type="array">
 							<id>9</id>
@@ -3058,8 +2968,7 @@
 					<title>Printed Archives</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:106" type="array">
 							<id>106</id>
@@ -3074,8 +2983,7 @@
 					<title>Printers Mark</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:126" type="array">
 							<id>126</id>
@@ -3090,8 +2998,7 @@
 					<title>Privileges</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:44" type="array">
 							<id>44</id>
@@ -3113,8 +3020,7 @@
 					<title>Proceeding</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:7" type="array">
 							<id>7</id>
@@ -3129,8 +3035,7 @@
 					<title>Provenance</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:155" type="array">
 							<id>155</id>
@@ -3159,8 +3064,7 @@
 					<title>Register</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:39" type="array">
 							<id>39</id>
@@ -3175,8 +3079,7 @@
 					<title>Report</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:156" type="array">
 							<id>156</id>
@@ -3191,8 +3094,7 @@
 					<title>Research Paper</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:111" type="array">
 							<id>111</id>
@@ -3228,8 +3130,7 @@
 					<title>Scheme</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:34" type="array">
 							<id>34</id>
@@ -3251,8 +3152,7 @@
 					<title>Seal</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:29" type="array">
 							<id>29</id>
@@ -3267,8 +3167,7 @@
 					<title>Section</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:177" type="array">
 							<id>177</id>
@@ -3297,8 +3196,7 @@
 					<title>Spine</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:35" type="array">
 							<id>35</id>
@@ -3313,8 +3211,7 @@
 					<title>Stamp</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:25" type="array">
 							<id>25</id>
@@ -3343,8 +3240,7 @@
 					<title>Study</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:24" type="array">
 							<id>24</id>
@@ -3359,8 +3255,7 @@
 					<title>Subinventory</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:178" type="array">
 							<id>178</id>
@@ -3382,8 +3277,7 @@
 					<title>Table</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:22" type="array">
 							<id>22</id>
@@ -3398,8 +3292,7 @@
 					<title>Table of Contents</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:93" type="array">
 							<id>93</id>
@@ -3428,8 +3321,7 @@
 					<title>Text</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:17" type="array">
 							<id>17</id>
@@ -3451,8 +3343,7 @@
 					<title>Titlepage</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:16" type="array">
 							<id>16</id>
@@ -3495,8 +3386,7 @@
 					<title>Verse</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:12" type="array">
 							<id>12</id>
@@ -3511,8 +3401,7 @@
 					<title>Volume</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:158" type="array">
 							<id>158</id>
@@ -3576,8 +3465,7 @@
 					<title>Year of Publication</title>
 					<relations index="rels" type="array">
 						<element index="sys_language:1" type="array">
-							<id>1</id>
-							<table>sys_language</table>
+							<id>0</id>							<table>sys_language</table>
 						</element>
 						<element index="tx_dlf_structures:89" type="array">
 							<id>89</id>
