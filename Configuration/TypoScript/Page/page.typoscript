@@ -6,7 +6,7 @@ page {
   bodyTag = <body class="website">
 
   adminPanelStyles = 0
-  shortcutIcon = EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png
+  shortcutIcon = EXT:dfgviewer/Resources/Public/Icons/Extension.png
 
   10 = FLUIDTEMPLATE
   10 {
