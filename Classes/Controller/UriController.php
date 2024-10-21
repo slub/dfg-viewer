@@ -43,7 +43,7 @@ class UriController extends AbstractController
     /**
      * The main method of the plugin
      *
-     * @return void
+     * @return ResponseInterface
      */
     public function mainAction(): ResponseInterface
     {
