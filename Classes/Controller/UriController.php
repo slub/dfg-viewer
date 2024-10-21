@@ -26,7 +26,8 @@ namespace Slub\Dfgviewer\Controller;
  ***************************************************************/
 
 use Kitodo\Dlf\Common\Helper;
-use TYPO3\CMS\Core\Utility\MathUtility;
+use Kitodo\Dlf\Controller\AbstractController;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -37,21 +38,21 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @subpackage dlf
  * @access public
  */
-class UriController extends \Kitodo\Dlf\Controller\AbstractController
+class UriController extends AbstractController
 {
     /**
      * The main method of the plugin
      *
      * @return void
      */
-    public function mainAction()
+    public function mainAction(): ResponseInterface
     {
         // Load current document.
         $this->loadDocument();
 
         if ($this->isDocMissingOrEmpty()) {
             // Quit without doing anything if required variables are not set.
-            return;
+            return $this->htmlResponse();
         }
 
         $this->setPage();
@@ -84,26 +85,30 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
             }
         }
 
-        // Get persistent identifier of page.
-        $uriPage = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[$this->requestData['page']]]['contentIds'], TRUE);
+        if (isset($this->requestData['page'])) {
+            // Get persistent identifier of page.
+            $uriPage = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[$this->requestData['page']]]['contentIds'], TRUE);
 
-        if (!empty($uriPage)) {
-            $uris = [];
+            if (!empty($uriPage)) {
+                $uris = [];
 
-            foreach ($uriPage as $uri) {
-                if (Helper::isValidHttpUrl($uri)) {
-                    $uris[] = $uri;
-                } elseif (strpos($uri, 'urn:') === 0) {
-                    if (strpos($uri, '/fragment/') === false) {
-                        $uris[] = 'https://nbn-resolving.de/' . $uri;
-                    } else {
-                        $uris[] = 'https://nbn-resolving.org/' . $uri;
+                foreach ($uriPage as $uri) {
+                    if (Helper::isValidHttpUrl($uri)) {
+                        $uris[] = $uri;
+                    } elseif (strpos($uri, 'urn:') === 0) {
+                        if (strpos($uri, '/fragment/') === false) {
+                            $uris[] = 'https://nbn-resolving.de/' . $uri;
+                        } else {
+                            $uris[] = 'https://nbn-resolving.org/' . $uri;
+                        }
                     }
                 }
-            }
-            if (!empty($uris)) {
-                $this->view->assign('uriPages', $uris);
+                if (!empty($uris)) {
+                    $this->view->assign('uriPages', $uris);
+                }
             }
         }
+
+        return $this->htmlResponse();
     }
 }
