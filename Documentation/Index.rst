@@ -12,7 +12,8 @@ Installation
 
 The current release 6.1 may be used with TYPO3 11.5 or TYPO3 12.4 LTS.
 
-The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_ and `SLUB DigitalCollections (slub_digitalcollections) <https://github.com/slub/slub_digitalcollections>`. Before you can start to
+The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_ and `SLUB DigitalCollections (slub_digitalcollections)
+<https://github.com/slub/slub_digitalcollections>`. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
 both extensions. The installation is only supported via Composer.
 Kitodo.Presentation will be installed and configured automatically.
