@@ -11,7 +11,6 @@ namespace Slub\Dfgviewer\ViewHelpers;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -58,8 +57,5 @@ class TitleTagViewHelper extends AbstractViewHelper
         if ($title !== null) {
             $GLOBALS['TSFE']->page['title'] = $title;
         }
-
-        // return first found result
-        return;
     }
 }
