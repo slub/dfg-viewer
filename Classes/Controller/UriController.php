@@ -25,6 +25,7 @@ namespace Slub\Dfgviewer\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Kitodo\Dlf\Common\AbstractDocument;
 use Kitodo\Dlf\Common\Helper;
 use Kitodo\Dlf\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface;
@@ -59,6 +60,20 @@ class UriController extends AbstractController
 
         $doc = $this->document->getCurrentDocument();
 
+        $this->assignUriBook($doc);
+        $this->assignUriPage($doc);
+
+        return $this->htmlResponse();
+    }
+
+    /**
+     * Assign the uri book.
+     *
+     * @param AbstractDocument|null $doc
+     * @return void
+     */
+    public function assignUriBook(?AbstractDocument $doc): void
+    {
         // Get persistent identifier of book.
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);
 
@@ -84,31 +99,40 @@ class UriController extends AbstractController
                 $this->view->assign('uriBooks', $uris);
             }
         }
+    }
 
-        if (isset($this->requestData['page'])) {
-            // Get persistent identifier of page.
-            $uriPage = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[$this->requestData['page']]]['contentIds'], TRUE);
-
-            if (!empty($uriPage)) {
-                $uris = [];
-
-                foreach ($uriPage as $uri) {
-                    if (Helper::isValidHttpUrl($uri)) {
-                        $uris[] = $uri;
-                    } elseif (strpos($uri, 'urn:') === 0) {
-                        if (strpos($uri, '/fragment/') === false) {
-                            $uris[] = 'https://nbn-resolving.de/' . $uri;
-                        } else {
-                            $uris[] = 'https://nbn-resolving.org/' . $uri;
-                        }
-                    }
-                }
-                if (!empty($uris)) {
-                    $this->view->assign('uriPages', $uris);
-                }
-            }
+    /**
+     * Assign the uri page.
+     *
+     * @param AbstractDocument|null $doc
+     * @return void
+     */
+    public function assignUriPage(?AbstractDocument $doc): void
+    {
+        if (!isset($this->requestData['page'])) {
+            return;
         }
 
-        return $this->htmlResponse();
+        // Get persistent identifier of page.
+        $uriPage = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[$this->requestData['page']]]['contentIds'], TRUE);
+
+        if (!empty($uriPage)) {
+            $uris = [];
+
+            foreach ($uriPage as $uri) {
+                if (Helper::isValidHttpUrl($uri)) {
+                    $uris[] = $uri;
+                } elseif (strpos($uri, 'urn:') === 0) {
+                    if (strpos($uri, '/fragment/') === false) {
+                        $uris[] = 'https://nbn-resolving.de/' . $uri;
+                    } else {
+                        $uris[] = 'https://nbn-resolving.org/' . $uri;
+                    }
+                }
+            }
+            if (!empty($uris)) {
+                $this->view->assign('uriPages', $uris);
+            }
+        }
     }
 }
