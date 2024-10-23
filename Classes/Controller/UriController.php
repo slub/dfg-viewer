@@ -27,6 +27,7 @@ namespace Slub\Dfgviewer\Controller;
 
 use Kitodo\Dlf\Common\Helper;
 use Kitodo\Dlf\Controller\AbstractController;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -42,16 +43,16 @@ class UriController extends AbstractController
     /**
      * The main method of the plugin
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function mainAction(): void
+    public function mainAction(): ResponseInterface
     {
         // Load current document.
         $this->loadDocument();
 
         if ($this->isDocMissingOrEmpty()) {
             // Quit without doing anything if required variables are not set.
-            return;
+            return $this->htmlResponse();
         }
 
         $this->setPage();
@@ -107,5 +108,7 @@ class UriController extends AbstractController
                 }
             }
         }
+
+        return $this->htmlResponse();
     }
 }

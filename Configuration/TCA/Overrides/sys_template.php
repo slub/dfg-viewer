@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3') or die('Access denied.');
+defined('TYPO3') or die();
 
 // Register static typoscript.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(

@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3') or die('Access denied.');
+defined('TYPO3') or die();
 
 // Plugin "uri".
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['dfgviewer_uri'] = 'layout,select_key,pages,recursive';

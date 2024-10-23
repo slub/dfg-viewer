@@ -29,6 +29,14 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Beatrycze Volk',
     'author_email' => 'typo3@slub-dresden.de',
     'author_company' => 'Saxon State and University Library Dresden (SLUB)',
+    'autoload' => [
+        'psr-4' => [
+            'Slub\\Dfgviewer\\' => 'Classes/'
+        ],
+        'classmap' => [
+            'vendor/symfony'
+        ]
+    ],
     'shy' => '',
     'priority' => '',
     'module' => '',
@@ -42,7 +50,8 @@ $EM_CONF[$_EXTKEY] = [
     'version' => '6.1.2',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-11.5.99',
+            'php' => '7.4.0-8.3.99',
+            'typo3' => '11.5.0-12.4.99',
             'dlf' => '5.0.6-',
         ],
         'conflicts' => [
