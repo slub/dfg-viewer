@@ -119,7 +119,7 @@ Success
 Now your installation should work. You can test this with the following url
 (replace *host* and *id* with the parameters of your installation):
 
-http://example.com/index.php?id=2&tx_dlf%5Bid%5D=https%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
+http://example.com/index.php?tx_dlf%5Bid%5D=https%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
 
 To pass a document to the viewer, use the tx_dlf[id] GET parameter. Don't forget to urlencode the value.::
 
