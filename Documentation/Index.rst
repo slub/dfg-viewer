@@ -74,7 +74,7 @@ Recommended Steps after Installation
 2. [optional] Change the backend language in your user settings to German.
 3. Go to the Install Tool --> All Configurations and change the default settings of pageNotFoundOnCHashError to '0'.
 
-Your *config/system/settings.php* must contain this::
+Your *config/system/settings.php* () must contain this::
 
   'FE' => [
           'pageNotFoundOnCHashError' => false,
@@ -91,14 +91,15 @@ to install DFG-Viewer extension.
 Install DFG-Viewer and Kitodo.Presentation via Composer
 -------------------------------------------------------
 
-Composer commands::
-
     composer require slub/dfgviewer:^6.1
 
 This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 5.0 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
-Configure the extension via cli::
+Optionally configure the extension via TYPO3 Console::
+
+    # Install TYPO3 Console
+    composer req helhum/typo3-console:^8.2
 
     ./vendor/bin/typo3 install:extensionsetupifpossible
 
