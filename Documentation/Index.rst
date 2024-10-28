@@ -20,11 +20,12 @@ Kitodo.Presentation will be installed and configured automatically.
 
 System Requirements
 -------------------
+Depending on the TYPO3 version, there are different system requirements which are linked here accordingly.
 
-You need a webserver stack with Apache2 or Nginx, PHP >= 7.4 and MySQL / MariaDB.
+* TYPO3 12 https://get.typo3.org/version/12
+* TYPO3 11 https://get.typo3.org/version/11
 
-We recommend at least:
-
+For the system we recommend at least:
 * CPU: 1
 * Memory: 2 GB
 * Disk: 20 GB
@@ -73,7 +74,7 @@ Recommended Steps after Installation
 2. [optional] Change the backend language in your user settings to German.
 3. Go to the Install Tool --> All Configurations and change the default settings of pageNotFoundOnCHashError to '0'.
 
-Your *typo3conf/LocalConfiguration.php* must contain this::
+Your *config/system/settings.php* must contain this::
 
   'FE' => [
           'pageNotFoundOnCHashError' => false,
@@ -92,19 +93,14 @@ Install DFG-Viewer and Kitodo.Presentation via Composer
 
 Composer commands::
 
-    # make sure you haven't set the platform php version to 7.2
-    composer config platform.php
-    # install DFG-Viewer extension
     composer require slub/dfgviewer:^6.1
 
 This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 5.0 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
-Install the Extension via extension manager or CLI::
+Configure the extension via cli::
 
-    ./vendor/bin/typo3 extension:activate dlf
-    ./vendor/bin/typo3 extension:activate dfgviewer
-    ./vendor/bin/typo3 extension:activate slub_digitalcollections
+    ./vendor/bin/typo3 install:extensionsetupifpossible
 
 During the installation, three pages will be created: a root page, the "Kitodo
 Configuration" folder and the viewer itself.
@@ -135,7 +131,7 @@ Known Problems
 ~~~~~~~~~~~~~~~~~~~~
 
 If you get a "404 - Page Not Found" error on calling the viewer you are missing
-the following configuration in *typo3conf/LocalConfiguration.php*::
+the following configuration in *config/system/settings.php*::
 
     'FE' => [
         'pageNotFoundOnCHashError' => false,
@@ -155,13 +151,13 @@ You may notice from time to time, the viewer page keeps empty even though you
 pass the :code:`tx_dlf[id]` parameter.
 
 This happens, if someone called the viewer page without any parameters. In this
-case, TYPO3 saves the page to it's cache. If you call the viewer page again with
+case, TYPO3 saves the page to its cache. If you call the viewer page again with
 any parameter and without a cHash, the (empty) cached page is delivered.
 
 To avoid this, you must configure :code:`tx_dlf[id]` to require a cHash. Of
 course this is impossible to achieve so the system will process the page uncached.
 
-Add this setting to your *typo3conf/LocalConfiguration.php*::
+Add this setting to your *config/system/settings.php*::
 
     'FE' => [
         'cacheHash' => [
