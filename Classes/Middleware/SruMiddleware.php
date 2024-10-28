@@ -1,4 +1,4 @@
-st<?php
+<?php
 
 namespace Slub\Dfgviewer\Middleware;
 
