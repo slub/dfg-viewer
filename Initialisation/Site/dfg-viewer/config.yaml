@@ -4,7 +4,7 @@ errorHandling: {  }
 languages:
     -   title: Deutsch
         enabled: true
-        locale: de_DE
+        locale: de_DE.UTF-8
         hreflang: de-DE
         base: /
         websiteTitle: ''
@@ -13,7 +13,7 @@ languages:
         languageId: 0
     -   title: English
         enabled: true
-        locale: en-US
+        locale: en_US.UTF-8
         hreflang: en-US
         base: /en/
         websiteTitle: ''
