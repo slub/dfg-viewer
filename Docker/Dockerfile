@@ -1,4 +1,4 @@
-FROM php:8.2-apache-bookworm
+FROM php:8.3-apache-bookworm
 
 LABEL \
     maintainer="https://slub-dresden.de" \
