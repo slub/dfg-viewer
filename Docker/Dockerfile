@@ -53,8 +53,8 @@ RUN curl -sS https://getcomposer.org/installer \
 
 # Install TYPO3
 RUN cd /var/www/html && \
-    composer create-project typo3/cms-base-distribution dfg-viewer "^11" && \
-    cp ./dfg-viewer/public/typo3/sysext/install/Resources/Private/FolderStructureTemplateFiles/root-htaccess ./dfg-viewer/public/.htaccess && \
+    composer create-project typo3/cms-base-distribution dfg-viewer "^12" && \
+   # cp ./dfg-viewer/public/typo3/sysext/install/Resources/Private/FolderStructureTemplateFiles/root-htaccess ./dfg-viewer/public/.htaccess && \
     touch ./dfg-viewer/public/FIRST_INSTALL && \
     chown -R www-data:www-data ./dfg-viewer
 
@@ -73,7 +73,7 @@ RUN mkdir -p /var/www/extensions/ && \
 COPY extensions /var/www/extensions
 
 # Sites configuration
-COPY site/dfgviewer/config.yaml ./config/sites/dfgviewer/config.yaml
+COPY --chown=www-data site/dfgviewer/config.yaml ./config/sites/dfgviewer/config.yaml
 
 # Install scripts
 COPY startup.sh /usr/bin/
@@ -88,6 +88,10 @@ ENV T3_USER=admin
 ENV T3_PASSWORD=adminslub
 
 RUN chmod +x /usr/bin/startup.sh && \
-    chmod +x /wait-for-it.sh
+    chmod +x /wait-for-it.sh && \
+    # make /var/www writable for composer
+    chown www-data:www-data /var/www
+
+USER www-data
 
 CMD ["/usr/bin/startup.sh"]
