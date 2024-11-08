@@ -26,10 +26,5 @@ services:
       - ${DB_PORT}:3306
     networks:
       - backend
-volumes:
-  database:
-  fileadmin:
-  typo3conf:
-  uploads:
 networks:
   backend:
