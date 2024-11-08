@@ -9,7 +9,7 @@ plugin.tx_news {
         skipDefaultArguments = 0
     }
     settings {
-        listPid = {$config.news.listPid}
+        listPid = {$plugin.tx_dfgviewer.news.listPid}
         displayDummyIfNoMedia = 0
         analytics {
             social {
@@ -18,7 +18,7 @@ plugin.tx_news {
                 twitter = 0
             }
         }
-        startingpoint = {$config.news.storagePid}
+        startingpoint = {$plugin.tx_dfgviewer.news.storagePid}
         list {
             media {
                 image {

@@ -1,18 +1,15 @@
-config {
+plugin.tx_dfgviewer {
 
-    # cat=plugin.tx_dfgviewer/links/010; type=int+; label=Storage PID
-    storagePid =
-
-    # cat=plugin.tx_dfgviewer/links/020; type=int+; label=Root PID
+    # cat=plugin.tx_dfgviewer/links/010; type=int+; label=Root PID
     rootPid =
 
-    # cat=plugin.tx_dfgviewer/links/030; type=int+; label= Headnavigation PID
+    # cat=plugin.tx_dfgviewer/links/020; type=int+; label= Headnavigation PID
     headNavPid =
 
-    # cat=plugin.tx_dfgviewer/links/040; type=string; label= Multiple IDs for the sidebar navigation in the viewer
+    # cat=plugin.tx_dfgviewer/links/030; type=string; label= Multiple IDs for the sidebar navigation in the viewer
     viewerNavPids =
 
-    # cat=plugin.tx_dfgviewer/links/050; type=int+; label=Kitodo Page View
+    # cat=plugin.tx_dfgviewer/links/040; type=int+; label=Kitodo Page View
     kitodoPageView =
 
     # cat=plugin.tx_dfgviewer/piwik/010; type=string; label=Piwik Hostname
