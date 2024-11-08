@@ -1,5 +1,10 @@
 FROM php:8.3-apache-bookworm
 
+ARG GIT_REF=master
+ARG GIT_REPOSITORY=slub/dfg-viewer
+ARG GIT_SERVER_URL=https://github.com
+ARG BUILD_DATE
+
 LABEL \
     maintainer="https://slub-dresden.de" \
     org.label-schema.vendor="Saxon State and University Library Dresden" \
