@@ -9,9 +9,9 @@ if ! test -f "config/system/settings.php"; then
     composer req helhum/typo3-console "^8.2"
 
     # Install extensions from mounted extension folder
+    composer req slub/dfgviewer "@dev"
     composer req kitodo/presentation "@dev"
     composer req slub/slub-digitalcollections "@dev"
-    composer req slub/dfgviewer "@dev"
 
     ./vendor/bin/typo3 install:fixfolderstructure
 

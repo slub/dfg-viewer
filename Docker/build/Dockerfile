@@ -85,7 +85,7 @@ ENV DB_NAME=typo3
 ENV DB_USER=typo3
 ENV DB_PASSWORD=password
 ENV T3_USER=admin
-ENV T3_PASSWORD=adminslub
+ENV T3_PASSWORD="dvAdmin.1"
 
 RUN chmod +x /usr/bin/startup.sh && \
     chmod +x /wait-for-it.sh && \

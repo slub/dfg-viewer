@@ -1,9 +1,8 @@
 services:
-
   dfg-viewer-app:
     image: ${APP_IMAGE}
     build:
-      no_cache: true
+        context: build
     environment:
       DB_HOST: ${DB_HOST}
       T3_USER: ${APP_T3_USER}
