@@ -53,7 +53,7 @@ jobs:
                   echo "`jq '.require."slub/slub-digitalcollections"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
                   echo "`jq '.require."kitodo/presentation"="@dev"' slub_digitalcollections/composer.json`" > slub_digitalcollections/composer.json
                   cat dfg-viewer/composer.json >> $GITHUB_OUTPUT
-                  cat dfg-viewer/composer.json
+                   cat slub_digitalcollections/composer.json >> $GITHUB_OUTPUT
 
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
