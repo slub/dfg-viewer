@@ -73,7 +73,8 @@ RUN a2ensite dfg-viewer.conf && \
 
 # Install extension path
 RUN mkdir -p /var/www/extensions/ && \
-    composer config repositories.local path /var/www/extensions/*
+    composer config repositories.local path /var/www/extensions/* && \
+    composer config minimum-stability dev
 
 COPY extensions /var/www/extensions
 
