@@ -42,18 +42,6 @@ jobs:
                   ref: update-typo12
                   path: ./Docker/build/extensions/slub_digitalcollections
 
-            - name: Update DFG-Viewer composer.json
-              uses: restackio/update-json-file-action@2.1
-              with:
-                  file: ./Docker/build/extensions/dfg-viewer/composer.json
-                  fields: "{'require.kitodo/presentation': '@dev', 'require.slub/slub-digitalcollections': '@dev'}"
-
-            - name: Update SLUB Digital Collections composer.json
-              uses: restackio/update-json-file-action@2.1
-              with:
-                  file: ./Docker/build/extensions/slub_digitalcollections/composer.json
-                  fields: "{'require.kitodo/presentation': '@dev'}"
-
             - name: Prepare environment
               run: |
                   # Rename example .env file
