@@ -58,6 +58,13 @@ jobs:
               run: |
                   # Rename example .env file
                   mv ./Docker/.env.example ./Docker/.env
+
+                  # Replace required versions with @dev
+                  cd ./Docker/build/extensions/
+                  echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
+                  echo "`jq '.require."slub/slub-digitalcollections"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
+                  echo "`jq '.require."kitodo/presentation"="@dev"' slub_digitalcollections/composer.json`" > slub_digitalcollections/composer.json
+
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
