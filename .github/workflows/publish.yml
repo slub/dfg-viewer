@@ -1,6 +1,8 @@
 name: Publish DFG-Viewer
 
 on:
+    push:
+        branches: [ "master" ]
     workflow_dispatch: # run manually
 
 env:
@@ -19,25 +21,31 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
+
             - name: Checkout DFG-Viewer repository
               uses: actions/checkout@v4
               with:
-                  repository: ${{ env.GIT_OWNER }}/${{ env.GIT_REPO }}
+                  repository: markusweigelt/dfg-viewer
                   ref: update-typo12
-                  path: ./Docker/extensions/dfg-viewer
+                  path: ./Docker/build/extensions/dfg-viewer
 
             - name: Checkout Kitodo.Presentation repository
               uses: actions/checkout@v4
               with:
                 repository: kitodo/kitodo-presentation
-                path: ./Docker/extensions/kitodo-presentation
+                path: ./Docker/build/extensions/kitodo-presentation
 
             - name: Checkout SLUB Digital Collections repository
               uses: actions/checkout@v4
               with:
-                  repository: ${{ env.GIT_OWNER }}/slub_digitalcollections
+                  repository: markusweigelt/slub_digitalcollections
                   ref: update-typo12
-                  path: ./Docker/extensions/slub_digitalcollections
+                  path: ./Docker/build/extensions/slub_digitalcollections
+
+            - name: Prepare environment
+              run: |
+                  # Rename example .env file
+                  mv ./Docker/.env.example ./Docker/.env
 
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
@@ -53,12 +61,12 @@ jobs:
             - name: Determine build args
               run: |
                   date -u +"build_date=%Y-%m-%dT%H:%M:%SZ" >> $GITHUB_ENV
-                  echo "vcs_ref=`git rev-parse --short HEAD`" >> $GITHUB_ENV
+                  echo "vcs_ref=`git -C ./Docker/build/extensions/dfg-viewer rev-parse HEAD`" >> $GITHUB_ENV
 
             - name: Build the DFG-Viewer image from module and deploy to GitHub Container Repository
               uses: docker/build-push-action@v6
               with:
-                  context: ./Docker
+                  context: ./Docker/build
                   push: true
                   tags: ${{ env.REGISTRY_PATH }}:${{ env.IMAGE_TAG }}
                   build-args: |
