@@ -14,7 +14,7 @@ env:
 
 jobs:
 
-    build:
+    build & publish:
         runs-on: ubuntu-latest
 
         steps:
@@ -42,11 +42,22 @@ jobs:
                   ref: update-typo12
                   path: ./Docker/build/extensions/slub_digitalcollections
 
+            - name: Update DFG-Viewer composer.json
+              uses: restackio/update-json-file-action@2.1
+              with:
+                  file: ./Docker/build/extensions/dfg-viewer/composer.json
+                  fields: "{'require.kitodo/presentation': '@dev', 'require.slub/slub-digitalcollections': '@dev'}"
+
+            - name: Update SLUB Digital Collections composer.json
+              uses: restackio/update-json-file-action@2.1
+              with:
+                  file: ./Docker/build/extensions/slub_digitalcollections/composer.json
+                  fields: "{'require.kitodo/presentation': '@dev'}"
+
             - name: Prepare environment
               run: |
                   # Rename example .env file
                   mv ./Docker/.env.example ./Docker/.env
-
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
