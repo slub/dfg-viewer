@@ -55,7 +55,6 @@ git clone https://github.com/slub/slub_digitalcollections build/extensions
 
 Adjust the `composer.json` files of the checkouts as follows.
 
-
 `composer.json` of the [DFG Viewer](https://github.com/slub/dfg-viewer) checkout `build/extensions/dfg-viewer`:
 
 ```
@@ -63,6 +62,7 @@ Adjust the `composer.json` files of the checkouts as follows.
   "require": {
     ...
     "kitodo/presentation": "@dev"
+    "slub/slub-digitalcollection": "@dev"
     ...
   },
   ...
