@@ -71,7 +71,7 @@ RUN a2ensite dfg-viewer.conf && \
 # Disable default behaviour
     a2dissite 000-default.conf
 
-# Install extension path
+# Install extension path and support of dev dependencies
 RUN mkdir -p /var/www/extensions/ && \
     composer config repositories.local path /var/www/extensions/* && \
     composer config minimum-stability dev
