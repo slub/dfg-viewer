@@ -63,6 +63,7 @@ jobs:
                       BUILD_DATE=${{ env.build_date }}
                       VCS_REF=${{ env.vcs_ref }}
                       VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
+                  cache-to: type=gha,mode=max,scope=${{ env.vcs_ref }}-image
 
             - name: Test the DFG-Viewer image
               run: |
@@ -93,5 +94,15 @@ jobs:
                   username: ${{ github.repository_owner }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Deploy to GitHub Container Repository
-              run: docker image push ghcr.io/${{ github.repository }}:latest
+            - name: Build the DFG-Viewer image using GitHub Actions cache and deploy to GitHub Container Repository
+              uses: docker/build-push-action@v6
+              with:
+                  context: ./Docker/build
+                  push: true
+                  tags: ghcr.io/${{ github.repository }}:latest
+                  build-args: |
+                      BUILD_DATE=${{ env.build_date }}
+                      VCS_REF=${{ env.vcs_ref }}
+                      VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
+                  cache-from: type=gha,scope=${{ env.vcs_ref }}-image
+

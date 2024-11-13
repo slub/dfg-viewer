@@ -7,7 +7,7 @@ docker compose up -d
 chmod +x ./build/wait-for-it.sh
 ./build/wait-for-it.sh localhost:80 --strict -- echo "Application container is up"
 
-# wait 60 seconds until the installation process has finished
+echo "Wait 60 seconds until the installation process has finished"
 sleep 60
 
 # testing the container
