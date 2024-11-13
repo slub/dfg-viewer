@@ -42,8 +42,6 @@ jobs:
                   # overwrite image path
                   sed -i "s|ghcr.io/slub/dfg-viewer|ghcr.io/${{ github.repository }}|g" ./Docker/.env
 
-                  cat ./Docker/.env
-
                   # Replace required versions with @dev
                   cd ./Docker/build/extensions/
                   echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
@@ -59,7 +57,7 @@ jobs:
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
 
-            - name: Build the DFG-Viewer image
+            - name: Build the DFG-Viewer image and cache to GitHub Actions cache
               uses: docker/build-push-action@v6
               with:
                   context: ./Docker/build
