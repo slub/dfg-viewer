@@ -1,4 +1,4 @@
-name: Publish DFG-Viewer
+name: Build, test and publish DFG-Viewer image
 
 on:
     push:
@@ -6,7 +6,7 @@ on:
     workflow_dispatch: # run manually
 
 jobs:
-    build-publish:
+    build-test-publish:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -65,7 +65,9 @@ jobs:
                       VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
 
             - name: Test the DFG-Viewer image
-              run: ./.github/scripts/test-image.sh
+              run: |
+                  chmod +x ./.github/scripts/test-image.sh
+                  ./.github/scripts/test-image.sh
 
             - name: Collect docker logs on failure
               if: failure()
