@@ -3,6 +3,8 @@ cd ./Docker || exit 1
 
 docker compose up -d
 
+echo $APP_IMAGE
+
 # run wait for it
 chmod +x ./build/wait-for-it.sh
 ./build/wait-for-it.sh localhost:80 --strict -- echo "Application container is up"
