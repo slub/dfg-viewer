@@ -20,6 +20,8 @@ Go to the directory where you've put `docker-compose.yml`.
 
 Copy the environment file `.env.example` inside the directory and rename it to `.env`. Adjust the configuration of the respective service to suit your needs. The variables are marked with the prefix of the service e.g. `APP_` for our Typo3 application with DFG-Viewer.
 
+*It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general, especially in an productive environment.*
+
 Download images and start all service containers
 ```
 docker compose up -d
@@ -82,6 +84,6 @@ Adjust the `composer.json` files of the checkouts as follows.
 
 Build the image.
 
-*Ensure that the .env file has been created. It is recommended to adjust the `APP_IMAGE` name for custom images.*
+*Ensure that the `.env` file has been created. It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general and the `APP_IMAGE` name for building custom images in `.env` file.*
 
 `docker compose build dfg-viewer-app`

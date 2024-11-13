@@ -22,5 +22,3 @@ if [ "$HTML_TITLE" != "DFG Viewer" ]; then
     echo "Expected content of the HTML <title> tag should to be \"DFG Viewer\", but got \"$HTML_TITLE\""
     exit 1
 fi
-
-
