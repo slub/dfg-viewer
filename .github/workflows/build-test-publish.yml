@@ -42,6 +42,8 @@ jobs:
                   # overwrite image path
                   sed -i "s|ghcr.io/slub/dfg-viewer|ghcr.io/${{ github.repository }}|g" ./Docker/.env
 
+                  cat ./Docker/.env
+
                   # Replace required versions with @dev
                   cd ./Docker/build/extensions/
                   echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
