@@ -8,9 +8,6 @@ on:
 jobs:
     build-publish:
         runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: ./Docker
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
