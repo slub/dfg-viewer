@@ -6,10 +6,11 @@ on:
     workflow_dispatch: # run manually
 
 jobs:
-
     build-publish:
         runs-on: ubuntu-latest
-
+        defaults:
+            run:
+                working-directory: ./Docker
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -20,13 +21,13 @@ jobs:
               with:
                   repository: markusweigelt/dfg-viewer
                   ref: update-typo12
-                  path: ./Docker/build/extensions/dfg-viewer
+                  path: ./build/extensions/dfg-viewer
 
             - name: Checkout Kitodo.Presentation repository
               uses: actions/checkout@v4
               with:
-                repository: kitodo/kitodo-presentation
-                path: ./Docker/build/extensions/kitodo-presentation
+                  repository: kitodo/kitodo-presentation
+                  path: ./build/extensions/kitodo-presentation
 
             # Deprecated should be set to the main repository if the update-typo12 branch is merged.
             - name: Checkout SLUB Digital Collections repository
@@ -34,22 +35,57 @@ jobs:
               with:
                   repository: markusweigelt/slub_digitalcollections
                   ref: update-typo12
-                  path: ./Docker/build/extensions/slub_digitalcollections
+                  path: ./build/extensions/slub_digitalcollections
 
             - name: Prepare environment
               run: |
                   # Rename example .env file
-                  mv ./Docker/.env.example ./Docker/.env
+                  mv .env.example .env
 
                   # Replace required versions with @dev
-                  cd ./Docker/build/extensions/
+                  cd ./build/extensions/
                   echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
                   echo "`jq '.require."slub/slub-digitalcollections"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
                   echo "`jq '.require."kitodo/presentation"="@dev"' slub_digitalcollections/composer.json`" > slub_digitalcollections/composer.json
 
+            - name: Determine build args
+              run: |
+                  date -u +"build_date=%Y-%m-%dT%H:%M:%SZ" >> $GITHUB_ENV
+                  echo "vcs_ref=`git -C ./build/extensions/dfg-viewer rev-parse HEAD`" >> $GITHUB_ENV
+
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
+
+            - name: Build the DFG-Viewer image
+              uses: docker/build-push-action@v6
+              with:
+                  context: ./build
+                  tags: ghcr.io/${{ github.repository }}:latest
+                  build-args: |
+                      BUILD_DATE=${{ env.build_date }}
+                      VCS_REF=${{ env.vcs_ref }}
+                      VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
+
+            - name: Test the DFG-Viewer image
+              run: ./../.github/scripts/test-image.sh
+
+            - name: Collect docker logs on failure
+              if: failure()
+              uses: jwalton/gh-docker-logs@v2
+              with:
+                  dest: './docker-logs'
+
+            - name: Tar docker logs on failure
+              if: failure()
+              run: tar cvzf ./docker-logs.tgz ./docker-logs
+
+            - name: Upload docker logs to GitHub
+              if: failure()
+              uses: actions/upload-artifact@master
+              with:
+                  name: docker-logs.tgz
+                  path: ./docker-logs.tgz
 
             - name: Login to GitHub Container Registry
               uses: docker/login-action@v3
@@ -58,20 +94,5 @@ jobs:
                   username: ${{ github.repository_owner }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Determine build args
-              run: |
-                  date -u +"build_date=%Y-%m-%dT%H:%M:%SZ" >> $GITHUB_ENV
-                  echo "vcs_ref=`git -C ./Docker/build/extensions/dfg-viewer rev-parse HEAD`" >> $GITHUB_ENV
-
-            - name: Build the DFG-Viewer image from module and deploy to GitHub Container Repository
-              uses: docker/build-push-action@v6
-              with:
-                  context: ./Docker/build
-                  push: true
-                  tags: ghcr.io/${{ github.repository }}:latest
-                  build-args: |
-                      BUILD_DATE=${{ env.build_date }}
-                      VCS_REF=${{ env.vcs_ref }}
-                      VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
-                  cache-from: type=gha,scope=${{ env.vcs_ref }}-image
-                  cache-to: type=gha,mode=max,scope=${{ env.vcs_ref }}-image
+            - name: Deploy to GitHub Container Repository
+              run: docker image push ghcr.io/${{ github.repository }}:latest
