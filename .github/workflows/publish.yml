@@ -21,13 +21,13 @@ jobs:
               with:
                   repository: markusweigelt/dfg-viewer
                   ref: update-typo12
-                  path: ./build/extensions/dfg-viewer
+                  path: ./Docker/build/extensions/dfg-viewer
 
             - name: Checkout Kitodo.Presentation repository
               uses: actions/checkout@v4
               with:
                   repository: kitodo/kitodo-presentation
-                  path: ./build/extensions/kitodo-presentation
+                  path: ./Docker/extensions/kitodo-presentation
 
             # Deprecated should be set to the main repository if the update-typo12 branch is merged.
             - name: Checkout SLUB Digital Collections repository
@@ -35,7 +35,7 @@ jobs:
               with:
                   repository: markusweigelt/slub_digitalcollections
                   ref: update-typo12
-                  path: ./build/extensions/slub_digitalcollections
+                  path: ./Docker/build/extensions/slub_digitalcollections
 
             - name: Prepare environment
               run: |
@@ -82,7 +82,7 @@ jobs:
 
             - name: Upload docker logs to GitHub
               if: failure()
-              uses: actions/upload-artifact@master
+              uses: actions/upload-artifact@v4
               with:
                   name: docker-logs.tgz
                   path: ./docker-logs.tgz
