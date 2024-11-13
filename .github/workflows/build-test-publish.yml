@@ -39,6 +39,9 @@ jobs:
                   # Rename example .env file
                   mv ./Docker/.env.example ./Docker/.env
 
+                  # overwrite image path
+                  sed -i "s|ghcr.io/slub/dfg-viewer|ghcr.io/${{ github.repository }}|g" .env
+
                   # Replace required versions with @dev
                   cd ./Docker/build/extensions/
                   echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
@@ -67,9 +70,6 @@ jobs:
 
             - name: Test the DFG-Viewer image
               run: |
-                  # overwrite env to use
-                  set APP_IMAGE=ghcr.io/${{ github.repository }}:latest
-
                   chmod +x ./.github/scripts/test-image.sh
                   ./.github/scripts/test-image.sh
 
