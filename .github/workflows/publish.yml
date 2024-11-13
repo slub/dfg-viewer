@@ -40,10 +40,10 @@ jobs:
             - name: Prepare environment
               run: |
                   # Rename example .env file
-                  mv .env.example .env
+                  mv ./Docker/.env.example ./Docker/.env
 
                   # Replace required versions with @dev
-                  cd ./build/extensions/
+                  cd ./Docker/build/extensions/
                   echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
                   echo "`jq '.require."slub/slub-digitalcollections"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
                   echo "`jq '.require."kitodo/presentation"="@dev"' slub_digitalcollections/composer.json`" > slub_digitalcollections/composer.json
@@ -51,7 +51,7 @@ jobs:
             - name: Determine build args
               run: |
                   date -u +"build_date=%Y-%m-%dT%H:%M:%SZ" >> $GITHUB_ENV
-                  echo "vcs_ref=`git -C ./build/extensions/dfg-viewer rev-parse HEAD`" >> $GITHUB_ENV
+                  echo "vcs_ref=`git -C ./Docker/build/extensions/dfg-viewer rev-parse HEAD`" >> $GITHUB_ENV
 
             # Activate cache export feature to reduce build time of images
             - name: Set up Docker Buildx
@@ -60,7 +60,7 @@ jobs:
             - name: Build the DFG-Viewer image
               uses: docker/build-push-action@v6
               with:
-                  context: ./build
+                  context: ./Docker/build
                   tags: ghcr.io/${{ github.repository }}:latest
                   build-args: |
                       BUILD_DATE=${{ env.build_date }}
@@ -68,7 +68,7 @@ jobs:
                       VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
 
             - name: Test the DFG-Viewer image
-              run: ./../.github/scripts/test-image.sh
+              run: ./.github/scripts/test-image.sh
 
             - name: Collect docker logs on failure
               if: failure()
