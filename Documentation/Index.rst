@@ -44,7 +44,9 @@ To install a fresh TYPO3 12.4 system, try the following installation procedure w
     # remove /var/www/dfgviewer if it already exist or make sure it's really empty by ls -la dfgviewer/
     rm -r dfgviewer/
     # load full TYPO3 via composer
+
     composer create-project typo3/cms-base-distribution:^12 dfgviewer
+
     # Install the TYPO3 system with the TYPO3-console
     cd dfgviewer/
     ./vendor/bin/typo3 setup
@@ -85,6 +87,7 @@ You can set this easily with the TYPO3-console::
     ./vendor/bin/typo3 configuration:set 'FE/pageNotFoundOnCHashError' 0
 
 Now you have a working TYPO3 12.4 LTS installation and you can continue with composer
+
 to install DFG-Viewer extension.
 
 

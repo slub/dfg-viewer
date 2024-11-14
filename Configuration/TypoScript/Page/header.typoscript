@@ -25,7 +25,7 @@ page {
 }
 
 
-[getTSFE() && getTSFE().id == {$config.kitodoPageView}]
+[getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.kitodoPageView}]
 page {
   includeCSS {
     style = EXT:dfgviewer/Resources/Public/Css/allStyles.css

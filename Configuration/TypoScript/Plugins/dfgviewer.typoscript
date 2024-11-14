@@ -42,7 +42,7 @@ plugin.tx_dfgviewer_newspapercalendar {
         }
     }
     settings {
-        targetPid = {$config.kitodoPageView}
+        targetPid = {$plugin.tx_dfgviewer.kitodoPageView}
         showEmptyMonths = 1
         showEmptyTertialMonths = 0
     }

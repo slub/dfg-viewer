@@ -27,25 +27,25 @@ page {
       pageTitle.data = page:title
 
       productName = TEXT
-      productName.value = {$config.productName}
+      productName.value = {$plugin.tx_dfgviewer.productName}
 
       pageHideInMenu = TEXT
       pageHideInMenu.data = page:nav_hide
 
       rootPageId = TEXT
-      rootPageId.value = {$config.rootPid}
+      rootPageId.value = {$plugin.tx_dfgviewer.rootPid}
 
       kitodoPageView = TEXT
-      kitodoPageView.value = {$config.kitodoPageView}
+      kitodoPageView.value = {$plugin.tx_dfgviewer.kitodoPageView}
 
       piwik_hostname = TEXT
-      piwik_hostname.value = {$config.piwik_hostname}
+      piwik_hostname.value = {$plugin.tx_dfgviewer.piwik_hostname}
 
       piwik_idsite = TEXT
-      piwik_idsite.value = {$config.piwik_idsite}
+      piwik_idsite.value = {$plugin.tx_dfgviewer.piwik_idsite}
 
       piwik_domains = TEXT
-      piwik_domains.value = {$config.piwik_domains}
+      piwik_domains.value = {$plugin.tx_dfgviewer.piwik_domains}
 
     }
   }
@@ -60,11 +60,11 @@ lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.nonWrappedTag >
 # -------------------------------
 # Diverses
 # -------------------------------
-[getTSFE() && getTSFE().id == {$config.rootPid}]
+[getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.rootPid}]
 page.bodyTag = <body class="website home">
 [END]
 
-[getTSFE() && getTSFE().id == {$config.kitodoPageView}]
+[getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.kitodoPageView}]
 page {
   bodyTag = <body class="dfgviewer">
   10 {
