@@ -5,8 +5,6 @@
  * [Development](#development)
  * [Further information](#further-information)
 
-The Kitodo.Production can be started quickly with the provided Docker image. However, a MySQL/MariaDB database and ElasticSearch are required to start the application. Additionally, a Docker Compose file is available for a faster setup.
-
 ## Prerequisites
 
 Install Docker Engine
