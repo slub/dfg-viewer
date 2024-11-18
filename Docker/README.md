@@ -17,7 +17,7 @@ https://docs.docker.com/compose/install/
 
 Go to the directory where you've put `docker-compose.yml`.
 
-Copy the environment file `.env.example` inside the directory and rename it to `.env`. Adjust the configuration of the respective service to suit your needs. The variables are marked with the prefix of the service e.g. `APP_` for our Typo3 application with DFG-Viewer.
+Copy the environment file `.env.example` inside the directory and rename it to `.env`. Adjust the configuration of the respective service to suit your needs. The variables are marked with the prefix of the service e.g. `APP_` for our TYPO3 application with DFG-Viewer.
 
 *It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general, especially in an productive environment.*
 

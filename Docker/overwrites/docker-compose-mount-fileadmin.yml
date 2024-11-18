@@ -1,5 +1,0 @@
-services:
-  dfg-viewer-app:
-
-    volumes:
-        - ./fileadmin:/var/www/html/dfg-viewer/public/fileadmin
