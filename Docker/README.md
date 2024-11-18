@@ -3,6 +3,7 @@
  * [Prerequisites](#prerequisites)
  * [Usage](#usage)
  * [Development](#development)
+ * [Further information](#further-information)
 
 The Kitodo.Production can be started quickly with the provided Docker image. However, a MySQL/MariaDB database and ElasticSearch are required to start the application. Additionally, a Docker Compose file is available for a faster setup.
 
@@ -41,7 +42,7 @@ docker compose down
 
 ## Development
 
-To build the image, a folder named `extensions` must be added under folder `build`.
+To build the image, a `build` folder with a subfolder `extension` must be added.
 
 ```
 mkdir -p build/extensions
@@ -87,3 +88,53 @@ Build the image.
 *Ensure that the `.env` file has been created. It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general and the `APP_IMAGE` name for building custom images in `.env` file.*
 
 `docker compose build dfg-viewer-app`
+
+## Further information
+
+### Usage of 3D viewer integrations
+
+*There are multiple ways to install the 3D viewer integration. The simplest is to upload the folder that is generated during the [viewer integration installation](https://github.com/slub/dlf-3d-viewers#installation). We have decided to provide an installation based on commands here.*
+
+Once all containers have been started (see [Usage](#usage)), you can continue as follows.
+
+1. Login into `dfg-viewer-app-1` container as root user.
+
+``
+docker exec -u root -it dfg-viewer-app-1 bash
+``
+
+2. Install unzip command line tool.
+
+``
+apt-get update && apt-get install unzip
+``
+
+3. Download the current state of main branch of repository [3D viewer integrations for DFG-Viewer](https://github.com/slub/dlf-3d-viewers) as zip file
+
+``
+wget "https://github.com/slub/dlf-3d-viewers/archive/refs/heads/main.zip" -O /tmp/dlf-3d-viewers.zip
+``
+
+4. Navigate to `fileadmin` folder, unzip the zip file, rename unzipped folder to `dlf_3d_viewers` and remove zip file
+
+```
+cd /var/www/html/dfg-viewer/public/fileadmin
+
+unzip /tmp/dlf-3d-viewers.zip
+
+mv dlf-3d-viewers-main dlf_3d_viewers
+
+rm /tmp/dlf-3d-viewers.zip
+```
+
+5. Download libraries and frameworks for each viewer integration
+
+``
+sh dlf_3d_viewers/install.sh
+``
+
+6. Change owner of integration folder, subfolder and files
+
+``
+chown -R www-data:www-data dlf_3d_viewers
+``

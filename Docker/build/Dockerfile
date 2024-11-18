@@ -61,6 +61,7 @@ RUN cd /var/www/html && \
     composer create-project typo3/cms-base-distribution dfg-viewer "^12" && \
    # cp ./dfg-viewer/public/typo3/sysext/install/Resources/Private/FolderStructureTemplateFiles/root-htaccess ./dfg-viewer/public/.htaccess && \
     touch ./dfg-viewer/public/FIRST_INSTALL && \
+    mkdir -p ./dfg-viewer/public/fileadmin && \
     chown -R www-data:www-data ./dfg-viewer
 
 WORKDIR /var/www/html/dfg-viewer
@@ -101,3 +102,5 @@ RUN chmod +x /usr/bin/startup.sh && \
 USER www-data
 
 CMD ["/usr/bin/startup.sh"]
+
+VOLUME /var/www/html/dfg-viewer/public/fileadmin
