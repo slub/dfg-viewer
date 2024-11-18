@@ -26,7 +26,11 @@ Download images and start all service containers
 docker compose up -d
 ```
 
-*When running `docker compose up` all services e.g. DFG-Viewer (APP) and database (DB) in our `docker-compose.yml` will be started and each as separate Docker container.*
+It may take about a minute for TYPO3 and the extension to be installed at the initial start.
+
+The DFG Viewer instance can then be accessed under `localhost`.
+
+*When running `docker compose up` all services e.g. DFG-Viewer (APP) and database (DB) in our `docker-compose.yml` will be started and each as separate Docker container. *
 
 Stops all service containers
 ```
