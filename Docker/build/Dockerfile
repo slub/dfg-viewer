@@ -1,3 +1,4 @@
+# Using a qualified path allows, for example, running with Podman out of the box
 FROM docker.io/php:8.3-apache-bookworm
 
 ARG GIT_REF=master
