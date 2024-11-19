@@ -1,4 +1,4 @@
-FROM php:8.3-apache-bookworm
+FROM docker.io/php:8.3-apache-bookworm
 
 ARG GIT_REF=master
 ARG GIT_REPOSITORY=slub/dfg-viewer
