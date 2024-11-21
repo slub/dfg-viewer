@@ -1,11 +1,8 @@
 # Configuration
-<INCLUDE_TYPOSCRIPT: source="DIR:./Config/" extensions="typoscript">
-
+@import 'EXT:dfgviewer/Configuration/TypoScript/Config/*.typoscript'
 # Navigation
-<INCLUDE_TYPOSCRIPT: source="DIR:./Navigation/" extensions="typoscript">
-
+@import 'EXT:dfgviewer/Configuration/TypoScript/Navigation/*.typoscript'
 # Plugin
-<INCLUDE_TYPOSCRIPT: source="DIR:./Plugins/" extensions="typoscript">
-
+@import 'EXT:dfgviewer/Configuration/TypoScript/Plugins/*.typoscript'
 # Page
-<INCLUDE_TYPOSCRIPT: source="DIR:./Page/" extensions="typoscript">
+@import 'EXT:dfgviewer/Configuration/TypoScript/Page/*.typoscript'

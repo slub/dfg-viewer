@@ -6,7 +6,7 @@ page {
   bodyTag = <body class="website">
 
   adminPanelStyles = 0
-  shortcutIcon = EXT:dfgviewer/Resources/Public/Images/dfgviewerFavicon.png
+  shortcutIcon = EXT:dfgviewer/Resources/Public/Icons/Extension.png
 
   10 = FLUIDTEMPLATE
   10 {
@@ -60,11 +60,11 @@ lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines.nonWrappedTag >
 # -------------------------------
 # Diverses
 # -------------------------------
-[getTSFE().id == {$plugin.tx_dfgviewer.rootPid}]
+[getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.rootPid}]
 page.bodyTag = <body class="website home">
 [END]
 
-[getTSFE().id == {$plugin.tx_dfgviewer.kitodoPageView}]
+[getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.kitodoPageView}]
 page {
   bodyTag = <body class="dfgviewer">
   10 {

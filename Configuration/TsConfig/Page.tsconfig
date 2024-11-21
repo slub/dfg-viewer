@@ -1,7 +1,7 @@
 ##############
 #### PAGE ####
 ##############
-<INCLUDE_TYPOSCRIPT: source="DIR:EXT:dfgviewer/Configuration/TsConfig/Page/" extensions="tsconfig">
+@import 'EXT:dfgviewer/Configuration/TypoScript/TsConfig/Page/*.tsconfig'
 
 
 # PAGE DEFAULT PERMISSIONS

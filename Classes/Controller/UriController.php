@@ -25,8 +25,10 @@ namespace Slub\Dfgviewer\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Kitodo\Dlf\Common\AbstractDocument;
 use Kitodo\Dlf\Common\Helper;
-use TYPO3\CMS\Core\Utility\MathUtility;
+use Kitodo\Dlf\Controller\AbstractController;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -37,27 +39,41 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @subpackage dlf
  * @access public
  */
-class UriController extends \Kitodo\Dlf\Controller\AbstractController
+class UriController extends AbstractController
 {
     /**
      * The main method of the plugin
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function mainAction()
+    public function mainAction(): ResponseInterface
     {
         // Load current document.
         $this->loadDocument();
 
         if ($this->isDocMissingOrEmpty()) {
             // Quit without doing anything if required variables are not set.
-            return;
+            return $this->htmlResponse();
         }
 
         $this->setPage();
 
         $doc = $this->document->getCurrentDocument();
 
+        $this->assignUriBook($doc);
+        $this->assignUriPage($doc);
+
+        return $this->htmlResponse();
+    }
+
+    /**
+     * Assign the uri book.
+     *
+     * @param AbstractDocument|null $doc
+     * @return void
+     */
+    public function assignUriBook(?AbstractDocument $doc): void
+    {
         // Get persistent identifier of book.
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);
 
@@ -82,6 +98,19 @@ class UriController extends \Kitodo\Dlf\Controller\AbstractController
             if (!empty($uris)) {
                 $this->view->assign('uriBooks', $uris);
             }
+        }
+    }
+
+    /**
+     * Assign the uri page.
+     *
+     * @param AbstractDocument|null $doc
+     * @return void
+     */
+    public function assignUriPage(?AbstractDocument $doc): void
+    {
+        if (!isset($this->requestData['page'])) {
+            return;
         }
 
         // Get persistent identifier of page.
