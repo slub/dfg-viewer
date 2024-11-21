@@ -12,7 +12,7 @@ sleep 60
 
 # testing the container
 HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" localhost);
-if [ $HTTP_CODE -ne 200 ]; then
+if [ "$HTTP_CODE" -ne 200 ]; then
     echo "Expected HTTP status code to be 200, but got $HTTP_CODE"
     exit 1
 fi
