@@ -8,10 +8,10 @@
 ## Prerequisites
 
 Install Docker Engine
-https://docs.docker.com/get-docker/
+<https://docs.docker.com/get-docker/>
 
 Install Docker Compose
-https://docs.docker.com/compose/install/
+<https://docs.docker.com/compose/install/>
 
 ## Usage
 
@@ -19,9 +19,10 @@ Go to the directory where you've put `docker-compose.yml`.
 
 Copy the environment file `.env.example` inside the directory and rename it to `.env`. Adjust the configuration of the respective service to suit your needs. The variables are marked with the prefix of the service e.g. `APP_` for our TYPO3 application with DFG-Viewer.
 
-*It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general, especially in an productive environment.*
+*It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general, especially in a productive environment.*
 
 Download images and start all service containers
+
 ```bash
 docker compose up -d
 ```
@@ -30,7 +31,7 @@ It may take about a minute for TYPO3 and the extension to be installed at the in
 
 The DFG Viewer instance can then be accessed under `localhost`.
 
-*When running `docker compose up` all services e.g. DFG-Viewer (APP) and database (DB) in our `docker-compose.yml` will be started and each as separate Docker container. *
+*When running `docker compose up` all services e.g. DFG-Viewer (APP) and database (DB) in our `docker-compose.yml` will be started and each as separate Docker container.*
 
 Stops all service containers
 ```bash
@@ -62,7 +63,7 @@ Adjust the `composer.json` files of the checkouts as follows.
 
 `composer.json` of the [DFG Viewer](https://github.com/slub/dfg-viewer) checkout `build/extensions/dfg-viewer`:
 
-```json
+```text
   ...
   "require": {
     ...
@@ -75,7 +76,7 @@ Adjust the `composer.json` files of the checkouts as follows.
 
 `composer.json` of the [SLUB Digital Collections](https://github.com/slub/slub_digitalcollections) checkout `build/extensions/slub_digitalcollections`:
 
-```json
+```text
   ...
   "require": {
     ...
