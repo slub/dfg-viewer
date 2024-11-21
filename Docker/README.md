@@ -1,4 +1,4 @@
-# DFG-Viewer Docker
+# DFG Viewer Docker
 
 * [Prerequisites](#prerequisites)
 * [Usage](#usage)
@@ -34,11 +34,13 @@ The DFG Viewer instance can then be accessed under `localhost`.
 *When running `docker compose up` all services e.g. DFG-Viewer (APP) and database (DB) in our `docker-compose.yml` will be started and each as separate Docker container.*
 
 Stops all service containers
+
 ```bash
 docker compose stop
 ```
 
 Stops and remove all service containers
+
 ```bash
 docker compose down
 ```
