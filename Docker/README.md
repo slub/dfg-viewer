@@ -102,7 +102,21 @@ docker compose build dfg-viewer-app
 
 *There are multiple ways to install the 3D viewer integration. The simplest is to upload the folder that is generated during the [viewer integration installation](https://github.com/slub/dlf-3d-viewers#installation). We have decided to provide an installation based on commands here.*
 
-Once all containers have been started (see [Usage](#usage)), you can continue as follows.
+Once all containers have been started (see [Usage](#usage)), you can run following command:
+
+```bash
+docker exec -u root -i dfg-viewer-app-1 sh -c "\
+apt-get update && apt-get install unzip \
+&& wget "https://github.com/slub/dlf-3d-viewers/archive/refs/heads/main.zip" -O /tmp/dlf-3d-viewers.zip \
+&& cd /var/www/html/dfg-viewer/public/fileadmin\
+&& unzip /tmp/dlf-3d-viewers.zip\
+&& mv dlf-3d-viewers-main dlf_3d_viewers\
+&& rm /tmp/dlf-3d-viewers.zip\
+&& sh dlf_3d_viewers/install.sh\
+&& chown -R www-data:www-data dlf_3d_viewers"
+```
+
+The steps of this long command can also be executed individually:
 
 1. Login into `dfg-viewer-app-1` container as root user.
 
