@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Waiting for database container."
-/wait-for-it.sh -t 0 $DB_HOST:$DB_PORT
+/wait-for-it.sh -t 0 "$DB_HOST:$DB_PORT"
 
 # run only once
 if ! test -f "config/system/settings.php"; then
@@ -26,10 +26,17 @@ if ! test -f "config/system/settings.php"; then
    --site-name="DFG-Viewer" \
    --use-existing-database \
    --web-server-config="apache"
+
+   # set base configuration
     ./vendor/bin/typo3 configuration:set 'EXTENSIONS/dlf/fileGrpAudio' 'AUDIO'
     ./vendor/bin/typo3 configuration:set 'EXTENSIONS/dlf/fileGrpVideo' 'VIDEO,DEFAULT'
     ./vendor/bin/typo3 configuration:set --json 'FE/cacheHash/requireCacheHashPresenceParameters' '["tx_dlf[id]"]'
     ./vendor/bin/typo3 configuration:set 'FE/pageNotFoundOnCHashError' 0
+
+    # set config if environment variable is not empty
+    if test ! -z "$T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN"; then
+        ./vendor/bin/typo3 configuration:set 'SYS/trustedHostsPattern' "$T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN"
+    fi
 fi
 
 exec apache2-foreground

@@ -94,7 +94,7 @@ ENV DB_USER=typo3
 ENV DB_PASSWORD=password
 ENV T3_USER=admin
 ENV T3_PASSWORD="dvAdmin.1"
-ENV T3_SYS_TRUSTEDHOSTSPATTERN=
+ENV T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN=""
 
 RUN chmod +x /usr/bin/startup.sh && \
     chmod +x /wait-for-it.sh && \

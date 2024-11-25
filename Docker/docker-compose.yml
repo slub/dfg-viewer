@@ -8,6 +8,7 @@ services:
       DB_HOST: ${DB_HOST}
       T3_USER: ${APP_T3_USER}
       T3_PASSWORD: ${APP_T3_PASSWORD}
+      T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN: ${APP_T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN}
     ports:
       - ${APP_PORT}:80
     volumes:
