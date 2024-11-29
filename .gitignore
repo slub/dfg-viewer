@@ -1,8 +1,10 @@
+.cache
 .idea/
 .vscode/
 .DS_Store
 node_modules
 *.css.map
+Build/Test/.env
 Documentation-GENERATED-temp/
 public/
 vendor/

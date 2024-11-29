@@ -46,10 +46,20 @@
         "kitodo/presentation": "^5.0|dev-master",
         "slub/slub-digitalcollections": "^4.0|dev-master"
     },
+    "require-dev": {
+      "phpunit/phpunit": "^9.6.20",
+      "spatie/phpunit-watcher": "^1.23.6",
+      "typo3/testing-framework": "^7.1.0"
+    },
     "autoload": {
         "psr-4": {
             "Slub\\Dfgviewer\\": "Classes/"
         }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Kitodo\\Dlf\\Tests\\": "Tests/"
+      }
     },
     "extra": {
         "typo3/cms": {
@@ -72,6 +82,12 @@
         "@composer docs:stop",
         "@composer docs:build",
         "@composer docs:start"
+      ],
+      "test:unit:local": [
+        "phpunit -c Build/Test/UnitTests.xml"
+      ],
+      "test:unit:watch": [
+        "phpunit-watcher watch -c Build/Test/UnitTests.xml"
       ]
     },
     "config": {
