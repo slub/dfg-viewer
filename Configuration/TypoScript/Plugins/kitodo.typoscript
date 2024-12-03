@@ -155,6 +155,7 @@ lib.kitodo.navigation.viewfunction {
 # imagedownloadtool
 # imagemanipulationtool
 # modeldownloadtool
+# viewerselectiontool
 # pdfdownloadtool
 # searchindocumenttool
 
@@ -170,6 +171,14 @@ plugin.tx_dlf_modeldownloadtool {
     settings {
         fileGrpsModelDownload = DEFAULT
         tools = modeldownloadtool
+    }
+}
+
+plugin.tx_dlf_viewerselectiontool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_viewerselectiontool {
+    settings {
+        fileGrpsModelDownload = DEFAULT
+        tools = viewerselectiontool
     }
 }
 
@@ -196,6 +205,7 @@ plugin.tx_dlf_pdfdownloadtool {
         tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
     }
 }
+
 
 # --------------------------------------------------------------------------------------------------------------------
 # Audio player
