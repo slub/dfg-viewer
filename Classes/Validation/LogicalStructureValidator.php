@@ -63,10 +63,11 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      */
     private function validateExternalReference(): void
     {
-        $externalReference = $this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr');
-        if ($externalReference->length > 1) {
+        $externalReferences = $this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr');
+        if ($externalReferences->length > 1) {
             $this->addError('Every mets:div in the logical structure may only contain one mets:mptr.', 1724234607);
-        } else if ($externalReference->length == 1) {
+        } else if ($externalReferences->length == 1) {
+            $externalReference = $externalReferences->item(0);
             if (!$externalReference->hasAttribute("LOCTYPE")) {
                 $this->addError('Mandatory "LOCTYPE" attribute of mets:mptr in the logical structure is missing.', 1724234607);
             } else {

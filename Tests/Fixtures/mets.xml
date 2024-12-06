@@ -106,7 +106,7 @@
         </mets:fileGrp>
     </mets:fileSec>
     <mets:structMap TYPE="LOGICAL">
-        <mets:div ID="LOG_0001" TYPE="volume" DMDID="DMDLOG_0001" LABEL="INDIA"/>
+        <mets:div ID="LOG_0001" TYPE="volume" DMDID="DMDLOG_0001" LABEL="INDIA" />
     </mets:structMap>
     <mets:structMap TYPE="PHYSICAL">
         <mets:div ID="PHYS_0000" TYPE="physSequence">

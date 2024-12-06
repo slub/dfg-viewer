@@ -57,24 +57,31 @@ handleDbmsAndDriverOptions() {
 # Load help text into $HELP
 read -r -d '' HELP <<EOF
 Based upon TYPO3 core test runner.
+
 Execute unit, functional and other test suites in a docker based test environment. Handles
 execution of single test files, sending xdebug information to a local IDE and more.
+
 Recommended docker version is >=20.10 for xdebug break pointing to work reliably, and
 a recent docker compose (tested >=2.27.1) is needed.
+
 Usage: $0 [options] [file]
+
 No arguments: Run all unit tests with PHP 7.4
+
 Options:
     -s <...>
         Specifies which test suite to run
             - composerInstall: "composer install"
             - functional: PHP functional tests
             - unit (default): PHP unit tests
+
     -t <|10.4|11.5>
         Only with -s composerInstall
         Specifies which TYPO3 version to install. When unset, installs either the packages from
         composer.lock, or the latest version otherwise (default behavior of "composer install").
             - 10.4
             - 11.5
+
     -a <mysqli|pdo_mysql>
         Only with -s functional
         Specifies to use another driver, following combinations are available:
@@ -84,11 +91,13 @@ Options:
             - mariadb
                 - mysqli (default)
                 - pdo_mysql
+
     -d <mariadb|mysql>
         Only with -s functional
         Specifies on which DBMS tests are performed
             - mariadb (default): use mariadb
             - mysql: use MySQL server
+
     -i <10.1|10.2|10.3|10.4|10.5|10.6|10.7|10.8|10.9|10.10>
         Only with -d mariadb
         Specifies on which version of mariadb tests are performed
@@ -102,6 +111,7 @@ Options:
             - 10.8
             - 10.9
             - 10.10
+
     -j <5.5|5.6|5.7|8.0>
         Only with -d mysql
         Specifies on which version of mysql tests are performed
@@ -109,36 +119,44 @@ Options:
             - 5.6
             - 5.7
             - 8.0
+
     -p <7.4|8.0|8.1|8.2>
         Specifies the PHP minor version to be used
             - 7.4: (default) use PHP 7.4
             - 8.0: use PHP 8.0
             - 8.1: use PHP 8.1
             - 8.2: use PHP 8.2 (note that xdebug is currently not available for PHP8.2)
+
     -e "<phpunit options>"
         Only with -s functional|functionalDeprecated|unit|unitDeprecated|unitRandom|acceptance
         Additional options to send to phpunit (unit & functional tests) or codeception (acceptance
         tests). For phpunit, options starting with "--" must be added after options starting with "-".
         Example -e "-v --filter canRetrieveValueWithGP" to enable verbose output AND filter tests
         named "canRetrieveValueWithGP"
+
     -x
         Only with -s functional|functionalDeprecated|unit|unitDeprecated|unitRandom|acceptance|acceptanceInstall
         Send information to host instance for test or system under test break points. This is especially
         useful if a local PhpStorm instance is listening on default xdebug port 9003. A different port
         can be selected with -y
+
     -y <port>
         Send xdebug information to a different port than default 9003 if an IDE like PhpStorm
         is not listening on default port.
+
     -w
         Only with -s functional|unit
         Run tests in watch mode.
+
     -u
         Update existing typo3/core-testing-*:latest docker images and remove dangling local docker volumes.
         Maintenance call to docker pull latest versions of the main php images. The images are updated once
         in a while and only the latest ones are supported by core testing. Use this if weird test errors occur.
         Also removes obsolete image versions of typo3/core-testing-*.
+
     -v
         Enable verbose script output. Shows variables and docker commands.
+
     -h
         Show this help.
 EOF
