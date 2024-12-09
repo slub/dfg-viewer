@@ -44,6 +44,11 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
             foreach ($structuralElements as $structuralElement) {
                 if (!$structuralElement->hasAttribute("ID")) {
                     $this->addError('Mandatory "ID" attribute of mets:div in the logical structure is missing.', 1724234607);
+                } else {
+                    $id = $structuralElement->getAttribute("ID");
+                    if ($this->xpath->query('//*[@ID="' . $id . '"]')->length > 1) {
+                        $this->addError('Logical structure "ID" "' . $id . '" already exists in document.', 1724234607);
+                    }
                 }
                 if (!$structuralElement->hasAttribute("TYPE")) {
                     $this->addError('Mandatory "TYPE" attribute of mets:div in the logical structure is missing.', 1724234607);
@@ -84,6 +89,8 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
                     $this->addError('URL of attribute value "xlink:href" of mets:mptr in the logical structure is not valid.', 1727792902);
                 }
             }
+
+            //*[@id="button"]
 
         }
     }
