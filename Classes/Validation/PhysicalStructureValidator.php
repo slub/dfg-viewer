@@ -35,10 +35,10 @@ class PhysicalStructureValidator extends ApplicationProfileBaseValidator
             $this->addError('Every physical structure has to consist of one mets:div for the sequence and at least of one subordinate mets:div.', 1724234607);
         } else {
             foreach ($subordinateStructuralElements as $subordinateStructuralElement) {
-                if (!$subordinateStructuralElements->hasAttribute("ID")) {
+                if (!$subordinateStructuralElement->hasAttribute("ID")) {
                     $this->addError('Mandatory "ID" attribute of mets:div in the physical structure is missing.', 1724234607);
                 } else {
-                    $id = $subordinateStructuralElements->getAttribute("ID");
+                    $id = $subordinateStructuralElement->getAttribute("ID");
                     if ($this->xpath->query('//*[@ID="' . $id . '"]')->length > 1) {
                         $this->addError('Physical structure "ID" "' . $id . '" already exists in document.', 1724234607);
                     }
