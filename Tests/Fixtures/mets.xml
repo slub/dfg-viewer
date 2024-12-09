@@ -110,7 +110,7 @@
     </mets:structMap>
     <mets:structMap TYPE="PHYSICAL">
         <mets:div ID="PHYS_0000" TYPE="physSequence">
-            <mets:div ID="PHYS_0001" ORDER="1" ORDERLABEL="1" TYPE="object">
+            <mets:div ID="PHYS_0001" ORDER="1" ORDERLABEL="1" TYPE="page">
                 <mets:fptr FILEID="FILE_0001_DEFAULT"/>
                 <mets:fptr FILEID="FILE_0001_THUMBS"/>
             </mets:div>

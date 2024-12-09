@@ -19,7 +19,7 @@ abstract class ApplicationProfileBaseValidator extends AbstractDlfValidator
         parent::__construct(DOMDocument::class);
     }
 
-    protected function setUpIsValid($value): void
+    protected function setupIsValid($value): void
     {
         $this->xpath = new DOMXPath($value);
     }

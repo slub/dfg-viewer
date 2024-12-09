@@ -3,17 +3,19 @@
 namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
 use DOMDocument;
+use DOMElement;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
+use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 abstract class ApplicationProfileValidatorTest extends UnitTestCase
 {
+    const NAMESPACE_METS = 'http://www.loc.gov/METS/';
+
     protected $validator;
 
     protected $doc;
-
-    private $originalDoc;
 
     abstract protected function createValidator(): AbstractDlfValidator;
 
@@ -22,7 +24,6 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         parent::setUp();
         $this->resetSingletonInstances = true;
         $this->doc = $this->getDOMDocument();
-        $this->originalDoc = $this->doc;
         $this->validator = $this->createValidator();
     }
 
@@ -33,9 +34,20 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
      */
     public function testDocument()
     {
-        $result = $this->validator->validate($this->doc);
+        $result = $this->validate();
         self::assertFalse($result->hasErrors());
     }
+
+    /**
+     * Validates using validator and DOMDocument
+     *
+     * @return mixed|Result
+     */
+    public function validate(): Result
+    {
+        return $this->validator->validate($this->doc);
+    }
+
 
     protected function resetDoc(): void
     {
@@ -43,67 +55,74 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     }
 
     /**
-     * Remove notes found by node expression in document.
+     * Add child node with name and namespace to DOMDocument.
      *
-     * @param DOMDocument $doc
      * @param string $expression
      * @param string $namespace
      * @param string $name
      * @return void
      * @throws \DOMException
      */
-    protected function addChildNode(DOMDocument $doc, string $expression, string $namespace, string $name): void
+    protected function addChildNodeNS(string $expression, string $namespace, string $name): void
     {
-        $xpath = new DOMXPath($doc);
-        $newNode = $doc->createElementNS($namespace, $name);
+        $this->addChildNode($expression, $this->doc->createElementNS($namespace, $name));
+    }
+
+    /**
+     * Add node as child node to DOMDocument.
+     *
+     * @param string $expression
+     * @param DOMElement $newNode
+     * @return void
+     */
+    protected function addChildNode(string $expression, DOMElement $newNode): void
+    {
+        $xpath = new DOMXPath($this->doc);
         foreach ($xpath->evaluate($expression) as $node) {
             $node->appendChild($newNode);
         }
     }
 
     /**
-     * Remove notes found by node expression in document.
+     * Remove notes found by node expression in DOMDocument.
      *
-     * @param DOMDocument $doc
      * @param string $expression
      * @return void
      */
-    protected function removeNodes(DOMDocument $doc, string $expression): void
+    protected function removeNodes(string $expression): void
     {
-        $xpath = new DOMXPath($doc);
+        $xpath = new DOMXPath($this->doc);
         foreach ($xpath->evaluate($expression) as $node) {
             $node->parentNode->removeChild($node);
         }
     }
 
     /**
-     * Set value of attribute found by node expression in document.
+     * Set value of attribute found by node expression in DOMDocument.
      *
-     * @param DOMDocument $doc
      * @param string $expression
      * @param string $attribute
      * @param string $value
      * @return void
      */
-    protected function setAttributeValue(DOMDocument $doc, string $expression, string $attribute, string $value): void
+    protected function setAttributeValue(string $expression, string $attribute, string $value): void
     {
-        $xpath = new DOMXPath($doc);
+        $xpath = new DOMXPath($this->doc);
         foreach ($xpath->evaluate($expression) as $node) {
             $node->setAttribute($attribute, $value);
         }
     }
 
     /**
-     * Remove attribute found by node expression in document.
+     * Remove attribute found by node expression in DOMDocument.
      *
-     * @param DOMDocument $doc
      * @param string $expression
      * @param string $attribute
      * @return void
      */
-    protected function removeAttribute(DOMDocument $doc, string $expression, string $attribute): void
+    protected function removeAttribute(string $expression, string $attribute): void
     {
-        $xpath = new DOMXPath($doc);
+        $xpath = new DOMXPath($this->doc);
         foreach ($xpath->evaluate($expression) as $node) {
             $node->removeAttribute($attribute);
         }

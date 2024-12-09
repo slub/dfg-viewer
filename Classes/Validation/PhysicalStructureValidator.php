@@ -6,28 +6,33 @@ class PhysicalStructureValidator extends ApplicationProfileBaseValidator
 {
     protected function isValid($value): void
     {
-        parent::setValue($value);
+        $this->setupIsValid($value);
 
+        // Validates against the rules of chapter "2.2.1 Physical structure - mets:structMap"
         if ($this->xpath->query('//mets:structMap[@TYPE="PHYSICAL"]')->length > 1) {
             $this->addError('Every METS file has to have no or one physical structural element.', 1723727164447);
         }
-
         $this->validateStructuralElements();
     }
 
 
     /**
+     *
+     * Validates the structural elements.
+     *
+     * Validates against the rules of chapter "2.2.2.1 Structural element - mets:div"
+     *
      * @return void
      */
     private function validateStructuralElements(): void
     {
-        if ($this->xpath->query('//mets:structMap[@TYPE="PHYSICAL"]/mets:div[@TYPE="“physSequence"]')->length == 0) {
-            $this->addError('Every physical structure has to consist one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', 1724234607);
+        if ($this->xpath->query('//mets:structMap[@TYPE="PHYSICAL"]/mets:div[@TYPE="physSequence"]')->length == 0) {
+            $this->addError('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', 1724234607);
         }
 
-        $subordinateStructuralElements = $this->xpath->query('//mets:structMap[@TYPE="PHYSICAL"]/mets:div[@TYPE="“physSequence"]/mets:div');
+        $subordinateStructuralElements = $this->xpath->query('//mets:structMap[@TYPE="PHYSICAL"]/mets:div[@TYPE="physSequence"]/mets:div');
         if ($subordinateStructuralElements->length == 0) {
-            $this->addError('Every physical structure has to consist one mets:div for the sequence and at least one subordinate mets:div.', 1724234607);
+            $this->addError('Every physical structure has to consist of one mets:div for the sequence and at least of one subordinate mets:div.', 1724234607);
         } else {
             foreach ($subordinateStructuralElements as $subordinateStructuralElement) {
                 if (!$subordinateStructuralElement->hasAttribute("TYPE")) {

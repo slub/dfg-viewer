@@ -14,7 +14,7 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
 {
     protected function isValid($value): void
     {
-        $this->setUpIsValid($value);
+        $this->setupIsValid($value);
 
         // Validates against the rules of chapter "2.1.1 Logical structure - mets:structMap"
         if ($this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]')->length == 0) {
@@ -24,6 +24,8 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
         $this->validateStructuralElements();
 
         $this->validateExternalReference();
+
+        $this->validatePeriodicPublishingSequences();
     }
 
     /**
@@ -84,5 +86,17 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
             }
 
         }
+    }
+
+    /**
+     * Validates the periodic publishing sequences.
+     *
+     * Validates against the rules of chapter "2.1.3 Periodic publishing sequences"
+     *
+     * @return void
+     */
+    private function validatePeriodicPublishingSequences(): void
+    {
+        // TODO
     }
 }
