@@ -3,9 +3,9 @@
 namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
-use Slub\Dfgviewer\Validation\LogicalStructureValidator;
+use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
 
-class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
+class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
 {
 
     /**
@@ -35,6 +35,14 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $this->removeAttribute('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'ID');
         $result = $this->validate();
         self::assertEquals($result->getFirstError()->getMessage(), 'Mandatory "ID" attribute of mets:div in the logical structure is missing.');
+
+        $this->resetDoc();
+
+        $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
+        $node->setAttribute('ID', 'LOG_0001');
+        $this->addChildNode('//mets:structMap[@TYPE="LOGICAL"]/mets:div', $node);
+        $result = $this->validate();
+        self::assertEquals('Logical structure "ID" "LOG_0001" already exists in document.', $result->getFirstError()->getMessage());
 
         $this->resetDoc();
 

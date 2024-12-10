@@ -2,9 +2,31 @@
 
 namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
+/**
+ * Copyright notice
+ *
+ * (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
+ * All rights reserved
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
+
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
-use Slub\Dfgviewer\Validation\LogicalStructureValidator;
-use Slub\Dfgviewer\Validation\PhysicalStructureValidator;
+use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
 {
@@ -45,6 +67,20 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $this->removeNodes('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div');
         $result = $this->validate();
         self::assertEquals('Every physical structure has to consist of one mets:div for the sequence and at least of one subordinate mets:div.', $result->getFirstError()->getMessage());
+
+        $this->resetDoc();
+
+        $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'ID');
+        $result = $this->validate();
+        self::assertEquals($result->getFirstError()->getMessage(), 'Mandatory "ID" attribute of mets:div in the physical structure is missing.');
+
+        $this->resetDoc();
+
+        $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
+        $node->setAttribute('ID', 'PHYS_0001');
+        $this->addChildNode('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', $node);
+        $result = $this->validate();
+        self::assertEquals('Physical structure "ID" "PHYS_0001" already exists in document.', $result->getFirstError()->getMessage());
 
         $this->resetDoc();
 
