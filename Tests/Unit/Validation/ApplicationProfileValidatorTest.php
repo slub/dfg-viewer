@@ -58,6 +58,9 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     public function testDocument()
     {
         $result = $this->validate();
+        if($result->hasErrors()){
+            self::assertEquals('',$result->getFirstError()->getMessage());
+        }
         self::assertFalse($result->hasErrors());
     }
 
@@ -77,19 +80,19 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
      * Validates using a validator and DOMDocument, then asserts that the resulting error message matches the expected value.
      *
      * @param $message
-     * @param $resetDoc
+     * @param $resetDocument bool True if the document is to be reset at the end of the function.
      * @return void
      */
-    public function validateAndAssertEquals(string $message, bool $resetDoc = false): void
+    public function validateAndAssertEquals(string $message, bool $resetDocument = false): void
     {
         $result = $this->validator->validate($this->doc);
         self::assertEquals($message, $result->getFirstError()->getMessage());
-        if ($resetDoc) {
-            $this->resetDoc();
+        if ($resetDocument) {
+            $this->resetDocument();
         }
     }
 
-    protected function resetDoc(): void
+    protected function resetDocument(): void
     {
         $this->doc = $this->getDOMDocument();
     }

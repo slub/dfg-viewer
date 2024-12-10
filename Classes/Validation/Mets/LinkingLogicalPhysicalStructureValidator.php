@@ -43,12 +43,13 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
     {
         $this->setupIsValid($value);
 
+        $structLinks = $this->xpath->query('//mets:structLink');
         // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
-        if ($this->xpath->query('//mets:structLink')->length > 1) {
+        if ($structLinks === false || $structLinks->length > 1) {
             $this->addError('Every METS file has to have no or one struct link element.', 1723727164447);
+        } elseif ($structLinks->length == 1) {
+            $this->validateLinkElements();
         }
-
-        $this->validateLinkingElements();
     }
 
     /**
@@ -58,14 +59,19 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
      *
      * @return void
      */
-    private function validateLinkingElements(): void
+    private function validateLinkElements(): void
     {
         $linkingElements = $this->xpath->query('//mets:structLink/mets:smLink');
+
+        if ($linkingElements->length === 0) {
+            $this->addError('There should be at least one "mets:smLink" under "mets:structLink".', 1723727164447);
+        }
 
         foreach ($linkingElements as $linkingElement) {
             $this->validateLinkingElement($linkingElement, "xlink:from", "LOGICAL");
             $this->validateLinkingElement($linkingElement, "xlink:to", "PHYSICAL");
         }
+
     }
 
     /**
@@ -82,7 +88,12 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
             $this->addError('Mandatory "' . $attribute . ' attribute of mets:div in the logical structure is missing.', 1724234607);
         } else {
             $id = $linkingElement->getAttribute($attribute);
-            if ($this->xpath->query('//mets:structMap[@TYPE="' . $structMapType . '"]/mets:div/mets:div[@ID = \'' . $id . '\']')->length !== 1) {
+            $structMaps = $this->xpath->query('//mets:structMap[@TYPE="' . $structMapType . '"]');
+            $foundElements = 0;
+            foreach ($structMaps as $structMap) {
+                $foundElements += $this->xpath->query('//mets:div[@ID = \'' . $id . '\']', $structMap)->length;
+            }
+            if ($foundElements !== 1) {
                 $this->addError('None or multiple ids found for "' . $id . '" in struct map type "' . $structMapType . '".', 1724234607);
             }
         }

@@ -43,6 +43,18 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
         $this->validateAndAssertEquals('Every METS file has to have no or one struct link element.');
     }
 
+    public function testLinkElements(): void
+    {
+        $this->removeNodes('//mets:structLink/mets:smLink');
+        $this->validateAndAssertEquals('There should be at least one "mets:smLink" under "mets:structLink".', true);
+
+        $this->setAttributeValue('//mets:structLink/mets:smLink', 'xlink:from', 'Test');
+        $this->validateAndAssertEquals('None or multiple ids found for "Test" in struct map type "LOGICAL".', true);
+
+        $this->setAttributeValue('//mets:structLink/mets:smLink', 'xlink:to', 'Test');
+        $this->validateAndAssertEquals('None or multiple ids found for "Test" in struct map type "PHYSICAL".', true);
+    }
+
     protected function createValidator(): AbstractDlfValidator
     {
         return new LinkingLogicalPhysicalStructureValidator();
