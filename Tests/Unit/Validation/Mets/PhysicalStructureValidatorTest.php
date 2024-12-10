@@ -41,8 +41,7 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:structMap');
         $node->setAttribute('TYPE', 'PHYSICAL');
         $this->addChildNode('/mets:mets', $node);
-        $result = $this->validate();
-        self::assertEquals('Every METS file has to have no or one physical structural element.', $result->getFirstError()->getMessage());
+        $this->validateAndAssertEquals('Every METS file has to have no or one physical structural element.');
     }
 
     /**
@@ -53,46 +52,27 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
     public function testStructuralElements(): void
     {
         $this->removeNodes('//mets:structMap[@TYPE="PHYSICAL"]/mets:div');
-        $result = $this->validate();
-        self::assertEquals('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', true);
 
         $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', 'TYPE');
-        $result = $this->validate();
-        self::assertEquals('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', true);
 
         $this->removeNodes('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div');
-        $result = $this->validate();
-        self::assertEquals('Every physical structure has to consist of one mets:div for the sequence and at least of one subordinate mets:div.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Every physical structure has to consist of one mets:div for the sequence and at least of one subordinate mets:div.', true);
 
         $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'ID');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'Mandatory "ID" attribute of mets:div in the physical structure is missing.');
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Mandatory "ID" attribute of mets:div in the physical structure is missing.', true);
 
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'PHYS_0001');
         $this->addChildNode('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', $node);
-        $result = $this->validate();
-        self::assertEquals('Physical structure "ID" "PHYS_0001" already exists in document.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Physical structure "ID" "PHYS_0001" already exists in document.', true);
 
         $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'TYPE');
-        $result = $this->validate();
-        self::assertEquals('Mandatory "TYPE" attribute of subordinate mets:div in physical structure is missing.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Mandatory "TYPE" attribute of subordinate mets:div in physical structure is missing.', true);
 
         $this->setAttributeValue('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'TYPE', 'Test');
-        $result = $this->validate();
-        self::assertEquals('Value "Test" of "TYPE" attribute of mets:div in physical structure is not permissible.', $result->getFirstError()->getMessage());
+        $this->validateAndAssertEquals('Value "Test" of "TYPE" attribute of mets:div in physical structure is not permissible.');
     }
 
     protected function createValidator(): AbstractDlfValidator

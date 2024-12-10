@@ -71,6 +71,23 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         return $this->validator->validate($this->doc);
     }
 
+    /**
+     * Validates using validator and DOMDocument and assert result error message for equality.
+     *
+     * Validates using a validator and DOMDocument, then asserts that the resulting error message matches the expected value.
+     *
+     * @param $message
+     * @param $resetDoc
+     * @return void
+     */
+    public function validateAndAssertEquals(string $message, bool $resetDoc = false): void
+    {
+        $result = $this->validator->validate($this->doc);
+        self::assertEquals($message, $result->getFirstError()->getMessage());
+        if ($resetDoc) {
+            $this->resetDoc();
+        }
+    }
 
     protected function resetDoc(): void
     {

@@ -39,8 +39,7 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
     public function testNotExistingLogicalStructureElement(): void
     {
         $this->removeNodes( '//mets:structMap[@TYPE="LOGICAL"]');
-        $result = $this->validate();
-        self::assertEquals('Every METS file has to have at least one logical structural element.', $result->getFirstError()->getMessage());
+        $this->validateAndAssertEquals('Every METS file has to have at least one logical structural element.');
     }
 
     /**
@@ -50,34 +49,21 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
     public function testStructuralElements(): void
     {
         $this->removeNodes('//mets:structMap[@TYPE="LOGICAL"]/mets:div');
-        $result = $this->validate();
-        self::assertEquals('Every logical structure has to consist of at least one mets:div.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Every logical structure has to consist of at least one mets:div.', true);
 
         $this->removeAttribute('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'ID');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'Mandatory "ID" attribute of mets:div in the logical structure is missing.');
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Mandatory "ID" attribute of mets:div in the logical structure is missing.', true);
 
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'LOG_0001');
         $this->addChildNode('//mets:structMap[@TYPE="LOGICAL"]/mets:div', $node);
-        $result = $this->validate();
-        self::assertEquals('Logical structure "ID" "LOG_0001" already exists in document.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Logical structure "ID" "LOG_0001" already exists in document.', true);
 
         $this->removeAttribute('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'TYPE');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'Mandatory "TYPE" attribute of mets:div in the logical structure is missing.');
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Mandatory "TYPE" attribute of mets:div in the logical structure is missing.', true);
 
         $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'TYPE', 'Test');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'Value "Test" of "TYPE" attribute of mets:div in the logical structure is not permissible.');
+        $this->validateAndAssertEquals('Value "Test" of "TYPE" attribute of mets:div in the logical structure is not permissible.', true);
     }
 
 
@@ -90,26 +76,19 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
     {
         $this->addChildNodeNS('//mets:structMap[@TYPE="LOGICAL"]/mets:div', self::NAMESPACE_METS, 'mets:mptr');
         $this->addChildNodeNS('//mets:structMap[@TYPE="LOGICAL"]/mets:div', self::NAMESPACE_METS, 'mets:mptr');
-        $result = $this->validate();
-        self::assertEquals('Every mets:div in the logical structure may only contain one mets:mptr.', $result->getFirstError()->getMessage());
-
-        $this->resetDoc();
+        $this->validateAndAssertEquals('Every mets:div in the logical structure may only contain one mets:mptr.', true);
 
         $this->addChildNodeNS('//mets:structMap[@TYPE="LOGICAL"]/mets:div', self::NAMESPACE_METS, 'mets:mptr');
-        $result = $this->validate();
-        self::assertEquals('Mandatory "LOCTYPE" attribute of mets:mptr in the logical structure is missing.', $result->getFirstError()->getMessage());
+        $this->validateAndAssertEquals('Mandatory "LOCTYPE" attribute of mets:mptr in the logical structure is missing.');
 
         $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'LOCTYPE', 'Test');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'Value "Test" of "LOCTYPE" attribute of mets:mptr in the logical structure is not permissible.');
+        $this->validateAndAssertEquals('Value "Test" of "LOCTYPE" attribute of mets:mptr in the logical structure is not permissible.');
 
         $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'LOCTYPE', 'URL');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'Mandatory "xlink:href" attribute of mets:mptr in the logical structure is missing.');
+        $this->validateAndAssertEquals('Mandatory "xlink:href" attribute of mets:mptr in the logical structure is missing.');
 
         $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'xlink:href', 'Test');
-        $result = $this->validate();
-        self::assertEquals($result->getFirstError()->getMessage(), 'URL of attribute value "xlink:href" of mets:mptr in the logical structure is not valid.');
+        $this->validateAndAssertEquals('URL of attribute value "xlink:href" of mets:mptr in the logical structure is not valid.');
 
         $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'xlink:href', 'http://example.com/periodical.xml');
         $result = $this->validate();
