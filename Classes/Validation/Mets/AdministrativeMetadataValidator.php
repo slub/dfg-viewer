@@ -27,13 +27,19 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+/**
+ * The validator validates against the rules outlined in chapter 2.6 of the METS application profile 2.3.1.
+ *
+ * @package TYPO3
+ * @subpackage dfg-viewer
+ *
+ * @access public
+ */
 class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
 {
-    protected function isValid($value): void
+    protected function isValidDocument(): void
     {
-        parent::setValue($value);
-
-        if ($this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]')->length == 0) {
+        if ($this->xpath->query('//mets:amdSec[@TYPE="LOGICAL"]')->length == 0) {
             $this->addError('Every METS file has to have at least one logical structural element.', 1723727164447);
         }
 

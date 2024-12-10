@@ -37,10 +37,8 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  */
 class PhysicalStructureValidator extends ApplicationProfileBaseValidator
 {
-    protected function isValid($value): void
+    protected function isValidDocument(): void
     {
-        $this->setupIsValid($value);
-
         // Validates against the rules of chapter "2.2.1 Physical structure - mets:structMap"
         if ($this->xpath->query('//mets:structMap[@TYPE="PHYSICAL"]')->length > 1) {
             $this->addError('Every METS file has to have no or one physical structural element.', 1723727164447);

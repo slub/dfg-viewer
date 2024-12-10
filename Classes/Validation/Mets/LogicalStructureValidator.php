@@ -37,10 +37,8 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  */
 class LogicalStructureValidator extends ApplicationProfileBaseValidator
 {
-    protected function isValid($value): void
+    protected function isValidDocument(): void
     {
-        $this->setupIsValid($value);
-
         // Validates against the rules of chapter "2.1.1 Logical structure - mets:structMap"
         if ($this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]')->length == 0) {
             $this->addError('Every METS file has to have at least one logical structural element.', 1723727164447);

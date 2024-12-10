@@ -39,10 +39,8 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
 class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseValidator
 {
 
-    protected function isValid($value): void
+    protected function isValidDocument(): void
     {
-        $this->setupIsValid($value);
-
         $structLinks = $this->xpath->query('//mets:structLink');
         // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
         if ($structLinks === false || $structLinks->length > 1) {
