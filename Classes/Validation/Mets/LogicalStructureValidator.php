@@ -37,17 +37,20 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  */
 class LogicalStructureValidator extends ApplicationProfileBaseValidator
 {
+
+    const XPATH_LOGICAL_STRUCTURES = '//mets:mets/mets:structMap[@TYPE="LOGICAL"]';
+
+    const XPATH_STRUCTURAL_ELEMENTS = self::XPATH_LOGICAL_STRUCTURES . '/mets:div';
+
+    const XPATH_EXTERNAL_REFERENCES = self::XPATH_STRUCTURAL_ELEMENTS . '/mets:mptr';
+
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.1.1 Logical structure - mets:structMap"
-        if ($this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]')->length == 0) {
-            $this->addError('Every METS file has to have at least one logical structural element.', 1723727164447);
-        }
+        $this->query(self::XPATH_LOGICAL_STRUCTURES)->validateHasAny();
 
         $this->validateStructuralElements();
-
-        $this->validateExternalReference();
-
+        $this->validateExternalReferences();
         $this->validatePeriodicPublishingSequences();
     }
 
@@ -58,30 +61,17 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    private function validateStructuralElements(): void
+    protected function validateStructuralElements(): void
     {
-        $structuralElements = $this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]/mets:div');
-        if ($structuralElements->length == 0) {
-            $this->addError('Every logical structure has to consist of at least one mets:div.', 1724234607);
-        } else {
-            foreach ($structuralElements as $structuralElement) {
-                if (!$structuralElement->hasAttribute("ID")) {
-                    $this->addError('Mandatory "ID" attribute of mets:div in the logical structure is missing.', 1724234607);
-                } else {
-                    $id = $structuralElement->getAttribute("ID");
-                    if ($this->xpath->query('//*[@ID="' . $id . '"]')->length > 1) {
-                        $this->addError('Logical structure "ID" "' . $id . '" already exists in document.', 1724234607);
-                    }
-                }
-                if (!$structuralElement->hasAttribute("TYPE")) {
-                    $this->addError('Mandatory "TYPE" attribute of mets:div in the logical structure is missing.', 1724234607);
-                } else {
-                    if (!in_array($structuralElement->getAttribute("TYPE"), self::STRUCTURE_DATASET)) {
-                        $this->addError('Value "' . $structuralElement->getAttribute("TYPE") . '" of "TYPE" attribute of mets:div in the logical structure is not permissible.', 1724234607);
-                    }
-                }
-            }
-        }
+        $this->query(self::XPATH_STRUCTURAL_ELEMENTS)
+            ->validateHasAny()
+            ->iterate(array($this, "validateStructuralElement"));
+    }
+
+    protected function validateStructuralElement(\DOMNode $structureElement): void
+    {
+        $this->validateHasUniqueId($structureElement);
+        $this->validateHasAttributeWithValue($structureElement, "TYPE", self::STRUCTURE_DATASET);
     }
 
     /**
@@ -91,31 +81,17 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    private function validateExternalReference(): void
+    protected function validateExternalReferences(): void
     {
-        $externalReferences = $this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr');
-        if ($externalReferences->length > 1) {
-            $this->addError('Every mets:div in the logical structure may only contain one mets:mptr.', 1724234607);
-        } else if ($externalReferences->length == 1) {
-            $externalReference = $externalReferences->item(0);
-            if (!$externalReference->hasAttribute("LOCTYPE")) {
-                $this->addError('Mandatory "LOCTYPE" attribute of mets:mptr in the logical structure is missing.', 1724234607);
-            } else {
-                if (!in_array($externalReference->getAttribute("LOCTYPE"), array("URL", "PURL"))) {
-                    $this->addError('Value "' . $externalReference->getAttribute("LOCTYPE") . '" of "LOCTYPE" attribute of mets:mptr in the logical structure is not permissible.', 1724234607);
-                }
-            }
-            if (!$externalReference->hasAttribute("xlink:href")) {
-                $this->addError('Mandatory "xlink:href" attribute of mets:mptr in the logical structure is missing.', 1724234607);
-            } else {
-                if (!filter_var($externalReference->getAttribute("xlink:href"), FILTER_VALIDATE_URL)) {
-                    $this->addError('URL of attribute value "xlink:href" of mets:mptr in the logical structure is not valid.', 1727792902);
-                }
-            }
+        $this->query(self::XPATH_EXTERNAL_REFERENCES)
+            ->validateHasNoneOrOne()
+            ->iterate(array($this, "validateExternalReference"));
+    }
 
-            //*[@id="button"]
-
-        }
+    protected function validateExternalReference(\DOMNode $externalReference): void
+    {
+        $this->validateHasAttributeWithValue($externalReference, "LOCTYPE", array("URL", "PURL"));
+        $this->validateHasAttributeWithUrl($externalReference, "xlink:href");
     }
 
     /**
@@ -125,7 +101,7 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    private function validatePeriodicPublishingSequences(): void
+    protected function validatePeriodicPublishingSequences(): void
     {
         // TODO
     }

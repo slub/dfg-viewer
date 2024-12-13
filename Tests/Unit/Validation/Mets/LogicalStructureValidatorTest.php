@@ -38,8 +38,8 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testNotExistingLogicalStructureElement(): void
     {
-        $this->removeNodes( '//mets:structMap[@TYPE="LOGICAL"]');
-        $this->validateAndAssertEquals('Every METS file has to have at least one logical structural element.');
+        $this->removeNodes(LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES);
+        $this->assertHasAny(LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES);
     }
 
     /**
@@ -48,49 +48,52 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testStructuralElements(): void
     {
-        $this->removeNodes('//mets:structMap[@TYPE="LOGICAL"]/mets:div');
-        $this->validateAndAssertEquals('Every logical structure has to consist of at least one mets:div.', true);
+        $this->removeNodes(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS);
+        $this->assertHasAny(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS);
+        $this->resetDocument();
 
-        $this->removeAttribute('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'ID');
-        $this->validateAndAssertEquals('Mandatory "ID" attribute of mets:div in the logical structure is missing.', true);
+        $this->removeAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
+        $this->assertHasAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
+        $this->resetDocument();
 
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'LOG_0001');
-        $this->addChildNode('//mets:structMap[@TYPE="LOGICAL"]/mets:div', $node);
-        $this->validateAndAssertEquals('Logical structure "ID" "LOG_0001" already exists in document.', true);
+        $this->addChildNode(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, $node);
+        $this->assertHasUniqueId(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'LOG_0001');
+        $this->resetDocument();
 
-        $this->removeAttribute('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'TYPE');
-        $this->validateAndAssertEquals('Mandatory "TYPE" attribute of mets:div in the logical structure is missing.', true);
+        $this->removeAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
+        $this->assertHasAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
 
-        $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div', 'TYPE', 'Test');
-        $this->validateAndAssertEquals('Value "Test" of "TYPE" attribute of mets:div in the logical structure is not permissible.', true);
+        $this->setAttributeValue(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
+        $this->assertHasAttributeWithValue(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
     }
-
-
 
     /**
      * Test validation against the rules of chapter "2.1.2.2 Reference to external METS-files - mets:div / mets:mptr"
      * @return void
+     * @throws \DOMException
      */
     public function testExternalReference(): void
     {
-        $this->addChildNodeNS('//mets:structMap[@TYPE="LOGICAL"]/mets:div', self::NAMESPACE_METS, 'mets:mptr');
-        $this->addChildNodeNS('//mets:structMap[@TYPE="LOGICAL"]/mets:div', self::NAMESPACE_METS, 'mets:mptr');
-        $this->validateAndAssertEquals('Every mets:div in the logical structure may only contain one mets:mptr.', true);
+        $this->addChildNodeNS(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
+        $this->addChildNodeNS(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
+        $this->assertHasNoneOrOne(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES);
+        $this->resetDocument();
 
-        $this->addChildNodeNS('//mets:structMap[@TYPE="LOGICAL"]/mets:div', self::NAMESPACE_METS, 'mets:mptr');
-        $this->validateAndAssertEquals('Mandatory "LOCTYPE" attribute of mets:mptr in the logical structure is missing.');
+        $this->addChildNodeNS(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
+        $this->assertHasAttribute(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE');
 
-        $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'LOCTYPE', 'Test');
-        $this->validateAndAssertEquals('Value "Test" of "LOCTYPE" attribute of mets:mptr in the logical structure is not permissible.');
+        $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE', 'Test');
+        $this->assertHasAttributeWithValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE', 'Test');
 
-        $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'LOCTYPE', 'URL');
-        $this->validateAndAssertEquals('Mandatory "xlink:href" attribute of mets:mptr in the logical structure is missing.');
+        $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE', 'URL');
+        $this->assertHasAttribute(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href');
 
-        $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'xlink:href', 'Test');
-        $this->validateAndAssertEquals('URL of attribute value "xlink:href" of mets:mptr in the logical structure is not valid.');
+        $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href', 'Test');
+        $this->assertHasAttributeWithUrl(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href', 'Test');
 
-        $this->setAttributeValue('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr', 'xlink:href', 'http://example.com/periodical.xml');
+        $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href', 'http://example.com/periodical.xml');
         $result = $this->validate();
         self::assertFalse($result->hasErrors());
     }

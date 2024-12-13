@@ -39,59 +39,55 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
 {
     protected function isValidDocument(): void
     {
-        if ($this->xpath->query('//mets:amdSec[@TYPE="LOGICAL"]')->length == 0) {
-            $this->addError('Every METS file has to have at least one logical structural element.', 1723727164447);
+        // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
+        $admSections = $this->xpath->query('//mets:amdSec');
+        if ($admSections === false || $admSections->length == 0) {
+            $this->addError('Every METS file has to have at least one administrative metadata section.', 1723727164447);
         }
 
-        $this->validateStructuralElements();
+        $hasDFGViewerSpecifics = false;
+        foreach ($admSections as $admSection) {
+            $this->validateTechnicalMetadata($admSection);
+            $hasDFGViewerSpecifics = ($this->xpath->query('/mets:rightsMD', $admSection)->length != 0 ||
+                $this->xpath->query('/mets:digiprovMD', $admSection)->length != 0);
+        }
 
-        $this->validateExternalReference();
-    }
-
-    /**
-     * @return void
-     */
-    private function validateStructuralElements(): void
-    {
-        $structuralElements = $this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]/mets:div');
-        if ($structuralElements->length == 0) {
-            $this->addError('Every logical structure has to consist of at least on mets:div.', 1724234607);
-        } else {
-            foreach ($structuralElements as $structuralElement) {
-                if (!$structuralElement->hasAttribute("ID")) {
-                    $this->addError('Mandatory "ID" attribute of mets:div in the logical structure is missing.', 1724234607);
-                }
-
-                if (!$structuralElement->hasAttribute("TYPE")) {
-                    $this->addError('Mandatory "TYPE" attribute of mets:div in the logical structure is missing.', 1724234607);
-                } else {
-                    if (!in_array($structuralElement->getAttribute("TYPE"), self::STRUCTURE_DATASET)) {
-                        $this->addError('Value "' . $structuralElement->getAttribute("TYPE") . '" of "TYPE" attribute of mets:div in the logical structure is not permissible.', 1724234607);
-                    }
-                }
-            }
+        if ($hasDFGViewerSpecifics) {
+            $this->addError('Every METS file must include at least one administrative metadata section containing "mets:rightsMD" and "mets:digiprovMD" as child elements.', 1723727164447);
         }
     }
 
     /**
+     * Validates the technical metadata.
+     *
+     * Validates against the rules of chapters "2.6.2.1 Technische Metadaten – mets:techMD" and "2.6.2.2 Eingebettete technische Daten – mets:techMD/mets:mdWrap"
+     *
      * @return void
      */
-    private function validateExternalReference(): void
+    private function validateTechnicalMetadata(\DOMNode $amdSection): void
     {
-        $externalReference = $this->xpath->query('//mets:structMap[@TYPE="LOGICAL"]/mets:div/mets:mptr');
-        if ($externalReference->length > 1) {
-            $this->addError('Every mets:div in the logical structure may only contain one mets:mptr.', 1724234607);
-        } else if ($externalReference->length == 1) {
-            if (!$externalReference->hasAttribute("LOCTYPE")) {
-                $this->addError('Mandatory "LOCTYPE" attribute of mets:mptr in the logical structure is missing.', 1724234607);
+        $technicalElements = $this->xpath->query('/mets:techMD', $amdSection);
+        if ($technicalElements === false || $technicalElements->length == 0) {
+            return;
+        }
+
+        if ($technicalElements->length > 1) {
+            $this->addError('Every "mets:amdSec" has to consist none or one "mets:techMD".', 1724234607);
+        }
+
+        if ($technicalElements->length == 1) {
+            $mdWrap = $this->xpath->query('/mets:mdWrap', $technicalElements->item(0));
+            if( $mdWrap === false || $mdWrap->length != 1 ) {
+                $this->addError('Every "mets:techMD" has to consist one "mets:mdWrap".', 1724234607);
             } else {
-                if (!in_array($externalReference->getAttribute("LOCTYPE"), array("URL", "PURL"))) {
-                    $this->addError('Value "' . $externalReference->getAttribute("LOCTYPE") . '" of "LOCTYPE" attribute of mets:mptr in the logical structure is not permissible.', 1724234607);
+                if (!$mdWrap->hasAttribute("MDTYPE") || $mdWrap->hasAttribute("OTHERMDTYPE")) {
+                    $this->addError('Mandatory attribute "MDTYPE" or "OTHERMDTYPE" of "mets:techMD/mets:mdWrap" is missing', 1724234607);
                 }
-            }
 
-            if (!$externalReference->hasAttribute("xlink:href")) {
-                $this->addError('Mandatory "xlink:href" attribute of mets:mptr in the logical structure is missing.', 1724234607);
+                $xmlData = $this->xpath->query('/mets:xmlData', $mdWrap);
+                if ($xmlData === false || $xmlData->length == 0) {
+                    $this->addError('Every "mets:techMD/mets:mdWrap" has to consist one "mets:xmlData"', 1724234607);
+                }
             }
         }
     }

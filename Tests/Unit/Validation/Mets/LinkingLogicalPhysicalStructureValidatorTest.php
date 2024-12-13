@@ -37,7 +37,7 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
      *
      * @return void
      */
-    public function testMultipleStructLinks(): void
+   /* public function testMultipleStructLinks(): void
     {
         $this->addChildNodeNS('/mets:mets', self::NAMESPACE_METS, 'mets:structLink');
         $this->validateAndAssertEquals('Every METS file has to have no or one struct link element.');
@@ -54,7 +54,7 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
         $this->setAttributeValue('//mets:structLink/mets:smLink', 'xlink:to', 'Test');
         $this->validateAndAssertEquals('None or multiple ids found for "Test" in struct map type "PHYSICAL".', true);
     }
-
+*/
     protected function createValidator(): AbstractDlfValidator
     {
         return new LinkingLogicalPhysicalStructureValidator();

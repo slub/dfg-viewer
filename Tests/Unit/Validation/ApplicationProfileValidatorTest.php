@@ -80,16 +80,12 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
      * Validates using a validator and DOMDocument, then asserts that the resulting error message matches the expected value.
      *
      * @param $message
-     * @param $resetDocument bool True if the document is to be reset at the end of the function.
      * @return void
      */
-    public function validateAndAssertEquals(string $message, bool $resetDocument = false): void
+    public function validateAndAssertEquals(string $message): void
     {
         $result = $this->validator->validate($this->doc);
         self::assertEquals($message, $result->getFirstError()->getMessage());
-        if ($resetDocument) {
-            $this->resetDocument();
-        }
     }
 
     protected function resetDocument(): void
@@ -178,4 +174,41 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         self::assertNotFalse($doc);
         return $doc;
     }
+
+
+    public function assertHasAny(string $expression): void
+    {
+        $this->validateAndAssertEquals('There must be at least one element that matches the XPath expression "' . $expression . '"');
+    }
+
+    public function assertHasOne(string $expression): void
+    {
+        $this->validateAndAssertEquals('There must be an element that matches the XPath expression "' . $expression . '"');
+    }
+
+    public function assertHasNoneOrOne(string $expression): void
+    {
+        $this->validateAndAssertEquals('There must be no more than one element that matches the XPath expression "' . $expression . '"');
+    }
+
+    public function assertHasAttribute(string $expression, string $name): void
+    {
+        $this->validateAndAssertEquals('Mandatory "' . $name . '" attribute of "' . $expression . '" is missing.');
+    }
+
+    public function assertHasAttributeWithValue(string $expression, string $name, string $value): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not permissible.');
+    }
+
+    public function assertHasAttributeWithUrl(string $expression, string $name, string $value): void
+    {
+        $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not valid.');
+    }
+
+    public function assertHasUniqueId(string $expression, string $value): void
+    {
+        $this->validateAndAssertEquals('"ID" attribute "' . $value . '" of "' . $expression . '" already exists.');
+    }
+
 }
