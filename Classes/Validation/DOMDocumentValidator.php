@@ -3,6 +3,7 @@
 namespace Slub\Dfgviewer\Validation;
 
 use DOMDocument;
+use DOMNode;
 use DOMNodeList;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
@@ -13,6 +14,8 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
 
     private string $expression;
 
+    private DOMNode $node;
+
     private DOMNodeList $nodeList;
 
     public function __construct()
@@ -20,14 +23,14 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
         parent::__construct(DOMDocument::class);
     }
 
-    public function query(string $expression)
+    public function query(string $expression): DOMDocumentValidator
     {
         $this->expression = $expression;
         $this->nodeList = $this->xpath->query($this->expression);
         return $this;
     }
 
-    public function iterate(callable $callback)
+    public function iterate(callable $callback): DOMDocumentValidator
     {
         foreach ($this->nodeList as $node) {
             call_user_func_array($callback, array($node));
@@ -35,7 +38,27 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
         return $this;
     }
 
-    public function validateHasAny()
+    public function setNode(DOMNode $node): DOMDocumentValidator
+    {
+        $this->node = $node;
+        return $this;
+    }
+
+    public function getFirst(): DOMDocumentValidator
+    {
+        $this->selectNode(0);
+        return $this;
+    }
+
+    public function selectNode(int $index): DOMDocumentValidator
+    {
+        if($this->nodeList->count() > $index) {
+            $this->node = $this->nodeList->item($index);
+        }
+        return $this;
+    }
+
+    public function validateHasAny(): DOMDocumentValidator
     {
         if (!$this->nodeList->length > 0) {
             $this->addError('There must be at least one element that matches the XPath expression "' . $this->expression . '"', 1723727164447);
@@ -43,7 +66,7 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
         return $this;
     }
 
-    public function validateHasOne()
+    public function validateHasOne(): DOMDocumentValidator
     {
         if ($this->nodeList->length != 1) {
             $this->addError('There must be an element that matches the XPath expression "' . $this->expression . '"', 1723727164447);
@@ -51,7 +74,7 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
         return $this;
     }
 
-    public function validateHasNoneOrOne()
+    public function validateHasNoneOrOne(): DOMDocumentValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
             $this->addError('There must be no more than one element that matches the XPath expression "' . $this->expression . '"', 1723727164447);
@@ -59,52 +82,67 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
         return $this;
     }
 
-    public function validateHasAttributeWithUrl(\DOMNode $node, string $name)
+    public function validateHasAttributeWithUrl(string $name): DOMDocumentValidator
     {
-        if ($node->hasAttribute($name)) {
-            $value = $node->getAttribute($name);
+        if(!isset($this->node)) {
+            return $this;
+        }
+
+        if ($this->node->hasAttribute($name)) {
+            $value = $this->node->getAttribute($name);
             if (!filter_var($value, FILTER_VALIDATE_URL)) {
                 $this->addError('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->expression . '" is not valid.', 1724234607);
             }
         } else {
-            $this->validateHasAttribute($node, $name);
+            $this->validateHasAttribute($name);
         }
+        return $this;
     }
 
-    public function validateHasAttributeWithValue(\DOMNode $node, string $name, array $values)
+    public function validateHasAttributeWithValue(string $name, array $values): DOMDocumentValidator
     {
-        if ($node->hasAttribute($name)) {
-            $value = $node->getAttribute($name);
+        if(!isset($this->node)) {
+            return $this;
+        }
+
+        if ($this->node->hasAttribute($name)) {
+            $value = $this->node->getAttribute($name);
             if (!in_array($value, $values)) {
                 $this->addError('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->expression . '" is not permissible.', 1724234607);
             }
         } else {
-            $this->validateHasAttribute($node, $name);
+            $this->validateHasAttribute($name);
         }
+        return $this;
     }
 
-    public function validateHasUniqueId(\DOMNode $node)
+    public function validateHasUniqueId(): DOMDocumentValidator
     {
-        if ($node->hasAttribute("ID")) {
-            $id = $node->getAttribute("ID");
+        if(!isset($this->node)) {
+            return $this;
+        }
+
+        if ($this->node->hasAttribute("ID")) {
+            $id = $this->node->getAttribute("ID");
             if ($this->xpath->query('//*[@ID="' . $id . '"]')->length > 1) {
                 $this->addError('"ID" attribute "' . $id . '" of "' .  $this->expression . '" already exists.', 1724234607);
             }
         } else {
-            $this->validateHasAttribute($node, "ID");
+            $this->validateHasAttribute("ID");
         }
+        return $this;
     }
 
-    /**
-     * @param \DOMNode $node
-     * @param string $name
-     * @return void
-     */
-    public function validateHasAttribute(\DOMNode $node, string $name): void
+    public function validateHasAttribute(string $name): DOMDocumentValidator
     {
-        if (!$node->hasAttribute($name)) {
+        if(!isset($this->node)) {
+            return $this;
+        }
+
+        if (!$this->node->hasAttribute($name)) {
             $this->addError('Mandatory "' . $name . '" attribute of "' . $this->expression . '" is missing.', 1724234607);
         }
+        return $this;
     }
 
     protected function isValid($value): void

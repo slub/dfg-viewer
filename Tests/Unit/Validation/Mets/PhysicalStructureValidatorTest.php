@@ -36,45 +36,53 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
      *
      * @return void
      */
-    /*public function testMultiplePhysicalDivisions(): void
+    public function testMultiplePhysicalDivisions(): void
     {
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:structMap');
         $node->setAttribute('TYPE', 'PHYSICAL');
         $this->addChildNode('/mets:mets', $node);
-        $this->validateAndAssertEquals('Every METS file has to have no or one physical structural element.');
-    }*/
+        $this->assertErrorHasNoneOrOne(PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
+    }
 
     /**
      * Test validation against the rules of chapter "2.2.2.1 Structural element - mets:div"
      *
      * @return void
      */
-   /* public function testStructuralElements(): void
+    public function testStructuralElements(): void
     {
-        $this->removeNodes('//mets:structMap[@TYPE="PHYSICAL"]/mets:div');
-        $this->validateAndAssertEquals('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', true);
+        $this->removeNodes(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->assertErrorHasOne(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->resetDocument();
 
-        $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', 'TYPE');
-        $this->validateAndAssertEquals('Every physical structure has to consist of one mets:div with "TYPE" attribute and value "physSequence" for the sequence.', true);
+        $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
+        $this->assertErrorHasAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
 
-        $this->removeNodes('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div');
-        $this->validateAndAssertEquals('Every physical structure has to consist of one mets:div for the sequence and at least of one subordinate mets:div.', true);
+        $this->setAttributeValue(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
+        $this->resetDocument();
 
-        $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'ID');
-        $this->validateAndAssertEquals('Mandatory "ID" attribute of mets:div in the physical structure is missing.', true);
+        $this->removeNodes(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS);
+        $this->assertErrorHasAny(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS);
+        $this->resetDocument();
+
+        $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
+        $this->assertErrorHasAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
+        $this->resetDocument();
 
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'PHYS_0001');
         $this->addChildNode('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', $node);
-        $this->validateAndAssertEquals('Physical structure "ID" "PHYS_0001" already exists in document.', true);
+        $this->validateErrorHasUniqueId(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'PHYS_0001');
+        $this->resetDocument();
 
-        $this->removeAttribute('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'TYPE');
-        $this->validateAndAssertEquals('Mandatory "TYPE" attribute of subordinate mets:div in physical structure is missing.', true);
+        $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
+        $this->assertErrorHasAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
 
-        $this->setAttributeValue('//mets:structMap[@TYPE="PHYSICAL"]/mets:div/mets:div', 'TYPE', 'Test');
-        $this->validateAndAssertEquals('Value "Test" of "TYPE" attribute of mets:div in physical structure is not permissible.');
+        $this->setAttributeValue(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
     }
-*/
+
     protected function createValidator(): AbstractDlfValidator
     {
         return new PhysicalStructureValidator();

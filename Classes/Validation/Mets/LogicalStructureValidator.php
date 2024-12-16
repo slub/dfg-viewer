@@ -70,8 +70,9 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
 
     protected function validateStructuralElement(\DOMNode $structureElement): void
     {
-        $this->validateHasUniqueId($structureElement);
-        $this->validateHasAttributeWithValue($structureElement, "TYPE", self::STRUCTURE_DATASET);
+        $this->setNode($structureElement)
+            ->validateHasUniqueId()
+            ->validateHasAttributeWithValue("TYPE", self::STRUCTURE_DATASET);
     }
 
     /**
@@ -90,8 +91,9 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
 
     protected function validateExternalReference(\DOMNode $externalReference): void
     {
-        $this->validateHasAttributeWithValue($externalReference, "LOCTYPE", array("URL", "PURL"));
-        $this->validateHasAttributeWithUrl($externalReference, "xlink:href");
+        $this->setNode($externalReference)
+            ->validateHasAttributeWithValue("LOCTYPE", array("URL", "PURL"))
+            ->validateHasAttributeWithUrl("xlink:href");
     }
 
     /**
