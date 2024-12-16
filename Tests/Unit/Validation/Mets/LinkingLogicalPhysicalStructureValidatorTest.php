@@ -25,9 +25,10 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
+use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
+use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
 {
@@ -37,26 +38,30 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
      *
      * @return void
      */
-   /* public function testMultipleStructLinks(): void
+    public function testMultipleStructLinks(): void
     {
         $this->addChildNodeNS('/mets:mets', self::NAMESPACE_METS, 'mets:structLink');
-        $this->validateAndAssertEquals('Every METS file has to have no or one struct link element.');
+        $this->assertErrorHasNoneOrOne(LinkingLogicalPhysicalStructureValidator::XPATH_STRUCT_LINK);
     }
 
     public function testLinkElements(): void
     {
-        $this->removeNodes('//mets:structLink/mets:smLink');
-        $this->validateAndAssertEquals('There should be at least one "mets:smLink" under "mets:structLink".', true);
+        $this->removeNodes(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS);
+        $this->assertErrorHasAny(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS);
+        $this->resetDocument();
 
-        $this->setAttributeValue('//mets:structLink/mets:smLink', 'xlink:from', 'Test');
-        $this->validateAndAssertEquals('None or multiple ids found for "Test" in struct map type "LOGICAL".', true);
+        $this->setAttributeValue(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:from', 'Test');
+        $this->assertErrorHasRefToOne(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:from', 'Test', LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES);
+        $this->resetDocument();
 
-        $this->setAttributeValue('//mets:structLink/mets:smLink', 'xlink:to', 'Test');
-        $this->validateAndAssertEquals('None or multiple ids found for "Test" in struct map type "PHYSICAL".', true);
+        $this->setAttributeValue(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:to', 'Test');
+        $this->assertErrorHasRefToOne(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:to', 'Test', PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
     }
-*/
+
     protected function createValidator(): AbstractDlfValidator
     {
         return new LinkingLogicalPhysicalStructureValidator();
     }
+
+
 }

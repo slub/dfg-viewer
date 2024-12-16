@@ -167,7 +167,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         }
     }
 
-    private function getDOMDocument(): DOMDocument
+    protected function getDOMDocument(): DOMDocument
     {
         $doc = new DOMDocument();
         $doc->load(__DIR__ . '/../../Fixtures/mets.xml');
@@ -175,37 +175,42 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         return $doc;
     }
 
-    public function assertErrorHasAny(string $expression): void
+    protected function assertErrorHasAny(string $expression): void
     {
         $this->validateAndAssertEquals('There must be at least one element that matches the XPath expression "' . $expression . '"');
     }
 
-    public function assertErrorHasOne(string $expression): void
+    protected function assertErrorHasOne(string $expression): void
     {
         $this->validateAndAssertEquals('There must be an element that matches the XPath expression "' . $expression . '"');
     }
 
-    public function assertErrorHasNoneOrOne(string $expression): void
+    protected function assertErrorHasNoneOrOne(string $expression): void
     {
         $this->validateAndAssertEquals('There must be no more than one element that matches the XPath expression "' . $expression . '"');
     }
 
-    public function assertErrorHasAttribute(string $expression, string $name): void
+    protected function assertErrorHasAttribute(string $expression, string $name): void
     {
         $this->validateAndAssertEquals('Mandatory "' . $name . '" attribute of "' . $expression . '" is missing.');
     }
 
-    public function assertErrorHasAttributeWithValue(string $expression, string $name, string $value): void
+    protected function assertErrorHasAttributeWithValue(string $expression, string $name, string $value): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not permissible.');
     }
 
-    public function assertErrorHasAttributeWithUrl(string $expression, string $name, string $value): void
+    protected function assertErrorHasAttributeWithUrl(string $expression, string $name, string $value): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not valid.');
     }
 
-    public function validateErrorHasUniqueId(string $expression, string $value): void
+    protected function assertErrorHasRefToOne(string $expression, string $name, string $value, string $targetContextExpression)
+    {
+        $this->validateAndAssertEquals( 'Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
+    }
+
+    protected function validateErrorHasUniqueId(string $expression, string $value): void
     {
         $this->validateAndAssertEquals('"ID" attribute "' . $value . '" of "' . $expression . '" already exists.');
     }

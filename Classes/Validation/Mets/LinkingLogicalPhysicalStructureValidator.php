@@ -39,15 +39,17 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
 class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseValidator
 {
 
+    const XPATH_STRUCT_LINK = '//mets:mets/mets:structLink';
+
+    const XPATH_LINK_ELEMENTS = self::XPATH_STRUCT_LINK . '/mets:smLink' ;
+
     protected function isValidDocument(): void
     {
-        $structLinks = $this->xpath->query('//mets:structLink');
         // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
-        if ($structLinks === false || $structLinks->length > 1) {
-            $this->addError('Every METS file has to have no or one struct link element.', 1723727164447);
-        } elseif ($structLinks->length == 1) {
-            $this->validateLinkElements();
-        }
+        $this->query(self::XPATH_STRUCT_LINK)
+            ->validateHasNoneOrOne();
+
+        $this->validateLinkElements();
     }
 
     /**
@@ -59,41 +61,16 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
      */
     private function validateLinkElements(): void
     {
-        $linkingElements = $this->xpath->query('//mets:structLink/mets:smLink');
-
-        if ($linkingElements->length === 0) {
-            $this->addError('There should be at least one "mets:smLink" under "mets:structLink".', 1723727164447);
-        }
-
-        foreach ($linkingElements as $linkingElement) {
-            $this->validateLinkingElement($linkingElement, "xlink:from", "LOGICAL");
-            $this->validateLinkingElement($linkingElement, "xlink:to", "PHYSICAL");
-        }
-
+        $this->query(self::XPATH_LINK_ELEMENTS)
+            ->validateHasAny()
+            ->iterate(array($this, "validateLinkElement"));
     }
 
-    /**
-     * Validate linking element.
-     *
-     * @param DOMNode $linkingElement
-     * @param string $attribute
-     * @param string $structMapType
-     * @return void
-     */
-    private function validateLinkingElement(DOMNode $linkingElement, string $attribute, string $structMapType): void
+    protected function validateLinkElement(\DOMNode $linkElement): void
     {
-        if (!$linkingElement->hasAttribute($attribute)) {
-            $this->addError('Mandatory "' . $attribute . ' attribute of mets:div in the logical structure is missing.', 1724234607);
-        } else {
-            $id = $linkingElement->getAttribute($attribute);
-            $structMaps = $this->xpath->query('//mets:structMap[@TYPE="' . $structMapType . '"]');
-            $foundElements = 0;
-            foreach ($structMaps as $structMap) {
-                $foundElements += $this->xpath->query('//mets:div[@ID = \'' . $id . '\']', $structMap)->length;
-            }
-            if ($foundElements !== 1) {
-                $this->addError('None or multiple ids found for "' . $id . '" in struct map type "' . $structMapType . '".', 1724234607);
-            }
-        }
+        $this->setNode($linkElement)
+            ->validateHasRefToOne("xlink:from", LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES)
+            ->validateHasRefToOne("xlink:to", PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
     }
+
 }

@@ -145,6 +145,27 @@ abstract class DOMDocumentValidator extends AbstractDlfValidator
         return $this;
     }
 
+    public function validateHasRefToOne(string $name, string $targetContextExpression): DOMDocumentValidator
+    {
+        if (!isset($this->node)) {
+            return $this;
+        }
+
+        $targetNodes = $this->xpath->query($targetContextExpression);
+        $id = $this->node->getAttribute($name);
+
+        $foundElements = 0;
+        foreach ($targetNodes as $targetNode) {
+            $foundElements += $this->xpath->query('//*[@ID="' . $id . '"]', $targetNode)->length;
+        }
+
+        if ($foundElements !== 1) {
+            $this->addError('Value "' . $id . '" in the "' . $name . '" attribute of "' . $this->expression . '" must reference one element under XPath expression "' . $targetContextExpression, 1724234607);
+        }
+
+        return $this;
+    }
+
     protected function isValid($value): void
     {
         $this->xpath = new DOMXPath($value);
