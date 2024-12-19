@@ -53,20 +53,20 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $this->resetDocument();
 
         $this->removeAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
-        $this->assertErrorHasAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
+        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[1]/mets:div', 'ID');
         $this->resetDocument();
 
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'LOG_0001');
         $this->addChildNode(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, $node);
-        $this->validateErrorHasUniqueId(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'LOG_0001');
+        $this->validateErrorHasUniqueId('/mets:mets/mets:structMap[1]/mets:div', 'LOG_0001');
         $this->resetDocument();
 
         $this->removeAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
-        $this->assertErrorHasAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
+        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[1]/mets:div', 'TYPE');
 
         $this->setAttributeValue(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[1]/mets:div', 'TYPE', 'Test');
     }
 
     /**
@@ -82,16 +82,16 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $this->resetDocument();
 
         $this->addChildNodeNS(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
-        $this->assertErrorHasAttribute(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE');
+        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE');
 
         $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE', 'Test');
 
         $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'LOCTYPE', 'URL');
-        $this->assertErrorHasAttribute(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href');
+        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href');
 
         $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href', 'Test');
-        $this->assertErrorHasAttributeWithUrl(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href', 'Test');
+        $this->assertErrorHasAttributeWithUrl('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href', 'Test');
 
         $this->setAttributeValue(LogicalStructureValidator::XPATH_EXTERNAL_REFERENCES, 'xlink:href', 'http://example.com/periodical.xml');
         $result = $this->validate();

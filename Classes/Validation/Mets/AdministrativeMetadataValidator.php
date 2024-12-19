@@ -37,24 +37,55 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  */
 class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
 {
+
+    const XPATH_ADMINISTRATIV_METADATA = '//mets:mets/mets:amdSec';
+
+    const XPATH_TECHNICAL_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:techMD';
+
+    const XPATH_RIGHTS_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:rightsMD';
+
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
-        $admSections = $this->xpath->query('//mets:amdSec');
-        if ($admSections === false || $admSections->length == 0) {
-            $this->addError('Every METS file has to have at least one administrative metadata section.', 1723727164447);
-        }
+        $this->createNodeListValidator(self::XPATH_ADMINISTRATIV_METADATA)
+            ->validateHasAny()
+            ->iterate(array($this, "validateAdministrativMetadata"));
 
-        $hasDFGViewerSpecifics = false;
-        foreach ($admSections as $admSection) {
-            $this->validateTechnicalMetadata($admSection);
-            $hasDFGViewerSpecifics = ($this->xpath->query('/mets:rightsMD', $admSection)->length != 0 ||
-                $this->xpath->query('/mets:digiprovMD', $admSection)->length != 0);
-        }
+        // Check if one administrativ metadata exist with "mets:rightsMD" and "mets:digiprovMD" as children
+        $this->createNodeListValidator(self::XPATH_ADMINISTRATIV_METADATA . '[mets:rightsMD and mets:digiprovMD]')
+            ->validateHasOne();
 
-        if ($hasDFGViewerSpecifics) {
-            $this->addError('Every METS file must include at least one administrative metadata section containing "mets:rightsMD" and "mets:digiprovMD" as child elements.', 1723727164447);
-        }
+        $this->validateTechnicalMetadataStructure();
+        $this->validateRightsMetadataStructure();
+    }
+
+    protected function validateAdministrativMetadata(\DOMNode $administrativeMetadata): void
+    {
+        $this->createNodeValidator($administrativeMetadata)
+            ->validateHasUniqueId();
+    }
+
+    protected function validateRightsMetadataStructure(): void
+    {
+        $this->createNodeListValidator(self::XPATH_RIGHTS_METADATA)
+            ->iterate(array($this, "validateRightsMetadata"));
+    }
+
+    protected function validateRightsMetadata(\DOMNode $rightsMetadata): void
+    {
+        $this->createNodeValidator($rightsMetadata)
+            ->validateHasUniqueId();
+
+        $node = $this->createNodeListValidator('/mets:mdWrap', $rightsMetadata)
+            ->validateHasOne()
+            ->getFirstNode();
+
+        $this->createNodeValidator($node)
+            ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
+            ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVRIGHTS'));
+
+        $this->createNodeListValidator('/mets:xmlData', $rightsMetadata)
+            ->validateHasOne();
     }
 
     /**
@@ -64,31 +95,28 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    private function validateTechnicalMetadata(\DOMNode $amdSection): void
+    protected function validateTechnicalMetadataStructure(): void
     {
-        $technicalElements = $this->xpath->query('/mets:techMD', $amdSection);
-        if ($technicalElements === false || $technicalElements->length == 0) {
-            return;
-        }
-
-        if ($technicalElements->length > 1) {
-            $this->addError('Every "mets:amdSec" has to consist none or one "mets:techMD".', 1724234607);
-        }
-
-        if ($technicalElements->length == 1) {
-            $mdWrap = $this->xpath->query('/mets:mdWrap', $technicalElements->item(0));
-            if( $mdWrap === false || $mdWrap->length != 1 ) {
-                $this->addError('Every "mets:techMD" has to consist one "mets:mdWrap".', 1724234607);
-            } else {
-                if (!$mdWrap->hasAttribute("MDTYPE") || $mdWrap->hasAttribute("OTHERMDTYPE")) {
-                    $this->addError('Mandatory attribute "MDTYPE" or "OTHERMDTYPE" of "mets:techMD/mets:mdWrap" is missing', 1724234607);
-                }
-
-                $xmlData = $this->xpath->query('/mets:xmlData', $mdWrap);
-                if ($xmlData === false || $xmlData->length == 0) {
-                    $this->addError('Every "mets:techMD/mets:mdWrap" has to consist one "mets:xmlData"', 1724234607);
-                }
-            }
-        }
+        $this->createNodeListValidator(self::XPATH_TECHNICAL_METADATA)
+            ->iterate(array($this, "validateTechnicalMetadata"));
     }
+
+
+    protected function validateTechnicalMetadata(\DOMNode $technicalMetadata): void
+    {
+        $this->createNodeValidator($technicalMetadata)
+            ->validateHasUniqueId();
+
+        $mdWrap = $this->createNodeListValidator('/mets:mdWrap', $technicalMetadata)
+            ->validateHasOne()
+            ->getFirstNode();
+
+        $this->createNodeValidator($mdWrap)
+            ->validateHasAttribute("MDTYPE")
+            ->validateHasAttribute("OTHERMDTYPE");
+
+        $this->createNodeListValidator('/mets:xmlData', $mdWrap)
+            ->validateHasOne();
+    }
+
 }

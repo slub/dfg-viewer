@@ -25,7 +25,6 @@ namespace Slub\Dfgviewer\Validation\Mets;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use DOMNode;
 use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
 
 /**
@@ -46,7 +45,7 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
-        $this->query(self::XPATH_STRUCT_LINK)
+        $this->createNodeListValidator(self::XPATH_STRUCT_LINK)
             ->validateHasNoneOrOne();
 
         $this->validateLinkElements();
@@ -59,16 +58,16 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
      *
      * @return void
      */
-    private function validateLinkElements(): void
+    protected function validateLinkElements(): void
     {
-        $this->query(self::XPATH_LINK_ELEMENTS)
+        $this->createNodeListValidator(self::XPATH_LINK_ELEMENTS)
             ->validateHasAny()
             ->iterate(array($this, "validateLinkElement"));
     }
 
-    protected function validateLinkElement(\DOMNode $linkElement): void
+    public function validateLinkElement(\DOMNode $linkElement): void
     {
-        $this->setNode($linkElement)
+        $this->createNodeValidator($linkElement)
             ->validateHasRefToOne("xlink:from", LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES)
             ->validateHasRefToOne("xlink:to", PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
     }

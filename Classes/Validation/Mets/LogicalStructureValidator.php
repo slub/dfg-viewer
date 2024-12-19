@@ -47,7 +47,8 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.1.1 Logical structure - mets:structMap"
-        $this->query(self::XPATH_LOGICAL_STRUCTURES)->validateHasAny();
+        $this->createNodeListValidator(self::XPATH_LOGICAL_STRUCTURES)
+            ->validateHasAny();
 
         $this->validateStructuralElements();
         $this->validateExternalReferences();
@@ -63,14 +64,14 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      */
     protected function validateStructuralElements(): void
     {
-        $this->query(self::XPATH_STRUCTURAL_ELEMENTS)
+        $this->createNodeListValidator(self::XPATH_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
             ->iterate(array($this, "validateStructuralElement"));
     }
 
-    protected function validateStructuralElement(\DOMNode $structureElement): void
+    public function validateStructuralElement(\DOMNode $structureElement): void
     {
-        $this->setNode($structureElement)
+        $this->createNodeValidator($structureElement)
             ->validateHasUniqueId()
             ->validateHasAttributeWithValue("TYPE", self::STRUCTURE_DATASET);
     }
@@ -84,14 +85,14 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      */
     protected function validateExternalReferences(): void
     {
-        $this->query(self::XPATH_EXTERNAL_REFERENCES)
+        $this->createNodeListValidator(self::XPATH_EXTERNAL_REFERENCES)
             ->validateHasNoneOrOne()
             ->iterate(array($this, "validateExternalReference"));
     }
 
-    protected function validateExternalReference(\DOMNode $externalReference): void
+    public function validateExternalReference(\DOMNode $externalReference): void
     {
-        $this->setNode($externalReference)
+        $this->createNodeValidator($externalReference)
             ->validateHasAttributeWithValue("LOCTYPE", array("URL", "PURL"))
             ->validateHasAttributeWithUrl("xlink:href");
     }

@@ -51,17 +51,16 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
         $this->resetDocument();
 
         $this->setAttributeValue(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:from', 'Test');
-        $this->assertErrorHasRefToOne(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:from', 'Test', LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES);
+        $this->assertErrorHasRefToOne('/mets:mets/mets:structLink/mets:smLink', 'xlink:from', 'Test', LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES);
         $this->resetDocument();
 
         $this->setAttributeValue(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:to', 'Test');
-        $this->assertErrorHasRefToOne(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:to', 'Test', PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
+        $this->assertErrorHasRefToOne('/mets:mets/mets:structLink/mets:smLink', 'xlink:to', 'Test', PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
     }
 
     protected function createValidator(): AbstractDlfValidator
     {
         return new LinkingLogicalPhysicalStructureValidator();
     }
-
 
 }

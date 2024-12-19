@@ -58,8 +58,8 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     public function testDocument()
     {
         $result = $this->validate();
-        if($result->hasErrors()){
-            self::assertEquals('',$result->getFirstError()->getMessage());
+        if ($result->hasErrors()) {
+            self::assertEquals('', $result->getFirstError()->getMessage());
         }
         self::assertFalse($result->hasErrors());
     }
@@ -207,7 +207,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
 
     protected function assertErrorHasRefToOne(string $expression, string $name, string $value, string $targetContextExpression)
     {
-        $this->validateAndAssertEquals( 'Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
     }
 
     protected function validateErrorHasUniqueId(string $expression, string $value): void

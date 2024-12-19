@@ -3,6 +3,7 @@
 namespace Slub\Dfgviewer\Validation\Mets;
 
 use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
+use function PHPUnit\Framework\callback;
 
 /**
  * Copyright notice
@@ -46,7 +47,8 @@ class PhysicalStructureValidator extends ApplicationProfileBaseValidator
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.2.1 Physical structure - mets:structMap"
-        $this->query(self::XPATH_PHYSICAL_STRUCTURES)->validateHasNoneOrOne();
+        $this->createNodeListValidator(self::XPATH_PHYSICAL_STRUCTURES)
+            ->validateHasNoneOrOne();
 
         $this->validateStructuralElements();
     }
@@ -59,21 +61,23 @@ class PhysicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    private function validateStructuralElements(): void
+    protected function validateStructuralElements(): void
     {
-        $this->query(self::XPATH_STRUCTURAL_ELEMENT_SEQUENCE )
+        $node = $this->createNodeListValidator(self::XPATH_STRUCTURAL_ELEMENT_SEQUENCE)
             ->validateHasOne()
-            ->getFirst()
+            ->getFirstNode();
+
+        $this->createNodeValidator($node)
             ->validateHasAttributeWithValue('TYPE', array('physSequence'));
 
-        $this->query(self::XPATH_STRUCTURAL_ELEMENTS)
+        $this->createNodeListValidator(self::XPATH_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
             ->iterate(array($this, "validateStructuralElement"));
     }
 
-    protected function validateStructuralElement(\DOMNode $structureElement): void
+    public function validateStructuralElement(\DOMNode $structureElement): void
     {
-        $this->setNode($structureElement)
+        $this->createNodeValidator($structureElement)
             ->validateHasUniqueId()
             ->validateHasAttributeWithValue("TYPE", array("page", "doublepage", "track"));
     }
