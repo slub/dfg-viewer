@@ -52,20 +52,26 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasUniqueId(): DOMNodeValidator
+    public function validateHasUniqueAttribute(string $name, string $contextExpression): DOMNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
         }
 
-        if ($this->node->hasAttribute("ID")) {
-            $id = $this->node->getAttribute("ID");
-            if ($this->xpath->query('//*[@ID="' . $id . '"]')->length > 1) {
-                $this->result->addError(new Error('"ID" attribute "' . $id . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
+        if ($this->node->hasAttribute($name)) {
+            $value = $this->node->getAttribute($name);
+            if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
+                $this->result->addError(new Error('"' . $name . '" attribute "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
             }
         } else {
-            $this->validateHasAttribute("ID");
+            $this->validateHasAttribute($name);
         }
+        return $this;
+    }
+
+    public function validateHasUniqueId(): DOMNodeValidator
+    {
+        $this->validateHasUniqueAttribute("ID", "//*");
         return $this;
     }
 

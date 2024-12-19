@@ -44,6 +44,8 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
 
     const XPATH_RIGHTS_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:rightsMD';
 
+    const XPATH_DIGIPROV_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:digiprovMD';
+
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
@@ -51,27 +53,65 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
             ->validateHasAny()
             ->iterate(array($this, "validateAdministrativMetadata"));
 
-        // Check if one administrativ metadata exist with "mets:rightsMD" and "mets:digiprovMD" as children
+        // Check if one administrative metadata exist with "mets:rightsMD" and "mets:digiprovMD" as children
         $this->createNodeListValidator(self::XPATH_ADMINISTRATIV_METADATA . '[mets:rightsMD and mets:digiprovMD]')
             ->validateHasOne();
 
         $this->validateTechnicalMetadataStructure();
         $this->validateRightsMetadataStructure();
+        $this->validateDigitalProvenanceMetadataStructure();
     }
 
-    protected function validateAdministrativMetadata(\DOMNode $administrativeMetadata): void
+    public function validateAdministrativMetadata(\DOMNode $administrativeMetadata): void
     {
         $this->createNodeValidator($administrativeMetadata)
             ->validateHasUniqueId();
     }
 
+    /**
+     * Validates the digital provenance metadata.
+     *
+     * Validates against the rules of chapters "2.6.2.5 Herstellung – mets:digiprovMD" and "2.6.2.6 Eingebettete Verweise – mets:digiprovMD/mets:mdWrap"
+     *
+     * @return void
+     */
+    protected function validateDigitalProvenanceMetadataStructure(): void
+    {
+        $this->createNodeListValidator(self::XPATH_DIGIPROV_METADATA)
+            ->iterate(array($this, "validateDigitalProvenanceMetadata"));
+    }
+
+    public function validateDigitalProvenanceMetadata(\DOMNode $digitalProvenanceMetadata): void
+    {
+        $this->createNodeValidator($digitalProvenanceMetadata)
+            ->validateHasUniqueId();
+
+        $mdWrAP = $this->createNodeListValidator('/mets:mdWrap', $digitalProvenanceMetadata)
+            ->validateHasOne()
+            ->getFirstNode();
+
+        $this->createNodeValidator($mdWrAP)
+            ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
+            ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVLINKS'));
+
+        $this->createNodeListValidator('/mets:xmlData', $digitalProvenanceMetadata)
+            ->validateHasOne();
+    }
+
+    /**
+     * Validates the rights metadata.
+     *
+     * Validates against the rules of chapters "2.6.2.4 Rechtedeklaration – mets:rightsMD" and "2.6.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"
+     *
+     * @return void
+     */
     protected function validateRightsMetadataStructure(): void
     {
         $this->createNodeListValidator(self::XPATH_RIGHTS_METADATA)
             ->iterate(array($this, "validateRightsMetadata"));
     }
 
-    protected function validateRightsMetadata(\DOMNode $rightsMetadata): void
+    public function validateRightsMetadata(\DOMNode $rightsMetadata): void
     {
         $this->createNodeValidator($rightsMetadata)
             ->validateHasUniqueId();
@@ -102,7 +142,7 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
     }
 
 
-    protected function validateTechnicalMetadata(\DOMNode $technicalMetadata): void
+    public function validateTechnicalMetadata(\DOMNode $technicalMetadata): void
     {
         $this->createNodeValidator($technicalMetadata)
             ->validateHasUniqueId();
