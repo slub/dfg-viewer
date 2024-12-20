@@ -27,7 +27,6 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
-use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
 
 class AdministrativeMetadataValidatorTest extends ApplicationProfileValidatorTest
 {
@@ -61,8 +60,32 @@ class AdministrativeMetadataValidatorTest extends ApplicationProfileValidatorTes
      */
     public function testDigitalProvenanceMetadataStructure(): void
     {
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA, 'ID', 'DMDLOG_0001');
+        $this->assertErrorHasUniqueId('/mets:mets/mets:amdSec/mets:digiprovMD', 'DMDLOG_0001');
+        $this->resetDocument();
 
+        $this->removeNodes(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA . '/mets:mdWrap');
+        $this->assertErrorHasOne('mets:mdWrap', '/mets:mets/mets:amdSec/mets:digiprovMD');
+        $this->resetDocument();
+
+        $this->removeAttribute(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA . '/mets:mdWrap', 'MDTYPE');
+        $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:digiprovMD/mets:mdWrap', 'MDTYPE');
+
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:amdSec/mets:digiprovMD/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->resetDocument();
+
+        $this->removeAttribute(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA . '/mets:mdWrap', 'OTHERMDTYPE');
+        $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:digiprovMD/mets:mdWrap', 'OTHERMDTYPE');
+
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:amdSec/mets:digiprovMD/mets:mdWrap', 'OTHERMDTYPE', 'Test');
+        $this->resetDocument();
+
+        $this->removeNodes(AdministrativeMetadataValidator::XPATH_DIGIPROV_METADATA . '/mets:mdWrap/mets:xmlData/dv:links');
+        $this->assertErrorHasOne('mets:xmlData[dv:links]', '/mets:mets/mets:amdSec/mets:digiprovMD/mets:mdWrap');
     }
+
 
     /**
      * Test validation against the rules of chapters "2.6.2.4 Rechtedeklaration – mets:rightsMD" and "2.6.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"
@@ -71,7 +94,30 @@ class AdministrativeMetadataValidatorTest extends ApplicationProfileValidatorTes
      */
     public function testRightsMetadataStructure(): void
     {
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA, 'ID', 'DMDLOG_0001');
+        $this->assertErrorHasUniqueId('/mets:mets/mets:amdSec/mets:rightsMD', 'DMDLOG_0001');
+        $this->resetDocument();
 
+        $this->removeNodes(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap');
+        $this->assertErrorHasOne('mets:mdWrap', '/mets:mets/mets:amdSec/mets:rightsMD');
+        $this->resetDocument();
+
+        $this->removeAttribute(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap', 'MDTYPE');
+        $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:rightsMD/mets:mdWrap', 'MDTYPE');
+
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:amdSec/mets:rightsMD/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->resetDocument();
+
+        $this->removeAttribute(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap', 'OTHERMDTYPE');
+        $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:rightsMD/mets:mdWrap', 'OTHERMDTYPE');
+
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:amdSec/mets:rightsMD/mets:mdWrap', 'OTHERMDTYPE', 'Test');
+        $this->resetDocument();
+
+        $this->removeNodes(AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap/mets:xmlData/dv:rights');
+        $this->assertErrorHasOne('mets:xmlData[dv:rights]', '/mets:mets/mets:amdSec/mets:rightsMD/mets:mdWrap');
     }
 
     /**
@@ -84,19 +130,19 @@ class AdministrativeMetadataValidatorTest extends ApplicationProfileValidatorTes
         $this->addChildNodeNS(AdministrativeMetadataValidator::XPATH_ADMINISTRATIVE_METADATA, self::NAMESPACE_METS, 'mets:techMD');
         $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:techMD','ID');
 
-        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD', 'ID', 'DMDLOG_0001');
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_TECHNICAL_METADATA, 'ID', 'DMDLOG_0001');
         $this->assertErrorHasUniqueId('/mets:mets/mets:amdSec/mets:techMD','DMDLOG_0001');
 
-        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD', 'ID', 'TECH_0001');
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_TECHNICAL_METADATA, 'ID', 'TECH_0001');
         $this->assertErrorHasOne('mets:mdWrap','/mets:mets/mets:amdSec/mets:techMD');
 
-        $this->addChildNodeNS(AdministrativeMetadataValidator::XPATH_ADMINISTRATIVE_METADATA. '/mets:techMD', self::NAMESPACE_METS, 'mets:mdWrap');
+        $this->addChildNodeNS(AdministrativeMetadataValidator::XPATH_TECHNICAL_METADATA, self::NAMESPACE_METS, 'mets:mdWrap');
         $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:techMD/mets:mdWrap','MDTYPE');
 
-        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD/mets:mdWrap', 'MDTYPE', '');
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_TECHNICAL_METADATA . '/mets:mdWrap', 'MDTYPE', '');
         $this->assertErrorHasAttribute('/mets:mets/mets:amdSec/mets:techMD/mets:mdWrap','OTHERMDTYPE');
 
-        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD/mets:mdWrap', 'OTHERMDTYPE', '');
+        $this->setAttributeValue(AdministrativeMetadataValidator::XPATH_TECHNICAL_METADATA . '/mets:mdWrap', 'OTHERMDTYPE', '');
         $this->assertErrorHasOne('mets:xmlData','/mets:mets/mets:amdSec/mets:techMD/mets:mdWrap');
     }
 
