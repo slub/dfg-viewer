@@ -61,9 +61,9 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
     }
 
     /**
-     * Validates the digital provenance metadata.
+     * Validates the file groups.
      *
-     * Validates against the rules of chapters "2.6.2.5 Herstellung – mets:digiprovMD" and "2.6.2.6 Eingebettete Verweise – mets:digiprovMD/mets:mdWrap"
+     * Validates against the rules of chapter "2.4.2.1 Dateigruppen – mets:fileGrp"
      *
      * @return void
      */
@@ -83,6 +83,13 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
             ->validateHasUniqueAttribute("USE", self::XPATH_FILE_GROUPS);
     }
 
+    /**
+     * Validates the files.
+     *
+     * Validates against the rules of chapters "2.4.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
+     *
+     * @return void
+     */
     protected function validateFiles(): void
     {
         $this->createNodeListValidator(self::XPATH_FILES)
@@ -93,14 +100,15 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
     public function validateFile(\DOMNode $file): void
     {
         $this->createNodeValidator($file)
-            ->validateHasUniqueId();
+            ->validateHasUniqueId()
+            ->validateHasAttribute('MIMETYPE');
 
         $fLocat = $this->createNodeListValidator('/mets:FLocat', $file)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($fLocat)
-            ->validateHasAttribute("xlink:href")
-            ->validateHasAttributeWithValue("LOCTYPE", array("URL", "PURL"));
+            ->validateHasAttributeWithValue('LOCTYPE', array('URL', 'PURL'))
+            ->validateHasAttributeWithUrl('xlink:href');
     }
 }

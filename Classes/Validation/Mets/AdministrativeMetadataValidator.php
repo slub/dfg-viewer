@@ -94,7 +94,7 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
             ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
             ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVLINKS'));
 
-        $this->createNodeListValidator('/mets:xmlData', $digitalProvenanceMetadata)
+        $this->createNodeListValidator('/mets:xmlData[dv:links]', $digitalProvenanceMetadata)
             ->validateHasOne();
     }
 
@@ -124,7 +124,7 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
             ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
             ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVRIGHTS'));
 
-        $this->createNodeListValidator('/mets:xmlData', $rightsMetadata)
+        $this->createNodeListValidator('/mets:xmlData[dv:rights]', $rightsMetadata)
             ->validateHasOne();
     }
 

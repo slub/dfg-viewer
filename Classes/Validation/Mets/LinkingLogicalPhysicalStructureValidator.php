@@ -68,8 +68,8 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
     public function validateLinkElement(\DOMNode $linkElement): void
     {
         $this->createNodeValidator($linkElement)
-            ->validateHasRefToOne("xlink:from", LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES)
-            ->validateHasRefToOne("xlink:to", PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
+            ->validateHasReferenceToId("xlink:from", LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES)
+            ->validateHasReferenceToId("xlink:to", PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
     }
 
 }

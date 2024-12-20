@@ -24,14 +24,15 @@ class DOMNodeValidator
             return $this;
         }
 
-        if ($this->node->hasAttribute($name)) {
-            $value = $this->node->getAttribute($name);
-            if (!filter_var($value, FILTER_VALIDATE_URL)) {
-                $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
-            }
-        } else {
-            $this->validateHasAttribute($name);
+        if (!$this->node->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
         }
+
+        $value = $this->node->getAttribute($name);
+        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
+        }
+
         return $this;
     }
 
@@ -41,14 +42,15 @@ class DOMNodeValidator
             return $this;
         }
 
-        if ($this->node->hasAttribute($name)) {
-            $value = $this->node->getAttribute($name);
-            if (!in_array($value, $values)) {
-                $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1724234607));
-            }
-        } else {
-            $this->validateHasAttribute($name);
+        if (!$this->node->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
         }
+
+        $value = $this->node->getAttribute($name);
+        if (!in_array($value, $values)) {
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1724234607));
+        }
+
         return $this;
     }
 
@@ -58,14 +60,15 @@ class DOMNodeValidator
             return $this;
         }
 
-        if ($this->node->hasAttribute($name)) {
-            $value = $this->node->getAttribute($name);
-            if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-                $this->result->addError(new Error('"' . $name . '" attribute "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
-            }
-        } else {
-            $this->validateHasAttribute($name);
+        if (!$this->node->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
         }
+
+        $value = $this->node->getAttribute($name);
+        if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
+            $this->result->addError(new Error('"' . $name . '" attribute "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
+        }
+
         return $this;
     }
 
@@ -87,10 +90,14 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasRefToOne(string $name, string $targetContextExpression): DOMNodeValidator
+    public function validateHasReferenceToId(string $name, string $targetContextExpression): DOMNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
+        }
+
+        if (!$this->node->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
         }
 
         $targetNodes = $this->xpath->query($targetContextExpression);
