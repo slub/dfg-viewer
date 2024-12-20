@@ -222,7 +222,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
     }
 
-    protected function validateErrorHasUniqueId(string $expression, string $value): void
+    protected function assertErrorHasUniqueId(string $expression, string $value): void
     {
         $this->validateAndAssertEquals('"ID" attribute "' . $value . '" of "' . $expression . '" already exists.');
     }

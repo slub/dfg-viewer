@@ -38,23 +38,23 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
 class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
 {
 
-    const XPATH_ADMINISTRATIV_METADATA = '//mets:mets/mets:amdSec';
+    const XPATH_ADMINISTRATIVE_METADATA = '//mets:mets/mets:amdSec';
 
-    const XPATH_TECHNICAL_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:techMD';
+    const XPATH_TECHNICAL_METADATA = self::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD';
 
-    const XPATH_RIGHTS_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:rightsMD';
+    const XPATH_RIGHTS_METADATA = self::XPATH_ADMINISTRATIVE_METADATA . '/mets:rightsMD';
 
-    const XPATH_DIGIPROV_METADATA = self::XPATH_ADMINISTRATIV_METADATA . '/mets:digiprovMD';
+    const XPATH_DIGIPROV_METADATA = self::XPATH_ADMINISTRATIVE_METADATA . '/mets:digiprovMD';
 
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
-        $this->createNodeListValidator(self::XPATH_ADMINISTRATIV_METADATA)
+        $this->createNodeListValidator(self::XPATH_ADMINISTRATIVE_METADATA)
             ->validateHasAny()
             ->iterate(array($this, "validateAdministrativMetadata"));
 
         // Check if one administrative metadata exist with "mets:rightsMD" and "mets:digiprovMD" as children
-        $this->createNodeListValidator(self::XPATH_ADMINISTRATIV_METADATA . '[mets:rightsMD and mets:digiprovMD]')
+        $this->createNodeListValidator(self::XPATH_ADMINISTRATIVE_METADATA . '[mets:rightsMD and mets:digiprovMD]')
             ->validateHasOne();
 
         $this->validateTechnicalMetadataStructure();
@@ -86,15 +86,15 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
         $this->createNodeValidator($digitalProvenanceMetadata)
             ->validateHasUniqueId();
 
-        $mdWrAP = $this->createNodeListValidator('/mets:mdWrap', $digitalProvenanceMetadata)
+        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $digitalProvenanceMetadata)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mdWrAP)
+        $this->createNodeValidator($mdWrap)
             ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
             ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVLINKS'));
 
-        $this->createNodeListValidator('/mets:xmlData[dv:links]', $digitalProvenanceMetadata)
+        $this->createNodeListValidator('mets:xmlData[dv:links]', $mdWrap)
             ->validateHasOne();
     }
 
@@ -116,15 +116,15 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
         $this->createNodeValidator($rightsMetadata)
             ->validateHasUniqueId();
 
-        $node = $this->createNodeListValidator('/mets:mdWrap', $rightsMetadata)
+        $mpWrap = $this->createNodeListValidator('mets:mdWrap', $rightsMetadata)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($node)
+        $this->createNodeValidator($mpWrap)
             ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
             ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVRIGHTS'));
 
-        $this->createNodeListValidator('/mets:xmlData[dv:rights]', $rightsMetadata)
+        $this->createNodeListValidator('mets:xmlData[dv:rights]', $mpWrap)
             ->validateHasOne();
     }
 
@@ -147,7 +147,7 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
         $this->createNodeValidator($technicalMetadata)
             ->validateHasUniqueId();
 
-        $mdWrap = $this->createNodeListValidator('/mets:mdWrap', $technicalMetadata)
+        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $technicalMetadata)
             ->validateHasOne()
             ->getFirstNode();
 
@@ -155,7 +155,7 @@ class AdministrativeMetadataValidator extends ApplicationProfileBaseValidator
             ->validateHasAttribute("MDTYPE")
             ->validateHasAttribute("OTHERMDTYPE");
 
-        $this->createNodeListValidator('/mets:xmlData', $mdWrap)
+        $this->createNodeListValidator('mets:xmlData', $mdWrap)
             ->validateHasOne();
     }
 

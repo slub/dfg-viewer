@@ -59,7 +59,7 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'LOG_0001');
         $this->addChildNode(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, $node);
-        $this->validateErrorHasUniqueId('/mets:mets/mets:structMap[1]/mets:div', 'LOG_0001');
+        $this->assertErrorHasUniqueId('/mets:mets/mets:structMap[1]/mets:div', 'LOG_0001');
         $this->resetDocument();
 
         $this->removeAttribute(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');

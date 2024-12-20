@@ -73,7 +73,7 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'PHYS_0001');
         $this->addChildNode('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', $node);
-        $this->validateErrorHasUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
+        $this->assertErrorHasUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
         $this->resetDocument();
 
         $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
