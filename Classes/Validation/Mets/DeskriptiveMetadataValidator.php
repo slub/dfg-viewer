@@ -45,9 +45,9 @@ class DeskriptiveMetadataValidator extends ApplicationProfileBaseValidator
         // Validates against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"
         $this->createNodeListValidator(self::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
             ->validateHasAny()
-            ->iterate(array($this, 'validateDescriptiveMetadataSection'));
+            ->iterate(array($this, 'validateDescriptiveMetadataSections'));
 
-        // If a physical structure is present, there must be one file section.
+        // there must be one primary structural element
         $logicalStructureElement = $this->createNodeListValidator(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS)
             ->validateHasOne()
             ->getFirstNode();
@@ -63,19 +63,23 @@ class DeskriptiveMetadataValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    public function validateDescriptiveMetadataSection(\DOMNode $descriptiveMetadataSection): void
+    public function validateDescriptiveMetadataSections(\DOMNode $descriptiveMetadataSection): void
     {
-        $mdWrap = $this->createNodeListValidator('/mets:mdWrap', $descriptiveMetadataSection)
+        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $descriptiveMetadataSection)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($mdWrap)
             ->validateHasAttributeWithValue('MDTYPE', array('MODS', 'TEIHDR'));
 
+        if(!$mdWrap) {
+            return;
+        }
+
         $mdType = $mdWrap->getAttribute('MDTYPE');
         if ($mdType == 'TEIHDR' || $mdType == 'MODS') {
             $childNode = $mdType == 'TEIHDR' ? 'tei:teiHeader' : 'mods:mods';
-            $this->createNodeListValidator('/mets:xmlData[' . $childNode . ']', $mdWrap)
+            $this->createNodeListValidator('mets:xmlData[' . $childNode . ']', $mdWrap)
                 ->validateHasOne();
         }
     }

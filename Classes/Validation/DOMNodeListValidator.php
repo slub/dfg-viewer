@@ -12,6 +12,8 @@ class DOMNodeListValidator
 {
     private string $expression;
 
+    private ?DOMNode $contextNode;
+
     private DOMNodeList $nodeList;
 
     private Result $result;
@@ -19,6 +21,7 @@ class DOMNodeListValidator
     public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode = null)
     {
         $this->expression = $expression;
+        $this->contextNode = $contextNode;
         $this->nodeList = $xpath->query($expression, $contextNode);
         $this->result = $result;
     }
@@ -44,7 +47,7 @@ class DOMNodeListValidator
     public function validateHasAny(): DOMNodeListValidator
     {
         if (!$this->nodeList->length > 0) {
-            $this->result->addError(new Error('There must be at least one element that matches the XPath expression "' . $this->expression . '"', 23));
+            $this->addError('There must be at least one element');
         }
         return $this;
     }
@@ -52,7 +55,7 @@ class DOMNodeListValidator
     public function validateHasOne(): DOMNodeListValidator
     {
         if ($this->nodeList->length != 1) {
-            $this->result->addError(new Error('There must be an element that matches the XPath expression "' . $this->expression . '"', 434));
+            $this->addError('There must be an element');
         }
         return $this;
     }
@@ -60,9 +63,18 @@ class DOMNodeListValidator
     public function validateHasNoneOrOne(): DOMNodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
-            $this->result->addError(new Error('There must be no more than one element that matches the XPath expression "' . $this->expression . '"', 43));
+            $this->addError('There must be no more than one element');
         }
         return $this;
+    }
+
+    private function addError(string $prefix): void
+    {
+        $message = $prefix . ' that matches the XPath expression "' . $this->expression . '"';
+        if($this->contextNode) {
+            $message .= ' under "' . $this->contextNode->getNodePath() . '"';
+        }
+        $this->result->addError(new Error($message, 23));
     }
 
 }

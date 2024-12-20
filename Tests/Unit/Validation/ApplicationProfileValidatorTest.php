@@ -131,7 +131,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     protected function removeNodes(string $expression): void
     {
         $xpath = new DOMXPath($this->doc);
-        foreach ($xpath->evaluate($expression) as $node) {
+        foreach ($xpath->query($expression) as $node) {
             $node->parentNode->removeChild($node);
         }
     }
@@ -175,19 +175,31 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         return $doc;
     }
 
-    protected function assertErrorHasAny(string $expression): void
+    protected function assertErrorHasAny(string $expression, string $context = ''): void
     {
-        $this->validateAndAssertEquals('There must be at least one element that matches the XPath expression "' . $expression . '"');
+        $message = 'There must be at least one element that matches the XPath expression "' . $expression . '"';
+        if ($context != '') {
+            $message .= ' under "' . $context . '"';
+        }
+        $this->validateAndAssertEquals($message);
     }
 
-    protected function assertErrorHasOne(string $expression): void
+    protected function assertErrorHasOne(string $expression, string $context = ''): void
     {
-        $this->validateAndAssertEquals('There must be an element that matches the XPath expression "' . $expression . '"');
+        $message = 'There must be an element that matches the XPath expression "' . $expression . '"';
+        if ($context != '') {
+            $message .= ' under "' . $context . '"';
+        }
+        $this->validateAndAssertEquals($message);
     }
 
-    protected function assertErrorHasNoneOrOne(string $expression): void
+    protected function assertErrorHasNoneOrOne(string $expression, string $context = ''): void
     {
-        $this->validateAndAssertEquals('There must be no more than one element that matches the XPath expression "' . $expression . '"');
+        $message = 'There must be no more than one element that matches the XPath expression "' . $expression . '"';
+        if ($context != '') {
+            $message .= ' under "' . $context . '"';
+        }
+        $this->validateAndAssertEquals($message);
     }
 
     protected function assertErrorHasAttribute(string $expression, string $name): void
