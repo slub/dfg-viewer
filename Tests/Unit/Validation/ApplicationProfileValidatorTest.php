@@ -57,11 +57,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
      */
     public function testDocument()
     {
-        $result = $this->validate();
-        if ($result->hasErrors()) {
-            self::assertEquals('', $result->getFirstError()->getMessage());
-        }
-        self::assertFalse($result->hasErrors());
+        $this->assertNoError();
     }
 
     /**
@@ -73,6 +69,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     {
         return $this->validator->validate($this->doc);
     }
+
 
     /**
      * Validates using validator and DOMDocument and assert result error message for equality.
@@ -175,6 +172,12 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         return $doc;
     }
 
+    protected function assertNoError(): void
+    {
+        $result = $this->validate();
+        $this->assertFalse($result->hasErrors());
+    }
+
     protected function assertErrorHasAny(string $expression, string $context = ''): void
     {
         $message = 'There must be at least one element that matches the XPath expression "' . $expression . '"';
@@ -224,7 +227,12 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
 
     protected function assertErrorHasUniqueId(string $expression, string $value): void
     {
-        $this->validateAndAssertEquals('"ID" attribute "' . $value . '" of "' . $expression . '" already exists.');
+        $this->assertErrorHasUniqueAttribute($expression, 'ID', $value);
+    }
+
+    protected function assertErrorHasUniqueAttribute(string $expression, string $name, string $value): void
+    {
+        $this->validateAndAssertEquals('"' . $name . '" attribute with value "' . $value . '" of "' . $expression . '" already exists.');
     }
 
 }

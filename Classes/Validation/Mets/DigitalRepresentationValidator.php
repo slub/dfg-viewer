@@ -40,7 +40,7 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
 
     const XPATH_FILE_SECTIONS = '//mets:mets/mets:fileSec';
 
-    const XPATH_FILE_GROUPS = self::XPATH_FILE_SECTIONS . '/mets:fileGroup';
+    const XPATH_FILE_GROUPS = self::XPATH_FILE_SECTIONS . '/mets:fileGrp';
 
     const XPATH_FILES = self::XPATH_FILE_GROUPS . '/mets:file';
 
@@ -56,8 +56,10 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
                 ->validateHasOne();
         }
 
-        $this->validateFileGroups();
-        $this->validateFiles();
+        if($this->xpath->query(DigitalRepresentationValidator::XPATH_FILE_SECTIONS)->length > 0) {
+            $this->validateFileGroups();
+            $this->validateFiles();
+        }
     }
 
     /**
@@ -103,7 +105,7 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
             ->validateHasUniqueId()
             ->validateHasAttribute('MIMETYPE');
 
-        $fLocat = $this->createNodeListValidator('/mets:FLocat', $file)
+        $fLocat = $this->createNodeListValidator('mets:FLocat', $file)
             ->validateHasOne()
             ->getFirstNode();
 

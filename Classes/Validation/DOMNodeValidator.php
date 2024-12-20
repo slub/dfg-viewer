@@ -66,7 +66,7 @@ class DOMNodeValidator
 
         $value = $this->node->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-            $this->result->addError(new Error('"' . $name . '" attribute "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
+            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
         }
 
         return $this;
