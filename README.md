@@ -26,3 +26,11 @@ If you have any questions or encounter any problems, please do not hesitate to c
 - [Beatrycze Volk](https://github.com/beatrycze-volk)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b5dfd6975d174d8a8033825fb640ba7c)](https://app.codacy.com/gh/slub/dfg-viewer?utm_source=github.com&utm_medium=referral&utm_content=slub/dfg-viewer&utm_campaign=Badge_Grade)
+
+## External Dependencies
+
+This project includes code from the following external projects:
+
+- [jQuery](https://jquery.com/) version 3.6.0
+- [highlight.js](https://highlightjs.org/) version 10.7.2
+- [Google Fonts](https://fonts.google.com/) (2020)
