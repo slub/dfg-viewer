@@ -18,6 +18,38 @@ class DOMNodeValidator
         $this->node = $node;
     }
 
+    public function validateHasContentWithEmail(): DOMNodeValidator
+    {
+        if (!isset($this->node) && !$this->node->nodeValue) {
+            return $this;
+        }
+
+        $email = $this->node->nodeValue;
+
+        if (str_starts_with(strtolower($email), 'mailto:')) {
+            $email = substr($email, 7);
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->result->addError(new Error('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
+        }
+
+        return $this;
+    }
+
+    public function validateHasContentWithUrl(): DOMNodeValidator
+    {
+        if (!isset($this->node) && !$this->node->nodeValue) {
+            return $this;
+        }
+
+        if (!filter_var($this->node->nodeValue, FILTER_VALIDATE_URL)) {
+            $this->result->addError(new Error('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
+        }
+
+        return $this;
+    }
+
     public function validateHasAttributeWithUrl(string $name): DOMNodeValidator
     {
         if (!isset($this->node)) {
