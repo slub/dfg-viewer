@@ -70,6 +70,13 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         return $this->validator->validate($this->doc);
     }
 
+    public static function trimDoubleSlash(string $value): string
+    {
+        if(str_starts_with($value, '//')) {
+            return substr($value, 1);
+        }
+        return $value;
+    }
 
     /**
      * Validates using validator and DOMDocument and assert result error message for equality.

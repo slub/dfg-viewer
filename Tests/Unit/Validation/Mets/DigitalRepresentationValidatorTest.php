@@ -26,12 +26,11 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
-use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class DigitalRepresentationValidatorTest extends ApplicationProfileValidatorTest
 {
-
     /**
      * Test validation against the rules of chapter "2.4.1 Dateisektion – mets:fileSec"
      *
@@ -40,15 +39,15 @@ class DigitalRepresentationValidatorTest extends ApplicationProfileValidatorTest
     public function testFileSections(): void
     {
         $this->addChildNodeNS('/mets:mets', self::NAMESPACE_METS, 'mets:fileSec');
-        $this->assertErrorHasNoneOrOne(DigitalRepresentationValidator::XPATH_FILE_SECTIONS);
+        $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_FILE_SECTIONS);
         $this->resetDocument();
 
-        $this->removeNodes(DigitalRepresentationValidator::XPATH_FILE_SECTIONS);
-        $this->assertErrorHasOne(DigitalRepresentationValidator::XPATH_FILE_SECTIONS);
+        $this->removeNodes(ValidationHelper::XPATH_FILE_SECTIONS);
+        $this->assertErrorHasOne(ValidationHelper::XPATH_FILE_SECTIONS);
         $this->resetDocument();
 
-        $this->removeNodes(PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
-        $this->removeNodes(DigitalRepresentationValidator::XPATH_FILE_SECTIONS);
+        $this->removeNodes(ValidationHelper::XPATH_PHYSICAL_STRUCTURES);
+        $this->removeNodes(ValidationHelper::XPATH_FILE_SECTIONS);
         $this->assertNoError();
     }
 
@@ -59,16 +58,16 @@ class DigitalRepresentationValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testFileGroups(): void
     {
-        $this->removeNodes(DigitalRepresentationValidator::XPATH_FILE_GROUPS);
-        $this->assertErrorHasAny(DigitalRepresentationValidator::XPATH_FILE_GROUPS);
+        $this->removeNodes(ValidationHelper::XPATH_FILE_SECTION_GROUPS);
+        $this->assertErrorHasAny(ValidationHelper::XPATH_FILE_SECTION_GROUPS);
         $this->resetDocument();
 
-        $this->removeNodes(DigitalRepresentationValidator::XPATH_FILE_GROUPS . '[@USE="DEFAULT"]');
-        $this->assertErrorHasOne(DigitalRepresentationValidator::XPATH_FILE_GROUPS . '[@USE="DEFAULT"]');
+        $this->removeNodes(ValidationHelper::XPATH_FILE_SECTION_GROUPS . '[@USE="DEFAULT"]');
+        $this->assertErrorHasOne(ValidationHelper::XPATH_FILE_SECTION_GROUPS . '[@USE="DEFAULT"]');
         $this->resetDocument();
 
-        $this->setAttributeValue(DigitalRepresentationValidator::XPATH_FILE_GROUPS . '[@USE="THUMBS"]', 'USE', 'DEFAULT');
-        $this->assertErrorHasUniqueAttribute('/mets:mets/mets:fileSec/mets:fileGrp[1]', 'USE', 'DEFAULT');
+        $this->setAttributeValue(ValidationHelper::XPATH_FILE_SECTION_GROUPS . '[@USE="THUMBS"]', 'USE', 'DEFAULT');
+        $this->assertErrorHasUniqueAttribute(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]', 'USE', 'DEFAULT');
     }
 
     /**
@@ -78,35 +77,35 @@ class DigitalRepresentationValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testFiles(): void
     {
-        $this->removeNodes(DigitalRepresentationValidator::XPATH_FILES);
-        $this->assertErrorHasAny(DigitalRepresentationValidator::XPATH_FILES);
+        $this->removeNodes(ValidationHelper::XPATH_FILE_SECTION_FILES);
+        $this->assertErrorHasAny(ValidationHelper::XPATH_FILE_SECTION_FILES);
         $this->resetDocument();
 
-        $this->setAttributeValue(DigitalRepresentationValidator::XPATH_FILES, 'ID', 'DMDLOG_0001');
-        $this->assertErrorHasUniqueId('/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file', 'DMDLOG_0001');
+        $this->setAttributeValue(ValidationHelper::XPATH_FILE_SECTION_FILES, 'ID', 'DMDLOG_0001');
+        $this->assertErrorHasUniqueId(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file', 'DMDLOG_0001');
         $this->resetDocument();
 
-        $this->removeAttribute(DigitalRepresentationValidator::XPATH_FILES, 'MIMETYPE');
-        $this->assertErrorHasAttribute('/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file', 'MIMETYPE');
+        $this->removeAttribute(ValidationHelper::XPATH_FILE_SECTION_FILES, 'MIMETYPE');
+        $this->assertErrorHasAttribute(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file', 'MIMETYPE');
         $this->resetDocument();
 
-        $this->removeNodes(DigitalRepresentationValidator::XPATH_FILES . '/mets:FLocat');
-        $this->assertErrorHasOne('mets:FLocat', '/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file');
+        $this->removeNodes(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat');
+        $this->assertErrorHasOne('mets:FLocat', self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file');
         $this->resetDocument();
 
-        $this->removeAttribute(DigitalRepresentationValidator::XPATH_FILES . '/mets:FLocat', 'LOCTYPE');
-        $this->assertErrorHasAttribute('/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file/mets:FLocat', 'LOCTYPE');
+        $this->removeAttribute(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'LOCTYPE');
+        $this->assertErrorHasAttribute(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'LOCTYPE');
         $this->resetDocument();
 
-        $this->setAttributeValue(DigitalRepresentationValidator::XPATH_FILES . '/mets:FLocat', 'LOCTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file/mets:FLocat', 'LOCTYPE','Test');
+        $this->setAttributeValue(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'LOCTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'LOCTYPE', 'Test');
         $this->resetDocument();
 
-        $this->removeAttribute(DigitalRepresentationValidator::XPATH_FILES . '/mets:FLocat', 'xlink:href');
-        $this->assertErrorHasAttribute('/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file/mets:FLocat', 'xlink:href');
+        $this->removeAttribute(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'xlink:href');
+        $this->assertErrorHasAttribute(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'xlink:href');
 
-        $this->setAttributeValue(DigitalRepresentationValidator::XPATH_FILES . '/mets:FLocat', 'xlink:href', 'Test');
-        $this->assertErrorHasAttributeWithUrl('/mets:mets/mets:fileSec/mets:fileGrp[1]/mets:file/mets:FLocat', 'xlink:href','Test');
+        $this->setAttributeValue(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'xlink:href', 'Test');
+        $this->assertErrorHasAttributeWithUrl(self::trimDoubleSlash(ValidationHelper::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'xlink:href', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator

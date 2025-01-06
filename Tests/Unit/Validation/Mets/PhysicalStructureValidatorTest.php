@@ -26,6 +26,7 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
@@ -41,7 +42,7 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:structMap');
         $node->setAttribute('TYPE', 'PHYSICAL');
         $this->addChildNode('/mets:mets', $node);
-        $this->assertErrorHasNoneOrOne(PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
+        $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_PHYSICAL_STRUCTURES);
     }
 
     /**
@@ -51,22 +52,22 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testStructuralElements(): void
     {
-        $this->removeNodes(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE);
-        $this->assertErrorHasOne(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->removeNodes(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->assertErrorHasOne(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
         $this->resetDocument();
 
-        $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
+        $this->removeAttribute(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div', 'TYPE');
 
-        $this->setAttributeValue(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
+        $this->setAttributeValue(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
         $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div', 'TYPE', 'Test');
         $this->resetDocument();
 
-        $this->removeNodes(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS);
-        $this->assertErrorHasAny(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS);
+        $this->removeNodes(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
+        $this->assertErrorHasAny(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
         $this->resetDocument();
 
-        $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'ID');
+        $this->removeAttribute(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'ID');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'ID');
         $this->resetDocument();
 
@@ -76,10 +77,10 @@ class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
         $this->assertErrorHasUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
         $this->resetDocument();
 
-        $this->removeAttribute(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE');
+        $this->removeAttribute(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE');
 
-        $this->setAttributeValue(PhysicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
+        $this->setAttributeValue(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
         $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE', 'Test');
     }
 

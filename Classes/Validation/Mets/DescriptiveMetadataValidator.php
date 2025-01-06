@@ -2,7 +2,8 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Validation\DOMDocumentValidator;
 
 /**
  * Copyright notice
@@ -35,25 +36,22 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  *
  * @access public
  */
-class DeskriptiveMetadataValidator extends ApplicationProfileBaseValidator
+class DescriptiveMetadataValidator extends DOMDocumentValidator
 {
-
-    const XPATH_DESCRIPTIVE_METADATA_SECTIONS = '//mets:mets/mets:dmdSec';
-
-    protected function isValidDocument(): void
+    public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"
-        $this->createNodeListValidator(self::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
             ->validateHasAny()
             ->iterate(array($this, 'validateDescriptiveMetadataSections'));
 
         // there must be one primary structural element
-        $logicalStructureElement = $this->createNodeListValidator(LogicalStructureValidator::XPATH_STRUCTURAL_ELEMENTS)
+        $logicalStructureElement = $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($logicalStructureElement)
-            ->validateHasReferenceToId('DMDID', self::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+            ->validateHasReferenceToId('DMDID', ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
     /**

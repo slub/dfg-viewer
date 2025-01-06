@@ -25,7 +25,8 @@ namespace Slub\Dfgviewer\Validation\Mets;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Validation\DOMDocumentValidator;
 
 /**
  * The validator validates against the rules outlined in chapter 2.3 of the METS application profile 2.3.1.
@@ -35,17 +36,12 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  *
  * @access public
  */
-class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseValidator
+class LinkingLogicalPhysicalStructureValidator extends DOMDocumentValidator
 {
-
-    const XPATH_STRUCT_LINK = '//mets:mets/mets:structLink';
-
-    const XPATH_LINK_ELEMENTS = self::XPATH_STRUCT_LINK . '/mets:smLink' ;
-
-    protected function isValidDocument(): void
+    public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
-        $this->createNodeListValidator(self::XPATH_STRUCT_LINK)
+        $this->createNodeListValidator(ValidationHelper::XPATH_STRUCT_LINK)
             ->validateHasNoneOrOne();
 
         $this->validateLinkElements();
@@ -58,9 +54,9 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
      *
      * @return void
      */
-    protected function validateLinkElements(): void
+    public function validateLinkElements(): void
     {
-        $this->createNodeListValidator(self::XPATH_LINK_ELEMENTS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS)
             ->validateHasAny()
             ->iterate(array($this, "validateLinkElement"));
     }
@@ -68,8 +64,7 @@ class LinkingLogicalPhysicalStructureValidator extends ApplicationProfileBaseVal
     public function validateLinkElement(\DOMNode $linkElement): void
     {
         $this->createNodeValidator($linkElement)
-            ->validateHasReferenceToId("xlink:from", LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES)
-            ->validateHasReferenceToId("xlink:to", PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
+            ->validateHasReferenceToId("xlink:from", ValidationHelper::XPATH_LOGICAL_STRUCTURES)
+            ->validateHasReferenceToId("xlink:to", ValidationHelper::XPATH_PHYSICAL_STRUCTURES);
     }
-
 }

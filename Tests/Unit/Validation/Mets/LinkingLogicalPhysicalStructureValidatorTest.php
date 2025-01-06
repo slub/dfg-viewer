@@ -26,13 +26,11 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
 {
-
     /**
      * Test validation against the rules of chapter "2.3.1 Structure links - mets:structLink"
      *
@@ -41,26 +39,25 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
     public function testMultipleStructLinks(): void
     {
         $this->addChildNodeNS('/mets:mets', self::NAMESPACE_METS, 'mets:structLink');
-        $this->assertErrorHasNoneOrOne(LinkingLogicalPhysicalStructureValidator::XPATH_STRUCT_LINK);
+        $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_STRUCT_LINK);
     }
 
     public function testLinkElements(): void
     {
-        $this->removeNodes(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS);
-        $this->assertErrorHasAny(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS);
+        $this->removeNodes(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS);
+        $this->assertErrorHasAny(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS);
         $this->resetDocument();
 
-        $this->setAttributeValue(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:from', 'Test');
-        $this->assertErrorHasRefToOne('/mets:mets/mets:structLink/mets:smLink', 'xlink:from', 'Test', LogicalStructureValidator::XPATH_LOGICAL_STRUCTURES);
+        $this->setAttributeValue(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS, 'xlink:from', 'Test');
+        $this->assertErrorHasRefToOne(self::trimDoubleSlash(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:from', 'Test', ValidationHelper::XPATH_LOGICAL_STRUCTURES);
         $this->resetDocument();
 
-        $this->setAttributeValue(LinkingLogicalPhysicalStructureValidator::XPATH_LINK_ELEMENTS, 'xlink:to', 'Test');
-        $this->assertErrorHasRefToOne('/mets:mets/mets:structLink/mets:smLink', 'xlink:to', 'Test', PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES);
+        $this->setAttributeValue(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS, 'xlink:to', 'Test');
+        $this->assertErrorHasRefToOne(self::trimDoubleSlash(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:to', 'Test', ValidationHelper::XPATH_PHYSICAL_STRUCTURES);
     }
 
     protected function createValidator(): AbstractDlfValidator
     {
         return new LinkingLogicalPhysicalStructureValidator();
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace Slub\Dfgviewer\Validation;
 
+use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
 
 /**
@@ -35,21 +36,18 @@ use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
  *
  * @access public
  */
-class DVMetadataValidator extends ApplicationProfileBaseValidator
+class DVMetadataValidator extends DOMDocumentValidator
 {
-    const XPATH_DV_RIGHTS = AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap[@MDTYPE="OTHER" and @OTHERMDTYPE="DVRIGHTS"]/mets:xmlData/dv:rights';
-
-    const XPATH_DV_LINKS = AdministrativeMetadataValidator::XPATH_RIGHTS_METADATA . '/mets:mdWrap[@MDTYPE="OTHER" and @OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links';
-
     protected function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.7.1 Rechteangaben – dv:rights"
-        $this->createNodeListValidator(self::XPATH_DV_RIGHTS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVRIGHTS)
             ->validateHasOne();
 
         $this->validateDvRights();
 
-        $this->createNodeListValidator(self::XPATH_DV_LINKS)
+        // Validates against the rules of chapter "2.7.3 Verweise – dv:links"
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVLINKS)
             ->validateHasOne();
 
         $this->validateDvLinks();
@@ -64,18 +62,18 @@ class DVMetadataValidator extends ApplicationProfileBaseValidator
      */
     public function validateDvLinks(): void
     {
-        $this->createNodeListValidator(self::XPATH_DV_LINKS . '/dv:reference')
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVLINKS . '/dv:reference')
             ->validateHasAny()
             ->iterate(array($this, "validateReferences"));
 
-        $this->createNodeListValidator(self::XPATH_DV_LINKS . '/dv:presentation')
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVLINKS . '/dv:presentation')
             ->validateHasNoneOrOne();
 
-        $sruNode = $this->createNodeListValidator(self::XPATH_DV_LINKS . '/dv:sru')
+        $sruNode = $this->createNodeListValidator(ValidationHelper::XPATH_DVLINKS . '/dv:sru')
             ->validateHasNoneOrOne()->getFirstNode();
         $this->createNodeValidator($sruNode)->validateHasContentWithUrl();
 
-        $iiifNode = $this->createNodeListValidator(self::XPATH_DV_LINKS . '/dv:iiif')
+        $iiifNode = $this->createNodeListValidator(ValidationHelper::XPATH_DVLINKS . '/dv:iiif')
             ->validateHasNoneOrOne()->getFirstNode();
         $this->createNodeValidator($iiifNode)->validateHasContentWithUrl();
     }
@@ -89,22 +87,22 @@ class DVMetadataValidator extends ApplicationProfileBaseValidator
      */
     public function validateDvRights(): void
     {
-        $this->createNodeListValidator(self::XPATH_DV_RIGHTS . '/dv:owner')
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVRIGHTS . '/dv:owner')
             ->validateHasOne();
 
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:ownerLogo');
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:ownerSiteURL');
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:ownerContact');
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:ownerLogo');
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:ownerSiteURL');
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:ownerContact');
 
-        $this->createNodeListValidator(self::XPATH_DV_RIGHTS . '/dv:aggregator')->validateHasNoneOrOne();
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:aggregatorLogo', true);
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:aggregatorSiteURL', true);
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVRIGHTS . '/dv:aggregator')->validateHasNoneOrOne();
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:aggregatorLogo', true);
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:aggregatorSiteURL', true);
 
-        $this->createNodeListValidator(self::XPATH_DV_RIGHTS . '/dv:sponsor')->validateHasNoneOrOne();
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:sponsorLogo', true);
-        $this->validateNodeContent(self::XPATH_DV_RIGHTS . '/dv:sponsorSiteURL', true);
+        $this->createNodeListValidator(ValidationHelper::XPATH_DVRIGHTS . '/dv:sponsor')->validateHasNoneOrOne();
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:sponsorLogo', true);
+        $this->validateNodeContent(ValidationHelper::XPATH_DVRIGHTS . '/dv:sponsorSiteURL', true);
 
-        $licenseNode = $this->createNodeListValidator(self::XPATH_DV_RIGHTS . '/dv:license')
+        $licenseNode = $this->createNodeListValidator(ValidationHelper::XPATH_DVRIGHTS . '/dv:license')
             ->validateHasNoneOrOne()
             ->getFirstNode();
         if ($licenseNode && !in_array($licenseNode->nodeValue, array('pdm', 'cc0', 'cc-by', 'cc-by-sa', 'cc-by-nd', 'cc-by-nc', 'cc-by-nc-sa', 'cc-by-nc-nd', 'reserved'))) {
@@ -117,6 +115,7 @@ class DVMetadataValidator extends ApplicationProfileBaseValidator
      *
      * Validates against the rules of chapter "2.7.4.1 Katalog- bzw. Findbuchnachweis – dv:reference"
      *
+     * @param \DOMNode $reference
      * @return void
      */
     public function validateReferences(\DOMNode $reference): void

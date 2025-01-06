@@ -2,7 +2,8 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Validation\DOMDocumentValidator;
 
 /**
  * Copyright notice
@@ -35,19 +36,12 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  *
  * @access public
  */
-class LogicalStructureValidator extends ApplicationProfileBaseValidator
+class LogicalStructureValidator extends DOMDocumentValidator
 {
-
-    const XPATH_LOGICAL_STRUCTURES = '//mets:mets/mets:structMap[@TYPE="LOGICAL"]';
-
-    const XPATH_STRUCTURAL_ELEMENTS = self::XPATH_LOGICAL_STRUCTURES . '/mets:div';
-
-    const XPATH_EXTERNAL_REFERENCES = self::XPATH_STRUCTURAL_ELEMENTS . '/mets:mptr';
-
-    protected function isValidDocument(): void
+    public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.1.1 Logical structure - mets:structMap"
-        $this->createNodeListValidator(self::XPATH_LOGICAL_STRUCTURES)
+        $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_STRUCTURES)
             ->validateHasAny();
 
         $this->validateStructuralElements();
@@ -62,9 +56,9 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    protected function validateStructuralElements(): void
+    public function validateStructuralElements(): void
     {
-        $this->createNodeListValidator(self::XPATH_STRUCTURAL_ELEMENTS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
             ->iterate(array($this, "validateStructuralElement"));
     }
@@ -73,7 +67,7 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
     {
         $this->createNodeValidator($structureElement)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue("TYPE", self::STRUCTURE_DATASET);
+            ->validateHasAttributeWithValue("TYPE", ValidationHelper::STRUCTURE_DATASET);
     }
 
     /**
@@ -83,9 +77,9 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    protected function validateExternalReferences(): void
+    public function validateExternalReferences(): void
     {
-        $this->createNodeListValidator(self::XPATH_EXTERNAL_REFERENCES)
+        $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_EXTERNAL_REFERENCES)
             ->validateHasNoneOrOne()
             ->iterate(array($this, "validateExternalReference"));
     }
@@ -104,7 +98,7 @@ class LogicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    protected function validatePeriodicPublishingSequences(): void
+    public function validatePeriodicPublishingSequences(): void
     {
         // TODO
     }

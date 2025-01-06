@@ -2,8 +2,8 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
-use function PHPUnit\Framework\callback;
+use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Validation\DOMDocumentValidator;
 
 /**
  * Copyright notice
@@ -36,18 +36,14 @@ use function PHPUnit\Framework\callback;
  *
  * @access public
  */
-class PhysicalStructureValidator extends ApplicationProfileBaseValidator
+class PhysicalStructureValidator extends DOMDocumentValidator
 {
-    const XPATH_PHYSICAL_STRUCTURES = '//mets:mets/mets:structMap[@TYPE="PHYSICAL"]';
 
-    const XPATH_STRUCTURAL_ELEMENT_SEQUENCE = self::XPATH_PHYSICAL_STRUCTURES . '/mets:div';
 
-    const XPATH_STRUCTURAL_ELEMENTS = self::XPATH_STRUCTURAL_ELEMENT_SEQUENCE . '/mets:div';
-
-    protected function isValidDocument(): void
+    public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.2.1 Physical structure - mets:structMap"
-        $this->createNodeListValidator(self::XPATH_PHYSICAL_STRUCTURES)
+        $this->createNodeListValidator(ValidationHelper::XPATH_PHYSICAL_STRUCTURES)
             ->validateHasNoneOrOne();
 
         $this->validateStructuralElements();
@@ -61,16 +57,16 @@ class PhysicalStructureValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    protected function validateStructuralElements(): void
+    public function validateStructuralElements(): void
     {
-        $node = $this->createNodeListValidator(self::XPATH_STRUCTURAL_ELEMENT_SEQUENCE)
+        $node = $this->createNodeListValidator(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($node)
             ->validateHasAttributeWithValue('TYPE', array('physSequence'));
 
-        $this->createNodeListValidator(self::XPATH_STRUCTURAL_ELEMENTS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
             ->iterate(array($this, "validateStructuralElement"));
     }
@@ -81,5 +77,4 @@ class PhysicalStructureValidator extends ApplicationProfileBaseValidator
             ->validateHasUniqueId()
             ->validateHasAttributeWithValue("TYPE", array("page", "doublepage", "track"));
     }
-
 }

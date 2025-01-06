@@ -28,6 +28,9 @@ namespace Slub\Dfgviewer\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidationStack;
+use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
+use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
+use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
 use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
@@ -35,11 +38,14 @@ use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 class MetsApplicationProfileValidationStack extends AbstractDlfValidationStack {
     public function __construct(array $options = [])
     {
-        parent::__construct(\DOMDocument::class, $options);
+        parent::__construct(\DOMDocument::class);
 
         $this->addValidator(LogicalStructureValidator::class, "Specifications for the logical document structure", false);
         $this->addValidator(PhysicalStructureValidator::class, "Specifications for the physical document structure", false);
         $this->addValidator(LinkingLogicalPhysicalStructureValidator::class, "Specifications for the physical document structure", false);
-
+        $this->addValidator(DigitalRepresentationValidator::class, "Specifications for the physical document structure", false);
+        $this->addValidator(DescriptiveMetadataValidator::class, "Descriptive metadata", false);
+        $this->addValidator(AdministrativeMetadataValidator::class, "Administrative metadata", false);
+        $this->addValidator(DVMetadataValidator::class, "DFG-Viewer specific informations", false);
     }
 }

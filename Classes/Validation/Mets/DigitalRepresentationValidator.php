@@ -2,7 +2,8 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Validation\DOMDocumentValidator;
 
 /**
  * Copyright notice
@@ -35,28 +36,21 @@ use Slub\Dfgviewer\Validation\ApplicationProfileBaseValidator;
  *
  * @access public
  */
-class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
+class DigitalRepresentationValidator extends DOMDocumentValidator
 {
-
-    const XPATH_FILE_SECTIONS = '//mets:mets/mets:fileSec';
-
-    const XPATH_FILE_GROUPS = self::XPATH_FILE_SECTIONS . '/mets:fileGrp';
-
-    const XPATH_FILES = self::XPATH_FILE_GROUPS . '/mets:file';
-
-    protected function isValidDocument(): void
+    public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.4.1 Dateisektion – mets:fileSec"
-        $this->createNodeListValidator(self::XPATH_FILE_SECTIONS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_FILE_SECTIONS)
             ->validateHasNoneOrOne();
 
         // If a physical structure is present, there must be one file section.
-        if($this->xpath->query(PhysicalStructureValidator::XPATH_PHYSICAL_STRUCTURES)->length > 0){
-            $this->createNodeListValidator(self::XPATH_FILE_SECTIONS)
+        if($this->xpath->query(ValidationHelper::XPATH_PHYSICAL_STRUCTURES)->length > 0){
+            $this->createNodeListValidator(ValidationHelper::XPATH_FILE_SECTIONS)
                 ->validateHasOne();
         }
 
-        if($this->xpath->query(DigitalRepresentationValidator::XPATH_FILE_SECTIONS)->length > 0) {
+        if ($this->xpath->query(ValidationHelper::XPATH_FILE_SECTIONS)->length > 0) {
             $this->validateFileGroups();
             $this->validateFiles();
         }
@@ -69,20 +63,20 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    protected function validateFileGroups(): void
+    public function validateFileGroups(): void
     {
-        $this->createNodeListValidator(self::XPATH_FILE_GROUPS)
+        $this->createNodeListValidator(ValidationHelper::XPATH_FILE_SECTION_GROUPS)
             ->validateHasAny()
             ->iterate(array($this, "validateFileGroup"));
 
-        $this->createNodeListValidator(self::XPATH_FILE_GROUPS . '[@USE="DEFAULT"]')
+        $this->createNodeListValidator(ValidationHelper::XPATH_FILE_SECTION_GROUPS . '[@USE="DEFAULT"]')
             ->validateHasOne();
     }
 
     public function validateFileGroup(\DOMNode $fileGroup): void
     {
         $this->createNodeValidator($fileGroup)
-            ->validateHasUniqueAttribute("USE", self::XPATH_FILE_GROUPS);
+            ->validateHasUniqueAttribute("USE", ValidationHelper::XPATH_FILE_SECTION_GROUPS);
     }
 
     /**
@@ -92,9 +86,9 @@ class DigitalRepresentationValidator extends ApplicationProfileBaseValidator
      *
      * @return void
      */
-    protected function validateFiles(): void
+    public function validateFiles(): void
     {
-        $this->createNodeListValidator(self::XPATH_FILES)
+        $this->createNodeListValidator(ValidationHelper::XPATH_FILE_SECTION_FILES)
             ->validateHasAny()
             ->iterate(array($this, "validateFile"));
     }
