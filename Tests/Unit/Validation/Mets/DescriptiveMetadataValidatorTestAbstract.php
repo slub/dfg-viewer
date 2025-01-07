@@ -26,10 +26,10 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
-use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
 
-class DescriptiveMetadataValidatorTest extends ApplicationProfileValidatorTest
+class DescriptiveMetadataValidatorTestAbstract extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"
@@ -38,16 +38,16 @@ class DescriptiveMetadataValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testDescriptiveMetadata(): void
     {
-        $this->removeNodes(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
-        $this->assertErrorHasAny(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->removeNodes(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->assertErrorHasAny(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
         $this->resetDocument();
 
-        $this->removeNodes(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
-        $this->assertErrorHasOne(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
+        $this->removeNodes(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
+        $this->assertErrorHasOne(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
         $this->resetDocument();
 
-        $this->setAttributeValue(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'DMDID', 'Test');
-        $this->assertErrorHasRefToOne('/mets:mets/mets:structMap[1]/mets:div', 'DMDID', 'Test', ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->setAttributeValue(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'DMDID', 'Test');
+        $this->assertErrorHasRefToOne('/mets:mets/mets:structMap[1]/mets:div', 'DMDID', 'Test', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
     /**
@@ -57,16 +57,16 @@ class DescriptiveMetadataValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testEmbeddedMetadata(): void
     {
-        $this->removeNodes(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap');
-        $this->assertErrorHasOne('mets:mdWrap', self::trimDoubleSlash(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS));
+        $this->removeNodes(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap');
+        $this->assertErrorHasOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS));
         $this->resetDocument();
 
-        $this->setAttributeValue(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap', 'MDTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(self::trimDoubleSlash(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->setAttributeValue(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->assertErrorHasAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap', 'MDTYPE', 'Test');
         $this->resetDocument();
 
-        $this->removeNodes(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap/mets:xmlData/mods:mods');
-        $this->assertErrorHasOne('mets:xmlData[mods:mods]', self::trimDoubleSlash(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap');
+        $this->removeNodes(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap/mets:xmlData/mods:mods');
+        $this->assertErrorHasOne('mets:xmlData[mods:mods]', VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap');
     }
 
     protected function createValidator(): AbstractDlfValidator

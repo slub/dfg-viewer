@@ -3,7 +3,7 @@
 namespace Slub\Dfgviewer\Validation\Mets;
 
 use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\DOMDocumentValidator;
+use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
 
 /**
  * Copyright notice
@@ -36,7 +36,7 @@ use Slub\Dfgviewer\Validation\DOMDocumentValidator;
  *
  * @access public
  */
-class DescriptiveMetadataValidator extends DOMDocumentValidator
+class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
 {
     public function isValidDocument(): void
     {

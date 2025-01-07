@@ -26,61 +26,62 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
-use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
-class PhysicalStructureValidatorTest extends ApplicationProfileValidatorTest
+class PhysicalStructureValidatorTestAbstract extends AbstractDomDocumentValidatorTest
 {
-
     /**
      * Test validation against the rules of chapter "2.2.1 Physical structure - mets:structMap"
      *
      * @return void
+     * @throws \DOMException
      */
     public function testMultiplePhysicalDivisions(): void
     {
-        $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:structMap');
+        $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:structMap');
         $node->setAttribute('TYPE', 'PHYSICAL');
         $this->addChildNode('/mets:mets', $node);
-        $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_PHYSICAL_STRUCTURES);
+        $this->assertErrorHasNoneOrOne(VH::XPATH_PHYSICAL_STRUCTURES);
     }
 
     /**
      * Test validation against the rules of chapter "2.2.2.1 Structural element - mets:div"
      *
      * @return void
+     * @throws \DOMException
      */
     public function testStructuralElements(): void
     {
-        $this->removeNodes(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
-        $this->assertErrorHasOne(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->assertErrorHasOne(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
         $this->resetDocument();
 
-        $this->removeAttribute(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
+        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div', 'TYPE');
 
-        $this->setAttributeValue(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
+        $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
         $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div', 'TYPE', 'Test');
         $this->resetDocument();
 
-        $this->removeNodes(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
-        $this->assertErrorHasAny(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
+        $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
+        $this->assertErrorHasAny(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
         $this->resetDocument();
 
-        $this->removeAttribute(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'ID');
+        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'ID');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'ID');
         $this->resetDocument();
 
-        $node = $this->doc->createElementNS(self::NAMESPACE_METS, 'mets:div');
+        $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'PHYS_0001');
         $this->addChildNode('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', $node);
         $this->assertErrorHasUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
         $this->resetDocument();
 
-        $this->removeAttribute(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE');
+        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE');
 
-        $this->setAttributeValue(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
+        $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
         $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE', 'Test');
     }
 

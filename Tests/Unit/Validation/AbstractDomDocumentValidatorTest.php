@@ -32,12 +32,8 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-abstract class ApplicationProfileValidatorTest extends UnitTestCase
+abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
 {
-    const NAMESPACE_METS = 'http://www.loc.gov/METS/';
-
-    const NAMESPACE_DV = 'http://dfg-viewer.de/';
-
     protected $validator;
 
     protected $doc;
@@ -65,19 +61,11 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     /**
      * Validates using validator and DOMDocument
      *
-     * @return mixed|Result
+     * @return Result
      */
     public function validate(): Result
     {
         return $this->validator->validate($this->doc);
-    }
-
-    public static function trimDoubleSlash(string $value): string
-    {
-        if(str_starts_with($value, '//')) {
-            return substr($value, 1);
-        }
-        return $value;
     }
 
     /**
@@ -85,7 +73,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
      *
      * Validates using a validator and DOMDocument, then asserts that the resulting error message matches the expected value.
      *
-     * @param $message
+     * @param $message string
      * @return void
      */
     public function validateAndAssertEquals(string $message): void
@@ -187,7 +175,6 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
             $node->nodeValue = $value;
         }
     }
-
 
     protected function getDOMDocument(): DOMDocument
     {

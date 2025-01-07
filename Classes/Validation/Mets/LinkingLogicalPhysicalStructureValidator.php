@@ -26,7 +26,7 @@ namespace Slub\Dfgviewer\Validation\Mets;
  */
 
 use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\DOMDocumentValidator;
+use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
 
 /**
  * The validator validates against the rules outlined in chapter 2.3 of the METS application profile 2.3.1.
@@ -36,7 +36,7 @@ use Slub\Dfgviewer\Validation\DOMDocumentValidator;
  *
  * @access public
  */
-class LinkingLogicalPhysicalStructureValidator extends DOMDocumentValidator
+class LinkingLogicalPhysicalStructureValidator extends AbstactDomDocumentValidator
 {
     public function isValidDocument(): void
     {

@@ -2,12 +2,35 @@
 
 namespace Slub\Dfgviewer\Validation;
 
+/**
+ * Copyright notice
+ *
+ * (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
+ * All rights reserved
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
+
 use DOMNode;
 use DOMXPath;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
-class DOMNodeValidator
+class DomNodeValidator
 {
     protected DOMXPath $xpath;
 
@@ -18,7 +41,7 @@ class DOMNodeValidator
         $this->node = $node;
     }
 
-    public function validateHasContentWithEmail(): DOMNodeValidator
+    public function validateHasContentWithEmail(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
@@ -37,7 +60,7 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasContentWithUrl(): DOMNodeValidator
+    public function validateHasContentWithUrl(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
@@ -50,7 +73,7 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasAttributeWithUrl(string $name): DOMNodeValidator
+    public function validateHasAttributeWithUrl(string $name): DomNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
@@ -68,7 +91,7 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasAttributeWithValue(string $name, array $values): DOMNodeValidator
+    public function validateHasAttributeWithValue(string $name, array $values): DomNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
@@ -86,7 +109,7 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasUniqueAttribute(string $name, string $contextExpression): DOMNodeValidator
+    public function validateHasUniqueAttribute(string $name, string $contextExpression): DomNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
@@ -104,13 +127,13 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasUniqueId(): DOMNodeValidator
+    public function validateHasUniqueId(): DomNodeValidator
     {
         $this->validateHasUniqueAttribute("ID", "//*");
         return $this;
     }
 
-    public function validateHasAttribute(string $name): DOMNodeValidator
+    public function validateHasAttribute(string $name): DomNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
@@ -122,7 +145,7 @@ class DOMNodeValidator
         return $this;
     }
 
-    public function validateHasReferenceToId(string $name, string $targetContextExpression): DOMNodeValidator
+    public function validateHasReferenceToId(string $name, string $targetContextExpression): DomNodeValidator
     {
         if (!isset($this->node)) {
             return $this;

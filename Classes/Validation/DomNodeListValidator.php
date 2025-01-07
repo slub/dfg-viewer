@@ -2,13 +2,36 @@
 
 namespace Slub\Dfgviewer\Validation;
 
+/**
+ * Copyright notice
+ *
+ * (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
+ * All rights reserved
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * The GNU General Public License can be found at
+ * http://www.gnu.org/copyleft/gpl.html.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * This copyright notice MUST APPEAR in all copies of the script!
+ */
+
 use DOMXPath;
 use DOMNode;
 use DOMNodeList;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
-class DOMNodeListValidator
+class DomNodeListValidator
 {
     private string $expression;
 
@@ -26,7 +49,7 @@ class DOMNodeListValidator
         $this->result = $result;
     }
 
-    public function iterate(callable $callback): DOMNodeListValidator
+    public function iterate(callable $callback): DomNodeListValidator
     {
         foreach ($this->nodeList as $node) {
             call_user_func_array($callback, array($node));
@@ -44,7 +67,7 @@ class DOMNodeListValidator
         return $this->nodeList->item($index);
     }
 
-    public function validateHasAny(): DOMNodeListValidator
+    public function validateHasAny(): DomNodeListValidator
     {
         if (!$this->nodeList->length > 0) {
             $this->addError('There must be at least one element');
@@ -52,7 +75,7 @@ class DOMNodeListValidator
         return $this;
     }
 
-    public function validateHasOne(): DOMNodeListValidator
+    public function validateHasOne(): DomNodeListValidator
     {
         if ($this->nodeList->length != 1) {
             $this->addError('There must be an element');
@@ -60,7 +83,7 @@ class DOMNodeListValidator
         return $this;
     }
 
-    public function validateHasNoneOrOne(): DOMNodeListValidator
+    public function validateHasNoneOrOne(): DomNodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
             $this->addError('There must be no more than one element');

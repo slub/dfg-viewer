@@ -35,7 +35,7 @@ use Slub\Dfgviewer\Common\ValidationHelper;
  *
  * @access public
  */
-class DvMetadataValidator extends DOMDocumentValidator
+class DvMetadataValidator extends AbstactDomDocumentValidator
 {
     protected function isValidDocument(): void
     {
