@@ -36,16 +36,15 @@ use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class MetsApplicationProfileValidationStack extends AbstractDlfValidationStack {
-    public function __construct(array $options = [])
+    public function __construct()
     {
         parent::__construct(\DOMDocument::class);
-
-        $this->addValidator(LogicalStructureValidator::class, "Specifications for the logical document structure", false);
-        $this->addValidator(PhysicalStructureValidator::class, "Specifications for the physical document structure", false);
-        $this->addValidator(LinkingLogicalPhysicalStructureValidator::class, "Specifications for the physical document structure", false);
-        $this->addValidator(DigitalRepresentationValidator::class, "Specifications for the physical document structure", false);
-        $this->addValidator(DescriptiveMetadataValidator::class, "Descriptive metadata", false);
-        $this->addValidator(AdministrativeMetadataValidator::class, "Administrative metadata", false);
-        $this->addValidator(DvMetadataValidator::class, "DFG-Viewer specific informations", false);
+        $this->addValidator(LogicalStructureValidator::class, "Validation of the logical document structure", false);
+        $this->addValidator(PhysicalStructureValidator::class, "Validation of the physical document structure", false);
+        $this->addValidator(LinkingLogicalPhysicalStructureValidator::class, "Validation of linking between logical and physical structure", false);
+        $this->addValidator(DigitalRepresentationValidator::class, "Validation of the digital representation", false);
+        $this->addValidator(DescriptiveMetadataValidator::class, "Validation of the descriptive metadata", false);
+        $this->addValidator(AdministrativeMetadataValidator::class, "Validation of the administrative metadata", false);
+        $this->addValidator(DvMetadataValidator::class, "Validation of the DFG-Viewer specific details", false);
     }
 }
