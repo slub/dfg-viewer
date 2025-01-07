@@ -127,7 +127,7 @@ class AdministrativeMetadataValidatorTest extends ApplicationProfileValidatorTes
      */
     public function testTechnicalMetadataStructure(): void
     {
-        $this->addChildNodeNS(ValidationHelper::XPATH_ADMINISTRATIVE_METADATA, self::NAMESPACE_METS, 'mets:techMD');
+        $this->addChildNodeWithNamespace(ValidationHelper::XPATH_ADMINISTRATIVE_METADATA, self::NAMESPACE_METS, 'mets:techMD');
         $this->assertErrorHasAttribute(self::trimDoubleSlash(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA), 'ID');
 
         $this->setAttributeValue(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, 'ID', 'DMDLOG_0001');
@@ -136,7 +136,7 @@ class AdministrativeMetadataValidatorTest extends ApplicationProfileValidatorTes
         $this->setAttributeValue(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, 'ID', 'TECH_0001');
         $this->assertErrorHasOne('mets:mdWrap', self::trimDoubleSlash(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA));
 
-        $this->addChildNodeNS(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, self::NAMESPACE_METS, 'mets:mdWrap');
+        $this->addChildNodeWithNamespace(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, self::NAMESPACE_METS, 'mets:mdWrap');
         $this->assertErrorHasAttribute(self::trimDoubleSlash(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap', 'MDTYPE');
 
         $this->setAttributeValue(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA . '/mets:mdWrap', 'MDTYPE', '');

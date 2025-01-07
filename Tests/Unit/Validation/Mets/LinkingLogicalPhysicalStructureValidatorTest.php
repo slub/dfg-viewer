@@ -38,7 +38,7 @@ class LinkingLogicalPhysicalStructureValidatorTest extends ApplicationProfileVal
      */
     public function testMultipleStructLinks(): void
     {
-        $this->addChildNodeNS('/mets:mets', self::NAMESPACE_METS, 'mets:structLink');
+        $this->addChildNodeWithNamespace('/mets:mets', self::NAMESPACE_METS, 'mets:structLink');
         $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_STRUCT_LINK);
     }
 

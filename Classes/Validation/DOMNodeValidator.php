@@ -20,7 +20,7 @@ class DOMNodeValidator
 
     public function validateHasContentWithEmail(): DOMNodeValidator
     {
-        if (!isset($this->node) && !$this->node->nodeValue) {
+        if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
         }
 
@@ -39,7 +39,7 @@ class DOMNodeValidator
 
     public function validateHasContentWithUrl(): DOMNodeValidator
     {
-        if (!isset($this->node) && !$this->node->nodeValue) {
+        if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
         }
 

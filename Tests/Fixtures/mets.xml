@@ -78,6 +78,13 @@
                         <dv:ownerLogo>http://dfg-viewer.de/fileadmin/_processed_/a/8/csm_HSM_Logo_T_schwarz_klein_bold_regular_d61a371993.jpg</dv:ownerLogo>
                         <dv:ownerSiteURL>https://3d-repository.hs-mainz.de/</dv:ownerSiteURL>
                         <dv:ownerContact>https://3d-repository.hs-mainz.de/contact</dv:ownerContact>
+                        <dv:aggregator>Aggregator</dv:aggregator>
+                        <dv:aggregatorLogo>http://dfg-viewer.de/fileadmin/_processed_/a/8/csm_HSM_Logo_T_schwarz_klein_bold_regular_d61a371993.jpg</dv:aggregatorLogo>
+                        <dv:aggregatorSiteURL>https://3d-repository.hs-mainz.de/</dv:aggregatorSiteURL>
+                        <dv:sponsor>Sponsor</dv:sponsor>
+                        <dv:sponsorLogo>http://dfg-viewer.de/fileadmin/_processed_/a/8/csm_HSM_Logo_T_schwarz_klein_bold_regular_d61a371993.jpg</dv:sponsorLogo>
+                        <dv:sponsorSiteURL>https://3d-repository.hs-mainz.de/</dv:sponsorSiteURL>
+                        <dv:license>pdm</dv:license>
                     </dv:rights>
                 </mets:xmlData>
             </mets:mdWrap>
@@ -86,8 +93,10 @@
             <mets:mdWrap MDTYPE="OTHER" MIMETYPE="text/xml" OTHERMDTYPE="DVLINKS">
                 <mets:xmlData>
                     <dv:links>
-                        <dv:reference/>
-                        <dv:presentation/>
+                        <dv:reference>http://slub-dresden.de/FOZK.pl?PPN=356448053</dv:reference>
+                        <dv:presentation>http://slub-dresden.de/356448053</dv:presentation>
+                        <dv:sru>http://digital.slub-dresden.de/sru/356448053</dv:sru>
+                        <dv:iiif>http://digital.slub-dresden.de/iiif/356448053.xml</dv:iiif>
                     </dv:links>
                 </mets:xmlData>
             </mets:mdWrap>

@@ -46,6 +46,6 @@ class MetsApplicationProfileValidationStack extends AbstractDlfValidationStack {
         $this->addValidator(DigitalRepresentationValidator::class, "Specifications for the physical document structure", false);
         $this->addValidator(DescriptiveMetadataValidator::class, "Descriptive metadata", false);
         $this->addValidator(AdministrativeMetadataValidator::class, "Administrative metadata", false);
-        $this->addValidator(DVMetadataValidator::class, "DFG-Viewer specific informations", false);
+        $this->addValidator(DvMetadataValidator::class, "DFG-Viewer specific informations", false);
     }
 }

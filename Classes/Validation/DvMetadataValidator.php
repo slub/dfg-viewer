@@ -3,7 +3,6 @@
 namespace Slub\Dfgviewer\Validation;
 
 use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
 
 /**
  * Copyright notice
@@ -36,7 +35,7 @@ use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
  *
  * @access public
  */
-class DVMetadataValidator extends DOMDocumentValidator
+class DvMetadataValidator extends DOMDocumentValidator
 {
     protected function isValidDocument(): void
     {
@@ -139,6 +138,10 @@ class DVMetadataValidator extends DOMDocumentValidator
         }
 
         $node = $nodeListValidator->getFirstNode();
+        if (!isset($node)) {
+            return;
+        }
+
         $nodeValidator = $this->createNodeValidator($node);
         if (str_starts_with(strtolower($node->nodeValue), 'mailto:')) {
             $nodeValidator->validateHasContentWithEmail();

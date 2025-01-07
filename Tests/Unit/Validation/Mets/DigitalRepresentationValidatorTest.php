@@ -38,7 +38,7 @@ class DigitalRepresentationValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testFileSections(): void
     {
-        $this->addChildNodeNS('/mets:mets', self::NAMESPACE_METS, 'mets:fileSec');
+        $this->addChildNodeWithNamespace('/mets:mets', self::NAMESPACE_METS, 'mets:fileSec');
         $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_FILE_SECTIONS);
         $this->resetDocument();
 

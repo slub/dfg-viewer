@@ -36,6 +36,8 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
 {
     const NAMESPACE_METS = 'http://www.loc.gov/METS/';
 
+    const NAMESPACE_DV = 'http://dfg-viewer.de/';
+
     protected $validator;
 
     protected $doc;
@@ -106,7 +108,7 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
      * @return void
      * @throws \DOMException
      */
-    protected function addChildNodeNS(string $expression, string $namespace, string $name): void
+    protected function addChildNodeWithNamespace(string $expression, string $namespace, string $name): void
     {
         $this->addChildNode($expression, $this->doc->createElementNS($namespace, $name));
     }
@@ -171,6 +173,22 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         }
     }
 
+    /**
+     * Set value of content found by node expression in DOMDocument.
+     *
+     * @param string $expression
+     * @param string $value
+     * @return void
+     */
+    protected function setContentValue(string $expression, string $value): void
+    {
+        $xpath = new DOMXPath($this->doc);
+        foreach ($xpath->evaluate($expression) as $node) {
+            $node->nodeValue = $value;
+        }
+    }
+
+
     protected function getDOMDocument(): DOMDocument
     {
         $doc = new DOMDocument();
@@ -227,7 +245,17 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
         $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not valid.');
     }
 
-    protected function assertErrorHasRefToOne(string $expression, string $name, string $value, string $targetContextExpression)
+    protected function assertErrorHasContentWithEmail(string $expression, string $value): void
+    {
+        $this->validateAndAssertEquals('Email "' . $value . '" in the content of "' . $expression . '" is not valid.');
+    }
+
+    protected function assertErrorHasContentWithUrl(string $expression, string $value): void
+    {
+        $this->validateAndAssertEquals('URL "' . $value . '" in the content of "' . $expression . '" is not valid.');
+    }
+
+    protected function assertErrorHasRefToOne(string $expression, string $name, string $value, string $targetContextExpression): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
     }
@@ -241,5 +269,4 @@ abstract class ApplicationProfileValidatorTest extends UnitTestCase
     {
         $this->validateAndAssertEquals('"' . $name . '" attribute with value "' . $value . '" of "' . $expression . '" already exists.');
     }
-
 }

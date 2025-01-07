@@ -76,12 +76,12 @@ class LogicalStructureValidatorTest extends ApplicationProfileValidatorTest
      */
     public function testExternalReference(): void
     {
-        $this->addChildNodeNS(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
-        $this->addChildNodeNS(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
+        $this->addChildNodeWithNamespace(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
+        $this->addChildNodeWithNamespace(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
         $this->assertErrorHasNoneOrOne(ValidationHelper::XPATH_LOGICAL_EXTERNAL_REFERENCES);
         $this->resetDocument();
 
-        $this->addChildNodeNS(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
+        $this->addChildNodeWithNamespace(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, self::NAMESPACE_METS, 'mets:mptr');
         $this->assertErrorHasAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE');
 
         $this->setAttributeValue(ValidationHelper::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'LOCTYPE', 'Test');
