@@ -29,7 +29,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
 
-class DigitalRepresentationValidatorTestAbstract extends AbstractDomDocumentValidatorTest
+class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.4.1 Dateisektion – mets:fileSec"

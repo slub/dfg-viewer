@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\Dfgviewer\Validation;
+namespace Slub\Dfgviewer\Validation\Dom;
 
 /**
  * Copyright notice

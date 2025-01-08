@@ -44,7 +44,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     {
         parent::setUp();
         $this->resetSingletonInstances = true;
-        $this->doc = $this->getDOMDocument();
+        $this->doc = $this->getDomDocument();
         $this->validator = $this->createValidator();
     }
 
@@ -84,7 +84,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
 
     protected function resetDocument(): void
     {
-        $this->doc = $this->getDOMDocument();
+        $this->doc = $this->getDomDocument();
     }
 
     /**
@@ -176,7 +176,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         }
     }
 
-    protected function getDOMDocument(): DOMDocument
+    protected function getDomDocument(): DOMDocument
     {
         $doc = new DOMDocument();
         $doc->load(__DIR__ . '/../../Fixtures/mets.xml');

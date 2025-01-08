@@ -35,7 +35,7 @@ use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
-class MetsApplicationProfileValidationStack extends AbstractDlfValidationStack {
+class ApplicationProfileValidationStack extends AbstractDlfValidationStack {
     public function __construct()
     {
         parent::__construct(\DOMDocument::class);

@@ -29,7 +29,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\DvMetadataValidator;
 
-class DvMetadataValidatorTestAbstract extends AbstractDomDocumentValidatorTest
+class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.7.1 Rechteangaben – dv:rights"

@@ -29,6 +29,8 @@ use DOMDocument;
 use DOMNode;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
+use Slub\Dfgviewer\Validation\Dom\DomNodeListValidator;
+use Slub\Dfgviewer\Validation\Dom\DomNodeValidator;
 
 abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
 {

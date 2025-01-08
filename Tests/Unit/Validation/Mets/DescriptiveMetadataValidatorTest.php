@@ -29,7 +29,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
 
-class DescriptiveMetadataValidatorTestAbstract extends AbstractDomDocumentValidatorTest
+class DescriptiveMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"

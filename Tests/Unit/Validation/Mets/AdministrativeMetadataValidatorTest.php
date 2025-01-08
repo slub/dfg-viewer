@@ -29,7 +29,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
 
-class AdministrativeMetadataValidatorTestAbstract extends AbstractDomDocumentValidatorTest
+class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
@@ -85,7 +85,6 @@ class AdministrativeMetadataValidatorTestAbstract extends AbstractDomDocumentVal
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap/mets:xmlData/dv:links');
         $this->assertErrorHasOne('mets:xmlData[dv:links]', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap');
     }
-
 
     /**
      * Test validation against the rules of chapters "2.6.2.4 Rechtedeklaration – mets:rightsMD" and "2.6.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"

@@ -29,7 +29,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
-class PhysicalStructureValidatorTestAbstract extends AbstractDomDocumentValidatorTest
+class PhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.2.1 Physical structure - mets:structMap"

@@ -38,26 +38,19 @@ plugin.tx_dlf {
                         namespace = http://www.openarchives.org/OAI/2.0/
                         schemaLocation = https://www.openarchives.org/OAI/2.0/OAI-PMH.xsd
                     }
-
                     mets {
                         namespace = http://www.loc.gov/METS/
                         schemaLocation = http://www.loc.gov/standards/mets/mets.xsd
                     }
-
                     mods {
                         namespace = http://www.loc.gov/mods/v3
                         schemaLocation = http://www.loc.gov/standards/mods/mods.xsd
                     }
-
-                    dfgviewer {
-                        namespace = http://dfg-viewer.de/
-                        schemaLocation = /var/www/html/public/typo3conf/ext/dfgviewer/Resources/Public/Xsd/dfg-viewer.xsd
-                    }
                 }
             }
             20 {
-                title = METS Application Profile Validation
-                className = Slub\Dfgviewer\Validation\MetsApplicationProfileValidationStack
+                title = Application Profile Validation
+                className = Slub\Dfgviewer\Validation\ApplicationProfileValidationStack
             }
         }
     }

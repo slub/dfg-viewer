@@ -29,7 +29,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
 
-class LogicalStructureValidatorTestAbstract extends AbstractDomDocumentValidatorTest
+class LogicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
      * Test validation against the rules of chapter "2.1.1 Logical structure - mets:structMap"

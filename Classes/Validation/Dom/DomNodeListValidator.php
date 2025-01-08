@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\Dfgviewer\Validation;
+namespace Slub\Dfgviewer\Validation\Dom;
 
 /**
  * Copyright notice
@@ -25,9 +25,9 @@ namespace Slub\Dfgviewer\Validation;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use DOMXPath;
 use DOMNode;
 use DOMNodeList;
+use DOMXPath;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
@@ -99,5 +99,4 @@ class DomNodeListValidator
         }
         $this->result->addError(new Error($message, 23));
     }
-
 }
