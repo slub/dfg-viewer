@@ -42,14 +42,19 @@
     ],
     "license": "GPL-3.0-or-later",
     "require": {
+        "php": "7.4 - 8.3",
         "typo3/cms-core": "^10.4|^11.5",
-        "kitodo/presentation": "^5.0|dev-master",
+        "kitodo/presentation": "^5.0|dev-main",
         "slub/slub-digitalcollections": "^4.0|dev-master"
     },
     "require-dev": {
-      "phpunit/phpunit": "^9.6.20",
-      "spatie/phpunit-watcher": "^1.23.6",
-      "typo3/testing-framework": "^7.1.0"
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^9.6.20",
+        "spatie/phpunit-watcher": "^1.23.6",
+        "typo3/testing-framework": "^7.1.0"
+    },
+    "replace": {
+        "typo3-ter/dfgviewer": "self.version"
     },
     "autoload": {
         "psr-4": {
@@ -82,6 +87,9 @@
         "@composer docs:stop",
         "@composer docs:build",
         "@composer docs:start"
+      ],
+      "phpstan": [
+        "@php vendor/bin/phpstan --configuration=\".github/phpstan.neon\""
       ],
       "test:unit:local": [
         "phpunit -c Build/Test/UnitTests.xml"
