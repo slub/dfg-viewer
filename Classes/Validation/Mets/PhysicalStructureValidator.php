@@ -62,9 +62,9 @@ class PhysicalStructureValidator extends AbstactDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($node)
-            ->validateHasAttributeWithValue('TYPE', array('physSequence'));
+            ->validateHasAttributeWithValue('TYPE', ['physSequence']);
 
-        $structuralElements =$this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
+        $structuralElements = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
             ->getNodeList();
         foreach ($structuralElements as $structuralElement) {
@@ -76,6 +76,6 @@ class PhysicalStructureValidator extends AbstactDomDocumentValidator
     {
         $this->createNodeValidator($structureElement)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue("TYPE", array("page", "doublepage", "track"));
+            ->validateHasAttributeWithValue("TYPE", ["page", "doublepage", "track"]);
     }
 }

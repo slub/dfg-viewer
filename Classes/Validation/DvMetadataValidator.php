@@ -107,7 +107,7 @@ class DvMetadataValidator extends AbstactDomDocumentValidator
         $licenseNode = $this->createNodeListValidator(VH::XPATH_DVRIGHTS . '/dv:license')
             ->validateHasNoneOrOne()
             ->getFirstNode();
-        if ($licenseNode && !in_array($licenseNode->nodeValue, array('pdm', 'cc0', 'cc-by', 'cc-by-sa', 'cc-by-nd', 'cc-by-nc', 'cc-by-nc-sa', 'cc-by-nc-nd', 'reserved'))) {
+        if ($licenseNode && !in_array($licenseNode->nodeValue, ['pdm', 'cc0', 'cc-by', 'cc-by-sa', 'cc-by-nd', 'cc-by-nc', 'cc-by-nc-sa', 'cc-by-nc-nd', 'reserved'])) {
             $this->createNodeValidator($licenseNode)->validateHasContentWithUrl();
         }
     }
@@ -128,7 +128,7 @@ class DvMetadataValidator extends AbstactDomDocumentValidator
         }
     }
 
-    private function validateNodeContent(string $expression, bool $optional = false): void
+    private function validateNodeContent(string $expression, bool $optional=false): void
     {
         $nodeListValidator = $this->createNodeListValidator($expression);
 

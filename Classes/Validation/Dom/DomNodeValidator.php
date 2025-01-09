@@ -41,10 +41,20 @@ use TYPO3\CMS\Extbase\Error\Result;
 class DomNodeValidator
 {
 
+    /**
+     * @var DOMXPath The XPath of document to validate
+     */
     private DOMXPath $xpath;
 
+    /**
+     * @var DOMNode|null The node to validate.
+     */
     private ?DOMNode $node;
 
+
+    /**
+     * @var Result The result containing errors of validation
+     */
     private Result $result;
 
     public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node)

@@ -41,13 +41,24 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeListValidator
 {
-
+    /**
+     * @var string The expression of XPath query
+     */
     private string $expression;
 
+    /**
+     * @var DOMNode|null The context node of XPath query
+     */
     private ?DOMNode $contextNode;
 
+    /**
+     * @var DOMNodeList|false|mixed The node list result of XPath query
+     */
     private DOMNodeList $nodeList;
 
+    /**
+     * @var Result The result containing errors of validation
+     */
     private Result $result;
 
     public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode = null)

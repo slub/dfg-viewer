@@ -71,16 +71,19 @@ class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($mdWrap)
-            ->validateHasAttributeWithValue('MDTYPE', array('MODS', 'TEIHDR'));
+            ->validateHasAttributeWithValue('MDTYPE', ['MODS', 'TEIHDR']);
 
-        if(!$mdWrap) {
+        if (!$mdWrap) {
             return;
         }
 
         // @phpstan-ignore-next-line
         $mdType = $mdWrap->getAttribute('MDTYPE');
         if ($mdType == 'TEIHDR' || $mdType == 'MODS') {
-            $childNode = $mdType == 'TEIHDR' ? 'tei:teiHeader' : 'mods:mods';
+            $childNode = 'mods:mods';
+            if ($mdType == 'TEIHDR') {
+                $childNode = 'tei:teiHeader';
+            }
             $this->createNodeListValidator('mets:xmlData[' . $childNode . ']', $mdWrap)
                 ->validateHasOne();
         }

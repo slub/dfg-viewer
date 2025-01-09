@@ -35,6 +35,9 @@ use Slub\Dfgviewer\Validation\Dom\DomNodeValidator;
 abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
 {
 
+    /**
+     * @var DOMXPath The XPath of DOMDocument value.
+     */
     protected DOMXpath $xpath;
 
     public function __construct()
@@ -48,7 +51,7 @@ abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
         $this->isValidDocument();
     }
 
-    protected function createNodeListValidator(string $expression, ?DOMNode $contextNode = null): DomNodeListValidator
+    protected function createNodeListValidator(string $expression, ?DOMNode $contextNode=null): DomNodeListValidator
     {
         return new DomNodeListValidator($this->xpath, $this->result, $expression, $contextNode);
     }
@@ -58,5 +61,5 @@ abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
         return new DomNodeValidator($this->xpath, $this->result, $node);
     }
 
-    abstract function isValidDocument();
+    public abstract function isValidDocument();
 }

@@ -93,7 +93,7 @@ class LogicalStructureValidator extends AbstactDomDocumentValidator
     protected function validateExternalReference(\DOMNode $externalReference): void
     {
         $this->createNodeValidator($externalReference)
-            ->validateHasAttributeWithValue("LOCTYPE", array("URL", "PURL"))
+            ->validateHasAttributeWithValue("LOCTYPE", ["URL", "PURL"])
             ->validateHasAttributeWithUrl("xlink:href");
     }
 
@@ -106,6 +106,5 @@ class LogicalStructureValidator extends AbstactDomDocumentValidator
      */
     protected function validatePeriodicPublishingSequences(): void
     {
-        // TODO
     }
 }
