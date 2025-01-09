@@ -41,19 +41,19 @@ class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"
-        $descriptiveMetadataSections = $this->createNodeListValidator(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
+        $descriptiveSections = $this->createNodeListValidator(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
             ->validateHasAny()
             ->getNodeList();
-        foreach ($descriptiveMetadataSections as $descriptiveMetadataSection) {
-            $this->validateDescriptiveMetadataSection($descriptiveMetadataSection);
+        foreach ($descriptiveSections as $descriptiveSection) {
+            $this->validateDescriptiveMetadataSection($descriptiveSection);
         }
 
         // there must be one primary structural element
-        $logicalStructureElement = $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
+        $structureElement = $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($logicalStructureElement)
+        $this->createNodeValidator($structureElement)
             ->validateHasReferenceToId('DMDID', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
@@ -64,9 +64,9 @@ class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    protected function validateDescriptiveMetadataSection(\DOMNode $descriptiveMetadataSection): void
+    protected function validateDescriptiveMetadataSection(\DOMNode $descriptiveSection): void
     {
-        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $descriptiveMetadataSection)
+        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $descriptiveSection)
             ->validateHasOne()
             ->getFirstNode();
 
@@ -77,7 +77,8 @@ class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
             return;
         }
 
-        $mdType = $mdWrap->getAttribute('MDTYPE'); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        $mdType = $mdWrap->getAttribute('MDTYPE');
         if ($mdType == 'TEIHDR' || $mdType == 'MODS') {
             $childNode = $mdType == 'TEIHDR' ? 'tei:teiHeader' : 'mods:mods';
             $this->createNodeListValidator('mets:xmlData[' . $childNode . ']', $mdWrap)

@@ -265,7 +265,7 @@ done
 if [ ${#INVALID_OPTIONS[@]} -ne 0 ]; then
     echo "Invalid option(s):" >&2
     for I in "${INVALID_OPTIONS[@]}"; do
-        echo "-"${I} >&2
+        echo "-${I}" >&2
     done
     echo >&2
     echo "call \".Build/Test/runTests.sh -h\" to display help and valid options"
@@ -364,4 +364,4 @@ echo "##########################################################################
 echo "" >&2
 
 # Exit with code of test suite - This script return non-zero if the executed test failed.
-exit $SUITE_EXIT_CODE
+exit "$SUITE_EXIT_CODE"

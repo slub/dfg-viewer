@@ -297,12 +297,12 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $expression The expression in error message
      * @param string $name The attribute name
      * @param string $value The attribute value
-     * @param string $targetContextExpression The target context expression
+     * @param string $targetExpression The target context expression
      * @return void
      */
-    protected function assertErrorHasAttributeRefToOne(string $expression, string $name, string $value, string $targetContextExpression): void
+    protected function assertErrorHasAttributeRefToOne(string $expression, string $name, string $value, string $targetExpression): void
     {
-        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetExpression);
     }
 
     /**

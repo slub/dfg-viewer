@@ -41,11 +41,11 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
-        $administrativeMetadata = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_METADATA)
+        $amdSections = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_METADATA)
             ->validateHasAny()
             ->getNodeList();
-        foreach ($administrativeMetadata as $administrativeMetadataNode) {
-            $this->validateAdministrativMetadataNode($administrativeMetadataNode);
+        foreach ($amdSections as $amdSection) {
+            $this->validateAdministrativMetadataNode($amdSection);
         }
 
         // Check if one administrative metadata exist with "mets:rightsMD" and "mets:digiprovMD" as children
@@ -57,9 +57,9 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
         $this->validateDigitalProvenanceMetadata();
     }
 
-    protected function validateAdministrativMetadataNode(\DOMNode $administrativeMetadata): void
+    protected function validateAdministrativMetadataNode(\DOMNode $amdSection): void
     {
-        $this->createNodeValidator($administrativeMetadata)
+        $this->createNodeValidator($amdSection)
             ->validateHasUniqueId();
     }
 
@@ -72,19 +72,19 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
      */
     protected function validateDigitalProvenanceMetadata(): void
     {
-        $digitalProvenanceMetadata = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA)
+        $digiprovs = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA)
             ->getNodeList();
-        foreach ($digitalProvenanceMetadata as $digitalProvenanceMetadataNode) {
-            $this->validateDigitalProvenanceMetadataNode($digitalProvenanceMetadataNode);
+        foreach ($digiprovs as $digiprov) {
+            $this->validateDigitalProvenanceMetadataNode($digiprov);
         }
     }
 
-    protected function validateDigitalProvenanceMetadataNode(\DOMNode $digitalProvenanceMetadata): void
+    protected function validateDigitalProvenanceMetadataNode(\DOMNode $digiprov): void
     {
-        $this->createNodeValidator($digitalProvenanceMetadata)
+        $this->createNodeValidator($digiprov)
             ->validateHasUniqueId();
 
-        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $digitalProvenanceMetadata)
+        $mdWrap = $this->createNodeListValidator('mets:mdWrap', $digiprov)
             ->validateHasOne()
             ->getFirstNode();
 

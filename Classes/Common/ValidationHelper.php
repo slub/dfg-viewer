@@ -39,9 +39,9 @@ class ValidationHelper
 
     const NAMESPACE_METS = 'http://www.loc.gov/METS/';
 
-    const STRUCTURE_DATASET = array(
+    const STRUCTURE_DATASET = [
         'section', 'file', 'album', 'register', 'annotation', 'address', 'article', 'atlas', 'issue', 'bachelor_thesis', 'volume', 'contained_work', 'additional', 'report', 'official_notification', 'provenance', 'inventory', 'image', 'collation', 'ornament', 'letter', 'cover', 'cover_front', 'cover_back', 'diploma_thesis', 'doctoral_thesis', 'document', 'printers_mark', 'printed_archives', 'binding', 'entry', 'corrigenda', 'bookplate', 'fascicle', 'leaflet', 'research_paper', 'photograph', 'fragment', 'land_register', 'ground_plan', 'habilitation_thesis', 'manuscript', 'illustration', 'imprint', 'contents', 'initial_decoration', 'year', 'chapter', 'map', 'cartulary', 'colophon', 'ephemera', 'engraved_titlepage', 'magister_thesis', 'folder', 'master_thesis', 'multivolume_work', 'month', 'monograph', 'musical_notation', 'periodical', 'poster', 'plan', 'privileges', 'index', 'spine', 'scheme', 'edge', 'seal', 'paste down', 'stamp', 'study', 'table', 'day', 'proceeding', 'text', 'title_page', 'subinventory', 'act', 'judgement', 'verse', 'note', 'preprint', 'dossier', 'lecture', 'endsheet', 'paper', 'preface', 'dedication', 'newspaper'
-    );
+    ];
 
     const XPATH_METS = '//mets:mets';
 
@@ -83,7 +83,7 @@ class ValidationHelper
 
     public static function trimDoubleSlash(string $value): string
     {
-        if(str_starts_with($value, '//')) {
+        if (str_starts_with($value, '//')) {
             return substr($value, 1);
         }
         return $value;

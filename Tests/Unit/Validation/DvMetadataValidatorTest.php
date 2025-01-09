@@ -125,25 +125,25 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->assertErrorHasContentWithUrl(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:iiif', 'Test');
     }
 
-    protected function assertNodeContent(string $expression, string $expectedErrorExpression): void
+    protected function assertNodeContent(string $expression, string $expectedExpression): void
     {
         $this->removeNodes($expression);
         $this->assertErrorHasOne($expression);
         $this->resetDocument();
 
         $this->setContentValue($expression, 'Test');
-        $this->assertErrorHasContentWithUrl($expectedErrorExpression, 'Test');
+        $this->assertErrorHasContentWithUrl($expectedExpression, 'Test');
         $this->resetDocument();
     }
 
-    protected function assertOptionalNodeContent(string $expression, string $name, string $expectedErrorExpression): void
+    protected function assertOptionalNodeContent(string $expression, string $name, string $expectedExpression): void
     {
         $this->addChildNodeWithNamespace($expression, VH::NAMESPACE_DV, $name);
         $this->assertErrorHasNoneOrOne($expression . '/' . $name);
         $this->resetDocument();
 
         $this->setContentValue($expression . '/' . $name, 'Test');
-        $this->assertErrorHasContentWithUrl($expectedErrorExpression, 'Test');
+        $this->assertErrorHasContentWithUrl($expectedExpression, 'Test');
         $this->resetDocument();
     }
 

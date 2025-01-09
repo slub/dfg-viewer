@@ -41,14 +41,11 @@ use TYPO3\CMS\Extbase\Error\Result;
 class DomNodeValidator
 {
 
-    protected DOMXPath $xpath;
+    private DOMXPath $xpath;
 
-    /**
-     * @var DOMNode
-     */
-    protected ?DOMNode $node;
+    private ?DOMNode $node;
 
-    protected Result $result;
+    private Result $result;
 
     public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node)
     {
@@ -116,7 +113,8 @@ class DomNodeValidator
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->node->getAttribute($name); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
         if (!filter_var($value, FILTER_VALIDATE_URL)) {
             $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
         }
@@ -142,7 +140,8 @@ class DomNodeValidator
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->node->getAttribute($name); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
         if (!in_array($value, $values)) {
             $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1724234607));
         }
@@ -168,7 +167,8 @@ class DomNodeValidator
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->node->getAttribute($name); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
             $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
         }
@@ -210,10 +210,10 @@ class DomNodeValidator
      * Validate that the node's resolvable identifier attribute points to a target with the specified "ID" attribute.
      *
      * @param string $name The attribute name containing the reference id as value
-     * @param string $targetContextExpression The context expression to the target reference
+     * @param string $targetExpression The context expression to the target reference
      * @return $this
      */
-    public function validateHasReferenceToId(string $name, string $targetContextExpression): DomNodeValidator
+    public function validateHasReferenceToId(string $name, string $targetExpression): DomNodeValidator
     {
         if (!isset($this->node)) {
             return $this;
@@ -224,16 +224,17 @@ class DomNodeValidator
             return $this->validateHasAttribute($name);
         }
 
-        $targetNodes = $this->xpath->query($targetContextExpression);
-        $id = $this->node->getAttribute($name); // @phpstan-ignore-line
+        $targetNodes = $this->xpath->query($targetExpression);
+        // @phpstan-ignore-next-line
+        $identifier = $this->node->getAttribute($name);
 
         $foundElements = 0;
         foreach ($targetNodes as $targetNode) {
-            $foundElements += $this->xpath->query('//*[@ID="' . $id . '"]', $targetNode)->length;
+            $foundElements += $this->xpath->query('//*[@ID="' . $identifier . '"]', $targetNode)->length;
         }
 
         if ($foundElements !== 1) {
-            $this->result->addError(new Error('Value "' . $id . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference one element under XPath expression "' . $targetContextExpression, 1724234607));
+            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference one element under XPath expression "' . $targetExpression, 1724234607));
         }
 
         return $this;
