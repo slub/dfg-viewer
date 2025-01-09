@@ -47,7 +47,7 @@ class DescriptiveMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'DMDID', 'Test');
-        $this->assertErrorHasRefToOne('/mets:mets/mets:structMap[1]/mets:div', 'DMDID', 'Test', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->assertErrorHasAttributeRefToOne('/mets:mets/mets:structMap[1]/mets:div', 'DMDID', 'Test', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
     /**

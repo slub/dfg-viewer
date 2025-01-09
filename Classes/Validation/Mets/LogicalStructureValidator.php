@@ -2,9 +2,6 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
-
 /**
  * Copyright notice
  *
@@ -28,6 +25,9 @@ use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
+
 /**
  * The validator validates against the rules outlined in chapter 2.1 of the METS application profile 2.3.1.
  *
@@ -41,7 +41,7 @@ class LogicalStructureValidator extends AbstactDomDocumentValidator
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.1.1 Logical structure - mets:structMap"
-        $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_STRUCTURES)
+        $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURES)
             ->validateHasAny();
 
         $this->validateStructuralElements();
@@ -56,18 +56,21 @@ class LogicalStructureValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateStructuralElements(): void
+    protected function validateStructuralElements(): void
     {
-        $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
+        $structuralElements = $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
-            ->iterate(array($this, "validateStructuralElement"));
+            ->getNodeList();
+        foreach ($structuralElements as $structuralElement) {
+            $this->validateStructuralElement($structuralElement);
+        }
     }
 
-    public function validateStructuralElement(\DOMNode $structureElement): void
+    protected function validateStructuralElement(\DOMNode $structureElement): void
     {
         $this->createNodeValidator($structureElement)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue("TYPE", ValidationHelper::STRUCTURE_DATASET);
+            ->validateHasAttributeWithValue("TYPE", VH::STRUCTURE_DATASET);
     }
 
     /**
@@ -77,14 +80,17 @@ class LogicalStructureValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateExternalReferences(): void
+    protected function validateExternalReferences(): void
     {
-        $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_EXTERNAL_REFERENCES)
+        $externalReferences = $this->createNodeListValidator(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES)
             ->validateHasNoneOrOne()
-            ->iterate(array($this, "validateExternalReference"));
+            ->getNodeList();
+        foreach ($externalReferences as $externalReference) {
+            $this->validateExternalReference($externalReference);
+        }
     }
 
-    public function validateExternalReference(\DOMNode $externalReference): void
+    protected function validateExternalReference(\DOMNode $externalReference): void
     {
         $this->createNodeValidator($externalReference)
             ->validateHasAttributeWithValue("LOCTYPE", array("URL", "PURL"))
@@ -98,7 +104,7 @@ class LogicalStructureValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validatePeriodicPublishingSequences(): void
+    protected function validatePeriodicPublishingSequences(): void
     {
         // TODO
     }

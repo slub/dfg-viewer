@@ -2,9 +2,6 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
-
 /**
  * Copyright notice
  *
@@ -28,6 +25,9 @@ use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
+
 /**
  * The validator validates against the rules outlined in chapter 2.2 of the METS application profile 2.3.1.
  *
@@ -38,12 +38,10 @@ use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
  */
 class PhysicalStructureValidator extends AbstactDomDocumentValidator
 {
-
-
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.2.1 Physical structure - mets:structMap"
-        $this->createNodeListValidator(ValidationHelper::XPATH_PHYSICAL_STRUCTURES)
+        $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURES)
             ->validateHasNoneOrOne();
 
         $this->validateStructuralElements();
@@ -57,21 +55,24 @@ class PhysicalStructureValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateStructuralElements(): void
+    protected function validateStructuralElements(): void
     {
-        $node = $this->createNodeListValidator(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE)
+        $node = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($node)
             ->validateHasAttributeWithValue('TYPE', array('physSequence'));
 
-        $this->createNodeListValidator(ValidationHelper::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
+        $structuralElements =$this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
             ->validateHasAny()
-            ->iterate(array($this, "validateStructuralElement"));
+            ->getNodeList();
+        foreach ($structuralElements as $structuralElement) {
+            $this->validateStructuralElement($structuralElement);
+        }
     }
 
-    public function validateStructuralElement(\DOMNode $structureElement): void
+    protected function validateStructuralElement(\DOMNode $structureElement): void
     {
         $this->createNodeValidator($structureElement)
             ->validateHasUniqueId()

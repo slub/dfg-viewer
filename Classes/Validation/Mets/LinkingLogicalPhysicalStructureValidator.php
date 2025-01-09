@@ -25,7 +25,7 @@ namespace Slub\Dfgviewer\Validation\Mets;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
 
 /**
@@ -41,7 +41,7 @@ class LinkingLogicalPhysicalStructureValidator extends AbstactDomDocumentValidat
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
-        $this->createNodeListValidator(ValidationHelper::XPATH_STRUCT_LINK)
+        $this->createNodeListValidator(VH::XPATH_STRUCT_LINK)
             ->validateHasNoneOrOne();
 
         $this->validateLinkElements();
@@ -54,17 +54,20 @@ class LinkingLogicalPhysicalStructureValidator extends AbstactDomDocumentValidat
      *
      * @return void
      */
-    public function validateLinkElements(): void
+    protected function validateLinkElements(): void
     {
-        $this->createNodeListValidator(ValidationHelper::XPATH_STRUCT_LINK_ELEMENTS)
+        $linkElements = $this->createNodeListValidator(VH::XPATH_STRUCT_LINK_ELEMENTS)
             ->validateHasAny()
-            ->iterate(array($this, "validateLinkElement"));
+            ->getNodeList();
+        foreach ($linkElements as $linkElement) {
+            $this->validateLinkElement($linkElement);
+        }
     }
 
-    public function validateLinkElement(\DOMNode $linkElement): void
+    protected function validateLinkElement(\DOMNode $linkElement): void
     {
         $this->createNodeValidator($linkElement)
-            ->validateHasReferenceToId("xlink:from", ValidationHelper::XPATH_LOGICAL_STRUCTURES)
-            ->validateHasReferenceToId("xlink:to", ValidationHelper::XPATH_PHYSICAL_STRUCTURES);
+            ->validateHasReferenceToId("xlink:from", VH::XPATH_LOGICAL_STRUCTURES)
+            ->validateHasReferenceToId("xlink:to", VH::XPATH_PHYSICAL_STRUCTURES);
     }
 }

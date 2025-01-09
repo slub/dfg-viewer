@@ -31,6 +31,14 @@ use DOMXPath;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
+/**
+ * The validator contains functions to validate a DOMNodeList.
+ *
+ * @package TYPO3
+ * @subpackage dfg-viewer
+ *
+ * @access public
+ */
 class DomNodeListValidator
 {
     private string $expression;
@@ -49,24 +57,42 @@ class DomNodeListValidator
         $this->result = $result;
     }
 
-    public function iterate(callable $callback): DomNodeListValidator
-    {
-        foreach ($this->nodeList as $node) {
-            call_user_func_array($callback, array($node));
-        }
-        return $this;
-    }
-
+    /**
+     * Get the first node from the node list.
+     *
+     * @return DOMNode|null
+     */
     public function getFirstNode(): ?DOMNode
     {
         return $this->getNode(0);
     }
 
+    /**
+     * Get a node from the node list at a specific index.
+     *
+     * @param int $index The index to retrieve the node
+     * @return DOMNode|null
+     */
     public function getNode(int $index): ?DOMNode
     {
         return $this->nodeList->item($index);
     }
 
+    /**
+     * Get the node list.
+     *
+     * @return DOMNodeList
+     */
+    public function getNodeList(): DOMNodeList
+    {
+        return $this->nodeList;
+    }
+
+    /**
+     * Validates the node list has any node.
+     *
+     * @return $this
+     */
     public function validateHasAny(): DomNodeListValidator
     {
         if (!$this->nodeList->length > 0) {
@@ -75,6 +101,11 @@ class DomNodeListValidator
         return $this;
     }
 
+    /**
+     * Validates the node list has one node.
+     *
+     * @return $this
+     */
     public function validateHasOne(): DomNodeListValidator
     {
         if ($this->nodeList->length != 1) {
@@ -83,6 +114,11 @@ class DomNodeListValidator
         return $this;
     }
 
+    /**
+     * Validates the node list has none or one node.
+     *
+     * @return $this
+     */
     public function validateHasNoneOrOne(): DomNodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {

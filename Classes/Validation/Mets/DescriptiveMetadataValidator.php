@@ -2,9 +2,6 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
-
 /**
  * Copyright notice
  *
@@ -28,6 +25,9 @@ use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
+
 /**
  * The validator validates against the rules outlined in chapter 2.5 of the METS application profile 2.3.1.
  *
@@ -41,17 +41,20 @@ class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"
-        $this->createNodeListValidator(ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
+        $descriptiveMetadataSections = $this->createNodeListValidator(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS)
             ->validateHasAny()
-            ->iterate(array($this, 'validateDescriptiveMetadataSections'));
+            ->getNodeList();
+        foreach ($descriptiveMetadataSections as $descriptiveMetadataSection) {
+            $this->validateDescriptiveMetadataSection($descriptiveMetadataSection);
+        }
 
         // there must be one primary structural element
-        $logicalStructureElement = $this->createNodeListValidator(ValidationHelper::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
+        $logicalStructureElement = $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($logicalStructureElement)
-            ->validateHasReferenceToId('DMDID', ValidationHelper::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+            ->validateHasReferenceToId('DMDID', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
     /**
@@ -61,7 +64,7 @@ class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateDescriptiveMetadataSections(\DOMNode $descriptiveMetadataSection): void
+    protected function validateDescriptiveMetadataSection(\DOMNode $descriptiveMetadataSection): void
     {
         $mdWrap = $this->createNodeListValidator('mets:mdWrap', $descriptiveMetadataSection)
             ->validateHasOne()

@@ -24,6 +24,15 @@ namespace Slub\Dfgviewer\Common;
  *
  * This copyright notice MUST APPEAR in all copies of the script!
  */
+
+/**
+ * The validator helper contains constants and functions to support the validation process.
+ *
+ * @package TYPO3
+ * @subpackage dfg-viewer
+ *
+ * @access public
+ */
 class ValidationHelper
 {
     const NAMESPACE_DV = 'http://dfg-viewer.de/';

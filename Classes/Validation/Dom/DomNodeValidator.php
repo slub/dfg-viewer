@@ -30,6 +30,14 @@ use DOMXPath;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
+/**
+ * The validator contains functions to validate a DOMNode.
+ *
+ * @package TYPO3
+ * @subpackage dfg-viewer
+ *
+ * @access public
+ */
 class DomNodeValidator
 {
     protected DOMXPath $xpath;
@@ -41,6 +49,11 @@ class DomNodeValidator
         $this->node = $node;
     }
 
+    /**
+     * Validate that the node's content contains an Email.
+     *
+     * @return $this
+     */
     public function validateHasContentWithEmail(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
@@ -60,6 +73,11 @@ class DomNodeValidator
         return $this;
     }
 
+    /**
+     * Validate that the node's content contains a URL.
+     *
+     * @return $this
+     */
     public function validateHasContentWithUrl(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
@@ -73,6 +91,12 @@ class DomNodeValidator
         return $this;
     }
 
+    /**
+     * Validate that the node has an attribute with a URL value.
+     *
+     * @param string $name The attribute name
+     * @return $this
+     */
     public function validateHasAttributeWithUrl(string $name): DomNodeValidator
     {
         if (!isset($this->node)) {
@@ -91,6 +115,13 @@ class DomNodeValidator
         return $this;
     }
 
+    /**
+     * Validate that the node has an attribute with a specific value.
+     *
+     * @param string $name The attribute name
+     * @param array $values The allowed values
+     * @return $this
+     */
     public function validateHasAttributeWithValue(string $name, array $values): DomNodeValidator
     {
         if (!isset($this->node)) {
@@ -109,6 +140,13 @@ class DomNodeValidator
         return $this;
     }
 
+    /**
+     * Validate that the node has a unique attribute with name.
+     *
+     * @param string $name The attribute name
+     * @param string $contextExpression The context expression to determine uniqueness.
+     * @return $this
+     */
     public function validateHasUniqueAttribute(string $name, string $contextExpression): DomNodeValidator
     {
         if (!isset($this->node)) {
@@ -127,12 +165,23 @@ class DomNodeValidator
         return $this;
     }
 
+    /**
+     * Validate that the node has a unique identifier.
+     *
+     * @return $this
+     */
     public function validateHasUniqueId(): DomNodeValidator
     {
         $this->validateHasUniqueAttribute("ID", "//*");
         return $this;
     }
 
+    /**
+     * Validate that the node has attribute with name.
+     *
+     * @param string $name The attribute name
+     * @return $this
+     */
     public function validateHasAttribute(string $name): DomNodeValidator
     {
         if (!isset($this->node)) {
@@ -145,6 +194,13 @@ class DomNodeValidator
         return $this;
     }
 
+    /**
+     * Validate that the node's resolvable identifier attribute points to a target with the specified "ID" attribute.
+     *
+     * @param string $name The attribute name containing the reference id as value
+     * @param string $targetContextExpression The context expression to the target reference
+     * @return $this
+     */
     public function validateHasReferenceToId(string $name, string $targetContextExpression): DomNodeValidator
     {
         if (!isset($this->node)) {
@@ -169,5 +225,4 @@ class DomNodeValidator
 
         return $this;
     }
-
 }

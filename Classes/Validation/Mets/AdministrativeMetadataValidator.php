@@ -2,9 +2,6 @@
 
 namespace Slub\Dfgviewer\Validation\Mets;
 
-use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
-
 /**
  * Copyright notice
  *
@@ -28,6 +25,9 @@ use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
+
 /**
  * The validator validates against the rules outlined in chapter 2.6 of the METS application profile 2.3.1.
  *
@@ -41,20 +41,23 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
     public function isValidDocument(): void
     {
         // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
-        $this->createNodeListValidator(ValidationHelper::XPATH_ADMINISTRATIVE_METADATA)
+        $administrativeMetadata = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_METADATA)
             ->validateHasAny()
-            ->iterate(array($this, "validateAdministrativMetadata"));
+            ->getNodeList();
+        foreach ($administrativeMetadata as $administrativeMetadataNode) {
+            $this->validateAdministrativMetadataNode($administrativeMetadataNode);
+        }
 
         // Check if one administrative metadata exist with "mets:rightsMD" and "mets:digiprovMD" as children
-        $this->createNodeListValidator(ValidationHelper::XPATH_ADMINISTRATIVE_METADATA . '[mets:rightsMD and mets:digiprovMD]')
+        $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_METADATA . '[mets:rightsMD and mets:digiprovMD]')
             ->validateHasOne();
 
-        $this->validateTechnicalMetadataStructure();
-        $this->validateRightsMetadataStructure();
-        $this->validateDigitalProvenanceMetadataStructure();
+        $this->validateTechnicalMetadata();
+        $this->validateRightsMetadata();
+        $this->validateDigitalProvenanceMetadata();
     }
 
-    public function validateAdministrativMetadata(\DOMNode $administrativeMetadata): void
+    protected function validateAdministrativMetadataNode(\DOMNode $administrativeMetadata): void
     {
         $this->createNodeValidator($administrativeMetadata)
             ->validateHasUniqueId();
@@ -67,13 +70,16 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateDigitalProvenanceMetadataStructure(): void
+    protected function validateDigitalProvenanceMetadata(): void
     {
-        $this->createNodeListValidator(ValidationHelper::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA)
-            ->iterate(array($this, "validateDigitalProvenanceMetadata"));
+        $digitalProvenanceMetadata = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA)
+            ->getNodeList();
+        foreach ($digitalProvenanceMetadata as $digitalProvenanceMetadataNode) {
+            $this->validateDigitalProvenanceMetadataNode($digitalProvenanceMetadataNode);
+        }
     }
 
-    public function validateDigitalProvenanceMetadata(\DOMNode $digitalProvenanceMetadata): void
+    protected function validateDigitalProvenanceMetadataNode(\DOMNode $digitalProvenanceMetadata): void
     {
         $this->createNodeValidator($digitalProvenanceMetadata)
             ->validateHasUniqueId();
@@ -97,13 +103,16 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateRightsMetadataStructure(): void
+    protected function validateRightsMetadata(): void
     {
-        $this->createNodeListValidator(ValidationHelper::XPATH_ADMINISTRATIVE_RIGHTS_METADATA)
-            ->iterate(array($this, "validateRightsMetadata"));
+        $rightsMetadata = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA)
+            ->getNodeList();
+        foreach ($rightsMetadata as $rightsMetadataNode) {
+            $this->validateRightsMetadataNode($rightsMetadataNode);
+        }
     }
 
-    public function validateRightsMetadata(\DOMNode $rightsMetadata): void
+    protected function validateRightsMetadataNode(\DOMNode $rightsMetadata): void
     {
         $this->createNodeValidator($rightsMetadata)
             ->validateHasUniqueId();
@@ -127,14 +136,16 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
      *
      * @return void
      */
-    public function validateTechnicalMetadataStructure(): void
+    protected function validateTechnicalMetadata(): void
     {
-        $this->createNodeListValidator(ValidationHelper::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA)
-            ->iterate(array($this, "validateTechnicalMetadata"));
+        $technicalMetadata = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA)
+            ->getNodeList();
+        foreach ($technicalMetadata as $technicalMetadataNode) {
+            $this->validateTechnicalMetadataNode($technicalMetadataNode);
+        }
     }
 
-
-    public function validateTechnicalMetadata(\DOMNode $technicalMetadata): void
+    protected function validateTechnicalMetadataNode(\DOMNode $technicalMetadata): void
     {
         $this->createNodeValidator($technicalMetadata)
             ->validateHasUniqueId();

@@ -49,7 +49,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     }
 
     /**
-     * Validates the document using the validator.
+     * Validates the document using the created validator.
      *
      * @return void
      */
@@ -63,7 +63,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      *
      * @return Result
      */
-    public function validate(): Result
+    protected function validate(): Result
     {
         return $this->validator->validate($this->doc);
     }
@@ -76,12 +76,17 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param $message string
      * @return void
      */
-    public function validateAndAssertEquals(string $message): void
+    protected function validateAndAssertEquals(string $message): void
     {
         $result = $this->validator->validate($this->doc);
         self::assertEquals($message, $result->getFirstError()->getMessage());
     }
 
+    /**
+     * Reset the document.
+     *
+     * @return void
+     */
     protected function resetDocument(): void
     {
         $this->doc = $this->getDomDocument();
@@ -176,6 +181,11 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         }
     }
 
+    /**
+     * Gets the doc from xml file.
+     *
+     * @return DOMDocument
+     */
     protected function getDomDocument(): DOMDocument
     {
         $doc = new DOMDocument();
@@ -184,12 +194,24 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         return $doc;
     }
 
+    /**
+     * Assert validation has no error.
+     *
+     * @return void
+     */
     protected function assertNoError(): void
     {
         $result = $this->validate();
         $this->assertFalse($result->hasErrors());
     }
 
+    /**
+     * Assert validation error has any.
+     *
+     * @param string $expression The expression in error message
+     * @param string $context The context in error message
+     * @return void
+     */
     protected function assertErrorHasAny(string $expression, string $context = ''): void
     {
         $message = 'There must be at least one element that matches the XPath expression "' . $expression . '"';
@@ -199,6 +221,13 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         $this->validateAndAssertEquals($message);
     }
 
+    /**
+     * Assert validation error has one.
+     *
+     * @param string $expression The expression in error message
+     * @param string $context The context in error message
+     * @return void
+     */
     protected function assertErrorHasOne(string $expression, string $context = ''): void
     {
         $message = 'There must be an element that matches the XPath expression "' . $expression . '"';
@@ -208,6 +237,13 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         $this->validateAndAssertEquals($message);
     }
 
+    /**
+     * Assert validation error has none or one.
+     *
+     * @param string $expression The expression in error message
+     * @param string $context The context in error message
+     * @return void
+     */
     protected function assertErrorHasNoneOrOne(string $expression, string $context = ''): void
     {
         $message = 'There must be no more than one element that matches the XPath expression "' . $expression . '"';
@@ -217,41 +253,102 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         $this->validateAndAssertEquals($message);
     }
 
+    /**
+     * Assert validation error has attribute.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @return void
+     */
     protected function assertErrorHasAttribute(string $expression, string $name): void
     {
         $this->validateAndAssertEquals('Mandatory "' . $name . '" attribute of "' . $expression . '" is missing.');
     }
 
+    /**
+     * Assert validation error has attribute with value.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @return void
+     */
     protected function assertErrorHasAttributeWithValue(string $expression, string $name, string $value): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not permissible.');
     }
 
+    /**
+     * Assert validation error has attribute with URL value.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @return void
+     */
     protected function assertErrorHasAttributeWithUrl(string $expression, string $name, string $value): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not valid.');
     }
 
+    /**
+     * Assert validation error has content with Email.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @param string $targetContextExpression The target context expression
+     * @return void
+     */
+    protected function assertErrorHasAttributeRefToOne(string $expression, string $name, string $value, string $targetContextExpression): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
+    }
+
+    /**
+     * Assert validation error has content with Email.
+     *
+     * @param string $expression The expression in error message
+     * @param string $value The content value
+     * @return void
+     */
     protected function assertErrorHasContentWithEmail(string $expression, string $value): void
     {
         $this->validateAndAssertEquals('Email "' . $value . '" in the content of "' . $expression . '" is not valid.');
     }
 
+    /**
+     * Assert validation error has content with URL.
+     *
+     * @param string $expression The expression in error message
+     * @param string $value The content value
+     * @return void
+     */
     protected function assertErrorHasContentWithUrl(string $expression, string $value): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the content of "' . $expression . '" is not valid.');
     }
 
-    protected function assertErrorHasRefToOne(string $expression, string $name, string $value, string $targetContextExpression): void
-    {
-        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetContextExpression);
-    }
-
+    /**
+     * Assert validation error has unique identifier.
+     *
+     * @param string $expression The expression in error message
+     * @param string $value The attribute value
+     * @return void
+     */
     protected function assertErrorHasUniqueId(string $expression, string $value): void
     {
         $this->assertErrorHasUniqueAttribute($expression, 'ID', $value);
     }
 
+    /**
+     * Assert validation error has unique attribute with value.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @return void
+     */
     protected function assertErrorHasUniqueAttribute(string $expression, string $name, string $value): void
     {
         $this->validateAndAssertEquals('"' . $name . '" attribute with value "' . $value . '" of "' . $expression . '" already exists.');
