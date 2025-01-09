@@ -42,6 +42,10 @@ class DomNodeValidator
 {
     protected DOMXPath $xpath;
 
+    protected ?DOMNode $node;
+
+    protected Result $result;
+
     public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node)
     {
         $this->xpath = $xpath;
