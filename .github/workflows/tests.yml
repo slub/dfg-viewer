@@ -10,15 +10,12 @@ jobs:
     test:
         name: TYPO3
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                typo3: [ 10.4, 11.5 ]
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
 
             - name: Install dependencies
-              run: Build/Test/runTests.sh -s composerInstall -t ${{ matrix.typo3 }}
+              run: Build/Test/runTests.sh -s composerInstall -t 11.5
 
             - name: Run unit tests
               run: Build/Test/runTests.sh -s unit

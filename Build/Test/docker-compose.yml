@@ -43,19 +43,6 @@ services:
                 php -S web:8001 -t ${DFGVIEWER_ROOT}
               fi
             "
-    solr:
-        image: docker.io/solr:9
-        volumes:
-            - ${DFGVIEWER_ROOT}/Configuration/ApacheSolr/configsets:/var/solr/data/configsets
-            - ./solr/modules/ocrsearch:/opt/solr/modules/ocrsearch
-        ports:
-            - 8983:8983
-        user: root # run as root to change the permissions of the solr folder
-        # Change permissions of the solr folder, create a default core and start solr as solr user
-        command: /bin/sh -c "
-            chown -R 8983:8983 /var/solr
-            && runuser -u solr -- solr-precreate default-core
-            "
     composer_install:
         image: docker.io/typo3/core-testing-${DOCKER_PHP_IMAGE}:latest
         user: "${HOST_UID}:${HOST_GID}"
@@ -70,7 +57,6 @@ services:
               if [ ${SCRIPT_VERBOSE} -eq 1 ]; then
                 set -x
               fi
-              composer require "kitodo/presentation:@dev"
               if [ -z ${TYPO3_VERSION} ]; then
                 composer install --no-progress --no-interaction;
               else
@@ -82,7 +68,6 @@ services:
         links:
             - ${DBMS}
             - web
-            - solr
         user: "${HOST_UID}:${HOST_GID}"
         volumes:
             - ${EXTENSIONS_ROOT}:/var/www/extensions/
