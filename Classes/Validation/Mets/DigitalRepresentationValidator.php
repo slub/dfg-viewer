@@ -45,7 +45,7 @@ class DigitalRepresentationValidator extends AbstactDomDocumentValidator
             ->validateHasNoneOrOne();
 
         // If a physical structure is present, there must be one file section.
-        if($this->xpath->query(VH::XPATH_PHYSICAL_STRUCTURES)->length > 0){
+        if ($this->xpath->query(VH::XPATH_PHYSICAL_STRUCTURES)->length > 0) {
             $this->createNodeListValidator(VH::XPATH_FILE_SECTIONS)
                 ->validateHasOne();
         }
@@ -110,7 +110,7 @@ class DigitalRepresentationValidator extends AbstactDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($fLocat)
-            ->validateHasAttributeWithValue('LOCTYPE', array('URL', 'PURL'))
+            ->validateHasAttributeWithValue('LOCTYPE', ['URL', 'PURL'])
             ->validateHasAttributeWithUrl('xlink:href');
     }
 }

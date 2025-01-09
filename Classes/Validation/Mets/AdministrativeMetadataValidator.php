@@ -89,8 +89,8 @@ class AdministrativeMetadataValidator extends AbstactDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($mdWrap)
-            ->validateHasAttributeWithValue('MDTYPE', array('OTHER'))
-            ->validateHasAttributeWithValue('OTHERMDTYPE', array('DVLINKS'));
+            ->validateHasAttributeWithValue('MDTYPE', ['OTHER'])
+            ->validateHasAttributeWithValue('OTHERMDTYPE', ['DVLINKS']);
 
         $this->createNodeListValidator('mets:xmlData[dv:links]', $mdWrap)
             ->validateHasOne();

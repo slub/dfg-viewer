@@ -41,6 +41,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeListValidator
 {
+
     private string $expression;
 
     private ?DOMNode $contextNode;
@@ -130,7 +131,7 @@ class DomNodeListValidator
     private function addError(string $prefix): void
     {
         $message = $prefix . ' that matches the XPath expression "' . $this->expression . '"';
-        if($this->contextNode) {
+        if ($this->contextNode) {
             $message .= ' under "' . $this->contextNode->getNodePath() . '"';
         }
         $this->result->addError(new Error($message, 23));

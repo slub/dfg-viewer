@@ -40,6 +40,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeValidator
 {
+
     protected DOMXPath $xpath;
 
     /**
