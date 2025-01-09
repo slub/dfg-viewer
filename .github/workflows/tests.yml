@@ -22,8 +22,3 @@ jobs:
 
             - name: Run unit tests
               run: Build/Test/runTests.sh -s unit
-
-            - name: Upload coverage reports
-              uses: codecov/codecov-action@v4
-              env:
-                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
