@@ -41,6 +41,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeListValidator
 {
+
     /**
      * @var string The expression of XPath query
      */
@@ -61,7 +62,7 @@ class DomNodeListValidator
      */
     private Result $result;
 
-    public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode = null)
+    public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode=null)
     {
         $this->expression = $expression;
         $this->contextNode = $contextNode;

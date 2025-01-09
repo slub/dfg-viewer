@@ -34,8 +34,14 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
 {
+    /**
+     * @var AbstractDlfValidator
+     */
     protected $validator;
 
+    /**
+     * @var DOMDocument
+     */
     protected $doc;
 
     abstract protected function createValidator(): AbstractDlfValidator;
