@@ -42,6 +42,9 @@ class DomNodeValidator
 {
     protected DOMXPath $xpath;
 
+    /**
+     * @var DOMNode
+     */
     protected ?DOMNode $node;
 
     protected Result $result;
@@ -107,11 +110,12 @@ class DomNodeValidator
             return $this;
         }
 
+        // @phpstan-ignore-next-line
         if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->node->getAttribute($name);
+        $value = $this->node->getAttribute($name); // @phpstan-ignore-line
         if (!filter_var($value, FILTER_VALIDATE_URL)) {
             $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
         }
@@ -132,11 +136,12 @@ class DomNodeValidator
             return $this;
         }
 
+        // @phpstan-ignore-next-line
         if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->node->getAttribute($name);
+        $value = $this->node->getAttribute($name); // @phpstan-ignore-line
         if (!in_array($value, $values)) {
             $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1724234607));
         }
@@ -157,11 +162,12 @@ class DomNodeValidator
             return $this;
         }
 
+        // @phpstan-ignore-next-line
         if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->node->getAttribute($name);
+        $value = $this->node->getAttribute($name); // @phpstan-ignore-line
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
             $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
         }
@@ -192,6 +198,7 @@ class DomNodeValidator
             return $this;
         }
 
+        // @phpstan-ignore-next-line
         if (!$this->node->hasAttribute($name)) {
             $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1724234607));
         }
@@ -211,12 +218,13 @@ class DomNodeValidator
             return $this;
         }
 
+        // @phpstan-ignore-next-line
         if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
         $targetNodes = $this->xpath->query($targetContextExpression);
-        $id = $this->node->getAttribute($name);
+        $id = $this->node->getAttribute($name); // @phpstan-ignore-line
 
         $foundElements = 0;
         foreach ($targetNodes as $targetNode) {
