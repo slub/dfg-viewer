@@ -46,7 +46,11 @@ jobs:
                   cd ./Docker/build/extensions/
                   echo "`jq '.require."kitodo/presentation"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
                   echo "`jq '.require."slub/slub-digitalcollections"="@dev"' dfg-viewer/composer.json`" > dfg-viewer/composer.json
+                  cat dfg-viewer/composer.json
+
                   echo "`jq '.require."kitodo/presentation"="@dev"' slub_digitalcollections/composer.json`" > slub_digitalcollections/composer.json
+                  cat dfg-slub_digitalcollections/composer.json
+
 
             - name: Determine build args
               run: |
