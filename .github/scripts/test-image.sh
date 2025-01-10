@@ -1,6 +1,8 @@
 #!/bin/bash
 cd ./Docker || exit 1
 
+docker compose build --build-arg BUILD_DATE="$1" --build-arg VCS_REF="$2" --build-arg VCS_URL="$3"
+
 docker compose up -d
 
 # run wait for it
