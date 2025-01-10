@@ -49,7 +49,7 @@ jobs:
                   cat dfg-viewer/composer.json
 
                   echo "`jq '.require."kitodo/presentation"="@dev"' slub_digitalcollections/composer.json`" > slub_digitalcollections/composer.json
-                  cat dfg-slub_digitalcollections/composer.json
+                  cat slub_digitalcollections/composer.json
 
 
             - name: Determine build args
