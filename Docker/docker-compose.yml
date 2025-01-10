@@ -1,7 +1,6 @@
 services:
   app:
     image: ${APP_IMAGE}
-    pull_policy: always
     build:
         context: build
     environment:
