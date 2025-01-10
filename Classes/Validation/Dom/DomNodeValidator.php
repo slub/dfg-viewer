@@ -47,7 +47,7 @@ class DomNodeValidator
     private DOMXPath $xpath;
 
     /**
-     * @var DOMNode|null The node to validate.
+     * @var DOMNode|null The node to validate
      */
     private ?DOMNode $node;
 
