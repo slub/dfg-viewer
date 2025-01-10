@@ -61,10 +61,22 @@ jobs:
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
 
+            - name: Build the DFG-Viewer image and cache to GitHub Actions cache
+              uses: docker/build-push-action@v6
+              with:
+                  build-args: |
+                      BUILD_DATE=${{ env.build_date }}
+                      VCS_REF=${{ env.vcs_ref }}
+                      VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
+                  cache-to: type=gha,mode=max,scope=${{ env.vcs_ref }}-image
+                  context: ./Docker/build
+                  load: true
+                  tags: ghcr.io/${{ github.repository }}:latest
+
             - name: Test the DFG-Viewer image
               run: |
                   chmod +x ./.github/scripts/test-image.sh
-                  ./.github/scripts/test-image.sh ${{ env.build_date }} ${{ env.vcs_ref }} https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
+                  ./.github/scripts/test-image.sh
 
             - name: Collect docker logs on failure
               if: failure()
@@ -93,10 +105,11 @@ jobs:
             - name: Build the DFG-Viewer image using GitHub Actions cache and deploy to GitHub Container Repository
               uses: docker/build-push-action@v6
               with:
-                  context: ./Docker/build
-                  push: true
-                  tags: ghcr.io/${{ github.repository }}:latest
                   build-args: |
                       BUILD_DATE=${{ env.build_date }}
                       VCS_REF=${{ env.vcs_ref }}
                       VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
+                  cache-from: type=gha,scope=${{ env.vcs_ref }}-image
+                  context: ./Docker/build
+                  push: true
+                  tags: ghcr.io/${{ github.repository }}:latest
