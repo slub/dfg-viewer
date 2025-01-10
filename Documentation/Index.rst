@@ -41,7 +41,7 @@ To install a fresh TYPO3 12.4 system, try the following installation procedure w
     #   * Apache is running as user www-data with group www-data
     #   * execution of all following commands as user www-data
     cd /var/www/
-    # remove /var/www/dfgviewer if it already exist or make sure it's really empty by ls -la dfgviewer/
+    # remove /var/www/dfgviewer if it already exists or make sure it's really empty by ls -la dfgviewer/
     rm -r dfgviewer/
     # load full TYPO3 via composer
 
