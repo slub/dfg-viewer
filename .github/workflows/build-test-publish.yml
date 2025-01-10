@@ -70,7 +70,7 @@ jobs:
                       BUILD_DATE=${{ env.build_date }}
                       VCS_REF=${{ env.vcs_ref }}
                       VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
-                  cache-to: type=gha,mode=max,scope=${{ env.vcs_ref }}-image
+                  #cache-to: type=gha,mode=max,scope=${{ env.vcs_ref }}-image
 
             - name: Test the DFG-Viewer image
               run: |
@@ -111,5 +111,4 @@ jobs:
                       BUILD_DATE=${{ env.build_date }}
                       VCS_REF=${{ env.vcs_ref }}
                       VCS_URL=https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}/
-                  cache-from: type=gha,scope=${{ env.vcs_ref }}-image
-
+                  #cache-from: type=gha,scope=${{ env.vcs_ref }}-image
