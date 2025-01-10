@@ -24,7 +24,7 @@ jobs:
               uses: actions/checkout@v4
               with:
                   repository: kitodo/kitodo-presentation
-                  path: ./Docker/extensions/kitodo-presentation
+                  path: ./Docker/build/extensions/kitodo-presentation
 
             # Deprecated should be set to the main repository if the update-typo12 branch is merged.
             - name: Checkout SLUB Digital Collections repository
