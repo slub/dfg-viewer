@@ -40,21 +40,21 @@ class LinkingLogicalPhysicalStructureValidatorTest extends AbstractDomDocumentVa
     public function testMultipleStructLinks(): void
     {
         $this->addChildNodeWithNamespace('/mets:mets', VH::NAMESPACE_METS, 'mets:structLink');
-        $this->assertErrorHasNoneOrOne(VH::XPATH_STRUCT_LINK);
+        $this->hasErrorNoneOrOne(VH::XPATH_STRUCT_LINK);
     }
 
     public function testLinkElements(): void
     {
         $this->removeNodes(VH::XPATH_STRUCT_LINK_ELEMENTS);
-        $this->assertErrorHasAny(VH::XPATH_STRUCT_LINK_ELEMENTS);
+        $this->hasErrorAny(VH::XPATH_STRUCT_LINK_ELEMENTS);
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_STRUCT_LINK_ELEMENTS, 'xlink:from', 'Test');
-        $this->assertErrorHasAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:from', 'Test', VH::XPATH_LOGICAL_STRUCTURES);
+        $this->hasErrorAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:from', 'Test', VH::XPATH_LOGICAL_STRUCTURES);
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_STRUCT_LINK_ELEMENTS, 'xlink:to', 'Test');
-        $this->assertErrorHasAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:to', 'Test', VH::XPATH_PHYSICAL_STRUCTURES);
+        $this->hasErrorAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:to', 'Test', VH::XPATH_PHYSICAL_STRUCTURES);
     }
 
     protected function createValidator(): AbstractDlfValidator

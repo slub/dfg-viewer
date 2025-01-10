@@ -42,7 +42,7 @@ class PhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
         $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:structMap');
         $node->setAttribute('TYPE', 'PHYSICAL');
         $this->addChildNode('/mets:mets', $node);
-        $this->assertErrorHasNoneOrOne(VH::XPATH_PHYSICAL_STRUCTURES);
+        $this->hasErrorNoneOrOne(VH::XPATH_PHYSICAL_STRUCTURES);
     }
 
     /**
@@ -54,35 +54,35 @@ class PhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testStructuralElements(): void
     {
         $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
-        $this->assertErrorHasOne(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->hasErrorOne(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
-        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div', 'TYPE');
+        $this->hasErrorAttribute('/mets:mets/mets:structMap[2]/mets:div', 'TYPE');
 
         $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div', 'TYPE', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div', 'TYPE', 'Test');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
-        $this->assertErrorHasAny(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
+        $this->hasErrorAny(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'ID');
-        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'ID');
+        $this->hasErrorAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'ID');
         $this->resetDocument();
 
         $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'PHYS_0001');
         $this->addChildNode('//mets:structMap[@TYPE="PHYSICAL"]/mets:div', $node);
-        $this->assertErrorHasUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
+        $this->hasErrorUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE');
-        $this->assertErrorHasAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE');
+        $this->hasErrorAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE');
 
         $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator

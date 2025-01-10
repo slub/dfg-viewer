@@ -39,18 +39,18 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     public function testAdministrativeMetadata(): void
     {
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_METADATA);
-        $this->assertErrorHasAny(VH::XPATH_ADMINISTRATIVE_METADATA);
+        $this->hasErrorAny(VH::XPATH_ADMINISTRATIVE_METADATA);
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_METADATA . '/mets:rightsMD');
-        $this->assertErrorHasOne(VH::XPATH_ADMINISTRATIVE_METADATA . '[mets:rightsMD and mets:digiprovMD]');
+        $this->hasErrorOne(VH::XPATH_ADMINISTRATIVE_METADATA . '[mets:rightsMD and mets:digiprovMD]');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_METADATA, 'ID', 'DMDLOG_0001');
-        $this->assertErrorHasUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_METADATA), 'DMDLOG_0001');
+        $this->hasErrorUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_METADATA), 'DMDLOG_0001');
 
         $this->removeAttribute(VH::XPATH_ADMINISTRATIVE_METADATA, 'ID');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_METADATA), 'ID');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_METADATA), 'ID');
     }
 
     /**
@@ -61,29 +61,29 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     public function testDigitalProvenanceMetadataStructure(): void
     {
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA, 'ID', 'DMDLOG_0001');
-        $this->assertErrorHasUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA), 'DMDLOG_0001');
+        $this->hasErrorUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA), 'DMDLOG_0001');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap');
-        $this->assertErrorHasOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA));
+        $this->hasErrorOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA));
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap', 'MDTYPE');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'MDTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'MDTYPE');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap', 'MDTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'MDTYPE', 'Test');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap', 'OTHERMDTYPE');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
+        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA . '/mets:mdWrap/mets:xmlData/dv:links');
-        $this->assertErrorHasOne('mets:xmlData[dv:links]', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap');
+        $this->hasErrorOne('mets:xmlData[dv:links]', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap');
     }
 
     /**
@@ -94,29 +94,29 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     public function testRightsMetadataStructure(): void
     {
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA, 'ID', 'DMDLOG_0001');
-        $this->assertErrorHasUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA), 'DMDLOG_0001');
+        $this->hasErrorUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA), 'DMDLOG_0001');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap');
-        $this->assertErrorHasOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA));
+        $this->hasErrorOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA));
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap', 'MDTYPE');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'MDTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'MDTYPE');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap', 'MDTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'MDTYPE', 'Test');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap', 'OTHERMDTYPE');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
-        $this->assertErrorHasAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
+        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE', 'Test');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap/mets:xmlData/dv:rights');
-        $this->assertErrorHasOne('mets:xmlData[dv:rights]', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap');
+        $this->hasErrorOne('mets:xmlData[dv:rights]', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap');
     }
 
     /**
@@ -128,22 +128,22 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     public function testTechnicalMetadataStructure(): void
     {
         $this->addChildNodeWithNamespace(VH::XPATH_ADMINISTRATIVE_METADATA, VH::NAMESPACE_METS, 'mets:techMD');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA), 'ID');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA), 'ID');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, 'ID', 'DMDLOG_0001');
-        $this->assertErrorHasUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA), 'DMDLOG_0001');
+        $this->hasErrorUniqueId(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA), 'DMDLOG_0001');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, 'ID', 'TECH_0001');
-        $this->assertErrorHasOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA));
+        $this->hasErrorOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA));
 
         $this->addChildNodeWithNamespace(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA, VH::NAMESPACE_METS, 'mets:mdWrap');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap', 'MDTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap', 'MDTYPE');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA . '/mets:mdWrap', 'MDTYPE', '');
-        $this->assertErrorHasAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap', 'OTHERMDTYPE');
 
         $this->setAttributeValue(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA . '/mets:mdWrap', 'OTHERMDTYPE', '');
-        $this->assertErrorHasOne('mets:xmlData', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap');
+        $this->hasErrorOne('mets:xmlData', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_TECHNICAL_METADATA) . '/mets:mdWrap');
     }
 
     protected function createValidator(): AbstractDlfValidator
