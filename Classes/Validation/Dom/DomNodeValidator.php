@@ -81,7 +81,7 @@ class DomNodeValidator
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->result->addError(new Error('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
+            $this->result->addError(new Error('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504169));
         }
 
         return $this;
@@ -99,7 +99,7 @@ class DomNodeValidator
         }
 
         if (!filter_var($this->node->nodeValue, FILTER_VALIDATE_URL)) {
-            $this->result->addError(new Error('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
+            $this->result->addError(new Error('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504177));
         }
 
         return $this;
@@ -125,7 +125,7 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
         if (!filter_var($value, FILTER_VALIDATE_URL)) {
-            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1724234607));
+            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
         }
 
         return $this;
@@ -152,7 +152,7 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
         if (!in_array($value, $values)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1724234607));
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
         }
 
         return $this;
@@ -179,7 +179,7 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1724234607));
+            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
         }
 
         return $this;
@@ -210,7 +210,7 @@ class DomNodeValidator
 
         // @phpstan-ignore-next-line
         if (!$this->node->hasAttribute($name)) {
-            $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1724234607));
+            $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1736504217));
         }
         return $this;
     }
@@ -243,7 +243,7 @@ class DomNodeValidator
         }
 
         if ($foundElements !== 1) {
-            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference one element under XPath expression "' . $targetExpression, 1724234607));
+            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference one element under XPath expression "' . $targetExpression, 1736504228));
         }
 
         return $this;

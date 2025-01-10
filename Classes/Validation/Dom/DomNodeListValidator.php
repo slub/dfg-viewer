@@ -109,7 +109,7 @@ class DomNodeListValidator
     public function validateHasAny(): DomNodeListValidator
     {
         if (!$this->nodeList->length > 0) {
-            $this->addError('There must be at least one element');
+            $this->addError('There must be at least one element', 1736504345);
         }
         return $this;
     }
@@ -122,7 +122,7 @@ class DomNodeListValidator
     public function validateHasOne(): DomNodeListValidator
     {
         if ($this->nodeList->length != 1) {
-            $this->addError('There must be an element');
+            $this->addError('There must be an element', 1736504354);
         }
         return $this;
     }
@@ -135,17 +135,17 @@ class DomNodeListValidator
     public function validateHasNoneOrOne(): DomNodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
-            $this->addError('There must be no more than one element');
+            $this->addError('There must be no more than one element', 1736504361);
         }
         return $this;
     }
 
-    private function addError(string $prefix): void
+    private function addError(string $prefix, int $code): void
     {
         $message = $prefix . ' that matches the XPath expression "' . $this->expression . '"';
         if ($this->contextNode) {
             $message .= ' under "' . $this->contextNode->getNodePath() . '"';
         }
-        $this->result->addError(new Error($message, 23));
+        $this->result->addError(new Error($message, $code));
     }
 }
