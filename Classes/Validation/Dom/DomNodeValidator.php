@@ -40,6 +40,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeValidator
 {
+
     /**
      * @var DOMXPath The XPath of document to validate
      */

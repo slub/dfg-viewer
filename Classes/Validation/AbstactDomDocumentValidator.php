@@ -45,6 +45,8 @@ abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
         parent::__construct(DOMDocument::class);
     }
 
+    abstract public function isValidDocument();
+
     protected function isValid($value): void
     {
         $this->xpath = new DOMXPath($value);
@@ -60,6 +62,4 @@ abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
     {
         return new DomNodeValidator($this->xpath, $this->result, $node);
     }
-
-    public abstract function isValidDocument();
 }

@@ -53,7 +53,7 @@ class DomNodeListValidator
     private ?DOMNode $contextNode;
 
     /**
-     * @var DOMNodeList|false|mixed The node list result of XPath query
+     * @var DOMNodeList|false The node list result of XPath query
      */
     private DOMNodeList $nodeList;
 
