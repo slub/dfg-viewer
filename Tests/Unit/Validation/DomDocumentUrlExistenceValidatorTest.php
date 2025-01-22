@@ -51,6 +51,6 @@ class DomDocumentUrlExistenceValidatorTest extends AbstractDomDocumentValidatorT
     {
         // ignore all urls of fixture xml to test specifically
         $excludeHosts = 'www.loc.gov,id.loc.gov,example.com,dfg-viewer.de,www.w3.org';
-        return new DomDocumentUrlExistenceValidator(array('excludeHosts' => $excludeHosts));
+        return new DomDocumentUrlExistenceValidator(['excludeHosts' => $excludeHosts]);
     }
 }

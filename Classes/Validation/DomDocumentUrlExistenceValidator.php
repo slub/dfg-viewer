@@ -42,15 +42,21 @@ use Slub\Dfgviewer\Common\ValidationHelper;
  */
 class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
 {
+
+    /**
+     * Excluded host names separated by comma.
+     * @var array
+     */
     private array $excludeHosts;
 
     public function __construct(array $configuration = [])
     {
         parent::__construct(DOMDocument::class);
-        $this->excludeHosts = isset($configuration["excludeHosts"]) ? explode(",", $configuration["excludeHosts"]) : [];
+        $this->excludeHosts = [];
+        if (isset($configuration["excludeHosts"])) {
+            $this->excludeHosts = explode(",", $configuration["excludeHosts"]);
+        }
     }
-
-
 
     protected function isValid($value): void
     {
@@ -69,7 +75,8 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
      */
     protected function getDocumentUrls(DOMDocument $document): array
     {
-        $tempDocument = clone $document; // do not modify original document
+        // do not modify original document
+        $tempDocument = clone $document;
         $urls = $this->getFileUrlAndRemoveFileGroups($tempDocument);
 
         // get the urls of document without file group nodes
@@ -105,7 +112,8 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
                     $urls[] = $url;
                 }
             }
-            $hosts = []; // reset to check for every file group
+            // reset to check for every file group
+            $hosts = [];
             $fileGroup->parentNode->removeChild($fileGroup);
         }
         return $urls;
