@@ -50,35 +50,7 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
         $this->excludeHosts = isset($configuration["excludeHosts"]) ? explode(",", $configuration["excludeHosts"]) : [];
     }
 
-    /**
-     * Get the representative file urls and remove file groups to prevent rechecking.
-     *
-     * To minimize the load of the exist check as much as possible, one URL is determined per file group and host.
-     *
-     * @param DOMDocument $document The document to validate
-     * @return array The file urls to check
-     */
-    protected function getFileUrlAndRemoveFileGroups(DOMDocument $document): array
-    {
-        $urls = [];
-        $hosts = [];
-        $xpath = new DOMXpath($document);
-        $fileGroups = $xpath->query(ValidationHelper::XPATH_FILE_SECTION_GROUPS);
-        foreach ($fileGroups as $fileGroup) {
-            $fLocats = $xpath->query('mets:file/mets:FLocat', $fileGroup);
-            foreach ($fLocats as $fLocat) {
-                $url = $fLocat->getAttribute("xlink:href");
-                $host = parse_url($url, PHP_URL_HOST);
-                if (!in_array($host, $hosts)) {
-                    $hosts[] = $host;
-                    $urls[] = $url;
-                }
-            }
-            $hosts = []; // reset to check for every file group
-            $fileGroup->parentNode->removeChild($fileGroup);
-        }
-        return $urls;
-    }
+
 
     protected function isValid($value): void
     {
@@ -104,6 +76,37 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
         preg_match_all('/' . ValidationHelper::URL_REGEX . '/i', $tempDocument->saveXML(), $matches);
         $urls += $matches[0] ?? [];
         return array_unique($urls);
+    }
+
+    /**
+     * Get the representative file urls and remove file groups to prevent rechecking.
+     *
+     * To minimize the load of the exist check as much as possible, one URL is determined per file group and host.
+     *
+     * @param DOMDocument $document The document to validate
+     * @return array The file urls to check
+     */
+    protected function getFileUrlAndRemoveFileGroups(DOMDocument $document): array
+    {
+        $urls = [];
+        $hosts = [];
+        $xpath = new DOMXpath($document);
+        $fileGroups = $xpath->query(ValidationHelper::XPATH_FILE_SECTION_GROUPS);
+        foreach ($fileGroups as $fileGroup) {
+            $fLocats = $xpath->query('mets:file/mets:FLocat', $fileGroup);
+            foreach ($fLocats as $fLocat) {
+                // @phpstan-ignore-next-line
+                $url = $fLocat->getAttribute("xlink:href");
+                $host = parse_url($url, PHP_URL_HOST);
+                if (!in_array($host, $hosts)) {
+                    $hosts[] = $host;
+                    $urls[] = $url;
+                }
+            }
+            $hosts = []; // reset to check for every file group
+            $fileGroup->parentNode->removeChild($fileGroup);
+        }
+        return $urls;
     }
 
     private function urlExists($url): bool
