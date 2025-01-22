@@ -39,7 +39,7 @@ To install a fresh TYPO3 11.5 system, try the following installation procedure w
     #   * Apache is running as user www-data with group www-data
     #   * execution of all following commands as user www-data
     cd /var/www/
-    # remove /var/www/dfgviewer if it already exist or make sure it's really empty by ls -la dfgviewer/
+    # remove /var/www/dfgviewer if it already exists or make sure it's really empty by ls -la dfgviewer/
     rm -r dfgviewer/
     # load full TYPO3 via composer
     composer create-project typo3/cms-base-distribution:^11 dfgviewer
@@ -154,7 +154,7 @@ You may notice from time to time, the viewer page keeps empty even though you
 pass the :code:`tx_dlf[id]` parameter.
 
 This happens, if someone called the viewer page without any parameters. In this
-case, TYPO3 saves the page to it's cache. If you call the viewer page again with
+case, TYPO3 saves the page to its cache. If you call the viewer page again with
 any parameter and without a cHash, the (empty) cached page is delivered.
 
 To avoid this, you must configure :code:`tx_dlf[id]` to require a cHash. Of
