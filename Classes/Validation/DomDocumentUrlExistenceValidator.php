@@ -29,8 +29,13 @@ namespace Slub\Dfgviewer\Validation;
 
 use DOMDocument;
 use DOMXPath;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
+use Psr\Log\LoggerAwareTrait;
 use Slub\Dfgviewer\Common\ValidationHelper;
+use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * The validator checks the document URLs for their existence.
@@ -42,6 +47,7 @@ use Slub\Dfgviewer\Common\ValidationHelper;
  */
 class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
 {
+    use LoggerAwareTrait;
 
     /**
      * Excluded host names separated by comma.
@@ -49,7 +55,7 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
      */
     private array $excludeHosts;
 
-    public function __construct(array $configuration = [])
+    public function __construct(array $configuration=[])
     {
         parent::__construct(DOMDocument::class);
         $this->excludeHosts = [];
@@ -121,14 +127,16 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
 
     private function urlExists($url): bool
     {
-        $headers = @get_headers($url);
-        if ($headers === false || !is_array($headers) || count($headers) == 0) {
-            return false;
+        /** @var RequestFactory $requestFactory */
+        $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
+        try {
+            $response = $requestFactory->request($url);
+            $statusCode = $response->getStatusCode();
+            return $statusCode >= 200 && $statusCode < 400;
+        } catch (ConnectException|RequestException $e) {
+            $this->logger->debug($e->getMessage());
         }
-
-        preg_match('/HTTP\/\d\.\d\s+(\d+)/', $headers[0], $matches);
-        $statusCode = (int)$matches[1];
-        return $statusCode >= 200 && $statusCode < 400;
+        return false;
     }
 
     private function isExcluded($url): bool
