@@ -90,4 +90,10 @@ class ValidationHelper
         }
         return $value;
     }
+
+    public static function getHost($url): string
+    {
+        preg_match('/' . ValidationHelper::URL_REGEX . '/i', $url, $matches);
+        return $matches[2] ?? '';
+    }
 }

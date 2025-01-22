@@ -33,7 +33,7 @@ use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Psr\Log\LoggerAwareTrait;
-use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -64,6 +64,7 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
         }
     }
 
+
     protected function isValid($value): void
     {
         foreach ($this->getDocumentUrls($value) as $url) {
@@ -86,7 +87,7 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
         $urls = $this->getFileUrlAndRemoveFileGroups($tempDocument);
 
         // get the urls of document without file group nodes
-        preg_match_all('/' . ValidationHelper::URL_REGEX . '/i', $tempDocument->saveXML(), $matches);
+        preg_match_all('/' . VH::URL_REGEX . '/i', $tempDocument->saveXML(), $matches);
         if (is_array($matches) && count($matches) > 0) {
             $urls += $matches[0];
         }
@@ -106,14 +107,14 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
         $urls = [];
         $hosts = [];
         $xpath = new DOMXpath($document);
-        $fileGroups = $xpath->query(ValidationHelper::XPATH_FILE_SECTION_GROUPS);
+        $fileGroups = $xpath->query(VH::XPATH_FILE_SECTION_GROUPS);
         foreach ($fileGroups as $fileGroup) {
             $fLocats = $xpath->query('mets:file/mets:FLocat', $fileGroup);
             foreach ($fLocats as $fLocat) {
                 // @phpstan-ignore-next-line
                 $url = $fLocat->getAttribute("xlink:href");
-                $host = parse_url($url, PHP_URL_HOST);
-                if (!in_array($host, $hosts)) {
+                $host = VH::getHost($url);
+                if ($host !== '' && !in_array($host, $hosts)) {
                     $hosts[] = $host;
                     $urls[] = $url;
                 }
@@ -141,11 +142,6 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
 
     private function isExcluded($url): bool
     {
-        foreach ($this->excludeHosts as $excludeHost) {
-            if (str_starts_with($url, 'http://' . $excludeHost) || str_starts_with($url, 'https://' . $excludeHost)) {
-                return true;
-            }
-        }
-        return false;
+        return in_array(VH::getHost($url), $this->excludeHosts);
     }
 }
