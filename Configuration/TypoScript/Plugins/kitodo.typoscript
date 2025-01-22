@@ -58,7 +58,7 @@ plugin.tx_dlf {
                 className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
                 breakOnError = false
                 configuration {
-                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org'
+                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
                 }
             }
         }
