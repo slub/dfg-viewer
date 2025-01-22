@@ -74,7 +74,9 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
 
         // get the urls of document without file group nodes
         preg_match_all('/' . ValidationHelper::URL_REGEX . '/i', $tempDocument->saveXML(), $matches);
-        $urls += $matches[0] ?? [];
+        if (is_array($matches) && count($matches) > 0) {
+            $urls += $matches[0];
+        }
         return array_unique($urls);
     }
 
