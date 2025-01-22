@@ -134,7 +134,7 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
             $response = $requestFactory->request($url);
             $statusCode = $response->getStatusCode();
             return $statusCode >= 200 && $statusCode < 400;
-        } catch (ConnectException|RequestException $e) {
+        } catch (ConnectException | RequestException $e) {
             $this->logger->debug($e->getMessage());
         }
         return false;
