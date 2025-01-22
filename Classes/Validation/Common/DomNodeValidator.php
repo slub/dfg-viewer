@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\Dfgviewer\Validation\Dom;
+namespace Slub\Dfgviewer\Validation\Common;
 
 /**
  * Copyright notice
@@ -27,6 +27,7 @@ namespace Slub\Dfgviewer\Validation\Dom;
 
 use DOMNode;
 use DOMXPath;
+use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
@@ -98,7 +99,7 @@ class DomNodeValidator
             return $this;
         }
 
-        if (!filter_var($this->node->nodeValue, FILTER_VALIDATE_URL)) {
+        if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $this->node->nodeValue)) {
             $this->result->addError(new Error('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504177));
         }
 
@@ -124,7 +125,8 @@ class DomNodeValidator
 
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
-        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+
+        if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $value)) {
             $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
         }
 

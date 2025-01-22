@@ -20,7 +20,7 @@
                         <mods:nameIdentifier type="viaf" typeURI="http://id.loc.gov/vocabulary/identifiers/viaf">none</mods:nameIdentifier>
                         <mods:namePart type="family"/>
                         <mods:namePart type="given"/>
-                        <mods:displayForm>https://zenodo.org/api/files/df31cc16-0a54-4599-89e9-0dd4ada4016d/b5df7cd550f64e818943ad96fff7e902.glb</mods:displayForm>
+                        <mods:displayForm></mods:displayForm>
                         <mods:role>
                             <mods:roleTerm authority="marcrelator" type="code">prv</mods:roleTerm>
                         </mods:role>
@@ -74,16 +74,16 @@
             <mets:mdWrap MDTYPE="OTHER" MIMETYPE="text/xml" OTHERMDTYPE="DVRIGHTS">
                 <mets:xmlData>
                     <dv:rights>
-                        <dv:owner>3D Repository</dv:owner>
-                        <dv:ownerLogo>http://dfg-viewer.de/fileadmin/_processed_/a/8/csm_HSM_Logo_T_schwarz_klein_bold_regular_d61a371993.jpg</dv:ownerLogo>
-                        <dv:ownerSiteURL>https://3d-repository.hs-mainz.de/</dv:ownerSiteURL>
-                        <dv:ownerContact>https://3d-repository.hs-mainz.de/contact</dv:ownerContact>
-                        <dv:aggregator>Aggregator</dv:aggregator>
-                        <dv:aggregatorLogo>http://dfg-viewer.de/fileadmin/_processed_/a/8/csm_HSM_Logo_T_schwarz_klein_bold_regular_d61a371993.jpg</dv:aggregatorLogo>
-                        <dv:aggregatorSiteURL>https://3d-repository.hs-mainz.de/</dv:aggregatorSiteURL>
-                        <dv:sponsor>Sponsor</dv:sponsor>
-                        <dv:sponsorLogo>http://dfg-viewer.de/fileadmin/_processed_/a/8/csm_HSM_Logo_T_schwarz_klein_bold_regular_d61a371993.jpg</dv:sponsorLogo>
-                        <dv:sponsorSiteURL>https://3d-repository.hs-mainz.de/</dv:sponsorSiteURL>
+                        <dv:owner>Example owner</dv:owner>
+                        <dv:ownerLogo>http://example.com/image.jpg</dv:ownerLogo>
+                        <dv:ownerSiteURL>http://example.com</dv:ownerSiteURL>
+                        <dv:ownerContact>http://example.com/contact</dv:ownerContact>
+                        <dv:aggregator>Example aggregator</dv:aggregator>
+                        <dv:aggregatorLogo>http://example.com/image.jpg</dv:aggregatorLogo>
+                        <dv:aggregatorSiteURL>http://example.com</dv:aggregatorSiteURL>
+                        <dv:sponsor>Example sponsor</dv:sponsor>
+                        <dv:sponsorLogo>http://example.com/image.jpg</dv:sponsorLogo>
+                        <dv:sponsorSiteURL>http://example.com</dv:sponsorSiteURL>
                         <dv:license>pdm</dv:license>
                     </dv:rights>
                 </mets:xmlData>
@@ -93,10 +93,10 @@
             <mets:mdWrap MDTYPE="OTHER" MIMETYPE="text/xml" OTHERMDTYPE="DVLINKS">
                 <mets:xmlData>
                     <dv:links>
-                        <dv:reference>http://slub-dresden.de/FOZK.pl?PPN=356448053</dv:reference>
-                        <dv:presentation>http://slub-dresden.de/356448053</dv:presentation>
-                        <dv:sru>http://digital.slub-dresden.de/sru/356448053</dv:sru>
-                        <dv:iiif>http://digital.slub-dresden.de/iiif/356448053.xml</dv:iiif>
+                        <dv:reference>http://example.com/12345678</dv:reference>
+                        <dv:presentation>http://example.com/12345678</dv:presentation>
+                        <dv:sru>http://example.com/sru/12345678</dv:sru>
+                        <dv:iiif>http://example.com/iiif/12345678.xml</dv:iiif>
                     </dv:links>
                 </mets:xmlData>
             </mets:mdWrap>
@@ -104,13 +104,13 @@
     </mets:amdSec>
     <mets:fileSec>
         <mets:fileGrp USE="DEFAULT">
-            <mets:file ID="FILE_0001_DEFAULT" MIMETYPE="model/gltf-binary">
-                <mets:FLocat LOCTYPE="URL" xlink:href="https://zenodo.org/api/files/df31cc16-0a54-4599-89e9-0dd4ada4016d/b5df7cd550f64e818943ad96fff7e902.glb"/>
+            <mets:file ID="FILE_0001_DEFAULT" MIMETYPE="image/jpeg">
+                <mets:FLocat LOCTYPE="URL" xlink:href="http://example.com/image.jpg"/>
             </mets:file>
         </mets:fileGrp>
         <mets:fileGrp USE="THUMBS">
             <mets:file ID="FILE_0001_THUMBS" MIMETYPE="image/jpeg">
-                <mets:FLocat LOCTYPE="URL" xlink:href="https://3drepo.eu/modelupload/b5df7cd550f64e818943ad96fff7e902.jpg"/>
+                <mets:FLocat LOCTYPE="URL" xlink:href="http://example.com/thumb.jpg"/>
             </mets:file>
         </mets:fileGrp>
     </mets:fileSec>
