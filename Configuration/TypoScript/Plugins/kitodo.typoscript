@@ -41,6 +41,23 @@ plugin.tx_dlf {
 	}
 }
 
+
+# --------------------------------------------------------------------------------------------------------------------
+# musical sources
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_annotation < tt_content.list.20.dlf_annotation
+plugin.tx_dlf_annotation {
+    settings {
+    }
+}
+
+plugin.tx_dlf_scoretool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_scoretool {
+    settings {
+        tools = scoretool
+    }
+}
+
 # --------------------------------------------------------------------------------------------------------------------
 # metadata
 # --------------------------------------------------------------------------------------------------------------------
@@ -62,7 +79,7 @@ plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
 plugin.tx_dlf_pageview {
     settings {
         features =
-        elementId = tx-dfgviewer-map
+        elementId = tx-dfgviewer-map-0
     }
 }
 
@@ -128,7 +145,7 @@ lib.kitodo.navigation.pagecontrol < tt_content.list.20.dlf_navigation
 lib.kitodo.navigation.pagecontrol {
     settings {
         pageStep = 10
-        features = pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+        features = measureBack,measureForward,pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
     }
 }
 
