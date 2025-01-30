@@ -26,7 +26,7 @@
       lang="en">
 
 <f:section name="ControlBar">
-  <div class="control-bar">
+    <div class="control-bar {f:if(condition:'{gp-multiview}', then:'multiview')}">
       <div class="header-bar">
         <h1><f:link.page pageUid="{rootPageId}" title="DFG-Viewer" class="dfgviewer-logo">DFG-Viewer</f:link.page></h1>
         <nav>
@@ -42,16 +42,31 @@
         </nav>
       </div>
 
-      <div class="metadata-wrapper">
-        <div class="tx-dlf-metadata">
-            <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata" />
-        </div>
-        <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
-      </div>
+        <div class="control-bar-content">
+            <div class="metadata-wrapper">
+                <div class="tx-dlf-metadata">
+                    <div class="control-bar-container metadata-basic">
+                        <h3>
+                            <span
+                                class="sidebar-heading-label">{f:translate(key:'metadata', extensionName:'dfgviewer')}</span>
+                            <span class="sidebar-heading-state"></span>
+                        </h3>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_metadata"/>
+                    </div>
+                </div>
+                <div class="offcanvas-toggle" title="<f:translate key='metadata' extensionName='dfgviewer' />"></div>
+            </div>
 
-      <div class="toc-wrapper">
-          <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents" />
-          <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
+            <div class="toc-wrapper">
+                <div class="control-bar-container">
+                    <h3>
+                        <span class="sidebar-heading-label">{f:translate(key:'toc', extensionName:'dfgviewer')}</span>
+                        <span class="sidebar-heading-state"></span>
+                    </h3>
+                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_tableofcontents"/>
+                </div>
+                <div class="offcanvas-toggle" title="<f:translate key='toc' extensionName='dfgviewer' />"></div>
+            </div>
       </div>
   </div>
 </f:section>
