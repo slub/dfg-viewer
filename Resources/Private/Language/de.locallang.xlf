@@ -13,6 +13,10 @@
 				<source><![CDATA[You use an outdated browser which lacks the support for modern JavaScript. Some features may not work as expected (e.g. images views). Please update to a current browser.]]></source>
 				<target><![CDATA[Sie nutzen einen veralteten Browser, dem die Unterstützung für modernes JavaScript fehlt. Einige Funktionen, wie z.B. die Anzeige der Bilder, stehen dadurch u.U. nicht zur Verfügung. Bitte aktualisieren Sie Ihren Browser.]]></target>
 			</trans-unit>
+            <trans-unit id="digitisation">
+                <source>Digitisation</source>
+                <target>Digitalisierung</target>
+            </trans-unit>
 			<trans-unit id="double.RectoVerso" approved="yes">
 				<source><![CDATA[Adjust recto/verso]]></source>
 				<target><![CDATA[Recto/Verso korrigieren]]></target>
@@ -61,6 +65,34 @@
 				<source><![CDATA[Metadata]]></source>
 				<target><![CDATA[Metadaten]]></target>
 			</trans-unit>
+            <trans-unit id="multiview.add_document.description">
+                <source>To add another document to this view, enter the entire URL of the METS/MODS file here.</source>
+                <target>Um dieser Ansicht ein weiteres Dokument hinzuzufügen geben Sie hier die gesamte URL der METS/MODS-Datei an.</target>
+            </trans-unit>
+            <trans-unit id="multiview.add_document.label">
+                <source>Add Document</source>
+                <target>Dokument hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="multiview.add_document.placeholder">
+                <source>Document URL</source>
+                <target>Dokument URL</target>
+            </trans-unit>
+            <trans-unit id="multiview.add_document.submit">
+                <source>Add now</source>
+                <target>Jetzt hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="multiview.remove_document">
+                <source>Remove Document from view</source>
+                <target>Dokument aus der Ansicht entfernen</target>
+            </trans-unit>
+            <trans-unit id="multiview.reset_layout">
+                <source>Reset Layout</source>
+                <target>Layout zurücksetzen</target>
+            </trans-unit>
+            <trans-unit id="multiview.dragging_label">
+                <source>Drag view to another position</source>
+                <target>Ansicht an eine andere Position ziehen</target>
+            </trans-unit>
 			<trans-unit id="provider.email_provider" approved="yes">
 				<source><![CDATA[Email to data provider]]></source>
 				<target><![CDATA[Email an Datenprovider]]></target>
