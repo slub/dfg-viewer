@@ -24,7 +24,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
       data-namespace-typo3-fluid="true">
-
 <f:if condition="{docArray -> f:count()} > 1">
     <f:then>
 
@@ -98,9 +97,6 @@
                                         </span>
                                     </f:else>
                                 </f:if>
-                                <f:comment>
-                                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
-                                </f:comment>
                             </div>
 
                             <div class="tx-dlf-navigation-prev">
@@ -164,10 +160,6 @@
             <div id="player"></div>
             <div id="svg_output" style="overflow:hidden;"></div>
         </div>
-
-        <f:comment>
-            <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
-        </f:comment>
 
         <div class="score-container">
             <div id="tx-dlf-score-0"></div>

@@ -51,13 +51,6 @@ plugin.tx_dlf_annotation {
     }
 }
 
-plugin.tx_dlf_scoretool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_scoretool {
-    settings {
-        tools = scoretool
-    }
-}
-
 # --------------------------------------------------------------------------------------------------------------------
 # metadata
 # --------------------------------------------------------------------------------------------------------------------
@@ -80,6 +73,7 @@ plugin.tx_dlf_pageview {
     settings {
         features =
         elementId = tx-dfgviewer-map-0
+        multiViewType = composition
     }
 }
 
@@ -196,6 +190,13 @@ plugin.tx_dlf_fulltexttool {
         tools = fulltexttool
         activateFullTextInitially = 0
         fullTextScrollElement = #tx-dlf-fulltextselection
+    }
+}
+
+plugin.tx_dlf_scoretool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_scoretool {
+    settings {
+        tools = scoretool
     }
 }
 
