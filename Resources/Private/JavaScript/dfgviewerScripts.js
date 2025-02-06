@@ -53,6 +53,49 @@ $(document).ready(function() {
         return false;
     });
 
+    // section toggle inside the sidebar on larger screens
+    $('.control-bar .control-bar-container h3').on('click', function () {
+        $(this).parent().toggleClass('section-hidden');
+    });
+
+    // toggle for full metadata display in sidebar
+    if ($('.control-bar .metadata-basic dl.tx-dlf-metadata-titledata').length > 1) {
+        var metadataToggleLabelMore = ($('html[lang^="de"]')[0]) ? 'mehr Metadaten anzeigen' : 'more Metadata';
+        var metadataToggleLabelLess = ($('html[lang^="de"]')[0]) ? 'weniger Metadaten anzeigen' : 'less Metadata';
+        $('.control-bar .metadata-basic').append('<div class="metadata-toggle">' + metadataToggleLabelMore + '</div>');
+        if (Cookies.get('tx-dlf-allmetadata') === 'true') {
+            $('.control-bar .metadata-basic').addClass('all-metadata').find('.metadata-toggle').text(metadataToggleLabelLess);
+            $('.control-bar .metadata-basic').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').show();
+        }
+        $('.metadata-toggle').on('click', function () {
+            if (!$('.control-bar .metadata-basic').hasClass('all-metadata')) {
+                Cookies.set('tx-dlf-allmetadata', 'true', {sameSite: 'lax'});
+                $(this).text(metadataToggleLabelLess);
+            } else {
+                Cookies.remove('tx-dlf-allmetadata');
+                $(this).text(metadataToggleLabelMore);
+            }
+            $('.control-bar .metadata-basic').toggleClass('all-metadata').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').slideToggle();
+
+        });
+    }
+
+    // extract title information from the meta data and add it to the top of the sidebar
+    ($('.tx-dlf-metadata dl.tx-dlf-metadata-titledata dd.tx-dlf-title')[0]) && $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().find('dd.tx-dlf-title').text() + '</h2></div>');
+
+    // add a toggle function for sub meta data "(+ n more)"
+    $('dl.tx-dlf-metadata-titledata dd > dl').each(function () {
+        $(this).parent().addClass('has-submetadata').prepend('<span class="submetadata-toggle">+' + $(this).find('dt').length + (($('html[lang^="de"]')[0]) ? ' weitere' : ' more') + '</span>').prev().addClass('has-submetadata');
+    });
+    $('.submetadata-toggle').on('click', function () {
+        $(this).parent().toggleClass('open');
+    });
+
+    // insert dd tag between two dt tags if necessary
+    $('dl.tx-dlf-metadata-titledata dt').each(function () {
+        $(this).after($(this).next('dt').length > 0 && $('<dd/>'))
+    });
+
     // secondary nav toggle
     $('nav .nav-toggle').on(mobileEvent, function(event) {
         $(this).toggleClass('active');
