@@ -80,22 +80,13 @@
                             <div class="score-tool">
                                 <f:if condition="{scoreAvailable.{iterator.index}}">
                                     <f:then>
-                                        <a class="select switchoff" id="tx-dlf-tools-score-{iterator.index}" title="" data-dic="fulltext:{f:translate(key: 'tools.score')}
-                            ;fulltext-on:{f:translate(key: 'tools.score.on')}
-                            ;fulltext-off:{f:translate(key: 'tools.score.off')}
-                            ;activate-score-initially:{activateScoreInitially}
-                            ;score-scroll-element:{settings.scoreScrollElement}
-                            ;search-hl-parameters:{settings.searchHlParameters}">
-                                            Score &nbsp;
+                                        <a class="select switchoff" id="tx-dlf-tools-score-{iterator.index}" title="" >
+                                            <f:translate key="tools.score"/>
                                         </a>
-                                        <a class="select switchoff" id="tx-dlf-tools-midi" title="" data-dic=""> Midi &nbsp;
+                                        <a class="select switchoff" id="tx-dlf-tools-midi" title="" data-dic="">
+                                            <f:translate key="tools.score.player"/>
                                         </a>
                                     </f:then>
-                                    <f:else>
-                                        <span class="no-score">
-                                            <f:translate key="tools.fulltext.not-available" />
-                                        </span>
-                                    </f:else>
                                 </f:if>
                             </div>
 

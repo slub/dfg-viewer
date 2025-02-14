@@ -22,10 +22,10 @@
 </f:comment>
 
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
-    xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
+      xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true"
+      lang="en">
 
-<ul>
+<ul st>
     <li class="submenu links">
         <a href="#" title="Links">Links</a>
         <ul>
@@ -168,24 +168,11 @@
                 </li>
             </f:if>
             <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
-                <li class="score">
-                    <f:if condition="{gp-double} == 1">
-                        <f:then>
-                        </f:then>
-                        <f:else>
-                            <f:if condition="{gp-pagegrid} == 1">
-                                <f:then>
-                            <span class="select switchoff" id="tx-dlf-tools-score-0" title="{f:translate(key:'score.no_score_gridpage', extensionName:'dfgviewer')}">
-                                <f:translate key='score.no_score_gridpage' extensionName='dfgviewer' />
-                            </span>
-                                </f:then>
-                                <f:else>
-                                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool" />
-                                </f:else>
-                            </f:if>
-                        </f:else>
-                    </f:if>
-                </li>
+                <f:if condition="{gp-double} != 1 && {gp-pagegrid} != 1">
+                    <f:then>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
+                    </f:then>
+                </f:if>
             </f:if>
             <li class="grid">
                 <f:if
