@@ -46,6 +46,13 @@ $(document).ready(function() {
         $(this).parent().toggleClass('open');
     });
 
+    // active toggle for submenus
+    $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
+        $('li.submenu.open a').not(this).parent().removeClass('open');
+        $(this).parent().toggleClass('open');
+        return false;
+    });
+
     // section toggle inside the sidebar on larger screens
     $('.control-bar .control-bar-container h3').on('click', function () {
         $(this).parent().toggleClass('section-hidden');
@@ -87,13 +94,6 @@ $(document).ready(function() {
     // insert dd tag between two dt tags if necessary
     $('dl.tx-dlf-metadata-titledata dt').each(function () {
         $(this).after($(this).next('dt').length > 0 && $('<dd/>'))
-    });
-
-    // active toggle for submenus
-    $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
-        $('li.submenu.open a').not(this).parent().removeClass('open');
-        $(this).parent().toggleClass('open');
-        return false;
     });
 
     // secondary nav toggle
