@@ -1,0 +1,35 @@
+services:
+  app:
+    image: ${APP_IMAGE}
+    build:
+        context: build
+    environment:
+      DB_HOST: ${DB_HOST}
+      T3_USER: ${APP_T3_USER}
+      T3_PASSWORD: ${APP_T3_PASSWORD}
+      T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN: ${APP_T3_CONFIG_SYS_TRUSTEDHOSTSPATTERN}
+    ports:
+      - ${APP_PORT}:80
+    volumes:
+      - t3_fileadmin:/var/www/html/dfg-viewer/public/fileadmin
+    networks:
+      - backend
+
+  db:
+    image: ${DB_IMAGE}
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+    ports:
+      - ${DB_PORT}:3306
+    networks:
+      - backend
+volumes:
+    t3_fileadmin:
+networks:
+  backend:
