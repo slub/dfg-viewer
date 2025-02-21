@@ -10,7 +10,7 @@ dfgviewer* extension.
 Installation
 ============
 
-The current release 6.1 may be used with TYPO3 11.5 or TYPO3 12.4 LTS.
+The current release 7.0 may be used with TYPO3 11.5 or TYPO3 12.4 LTS.
 
 The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_ and `SLUB DigitalCollections (slub_digitalcollections)
 <https://github.com/slub/slub_digitalcollections>`. Before you can start to
@@ -94,9 +94,9 @@ to install DFG-Viewer extension.
 Install DFG-Viewer and Kitodo.Presentation via Composer
 -------------------------------------------------------
 
-    composer require slub/dfgviewer:^6.1
+    composer require slub/dfgviewer:^7.0
 
-This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 5.0 from
+This will install the DFG-Viewer 7.0 extension and Kitodo.Presentation 5.1 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
 Optionally configure the extension via TYPO3 Console::
