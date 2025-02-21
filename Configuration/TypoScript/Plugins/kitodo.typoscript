@@ -162,14 +162,12 @@ lib.kitodo.navigation.viewfunction {
 plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
 plugin.tx_dlf_toolbox {
     settings {
-#        fileGrpsImageDownload = MIN,DEFAULT,MAX
     }
 }
 
 plugin.tx_dlf_modeldownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_modeldownloadtool {
     settings {
-        fileGrpsModelDownload = DEFAULT
         tools = modeldownloadtool
     }
 }
@@ -177,7 +175,6 @@ plugin.tx_dlf_modeldownloadtool {
 plugin.tx_dlf_viewerselectiontool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_viewerselectiontool {
     settings {
-        fileGrpsModelDownload = DEFAULT
         tools = viewerselectiontool
     }
 }
