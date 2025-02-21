@@ -26,6 +26,8 @@ namespace Slub\Dfgviewer\Controller;
  */
 
 use Kitodo\Dlf\Common\MetsDocument;
+use Kitodo\Dlf\Controller\AbstractController;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -39,14 +41,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @subpackage tx_dfgviewer
  * @access public
  */
-class SruController extends \Kitodo\Dlf\Controller\AbstractController
+class SruController extends AbstractController
 {
     /**
      * The main method of the controller
-     *
-     * @return void
+     * @return ResponseInterface
      */
-    public function mainAction()
+    public function mainAction(): ResponseInterface
     {
         // Load current document.
         $this->loadDocument();
@@ -55,7 +56,7 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
             || !$this->document->getCurrentDocument() instanceof MetsDocument
         ) {
             // Quit without doing anything if required variables are not set.
-            return;
+            return $this->htmlResponse();
         }
 
         // Get digital provenance information.
@@ -72,11 +73,12 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
 
         if (empty($sruLink)) {
             // Quit without doing anything if link is not set.
-            return;
+            return $this->htmlResponse();
         }
 
+        $pageArguments = $this->request->getAttribute('routing');
         $actionUrl = $this->uriBuilder->reset()
-            ->setTargetPageUid($GLOBALS['TSFE']->id)
+            ->setTargetPageUid($pageArguments->getPageId())
             ->setCreateAbsoluteUri(true)
             ->build();
 
@@ -85,6 +87,8 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
         $this->view->assign('sruLink', $sruLink);
         $this->view->assign('currentDocument', $this->document->getLocation());
         $this->view->assign('actionUrl', $actionUrl);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -94,7 +98,7 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
      *
      * @return void
      */
-    protected function addSruResultsJS()
+    protected function addSruResultsJS(): void
     {
         if (!empty($this->requestData['highlight']) && !empty($this->requestData['origimage'])) {
             $highlight = unserialize(urldecode($this->requestData['highlight']));

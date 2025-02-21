@@ -10,28 +10,30 @@ dfgviewer* extension.
 Installation
 ============
 
-The current release 6.1 may be used with TYPO3 10.4 or TYPO3 11.5 LTS.
+The current release 7.0 may be used with TYPO3 11.5 or TYPO3 12.4 LTS.
 
-The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_ and `SLUB DigitalCollections (slub_digitalcollections) <https://github.com/slub/slub_digitalcollections>`. Before you can start to
+The extension is based on `Kitodo.Presentation (dlf) <https://github.com/kitodo/kitodo-presentation>`_ and `SLUB DigitalCollections (slub_digitalcollections)
+<https://github.com/slub/slub_digitalcollections>`. Before you can start to
 use the *DFG Viewer (dfgviewer)* in your TYPO3 installation, you have to install
 both extensions. The installation is only supported via Composer.
 Kitodo.Presentation will be installed and configured automatically.
 
 System Requirements
 -------------------
+Depending on the TYPO3 version, there are different system requirements which are linked here accordingly.
 
-You need a webserver stack with Apache2 or Nginx, PHP >= 7.4 and MySQL / MariaDB.
+* TYPO3 12 https://get.typo3.org/version/12
+* TYPO3 11 https://get.typo3.org/version/11
 
-We recommend at least:
-
+For the system we recommend at least:
 * CPU: 1
 * Memory: 2 GB
 * Disk: 20 GB
 
-Install a fresh TYPO3 11.5 LTS
+Install a fresh TYPO3 12.4 LTS
 -----------------------------
 
-To install a fresh TYPO3 11.5 system, try the following installation procedure with composer::
+To install a fresh TYPO3 12.4 system, try the following installation procedure with composer::
 
     # Assuming the following settings:
     #   * the installation directory is /var/www/dfgviewer
@@ -42,10 +44,12 @@ To install a fresh TYPO3 11.5 system, try the following installation procedure w
     # remove /var/www/dfgviewer if it already exists or make sure it's really empty by ls -la dfgviewer/
     rm -r dfgviewer/
     # load full TYPO3 via composer
-    composer create-project typo3/cms-base-distribution:^11 dfgviewer
+
+    composer create-project typo3/cms-base-distribution:^12 dfgviewer
+
     # Install the TYPO3 system with the TYPO3-console
     cd dfgviewer/
-    ./vendor/bin/typo3cms install:setup
+    ./vendor/bin/typo3 setup
 
 Instead of using the TYPO3-console, you can you can switch to the web-based installation of TYPO3 in your
 browser. Just follow the 4 steps. You need your MySQL/MariaDB credentials of course.::
@@ -72,7 +76,7 @@ Recommended Steps after Installation
 2. [optional] Change the backend language in your user settings to German.
 3. Go to the Install Tool --> All Configurations and change the default settings of pageNotFoundOnCHashError to '0'.
 
-Your *typo3conf/LocalConfiguration.php* must contain this::
+Your *config/system/settings.php* () must contain this::
 
   'FE' => [
           'pageNotFoundOnCHashError' => false,
@@ -80,30 +84,27 @@ Your *typo3conf/LocalConfiguration.php* must contain this::
 
 You can set this easily with the TYPO3-console::
 
-    ./vendor/bin/typo3cms configuration:set 'FE/pageNotFoundOnCHashError' 0
+    ./vendor/bin/typo3 configuration:set 'FE/pageNotFoundOnCHashError' 0
 
-Now you have a working TYPO3 11.5 LTS installation and you can continue with composer
+Now you have a working TYPO3 12.4 LTS installation and you can continue with composer
+
 to install DFG-Viewer extension.
 
 
 Install DFG-Viewer and Kitodo.Presentation via Composer
 -------------------------------------------------------
 
-Composer commands::
+    composer require slub/dfgviewer:^7.0
 
-    # make sure you haven't set the platform php version to 7.2
-    composer config platform.php 7.4
-    # install DFG-Viewer extension
-    composer require slub/dfgviewer:^6.1
-
-This will install the DFG-Viewer 6.1 extension and Kitodo.Presentation 5.0 from
+This will install the DFG-Viewer 7.0 extension and Kitodo.Presentation 5.1 from
 `Packagist <https://github.com/slub/dfg-viewer>`_.
 
-Install the Extension via extension manager or CLI::
+Optionally configure the extension via TYPO3 Console::
 
-    ./vendor/bin/typo3 extension:activate dlf
-    ./vendor/bin/typo3 extension:activate dfgviewer
-    ./vendor/bin/typo3 extension:activate slub_digitalcollections
+    # Install TYPO3 Console
+    composer req helhum/typo3-console:^8.2
+
+    ./vendor/bin/typo3 install:extensionsetupifpossible
 
 During the installation, three pages will be created: a root page, the "Kitodo
 Configuration" folder and the viewer itself.
@@ -121,7 +122,7 @@ Success
 Now your installation should work. You can test this with the following url
 (replace *host* and *id* with the parameters of your installation):
 
-http://example.com/index.php?id=2&tx_dlf%5Bid%5D=https%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
+http://example.com/index.php?tx_dlf%5Bid%5D=https%3A%2F%2Fdigital.slub-dresden.de%2Foai%2F%3Fverb%3DGetRecord%26metadataPrefix%3Dmets%26identifier%3Doai%3Ade%3Aslub-dresden%3Adb%3Aid-263566811
 
 To pass a document to the viewer, use the tx_dlf[id] GET parameter. Don't forget to urlencode the value.::
 
@@ -134,7 +135,7 @@ Known Problems
 ~~~~~~~~~~~~~~~~~~~~
 
 If you get a "404 - Page Not Found" error on calling the viewer you are missing
-the following configuration in *typo3conf/LocalConfiguration.php*::
+the following configuration in *config/system/settings.php*::
 
     'FE' => [
         'pageNotFoundOnCHashError' => false,
@@ -160,7 +161,7 @@ any parameter and without a cHash, the (empty) cached page is delivered.
 To avoid this, you must configure :code:`tx_dlf[id]` to require a cHash. Of
 course this is impossible to achieve so the system will process the page uncached.
 
-Add this setting to your *typo3conf/LocalConfiguration.php*::
+Add this setting to your *config/system/settings.php*::
 
     'FE' => [
         'cacheHash' => [
