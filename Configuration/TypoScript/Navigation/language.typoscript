@@ -2,6 +2,7 @@
 # Header Language Navigation
 # ----------------------------------------
 
+
 lib.menu {
   language = COA
   language {
@@ -11,7 +12,7 @@ lib.menu {
       # show only Default and English
       special.value = 0,1
 
-      addQueryString = 1
+      addQueryString = untrusted
       addQueryString.method = GET
       addQueryString.exclude = cHash
 
@@ -21,7 +22,8 @@ lib.menu {
         noBlur = 1
         NO = 1
         NO {
-          linkWrap=<li>|</li>
+          before = <li>
+          after = </li>
           stdWrap.override = DE || EN
           ATagTitle.override = Sprache: Deutsch || Language: English
         }
