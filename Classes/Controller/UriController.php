@@ -71,7 +71,7 @@ class UriController extends AbstractController
      * @param AbstractDocument|null $doc
      * @return void
      */
-    public function assignUriBook(?AbstractDocument $doc): void
+    private function assignUriBook(?AbstractDocument $doc): void
     {
         // Get persistent identifier of book.
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);
@@ -106,7 +106,7 @@ class UriController extends AbstractController
      * @param AbstractDocument|null $doc
      * @return void
      */
-    public function assignUriPage(?AbstractDocument $doc): void
+    private function assignUriPage(?AbstractDocument $doc): void
     {
         if (!isset($this->requestData['page'])) {
             return;
