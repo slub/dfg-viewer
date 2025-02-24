@@ -15,7 +15,7 @@ jobs:
             - name: Checkout DFG-Viewer repository
               uses: actions/checkout@v4
               with:
-                  repository: slub/dfg-viewer
+                  repository: ${{ github.repository }}
                   path: ./Docker/build/extensions/dfg-viewer
 
             - name: Checkout Kitodo.Presentation repository
@@ -27,7 +27,7 @@ jobs:
             - name: Checkout SLUB Digital Collections repository
               uses: actions/checkout@v4
               with:
-                  repository: slub/slub_digitalcollections
+                  repository: ${{ github.repository_owner }}/slub_digitalcollections
                   path: ./Docker/build/extensions/slub_digitalcollections
 
             - name: Prepare environment
