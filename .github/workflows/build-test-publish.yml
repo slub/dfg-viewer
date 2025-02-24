@@ -12,12 +12,10 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            # Deprecated should be set to the main repository if the update-typo12 branch is merged.
             - name: Checkout DFG-Viewer repository
               uses: actions/checkout@v4
               with:
-                  repository: markusweigelt/dfg-viewer
-                  ref: update-typo12
+                  repository: slub/dfg-viewer
                   path: ./Docker/build/extensions/dfg-viewer
 
             - name: Checkout Kitodo.Presentation repository
@@ -26,12 +24,10 @@ jobs:
                   repository: kitodo/kitodo-presentation
                   path: ./Docker/build/extensions/kitodo-presentation
 
-            # Deprecated should be set to the main repository if the update-typo12 branch is merged.
             - name: Checkout SLUB Digital Collections repository
               uses: actions/checkout@v4
               with:
-                  repository: markusweigelt/slub_digitalcollections
-                  ref: update-typo12
+                  repository: slub/slub_digitalcollections
                   path: ./Docker/build/extensions/slub_digitalcollections
 
             - name: Prepare environment

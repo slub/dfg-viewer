@@ -129,7 +129,7 @@ class SruMiddleware implements MiddlewareInterface
                 ];
             }
 
-            $page = (string) $pageAttributes['id'];
+            $page = (int) $pageAttributes['id'];
 
             // get METS file of search hit
             $parentUrl = (string) $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->url;

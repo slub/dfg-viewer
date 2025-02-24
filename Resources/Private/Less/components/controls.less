@@ -356,6 +356,7 @@
 }
 
 /* ==============[ view functions for zoom, rotate and other view related functions ]===== */
+.viewer-selection,
 .view-functions {
     ul {
         position: relative;
@@ -373,6 +374,7 @@
                 &.rotate {
                     display: none;
                 }
+                &.viewers,
                 &.pages {
                     position: relative;
                     top: auto;
@@ -537,6 +539,14 @@
                 }
             }
         }
+    }
+}
+
+/* ==============[ the viewer selection tools ]========================================= */
+.viewer-selection {
+    > ul {
+        top: 0;
+        right: -254px;
     }
 }
 
