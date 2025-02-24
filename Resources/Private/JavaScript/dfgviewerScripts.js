@@ -150,8 +150,8 @@ $(document).ready(function() {
     $('.view-functions .pages form, .view-functions .zoom a.fullscreen, .fulltext-search-toggle').clone().appendTo('.provider .mobile-controls');
 
     // Shorten mobile meta title
-    shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
-    shortenMobileMetaTitle = shortenMobileMetaElement.text();
+    let shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
+    let shortenMobileMetaTitle = shortenMobileMetaElement.text();
     if(shortenMobileMetaTitle.length > 140) {
         shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0,140) + '...';
         shortenMobileMetaElement.text(shortenMobileMetaTitle);
@@ -199,7 +199,7 @@ $(document).ready(function() {
                 localStorage.txDlfFromPage = $(this).attr('class').split(' ')[0];
             });
         $('body').on('touchstart', function (event) {
-            target = $(event.target);
+            let target = $(event.target);
             if (!target.closest('.page-control')[0]) {
                 $('.fwds, .backs').removeClass('over enable-touchevent').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').removeClass('over');
                 localStorage.clear();
