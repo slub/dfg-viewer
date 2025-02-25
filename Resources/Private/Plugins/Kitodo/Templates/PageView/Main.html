@@ -30,28 +30,28 @@
         <div class="page-control-multiview">
             <div class="backs">
                 <span class="prev">
-                    <f:link.action addQueryString="1" additionalParams="{navigateAllPagePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllPagePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
                         <f:translate key="prevPage" />
                     </f:link.action>
                 </span>
             </div>
             <div class="measureBacks">
                 <span class="prev">
-                    <f:link.action addQueryString="1" additionalParams="{navigateAllMeasurePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllMeasurePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
                         <f:translate key="prevMeasure" />
                     </f:link.action>
                 </span>
             </div>
             <div class="fwds">
                 <span class="next">
-                    <f:link.action addQueryString="1" additionalParams="{navigateAllPageNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllPageNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
                         <f:translate key="nextPage" />
                     </f:link.action>
                 </span>
             </div>
             <div class="measureFwds">
                 <span class="next">
-                    <f:link.action addQueryString="1" additionalParams="{navigateAllMeasureNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllMeasureNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
                         <f:translate key="nextMeasure" />
                     </f:link.action>
                 </span>
@@ -71,7 +71,7 @@
                             <div class="tx-dlf-navigation-prev">
                                 <f:if condition="{docPage.{iterator.index}} > 1">
                                     <f:then>
-                                        <f:link.action title="{f:translate(key: 'prevPage')}" class="prev" addQueryString="1" additionalParams="{navigationArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                        <f:link.action title="{f:translate(key: 'prevPage')}" class="prev" addQueryString="untrusted" additionalParams="{navigationArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
                                             <f:translate key="prevPage" />
                                         </f:link.action>
                                     </f:then>
@@ -82,7 +82,7 @@
                                     </f:else>
                                 </f:if>
 
-                                <f:link.action class="prevMeasure" title="{f:translate(key: 'prevMeasure')}" addQueryString="1" additionalParams="{navigationMeasureArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                <f:link.action class="prevMeasure" title="{f:translate(key: 'prevMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
                                     <f:translate key="prevMeasure" />
                                 </f:link.action>
                             </div>
@@ -90,7 +90,7 @@
                             <div class="tx-dlf-navigation-next">
                                 <f:if condition="{docPage.{iterator.index}} < {docNumPage.{iterator.index}}">
                                     <f:then>
-                                        <f:link.action title="{f:translate(key: 'nextPage')}" class="next" addQueryString="1" additionalParams="{navigationArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                        <f:link.action title="{f:translate(key: 'nextPage')}" class="next" addQueryString="untrusted" additionalParams="{navigationArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
                                             <f:translate key="nextPage" />
                                         </f:link.action>
                                     </f:then>
@@ -101,7 +101,7 @@
                                     </f:else>
                                 </f:if>
 
-                                <f:link.action class="nextMeasure"title="{f:translate(key: 'nextMeasure')}" addQueryString="1" additionalParams="{navigationMeasureArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                <f:link.action class="nextMeasure"title="{f:translate(key: 'nextMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
                                     <f:translate key="nextMeasure" />
                                 </f:link.action>
                             </div>
@@ -112,7 +112,7 @@
 
                         <f:if condition="{removeDocumentButton.{iterator.index}} || {removeDocumentButton.{iterator.index}} === '0'">
                             <div class="removeDocument">
-                                <f:link.action addQueryString="1" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{removeDocumentButton.{iterator.index}}]'}">
+                                <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{removeDocumentButton.{iterator.index}}]'}">
                                     <f:translate key="multiview.remove_document" extensionName="dfgviewer" />
                                 </f:link.action>
                             </div>
