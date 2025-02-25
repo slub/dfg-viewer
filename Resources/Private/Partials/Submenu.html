@@ -222,7 +222,7 @@
             <f:if condition="{gp-multiview}">
                 <li class="submenu add-multiview-document">
                     <a href="#" title="{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}">{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}</a>
-                    <f:form method="post" pluginName="pageview" action="addDocument" addQueryString="1" name="formAddDocument" object="{formAddDocument}" extensionName="dlf" controller="PageView">
+                    <f:form method="post" pluginName="pageview" action="addDocument" addQueryString="untrusted" name="formAddDocument" object="{formAddDocument}" extensionName="dlf" controller="PageView">
                         <p class="add-document-description">{f:translate(key:'multiview.add_document.description', extensionName:'dfgviewer')}</p>
                         <label for="location-field">{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}</label>
                         <f:form.textfield property="location" id="location-field" placeholder="{f:translate(key:'multiview.add_document.placeholder', extensionName:'dfgviewer')}" />
