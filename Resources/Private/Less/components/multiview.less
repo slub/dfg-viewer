@@ -1,0 +1,314 @@
+/*
+ *
+ * Multiview
+ * ================================================
+ * Styles for the dragable tiles of many
+ * different documents
+ * (mostly used for score comparison)
+ *
+ */
+
+
+/* ==============[ buttons and control elements ]================= */
+.document-view.multiview {
+
+    > .page-control,
+    .view-functions ul li.pages,
+    .document-functions ul li.grid {
+        display: none;
+    }
+
+    .document-functions {
+        .provider {
+            background-color: lighten(@light-blue, 20%);
+        }
+
+        > ul > li {
+            &.add-multiview-document {
+                > a {
+                    background-position: -720px -80px;
+                }
+
+                &.submenu {
+                    > form {
+                        position: fixed;
+                        bottom: 80px;
+                        left: 40px;
+                        right: 40px;
+                        padding: 20px;
+                        background: fade(@base-blue, 90%);
+                        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+                        font-size: 14px;
+                        line-height: 1.4;
+                        text-align: left;
+                        transform-origin: center bottom;
+                        .transition();
+                        .transform(scaleY(0) translateY(100px));
+                        opacity: 0;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+                        p.add-document-description {
+                            color: white;
+                            margin-bottom: 20px;
+                        }
+
+                        label {
+                            display: none;
+                        }
+
+                        input[type="text"] {
+                            position: relative;
+                            width: 100%;
+                            padding: 6px 10px;
+                            color: @base-blue;
+                            border: 0 none;
+                            outline: none;
+                            height: 30px;
+                            line-height: 30px;
+                            box-shadow: inset 1px 1px 2px fade(@base-blue, 20%);
+
+                            &::placeholder {
+                                color: lighten(@light-blue, 10%);
+                            }
+                        }
+
+                        button[type="submit"] {
+                            position: absolute;
+                            bottom: 20px;
+                            right: 20px;
+                            width: 30px;
+                            height: 30px;
+                            padding: 0;
+                            .text-hide();
+
+                            &::after {
+                                position: relative;
+                                font-size: 22px;
+                                line-height: 30px;
+                                color: @base-blue;
+                                content: "+";
+                            }
+                        }
+                    }
+                }
+
+                &.submenu.open {
+                    > form {
+                        .transform(scaleY(1) translateY(0));
+                        opacity: 1;
+                    }
+                }
+            }
+
+            > a.reset-gridstack-layout {
+                background-position: -720px -40px;
+            }
+        }
+    }
+
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        .document-functions {
+            > ul > li {
+                &.add-multiview-document {
+                    &.submenu {
+                        > form {
+                            position: absolute;
+                            inset: 50px auto auto -20px;
+                            width: 450px;
+                            transform-origin: center top;
+                            transform: scaleY(0) translateY(-100px);
+
+                            p.add-document-description {
+                                margin-bottom: 10px;
+                            }
+
+                            input[type="text"] {
+                                padding: 6px 10px;
+                                height: 24px;
+                                line-height: 24px;
+                            }
+
+                            button[type="submit"] {
+                                width: 24px;
+                                height: 24px;
+                                line-height: 24px;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    &.submenu.open {
+                        > form {
+                            .transform(scaleY(1) translateY(0));
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+/* ==============[ the stack layout itself ]================= */
+.grid-stack-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+    padding: 60px 5px 75px 5px;
+
+    .grid-stack {
+        .grid-stack-item {
+            border: 0 none;
+
+            &::before {
+                position: absolute;
+                inset: 5px;
+                background-color: lighten(@light-blue, 20%);
+                border: 1px solid lighten(@light-blue, 10%);
+                content: " ";
+                pointer-events: none;
+
+            }
+
+            .score-tool {
+                display: none;
+            }
+
+            .tx-dlf-navigation-prev,
+            .tx-dlf-navigation-next {
+                display: none;
+            }
+
+
+            .gridstack-dragging-handle,
+            .ui-resizable-handle,
+            .removeDocument a {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 24px;
+                height: 24px;
+                background-color: white;
+                background-image: none;
+
+                &::before {
+                    position: absolute;
+                    inset: 2px;
+                    content: " ";
+                }
+            }
+
+            .gridstack-dragging-handle {
+                left: 0;
+                cursor: grab;
+
+                &::before {
+                    left: 5px;
+                    background: linear-gradient(0deg, @base-blue 7.14%, transparent 7.14%, transparent 50%, @base-blue 50%, @base-blue 57.14%, transparent 57.14%, transparent 100%);
+                    background-size: 10px 11px;
+                    right: 5px;
+                    opacity: .5;
+                }
+            }
+
+            .ui-resizable-handle {
+                transform: rotate(90deg);
+
+                &::before {
+                    background: url(../Images/controlIcons.svg) no-repeat 0 0;
+                    background-size: auto 60px;
+                    background-position: -160px 0;
+                }
+            }
+
+            .removeDocument a {
+                top: 0;
+                .text-hide();
+                background-color: white;
+
+                &::before {
+                    content: "+";
+                    color: @base-blue;
+                    font-size: 20px;
+                    line-height: 1;
+                    transform: rotate(-45deg);
+                    opacity: .5;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        padding: 5px;
+    }
+
+    @media screen and (min-width: @desktopViewportWidth) {
+        padding: 25px;
+
+        .grid-stack {
+            .grid-stack-item {
+
+                .tx-dlf-navigation-prev,
+                .tx-dlf-navigation-next {
+                    position: absolute;
+                    inset: auto auto 10px 50%;
+                    display: flex;
+
+                    > a, > span {
+                        position: relative;
+                        width: 40px;
+                        height: 40px;
+                        display: block;
+                        .text-hide();
+                        background: white url(../Images/controlIcons.svg) no-repeat 0 0;
+                        background-size: auto 120px;
+                        border-radius: 20px;
+                        margin: 0 5px;
+
+                        &.prevMeasure {
+                            background-position: -680px -80px;
+                            transform: scale(.8);
+                        }
+
+                        &.nextMeasure {
+                            background-position: -680px -40px;
+                            transform: scale(.8);
+                        }
+
+                        &.prev {
+                            background-position: -240px -80px;
+                        }
+
+                        &.next {
+                            background-position: -280px -80px;
+                        }
+                    }
+
+                    > span {
+                        opacity: .3;
+                    }
+                }
+
+                .tx-dlf-navigation-prev {
+                    flex-direction: row-reverse;
+                    transform: translateX(-100%);
+                }
+            }
+        }
+    }
+
+    .no-touchevents & {
+        .grid-stack-item {
+            .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
+                opacity: 0;
+                transition: all .3s ease-in-out;
+            }
+
+            &:hover {
+                .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

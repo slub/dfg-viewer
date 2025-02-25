@@ -7,6 +7,7 @@ page {
   includeCSS {
     style = EXT:dfgviewer/Resources/Public/Css/webStyles.css
     highlight = EXT:dfgviewer/Resources/Public/JavaScript/Highlight/styles/magula.css
+    annotations = EXT:dfgviewer/Resources/Public/Css/annotationStyles.css
   }
   includeJSFooterlibs {
     jQuery = EXT:dfgviewer/Resources/Public/JavaScript/jQuery/jquery-3.6.0.min.js

@@ -5,6 +5,9 @@
 			<generator>LFEditor</generator>
 		</header>
 		<body>
+        <trans-unit id="digitisation">
+            <source>Digitisation</source>
+        </trans-unit>
 		<trans-unit id="double.RectoVerso">
 			<source>Adjust recto/verso</source>
 		</trans-unit>
@@ -65,6 +68,27 @@
 		<trans-unit id="metadata">
 			<source>Metadata</source>
 		</trans-unit>
+        <trans-unit id="multiview.add_document.description">
+            <source>To add another document to this view, enter the entire URL of the METS/MODS file here.</source>
+        </trans-unit>
+        <trans-unit id="multiview.add_document.label">
+            <source>Add Document</source>
+        </trans-unit>
+        <trans-unit id="multiview.add_document.placeholder">
+            <source>Document URL</source>
+        </trans-unit>
+        <trans-unit id="multiview.add_document.submit">
+            <source>Add now</source>
+        </trans-unit>
+        <trans-unit id="multiview.remove_document">
+            <source>Remove Document from view</source>
+        </trans-unit>
+        <trans-unit id="multiview.reset_layout">
+            <source>Reset Layout</source>
+        </trans-unit>
+        <trans-unit id="multiview.dragging_label">
+            <source>Drag view to another position</source>
+        </trans-unit>
 		<trans-unit id="toc">
 			<source>Table of Content</source>
 		</trans-unit>

@@ -24,9 +24,117 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
       data-namespace-typo3-fluid="true">
+<f:if condition="{docArray -> f:count()} > 1">
+    <f:then>
 
-<div id="tx-dfgviewer-map" class="tx-dlf-map">
-</div>
+        <div class="page-control-multiview">
+            <div class="backs">
+                <span class="prev">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllPagePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                        <f:translate key="prevPage" />
+                    </f:link.action>
+                </span>
+            </div>
+            <div class="measureBacks">
+                <span class="prev">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllMeasurePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                        <f:translate key="prevMeasure" />
+                    </f:link.action>
+                </span>
+            </div>
+            <div class="fwds">
+                <span class="next">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllPageNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
+                        <f:translate key="nextPage" />
+                    </f:link.action>
+                </span>
+            </div>
+            <div class="measureFwds">
+                <span class="next">
+                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllMeasureNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
+                        <f:translate key="nextMeasure" />
+                    </f:link.action>
+                </span>
+            </div>
+        </div>
+
+        <div class="grid-stack-wrapper">
+            <div class="grid-stack">
+                <f:for each="{docArray}" as="document" iteration="iterator">
+                    <div class="grid-stack-item" gs-w="6" gs-h="6" gs-id="{iterator.index}">
+                        <div class="grid-stack-item-content">
+
+                            <div id="tx-dfgviewer-map-{iterator.index}" data-viewercount="{iterator.index}" class="tx-dlf-map"></div>
+
+                            <f:variable name="curDocPage" value="{docPage.{iterator.index}}" />
+
+                            <div class="tx-dlf-navigation-prev">
+                                <f:if condition="{docPage.{iterator.index}} > 1">
+                                    <f:then>
+                                        <f:link.action title="{f:translate(key: 'prevPage')}" class="prev" addQueryString="untrusted" additionalParams="{navigationArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                            <f:translate key="prevPage" />
+                                        </f:link.action>
+                                    </f:then>
+                                    <f:else>
+                                        <span class="prev" title="{f:translate(key: 'prevPage')}">
+                                            <f:translate key="prevPage" />
+                                        </span>
+                                    </f:else>
+                                </f:if>
+
+                                <f:link.action class="prevMeasure" title="{f:translate(key: 'prevMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                    <f:translate key="prevMeasure" />
+                                </f:link.action>
+                            </div>
+
+                            <div class="tx-dlf-navigation-next">
+                                <f:if condition="{docPage.{iterator.index}} < {docNumPage.{iterator.index}}">
+                                    <f:then>
+                                        <f:link.action title="{f:translate(key: 'nextPage')}" class="next" addQueryString="untrusted" additionalParams="{navigationArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
+                                            <f:translate key="nextPage" />
+                                        </f:link.action>
+                                    </f:then>
+                                    <f:else>
+                                        <span class="next" title="{f:translate(key: 'nextPage')}">
+                                            <f:translate key="nextPage" />
+                                        </span>
+                                    </f:else>
+                                </f:if>
+
+                                <f:link.action class="nextMeasure"title="{f:translate(key: 'nextMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
+                                    <f:translate key="nextMeasure" />
+                                </f:link.action>
+                            </div>
+
+                        </div>
+
+                        <div class="gridstack-dragging-handle" title="{f:translate(key: 'multiview.dragging_label', extensionName: 'dfgviewer')}"></div>
+
+                        <f:if condition="{removeDocumentButton.{iterator.index}} || {removeDocumentButton.{iterator.index}} === '0'">
+                            <div class="removeDocument">
+                                <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{removeDocumentButton.{iterator.index}}]'}">
+                                    <f:translate key="multiview.remove_document" extensionName="dfgviewer" />
+                                </f:link.action>
+                            </div>
+                        </f:if>
+
+                    </div>
+                </f:for>
+            </div>
+        </div>
+    </f:then>
+    <f:else>
+        <div id="tx-dfgviewer-map-0" class="tx-dlf-map"></div>
+        <div id="svg_panel">
+            <div id="player"></div>
+            <div id="svg_output" style="overflow:hidden;"></div>
+        </div>
+
+        <div class="score-container">
+            <div id="tx-dlf-score-0"></div>
+        </div>
+    </f:else>
+</f:if>
 
 <kitodo:jsFooter inlineCode="{viewerConfiguration}" />
 

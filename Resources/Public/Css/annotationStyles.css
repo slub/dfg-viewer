@@ -1,0 +1,86 @@
+annotation-bar {
+    position: absolute;
+    left: 75%;
+    top: 0;
+    bottom: 0;
+    width: 25%;
+    background-color: lightgray;
+    padding: 30px;
+    overflow: scroll;
+    text-align: left;
+}
+
+.annotation-bar .annotation-list {
+    border-top: solid 2px;
+}
+
+.annotation-bar .annotation-list-item {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: solid 2px;
+}
+
+.annotation-bar .annotation-title:hover {
+    background-color: gray;
+}
+
+
+.annotation-bar .annotation-body {
+    background-color: #fff;
+}
+
+.annotation-bar .annotation-creator {
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+.annotation-bar .annotation-date {
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+.annotation-list-item details.hover {
+    background-color: #aaa9a9;
+}
+
+.annotation-list-item details.active {
+    background-color: #8ebfff;
+}
+
+rect.hover[fill] {
+    stroke: white;
+    stroke-width: 40px;
+    stroke-opacity: .3;
+    fill: #6887a3;
+    fill-opacity: .3;
+}
+
+rect.active {
+    stroke: white;
+    stroke-width: 40px;
+    fill: #ff9a23;
+    fill-opacity: .3;
+}
+
+.drag {
+    cursor: move;
+    min-height: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.tx-dlf-navigation-next {
+    position: absolute;
+    top: 40px;
+}
+
+.tx-dlf-navigation-prev {
+    position: absolute;
+    top: 20px;
+}
+
+.sync-views {
+    display: none;
+}
