@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Install dependencies
-              run: Build/Test/runTests.sh -s composerInstall -t 11.5
+              run: Build/Test/runTests.sh -s composerInstall -t 11.5 -p 8.1
 
             - name: Run unit tests
               run: Build/Test/runTests.sh -s unit
