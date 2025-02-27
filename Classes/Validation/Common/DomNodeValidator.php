@@ -258,6 +258,6 @@ class DomNodeValidator
      */
     public function isElementType(): bool
     {
-        return $this->node->nodeType === XML_ELEMENT_NODE;
+        return $this->node->nodeType === XML_ELEMENT_NODE && $this->node instanceof \DOMElement;
     }
 }
