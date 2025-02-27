@@ -26,7 +26,6 @@ namespace Slub\Dfgviewer\Validation;
  */
 
 use DOMDocument;
-use DOMElement;
 use DOMNode;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;

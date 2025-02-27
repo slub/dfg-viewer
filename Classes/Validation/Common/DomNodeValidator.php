@@ -25,7 +25,7 @@ namespace Slub\Dfgviewer\Validation\Common;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use DOMElement;
+use DOMNode;
 use DOMXPath;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Error;
@@ -48,9 +48,9 @@ class DomNodeValidator
     private DOMXPath $xpath;
 
     /**
-     * @var DOMElement|null The node to validate
+     * @var DOMNode|null The node to validate
      */
-    private ?DOMElement $element = null;
+    private ?DOMNode $node;
 
     /**
      * @var Result The result containing errors of validation
@@ -61,9 +61,7 @@ class DomNodeValidator
     {
         $this->xpath = $xpath;
         $this->result = $result;
-        if($node && $node->nodeType === XML_ELEMENT_NODE) {
-            $this->element = $node;
-        }
+        $this->node = $node;
     }
 
     /**
@@ -73,18 +71,18 @@ class DomNodeValidator
      */
     public function validateHasContentWithEmail(): DomNodeValidator
     {
-        if (!isset($this->element) || !$this->element->nodeValue) {
+        if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
         }
 
-        $email = $this->element->nodeValue;
+        $email = $this->node->nodeValue;
 
         if (str_starts_with(strtolower($email), 'mailto:')) {
             $email = substr($email, 7);
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->result->addError(new Error('Email "' . $this->element->nodeValue . '" in the content of "' . $this->element->getNodePath() . '" is not valid.', 1736504169));
+            $this->result->addError(new Error('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504169));
         }
 
         return $this;
@@ -97,12 +95,12 @@ class DomNodeValidator
      */
     public function validateHasContentWithUrl(): DomNodeValidator
     {
-        if (!isset($this->element) || !$this->element->nodeValue) {
+        if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
         }
 
-        if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $this->element->nodeValue)) {
-            $this->result->addError(new Error('URL "' . $this->element->nodeValue . '" in the content of "' . $this->element->getNodePath() . '" is not valid.', 1736504177));
+        if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $this->node->nodeValue)) {
+            $this->result->addError(new Error('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504177));
         }
 
         return $this;
@@ -116,18 +114,20 @@ class DomNodeValidator
      */
     public function validateHasAttributeWithUrl(string $name): DomNodeValidator
     {
-        if (!isset($this->element)) {
+        if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        if (!$this->element->hasAttribute($name)) {
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->element->getAttribute($name);
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
 
         if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $value)) {
-            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->element->getNodePath() . '" is not valid.', 1736504189));
+            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
         }
 
         return $this;
@@ -142,17 +142,19 @@ class DomNodeValidator
      */
     public function validateHasAttributeWithValue(string $name, array $values): DomNodeValidator
     {
-        if (!isset($this->element)) {
+        if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        if (!$this->element->hasAttribute($name)) {
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->element->getAttribute($name);
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
         if (!in_array($value, $values)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->element->getNodePath() . '" is not permissible.', 1736504197));
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
         }
 
         return $this;
@@ -167,17 +169,19 @@ class DomNodeValidator
      */
     public function validateHasUniqueAttribute(string $name, string $contextExpression): DomNodeValidator
     {
-        if (!isset($this->element)) {
+        if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        if (!$this->element->hasAttribute($name)) {
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->element->getAttribute($name);
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->element->getNodePath() . '" already exists.', 1736504203));
+            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
         }
 
         return $this;
@@ -202,12 +206,13 @@ class DomNodeValidator
      */
     public function validateHasAttribute(string $name): DomNodeValidator
     {
-        if (!isset($this->element)) {
+        if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        if (!$this->element->hasAttribute($name)) {
-            $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->element->getNodePath() . '" is missing.', 1736504217));
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
+            $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1736504217));
         }
         return $this;
     }
@@ -221,16 +226,18 @@ class DomNodeValidator
      */
     public function validateHasReferenceToId(string $name, string $targetExpression): DomNodeValidator
     {
-        if (!isset($this->element)) {
+        if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        if (!$this->element->hasAttribute($name)) {
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
         $targetNodes = $this->xpath->query($targetExpression);
-        $identifier = $this->element->getAttribute($name);
+        // @phpstan-ignore-next-line
+        $identifier = $this->node->getAttribute($name);
 
         $foundElements = 0;
         foreach ($targetNodes as $targetNode) {
@@ -238,9 +245,19 @@ class DomNodeValidator
         }
 
         if ($foundElements !== 1) {
-            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->element->getNodePath() . '" must reference one element under XPath expression "' . $targetExpression, 1736504228));
+            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference one element under XPath expression "' . $targetExpression, 1736504228));
         }
 
         return $this;
+    }
+
+    /**
+     * Checks if node type is of type XML_ELEMENT_NODE.
+     *
+     * @return bool True if is element node
+     */
+    public function isElementType(): bool
+    {
+        return $this->node->nodeType === XML_ELEMENT_NODE;
     }
 }
