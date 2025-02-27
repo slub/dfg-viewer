@@ -32,7 +32,7 @@ use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Validation\Common\DomNodeListValidator;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 
-abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
+abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
 {
 
     /**
@@ -45,8 +45,24 @@ abstract class AbstactDomDocumentValidator extends AbstractDlfValidator
         parent::__construct(DOMDocument::class);
     }
 
+    /**
+     * Performs the actual validator-specific validation.
+     *
+     * This function must be implemented in the inherited validator.
+     *
+     * @return mixed
+     */
     abstract public function isValidDocument();
 
+    /**
+     * Check if $value is valid.
+     *
+     * This function overwrites the isValid function and initializes common necessary functionalities based on the current document.
+     * After that, the isValidDocument function is called, which must be implemented by each validator and performs the actual validator-specific validation.
+     * If it is not valid, errors are added to the result.
+     *
+     * @param mixed $value
+     */
     protected function isValid($value): void
     {
         $this->xpath = new DOMXPath($value);

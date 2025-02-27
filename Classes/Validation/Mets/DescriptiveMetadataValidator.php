@@ -26,7 +26,7 @@ namespace Slub\Dfgviewer\Validation\Mets;
  */
 
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
-use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
+use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
  * The validator validates against the rules outlined in chapter 2.5 of the METS application profile 2.3.1.
@@ -36,7 +36,7 @@ use Slub\Dfgviewer\Validation\AbstactDomDocumentValidator;
  *
  * @access public
  */
-class DescriptiveMetadataValidator extends AbstactDomDocumentValidator
+class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
 {
     public function isValidDocument(): void
     {
