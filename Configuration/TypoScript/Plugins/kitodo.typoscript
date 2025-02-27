@@ -28,6 +28,40 @@ plugin.tx_dlf {
     }
     settings {
         storagePid = {$plugin.tx_dlf.persistence.storagePid}
+        domDocumentValidationValidators {
+            10 {
+                title = XML-Schemes Validator
+                className = Kitodo\Dlf\Validation\XmlSchemesValidator
+                breakOnError = false
+                configuration {
+                    oai {
+                        namespace = http://www.openarchives.org/OAI/2.0/
+                        schemaLocation = https://www.openarchives.org/OAI/2.0/OAI-PMH.xsd
+                    }
+                    mets {
+                        namespace = http://www.loc.gov/METS/
+                        schemaLocation = http://www.loc.gov/standards/mets/mets.xsd
+                    }
+                    mods {
+                        namespace = http://www.loc.gov/mods/v3
+                        schemaLocation = http://www.loc.gov/standards/mods/mods.xsd
+                    }
+                }
+            }
+            20 {
+                title = Application Profile Validation
+                className = Slub\Dfgviewer\Validation\ApplicationProfileValidationStack
+                breakOnError = false
+            }
+            30 {
+                title = URL Existence Validator
+                className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
+                breakOnError = false
+                configuration {
+                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+                }
+            }
+        }
     }
 	view {
 		partialRootPaths {

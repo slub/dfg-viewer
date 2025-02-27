@@ -1,0 +1,21 @@
+name: Unit Testing
+
+on:
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
+
+jobs:
+    test:
+        name: TYPO3
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install dependencies
+              run: Build/Test/runTests.sh -s composerInstall -t 11.5 -p 8.1
+
+            - name: Run unit tests
+              run: Build/Test/runTests.sh -s unit -p 8.1
