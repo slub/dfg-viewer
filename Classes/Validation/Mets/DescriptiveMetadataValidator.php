@@ -53,7 +53,7 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createElementValidator($structureElement)
+        $this->createNodeValidator($structureElement)
             ->validateHasReferenceToId('DMDID', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
@@ -70,7 +70,7 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createElementValidator($mdWrap)
+        $this->createNodeValidator($mdWrap)
             ->validateHasAttributeWithValue('MDTYPE', ['MODS', 'TEIHDR']);
 
         if (!$mdWrap) {

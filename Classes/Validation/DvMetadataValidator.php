@@ -73,11 +73,11 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
 
         $sruNode = $this->createNodeListValidator(VH::XPATH_DVLINKS . '/dv:sru')
             ->validateHasNoneOrOne()->getFirstNode();
-        $this->createElementValidator($sruNode)->validateHasContentWithUrl();
+        $this->createNodeValidator($sruNode)->validateHasContentWithUrl();
 
         $iiifNode = $this->createNodeListValidator(VH::XPATH_DVLINKS . '/dv:iiif')
             ->validateHasNoneOrOne()->getFirstNode();
-        $this->createElementValidator($iiifNode)->validateHasContentWithUrl();
+        $this->createNodeValidator($iiifNode)->validateHasContentWithUrl();
     }
 
     /**
@@ -108,7 +108,7 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasNoneOrOne()
             ->getFirstNode();
         if ($licenseNode && !in_array($licenseNode->nodeValue, ['pdm', 'cc0', 'cc-by', 'cc-by-sa', 'cc-by-nd', 'cc-by-nc', 'cc-by-nc-sa', 'cc-by-nc-nd', 'reserved'])) {
-            $this->createElementValidator($licenseNode)->validateHasContentWithUrl();
+            $this->createNodeValidator($licenseNode)->validateHasContentWithUrl();
         }
     }
 
@@ -123,7 +123,7 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
     protected function validateReference(\DOMNode $reference): void
     {
         if ($this->xpath->query('dv:reference', $reference->parentNode)->length > 1) {
-            $this->createElementValidator($reference)
+            $this->createNodeValidator($reference)
                 ->validateHasAttribute('linktext');
         }
     }
@@ -145,7 +145,7 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
             return;
         }
 
-        $nodeValidator = $this->createElementValidator($node);
+        $nodeValidator = $this->createNodeValidator($node);
         if (str_starts_with(strtolower($node->nodeValue), 'mailto:')) {
             $nodeValidator->validateHasContentWithEmail();
         } else {

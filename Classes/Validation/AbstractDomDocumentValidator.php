@@ -31,7 +31,7 @@ use DOMNode;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Validation\Common\DomNodeListValidator;
-use Slub\Dfgviewer\Validation\Common\DomElementValidator;
+use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 
 abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
 {
@@ -75,8 +75,8 @@ abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
         return new DomNodeListValidator($this->xpath, $this->result, $expression, $contextNode);
     }
 
-    protected function createElementValidator(?DOMElement $node): DomElementValidator
+    protected function createNodeValidator(?DOMNode $node): DomNodeValidator
     {
-        return new DomElementValidator($this->xpath, $this->result, $node);
+        return new DomNodeValidator($this->xpath, $this->result, $node);
     }
 }

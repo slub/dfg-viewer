@@ -25,6 +25,7 @@ namespace Slub\Dfgviewer\Validation\Common;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use DOMElement;
 use DOMXPath;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Error;
@@ -38,7 +39,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * @access public
  */
-class DomElementValidator
+class DomNodeValidator
 {
 
     /**
@@ -49,18 +50,20 @@ class DomElementValidator
     /**
      * @var DOMElement|null The node to validate
      */
-    private ?DOMElement $element;
+    private ?DOMElement $element = null;
 
     /**
      * @var Result The result containing errors of validation
      */
     private Result $result;
 
-    public function __construct(DOMXPath $xpath, Result $result, ?DOMElement $element)
+    public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node)
     {
         $this->xpath = $xpath;
         $this->result = $result;
-        $this->element = $element;
+        if($node && $node->nodeType === XML_ELEMENT_NODE) {
+            $this->element = $node;
+        }
     }
 
     /**
@@ -68,7 +71,7 @@ class DomElementValidator
      *
      * @return $this
      */
-    public function validateHasContentWithEmail(): DomElementValidator
+    public function validateHasContentWithEmail(): DomNodeValidator
     {
         if (!isset($this->element) || !$this->element->nodeValue) {
             return $this;
@@ -92,7 +95,7 @@ class DomElementValidator
      *
      * @return $this
      */
-    public function validateHasContentWithUrl(): DomElementValidator
+    public function validateHasContentWithUrl(): DomNodeValidator
     {
         if (!isset($this->element) || !$this->element->nodeValue) {
             return $this;
@@ -111,7 +114,7 @@ class DomElementValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttributeWithUrl(string $name): DomElementValidator
+    public function validateHasAttributeWithUrl(string $name): DomNodeValidator
     {
         if (!isset($this->element)) {
             return $this;
@@ -137,7 +140,7 @@ class DomElementValidator
      * @param array $values The allowed values
      * @return $this
      */
-    public function validateHasAttributeWithValue(string $name, array $values): DomElementValidator
+    public function validateHasAttributeWithValue(string $name, array $values): DomNodeValidator
     {
         if (!isset($this->element)) {
             return $this;
@@ -162,7 +165,7 @@ class DomElementValidator
      * @param string $contextExpression The context expression to determine uniqueness.
      * @return $this
      */
-    public function validateHasUniqueAttribute(string $name, string $contextExpression): DomElementValidator
+    public function validateHasUniqueAttribute(string $name, string $contextExpression): DomNodeValidator
     {
         if (!isset($this->element)) {
             return $this;
@@ -185,7 +188,7 @@ class DomElementValidator
      *
      * @return $this
      */
-    public function validateHasUniqueId(): DomElementValidator
+    public function validateHasUniqueId(): DomNodeValidator
     {
         $this->validateHasUniqueAttribute("ID", "//*");
         return $this;
@@ -197,7 +200,7 @@ class DomElementValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttribute(string $name): DomElementValidator
+    public function validateHasAttribute(string $name): DomNodeValidator
     {
         if (!isset($this->element)) {
             return $this;
@@ -216,7 +219,7 @@ class DomElementValidator
      * @param string $targetExpression The context expression to the target reference
      * @return $this
      */
-    public function validateHasReferenceToId(string $name, string $targetExpression): DomElementValidator
+    public function validateHasReferenceToId(string $name, string $targetExpression): DomNodeValidator
     {
         if (!isset($this->element)) {
             return $this;
