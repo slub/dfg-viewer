@@ -27,8 +27,6 @@ namespace Slub\Dfgviewer\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Viewhelper to filter calendar data and inject a variable with the result.

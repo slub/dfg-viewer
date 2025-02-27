@@ -26,7 +26,7 @@
     xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-    <div class="document-view">
+    <div class="document-view {f:if(condition:'{gp-multiview}', then:'multiview')}">
         <div id="browser-hint" class="hidden">
             <div class="alert">
                 <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>

@@ -22,8 +22,8 @@
 </f:comment>
 
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
-    xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
+      xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true"
+      lang="en">
 
 <ul>
     <li class="submenu links">
@@ -107,6 +107,13 @@
                     <f:cObject typoscriptObjectPath="plugin.tx_dlf_modeldownloadtool"/>
                 </ul>
             </li>
+            <li class="viewer-selection" >
+                <ul>
+                    <li class="viewers">
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_viewerselectiontool"/>
+                    </li>
+                </ul>
+            </li>
         </f:then>
         <f:else>
             <li class="submenu downloads">
@@ -167,6 +174,13 @@
                     </f:if>
                 </li>
             </f:if>
+            <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+                <f:if condition="{gp-double} != 1 && {gp-pagegrid} != 1">
+                    <f:then>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
+                    </f:then>
+                </f:if>
+            </f:if>
             <li class="grid">
                 <f:if
                     condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
@@ -204,6 +218,22 @@
                         <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
                     </li>
                 </f:then>
+            </f:if>
+            <f:if condition="{gp-multiview}">
+                <li class="submenu add-multiview-document">
+                    <a href="#" title="{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}">{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}</a>
+                    <f:form method="post" pluginName="pageview" action="addDocument" addQueryString="untrusted" name="formAddDocument" object="{formAddDocument}" extensionName="dlf" controller="PageView">
+                        <p class="add-document-description">{f:translate(key:'multiview.add_document.description', extensionName:'dfgviewer')}</p>
+                        <label for="location-field">{f:translate(key:'multiview.add_document.label', extensionName:'dfgviewer')}</label>
+                        <f:form.textfield property="location" id="location-field" placeholder="{f:translate(key:'multiview.add_document.placeholder', extensionName:'dfgviewer')}" />
+                        <f:form.button>{f:translate(key:'multiview.add_document.submit', extensionName:'dfgviewer')}</f:form.button>
+                    </f:form>
+                </li>
+                <li>
+                    <a href="#" class="reset-gridstack-layout" title="{f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}">
+                        {f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}
+                    </a>
+                </li>
             </f:if>
         </f:else>
     </f:if>

@@ -181,7 +181,7 @@ $(document).ready(function() {
     if (Modernizr.touchevents) {
         $('.fwds, .backs')
             .on('touchstart', function () {
-                $(this).addClass('over');
+                $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
                 triggeredElement = $(this);
                 setTimeout(function () {
                     triggeredElement.addClass('enable-touchevent');
@@ -193,7 +193,7 @@ $(document).ready(function() {
         $('body').on('touchstart', function (event) {
             target = $(event.target);
             if (!target.closest('.page-control')[0]) {
-                $('.fwds, .backs').removeClass('over enable-touchevent');
+                $('.fwds, .backs').removeClass('over enable-touchevent').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').removeClass('over');
                 localStorage.clear();
             }
         });
@@ -204,19 +204,25 @@ $(document).ready(function() {
     } else {
         $('.fwds, .backs')
             .on('mouseenter', function () {
-                $(this).addClass('over');
+                $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
             })
             .on('mouseleave', function () {
-                $(this).removeClass('over');
+                $(this).removeClass('over').siblings('.measureBacks, .measureFwds').removeClass('over');
             })
             .on('click', function () {
                 localStorage.txDlfFromPage = $(this).attr('class').split(' ')[0];
+                showLoadingAnimation();
             });
         if (localStorage.txDlfFromPage) {
             $('.' + localStorage.txDlfFromPage).addClass('no-transition over');
             localStorage.clear();
         }
     }
+
+    $('.measureBacks, .measureFwds').on('click', function (evt)
+    {
+        showLoadingAnimation();
+    });
 
     // hide outdated browser hint, if cookie was found
     if (Cookies.get('tx-dlf-pageview-hidebrowseralert') === 'true') {
@@ -272,4 +278,8 @@ function hideBrowserAlert(){
     $('#browser-hint').addClass('hidden');
     Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
 
+}
+
+function showLoadingAnimation() {
+    $("#overlay").fadeIn(300);
 }

@@ -9,3 +9,6 @@ Documentation-GENERATED-temp/
 public/
 vendor/
 composer.lock
+.env
+Docker/build/extensions
+!Docker/build/extensions/.gitkeep

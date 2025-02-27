@@ -14,8 +14,8 @@
     font-style: normal;
     font-weight: 300;
     src: local('Open Sans Light'), local('OpenSans-Light'),
-         url('../../Public/Fonts/open-sans-v17-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../Public/Fonts/open-sans-v17-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('../Fonts/open-sans-v17-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../Fonts/open-sans-v17-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
   /* open-sans-300italic - latin */
   @font-face {
@@ -23,8 +23,8 @@
     font-style: italic;
     font-weight: 300;
     src: local('Open Sans Light Italic'), local('OpenSans-LightItalic'),
-         url('../../Public/Fonts/open-sans-v17-latin-300italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../Public/Fonts/open-sans-v17-latin-300italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('../Fonts/open-sans-v17-latin-300italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../Fonts/open-sans-v17-latin-300italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
   /* open-sans-regular - latin */
   @font-face {
@@ -32,8 +32,8 @@
     font-style: normal;
     font-weight: 400;
     src: local('Open Sans Regular'), local('OpenSans-Regular'),
-         url('../../Public/Fonts/open-sans-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../Public/Fonts/open-sans-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('../Fonts/open-sans-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../Fonts/open-sans-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
   /* open-sans-italic - latin */
   @font-face {
@@ -41,8 +41,8 @@
     font-style: italic;
     font-weight: 400;
     src: local('Open Sans Italic'), local('OpenSans-Italic'),
-         url('../../Public/Fonts/open-sans-v17-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../Public/Fonts/open-sans-v17-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('../Fonts/open-sans-v17-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../Fonts/open-sans-v17-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
   /* open-sans-700 - latin */
   @font-face {
@@ -50,8 +50,8 @@
     font-style: normal;
     font-weight: 700;
     src: local('Open Sans Bold'), local('OpenSans-Bold'),
-         url('../../Public/Fonts/open-sans-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../Public/Fonts/open-sans-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('../Fonts/open-sans-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../Fonts/open-sans-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
   /* open-sans-700italic - latin */
   @font-face {
@@ -59,8 +59,8 @@
     font-style: italic;
     font-weight: 700;
     src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'),
-         url('../../Public/Fonts/open-sans-v17-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../Public/Fonts/open-sans-v17-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+         url('../Fonts/open-sans-v17-latin-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../Fonts/open-sans-v17-latin-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
 
 /* ==============[ basic html element settings ]========================================== */
@@ -168,7 +168,7 @@ a {
             left: 0;
             right: 0;
             text-align: left;
-            z-index: auto;
+            z-index: 1;
             background: #fff;
             display: flex;
             align-items: center;
@@ -242,7 +242,7 @@ a {
                         position: absolute;
                         width: 12px;
                         height: 12px;
-                        background: url(../Images/controlIcons.svg) no-repeat -538px -54px;
+                        background: url(../Images/controlIcons.svg) no-repeat -574px -54px;
                         background-size: auto 120px;
                         display: block;
                         content: " ";
@@ -310,6 +310,36 @@ a {
         padding: 0;
         .tx-dlf-map {
             top: 0;
+            .score-visible & {
+                .custom-zoom {
+                    position: absolute;
+                    inset: auto 50% 20px auto;
+                    transform: translateX(50%);
+                    display: block;
+                    background-color: transparent;
+                    display: flex;
+
+                    a {
+                        position: relative;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 20px;
+                        margin: 0 4px;
+                        .text-hide();
+                        background: white url(../Images/controlIcons.svg) no-repeat -360px 0;
+                        background-size: auto 120px;
+                        &.in {
+                            background-position: -360px 0;
+                        }
+                        &.out {
+                            background-position: -400px 0;
+                        }
+                        &.fullscreen {
+                            display: none;
+                        }
+                    }
+                }
+            }
         }
         .document-functions {
             .provider {
