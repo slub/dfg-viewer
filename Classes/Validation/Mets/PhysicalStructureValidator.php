@@ -61,7 +61,7 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($node)
+        $this->createElementValidator($node)
             ->validateHasAttributeWithValue('TYPE', ['physSequence']);
 
         $structuralElements = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
@@ -74,7 +74,7 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
 
     protected function validateStructuralElement(\DOMNode $structureElement): void
     {
-        $this->createNodeValidator($structureElement)
+        $this->createElementValidator($structureElement)
             ->validateHasUniqueId()
             ->validateHasAttributeWithValue("TYPE", ["page", "doublepage", "track"]);
     }

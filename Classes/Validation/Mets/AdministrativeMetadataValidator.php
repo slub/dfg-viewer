@@ -59,7 +59,7 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateAdministrativMetadataNode(\DOMNode $amdSection): void
     {
-        $this->createNodeValidator($amdSection)
+        $this->createElementValidator($amdSection)
             ->validateHasUniqueId();
     }
 
@@ -81,14 +81,14 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateDigitalProvenanceMetadataNode(\DOMNode $digiprov): void
     {
-        $this->createNodeValidator($digiprov)
+        $this->createElementValidator($digiprov)
             ->validateHasUniqueId();
 
         $mdWrap = $this->createNodeListValidator('mets:mdWrap', $digiprov)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mdWrap)
+        $this->createElementValidator($mdWrap)
             ->validateHasAttributeWithValue('MDTYPE', ['OTHER'])
             ->validateHasAttributeWithValue('OTHERMDTYPE', ['DVLINKS']);
 
@@ -114,14 +114,14 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateRightsMetadataNode(\DOMNode $rightsMetadata): void
     {
-        $this->createNodeValidator($rightsMetadata)
+        $this->createElementValidator($rightsMetadata)
             ->validateHasUniqueId();
 
         $mpWrap = $this->createNodeListValidator('mets:mdWrap', $rightsMetadata)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mpWrap)
+        $this->createElementValidator($mpWrap)
             ->validateHasAttributeWithValue('MDTYPE', ['OTHER'])
             ->validateHasAttributeWithValue('OTHERMDTYPE', ['DVRIGHTS']);
 
@@ -147,14 +147,14 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateTechnicalMetadataNode(\DOMNode $technicalMd): void
     {
-        $this->createNodeValidator($technicalMd)
+        $this->createElementValidator($technicalMd)
             ->validateHasUniqueId();
 
         $mdWrap = $this->createNodeListValidator('mets:mdWrap', $technicalMd)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mdWrap)
+        $this->createElementValidator($mdWrap)
             ->validateHasAttribute("MDTYPE")
             ->validateHasAttribute("OTHERMDTYPE");
 

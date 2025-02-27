@@ -68,7 +68,7 @@ class LogicalStructureValidator extends AbstractDomDocumentValidator
 
     protected function validateStructuralElement(\DOMNode $structureElement): void
     {
-        $this->createNodeValidator($structureElement)
+        $this->createElementValidator($structureElement)
             ->validateHasUniqueId()
             ->validateHasAttributeWithValue("TYPE", VH::STRUCTURE_DATASET);
     }
@@ -92,7 +92,7 @@ class LogicalStructureValidator extends AbstractDomDocumentValidator
 
     protected function validateExternalReference(\DOMNode $externalReference): void
     {
-        $this->createNodeValidator($externalReference)
+        $this->createElementValidator($externalReference)
             ->validateHasAttributeWithValue("LOCTYPE", ["URL", "PURL"])
             ->validateHasAttributeWithUrl("xlink:href");
     }

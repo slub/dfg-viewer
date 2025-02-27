@@ -26,11 +26,12 @@ namespace Slub\Dfgviewer\Validation;
  */
 
 use DOMDocument;
+use DOMElement;
 use DOMNode;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Validation\Common\DomNodeListValidator;
-use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
+use Slub\Dfgviewer\Validation\Common\DomElementValidator;
 
 abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
 {
@@ -74,8 +75,8 @@ abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
         return new DomNodeListValidator($this->xpath, $this->result, $expression, $contextNode);
     }
 
-    protected function createNodeValidator(?DOMNode $node): DomNodeValidator
+    protected function createElementValidator(?DOMElement $node): DomElementValidator
     {
-        return new DomNodeValidator($this->xpath, $this->result, $node);
+        return new DomElementValidator($this->xpath, $this->result, $node);
     }
 }
