@@ -126,6 +126,9 @@
     <f:else>
         <div id="tx-dfgviewer-map-0" class="tx-dlf-map"></div>
         <div id="svg_panel">
+            <f:asset.script identifier="wildwebmidi-remote-package-base" priority="true">
+                const WILDWEBMIDI_REMOTE_PACKAGE_BASE = '{viewData.publicResourcePath}/JavaScript/WildWebMidi/wildwebmidi.data';
+            </f:asset.script>
             <div id="player"></div>
             <div id="svg_output" style="overflow:hidden;"></div>
         </div>
