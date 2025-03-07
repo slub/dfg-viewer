@@ -38,14 +38,14 @@ page {
       kitodoPageView = TEXT
       kitodoPageView.value = {$plugin.tx_dfgviewer.kitodoPageView}
 
-      piwik_hostname = TEXT
-      piwik_hostname.value = {$plugin.tx_dfgviewer.piwik_hostname}
+      piwikHostname = TEXT
+      piwikHostname.value = {$plugin.tx_dfgviewer.piwik.hostname}
 
-      piwik_idsite = TEXT
-      piwik_idsite.value = {$plugin.tx_dfgviewer.piwik_idsite}
+      piwikIdsite = TEXT
+      piwikIdsite.value = {$plugin.tx_dfgviewer.piwik.idsite}
 
-      piwik_domains = TEXT
-      piwik_domains.value = {$plugin.tx_dfgviewer.piwik_domains}
+      piwikDomains = TEXT
+      piwikDomains.value = {$plugin.tx_dfgviewer.piwik.domains}
 
     }
   }
