@@ -161,6 +161,32 @@ class DomNodeValidator
     }
 
     /**
+     * Validate that the node has an attribute with a numeric value.
+     *
+     * @param string $name The attribute name
+     * @return $this
+     */
+    public function validateHasNumericAttribute(string $name): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->isElementType()) {
+            return $this;
+        }
+
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
+        }
+
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
+        if (!is_numeric($value)) {
+            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" is not numeric.', 1736504203));
+        }
+
+        return $this;
+    }
+
+    /**
      * Validate that the node has a unique attribute with name.
      *
      * @param string $name The attribute name

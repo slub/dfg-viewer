@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.5 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.6 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -60,7 +60,7 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
     /**
      * Validates the embedded metadata.
      *
-     * Validates against the rules of chapter "2.5.2.1 Eingebettete Metadaten – mets:mdWrap"
+     * Validates against the rules of chapter "2.6.2.1 Eingebettete Metadaten – mets:mdWrap"
      *
      * @return void
      */

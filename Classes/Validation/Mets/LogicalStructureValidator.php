@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.1 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.1 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer

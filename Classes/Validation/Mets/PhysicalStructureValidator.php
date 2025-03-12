@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.2 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.2 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -57,25 +57,34 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
      */
     protected function validateStructuralElements(): void
     {
-        $node = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE)
+        $node = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($node)
-            ->validateHasAttributeWithValue('TYPE', ['physSequence']);
+            ->validateHasAttributeWithValue('TYPE', ['physSequence', 'object']);
 
-        $structuralElements = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS)
-            ->validateHasAny()
-            ->getNodeList();
-        foreach ($structuralElements as $structuralElement) {
-            $this->validateStructuralElement($structuralElement);
+        // @phpstan-ignore-next-line
+        if ($node->getAttribute('TYPE') === 'object') {
+            $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT . '/mets:fptr')
+                ->validateHasAny();
+            // TODO Check FILEID
+        } else {
+            $sequenceElements = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE)
+                ->validateHasAny()
+                ->getNodeList();
+            foreach ($sequenceElements as $sequenceElement) {
+                $this->validateSequenceElement($sequenceElement);
+            }
         }
     }
 
-    protected function validateStructuralElement(\DOMNode $structureElement): void
+    protected function validateSequenceElement(\DOMNode $sequenceElement): void
     {
-        $this->createNodeValidator($structureElement)
+        $this->createNodeValidator($sequenceElement)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue("TYPE", ["page", "doublepage", "track"]);
+            ->validateHasAttributeWithValue("TYPE", ["page", "doublepage", "track"])
+            ->validateHasNumericAttribute('ORDER');
+        // TODO Check Attributes of Application Profile
     }
 }

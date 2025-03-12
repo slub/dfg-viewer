@@ -32,7 +32,7 @@ use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
 class LinkingLogicalPhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
-     * Test validation against the rules of chapter "2.3.1 Structure links - mets:structLink"
+     * Test validation against the rules of chapter "2.4 Structure links - mets:structLink"
      *
      * @return void
      * @throws \DOMException

@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.4 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.5 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -59,7 +59,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     /**
      * Validates the file groups.
      *
-     * Validates against the rules of chapter "2.4.2.1 Dateigruppen – mets:fileGrp"
+     * Validates against the rules of chapter "2.5.2.1 Dateigruppen – mets:fileGrp"
      *
      * @return void
      */
@@ -85,7 +85,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     /**
      * Validates the files.
      *
-     * Validates against the rules of chapters "2.4.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
+     * Validates against the rules of chapters "2.5.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
      *
      * @return void
      */
