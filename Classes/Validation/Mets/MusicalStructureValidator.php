@@ -27,6 +27,7 @@ namespace Slub\Dfgviewer\Validation\Mets;
 
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
+use TYPO3\CMS\Extbase\Error\Error;
 
 /**
  * The validator validates against the rules outlined in chapter 2.3 of the METS application profile 2.4.
@@ -51,7 +52,7 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      *
      * Validates the structural elements.
      *
-     * Validates against the rules of chapter "2.2.2.1 Strukturelement – mets:div"
+     * Validates against the rules of chapter "2.3.2.1 Strukturelement – mets:div"
      *
      * @return void
      */
@@ -76,7 +77,7 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
     protected function validateMeasureElement(\DOMNode $measureElement): void
     {
         $this->createNodeValidator($measureElement)
-            ->validateHasUniqueId() // TODO Ref ID
+            ->validateHasUniqueId()
             ->validateHasAttributeWithValue('TYPE', ['measure'])
             ->validateHasNumericAttribute('ORDER');
         // TODO Check Attributes of Application Profile
@@ -100,12 +101,52 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      */
     protected function validateMeasureDigitalRepresentation(\DOMNode $measureDigitalRepresentation): void
     {
-        $measureSubstructure = $this->createNodeListValidator('mets:area', $measureDigitalRepresentation)
+        $measureLinks = $this->createNodeListValidator('mets:area', $measureDigitalRepresentation)
             ->validateHasAny()
             ->getNodeList();
+        $fileIdOfDigitalRepresentation = '';
+        foreach ($measureLinks as $measureLink) {
+            $this->validateMeasureLink($measureLink, $fileIdOfDigitalRepresentation);
+        }
+    }
 
-        foreach ($measureSubstructures as $measureSubstructure) {
-            $this->validateMeasureElement($measureElement);
+    /**
+     *
+     * Validates the measure link.
+     *
+     * Validates against the rules of chapter "2.3.2.3 Verweis auf Substrukturen – mets:div/mets:fptr/mets:area"
+     *
+     * @return void
+     */
+    protected function validateMeasureLink(\DOMNode $measureLink, string &$fileIdOfDigitalRepresentation): void
+    {
+        $nodeValidator = $this->createNodeValidator($measureLink);
+        $nodeValidator->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
+
+        $fileId = $measureLink->getAttribute('FILEID');
+
+        // validates file identifier measure link under digital representation
+        if ( $fileIdOfDigitalRepresentation === '' ) {
+            $fileIdOfDigitalRepresentation = $fileId;
+        }
+        if ( $fileIdOfDigitalRepresentation !== $fileId ) {
+            $this->result->addError(new Error('"FILEID" attribute value under "' . $measureLink->getNodePath() . '" can only refer to the same file within one "mets:fptr" element.', 1741860129));
+        }
+
+        $files = $this->xpath->query(VH::XPATH_FILE_SECTION_FILES . '[@ID="' . $fileId . '"]');
+        if ($files->length > 0 && $this->createNodeValidator($files->item(0))->isElementType()) {
+            $file = $files->item(0);
+            // check if measure linked file is an image derivative
+            if ($file->hasAttribute('MIMETYPE') && str_starts_with($file->getAttribute('MIMETYPE'), 'image')) {
+                $nodeValidator->validateHasAttribute('COORDS');
+                // TODO Validate COORDS x1,y1,x2,y2
+                $nodeValidator->validateHasAttributeWithValue('SHAPE', ['RECT']);
+            } else {
+                // validate as MEI derivative
+                $nodeValidator->validateHasAttribute('BEGIN');
+                $nodeValidator->validateHasAttribute('END');
+                $nodeValidator->validateHasAttributeWithValue('BETYPE', ['IDREF']);
+            }
         }
     }
 }
