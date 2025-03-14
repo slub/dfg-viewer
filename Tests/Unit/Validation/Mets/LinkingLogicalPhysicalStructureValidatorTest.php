@@ -50,11 +50,11 @@ class LinkingLogicalPhysicalStructureValidatorTest extends AbstractDomDocumentVa
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_STRUCT_LINK_ELEMENTS, 'xlink:from', 'Test');
-        $this->hasErrorAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:from', 'Test', VH::XPATH_LOGICAL_STRUCTURES);
+        $this->hasErrorAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:from', 'Test', VH::XPATH_LOGICAL_STRUCTURES . '//mets:div');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_STRUCT_LINK_ELEMENTS, 'xlink:to', 'Test');
-        $this->hasErrorAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:to', 'Test', VH::XPATH_PHYSICAL_STRUCTURES);
+        $this->hasErrorAttributeRefToOne(VH::trimDoubleSlash(VH::XPATH_STRUCT_LINK_ELEMENTS), 'xlink:to', 'Test', VH::XPATH_PHYSICAL_STRUCTURES . '//mets:div');
     }
 
     protected function createValidator(): AbstractDlfValidator

@@ -83,30 +83,30 @@ class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTes
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_FILE_SECTION_FILES, 'ID', 'DMDLOG_0001');
-        $this->hasErrorUniqueId(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file', 'DMDLOG_0001');
+        $this->hasErrorUniqueId(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]', 'DMDLOG_0001');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_FILE_SECTION_FILES, 'MIMETYPE');
-        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file', 'MIMETYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]', 'MIMETYPE');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat');
-        $this->hasErrorOne('mets:FLocat', VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file');
+        $this->hasErrorOne('mets:FLocat', VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'LOCTYPE');
-        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'LOCTYPE');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'LOCTYPE');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'LOCTYPE', 'Test');
-        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'LOCTYPE', 'Test');
+        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'LOCTYPE', 'Test');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'xlink:href');
-        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'xlink:href');
+        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'xlink:href');
 
         $this->setAttributeValue(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'xlink:href', 'Test');
-        $this->hasErrorAttributeWithUrl(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file/mets:FLocat', 'xlink:href', 'Test');
+        $this->hasErrorAttributeWithUrl(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'xlink:href', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator

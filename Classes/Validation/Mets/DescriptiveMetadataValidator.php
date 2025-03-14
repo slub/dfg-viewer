@@ -70,15 +70,14 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mdWrap)
+        $nodeValidator = $this->createNodeValidator($mdWrap)
             ->validateHasAttributeWithValue('MDTYPE', ['MODS', 'TEIHDR']);
 
         if (!$mdWrap) {
             return;
         }
 
-        // @phpstan-ignore-next-line
-        $mdType = $mdWrap->getAttribute('MDTYPE');
+        $mdType = $nodeValidator->getDomElement()->getAttribute('MDTYPE');
         if ($mdType == 'TEIHDR' || $mdType == 'MODS') {
             $childNode = 'mods:mods';
             if ($mdType == 'TEIHDR') {

@@ -309,7 +309,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasErrorAttributeRefToOne(string $expression, string $name, string $value, string $targetExpression): void
     {
-        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetExpression);
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference an element within the XPath expression "' . $targetExpression . '"');
     }
 
     /**

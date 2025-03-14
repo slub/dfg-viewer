@@ -61,11 +61,11 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($node)
+        $nodeValidator = $this->createNodeValidator($node)
             ->validateHasAttributeWithValue('TYPE', ['physSequence', 'object']);
 
-        // @phpstan-ignore-next-line
-        if ($node->getAttribute('TYPE') === 'object') {
+        if ($nodeValidator->isElementType()
+            && $nodeValidator->getDomElement()->getAttribute('TYPE') === 'object') {
             $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT . '/mets:fptr')
                 ->validateHasAny();
             // TODO Check FILEID
