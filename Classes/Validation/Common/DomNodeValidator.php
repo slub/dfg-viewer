@@ -30,8 +30,6 @@ use DOMXPath;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\stringEndsWith;
 
 /**
  * The validator contains functions to validate a DOMNode.

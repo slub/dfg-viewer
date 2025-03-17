@@ -69,6 +69,10 @@ class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTes
 
         $this->setAttributeValue(VH::XPATH_FILE_SECTION_GROUPS . '[@USE="THUMBS"]', 'USE', 'DEFAULT');
         $this->hasErrorUniqueAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]', 'USE', 'DEFAULT');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_FILE_SECTION_GROUPS . '[@USE="THUMBS"]', 'USE', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:fileSec/mets:fileGrp[2]', 'USE', 'Test');
     }
 
     /**

@@ -72,6 +72,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
             $this->validateFileGroup($fileSectionGroup);
         }
 
+        // there should be at least one DEFAULT file group
         $this->createNodeListValidator(VH::XPATH_FILE_SECTION_GROUPS . '[@USE="DEFAULT"]')
             ->validateHasOne();
     }
@@ -79,7 +80,8 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     protected function validateFileGroup(\DOMNode $fileGroup): void
     {
         $this->createNodeValidator($fileGroup)
-            ->validateHasUniqueAttribute("USE", VH::XPATH_FILE_SECTION_GROUPS);
+            ->validateHasUniqueAttribute("USE", VH::XPATH_FILE_SECTION_GROUPS)
+            ->validateHasAttributeValue("USE", VH::SUPPORTED_FILEGROUPS);
     }
 
     /**
