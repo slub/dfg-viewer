@@ -71,7 +71,7 @@ class DomNodeValidator
      *
      * @return $this
      */
-    public function validateHasContentWithEmail(): DomNodeValidator
+    public function validateHasEmailContent(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
@@ -95,7 +95,7 @@ class DomNodeValidator
      *
      * @return $this
      */
-    public function validateHasContentWithUrl(): DomNodeValidator
+    public function validateHasUrlContent(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
@@ -114,7 +114,7 @@ class DomNodeValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttributeWithUrl(string $name): DomNodeValidator
+    public function validateHasUrlAttribute(string $name): DomNodeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
@@ -140,7 +140,7 @@ class DomNodeValidator
      * @param array $values The allowed values
      * @return $this
      */
-    public function validateHasAttributeWithValue(string $name, array $values): DomNodeValidator
+    public function validateHasAttributeValue(string $name, array $values): DomNodeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
@@ -176,7 +176,7 @@ class DomNodeValidator
 
         $value = $this->getDomElement()->getAttribute($name);
         if (!is_numeric($value)) {
-            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" is not numeric.', 1736504203));
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not numeric.', 1736504203));
         }
 
         return $this;
@@ -201,11 +201,36 @@ class DomNodeValidator
 
         $value = $this->getDomElement()->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
         }
 
         return $this;
     }
+
+    /**
+     * Validate that the node has a regex attribute with name.
+     *
+     * @return $this
+     */
+    public function validateHasRegexAttribute(string $name, string $regex): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->isElementType()) {
+            return $this;
+        }
+
+        if (!$this->getDomElement()->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
+        }
+
+        $value = $this->getDomElement()->getAttribute($name);
+        $pattern = '/^' . $regex . '$/i';
+        if (!preg_match('/^' . $regex . '$/i', $value)) {
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" does not match the pattern "' . $pattern . '".', 1742208208));
+        }
+
+        return $this;
+    }
+
 
     /**
      * Validate that the node has a unique identifier.

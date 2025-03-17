@@ -110,7 +110,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($fLocat)
-            ->validateHasAttributeWithValue('LOCTYPE', ['URL', 'PURL'])
-            ->validateHasAttributeWithUrl('xlink:href');
+            ->validateHasAttributeValue('LOCTYPE', ['URL', 'PURL'])
+            ->validateHasUrlAttribute('xlink:href');
     }
 }

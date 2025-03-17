@@ -44,31 +44,30 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
         $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURES)
             ->validateHasNoneOrOne();
 
-        $this->validateStructuralElements();
+        $this->validateStructuralElement();
     }
 
     /**
      *
-     * Validates the structural elements.
+     * Validates the structural element.
      *
      * Validates against the rules of chapter "2.2.2.1 Structural element - mets:div"
      *
      * @return void
      */
-    protected function validateStructuralElements(): void
+    protected function validateStructuralElement(): void
     {
         $node = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT)
             ->validateHasOne()
             ->getFirstNode();
 
         $nodeValidator = $this->createNodeValidator($node)
-            ->validateHasAttributeWithValue('TYPE', ['physSequence', 'object']);
+            ->validateHasAttributeValue('TYPE', ['physSequence', 'object']);
 
+        // validates the 3D object models, pages or track-based media
         if ($nodeValidator->isElementType()
             && $nodeValidator->getDomElement()->getAttribute('TYPE') === 'object') {
-            $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT . '/mets:fptr')
-                ->validateHasAny();
-            // TODO Check FILEID
+            $this->validateFiles(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT . '/mets:fptr');
         } else {
             $sequenceElements = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE)
                 ->validateHasAny()
@@ -79,12 +78,39 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
         }
     }
 
+    /**
+     *
+     * Validates the sequence element.
+     *
+     * Validates against the rules of chapter "2.2.2.1 Structural element - mets:div"
+     *
+     * @return void
+     */
     protected function validateSequenceElement(\DOMNode $sequenceElement): void
     {
-        $this->createNodeValidator($sequenceElement)
+        $element = $this->createNodeValidator($sequenceElement)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue("TYPE", ["page", "doublepage", "track"])
-            ->validateHasNumericAttribute('ORDER');
-        // TODO Check Attributes of Application Profile
+            ->validateHasAttributeValue("TYPE", ["page", "doublepage", "track"])
+            ->validateHasNumericAttribute('ORDER')
+            ->getDomElement();
+        $this->validateFiles('mets:fptr', $element);
+    }
+
+    /**
+     * Validates the file linking.
+     *
+     * Validates against the rules of chapter "2.2.2.2 Structural element - mets:div"
+     *
+     * @return void
+     */
+    protected function validateFiles(string $expression, \DOMElement $contextNode=null): void
+    {
+        $fileList = $this->createNodeListValidator($expression, $contextNode)
+            ->validateHasAny()
+            ->getNodeList();
+        foreach ($fileList as $file) {
+            $this->createNodeValidator($file)
+                ->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
+        }
     }
 }

@@ -45,18 +45,18 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
         $this->createNodeListValidator(VH::XPATH_MUSICAL_STRUCTURES)
             ->validateHasNoneOrOne();
 
-        $this->validateStructuralElements();
+        $this->validateStructuralElement();
     }
 
     /**
      *
-     * Validates the structural elements.
+     * Validates the structural element.
      *
      * Validates against the rules of chapter "2.3.2.1 Strukturelement – mets:div"
      *
      * @return void
      */
-    protected function validateStructuralElements(): void
+    protected function validateStructuralElement(): void
     {
         $node = $this->createNodeListValidator(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT)
             ->validateHasOne()
@@ -64,9 +64,9 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
 
         $this->createNodeValidator($node)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue('TYPE', ['measures']);
+            ->validateHasAttributeValue('TYPE', ['measures']);
 
-        $measureElements = $this->createNodeListValidator(VH::XPATH_MUSICAL_STRUCTURAL_MEASURES)
+        $measureElements = $this->createNodeListValidator(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE)
             ->validateHasAny()
             ->getNodeList();
         foreach ($measureElements as $measureElement) {
@@ -74,13 +74,20 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
         }
     }
 
+    /**
+     *
+     * Validates the measure element.
+     *
+     * Validates against the rules of chapter "2.3.2.1 Strukturelement – mets:div"
+     *
+     * @return void
+     */
     protected function validateMeasureElement(\DOMNode $measureElement): void
     {
         $this->createNodeValidator($measureElement)
             ->validateHasUniqueId()
-            ->validateHasAttributeWithValue('TYPE', ['measure'])
+            ->validateHasAttributeValue('TYPE', ['measure'])
             ->validateHasNumericAttribute('ORDER');
-        // TODO Check Attributes of Application Profile
 
         $measureDigitalRepresentations = $this->createNodeListValidator('mets:fptr', $measureElement)
             ->validateHasAny()
@@ -138,14 +145,13 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
             $file = $files->item(0);
             // check if measure linked file is an image derivative
             if ($file->hasAttribute('MIMETYPE') && str_starts_with($file->getAttribute('MIMETYPE'), 'image')) {
-                $nodeValidator->validateHasAttribute('COORDS');
-                // TODO Validate COORDS x1,y1,x2,y2
-                $nodeValidator->validateHasAttributeWithValue('SHAPE', ['RECT']);
+                $nodeValidator->validateHasRegexAttribute('COORDS',VH::COORDS_REGEX);
+                $nodeValidator->validateHasAttributeValue('SHAPE', ['RECT']);
             } else {
                 // validate as MEI derivative
                 $nodeValidator->validateHasAttribute('BEGIN');
                 $nodeValidator->validateHasAttribute('END');
-                $nodeValidator->validateHasAttributeWithValue('BETYPE', ['IDREF']);
+                $nodeValidator->validateHasAttributeValue('BETYPE', ['IDREF']);
             }
         }
     }

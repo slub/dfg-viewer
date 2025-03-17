@@ -51,7 +51,7 @@ class PhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
      * @return void
      * @throws \DOMException
      */
-    public function testStructuralElements(): void
+    public function testStructuralElement(): void
     {
         $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT);
         $this->hasErrorOne(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT);

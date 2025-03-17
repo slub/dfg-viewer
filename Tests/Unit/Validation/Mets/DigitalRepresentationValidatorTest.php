@@ -106,7 +106,7 @@ class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTes
         $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'xlink:href');
 
         $this->setAttributeValue(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat', 'xlink:href', 'Test');
-        $this->hasErrorAttributeWithUrl(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'xlink:href', 'Test');
+        $this->hasErrorUrlAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]/mets:FLocat', 'xlink:href', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator

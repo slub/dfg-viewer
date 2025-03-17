@@ -71,7 +71,7 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
             ->getFirstNode();
 
         $nodeValidator = $this->createNodeValidator($mdWrap)
-            ->validateHasAttributeWithValue('MDTYPE', ['MODS', 'TEIHDR']);
+            ->validateHasAttributeValue('MDTYPE', ['MODS', 'TEIHDR']);
 
         if (!$mdWrap) {
             return;

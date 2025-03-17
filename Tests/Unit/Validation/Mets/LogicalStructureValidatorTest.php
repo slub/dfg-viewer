@@ -91,7 +91,7 @@ class LogicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasErrorAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'xlink:href', 'Test');
-        $this->hasErrorAttributeWithUrl('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href', 'Test');
+        $this->hasErrorUrlAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href', 'Test');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'xlink:href', 'http://example.com/periodical.xml');
         $result = $this->validate();
