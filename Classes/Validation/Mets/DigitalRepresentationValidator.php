@@ -105,7 +105,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     {
         $this->createNodeValidator($file)
             ->validateHasUniqueId()
-            ->validateHasAttribute('MIMETYPE');
+            ->validateHasAttributeValue('MIMETYPE', VH::SUPPORTED_MIMETYPES);
 
         $fLocat = $this->createNodeListValidator('mets:FLocat', $file)
             ->validateHasOne()

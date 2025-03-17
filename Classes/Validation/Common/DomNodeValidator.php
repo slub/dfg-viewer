@@ -148,9 +148,17 @@ class DomNodeValidator
             return $this->validateHasAttribute($name);
         }
 
-        $value = $this->getDomElement()->getAttribute($name);
-        if (!in_array($value, $values)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
+        $attrValue = $this->getDomElement()->getAttribute($name);
+        $match = false;
+        foreach ($values as $value) {
+            if (str_starts_with($attrValue, $value)) {
+                $match = true;
+                break;
+            }
+        }
+
+        if (!$match) {
+            $this->result->addError(new Error('Value "' . $attrValue . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
         }
 
         return $this;

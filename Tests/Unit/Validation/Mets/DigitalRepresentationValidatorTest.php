@@ -32,7 +32,7 @@ use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
 class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
-     * Test validation against the rules of chapter "2.4.1 Dateisektion – mets:fileSec"
+     * Test validation against the rules of chapter "2.5.1 Dateisektion – mets:fileSec"
      *
      * @return void
      * @throws \DOMException
@@ -53,7 +53,7 @@ class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTes
     }
 
     /**
-     * Test validation against the rules of chapter "2.4.2.1 Dateigruppen – mets:fileGrp"
+     * Test validation against the rules of chapter "2.5.2.1 Dateigruppen – mets:fileGrp"
      *
      * @return void
      */
@@ -76,7 +76,7 @@ class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTes
     }
 
     /**
-     * Test validation against the rules of chapter "2.4.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
+     * Test validation against the rules of chapter "2.5.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
      *
      * @return void
      */
@@ -92,6 +92,10 @@ class DigitalRepresentationValidatorTest extends AbstractDomDocumentValidatorTes
 
         $this->removeAttribute(VH::XPATH_FILE_SECTION_FILES, 'MIMETYPE');
         $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]', 'MIMETYPE');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_FILE_SECTION_FILES, 'MIMETYPE', 'Test');
+        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_FILE_SECTION_GROUPS) . '[1]/mets:file[1]',  'MIMETYPE','Test');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_FILE_SECTION_FILES . '/mets:FLocat');

@@ -51,6 +51,9 @@ class ValidationHelper
         'DEFAULT', 'DOWNLOAD', 'THUMBS', 'TEASER', 'AUDIO', 'FULLTEXT', 'SCORE'
     ];
 
+    const SUPPORTED_MIMETYPES = [
+        'image/', 'audio/', 'video/', 'application/vnd.kitodo.iiif', 'application/vnd.netfpx', 'application/vnd.kitodo.zoomify', 'model/gltf-binary', 'model/gltf+json', 'text/xml', 'application/mei+xml', 'application/pdf'
+    ];
 
     const XPATH_METS = '//mets:mets';
 
