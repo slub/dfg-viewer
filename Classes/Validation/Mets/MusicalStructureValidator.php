@@ -89,12 +89,12 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasAttributeValue('TYPE', ['measure'])
             ->validateHasNumericAttribute('ORDER');
 
-        $digitalRepresentations = $this->createNodeListValidator('mets:fptr', $measureElement)
+        $measureFptrs = $this->createNodeListValidator('mets:fptr', $measureElement)
             ->validateHasAny()
             ->getNodeList();
 
-        foreach ($digitalRepresentations as $digitalRepresentation) {
-            $this->validateMeasureDigitalRepresentation($digitalRepresentation);
+        foreach ($measureFptrs as $measureFptr) {
+            $this->validateMeasureDigitalRepresentation($measureFptr);
         }
     }
 
@@ -106,14 +106,14 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateMeasureDigitalRepresentation(\DOMNode $digitalRepresentation): void
+    protected function validateMeasureDigitalRepresentation(\DOMNode $measureFptr): void
     {
-        $measureLinks = $this->createNodeListValidator('mets:area', $digitalRepresentation)
+        $measureAreas = $this->createNodeListValidator('mets:area', $measureFptr)
             ->validateHasAny()
             ->getNodeList();
-        $measureLinkFileId = '';
-        foreach ($measureLinks as $measureLink) {
-            $this->validateMeasureLink($measureLink, $measureLinkFileId);
+        $measureFileId = '';
+        foreach ($measureAreas as $measureArea) {
+            $this->validateMeasureLink($measureArea, $measureFileId);
         }
     }
 
@@ -125,19 +125,19 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateMeasureLink(\DOMNode $measureLink, string &$measureLinkFileId): void
+    protected function validateMeasureLink(\DOMNode $measureArea, string &$measureFileId): void
     {
-        $nodeValidator = $this->createNodeValidator($measureLink);
-        $nodeValidator->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
+        $nodeValidator = $this->createNodeValidator($measureArea)
+            ->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
 
-        $fileId = $measureLink->getAttribute('FILEID');
+        $fileId = $nodeValidator->getDomElement()->getAttribute('FILEID');
 
-        // validates file identifier measure link under digital representation
-        if ( $measureLinkFileId === '' ) {
-            $measureLinkFileId = $fileId;
+        // validates file identifier of measure area
+        if ($measureFileId === '') {
+            $measureFileId = $fileId;
         }
-        if ( $measureLinkFileId !== $fileId ) {
-            $this->result->addError(new Error('"FILEID" attribute value under "' . $measureLink->getNodePath() . '" can only refer to the same file within one "mets:fptr" element.', 1741860129));
+        if ($measureFileId !== $fileId) {
+            $this->result->addError(new Error('"FILEID" attribute value under "' . $measureArea->getNodePath() . '" can only refer to the same file within one "mets:fptr" element.', 1741860129));
         }
 
         $files = $this->xpath->query(VH::XPATH_FILE_SECTION_FILES . '[@ID="' . $fileId . '"]');

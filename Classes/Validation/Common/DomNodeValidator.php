@@ -289,8 +289,7 @@ class DomNodeValidator
         $foundElements = 0;
         $targetNodes = $this->xpath->query($targetExpression);
         foreach ($targetNodes as $targetNode) {
-            if ($targetNode instanceof \DOMElement
-                && $targetNode->getAttribute('ID') == $identifier) {
+            if ($targetNode instanceof \DOMElement && $targetNode->getAttribute('ID') == $identifier) {
                 $foundElements++;
             }
         }
