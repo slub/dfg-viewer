@@ -144,7 +144,7 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
         if ($files->length > 0 && $this->createNodeValidator($files->item(0))->isElementType()) {
             $file = $files->item(0);
             // check if measure linked file is an image derivative
-            if ($file->hasAttribute('MIMETYPE') && str_starts_with($file->getAttribute('MIMETYPE'), 'image')) {
+            if ($file instanceof \DOMElement && $file->hasAttribute('MIMETYPE') && str_starts_with($file->getAttribute('MIMETYPE'), 'image')) {
                 $nodeValidator->validateHasRegexAttribute('COORDS',VH::COORDS_REGEX);
                 $nodeValidator->validateHasAttributeValue('SHAPE', ['RECT']);
             } else {
