@@ -89,12 +89,12 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasAttributeValue('TYPE', ['measure'])
             ->validateHasNumericAttribute('ORDER');
 
-        $measureDigitalRepresentations = $this->createNodeListValidator('mets:fptr', $measureElement)
+        $digitalRepresentations = $this->createNodeListValidator('mets:fptr', $measureElement)
             ->validateHasAny()
             ->getNodeList();
 
-        foreach ($measureDigitalRepresentations as $measureDigitalRepresentation) {
-            $this->validateMeasureDigitalRepresentation($measureDigitalRepresentation);
+        foreach ($digitalRepresentations as $digitalRepresentation) {
+            $this->validateMeasureDigitalRepresentation($digitalRepresentation);
         }
     }
 
@@ -106,14 +106,14 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateMeasureDigitalRepresentation(\DOMNode $measureDigitalRepresentation): void
+    protected function validateMeasureDigitalRepresentation(\DOMNode $digitalRepresentation): void
     {
-        $measureLinks = $this->createNodeListValidator('mets:area', $measureDigitalRepresentation)
+        $measureLinks = $this->createNodeListValidator('mets:area', $digitalRepresentation)
             ->validateHasAny()
             ->getNodeList();
-        $fileIdOfDigitalRepresentation = '';
+        $measureLinkFileId = '';
         foreach ($measureLinks as $measureLink) {
-            $this->validateMeasureLink($measureLink, $fileIdOfDigitalRepresentation);
+            $this->validateMeasureLink($measureLink, $measureLinkFileId);
         }
     }
 
@@ -125,7 +125,7 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateMeasureLink(\DOMNode $measureLink, string &$fileIdOfDigitalRepresentation): void
+    protected function validateMeasureLink(\DOMNode $measureLink, string &$measureLinkFileId): void
     {
         $nodeValidator = $this->createNodeValidator($measureLink);
         $nodeValidator->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
@@ -133,10 +133,10 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
         $fileId = $measureLink->getAttribute('FILEID');
 
         // validates file identifier measure link under digital representation
-        if ( $fileIdOfDigitalRepresentation === '' ) {
-            $fileIdOfDigitalRepresentation = $fileId;
+        if ( $measureLinkFileId === '' ) {
+            $measureLinkFileId = $fileId;
         }
-        if ( $fileIdOfDigitalRepresentation !== $fileId ) {
+        if ( $measureLinkFileId !== $fileId ) {
             $this->result->addError(new Error('"FILEID" attribute value under "' . $measureLink->getNodePath() . '" can only refer to the same file within one "mets:fptr" element.', 1741860129));
         }
 

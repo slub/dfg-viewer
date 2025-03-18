@@ -65,8 +65,7 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasAttributeValue('TYPE', ['physSequence', 'object']);
 
         // validates the 3D object models, pages or track-based media
-        if ($nodeValidator->isElementType()
-            && $nodeValidator->getDomElement()->getAttribute('TYPE') === 'object') {
+        if ($nodeValidator->isElementType() && $nodeValidator->getDomElement()->getAttribute('TYPE') === 'object') {
             $this->validateFiles(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT . '/mets:fptr');
         } else {
             $sequenceElements = $this->createNodeListValidator(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE)

@@ -46,7 +46,7 @@ class LogicalStructureValidator extends AbstractDomDocumentValidator
 
         $this->validateStructuralElements();
         $this->validateExternalReferences();
-        $this->validatePeriodicPublishingSequences();
+        $this->validatePeriodical();
     }
 
     /**
@@ -104,7 +104,8 @@ class LogicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validatePeriodicPublishingSequences(): void
+    protected function validatePeriodical(): void
     {
+       $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS . '/mets:div[@TYPE="periodical"]');
     }
 }
