@@ -15,3 +15,18 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['dfgviewe
     'SRU',
     'LLL:EXT:dfgviewer/Resources/Private/Language/locallang_be.xlf:plugins.sru.title',
 );
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+    'tt_content',
+    'CType',
+    [
+        // title
+        'Example',
+        // plugin signature: extkey_identifier
+        'dfgviewer_metsvalidatior',
+        // icon identifier
+        'content-form',
+    ],
+    'textmedia',
+    'after'
+);

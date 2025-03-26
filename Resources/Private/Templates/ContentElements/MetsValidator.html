@@ -1,0 +1,110 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+
+<div class="dfg-viewer-metsvalidation" >
+    <form id="test">
+        <h2>Data available to the content element: </h2>
+        <label for="mets">Fügen Sie hier den Link zu Ihrer <acronym
+            title="(engl.) metadata encoding and transmission standard; (dt.) Metadatenkodierungs- und -übertragungsstandard">METS</acronym>-Datei
+            bzw. <acronym title="(engl.) open archives initiative; (dt.) Initiative für freien Datenaustausch">OAI</acronym>-Schnittstelle
+            ein:</label>
+        <input type="text" class="url" id="url" value="" required>
+        <input type="submit" class="submit" value="Validieren">
+    </form>
+</div>
+
+</html>
+<style>
+    .dfg-viewer-metsvalidation {
+        position:relative;
+    }
+    .validationResult {
+        clear: both;
+    }
+
+    .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        background-color: rgba(255,255,255,0.5);
+    }
+
+    .spinner {
+        width: 48px;
+        height: 48px;
+        border: 5px solid @base-blue;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+</style>
+<script>
+    document.getElementById("test").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let loader = buildLoader(event.target);
+        let container = event.target.parentElement;
+        Array.from(container.getElementsByClassName("validationResult")).forEach(element => element.remove());
+        getData(document.getElementById("url").value).then(json => {
+            const validationResult = document.createElement('div');
+            validationResult.classList.add("validationResult");
+            if (!json.valid) {
+                const validatorList = document.createElement("ul");
+                Object.keys(json.results).forEach(key => {
+                    const validatorListItem = document.createElement("li");
+                    validatorListItem.textContent = key;
+                    const errorList = document.createElement("ul");
+                    json.results[key].forEach((item) => {
+                        let errorListItem =
+                            document.createElement("li");
+                        errorListItem.innerText = item;
+                        errorList.appendChild(errorListItem);
+                    });
+                    validatorListItem.appendChild(errorList);
+                    validatorList.appendChild(validatorListItem);
+                });
+                validationResult.appendChild(validatorList);
+            }
+            container.appendChild(validationResult);
+            loader.remove();
+        })
+    });
+
+    async function getData(url) {
+        try {
+            const response = await fetch("https://dfg-viewer-typo3-11.ddev.site/?middleware=dlf/domDocumentValidation&url=" + encodeURI(url));
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+    function buildLoader(parentElement) {
+        let loader = document.createElement('div');
+        loader.classList.add("loader");
+        let spinner = document.createElement('span');
+        spinner.classList.add("spinner");
+        loader.appendChild(spinner);
+        parentElement.appendChild(loader);
+        return loader;
+    }
+</script>
