@@ -46,7 +46,6 @@ class LogicalStructureValidator extends AbstractDomDocumentValidator
 
         $this->validateStructuralElements();
         $this->validateExternalReferences();
-        $this->validatePeriodical();
     }
 
     /**
@@ -95,17 +94,5 @@ class LogicalStructureValidator extends AbstractDomDocumentValidator
         $this->createNodeValidator($externalReference)
             ->validateHasAttributeValue("LOCTYPE", ["URL", "PURL"])
             ->validateHasUrlAttribute("xlink:href");
-    }
-
-    /**
-     * Validates the periodic publishing sequences.
-     *
-     * Validates against the rules of chapter "2.1.3 Periodic publishing sequences"
-     *
-     * @return void
-     */
-    protected function validatePeriodical(): void
-    {
-        $this->createNodeListValidator(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS . '/mets:div[@TYPE="periodical"]');
     }
 }
