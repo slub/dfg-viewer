@@ -57,6 +57,12 @@ class ValidationHelper
 
     const XPATH_METS = '//mets:mets';
 
+    const XPATH_MODS = '//mods:mods';
+
+    const XPATH_MODS_TITLEINFO =  self::XPATH_MODS . '/mods:titleInfo';
+
+    const XPATH_MODS_NAMES =  self::XPATH_MODS . '/mods:name';
+
     const XPATH_ADMINISTRATIVE_METADATA = self::XPATH_METS . '/mets:amdSec';
 
     const XPATH_ADMINISTRATIVE_TECHNICAL_METADATA = self::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD';
