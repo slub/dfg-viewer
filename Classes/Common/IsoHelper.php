@@ -33,7 +33,7 @@ namespace Slub\Dfgviewer\Common;
  *
  * @access public
  */
-class LanguageHelper
+class IsoHelper
 {
     /*
      *  Language array based on the ISO 639-2 code standard from the Library of Congress (https://www.loc.gov/standards/iso639-2/php/code_list.php).
@@ -554,7 +554,7 @@ class LanguageHelper
     ];
 
     /**
-     * Check if iso code exist as ISO 639-2/B.
+     * Checks if iso code exist as ISO 639-2/B.
      *
      * This function tests whether a corresponding ISO 639-2 code exists in the constant array.
      * If an alternative version exists for that code, only true is returned for the bibliographic version.

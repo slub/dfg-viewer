@@ -27,7 +27,7 @@ namespace Slub\Dfgviewer\Validation\Common;
 
 use DOMNode;
 use DOMXPath;
-use Slub\Dfgviewer\Common\LanguageHelper;
+use Slub\Dfgviewer\Common\IsoHelper;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
@@ -127,7 +127,7 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
 
-        if (LanguageHelper::iso6392BCodeExists($value)) {
+        if (IsoHelper::iso6392BCodeExists($value)) {
             $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute on node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957));
         }
 

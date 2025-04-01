@@ -26,6 +26,7 @@ namespace Slub\Dfgviewer\Validation;
  */
 
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 
 /**
  * The validator validates against the rules of the MODS application profile 2.4.
@@ -42,6 +43,8 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateTitle();
         $this->validateNames();
         $this->validateGenre();
+        $this->validateOrigin();
+        $this->validateLanguage();
 
         // Validation of chapter "2.7 Abstract" already covered by MODS XML schema validation
 
@@ -72,12 +75,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             $nodeValidator = $this->createNodeValidator($typedTitleInfo)
                 ->validateHasAttributeWithValue('TYPE', ['abbreviated', 'translated', 'alternative', 'uniform']);
             if ($typedTitleInfo instanceof \DOMElement) {
-                if ($typedTitleInfo->hasAttribute('authorityURI')) {
-                    $nodeValidator->validateHasAttributeWithUrl('authorityURI');
-                }
-                if ($typedTitleInfo->hasAttribute('valueURI')) {
-                    $nodeValidator->validateHasAttributeWithUrl('valueURI');
-                }
+                static::validateUriAttributes($typedTitleInfo, $nodeValidator);
                 if ($typedTitleInfo->hasAttribute('lang')) {
                     $nodeValidator->validateHasAttributeWithIso6392B('lang');
                 }
@@ -116,17 +114,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
 
         foreach ($names as $name) {
-            $nodeValidator = $this->createNodeValidator($name)
-                ->validateHasAttributeWithValue('TYPE', ['personal', 'corporate', 'conference', 'family']);
-            if ($name instanceof \DOMElement) {
-                if ($name->hasAttribute('TYPE') && ($name->getAttribute('TYPE') == 'personal' || $name->getAttribute('TYPE') == 'corporate')) {
-                    $nodeValidator->validateHasAttributeWithUrl('valueURI');
-                }
-                if ($name->hasAttribute('authorityURI')) {
-                    $nodeValidator->validateHasAttributeWithUrl('authorityURI');
-                }
-                $this->validateNameSubElements($name);
-            }
+            $this->validateNameOrAgent($name);
         }
     }
 
@@ -137,7 +125,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateNameSubElements(\DOMNode $name): void
+    protected function validateNameOrAgentSubElements(\DOMNode $name): void
     {
         // Validates against the rules of chapter "2.2.2.1 Namensbestandteil – mods:namePart"
         $nameParts = $this->createNodeListValidator('mods:namePart', $name)
@@ -179,7 +167,132 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      */
     protected function validateGenre(): void
     {
+        $genres = $this->createNodeListValidator(VH::XPATH_MODS_GENRES)
+            ->getNodeList();
+        foreach ($genres as $genre) {
+            static::validateUriAttributes($genre, $this->createNodeValidator($genre));
+        }
+    }
 
+    /**
+     * @param mixed $name
+     * @return void
+     */
+    public function validateNameOrAgent(\DOMElement $name): void
+    {
+        $nodeValidator = $this->createNodeValidator($name)
+            ->validateHasAttributeWithValue('TYPE', ['personal', 'corporate', 'conference', 'family']);
+        if ($name->hasAttribute('TYPE') && ($name->getAttribute('TYPE') == 'personal' || $name->getAttribute('TYPE') == 'corporate')) {
+            $nodeValidator->validateHasAttributeWithUrl('valueURI');
+        }
+        if ($name->hasAttribute('authorityURI')) {
+            $nodeValidator->validateHasAttributeWithUrl('authorityURI');
+        }
+        $this->validateNameOrAgentSubElements($name);
+    }
+
+    /**
+     * Validates the genre.
+     *
+     * Validates against the rules of chapter "2.4 Angaben zu Entstehung und Lebenszyklus"
+     *
+     * @return void
+     */
+    protected function validateOrigin(): void
+    {
+        $originInfos = $this->createNodeListValidator(VH::XPATH_MODS_ORIGININFO)
+            ->getNodeList();
+        foreach ($originInfos as $originInfo) {
+             $this->createNodeValidator($originInfo)
+                 ->validateHasUniqueAttribute('eventType', VH::XPATH_MODS_ORIGININFO);
+
+            $places = $this->createNodeListValidator('mods:place', $originInfo)
+                ->getNodeList();
+            foreach ($places as $place) {
+                $placeTerms = $this->createNodeListValidator('mods:placeTerm', $place)
+                    ->validateHasAny()
+                    ->getNodeList();
+                // TODO Einzigartigkeits check TYPE Attribute
+
+                foreach ($placeTerms as $placeTerm) {
+                    $nodeValidator = $this->createNodeValidator($placeTerm)
+                        ->validateHasAttributeWithValue('TYPE', ['text', 'code']);
+                    static::validateUriAttributes($placeTerm, $nodeValidator);
+                }
+            }
+
+            $agents = $this->createNodeListValidator('mods:agent', $originInfo)
+                ->getNodeList();
+            // TODO Check Agents by person and or cooperation
+            foreach ($agents as $agent) {
+                // validate mods:agent like mods:name
+                $this->validateNameOrAgent($agent);
+            }
+
+            // Validates against the rules of chapters 2.4.2.4 - 2.4.2.8
+            $this->validateOriginDate('mods:dateIssued', $originInfo);
+            $this->validateOriginDate('mods:dateCreated', $originInfo);
+            $this->validateOriginDate('mods:dateValid', $originInfo);
+            $this->validateOriginDate('mods:dateOther', $originInfo);
+
+            // Validates against the rules of chapter 2.4.2.9
+            $this->createNodeListValidator(' mods:edition', $originInfo)
+                ->validateHasNoneOrOne();
+        }
+    }
+
+    /**
+     * Validates the language and font.
+     *
+     * Validates against the rules of chapter "2.5 Sprache und Schrift"
+     *
+     * @return void
+     */
+    protected function validateLanguage(): void
+    {
+        $languages = $this->createNodeListValidator(VH::XPATH_MODS_LANGUAGE)
+            ->getNodeList();
+        foreach ($languages as $language) {
+            $languageTerms = $this->createNodeListValidator('mods:languageTerm', $language)
+                ->validateHasAny()
+                ->getNodeList();
+            foreach ($languageTerms as $languageTerm) {
+                $nodeValidator = $this->createNodeValidator($languageTerm)
+                    ->validateHasAttributeWithIso6392B('code');
+                self::validateUriAttributes($languageTerm, $nodeValidator);
+            }
+
+            $scriptTerms = $this->createNodeListValidator('mods:scriptTerm', $language)
+                ->validateHasAny()
+                ->getNodeList();
+            foreach ($scriptTerms as $scriptTerm) {
+                // TODO Code validation ISO 15924
+                self::validateUriAttributes($scriptTerm, $nodeValidator);
+            }
+        }
+    }
+
+    private static function validateUriAttributes(\DOMElement $node, DomNodeValidator $nodeValidator): void
+    {
+        if ($node->hasAttribute('authorityURI')) {
+            $nodeValidator->validateHasAttributeWithUrl('authorityURI');
+        }
+        if ($node->hasAttribute('valueURI')) {
+            $nodeValidator->validateHasAttributeWithUrl('valueURI');
+        }
+    }
+
+    private function validateOriginDate(string $expression,mixed $originInfo): void
+    {
+        $dates = $this->createNodeListValidator($expression, $originInfo);
+        foreach ($dates as $date) {
+            if ($date instanceof \DOMElement) {
+                if ($date->hasAttribute('authorityURI')) {
+                    $this->createNodeValidator($date)
+                        ->validateHasAttributeWithValue('qualifier', ['approximate', 'inferred', 'questionable']);
+                }
+            }
+        }
     }
 
 }
