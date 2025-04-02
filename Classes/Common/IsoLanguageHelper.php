@@ -26,17 +26,17 @@ namespace Slub\Dfgviewer\Common;
  */
 
 /**
- * The language helper contains functions to handle ISO 639-2.
+ * The iso language helper contains functions to handle ISO 639-2.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
  *
  * @access public
  */
-class IsoHelper
+class IsoLanguageHelper
 {
     /*
-     *  Language array based on the ISO 639-2 code standard from the Library of Congress (https://www.loc.gov/standards/iso639-2/php/code_list.php).
+     *  Array based on the ISO 639-2 code standard from the Library of Congress (https://www.loc.gov/standards/iso639-2/php/code_list.php).
      *
      *  Each element of the array uses an ISO 639-2 code as its key and contains an array with the language name in both English and German.
      *  Additionally, for 21 codes that have alternative versions for bibliographic or terminological purposes, a second array is included.

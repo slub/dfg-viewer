@@ -27,7 +27,8 @@ namespace Slub\Dfgviewer\Validation\Common;
 
 use DOMNode;
 use DOMXPath;
-use Slub\Dfgviewer\Common\IsoHelper;
+use Slub\Dfgviewer\Common\IsoLanguageHelper;
+use Slub\Dfgviewer\Common\IsoScriptHelper;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
@@ -127,8 +128,35 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
 
-        if (IsoHelper::iso6392BCodeExists($value)) {
+        if (IsoLanguageHelper::iso6392BCodeExists($value)) {
             $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute on node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Validate that the node has an attribute with a ISO 15924 value.
+     *
+     * @param string $name The attribute name
+     * @return $this
+     */
+    public function validateHasAttributeWithIso15924(string $name): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->isElementType()) {
+            return $this;
+        }
+
+        // @phpstan-ignore-next-line
+        if (!$this->node->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
+        }
+
+        // @phpstan-ignore-next-line
+        $value = $this->node->getAttribute($name);
+
+        if (array_key_exists($value, IsoScriptHelper::ISO_15924)) {
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute on node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592));
         }
 
         return $this;
