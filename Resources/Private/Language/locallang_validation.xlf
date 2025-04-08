@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2021-11-27T12:07:34Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+            <trans-unit id="validation.success">
+                <source><![CDATA[Successful]]></source>
+            </trans-unit>
+            <trans-unit id="validation.error">
+                <source><![CDATA[Error]]></source>
+            </trans-unit>
+            <trans-unit id="validation.warning">
+                <source><![CDATA[Warning]]></source>
+            </trans-unit>
+            <trans-unit id="validation.notice">
+                <source><![CDATA[Notice]]></source>
+            </trans-unit>
+			<trans-unit id="validator.metsapplicationprofile.title">
+				<source><![CDATA[METS application profile]]></source>
+			</trans-unit>
+            <trans-unit id="validator.metsapplicationprofile.description">
+                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf">METS Application Profile version 2.3.1</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

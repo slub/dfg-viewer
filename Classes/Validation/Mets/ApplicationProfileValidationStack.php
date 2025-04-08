@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Slub\Dfgviewer\Validation;
+namespace Slub\Dfgviewer\Validation\Mets;
 
 /**
  * Copyright notice
@@ -28,12 +28,7 @@ namespace Slub\Dfgviewer\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidationStack;
-use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
-use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
-use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
-use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
+use Slub\Dfgviewer\Validation\DvMetadataValidator;
 
 class ApplicationProfileValidationStack extends AbstractDlfValidationStack
 {
@@ -48,4 +43,5 @@ class ApplicationProfileValidationStack extends AbstractDlfValidationStack
         $this->addValidator(AdministrativeMetadataValidator::class);
         $this->addValidator(DvMetadataValidator::class);
     }
+
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2022-03-22T22:04:56Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="validation.success">
+                <source><![CDATA[Successful]]></source>
+                <target><![CDATA[Erfolgreich]]></target>
+            </trans-unit>
+            <trans-unit id="validation.error">
+                <source><![CDATA[Error]]></source>
+                <target><![CDATA[Fehler]]></target>
+            </trans-unit>
+            <trans-unit id="validation.warning">
+                <source><![CDATA[Warning]]></source>
+                <target><![CDATA[Warnung]]></target>
+            </trans-unit>
+            <trans-unit id="validation.notice">
+                <source><![CDATA[Notice]]></source>
+                <target><![CDATA[Info]]></target>
+            </trans-unit>
+            <trans-unit id="validator.metsapplicationprofile.title" approved="yes">
+                <source><![CDATA[METS application profile]]></source>
+                <target><![CDATA[METS-Anwendungsprofil]]></target>
+            </trans-unit>
+            <trans-unit id="validator.metsapplicationprofile.description" approved="yes">
+                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf">METS Application Profile version 2.3.1</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+                <target><![CDATA[Validierung gegen das <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf">METS Application Profile Version 2.3.1</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

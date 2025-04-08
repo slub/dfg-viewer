@@ -49,16 +49,18 @@ plugin.tx_dlf {
             //    }
             //}
             20 {
-                title = Application Profile Validation
-                className = Slub\Dfgviewer\Validation\ApplicationProfileValidationStack
+                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
+                description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
+                className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
             }
-            30 {
-                title = URL Existence Validator
-                className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
-                configuration {
-                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
-                }
-            }
+            //30 {
+            //    title = URL Existence Validator
+            //    description =
+            //   className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
+            //   configuration {
+            //        excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+            //    }
+            //}
         }
     }
 	view {
