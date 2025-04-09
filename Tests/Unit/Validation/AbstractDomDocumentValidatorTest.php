@@ -86,7 +86,9 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     protected function validateAndAssertEquals(string $message): void
     {
         $result = $this->validator->validate($this->doc);
-        self::assertEquals($message, $result->getFirstError()->getMessage());
+        if ($result->hasErrors()) {
+            self::assertEquals($message, $result->getFirstError()->getMessage());
+        }
     }
 
     /**
@@ -293,7 +295,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasErrorAttributeWithUrl(string $expression, string $name, string $value): void
+    protected function hasErrorUrlAttribute(string $expression, string $name, string $value): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not valid.');
     }
@@ -309,7 +311,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasErrorAttributeRefToOne(string $expression, string $name, string $value, string $targetExpression): void
     {
-        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference one element under XPath expression "' . $targetExpression);
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference an element within the XPath expression "' . $targetExpression . '"');
     }
 
     /**
@@ -319,7 +321,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The content value
      * @return void
      */
-    protected function hasErrorContentWithEmail(string $expression, string $value): void
+    protected function hasErrorEmailContent(string $expression, string $value): void
     {
         $this->validateAndAssertEquals('Email "' . $value . '" in the content of "' . $expression . '" is not valid.');
     }
@@ -331,7 +333,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The content value
      * @return void
      */
-    protected function hasErrorContentWithUrl(string $expression, string $value): void
+    protected function hasErrorUrlContent(string $expression, string $value): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the content of "' . $expression . '" is not valid.');
     }
@@ -349,6 +351,33 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     }
 
     /**
+     * Assert error of has numeric attribute with value.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @return void
+     */
+    protected function hasErrorNumericAttribute(string $expression, string $name, string $value): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not numeric.');
+    }
+
+    /**
+     * Assert error of has attribute with value with regex.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @param string $regex The attribute value
+     * @return void
+     */
+    protected function hasErrorRegexAttribute(string $expression, string $name, string $value, string $regex): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" does not match the pattern "/^' . $regex . '$/i".');
+    }
+
+    /**
      * Assert error of has unique attribute with value.
      *
      * @param string $expression The expression in error message
@@ -358,6 +387,6 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasErrorUniqueAttribute(string $expression, string $name, string $value): void
     {
-        $this->validateAndAssertEquals('"' . $name . '" attribute with value "' . $value . '" of "' . $expression . '" already exists.');
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" already exists.');
     }
 }

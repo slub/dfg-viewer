@@ -107,10 +107,18 @@
             <mets:file ID="FILE_0001_DEFAULT" MIMETYPE="image/jpeg">
                 <mets:FLocat LOCTYPE="URL" xlink:href="http://example.com/image.jpg"/>
             </mets:file>
+            <mets:file ID="FILE_0002_DEFAULT" MIMETYPE="model/gltf-binary">
+                <mets:FLocat LOCTYPE="URL" xlink:href="https://example.com/obj.glb"/>
+            </mets:file>
         </mets:fileGrp>
         <mets:fileGrp USE="THUMBS">
             <mets:file ID="FILE_0001_THUMBS" MIMETYPE="image/jpeg">
                 <mets:FLocat LOCTYPE="URL" xlink:href="http://example.com/thumb.jpg"/>
+            </mets:file>
+        </mets:fileGrp>
+        <mets:fileGrp USE="SCORE">
+            <mets:file ID="FILE_0001_SCORE" MIMETYPE="application/mei+xml">
+                <mets:FLocat LOCTYPE="URL" xlink:href="http://example.com/score.mei"></mets:FLocat>
             </mets:file>
         </mets:fileGrp>
     </mets:fileSec>
@@ -122,6 +130,42 @@
             <mets:div ID="PHYS_0001" ORDER="1" ORDERLABEL="1" TYPE="page">
                 <mets:fptr FILEID="FILE_0001_DEFAULT"/>
                 <mets:fptr FILEID="FILE_0001_THUMBS"/>
+            </mets:div>
+        </mets:div>
+    </mets:structMap>
+    <mets:structMap TYPE="MUSICAL">
+        <mets:div ID="MUS_0000" TYPE="measures">
+            <mets:div ID="MUS_0001" ORDER="1" TYPE="measure">
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_SCORE" BEGIN="ID_MEASURE_001" END="ID_MEASURE_001" BETYPE="IDREF"></mets:area>
+                </mets:fptr>
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_DEFAULT" SHAPE="RECT" COORDS="100,120,150,180"></mets:area>
+                </mets:fptr>
+            </mets:div>
+            <mets:div ID="MUS_0002" ORDER="2" TYPE="measure">
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_SCORE" BEGIN="ID_MEASURE_002" END="ID_MEASURE_002" BETYPE="IDREF"></mets:area>
+                </mets:fptr>
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_DEFAULT" SHAPE="RECT" COORDS="150,120,200,180"></mets:area>
+                </mets:fptr>
+            </mets:div>
+            <mets:div ID="MUS_0003" ORDER="3" TYPE="measure">
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_SCORE" BEGIN="ID_MEASURE_003" END="ID_MEASURE_003" BETYPE="IDREF"></mets:area>
+                </mets:fptr>
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_DEFAULT" SHAPE="RECT" COORDS="200,120,250,180"></mets:area>
+                </mets:fptr>
+            </mets:div>
+            <mets:div ID="MUS_0004" ORDER="4" TYPE="measure">
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_SCORE" BEGIN="ID_MEASURE_004" END="ID_MEASURE_004" BETYPE="IDREF"></mets:area>
+                </mets:fptr>
+                <mets:fptr>
+                    <mets:area FILEID="FILE_0001_DEFAULT" SHAPE="RECT" COORDS="250,120,300,180"></mets:area>
+                </mets:fptr>
             </mets:div>
         </mets:div>
     </mets:structMap>

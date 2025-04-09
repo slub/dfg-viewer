@@ -51,24 +51,24 @@ class PhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
      * @return void
      * @throws \DOMException
      */
-    public function testStructuralElements(): void
+    public function testStructuralElement(): void
     {
-        $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
-        $this->hasErrorOne(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE);
+        $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT);
+        $this->hasErrorOne(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT);
         $this->resetDocument();
 
-        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE');
+        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT, 'TYPE');
         $this->hasErrorAttribute('/mets:mets/mets:structMap[2]/mets:div', 'TYPE');
 
-        $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE, 'TYPE', 'Test');
+        $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENT, 'TYPE', 'Test');
         $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div', 'TYPE', 'Test');
         $this->resetDocument();
 
-        $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
-        $this->hasErrorAny(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS);
+        $this->removeNodes(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE);
+        $this->hasErrorAny(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE);
         $this->resetDocument();
 
-        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'ID');
+        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE, 'ID');
         $this->hasErrorAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'ID');
         $this->resetDocument();
 
@@ -78,10 +78,10 @@ class PhysicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasErrorUniqueId('/mets:mets/mets:structMap[2]/mets:div/mets:div[1]', 'PHYS_0001');
         $this->resetDocument();
 
-        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE');
+        $this->removeAttribute(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE, 'TYPE');
         $this->hasErrorAttribute('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE');
 
-        $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
+        $this->setAttributeValue(VH::XPATH_PHYSICAL_STRUCTURAL_SEQUENCE, 'TYPE', 'Test');
         $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[2]/mets:div/mets:div', 'TYPE', 'Test');
     }
 

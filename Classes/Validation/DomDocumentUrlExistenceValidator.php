@@ -111,12 +111,13 @@ class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
         foreach ($fileGroups as $fileGroup) {
             $fLocats = $xpath->query('mets:file/mets:FLocat', $fileGroup);
             foreach ($fLocats as $fLocat) {
-                // @phpstan-ignore-next-line
-                $url = $fLocat->getAttribute("xlink:href");
-                $host = VH::getHost($url);
-                if ($host !== '' && !in_array($host, $hosts)) {
-                    $hosts[] = $host;
-                    $urls[] = $url;
+                if ($fLocat instanceof \DOMElement) {
+                    $url = $fLocat->getAttribute("xlink:href");
+                    $host = VH::getHost($url);
+                    if ($host !== '' && !in_array($host, $hosts)) {
+                        $hosts[] = $host;
+                        $urls[] = $url;
+                    }
                 }
             }
             // reset to check for every file group

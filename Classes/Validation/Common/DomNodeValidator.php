@@ -69,7 +69,7 @@ class DomNodeValidator
      *
      * @return $this
      */
-    public function validateHasContentWithEmail(): DomNodeValidator
+    public function validateHasEmailContent(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
@@ -93,7 +93,7 @@ class DomNodeValidator
      *
      * @return $this
      */
-    public function validateHasContentWithUrl(): DomNodeValidator
+    public function validateHasUrlContent(): DomNodeValidator
     {
         if (!isset($this->node) || !$this->node->nodeValue) {
             return $this;
@@ -112,19 +112,17 @@ class DomNodeValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttributeWithUrl(string $name): DomNodeValidator
+    public function validateHasUrlAttribute(string $name): DomNodeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        // @phpstan-ignore-next-line
-        $value = $this->node->getAttribute($name);
+        $value = $this->getDomElement()->getAttribute($name);
 
         if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $value)) {
             $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
@@ -140,21 +138,51 @@ class DomNodeValidator
      * @param array $values The allowed values
      * @return $this
      */
-    public function validateHasAttributeWithValue(string $name, array $values): DomNodeValidator
+    public function validateHasAttributeValue(string $name, array $values): DomNodeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        // @phpstan-ignore-next-line
-        $value = $this->node->getAttribute($name);
-        if (!in_array($value, $values)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
+        $attrValue = $this->getDomElement()->getAttribute($name);
+        $match = false;
+        foreach ($values as $value) {
+            if (str_starts_with($attrValue, $value)) {
+                $match = true;
+                break;
+            }
+        }
+
+        if (!$match) {
+            $this->result->addError(new Error('Value "' . $attrValue . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Validate that the node has an attribute with a numeric value.
+     *
+     * @param string $name The attribute name
+     * @return $this
+     */
+    public function validateHasNumericAttribute(string $name): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->isElementType()) {
+            return $this;
+        }
+
+        if (!$this->getDomElement()->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
+        }
+
+        $value = $this->getDomElement()->getAttribute($name);
+        if (!is_numeric($value)) {
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not numeric.', 1736504203));
         }
 
         return $this;
@@ -173,19 +201,42 @@ class DomNodeValidator
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        // @phpstan-ignore-next-line
-        $value = $this->node->getAttribute($name);
+        $value = $this->getDomElement()->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-            $this->result->addError(new Error('"' . $name . '" attribute with value "' . $value . '" of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
         }
 
         return $this;
     }
+
+    /**
+     * Validate that the node has a regex attribute with name.
+     *
+     * @return $this
+     */
+    public function validateHasRegexAttribute(string $name, string $regex): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->isElementType()) {
+            return $this;
+        }
+
+        if (!$this->getDomElement()->hasAttribute($name)) {
+            return $this->validateHasAttribute($name);
+        }
+
+        $value = $this->getDomElement()->getAttribute($name);
+        $pattern = '/^' . $regex . '$/i';
+        if (!preg_match('/^' . $regex . '$/i', $value)) {
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" does not match the pattern "' . $pattern . '".', 1742208208));
+        }
+
+        return $this;
+    }
+
 
     /**
      * Validate that the node has a unique identifier.
@@ -210,8 +261,7 @@ class DomNodeValidator
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1736504217));
         }
         return $this;
@@ -230,34 +280,47 @@ class DomNodeValidator
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        $targetNodes = $this->xpath->query($targetExpression);
-        // @phpstan-ignore-next-line
-        $identifier = $this->node->getAttribute($name);
+        $identifier = $this->getDomElement()->getAttribute($name);
 
         $foundElements = 0;
+        $targetNodes = $this->xpath->query($targetExpression);
         foreach ($targetNodes as $targetNode) {
-            $foundElements += $this->xpath->query('//*[@ID="' . $identifier . '"]', $targetNode)->length;
+            if ($targetNode instanceof \DOMElement && $targetNode->getAttribute('ID') == $identifier) {
+                $foundElements++;
+            }
         }
 
         if ($foundElements !== 1) {
-            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference one element under XPath expression "' . $targetExpression, 1736504228));
+            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference an element within the XPath expression "' . $targetExpression . '"', 1736504228));
         }
 
         return $this;
     }
 
     /**
-     * Checks if node type is of type XML_ELEMENT_NODE.
+     * Checks if node type is DOMElement.
      *
      * @return bool True if is element node
      */
     public function isElementType(): bool
     {
-        return $this->node->nodeType === XML_ELEMENT_NODE && $this->node instanceof \DOMElement;
+        return $this->node instanceof \DOMElement;
+    }
+
+    /**
+     * Get the DOMElement.
+     *
+     * @return \DOMElement The element node
+     */
+    public function getDomElement(): ?\DOMElement
+    {
+        if ($this->node instanceof \DOMElement) {
+            return $this->node;
+        }
+        return null;
     }
 }

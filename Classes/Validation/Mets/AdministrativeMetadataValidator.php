@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.6 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.7 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -40,7 +40,7 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 {
     public function isValidDocument(): void
     {
-        // Validates against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
+        // Validates against the rules of chapter "2.7.1 Metadatensektion – mets:amdSec"
         $amdSections = $this->createNodeListValidator(VH::XPATH_ADMINISTRATIVE_METADATA)
             ->validateHasAny()
             ->getNodeList();
@@ -66,7 +66,7 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
     /**
      * Validates the digital provenance metadata.
      *
-     * Validates against the rules of chapters "2.6.2.5 Herstellung – mets:digiprovMD" and "2.6.2.6 Eingebettete Verweise – mets:digiprovMD/mets:mdWrap"
+     * Validates against the rules of chapters "2.7.2.5 Herstellung – mets:digiprovMD" and "2.7.2.6 Eingebettete Verweise – mets:digiprovMD/mets:mdWrap"
      *
      * @return void
      */
@@ -89,8 +89,8 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($mdWrap)
-            ->validateHasAttributeWithValue('MDTYPE', ['OTHER'])
-            ->validateHasAttributeWithValue('OTHERMDTYPE', ['DVLINKS']);
+            ->validateHasAttributeValue('MDTYPE', ['OTHER'])
+            ->validateHasAttributeValue('OTHERMDTYPE', ['DVLINKS']);
 
         $this->createNodeListValidator('mets:xmlData[dv:links]', $mdWrap)
             ->validateHasOne();
@@ -99,7 +99,7 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
     /**
      * Validates the rights metadata.
      *
-     * Validates against the rules of chapters "2.6.2.4 Rechtedeklaration – mets:rightsMD" and "2.6.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"
+     * Validates against the rules of chapters "2.7.2.4 Rechtedeklaration – mets:rightsMD" and "2.7.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"
      *
      * @return void
      */
@@ -122,8 +122,8 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
             ->getFirstNode();
 
         $this->createNodeValidator($mpWrap)
-            ->validateHasAttributeWithValue('MDTYPE', ['OTHER'])
-            ->validateHasAttributeWithValue('OTHERMDTYPE', ['DVRIGHTS']);
+            ->validateHasAttributeValue('MDTYPE', ['OTHER'])
+            ->validateHasAttributeValue('OTHERMDTYPE', ['DVRIGHTS']);
 
         $this->createNodeListValidator('mets:xmlData[dv:rights]', $mpWrap)
             ->validateHasOne();
@@ -132,7 +132,7 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
     /**
      * Validates the technical metadata.
      *
-     * Validates against the rules of chapters "2.6.2.1 Technische Metadaten – mets:techMD" and "2.6.2.2 Eingebettete technische Daten – mets:techMD/mets:mdWrap"
+     * Validates against the rules of chapters "2.7.2.1 Technische Metadaten – mets:techMD" and "2.7.2.2 Eingebettete technische Daten – mets:techMD/mets:mdWrap"
      *
      * @return void
      */
