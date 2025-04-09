@@ -11,6 +11,9 @@
 			<trans-unit id="plugins.sru.title">
 				<source><![CDATA[SRU Search Bar]]></source>
 			</trans-unit>
+            <trans-unit id="validationForm">
+                <source><![CDATA[Validation form]]></source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
