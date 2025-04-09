@@ -13,8 +13,8 @@ lib.contentElement {
 }
 
 tt_content {
-    dfgviewer_metsvalidatior =< lib.contentElement
-    dfgviewer_metsvalidatior {
-        templateName = MetsValidator
+    dfgviewer_validation_form =< lib.contentElement
+    dfgviewer_validation_form {
+        templateName = ValidationForm
     }
 }

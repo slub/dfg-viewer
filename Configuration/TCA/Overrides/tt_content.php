@@ -20,11 +20,8 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['dfgviewe
     'tt_content',
     'CType',
     [
-        // title
-        'Example',
-        // plugin signature: extkey_identifier
-        'dfgviewer_metsvalidatior',
-        // icon identifier
+        'LLL:EXT:dfgviewer/Resources/Private/Language/locallang_be.xlf:validation',
+        'dfgviewer_validation_form',
         'content-form',
     ],
     'textmedia',
