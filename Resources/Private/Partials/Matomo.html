@@ -25,21 +25,21 @@
       data-namespace-typo3-fluid="true"
       lang="en">
 
-<f:section name="Piwik">
+<f:section name="Matomo">
 <script>
   var _paq = _paq || [];
-  _paq.push(["setDomains", ["{piwik_domains}"]]);
+  _paq.push(["setDomains", ["{matomoDomains}"]]);
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    var u="//{piwik_hostname}/";
+    var u="//{matomoHostname}/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', '{piwik_idsite}']);
+    _paq.push(['setSiteId', '{matomoIdsite}']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//{piwik_hostname}/piwik.php?idsite={piwik_idsite}" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="//{matomoHostname}/piwik.php?idsite={matomoIdsite}" style="border:0;" alt="" /></p></noscript>
 </f:section>
 
 </html>
