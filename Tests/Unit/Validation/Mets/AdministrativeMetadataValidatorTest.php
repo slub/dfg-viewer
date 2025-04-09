@@ -32,7 +32,7 @@ use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
 class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
-     * Test validation against the rules of chapter "2.6.1 Metadatensektion – mets:amdSec"
+     * Test validation against the rules of chapter "2.7.1 Metadatensektion – mets:amdSec"
      *
      * @return void
      */
@@ -54,7 +54,7 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     }
 
     /**
-     * Test validation against the rules of chapters "2.6.2.5 Herstellung – mets:digiprovMD" and "2.6.2.6 Eingebettete Verweise – mets:digiprovMD/mets:mdWrap"
+     * Test validation against the rules of chapters "2.7.2.5 Herstellung – mets:digiprovMD" and "2.7.2.7 Eingebettete Verweise – mets:digiprovMD/mets:mdWrap"
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     }
 
     /**
-     * Test validation against the rules of chapters "2.6.2.4 Rechtedeklaration – mets:rightsMD" and "2.6.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"
+     * Test validation against the rules of chapters "2.7.2.4 Rechtedeklaration – mets:rightsMD" and "2.7.2.4 Eingebettete Rechteangaben – mets:rightsMD/mets:mdWrap"
      *
      * @return void
      */
@@ -120,7 +120,7 @@ class AdministrativeMetadataValidatorTest extends AbstractDomDocumentValidatorTe
     }
 
     /**
-     * Test validation against the rules of chapters "2.6.2.1 Technische Metadaten – mets:techMD" and "2.6.2.2 Eingebettete technische Daten – mets:techMD/mets:mdWrap"
+     * Test validation against the rules of chapters "2.7.2.1 Technische Metadaten – mets:techMD" and "2.7.2.2 Eingebettete technische Daten – mets:techMD/mets:mdWrap"
      *
      * @return void
      * @throws \DOMException

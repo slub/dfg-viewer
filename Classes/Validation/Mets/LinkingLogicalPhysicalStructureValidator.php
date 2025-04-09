@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.3 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.4 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -40,7 +40,7 @@ class LinkingLogicalPhysicalStructureValidator extends AbstractDomDocumentValida
 {
     public function isValidDocument(): void
     {
-        // Validates against the rules of chapter "2.3.1 Structure links - mets:structLink"
+        // Validates against the rules of chapter "2.4 Structure links - mets:structLink"
         $this->createNodeListValidator(VH::XPATH_STRUCT_LINK)
             ->validateHasNoneOrOne();
 
@@ -50,7 +50,7 @@ class LinkingLogicalPhysicalStructureValidator extends AbstractDomDocumentValida
     /**
      * Validates the linking elements.
      *
-     * Validates against the rules of chapter "2.3.2.1 Linking – mets:smLink"
+     * Validates against the rules of chapter "2.4.2.1 Linking – mets:smLink"
      *
      * @return void
      */
@@ -67,7 +67,7 @@ class LinkingLogicalPhysicalStructureValidator extends AbstractDomDocumentValida
     protected function validateLinkElement(\DOMNode $linkElement): void
     {
         $this->createNodeValidator($linkElement)
-            ->validateHasReferenceToId("xlink:from", VH::XPATH_LOGICAL_STRUCTURES)
-            ->validateHasReferenceToId("xlink:to", VH::XPATH_PHYSICAL_STRUCTURES);
+            ->validateHasReferenceToId("xlink:from", VH::XPATH_LOGICAL_STRUCTURES . '//mets:div')
+            ->validateHasReferenceToId("xlink:to", VH::XPATH_PHYSICAL_STRUCTURES . '//mets:div');
     }
 }

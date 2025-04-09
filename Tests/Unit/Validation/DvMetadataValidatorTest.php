@@ -58,7 +58,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->assertNodeContent(VH::XPATH_DVRIGHTS . '/dv:ownerSiteURL', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerSiteURL');
         $this->assertNodeContent(VH::XPATH_DVRIGHTS . '/dv:ownerContact', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerContact');
         $this->setContentValue(VH::XPATH_DVRIGHTS . '/dv:ownerContact', 'mailto:Test');
-        $this->hasErrorContentWithEmail(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerContact', 'mailto:Test');
+        $this->hasErrorEmailContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerContact', 'mailto:Test');
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVRIGHTS, VH::NAMESPACE_DV, 'dv:aggregator');
@@ -74,7 +74,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->assertOptionalNodeContent(VH::XPATH_DVRIGHTS, 'dv:sponsorSiteURL', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:sponsorSiteURL');
 
         $this->setContentValue(VH::XPATH_DVRIGHTS . '/dv:license', 'Test');
-        $this->hasErrorContentWithUrl(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:license', 'Test');
+        $this->hasErrorUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:license', 'Test');
     }
 
     /**
@@ -114,7 +114,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_DVLINKS . '/dv:sru', 'Test');
-        $this->hasErrorContentWithUrl(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:sru', 'Test');
+        $this->hasErrorUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:sru', 'Test');
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVLINKS, VH::NAMESPACE_DV, 'dv:iiif');
@@ -122,7 +122,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_DVLINKS . '/dv:iiif', 'Test');
-        $this->hasErrorContentWithUrl(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:iiif', 'Test');
+        $this->hasErrorUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:iiif', 'Test');
     }
 
     protected function assertNodeContent(string $expression, string $expectedExpression): void
@@ -132,7 +132,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         $this->setContentValue($expression, 'Test');
-        $this->hasErrorContentWithUrl($expectedExpression, 'Test');
+        $this->hasErrorUrlContent($expectedExpression, 'Test');
         $this->resetDocument();
     }
 
@@ -143,7 +143,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         $this->setContentValue($expression . '/' . $name, 'Test');
-        $this->hasErrorContentWithUrl($expectedExpression, 'Test');
+        $this->hasErrorUrlContent($expectedExpression, 'Test');
         $this->resetDocument();
     }
 

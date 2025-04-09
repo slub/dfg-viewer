@@ -28,7 +28,7 @@ namespace Slub\Dfgviewer\Validation;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 
 /**
- * The validator validates against the rules outlined in chapter 2.7 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.7 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -73,11 +73,11 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
 
         $sruNode = $this->createNodeListValidator(VH::XPATH_DVLINKS . '/dv:sru')
             ->validateHasNoneOrOne()->getFirstNode();
-        $this->createNodeValidator($sruNode)->validateHasContentWithUrl();
+        $this->createNodeValidator($sruNode)->validateHasUrlContent();
 
         $iiifNode = $this->createNodeListValidator(VH::XPATH_DVLINKS . '/dv:iiif')
             ->validateHasNoneOrOne()->getFirstNode();
-        $this->createNodeValidator($iiifNode)->validateHasContentWithUrl();
+        $this->createNodeValidator($iiifNode)->validateHasUrlContent();
     }
 
     /**
@@ -108,7 +108,7 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasNoneOrOne()
             ->getFirstNode();
         if ($licenseNode && !in_array($licenseNode->nodeValue, ['pdm', 'cc0', 'cc-by', 'cc-by-sa', 'cc-by-nd', 'cc-by-nc', 'cc-by-nc-sa', 'cc-by-nc-nd', 'reserved'])) {
-            $this->createNodeValidator($licenseNode)->validateHasContentWithUrl();
+            $this->createNodeValidator($licenseNode)->validateHasUrlContent();
         }
     }
 
@@ -147,9 +147,9 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
 
         $nodeValidator = $this->createNodeValidator($node);
         if (str_starts_with(strtolower($node->nodeValue), 'mailto:')) {
-            $nodeValidator->validateHasContentWithEmail();
+            $nodeValidator->validateHasEmailContent();
         } else {
-            $nodeValidator->validateHasContentWithUrl();
+            $nodeValidator->validateHasUrlContent();
         }
     }
 }
