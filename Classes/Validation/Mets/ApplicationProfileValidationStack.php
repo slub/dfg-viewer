@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Slub\Dfgviewer\Validation;
+namespace Slub\Dfgviewer\Validation\Mets;
 
 /**
  * Copyright notice
@@ -28,6 +28,7 @@ namespace Slub\Dfgviewer\Validation;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidationStack;
+use Slub\Dfgviewer\Validation\DvMetadataValidator;
 use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
 use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
 use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
@@ -41,13 +42,13 @@ class ApplicationProfileValidationStack extends AbstractDlfValidationStack
     public function __construct()
     {
         parent::__construct(\DOMDocument::class);
-        $this->addValidator(LogicalStructureValidator::class, "Validation of the logical document structure", false);
-        $this->addValidator(PhysicalStructureValidator::class, "Validation of the physical document structure", false);
-        $this->addValidator(MusicalStructureValidator::class, "Validation of the musical document structure", false);
-        $this->addValidator(LinkingLogicalPhysicalStructureValidator::class, "Validation of linking between logical and physical structure", false);
-        $this->addValidator(DigitalRepresentationValidator::class, "Validation of the digital representation", false);
-        $this->addValidator(DescriptiveMetadataValidator::class, "Validation of the descriptive metadata", false);
-        $this->addValidator(AdministrativeMetadataValidator::class, "Validation of the administrative metadata", false);
-        $this->addValidator(DvMetadataValidator::class, "Validation of the DFG-Viewer specific details", false);
+        $this->addValidator(LogicalStructureValidator::class, );
+        $this->addValidator(PhysicalStructureValidator::class, );
+        $this->addValidator(MusicalStructureValidator::class);
+        $this->addValidator(LinkingLogicalPhysicalStructureValidator::class);
+        $this->addValidator(DigitalRepresentationValidator::class);
+        $this->addValidator(DescriptiveMetadataValidator::class);
+        $this->addValidator(AdministrativeMetadataValidator::class);
+        $this->addValidator(DvMetadataValidator::class);
     }
 }

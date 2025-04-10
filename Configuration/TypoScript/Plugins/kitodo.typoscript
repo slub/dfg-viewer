@@ -28,7 +28,7 @@ plugin.tx_dlf {
     }
     settings {
         storagePid = {$plugin.tx_dlf.persistence.storagePid}
-        domDocumentValidationValidators {
+        domDocumentValidation {
             10 {
                 title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
                 description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
@@ -112,6 +112,13 @@ plugin.tx_dlf_pageview {
         elementId = tx-dfgviewer-map-0
         multiViewType = composition
     }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
+# validation form
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_validationform < tt_content.list.20.dlf_validationform
+plugin.tx_dlf_validationform {
 }
 
 # --------------------------------------------------------------------------------------------------------------------

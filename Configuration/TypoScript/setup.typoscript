@@ -13,8 +13,8 @@ lib.contentElement {
 }
 
 tt_content {
-    dfgviewer_validation_form =< lib.contentElement
-    dfgviewer_validation_form {
+    dfgviewer_validation =< lib.contentElement
+    dfgviewer_validation {
         templateName = ValidationForm
     }
 }

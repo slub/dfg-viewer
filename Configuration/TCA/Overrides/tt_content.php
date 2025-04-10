@@ -21,7 +21,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['dfgviewe
     'CType',
     [
         'LLL:EXT:dfgviewer/Resources/Private/Language/locallang_be.xlf:validation',
-        'dfgviewer_validation_form',
+        'dfgviewer_validation',
         'content-form',
     ],
     'textmedia',
