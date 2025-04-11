@@ -29,39 +29,41 @@ plugin.tx_dlf {
     settings {
         storagePid = {$plugin.tx_dlf.persistence.storagePid}
         domDocumentValidation {
-            10 {
-                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
-                description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
-                className = Kitodo\Dlf\Validation\XmlSchemesValidator
-                configuration {
-                    oai {
-                        title = OAI 2.0
-                        namespace = http://www.openarchives.org/OAI/2.0/
-                        schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/OAI-PMH.xsd
-                    }
-                    mets {
-                        title = METS 1.10
-                        namespace = http://www.loc.gov/METS/
-                        schemaLocation = https://www.loc.gov/standards/mets/version112/mets.xsd
-                    }
-                    mods {
-                        title = MODS 3.5
-                        namespace = http://www.loc.gov/mods/v3
-                        schemaLocation = https://www.loc.gov/standards/mods/v3/mods-3-5.xsd
+            dfgviewer {
+                10 {
+                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
+                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
+                    className = Kitodo\Dlf\Validation\XmlSchemesValidator
+                    configuration {
+                        oai {
+                            title = OAI 2.0
+                            namespace = http://www.openarchives.org/OAI/2.0/
+                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/OAI-PMH.xsd
+                        }
+                        mets {
+                            title = METS 1.10
+                            namespace = http://www.loc.gov/METS/
+                            schemaLocation = https://www.loc.gov/standards/mets/version112/mets.xsd
+                        }
+                        mods {
+                            title = MODS 3.5
+                            namespace = http://www.loc.gov/mods/v3
+                            schemaLocation = https://www.loc.gov/standards/mods/v3/mods-3-5.xsd
+                        }
                     }
                 }
-            }
-            20 {
-                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
-                description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
-                className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
-            }
-            30 {
-                title = URL Existence Validator
-                description =
-                className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
-                configuration {
-                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+                20 {
+                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
+                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
+                    className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
+                }
+                30 {
+                    title = URL Existence Validator
+                    description =
+                    className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
+                    configuration {
+                        excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+                    }
                 }
             }
         }
