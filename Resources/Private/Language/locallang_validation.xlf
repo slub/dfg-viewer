@@ -5,18 +5,6 @@
 			<generator>LFEditor</generator>
 		</header>
 		<body>
-            <trans-unit id="validation.success">
-                <source><![CDATA[Successful]]></source>
-            </trans-unit>
-            <trans-unit id="validation.error">
-                <source><![CDATA[Error]]></source>
-            </trans-unit>
-            <trans-unit id="validation.warning">
-                <source><![CDATA[Warning]]></source>
-            </trans-unit>
-            <trans-unit id="validation.notice">
-                <source><![CDATA[Notice]]></source>
-            </trans-unit>
 			<trans-unit id="validator.metsapplicationprofile.title">
 				<source><![CDATA[METS Application Profile Validator]]></source>
 			</trans-unit>

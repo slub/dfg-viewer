@@ -42,8 +42,8 @@ class ApplicationProfileValidationStack extends AbstractDlfValidationStack
     public function __construct()
     {
         parent::__construct(\DOMDocument::class);
-        $this->addValidator(LogicalStructureValidator::class, );
-        $this->addValidator(PhysicalStructureValidator::class, );
+        $this->addValidator(LogicalStructureValidator::class);
+        $this->addValidator(PhysicalStructureValidator::class);
         $this->addValidator(MusicalStructureValidator::class);
         $this->addValidator(LinkingLogicalPhysicalStructureValidator::class);
         $this->addValidator(DigitalRepresentationValidator::class);

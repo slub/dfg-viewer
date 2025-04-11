@@ -6,15 +6,3 @@
 @import 'EXT:dfgviewer/Configuration/TypoScript/Plugins/*.typoscript'
 # Page
 @import 'EXT:dfgviewer/Configuration/TypoScript/Page/*.typoscript'
-
-# Content Elements
-lib.contentElement {
-    templateRootPaths.200 = EXT:dfgviewer/Resources/Private/Templates/ContentElements/
-}
-
-tt_content {
-    dfgviewer_validation =< lib.contentElement
-    dfgviewer_validation {
-        templateName = ValidationForm
-    }
-}

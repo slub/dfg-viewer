@@ -13,10 +13,6 @@
 				<source><![CDATA[SRU Search Bar]]></source>
 				<target><![CDATA[SRU-Suchleiste]]></target>
 			</trans-unit>
-            <trans-unit id="validationForm">
-                <source><![CDATA[Validation form]]></source>
-                <target><![CDATA[Validierungsformular]]></target>
-            </trans-unit>
 		</body>
 	</file>
 </xliff>
