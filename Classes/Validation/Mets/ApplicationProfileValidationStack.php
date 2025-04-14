@@ -28,15 +28,18 @@ namespace Slub\Dfgviewer\Validation\Mets;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidationStack;
+use Kitodo\Dlf\Validation\XmlSchemasValidator;
+use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\DvMetadataValidator;
-use Slub\Dfgviewer\Validation\Mets\AdministrativeMetadataValidator;
-use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
-use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
-use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\MusicalStructureValidator;
-use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
+/**
+ * The validator stack validates against the rules of the METS application profile 2.4.
+ *
+ * @package TYPO3
+ * @subpackage dfg-viewer
+ *
+ * @access public
+ */
 class ApplicationProfileValidationStack extends AbstractDlfValidationStack
 {
     public function __construct()

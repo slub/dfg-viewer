@@ -10,16 +10,16 @@
                 <target><![CDATA[METS-Anwendungsprofil Validator]]></target>
             </trans-unit>
             <trans-unit id="validator.metsapplicationprofile.description" approved="yes">
-                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf">METS Application Profile version 2.3.1</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
-                <target><![CDATA[Validierung gegen das <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf">METS Application Profile Version 2.3.1</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
+                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile version 2.4</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+                <target><![CDATA[Validierung gegen das <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile Version 2.4</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
             </trans-unit>
             <trans-unit id="validator.xmlschemas.title">
                 <source><![CDATA[XML Schemas Validator]]></source>
                 <target><![CDATA[XML-Schema Validator]]></target>
             </trans-unit>
             <trans-unit id="validator.xmlschemas.description">
-                <source><![CDATA[Validation against the <a href="https://dfg-viewer-typo3-11.ddev.site/_assets/9f048726b53ecbb041abd64b33ca6a98/Xsd/OAI-PMH.xsd">OAI 2.0</a>, <a href="https://www.loc.gov/standards/mets/version110/mets.xsd">METS 1.10</a>, and <a href="https://www.loc.gov/standards/mods/v3/mods-3-5.xsd">MODS 3.5</a> XSD files.]]></source>
-                <target><![CDATA[Validierung gegen die <a href="https://dfg-viewer-typo3-11.ddev.site/_assets/9f048726b53ecbb041abd64b33ca6a98/Xsd/OAI-PMH.xsd">OAI 2.0</a>, <a href="https://www.loc.gov/standards/mets/version110/mets.xsd">METS 1.10</a> und <a href="https://www.loc.gov/standards/mods/v3/mods-3-5.xsd">MODS 3.5</a> XSD-Dateien.]]></target>
+                <source><![CDATA[Validation against the <a href="%s">%s</a> and <a href="%s">%s</a> XSD files.]]></source>
+                <target><![CDATA[Validierung gegen die <a href="%s">%s</a> und <a href="%s">%s</a> XSD-Dateien.]]></target>
             </trans-unit>
         </body>
     </file>

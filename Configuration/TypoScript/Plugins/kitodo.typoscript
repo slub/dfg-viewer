@@ -32,23 +32,24 @@ plugin.tx_dlf {
             dfgviewer {
                 10 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
-                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
-                    className = Kitodo\Dlf\Validation\XmlSchemesValidator
-                    configuration {
-                        oai {
-                            title = OAI 2.0
-                            namespace = http://www.openarchives.org/OAI/2.0/
-                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/OAI-PMH.xsd
+                    description {
+                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
+                        arguments {
+                            0 = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
+                            1 = METS 1.12.1
+                            2 = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
+                            3 = MODS 3.8
                         }
+                    }
+                    className = Kitodo\Dlf\Validation\XmlSchemasValidator
+                    configuration {
                         mets {
-                            title = METS 1.10
                             namespace = http://www.loc.gov/METS/
-                            schemaLocation = https://www.loc.gov/standards/mets/version112/mets.xsd
+                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
                         }
                         mods {
-                            title = MODS 3.5
                             namespace = http://www.loc.gov/mods/v3
-                            schemaLocation = https://www.loc.gov/standards/mods/v3/mods-3-5.xsd
+                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
                         }
                     }
                 }
