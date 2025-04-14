@@ -61,7 +61,7 @@ plugin.tx_dlf {
                 30 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.title
                     description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.description
-                    className = Kitodo\Dlf\Validation\MetsUrlExistenceValidator
+                    className = Slub\Dfgviewer\Validation\MetsUrlExistenceValidator
                     configuration {
                         excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
                     }
