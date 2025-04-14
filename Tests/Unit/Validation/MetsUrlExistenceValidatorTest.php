@@ -25,6 +25,7 @@
 
 namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
+use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\MetsUrlExistenceValidator;
 
