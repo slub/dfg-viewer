@@ -1,7 +1,5 @@
 <?php
 
-namespace Slub\Dfgviewer\Tests\Unit\Validation;
-
 /**
  * Copyright notice
  *
@@ -25,11 +23,12 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Kitodo\Dlf\Validation\AbstractDlfValidator;
-use Slub\Dfgviewer\Common\ValidationHelper;
-use Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator;
+namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
-class DomDocumentUrlExistenceValidatorTest extends AbstractDomDocumentValidatorTest
+use Slub\Dfgviewer\Common\ValidationHelper;
+use Slub\Dfgviewer\Validation\MetsUrlExistenceValidator;
+
+class MetsUrlExistenceValidatorTest extends AbstractDomDocumentValidatorTest
 {
 
     public function testBrokenUrlError(): void
@@ -51,6 +50,6 @@ class DomDocumentUrlExistenceValidatorTest extends AbstractDomDocumentValidatorT
     {
         // ignore all urls of fixture xml to test specifically
         $excludeHosts = 'www.loc.gov,id.loc.gov,example.com,dfg-viewer.de,www.w3.org';
-        return new DomDocumentUrlExistenceValidator(['excludeHosts' => $excludeHosts]);
+        return new MetsUrlExistenceValidator(['excludeHosts' => $excludeHosts]);
     }
 }

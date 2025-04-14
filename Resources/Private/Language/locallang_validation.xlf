@@ -11,6 +11,12 @@
             <trans-unit id="validator.metsapplicationprofile.description">
                 <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile version 2.4</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
             </trans-unit>
+            <trans-unit id="validator.metsurlexistence.title">
+                <source><![CDATA[METS URL Existence Validator]]></source>
+            </trans-unit>
+            <trans-unit id="validator.metsurlexistence.description">
+                <source><![CDATA[The validator checks the URLs of a METS document for their existence. The URLs of the file groups are only checked on a sample basis for performance reasons. For this purpose, only one file URL per host checked for each file group.]]></source>
+            </trans-unit>
             <trans-unit id="validator.xmlschemas.title">
                 <source><![CDATA[XML Schemas Validator]]></source>
             </trans-unit>
