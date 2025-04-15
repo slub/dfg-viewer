@@ -28,8 +28,6 @@ namespace Slub\Dfgviewer\Validation\Mets;
  */
 
 use Kitodo\Dlf\Validation\AbstractDlfValidationStack;
-use Kitodo\Dlf\Validation\XmlSchemasValidator;
-use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Validation\DvMetadataValidator;
 
 /**
