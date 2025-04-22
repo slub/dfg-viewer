@@ -184,7 +184,7 @@ lib.kitodo.navigation.viewfunction < tt_content.list.20.dlf_navigation
 lib.kitodo.navigation.viewfunction {
     settings {
         pages = {$plugin.tx_dlf.persistence.storagePid}
-        features = pageselect,rotation,zoom,fullscreen
+        features = pageselect,rotation,zoom
     }
 }
 
