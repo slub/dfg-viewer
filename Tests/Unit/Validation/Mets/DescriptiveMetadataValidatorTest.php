@@ -32,7 +32,7 @@ use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
 class DescriptiveMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 {
     /**
-     * Test validation against the rules of chapter "2.5.1 Metadatensektion – mets:dmdSec"
+     * Test validation against the rules of chapter "2.6.1 Metadatensektion – mets:dmdSec"
      *
      * @return void
      */
@@ -51,7 +51,7 @@ class DescriptiveMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     }
 
     /**
-     * Test validation against the rules of chapter "2.5.2.1 Eingebettete Metadaten – mets:mdWrap"
+     * Test validation against the rules of chapter "2.6.2.1 Eingebettete Metadaten – mets:mdWrap"
      *
      * @return void
      */

@@ -29,7 +29,7 @@ use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
 
 /**
- * The validator validates against the rules outlined in chapter 2.4 of the METS application profile 2.3.1.
+ * The validator validates against the rules outlined in chapter 2.5 of the METS application profile 2.4.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
@@ -59,7 +59,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     /**
      * Validates the file groups.
      *
-     * Validates against the rules of chapter "2.4.2.1 Dateigruppen – mets:fileGrp"
+     * Validates against the rules of chapter "2.5.2.1 Dateigruppen – mets:fileGrp"
      *
      * @return void
      */
@@ -72,6 +72,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
             $this->validateFileGroup($fileSectionGroup);
         }
 
+        // there should be at least one DEFAULT file group
         $this->createNodeListValidator(VH::XPATH_FILE_SECTION_GROUPS . '[@USE="DEFAULT"]')
             ->validateHasOne();
     }
@@ -79,13 +80,14 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     protected function validateFileGroup(\DOMNode $fileGroup): void
     {
         $this->createNodeValidator($fileGroup)
-            ->validateHasUniqueAttribute("USE", VH::XPATH_FILE_SECTION_GROUPS);
+            ->validateHasUniqueAttribute("USE", VH::XPATH_FILE_SECTION_GROUPS)
+            ->validateHasAttributeValue("USE", VH::SUPPORTED_FILEGROUPS);
     }
 
     /**
      * Validates the files.
      *
-     * Validates against the rules of chapters "2.4.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
+     * Validates against the rules of chapters "2.5.2.2 Datei – mets:fileGrp/mets:file" and "2.4.2.3 Dateilink – mets:fileGrp/mets:file/mets:FLocat"
      *
      * @return void
      */
@@ -103,14 +105,14 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     {
         $this->createNodeValidator($file)
             ->validateHasUniqueId()
-            ->validateHasAttribute('MIMETYPE');
+            ->validateHasAttributeValue('MIMETYPE', VH::SUPPORTED_MIMETYPES);
 
         $fLocat = $this->createNodeListValidator('mets:FLocat', $file)
             ->validateHasOne()
             ->getFirstNode();
 
         $this->createNodeValidator($fLocat)
-            ->validateHasAttributeWithValue('LOCTYPE', ['URL', 'PURL'])
-            ->validateHasAttributeWithUrl('xlink:href');
+            ->validateHasAttributeValue('LOCTYPE', ['URL', 'PURL'])
+            ->validateHasUrlAttribute('xlink:href');
     }
 }

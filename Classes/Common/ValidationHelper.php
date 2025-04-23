@@ -41,8 +41,18 @@ class ValidationHelper
 
     const URL_REGEX = '(http|https):\/\/([\w_-]+(?:\.[\w_-]+)+)([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])';
 
+    const COORDS_REGEX = '\d+,\d+,\d+,\d+';
+
     const STRUCTURE_DATASET = [
         'section', 'file', 'album', 'register', 'annotation', 'address', 'article', 'atlas', 'issue', 'bachelor_thesis', 'volume', 'contained_work', 'additional', 'report', 'official_notification', 'provenance', 'inventory', 'image', 'collation', 'ornament', 'letter', 'cover', 'cover_front', 'cover_back', 'diploma_thesis', 'doctoral_thesis', 'document', 'printers_mark', 'printed_archives', 'binding', 'entry', 'corrigenda', 'bookplate', 'fascicle', 'leaflet', 'research_paper', 'photograph', 'fragment', 'land_register', 'ground_plan', 'habilitation_thesis', 'manuscript', 'illustration', 'imprint', 'contents', 'initial_decoration', 'year', 'chapter', 'map', 'cartulary', 'colophon', 'ephemera', 'engraved_titlepage', 'magister_thesis', 'folder', 'master_thesis', 'multivolume_work', 'month', 'monograph', 'musical_notation', 'periodical', 'poster', 'plan', 'privileges', 'index', 'spine', 'scheme', 'edge', 'seal', 'paste down', 'stamp', 'study', 'table', 'day', 'proceeding', 'text', 'title_page', 'subinventory', 'act', 'judgement', 'verse', 'note', 'preprint', 'dossier', 'lecture', 'endsheet', 'paper', 'preface', 'dedication', 'newspaper'
+    ];
+
+    const SUPPORTED_FILEGROUPS = [
+        'DEFAULT', 'DOWNLOAD', 'THUMBS', 'TEASER', 'AUDIO', 'FULLTEXT', 'SCORE'
+    ];
+
+    const SUPPORTED_MIMETYPES = [
+        'image/', 'audio/', 'video/', 'application/vnd.kitodo.iiif', 'application/vnd.netfpx', 'application/vnd.kitodo.zoomify', 'model/gltf-binary', 'model/gltf+json', 'text/xml', 'application/mei+xml', 'application/pdf'
     ];
 
     const XPATH_METS = '//mets:mets';
@@ -73,11 +83,17 @@ class ValidationHelper
 
     const XPATH_LOGICAL_EXTERNAL_REFERENCES = self::XPATH_LOGICAL_STRUCTURAL_ELEMENTS . '/mets:mptr';
 
+    const XPATH_MUSICAL_STRUCTURES = self::XPATH_METS . '/mets:structMap[@TYPE="MUSICAL"]';
+
+    const XPATH_MUSICAL_STRUCTURAL_ELEMENT = self::XPATH_MUSICAL_STRUCTURES . '/mets:div';
+
+    const XPATH_MUSICAL_STRUCTURAL_MEASURE = self::XPATH_MUSICAL_STRUCTURAL_ELEMENT . '/mets:div';
+
     const XPATH_PHYSICAL_STRUCTURES = self::XPATH_METS . '/mets:structMap[@TYPE="PHYSICAL"]';
 
-    const XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE = self::XPATH_PHYSICAL_STRUCTURES . '/mets:div';
+    const XPATH_PHYSICAL_STRUCTURAL_ELEMENT = self::XPATH_PHYSICAL_STRUCTURES . '/mets:div';
 
-    const XPATH_PHYSICAL_STRUCTURAL_ELEMENTS = self::XPATH_PHYSICAL_STRUCTURAL_ELEMENT_SEQUENCE . '/mets:div';
+    const XPATH_PHYSICAL_STRUCTURAL_SEQUENCE = self::XPATH_PHYSICAL_STRUCTURAL_ELEMENT . '/mets:div';
 
     const XPATH_DVRIGHTS = self::XPATH_ADMINISTRATIVE_RIGHTS_METADATA . '/mets:mdWrap[@MDTYPE="OTHER" and @OTHERMDTYPE="DVRIGHTS"]/mets:xmlData/dv:rights';
 

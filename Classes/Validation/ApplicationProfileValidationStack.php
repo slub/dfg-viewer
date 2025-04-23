@@ -33,6 +33,7 @@ use Slub\Dfgviewer\Validation\Mets\DescriptiveMetadataValidator;
 use Slub\Dfgviewer\Validation\Mets\DigitalRepresentationValidator;
 use Slub\Dfgviewer\Validation\Mets\LinkingLogicalPhysicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\LogicalStructureValidator;
+use Slub\Dfgviewer\Validation\Mets\MusicalStructureValidator;
 use Slub\Dfgviewer\Validation\Mets\PhysicalStructureValidator;
 
 class ApplicationProfileValidationStack extends AbstractDlfValidationStack
@@ -42,6 +43,7 @@ class ApplicationProfileValidationStack extends AbstractDlfValidationStack
         parent::__construct(\DOMDocument::class);
         $this->addValidator(LogicalStructureValidator::class, "Validation of the logical document structure", false);
         $this->addValidator(PhysicalStructureValidator::class, "Validation of the physical document structure", false);
+        $this->addValidator(MusicalStructureValidator::class, "Validation of the musical document structure", false);
         $this->addValidator(LinkingLogicalPhysicalStructureValidator::class, "Validation of linking between logical and physical structure", false);
         $this->addValidator(DigitalRepresentationValidator::class, "Validation of the digital representation", false);
         $this->addValidator(DescriptiveMetadataValidator::class, "Validation of the descriptive metadata", false);
