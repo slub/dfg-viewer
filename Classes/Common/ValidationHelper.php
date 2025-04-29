@@ -41,7 +41,7 @@ class ValidationHelper
 
     const NAMESPACE_MODS = 'http://www.loc.gov/mods/v3';
 
-    const URL_REGEX = '(http|https):\/\/([\w_-]+(?:\.[\w_-]+)+)([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])';
+    const URL_REGEX = '(http|https):\/\/([\w_-]+(?:\.[\w_-]+)+)([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])?';
 
     const COORDS_REGEX = '\d+,\d+,\d+,\d+';
 
