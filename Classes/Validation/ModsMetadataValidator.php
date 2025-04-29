@@ -61,14 +61,16 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      */
     protected function validateTitle(): void
     {
-        $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO . '[not(@TYPE)]')
+        $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO . '[not(@type)]')
             ->validateHasOne();
 
-        $typedTitleInfos = $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO . '[@TYPE]')
+        // TODO Mehrbändigkeit
+
+        $titleInfos = $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO )
             ->getNodeList();
 
-        foreach ($typedTitleInfos as $typedTitleInfo) {
-            $this->validateTitleInfo($typedTitleInfo);
+        foreach ($titleInfos as $titleInfo) {
+            $this->validateTitleInfo($titleInfo);
         }
     }
 
@@ -79,18 +81,19 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    public function validateTitleInfo(mixed $typedTitleInfo): void
+    public function validateTitleInfo(mixed $titleInfo): void
     {
-        $nodeValidator = $this->createNodeValidator($typedTitleInfo)
-            ->validateHasAttributeWithValue('TYPE', ['abbreviated', 'translated', 'alternative', 'uniform']);
-        if ($typedTitleInfo instanceof \DOMElement) {
-            static::validateUriAttributes($typedTitleInfo, $nodeValidator);
-            if ($typedTitleInfo->hasAttribute('lang')) {
+        if ($titleInfo instanceof \DOMElement) {
+            $nodeValidator = $this->createNodeValidator($titleInfo);
+            if ($titleInfo->hasAttribute('type')) {
+                $nodeValidator->validateHasAttributeValue('type', ['abbreviated', 'translated', 'alternative', 'uniform']);
+            }
+            static::validateUriAttributes($titleInfo, $nodeValidator);
+            if ($titleInfo->hasAttribute('lang')) {
                 $nodeValidator->validateHasAttributeWithIso6392B('lang');
             }
         }
-
-        $this->validateTitleInfoSubElements($typedTitleInfo);
+        $this->validateTitleInfoSubElements($titleInfo);
     }
 
     /**
@@ -136,12 +139,12 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     public function validateName(\DOMElement $name): void
     {
         $nodeValidator = $this->createNodeValidator($name)
-            ->validateHasAttributeWithValue('TYPE', ['personal', 'corporate', 'conference', 'family']);
-        if ($name->hasAttribute('TYPE') && ($name->getAttribute('TYPE') == 'personal' || $name->getAttribute('TYPE') == 'corporate')) {
-            $nodeValidator->validateHasAttributeWithUrl('valueURI');
+            ->validateHasAttributeValue('type', ['personal', 'corporate', 'conference', 'family']);
+        if ($name->hasAttribute('type') && ($name->getAttribute('type') == 'personal' || $name->getAttribute('type') == 'corporate')) {
+            $nodeValidator->validateHasUrlAttribute('valueURI');
         }
         if ($name->hasAttribute('authorityURI')) {
-            $nodeValidator->validateHasAttributeWithUrl('authorityURI');
+            $nodeValidator->validateHasUrlAttribute('authorityURI');
         }
         $this->validateNameSubElements($name);
     }
@@ -159,18 +162,17 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $nameParts = $this->createNodeListValidator('mods:namePart', $name)
             ->validateHasAny()
             ->getNodeList();
-
         foreach ($nameParts as $namePart) {
             $nodeValidator = $this->createNodeValidator($namePart);
-            // TODO Einzigartigkeits check TYPE Attribute
-            if ($name instanceof \DOMElement && $name->hasAttribute('TYPE')) {
-                if ($name->getAttribute('TYPE') == 'personal') {
+            // TODO Einzigartigkeits check type Attribute
+            if ($name instanceof \DOMElement && $name->hasAttribute('type')) {
+                if ($name->getAttribute('type') == 'personal') {
                     $nodeValidator
-                        ->validateHasAttributeWithValue('TYPE', ['family', 'given', 'date', 'termsOfAddress']);
+                        ->validateHasAttributeValue('type', ['family', 'given', 'date', 'termsOfAddress']);
                 }
-                if ($name->getAttribute('TYPE') == 'corporate') {
+                if ($name->getAttribute('type') == 'corporate') {
                     $nodeValidator
-                        ->validateHasNoneAttribute('TYPE');
+                        ->validateHasNoneAttribute('type');
                 }
             }
         }
@@ -223,11 +225,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $placeTerms = $this->createNodeListValidator('mods:placeTerm', $place)
                     ->validateHasAny()
                     ->getNodeList();
-                // TODO Einzigartigkeits check TYPE Attribute
+                // TODO Einzigartigkeits check type Attribute
 
                 foreach ($placeTerms as $placeTerm) {
                     $nodeValidator = $this->createNodeValidator($placeTerm)
-                        ->validateHasAttributeWithValue('TYPE', ['text', 'code']);
+                        ->validateHasAttributeValue('type', ['text', 'code']);
                     static::validateUriAttributes($placeTerm, $nodeValidator);
                 }
             }
@@ -246,7 +248,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 if ($date instanceof \DOMElement) {
                     if ($date->hasAttribute('authorityURI')) {
                         $this->createNodeValidator($date)
-                            ->validateHasAttributeWithValue('qualifier', ['approximate', 'inferred', 'questionable']);
+                            ->validateHasAttributeValue('qualifier', ['approximate', 'inferred', 'questionable']);
                     }
                 }
             }
@@ -316,7 +318,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $notes = $this->createNodeListValidator(VH::XPATH_MODS . '//mods:note')
             ->getNodeList();
         foreach ($notes as $note) {
-            $this->createNodeValidator($note)->validateHasAttribute('TYPE');
+            $this->createNodeValidator($note)->validateHasAttribute('type');
         }
     }
 
@@ -345,7 +347,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $subjectsSubElementValidator = $this->createNodeValidator($subjectsSubElement);
                 if ($subjectsSubElement instanceof \DOMElement) {
                     if ($subjectsSubElement->hasAttribute('valueURI')) {
-                        $subjectsSubElementValidator->validateHasAttributeWithUrl('valueURI');
+                        $subjectsSubElementValidator->validateHasUrlAttribute('valueURI');
                     }
 
                     if ($subjectsSubElement->nodeName == 'mods:titleInfo') {
@@ -384,10 +386,10 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     private static function validateUriAttributes(\DOMElement $node, DomNodeValidator $nodeValidator): void
     {
         if ($node->hasAttribute('authorityURI')) {
-            $nodeValidator->validateHasAttributeWithUrl('authorityURI');
+            $nodeValidator->validateHasUrlAttribute('authorityURI');
         }
         if ($node->hasAttribute('valueURI')) {
-            $nodeValidator->validateHasAttributeWithUrl('valueURI');
+            $nodeValidator->validateHasUrlAttribute('valueURI');
         }
     }
 

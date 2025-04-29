@@ -102,7 +102,7 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateFiles(string $expression, \DOMElement $contextNode=null): void
+    protected function validateFiles(string $expression, ?\DOMElement $contextNode=null): void
     {
         $fileList = $this->createNodeListValidator($expression, $contextNode)
             ->validateHasAny()

@@ -2,6 +2,8 @@
 
 namespace Slub\Dfgviewer\Common;
 
+use function PHPUnit\Framework\assertEquals;
+
 /**
  * Copyright notice
  *
@@ -43,7 +45,7 @@ class IsoLanguageHelper
      *  This second array holds two values: the first is a boolean indicating whether it is a bibliographic code (true) or a terminological code (false),
      *  and the second is a reference to the alternative ISO code associated with that distinction.
      */
-    public const array ISO_639_2 = [
+    public const ISO_639_2 = [
         'aar' => [['Afar', 'Danakil-Sprache']],
         'abk' => [['Abkhazian', 'Abchasisch']],
         'ace' => [['Achinese', 'Aceh-Sprache']],

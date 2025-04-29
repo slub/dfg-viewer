@@ -128,8 +128,8 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
 
-        if (IsoLanguageHelper::iso6392BCodeExists($value)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute on node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957));
+        if (!IsoLanguageHelper::iso6392BCodeExists($value)) {
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957));
         }
 
         return $this;
@@ -156,7 +156,7 @@ class DomNodeValidator
         $value = $this->node->getAttribute($name);
 
         if (array_key_exists($value, IsoScriptHelper::ISO_15924)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute on node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592));
+            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592));
         }
 
         return $this;
@@ -181,7 +181,7 @@ class DomNodeValidator
         $value = $this->getDomElement()->getAttribute($name);
 
         if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $value)) {
-            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute on node "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
+            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
         }
 
         return $this;

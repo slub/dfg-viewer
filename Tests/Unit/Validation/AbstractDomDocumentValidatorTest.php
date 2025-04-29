@@ -211,6 +211,9 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     protected function hasNoError(): void
     {
         $result = $this->validate();
+        if($result->hasErrors()) {
+            $this->assertEquals("", $result->getFirstError()->getMessage());
+        }
         $this->assertFalse($result->hasErrors());
     }
 
@@ -275,6 +278,19 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     }
 
     /**
+     * Assert error of has attribute with ISO 639-2/B value validation.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @param string $value The attribute value
+     * @return void
+     */
+    protected function hasErrorAttributeWithIso6392B(string $expression, string $name, string $value): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $expression . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.');
+    }
+
+    /**
      * Assert error of has attribute with value validation.
      *
      * @param string $expression The expression in error message
@@ -297,7 +313,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasErrorUrlAttribute(string $expression, string $name, string $value): void
     {
-        $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not valid.');
+        $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of node "' . $expression . '" is not valid.');
     }
 
     /**

@@ -7,7 +7,7 @@
                     <mods:titleInfo>
                         <mods:title>"INDIA"</mods:title>
                     </mods:titleInfo>
-                    <mods:name type="personal">
+                    <mods:name type="personal" valueURI="http://example.com">
                         <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid">none</mods:nameIdentifier>
                         <mods:namePart type="family"/>
                         <mods:namePart type="given"/>
@@ -16,13 +16,10 @@
                             <mods:roleTerm authority="marcrelator" type="code">aut</mods:roleTerm>
                         </mods:role>
                     </mods:name>
-                    <mods:name type="corporate">
-                        <mods:nameIdentifier type="viaf" typeURI="http://id.loc.gov/vocabulary/identifiers/viaf">none</mods:nameIdentifier>
-                        <mods:namePart type="family"/>
-                        <mods:namePart type="given"/>
-                        <mods:displayForm></mods:displayForm>
+                    <mods:name type="corporate" valueURI="http://example.com">
+                        <mods:namePart>Royal Society &lt;London&gt;</mods:namePart>
                         <mods:role>
-                            <mods:roleTerm authority="marcrelator" type="code">prv</mods:roleTerm>
+                            <mods:roleTerm authority="marcrelator" type="code">ctb</mods:roleTerm>
                         </mods:role>
                     </mods:name>
                     <mods:originInfo eventType="digitisation">
