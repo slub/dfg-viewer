@@ -38,14 +38,14 @@ page {
       kitodoPageView = TEXT
       kitodoPageView.value = {$plugin.tx_dfgviewer.kitodoPageView}
 
-      piwik_hostname = TEXT
-      piwik_hostname.value = {$plugin.tx_dfgviewer.piwik_hostname}
+      matomoHostname = TEXT
+      matomoHostname.value = {$plugin.tx_dfgviewer.matomo.hostname}
 
-      piwik_idsite = TEXT
-      piwik_idsite.value = {$plugin.tx_dfgviewer.piwik_idsite}
+      matomoIdsite = TEXT
+      matomoIdsite.value = {$plugin.tx_dfgviewer.matomo.idsite}
 
-      piwik_domains = TEXT
-      piwik_domains.value = {$plugin.tx_dfgviewer.piwik_domains}
+      matomoDomains = TEXT
+      matomoDomains.value = {$plugin.tx_dfgviewer.matomo.domains}
 
     }
   }
