@@ -84,9 +84,11 @@
                         <f:else>
                             <ul>
                                 <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
-                                <li class="tx-dlf-imagemanipulationtool">
-                                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
-                                </li>
+                                <f:if condition="{gp-multiview}">
+                                    <li class="tx-dlf-imagemanipulationtool">
+                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
+                                    </li>
+                                </f:if>
                             </ul>
                         </f:else>
                     </f:if>

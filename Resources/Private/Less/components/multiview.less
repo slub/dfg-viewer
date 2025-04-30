@@ -179,6 +179,42 @@
                 display: none;
             }
 
+            .tx-dlf-imagemanipulationtool {
+                position: relative;
+                display: inline-block;
+                > span {
+                    opacity: 1;
+                    overflow: hidden;
+                    width: auto;
+                    height: auto;
+                    display: inline;
+                    margin: 0;
+                    > span > a {
+                        position: relative;
+                        display: inline-block;
+                        width: 40px;
+                        height: 40px;
+                        .text-hide();
+                        border-radius: 20px;
+                        margin: 0 5px;
+                        background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
+                        background-size: auto 120px;
+                        &.active:before {
+                            position: absolute;
+                            top: 2px;
+                            right: 0px;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 8px;
+                            border: 2px solid #fff;
+                            background: @okay-green;
+                            display: block;
+                            content: " ";
+                        }
+                    }
+                }
+            }
+
 
             .gridstack-dragging-handle,
             .ui-resizable-handle,
@@ -247,6 +283,12 @@
 
         .grid-stack {
             .grid-stack-item {
+
+                .tx-dlf-imagemanipulationtool {
+                    position: absolute;
+                    inset: auto 10px auto auto;
+                    display: flex;
+                }
 
                 .tx-dlf-navigation-prev,
                 .tx-dlf-navigation-next {
