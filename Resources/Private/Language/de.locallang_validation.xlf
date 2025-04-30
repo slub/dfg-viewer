@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2022-03-22T22:04:56Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="validator.metsapplicationprofile.title" approved="yes">
+                <source><![CDATA[METS Application Profile Validator]]></source>
+                <target><![CDATA[METS-Anwendungsprofil Validator]]></target>
+            </trans-unit>
+            <trans-unit id="validator.metsapplicationprofile.description" approved="yes">
+                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile version 2.4</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+                <target><![CDATA[Validierung gegen das <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile Version 2.4</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
+            </trans-unit>
+            <trans-unit id="validator.metsurlexistence.title">
+                <source><![CDATA[METS URL Existence Validator]]></source>
+                <target><![CDATA[METS-URL-Existenzprüfer]]></target>
+            </trans-unit>
+            <trans-unit id="validator.metsurlexistence.description">
+                <source><![CDATA[The validator checks the URLs of a METS document for their existence. The URLs of the file groups are only checked on a sample basis for performance reasons. For this purpose, only one file URL per host checked for each file group.]]></source>
+                <target><![CDATA[Der Validator überprüft die URLs eines METS-Dokuments auf ihre Existenz. Die URLs der Dateigruppen werden aus Gründen der Performance nur stichprobenartig überprüft. Dabei wird pro Dateigruppe nur eine Datei-URL pro Host geprüft.]]></target>
+            </trans-unit>
+            <trans-unit id="validator.xmlschemas.title">
+                <source><![CDATA[XML Schemas Validator]]></source>
+                <target><![CDATA[XML-Schema Validator]]></target>
+            </trans-unit>
+            <trans-unit id="validator.xmlschemas.description">
+                <source><![CDATA[Validation against the <a href="%s">%s</a> and <a href="%s">%s</a> XSD files.]]></source>
+                <target><![CDATA[Validierung gegen die <a href="%s">%s</a> und <a href="%s">%s</a> XSD-Dateien.]]></target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
