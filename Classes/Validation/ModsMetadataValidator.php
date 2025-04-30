@@ -205,7 +205,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     }
 
     /**
-     * Validates the genre.
+     * Validates the origin.
      *
      * Validates against the rules of chapter "2.4 Angaben zu Entstehung und Lebenszyklus"
      *

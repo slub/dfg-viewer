@@ -43,12 +43,12 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 
         // validate title info
         $this->addChildNodeWithNamespace('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods', VH::NAMESPACE_MODS, 'mods:titleInfo');
-        $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO . '[@type="alternative"]', 'type', 'test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[1]', 'type', 'test');
+        $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO . '[@type="alternative"]', 'type', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[1]', 'type', 'Test');
         $this->resetDocument();
 
-        $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'lang', 'test');
-        $this->hasErrorAttributeWithIso6392B('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo', 'lang', 'test');
+        $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'lang', 'Test');
+        $this->hasErrorAttributeWithIso6392B('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo', 'lang', 'Test');
         $this->resetDocument();
 
         // validate title info sub elements
@@ -63,16 +63,92 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testName(): void
     {
-        // validate namme
-        $this->setAttributeValue(VH::XPATH_MODS_NAMES, 'type', 'test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'type', 'test');
+        // validate name
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES, 'type', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'type', 'Test');
         $this->resetDocument();
 
+        $this->removeAttribute(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'valueURI');
+        $this->hasErrorAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'valueURI');
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'valueURI', 'Test');
+        $this->hasErrorUrlAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'valueURI', 'Test');
+        $this->resetDocument();
 
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'authorityURI', 'Test');
+        $this->hasErrorUrlAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'authorityURI', 'Test');
 
+        // validate name subelemets
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.3 Gattung/Genre"
+     *
+     * @return void
+     */
+    public function testGenre(): void
+    {
 
     }
 
+    /**
+     * Test validation against the rules of chapter "2.4 Angaben zu Entstehung und Lebenszyklus"
+     *
+     * @return void
+     */
+    public function testOrigin(): void
+    {
+
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.5 Sprache und Schrift"
+     *
+     * @return void
+     */
+    public function testLanguage(): void
+    {
+
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.6 Physische Beschreibung"
+     *
+     * @return void
+     */
+    public function testPhysicalDescription(): void
+    {
+
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.8 Anmerkungen"
+     *
+     * @return void
+     */
+    public function testNotes(): void
+    {
+
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.9 Schlagwörter"
+     *
+     * @return void
+     */
+    public function testSubjects(): void
+    {
+
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.10 Klassifikationen"
+     *
+     * @return void
+     */
+    public function testClassification(): void
+    {
+
+    }
 
     protected function createValidator(): AbstractDlfValidator
     {
