@@ -28,37 +28,43 @@ plugin.tx_dlf {
     }
     settings {
         storagePid = {$plugin.tx_dlf.persistence.storagePid}
-        domDocumentValidationValidators {
-            10 {
-                title = XML-Schemes Validator
-                className = Kitodo\Dlf\Validation\XmlSchemesValidator
-                breakOnError = false
-                configuration {
-                    oai {
-                        namespace = http://www.openarchives.org/OAI/2.0/
-                        schemaLocation = https://www.openarchives.org/OAI/2.0/OAI-PMH.xsd
+        domDocumentValidation {
+            dfgviewer {
+                10 {
+                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
+                    description {
+                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
+                        arguments {
+                            0 = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
+                            1 = METS 1.12.1
+                            2 = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
+                            3 = MODS 3.8
+                        }
                     }
-                    mets {
-                        namespace = http://www.loc.gov/METS/
-                        schemaLocation = http://www.loc.gov/standards/mets/mets.xsd
-                    }
-                    mods {
-                        namespace = http://www.loc.gov/mods/v3
-                        schemaLocation = http://www.loc.gov/standards/mods/mods.xsd
+                    className = Kitodo\Dlf\Validation\XmlSchemasValidator
+                    configuration {
+                        mets {
+                            namespace = http://www.loc.gov/METS/
+                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
+                        }
+                        mods {
+                            namespace = http://www.loc.gov/mods/v3
+                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
+                        }
                     }
                 }
-            }
-            20 {
-                title = Application Profile Validation
-                className = Slub\Dfgviewer\Validation\ApplicationProfileValidationStack
-                breakOnError = false
-            }
-            30 {
-                title = URL Existence Validator
-                className = Slub\Dfgviewer\Validation\DomDocumentUrlExistenceValidator
-                breakOnError = false
-                configuration {
-                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+                20 {
+                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
+                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
+                    className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
+                }
+                30 {
+                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.title
+                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.description
+                    className = Slub\Dfgviewer\Validation\MetsUrlExistenceValidator
+                    configuration {
+                        excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+                    }
                 }
             }
         }
@@ -109,6 +115,13 @@ plugin.tx_dlf_pageview {
         elementId = tx-dfgviewer-map-0
         multiViewType = composition
     }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
+# validation form
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_validationform < tt_content.list.20.dlf_validationform
+plugin.tx_dlf_validationform {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
