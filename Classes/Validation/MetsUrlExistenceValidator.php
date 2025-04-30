@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright notice
  *
@@ -38,14 +36,17 @@ use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * The validator checks the document URLs for their existence.
+ * The validator checks the URLs of a METS document for their existence.
+ *
+ * The URLs of the file groups are only checked on a sample basis for performance reasons.
+ * For this purpose, only one file URL per host checked for each file group.
  *
  * @package TYPO3
  * @subpackage dlf
  *
  * @access public
  */
-class DomDocumentUrlExistenceValidator extends AbstractDlfValidator
+class MetsUrlExistenceValidator extends AbstractDlfValidator
 {
     use LoggerAwareTrait;
 

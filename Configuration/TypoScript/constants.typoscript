@@ -12,14 +12,16 @@ plugin.tx_dfgviewer {
     # cat=plugin.tx_dfgviewer/links/040; type=int+; label=Kitodo Page View
     kitodoPageView =
 
-    # cat=plugin.tx_dfgviewer/piwik/010; type=string; label=Piwik Hostname
-    piwik_hostname =
+    matomo {
+        # cat=plugin.tx_dfgviewer/matomo/010; type=string; label=Matomo Hostname
+        hostname =
 
-    # cat=plugin.tx_dfgviewer/piwik/020; type=string; label=Piwik Idsite
-    piwik_idsite =
+        # cat=plugin.tx_dfgviewer/matomo/020; type=string; label=Matomo Idsite
+        idsite =
 
-    # cat=plugin.tx_dfgviewer/piwik/030; type=string; label=Piwik Domains
-    piwik_domains =
+        # cat=plugin.tx_dfgviewer/matomo/030; type=string; label=Matomo Domains
+        domains =
+    }
 
     news {
         # cat=plugin.tx_dfgviewer/links/020; type=int+; label=News Storage Pid
