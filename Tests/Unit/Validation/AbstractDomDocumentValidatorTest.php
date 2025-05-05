@@ -343,6 +343,31 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     }
 
     /**
+     * Assert error of has content with ISO 639-2b validation.
+     *
+     * @param string $expression The expression in error message
+     * @param string $value The content value
+     * @return void
+     */
+    protected function hasErrorIso6392BContent(string $expression, string $value): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the content of "' . $expression . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.');
+    }
+
+
+    /**
+     * Assert error of has content with ISO 15924 validation.
+     *
+     * @param string $expression The expression in error message
+     * @param string $value The content value
+     * @return void
+     */
+    protected function hasErrorIso15924Content(string $expression, string $value): void
+    {
+        $this->validateAndAssertEquals('Value "' . $value . '" in the content of "' . $expression . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.');
+    }
+
+    /**
      * Assert error of has content with URL.
      *
      * @param string $expression The expression in error message

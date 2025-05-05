@@ -40,7 +40,7 @@ class IsoScriptHelper
      *
      *  Each element of the array uses an ISO 15924 code as its key and contains an array with the number as the first value and, as the second, an array with English and French.
      */
-    public const array ISO_15924 = [
+    public const ISO_15924 = [
         'Adlm' => ['166', ['Adlam', 'adlam']],
         'Afak' => ['439', ['Afaka', 'afaka']],
         'Aghb' => ['239', ['Caucasian Albanian', 'aghbanien']],

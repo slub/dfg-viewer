@@ -199,6 +199,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     {
         $genres = $this->createNodeListValidator(VH::XPATH_MODS_GENRES)
             ->getNodeList();
+        // TODO Test authority
         foreach ($genres as $genre) {
             static::validateUriAttributes($genre, $this->createNodeValidator($genre));
         }
@@ -226,7 +227,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                     ->validateHasAny()
                     ->getNodeList();
                 // TODO Einzigartigkeits check type Attribute
-
                 foreach ($placeTerms as $placeTerm) {
                     $nodeValidator = $this->createNodeValidator($placeTerm)
                         ->validateHasAttributeValue('type', ['text', 'code']);
@@ -276,7 +276,8 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->getNodeList();
             foreach ($languageTerms as $languageTerm) {
                 $nodeValidator = $this->createNodeValidator($languageTerm)
-                    ->validateHasAttributeWithIso6392B('code');
+                    ->validateHasAttributeValue('type', ['code', 'text'])
+                    ->validateHasIso6392BContent();
                 self::validateUriAttributes($languageTerm, $nodeValidator);
             }
 
@@ -285,7 +286,8 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->getNodeList();
             foreach ($scriptTerms as $scriptTerm) {
                 $nodeValidator = $this->createNodeValidator($scriptTerm)
-                    ->validateHasAttributeWithIso15924('code');
+                    ->validateHasAttributeValue('type', ['code', 'text'])
+                    ->validateHasIso15924Content();
                 self::validateUriAttributes($scriptTerm, $nodeValidator);
             }
         }

@@ -91,6 +91,43 @@ class DomNodeValidator
     }
 
     /**
+     * Validate that the node's content contains a ISO 639-2b.
+     *
+     * @return $this
+     */
+    public function validateHasIso6392BContent(): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->node->nodeValue) {
+            return $this;
+        }
+
+        if (!IsoLanguageHelper::iso6392BCodeExists($this->node->nodeValue)) {
+            $this->result->addError(new Error('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1746455012));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Validate that the node's content contains a ISO 15924 value.
+     *
+     * @return $this
+     */
+    public function validateHasIso15924Content(): DomNodeValidator
+    {
+        if (!isset($this->node) || !$this->node->nodeValue) {
+            return $this;
+        }
+
+        if (!array_key_exists($this->node->nodeValue, IsoScriptHelper::ISO_15924)) {
+            $this->result->addError(new Error('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1746455012));
+        }
+
+        return $this;
+    }
+
+
+    /**
      * Validate that the node's content contains a URL.
      *
      * @return $this
@@ -155,7 +192,7 @@ class DomNodeValidator
         // @phpstan-ignore-next-line
         $value = $this->node->getAttribute($name);
 
-        if (array_key_exists($value, IsoScriptHelper::ISO_15924)) {
+        if (!array_key_exists($value, IsoScriptHelper::ISO_15924)) {
             $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592));
         }
 

@@ -87,7 +87,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testGenre(): void
     {
-
+        $this->testUriAttributes(VH::XPATH_MODS_GENRES, '/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:genre');
     }
 
     /**
@@ -107,7 +107,20 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testLanguage(): void
     {
+        $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'type', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:languageTerm', 'type', 'Test');
+        $this->resetDocument();
 
+        $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'Test');
+        $this->hasErrorIso6392BContent('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:languageTerm', 'Test');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'type', 'Test');
+        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:scriptTerm', 'type', 'Test');
+        $this->resetDocument();
+
+        $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'Test');
+        $this->hasErrorIso15924Content('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:scriptTerm', 'Test');
     }
 
     /**
@@ -127,7 +140,8 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testNotes(): void
     {
-
+        $this->removeAttribute(VH::XPATH_MODS . '/mods:note', 'type');
+        $this->hasErrorAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:note', 'type');
     }
 
     /**
@@ -148,6 +162,16 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testClassification(): void
     {
 
+    }
+
+    protected function testUriAttributes(string $expression, string $expectedExpression): void
+    {
+        $this->setAttributeValue($expression, 'authorityURI', 'Test');
+        $this->hasErrorUrlAttribute($expectedExpression, 'authorityURI', 'Test');
+        $this->resetDocument();
+
+        $this->setAttributeValue($expression, 'valueURI', 'Test');
+        $this->hasErrorUrlAttribute($expectedExpression, 'valueURI', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator
