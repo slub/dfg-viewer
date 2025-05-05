@@ -36,6 +36,7 @@
                         <mods:dateCreated point="end" encoding="iso8601"/>
                         <mods:dateIssued encoding="iso8601"/>
                     </mods:originInfo>
+                    <mods:classification authority="lcc">QM21</mods:classification>
                     <mods:relatedItem type="original">
                         <mods:titleInfo>
                             <mods:title/>

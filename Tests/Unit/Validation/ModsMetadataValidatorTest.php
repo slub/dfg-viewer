@@ -31,6 +31,8 @@ use Slub\Dfgviewer\Validation\ModsMetadataValidator;
 
 class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 {
+    const MODS_BASEPATH = '/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods';
+
     /**
      * Test validation against the rules of chapter "2.1 Titel"
      *
@@ -42,18 +44,18 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasErrorOne(VH::XPATH_MODS_TITLEINFO . '[not(@type)]');
 
         // validate title info
-        $this->addChildNodeWithNamespace('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods', VH::NAMESPACE_MODS, 'mods:titleInfo');
+        $this->addChildNodeWithNamespace(self::MODS_BASEPATH, VH::NAMESPACE_MODS, 'mods:titleInfo');
         $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO . '[@type="alternative"]', 'type', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[1]', 'type', 'Test');
+        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:titleInfo[1]', 'type', 'Test');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'lang', 'Test');
-        $this->hasErrorAttributeWithIso6392B('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo', 'lang', 'Test');
+        $this->hasErrorAttributeWithIso6392B(self::MODS_BASEPATH . '/mods:titleInfo', 'lang', 'Test');
         $this->resetDocument();
 
         // validate title info sub elements
         $this->removeNodes(VH::XPATH_MODS_TITLEINFO . '/mods:title');
-        $this->hasErrorOne('mods:title', '/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo');
+        $this->hasErrorOne('mods:title', self::MODS_BASEPATH . '/mods:titleInfo');
     }
 
     /**
@@ -65,17 +67,17 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     {
         // validate name
         $this->setAttributeValue(VH::XPATH_MODS_NAMES, 'type', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'type', 'Test');
+        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]', 'type', 'Test');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'valueURI');
-        $this->hasErrorAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'valueURI');
+        $this->hasErrorAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'valueURI');
         $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'valueURI', 'Test');
-        $this->hasErrorUrlAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'valueURI', 'Test');
+        $this->hasErrorUrlAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'valueURI', 'Test');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'authorityURI', 'Test');
-        $this->hasErrorUrlAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name[1]', 'authorityURI', 'Test');
+        $this->hasErrorUrlAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'authorityURI', 'Test');
 
         // validate name subelemets
     }
@@ -87,7 +89,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testGenre(): void
     {
-        $this->testUriAttributes(VH::XPATH_MODS_GENRES, '/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:genre');
+        $this->checkUriAttributes(VH::XPATH_MODS_GENRES, self::MODS_BASEPATH . '/mods:genre');
     }
 
     /**
@@ -108,19 +110,19 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testLanguage(): void
     {
         $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'type', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:languageTerm', 'type', 'Test');
+        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:language/mods:languageTerm', 'type', 'Test');
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'Test');
-        $this->hasErrorIso6392BContent('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:languageTerm', 'Test');
+        $this->hasErrorIso6392BContent(self::MODS_BASEPATH . '/mods:language/mods:languageTerm', 'Test');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'type', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:scriptTerm', 'type', 'Test');
+        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'type', 'Test');
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'Test');
-        $this->hasErrorIso15924Content('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:language/mods:scriptTerm', 'Test');
+        $this->hasErrorIso15924Content( self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'Test');
     }
 
     /**
@@ -130,7 +132,8 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testPhysicalDescription(): void
     {
-
+        $this->addChildNodeWithNamespace(self::MODS_BASEPATH, VH::NAMESPACE_MODS, 'mods:physicalDescription');
+        $this->hasErrorNoneOrOne(self::MODS_BASEPATH . '/mods:physicalDescription');
     }
 
     /**
@@ -141,7 +144,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testNotes(): void
     {
         $this->removeAttribute(VH::XPATH_MODS . '/mods:note', 'type');
-        $this->hasErrorAttribute('/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:note', 'type');
+        $this->hasErrorAttribute(self::MODS_BASEPATH . '/mods:note', 'type');
     }
 
     /**
@@ -161,10 +164,10 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testClassification(): void
     {
-
+        $this->checkUriAttributes(VH::XPATH_MODS_CLASSIFICATION, self::MODS_BASEPATH . '/mods:classification');
     }
 
-    protected function testUriAttributes(string $expression, string $expectedExpression): void
+    protected function checkUriAttributes(string $expression, string $expectedExpression): void
     {
         $this->setAttributeValue($expression, 'authorityURI', 'Test');
         $this->hasErrorUrlAttribute($expectedExpression, 'authorityURI', 'Test');
