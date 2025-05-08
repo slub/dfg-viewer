@@ -50,6 +50,8 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateNotes();
         $this->validateSubjects();
         $this->validateClassification();
+        $this->validateRelatedItem();
+        $this->validateIdentifier();
     }
 
     /**
@@ -382,6 +384,87 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
         foreach ($classifications as $classification) {
             static::validateUriAttributes($classification, $this->createNodeValidator($classification));
+        }
+    }
+
+    /**
+     * Validates the related items.
+     *
+     * Validates against the rules of chapter "2.11 Beziehungen zu anderen Ressourcen"
+     *
+     * @return void
+     */
+    protected function validateRelatedItem(): void
+    {
+        $relatedItems = $this->createNodeListValidator(VH::XPATH_MODS_RELATEDITEM)
+            ->getNodeList();
+        foreach ($relatedItems as $relatedItem) {
+            $this->createNodeValidator($relatedItem)
+                ->validateHasAttributeValue('type', ['host', 'preceding', 'succeeding', 'series', 'original']);
+
+            // Validation of chapter "2.11.2.1 Titelangaben – mods:titleInfo"
+            $titleInfos = $this->createNodeListValidator('mods:titleInfo', $relatedItem)
+                ->getNodeList();
+
+            foreach ($titleInfos as $titleInfo) {
+                $this->validateTitleInfo($titleInfo);
+                // TODO Wenn in mods:relatedItem das Element mods:recordInfo nicht vorkommt, muss mods:relatedItem über ein mods:titleInfo verfügen, das die Titelinformationen enthält.
+            }
+
+            // Validation of chapter "2.11.2.2 Zählung – mods:part"
+            $parts = $this->createNodeListValidator('mods:part', $relatedItem)
+                ->validateHasNoneOrOne()
+                ->getNodeList();
+
+            // Validation of chapter "2.11.2.3 Unterelemente zu mods:part"
+            foreach ($parts as $part) {
+                $details = $this->createNodeListValidator('mods:detail', $part)
+                    ->validateHasAny()
+                    ->getNodeList();
+                // TODO bei wiederholung muss es ein type Attribute geben
+                // TODO Jeder Wert darf nur einmal vorkommen
+                foreach ($details as $detail) {
+                    if ($detail instanceof \DOMElement && $detail->hasAttribute('type')) {
+                        $this->createNodeValidator($detail)
+                            ->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'collection', 'class', 'series', 'file']);
+                    }
+
+                    // Validation of chapter "2.11.2.3.2.1 mods:number"
+                    $this->createNodeListValidator('mods:number', $detail)->validateHasOne();
+                }
+            }
+
+            // Validation of chapter "2.11.2.4 Ressource – mods:recordInfo"
+            $nodeListValidator = $this->createNodeListValidator('mods:recordInfo', $relatedItem);
+            if (count($titleInfos) == 0) {
+                $nodeListValidator->validateHasOne();
+            } else {
+                $nodeListValidator->validateHasNoneOrOne();
+            }
+
+            if ($nodeListValidator->getNodeList()->count() == 1) {
+                $this->createNodeListValidator('mods:recordIdentifier', $nodeListValidator->getFirstNode());
+            }
+        }
+    }
+
+    /**
+     * Validates the identifier.
+     *
+     * Validates against the rules of chapter "2.12 Identifier"
+     *
+     * @return void
+     */
+    protected function validateIdentifier(): void
+    {
+        $identifiers = $this->createNodeListValidator(VH::XPATH_MODS . '/mods:identifier')
+            ->getNodeList();
+        foreach ($identifiers as $identifier) {
+            $nodeValidator = $this->createNodeValidator($identifier)->validateHasAttribute('type');
+            // TODO validate types http://www.loc.gov/standards/mods/v3/mods-userguide-elements.html#identifier
+            if ($identifier instanceof \DOMElement && $identifier->hasAttribute("invalid")) {
+                $nodeValidator->validateHasAttributeValue('invalid', ['yes']);
+            }
         }
     }
 

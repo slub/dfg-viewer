@@ -77,6 +77,8 @@ class ValidationHelper
 
     const XPATH_MODS_CLASSIFICATION =  self::XPATH_MODS . '/mods:classification';
 
+    const XPATH_MODS_RELATEDITEM =  self::XPATH_MODS . '/mods:relatedItem';
+
     const XPATH_ADMINISTRATIVE_METADATA = self::XPATH_METS . '/mets:amdSec';
 
     const XPATH_ADMINISTRATIVE_TECHNICAL_METADATA = self::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD';
