@@ -52,6 +52,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateClassification();
         $this->validateRelatedItem();
         $this->validateIdentifier();
+        $this->validateLocation();
+        // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
+        $this->validatePart();
+        $this->validateRecordInfo();
+        // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
     }
 
     /**
@@ -90,7 +95,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             if ($titleInfo->hasAttribute('type')) {
                 $nodeValidator->validateHasAttributeValue('type', ['abbreviated', 'translated', 'alternative', 'uniform']);
             }
-            static::validateUriAttributes($titleInfo, $nodeValidator);
+            static::validateUriAttributes($nodeValidator);
             if ($titleInfo->hasAttribute('lang')) {
                 $nodeValidator->validateHasAttributeWithIso6392B('lang');
             }
@@ -203,7 +208,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
         // TODO Test authority
         foreach ($genres as $genre) {
-            static::validateUriAttributes($genre, $this->createNodeValidator($genre));
+            static::validateUriAttributes($this->createNodeValidator($genre));
         }
     }
 
@@ -232,7 +237,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 foreach ($placeTerms as $placeTerm) {
                     $nodeValidator = $this->createNodeValidator($placeTerm)
                         ->validateHasAttributeValue('type', ['text', 'code']);
-                    static::validateUriAttributes($placeTerm, $nodeValidator);
+                    static::validateUriAttributes($nodeValidator);
                 }
             }
 
@@ -280,7 +285,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $nodeValidator = $this->createNodeValidator($languageTerm)
                     ->validateHasAttributeValue('type', ['code', 'text'])
                     ->validateHasIso6392BContent();
-                self::validateUriAttributes($languageTerm, $nodeValidator);
+                self::validateUriAttributes($nodeValidator);
             }
 
             $scriptTerms = $this->createNodeListValidator('mods:scriptTerm', $language)
@@ -290,7 +295,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $nodeValidator = $this->createNodeValidator($scriptTerm)
                     ->validateHasAttributeValue('type', ['code', 'text'])
                     ->validateHasIso15924Content();
-                self::validateUriAttributes($scriptTerm, $nodeValidator);
+                self::validateUriAttributes($nodeValidator);
             }
         }
     }
@@ -342,7 +347,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             if (!$subject->hasAttribute('valueURI')) {
                 $subjectValidator->validateHasAttribute('authority');
             }
-            self::validateUriAttributes($subject, $subjectValidator);
+            self::validateUriAttributes($subjectValidator);
 
             $subjectsSubElements = $this->createNodeListValidator('mods:topic or mods:geographic or mods:temporal or mods:titleInfo or mods:name', $subject)
                 ->getNodeList();
@@ -383,7 +388,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $classifications = $this->createNodeListValidator(VH::XPATH_MODS_CLASSIFICATION)
             ->getNodeList();
         foreach ($classifications as $classification) {
-            static::validateUriAttributes($classification, $this->createNodeValidator($classification));
+            static::validateUriAttributes($this->createNodeValidator($classification));
         }
     }
 
@@ -457,7 +462,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      */
     protected function validateIdentifier(): void
     {
-        $identifiers = $this->createNodeListValidator(VH::XPATH_MODS . '/mods:identifier')
+        $identifiers = $this->createNodeListValidator(VH::XPATH_MODS_IDENTIFIER)
             ->getNodeList();
         foreach ($identifiers as $identifier) {
             $nodeValidator = $this->createNodeValidator($identifier)->validateHasAttribute('type');
@@ -468,12 +473,106 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         }
     }
 
-    private static function validateUriAttributes(\DOMElement $node, DomNodeValidator $nodeValidator): void
+    /**
+     * Validates the location.
+     *
+     * Validates against the rules of chapter "2.13 Zugang zur Ressource"
+     *
+     * @return void
+     */
+    protected function validateLocation(): void
     {
-        if ($node->hasAttribute('authorityURI')) {
+        $locations = $this->createNodeListValidator(VH::XPATH_MODS_LOCATION)
+            ->getNodeList();
+        // TODO check konditional
+        foreach ($locations as $location) {
+            $physicalLocation = $this->createNodeListValidator('mods:physicalLocation', $location)
+                ->validateHasNoneOrOne()
+                ->getFirstNode();
+
+            if ($physicalLocation != null) {
+                self::validateUriAttributes($this->createNodeValidator($physicalLocation));
+            }
+
+            $this->createNodeListValidator('mods:url or mods:physicalLocation', $location)
+                ->validateHasOne();
+
+            $urls = $this->createNodeListValidator('mods:url', $location);
+            foreach ($urls as $url) {
+                $this->createNodeValidator($url)->severityNotice()->validateHasAttributeValue('access', ['preview','raw object', 'object in context']);
+            }
+
+            $this->createNodeListValidator('mods:shelfLocator', $location)
+                ->validateHasNoneOrOne();
+        }
+    }
+
+    /**
+     * Validates the part.
+     *
+     * Validates against the rules of chapter "2.15 Angabe von Bänden und anderen Teilen"
+     *
+     * @return void
+     */
+    protected function validatePart(): void
+    {
+        $nodeListValidator = $this->createNodeListValidator(VH::XPATH_MODS_PART);
+
+        $this->createNodeListValidator(VH::XPATH_MODS_RELATEDITEM . '[@type="host"]')->getNodeList()->count() > 0 ? $nodeListValidator->validateHasOne() : $nodeListValidator->validateHasNoneOrOne();
+
+        $part = $nodeListValidator->getFirstNode();
+        if ($part != null) {
+            $nodeValidator = $this->createNodeValidator($part);
+            $orderValue = $nodeValidator
+                ->validateHasAttribute('order')
+                ->getDomElement()->getAttribute('order');
+            if (!(is_int($orderValue) && $orderValue >= 0)) {
+                $nodeValidator->addSeverityMessage('Value "' . $orderValue . '" in the "order" attribute of "' . $part->getNodePath() . '" is not a positiv integer.', 1746779788);
+            }
+
+            // Validation of chapter "2.15.2 Unterelemente zu mods:part"
+            $details = $this->createNodeListValidator('mods:detail', $part)
+                ->validateHasAny()
+                ->getNodeList();
+            foreach ($details as $detail) {
+                $this->createNodeValidator($detail)->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'album']);
+
+                $this->createNodeListValidator('mods:number', $detail)->validateHasOne();
+            }
+        }
+    }
+
+    /**
+     * Validates the record info.
+     *
+     * Validates against the rules of chapter "2.16 Informationen zum Metadatensatz"
+     *
+     * @return void
+     */
+    protected function validateRecordInfo(): void
+    {
+        // Validation of chapter "2.16.1 Datensatzinformationen – mods:recordInfo"
+        $recordInfo = $this->createNodeListValidator(VH::XPATH_MODS_RECORDINFO)
+            ->validateHasOne()
+            ->getFirstNode();
+        if ($recordInfo != null) {
+            // Validation of chapter "2.16.2.1 Identifier – mods:recordIdentifier"
+            $this->createNodeListValidator('mods:recordIdentifier', $recordInfo)
+                ->validateHasOne();
+
+            // Validation of chapter "2.16.2.2 Erschließungsstandard – mods:descriptionStandard"
+            $this->createNodeListValidator('mods:descriptionStandard', $recordInfo)
+                ->validateHasNoneOrOne();
+        }
+    }
+
+    private static function validateUriAttributes(DomNodeValidator $nodeValidator): void
+    {
+        $element = $nodeValidator->getDomElement();
+        if ($element->hasAttribute('authorityURI')) {
             $nodeValidator->validateHasUrlAttribute('authorityURI');
         }
-        if ($node->hasAttribute('valueURI')) {
+        if ($element->hasAttribute('valueURI')) {
             $nodeValidator->validateHasUrlAttribute('valueURI');
         }
     }

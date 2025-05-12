@@ -39,9 +39,8 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * @access public
  */
-class DomNodeListValidator
+class DomNodeListValidator extends DomValidator
 {
-
     /**
      * @var string The expression of XPath query
      */
@@ -56,11 +55,6 @@ class DomNodeListValidator
      * @var DOMNodeList The node list result of XPath query
      */
     private DOMNodeList $nodeList;
-
-    /**
-     * @var Result The result containing errors of validation
-     */
-    private Result $result;
 
     public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode=null)
     {
@@ -88,7 +82,7 @@ class DomNodeListValidator
      */
     public function getNode(int $index): ?DOMNode
     {
-        return $this->nodeList->item($index);
+        return $this->nodeList->length > $index ? $this->nodeList->item($index) : null;
     }
 
     /**
@@ -109,7 +103,7 @@ class DomNodeListValidator
     public function validateHasAny(): DomNodeListValidator
     {
         if (!$this->nodeList->length > 0) {
-            $this->addError('There must be at least one element', 1736504345);
+            $this->addMessage('There must be at least one element', 1736504345);
         }
         return $this;
     }
@@ -122,7 +116,7 @@ class DomNodeListValidator
     public function validateHasOne(): DomNodeListValidator
     {
         if ($this->nodeList->length != 1) {
-            $this->addError('There must be an element', 1736504354);
+            $this->addMessage('There must be an element', 1736504354);
         }
         return $this;
     }
@@ -135,17 +129,17 @@ class DomNodeListValidator
     public function validateHasNoneOrOne(): DomNodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
-            $this->addError('There must be no more than one element', 1736504361);
+            $this->addMessage('There must be no more than one element', 1736504361);
         }
         return $this;
     }
 
-    private function addError(string $prefix, int $code): void
+    private function addMessage(string $prefix, int $code): void
     {
         $message = $prefix . ' that matches the XPath expression "' . $this->expression . '"';
         if ($this->contextNode) {
             $message .= ' under "' . $this->contextNode->getNodePath() . '"';
         }
-        $this->result->addError(new Error($message, $code));
+        $this->addSeverityMessage($message, $code);
     }
 }

@@ -79,6 +79,14 @@ class ValidationHelper
 
     const XPATH_MODS_RELATEDITEM =  self::XPATH_MODS . '/mods:relatedItem';
 
+    const XPATH_MODS_IDENTIFIER =  self::XPATH_MODS . '/mods:identifier';
+
+    const XPATH_MODS_LOCATION =  self::XPATH_MODS . '/mods:location';
+
+    const XPATH_MODS_RECORDINFO =  self::XPATH_MODS . '/mods:recordInfo';
+
+    const XPATH_MODS_PART =  self::XPATH_MODS . '/mods:part';
+
     const XPATH_ADMINISTRATIVE_METADATA = self::XPATH_METS . '/mets:amdSec';
 
     const XPATH_ADMINISTRATIVE_TECHNICAL_METADATA = self::XPATH_ADMINISTRATIVE_METADATA . '/mets:techMD';

@@ -30,7 +30,6 @@ use DOMXPath;
 use Slub\Dfgviewer\Common\IsoLanguageHelper;
 use Slub\Dfgviewer\Common\IsoScriptHelper;
 use Slub\Dfgviewer\Common\ValidationHelper;
-use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -41,8 +40,9 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * @access public
  */
-class DomNodeValidator
+class DomNodeValidator extends DomValidator
 {
+    use SeverityTrait;
 
     /**
      * @var DOMXPath The XPath of document to validate
@@ -53,11 +53,6 @@ class DomNodeValidator
      * @var DOMNode|null The node to validate
      */
     private ?DOMNode $node;
-
-    /**
-     * @var Result The result containing errors of validation
-     */
-    private Result $result;
 
     public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node)
     {
@@ -84,7 +79,7 @@ class DomNodeValidator
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->result->addError(new Error('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504169));
+            $this->addSeverityMessage('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504169);
         }
 
         return $this;
@@ -102,7 +97,7 @@ class DomNodeValidator
         }
 
         if (!IsoLanguageHelper::iso6392BCodeExists($this->node->nodeValue)) {
-            $this->result->addError(new Error('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1746455012));
+            $this->addSeverityMessage('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1746455012);
         }
 
         return $this;
@@ -120,7 +115,7 @@ class DomNodeValidator
         }
 
         if (!array_key_exists($this->node->nodeValue, IsoScriptHelper::ISO_15924)) {
-            $this->result->addError(new Error('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1746455012));
+            $this->addSeverityMessage('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1746455012);
         }
 
         return $this;
@@ -139,7 +134,7 @@ class DomNodeValidator
         }
 
         if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $this->node->nodeValue)) {
-            $this->result->addError(new Error('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504177));
+            $this->addSeverityMessage('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504177);
         }
 
         return $this;
@@ -166,7 +161,7 @@ class DomNodeValidator
         $value = $this->node->getAttribute($name);
 
         if (!IsoLanguageHelper::iso6392BCodeExists($value)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957));
+            $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957);
         }
 
         return $this;
@@ -193,7 +188,7 @@ class DomNodeValidator
         $value = $this->node->getAttribute($name);
 
         if (!array_key_exists($value, IsoScriptHelper::ISO_15924)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592));
+            $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592);
         }
 
         return $this;
@@ -218,7 +213,7 @@ class DomNodeValidator
         $value = $this->getDomElement()->getAttribute($name);
 
         if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $value)) {
-            $this->result->addError(new Error('URL "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not valid.', 1736504189));
+            $this->addSeverityMessage('URL "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not valid.', 1736504189);
         }
 
         return $this;
@@ -251,7 +246,7 @@ class DomNodeValidator
         }
 
         if (!$match) {
-            $this->result->addError(new Error('Value "' . $attrValue . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197));
+            $this->addSeverityMessage('Value "' . $attrValue . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not permissible.', 1736504197);
         }
 
         return $this;
@@ -275,7 +270,7 @@ class DomNodeValidator
 
         $value = $this->getDomElement()->getAttribute($name);
         if (!is_numeric($value)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not numeric.', 1736504203));
+            $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is not numeric.', 1736504203);
         }
 
         return $this;
@@ -300,7 +295,7 @@ class DomNodeValidator
 
         $value = $this->getDomElement()->getAttribute($name);
         if ($this->xpath->query($contextExpression . '[@' . $name . '="' . $value . '"]')->length > 1) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" already exists.', 1736504203));
+            $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" already exists.', 1736504203);
         }
 
         return $this;
@@ -324,7 +319,7 @@ class DomNodeValidator
         $value = $this->getDomElement()->getAttribute($name);
         $pattern = '/^' . $regex . '$/i';
         if (!preg_match('/^' . $regex . '$/i', $value)) {
-            $this->result->addError(new Error('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" does not match the pattern "' . $pattern . '".', 1742208208));
+            $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" does not match the pattern "' . $pattern . '".', 1742208208);
         }
 
         return $this;
@@ -355,7 +350,7 @@ class DomNodeValidator
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            $this->result->addError(new Error('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1736504217));
+            $this->addSeverityMessage('Mandatory "' . $name . '" attribute of "' . $this->node->getNodePath() . '" is missing.', 1736504217);
         }
         return $this;
     }
@@ -374,7 +369,7 @@ class DomNodeValidator
 
         // @phpstan-ignore-next-line
         if ($this->node->hasAttribute($name)) {
-            $this->result->addError(new Error('Attribute "' . $name . '" is not allowed on node "' . $this->node->getNodePath() . '".', 1736504217));
+            $this->addSeverityMessage('Attribute "' . $name . '" is not allowed on node "' . $this->node->getNodePath() . '".', 1736504217);
         }
         return $this;
     }
@@ -407,7 +402,7 @@ class DomNodeValidator
         }
 
         if ($foundElements !== 1) {
-            $this->result->addError(new Error('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference an element within the XPath expression "' . $targetExpression . '"', 1736504228));
+            $this->addSeverityMessage('Value "' . $identifier . '" in the "' . $name . '" attribute of "' . $this->node->getNodePath() . '" must reference an element within the XPath expression "' . $targetExpression . '"', 1736504228);
         }
 
         return $this;
