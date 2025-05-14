@@ -324,10 +324,10 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      */
     protected function validateNotes(): void
     {
-        $notes = $this->createNodeListValidator(VH::XPATH_MODS . '//mods:note')
+        $notes = $this->createNodeListValidator(VH::XPATH_MODS_NOTE)
             ->getNodeList();
         foreach ($notes as $note) {
-            $this->createNodeValidator($note)->validateHasAttribute('type');
+            $this->createNodeValidator($note)->severityNotice()->validateHasAttribute('type');
         }
     }
 
@@ -408,12 +408,17 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->validateHasAttributeValue('type', ['host', 'preceding', 'succeeding', 'series', 'original']);
 
             // Validation of chapter "2.11.2.1 Titelangaben – mods:titleInfo"
-            $titleInfos = $this->createNodeListValidator('mods:titleInfo', $relatedItem)
-                ->getNodeList();
+            $titleInfoListValidator = $this->createNodeListValidator('mods:titleInfo', $relatedItem);
+            $recordInfoListValidator = $this->createNodeListValidator('mods:recordInfo', $relatedItem);
 
+            if ($recordInfoListValidator->getNodeList()->length == 0) {
+                $titleInfoListValidator->validateHasAny();
+            }
+
+            // TODO Sebstian nachfrage wegen "host" Prüfung in related Item wenn nicht vorhanden -> L451
+            $titleInfos = $titleInfoListValidator->getNodeList();
             foreach ($titleInfos as $titleInfo) {
                 $this->validateTitleInfo($titleInfo);
-                // TODO Wenn in mods:relatedItem das Element mods:recordInfo nicht vorkommt, muss mods:relatedItem über ein mods:titleInfo verfügen, das die Titelinformationen enthält.
             }
 
             // Validation of chapter "2.11.2.2 Zählung – mods:part"
@@ -426,12 +431,14 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $details = $this->createNodeListValidator('mods:detail', $part)
                     ->validateHasAny()
                     ->getNodeList();
-                // TODO bei wiederholung muss es ein type Attribute geben
-                // TODO Jeder Wert darf nur einmal vorkommen
                 foreach ($details as $detail) {
-                    if ($detail instanceof \DOMElement && $detail->hasAttribute('type')) {
+                    // one detail without type attribute can exist
+                    if ($details->length > 1 || ($detail instanceof \DOMElement && $detail->hasAttribute('type'))) {
                         $this->createNodeValidator($detail)
                             ->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'collection', 'class', 'series', 'file']);
+                        // type attribute can only be used once within a mods:part
+                        $this->createNodeListValidator('mods:detail[@type="' . $detail->hasAttribute('type') . '"]', $part)
+                            ->validateHasNoneOrOne();
                     }
 
                     // Validation of chapter "2.11.2.3.2.1 mods:number"
@@ -440,15 +447,15 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             }
 
             // Validation of chapter "2.11.2.4 Ressource – mods:recordInfo"
-            $nodeListValidator = $this->createNodeListValidator('mods:recordInfo', $relatedItem);
             if (count($titleInfos) == 0) {
-                $nodeListValidator->validateHasOne();
+                $recordInfoListValidator->validateHasOne();
             } else {
-                $nodeListValidator->validateHasNoneOrOne();
+                $recordInfoListValidator->validateHasNoneOrOne();
             }
 
-            if ($nodeListValidator->getNodeList()->count() == 1) {
-                $this->createNodeListValidator('mods:recordIdentifier', $nodeListValidator->getFirstNode());
+            if ($recordInfoListValidator->getNodeList()->count() == 1) {
+                $this->createNodeListValidator('mods:recordIdentifier', $recordInfoListValidator->getFirstNode())
+                    ->validateHasOne();
             }
         }
     }
@@ -466,7 +473,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
         foreach ($identifiers as $identifier) {
             $nodeValidator = $this->createNodeValidator($identifier)->validateHasAttribute('type');
-            // TODO validate types http://www.loc.gov/standards/mods/v3/mods-userguide-elements.html#identifier
             if ($identifier instanceof \DOMElement && $identifier->hasAttribute("invalid")) {
                 $nodeValidator->validateHasAttributeValue('invalid', ['yes']);
             }
@@ -484,7 +490,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     {
         $locations = $this->createNodeListValidator(VH::XPATH_MODS_LOCATION)
             ->getNodeList();
-        // TODO check konditional
         foreach ($locations as $location) {
             $physicalLocation = $this->createNodeListValidator('mods:physicalLocation', $location)
                 ->validateHasNoneOrOne()

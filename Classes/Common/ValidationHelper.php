@@ -73,6 +73,8 @@ class ValidationHelper
 
     const XPATH_MODS_PHYSICAL_DESCRIPTION =  self::XPATH_MODS . '/mods:physicalDescription';
 
+    const XPATH_MODS_NOTE =  self::XPATH_MODS . '/mods:note';
+
     const XPATH_MODS_SUBJECT =  self::XPATH_MODS . '/mods:subject';
 
     const XPATH_MODS_CLASSIFICATION =  self::XPATH_MODS . '/mods:classification';
