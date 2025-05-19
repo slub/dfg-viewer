@@ -9,7 +9,7 @@ use TYPO3\CMS\Extbase\Error\Warning;
 
 trait SeverityTrait {
 
-    private SeverityLevel $severityLevel = SeverityLevel::ERROR;
+    protected SeverityLevel $severityLevel = SeverityLevel::ERROR;
 
     public function addSeverityMessage($message, $code) {
         switch ($this->severityLevel) {
@@ -24,25 +24,6 @@ trait SeverityTrait {
         }
     }
 
-    public function severityError(): DomNodeValidator
-    {
-        $this->severityLevel = SeverityLevel::ERROR;
-        return $this;
-    }
-
-    public function severityWarning(): DomNodeValidator
-    {
-        $this->severityLevel = SeverityLevel::WARNING;
-        return $this;
-    }
-
-    public function severityNotice(): DomNodeValidator
-    {
-        $this->severityLevel = SeverityLevel::NOTICE;
-        return $this;
-    }
-
     abstract protected function getResult(): Result;
-
 
 }

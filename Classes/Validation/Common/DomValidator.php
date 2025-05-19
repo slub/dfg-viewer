@@ -25,11 +25,6 @@ namespace Slub\Dfgviewer\Validation\Common;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use DOMNode;
-use DOMXPath;
-use Slub\Dfgviewer\Common\IsoLanguageHelper;
-use Slub\Dfgviewer\Common\IsoScriptHelper;
-use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -43,6 +38,11 @@ use TYPO3\CMS\Extbase\Error\Result;
 abstract class DomValidator
 {
     use SeverityTrait;
+
+    public function __construct(SeverityLevel $severityLevel=SeverityLevel::ERROR)
+    {
+        $this->severityLevel = $severityLevel;
+    }
 
     /**
      * @var Result The result containing errors of validation

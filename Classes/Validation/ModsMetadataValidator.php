@@ -27,6 +27,7 @@ namespace Slub\Dfgviewer\Validation;
 
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
+use Slub\Dfgviewer\Validation\Common\SeverityLevel;
 
 /**
  * The validator validates against the rules of the MODS application profile 2.4.
@@ -327,7 +328,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $notes = $this->createNodeListValidator(VH::XPATH_MODS_NOTE)
             ->getNodeList();
         foreach ($notes as $note) {
-            $this->createNodeValidator($note)->severityNotice()->validateHasAttribute('type');
+            $this->createNodeValidator($note, SeverityLevel::NOTICE)->validateHasAttribute('type');
         }
     }
 
@@ -344,10 +345,9 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
         foreach ($subjects as $subject) {
             $subjectValidator = $this->createNodeValidator($subject);
-            if (!$subject->hasAttribute('valueURI')) {
-                $subjectValidator->validateHasAttribute('authority');
+            if ($subject->hasAttribute('authorityURI')) {
+                $subjectValidator->validateHasUrlAttribute('authorityURI');
             }
-            self::validateUriAttributes($subjectValidator);
 
             $subjectsSubElements = $this->createNodeListValidator('mods:topic or mods:geographic or mods:temporal or mods:titleInfo or mods:name', $subject)
                 ->getNodeList();
@@ -363,12 +363,13 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                         $this->validateTitleInfo($subjectsSubElement);
                         if ($subjectsSubElement->hasAttribute('nameTitleGroup')) {
                             $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
-                            $this->createNodeListValidator('mods:name[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject)
+                            $this->createNodeListValidator('mods:name[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)
                                 ->validateHasOne();
                         }
                     } elseif ($subjectsSubElement->nodeName == 'mods:name') {
+                        $this->validateName($subjectsSubElement);
                         $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
-                        $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject)
+                        $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)
                             ->validateHasOne();
                     }
                 }
@@ -504,7 +505,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
 
             $urls = $this->createNodeListValidator('mods:url', $location);
             foreach ($urls as $url) {
-                $this->createNodeValidator($url)->severityNotice()->validateHasAttributeValue('access', ['preview','raw object', 'object in context']);
+                $this->createNodeValidator($url, SeverityLevel::NOTICE)->validateHasAttributeValue('access', ['preview','raw object', 'object in context']);
             }
 
             $this->createNodeListValidator('mods:shelfLocator', $location)

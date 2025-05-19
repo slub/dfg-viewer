@@ -28,7 +28,6 @@ namespace Slub\Dfgviewer\Validation\Common;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
-use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -56,8 +55,9 @@ class DomNodeListValidator extends DomValidator
      */
     private DOMNodeList $nodeList;
 
-    public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode=null)
+    public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode=null, SeverityLevel $severityLevel=SeverityLevel::ERROR)
     {
+        parent::__construct($severityLevel);
         $this->expression = $expression;
         $this->contextNode = $contextNode;
         $this->nodeList = $xpath->query($expression, $contextNode);

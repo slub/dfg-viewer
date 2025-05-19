@@ -42,8 +42,6 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeValidator extends DomValidator
 {
-    use SeverityTrait;
-
     /**
      * @var DOMXPath The XPath of document to validate
      */
@@ -54,8 +52,9 @@ class DomNodeValidator extends DomValidator
      */
     private ?DOMNode $node;
 
-    public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node)
+    public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node, SeverityLevel $severityLevel=SeverityLevel::ERROR)
     {
+        parent::__construct($severityLevel);
         $this->xpath = $xpath;
         $this->result = $result;
         $this->node = $node;
