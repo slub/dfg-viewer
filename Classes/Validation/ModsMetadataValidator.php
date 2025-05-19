@@ -207,7 +207,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     {
         $genres = $this->createNodeListValidator(VH::XPATH_MODS_GENRES)
             ->getNodeList();
-        // TODO Test authority
         foreach ($genres as $genre) {
             static::validateUriAttributes($this->createNodeValidator($genre));
         }
@@ -284,9 +283,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->getNodeList();
             foreach ($languageTerms as $languageTerm) {
                 $nodeValidator = $this->createNodeValidator($languageTerm)
-                    ->validateHasAttributeValue('type', ['code', 'text'])
-                    ->validateHasIso6392BContent();
+                    ->validateHasAttributeValue('type', ['code', 'text']);
                 self::validateUriAttributes($nodeValidator);
+
+                $this->createNodeValidator($languageTerm, SeverityLevel::NOTICE)
+                    ->validateHasIso6392BContent();
             }
 
             $scriptTerms = $this->createNodeListValidator('mods:scriptTerm', $language)
@@ -294,9 +295,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->getNodeList();
             foreach ($scriptTerms as $scriptTerm) {
                 $nodeValidator = $this->createNodeValidator($scriptTerm)
-                    ->validateHasAttributeValue('type', ['code', 'text'])
-                    ->validateHasIso15924Content();
+                    ->validateHasAttributeValue('type', ['code', 'text']);
                 self::validateUriAttributes($nodeValidator);
+
+                $this->createNodeValidator($scriptTerm, SeverityLevel::NOTICE)
+                    ->validateHasIso15924Content();
             }
         }
     }

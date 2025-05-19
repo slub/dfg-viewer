@@ -26,4 +26,5 @@ trait SeverityTrait {
 
     abstract protected function getResult(): Result;
 
+
 }
