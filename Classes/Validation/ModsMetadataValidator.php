@@ -224,8 +224,12 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $originInfos = $this->createNodeListValidator(VH::XPATH_MODS_ORIGININFO)
             ->getNodeList();
         foreach ($originInfos as $originInfo) {
-             $this->createNodeValidator($originInfo)
-                 ->validateHasUniqueAttribute('eventType', VH::XPATH_MODS_ORIGININFO);
+            $this->createNodeValidator($originInfo)
+                ->validateHasAttribute('eventType');
+
+            // Check if event type is unique
+            $this->createNodeListValidator('mods:originInfo[@type="' . $originInfo->hasAttribute('eventType') . '"]', $originInfo->parentNode)
+                ->validateHasOne();
 
             $places = $this->createNodeListValidator('mods:place', $originInfo)
                 ->getNodeList();
@@ -233,7 +237,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $placeTerms = $this->createNodeListValidator('mods:placeTerm', $place)
                     ->validateHasAny()
                     ->getNodeList();
-                // TODO Einzigartigkeits check type Attribute
                 foreach ($placeTerms as $placeTerm) {
                     $nodeValidator = $this->createNodeValidator($placeTerm)
                         ->validateHasAttributeValue('type', ['text', 'code']);
@@ -243,7 +246,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
 
             $agents = $this->createNodeListValidator('mods:agent', $originInfo)
                 ->getNodeList();
-            // TODO Check Agents by person and or cooperation
             foreach ($agents as $agent) {
                 // validate mods:agent like mods:name
                 $this->validateName($agent);
@@ -252,13 +254,24 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             // Validates against the rules of chapters 2.4.2.4 - 2.4.2.8
             $dates = $this->createNodeListValidator('mods:dateIssued or mods:dateCreated or mods:dateValid or mods:dateOther', $originInfo);
             foreach ($dates as $date) {
+                $nodeValidator = $this->createNodeValidator($date);
                 if ($date instanceof \DOMElement) {
                     if ($date->hasAttribute('authorityURI')) {
-                        $this->createNodeValidator($date)
-                            ->validateHasAttributeValue('qualifier', ['approximate', 'inferred', 'questionable']);
+                        $nodeValidator->validateHasAttributeValue('qualifier', ['approximate', 'inferred', 'questionable']);
                     }
+                    if ($date->hasAttribute('point')) {
+                        $nodeValidator->validateHasAttributeValue('point', ['start', 'end']);
+                        if ($date->hasAttribute('keyDate')) {
+                            $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']); // TODO @Sebastian ist das Korrekt -> nur Jahreszahl kein ISO8601
+                        }
+                    }
+                    // TODO Severity Notice @Sebastian ISO Validierung macht keinen Sinn da kein ISO String YYYY-MM-DDTHH:MM:SS.sssZ
                 }
             }
+
+            $this->createNodeListValidator('[@keyDate="yes"]', $originInfo)
+                ->validateHasNoneOrOne();
+
 
             // Validates against the rules of chapter 2.4.2.9
             $this->createNodeListValidator(' mods:edition', $originInfo)

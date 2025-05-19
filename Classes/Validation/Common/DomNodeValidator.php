@@ -151,13 +151,11 @@ class DomNodeValidator extends DomValidator
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        // @phpstan-ignore-next-line
-        $value = $this->node->getAttribute($name);
+        $value = $this->getDomElement()->getAttribute($name);
 
         if (!IsoLanguageHelper::iso6392BCodeExists($value)) {
             $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957);
@@ -178,13 +176,11 @@ class DomNodeValidator extends DomValidator
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if (!$this->node->hasAttribute($name)) {
+        if (!$this->getDomElement()->hasAttribute($name)) {
             return $this->validateHasAttribute($name);
         }
 
-        // @phpstan-ignore-next-line
-        $value = $this->node->getAttribute($name);
+        $value = $this->getDomElement()->getAttribute($name);
 
         if (!array_key_exists($value, IsoScriptHelper::ISO_15924)) {
             $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592);
@@ -366,8 +362,7 @@ class DomNodeValidator extends DomValidator
             return $this;
         }
 
-        // @phpstan-ignore-next-line
-        if ($this->node->hasAttribute($name)) {
+        if ($this->getDomElement()->hasAttribute($name)) {
             $this->addSeverityMessage('Attribute "' . $name . '" is not allowed on node "' . $this->node->getNodePath() . '".', 1736504217);
         }
         return $this;

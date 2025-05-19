@@ -82,7 +82,7 @@ class DomNodeListValidator extends DomValidator
      */
     public function getNode(int $index): ?DOMNode
     {
-        return $this->nodeList->length > $index ? $this->nodeList->item($index) : null;
+        return $this->nodeList->length > $index ? $this->nodeList->item($index): null;
     }
 
     /**
@@ -116,7 +116,7 @@ class DomNodeListValidator extends DomValidator
     public function validateHasOne(): DomNodeListValidator
     {
         if ($this->nodeList->length != 1) {
-            $this->addMessage('There must be an element', 1736504354);
+            $this->addMessage('There must be no more than one element', 1736504354);
         }
         return $this;
     }
@@ -129,7 +129,7 @@ class DomNodeListValidator extends DomValidator
     public function validateHasNoneOrOne(): DomNodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
-            $this->addMessage('There must be no more than one element', 1736504361);
+            $this->addMessage('There must be either no element or only one', 1736504361);
         }
         return $this;
     }
