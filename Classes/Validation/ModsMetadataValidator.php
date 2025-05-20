@@ -69,10 +69,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      */
     protected function validateTitle(): void
     {
-        $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO . '[not(@type)]')
-            ->validateHasOne();
-
-        // TODO Mehrbändigkeit
+        if (!$this->hasRelatedItemWithTypeHost()) {
+            // Check for primary title
+            $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO . '[not(@type)]')
+                ->validateHasOne();
+        }
 
         $titleInfos = $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO )
             ->getNodeList();
@@ -171,7 +172,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         foreach ($nameParts as $namePart) {
             $nodeValidator = $this->createNodeValidator($namePart);
 
-            $this->checkUniqueAttributeUnderParent($nodeValidator->getDomElement(), 'type');
+            $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
 
             if ($nodeValidator->getDomElement()->getAttribute('type') == 'personal') {
                 $nodeValidator
@@ -203,7 +204,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             foreach ($roleTerms as $roleTerm) {
                 $nodeValidator = $this->createNodeValidator($roleTerm)
                     ->validateHasAttributeValue('type', ['text', 'code']);
-                $this->checkUniqueAttributeUnderParent($nodeValidator->getDomElement(), 'type');
+                $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
                 if ($nodeValidator->getDomElement()->getAttribute('type') == 'code') {
                     $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
                         ->validateHasAttributeValue('authority', 'marcrelator')
@@ -247,7 +248,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             $nodeValidator = $this->createNodeValidator($originInfo)
                 ->validateHasAttribute('eventType');
 
-            $this->checkUniqueAttributeUnderParent($nodeValidator->getDomElement(), 'eventType');
+            $this->checkUniqueAttributeUnderParent($nodeValidator, 'eventType');
 
             $places = $this->createNodeListValidator('mods:place', $originInfo)
                 ->getNodeList();
@@ -558,7 +559,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     {
         $nodeListValidator = $this->createNodeListValidator(VH::XPATH_MODS_PART);
 
-        $this->createNodeListValidator(VH::XPATH_MODS_RELATEDITEM . '[@type="host"]')->getNodeList()->count() > 0 ? $nodeListValidator->validateHasOne() : $nodeListValidator->validateHasNoneOrOne();
+        $this->hasRelatedItemWithTypeHost() ? $nodeListValidator->validateHasOne() : $nodeListValidator->validateHasNoneOrOne();
 
         $part = $nodeListValidator->getFirstNode();
         if ($part != null) {
@@ -617,10 +618,17 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         }
     }
 
-    private function checkUniqueAttributeUnderParent(\DOMElement $element, string $attribute): void
+    private function checkUniqueAttributeUnderParent(DomNodeValidator $nodeValidator, string $attribute): void
     {
+        $element = $nodeValidator->getDomElement();
         $this->createNodeListValidator('mods:' . $element->tagName . '[@' . $attribute . '="' . $element->getAttribute($attribute) . '"]', $element->parentNode)
             ->validateHasOne();
+    }
+
+
+    private function hasRelatedItemWithTypeHost(): bool
+    {
+        return $this->createNodeListValidator(VH::XPATH_MODS_RELATEDITEM . '[@type="host"]')->getNodeList()->count() > 0;
     }
 
 }
