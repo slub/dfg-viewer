@@ -5933,9 +5933,15 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 value.setContentToCurrent = 1
 value.required = 1
 value.typolink.parameter.current = 1
-value.typolink.parameter.rawUrlEncode = 1
+value.typolink.parameter.replacement {
+    10 {
+        search = #\s#i
+        replace = +
+        useRegExp = 1
+    }
+}
 value.typolink.parameter.prepend = TEXT
-value.typolink.parameter.prepend.value = http://gateway-bayern.bib-bvb.de/aleph-cgi/bvb_suche?sid=VD16&amp;find_code_1=WVD&amp;find_request_1=
+value.typolink.parameter.prepend.value = https://gateway-bayern.de/VD16+
 value.wrap = &lt;dd&gt;[|]&lt;/dd&gt;</field>
 				<field index="index_tokenized" type="integer">0</field>
 				<field index="index_stored" type="integer">1</field>
