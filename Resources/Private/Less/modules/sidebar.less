@@ -109,18 +109,22 @@
                     position: relative;
                     display: inline-block;
                     margin-right: 4px;
+                    color: #fff;
                     a {
                         position: relative;
                         padding: 6px;
                         color: #fff;
                         display: block;
                     }
+                    &:not(:last-child) {
+                        margin-right: 8px;
+                    }
                 }
                 &:before {
                     position: absolute;
                     top: 0;
                     left: 50%;
-                    margin-left: -6px;
+                    margin-left: -4px;
                     content: "/";
                     opacity: 0.2;
                     font-size: 24px;
