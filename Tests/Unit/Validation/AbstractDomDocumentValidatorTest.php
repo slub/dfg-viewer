@@ -242,7 +242,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasErrorOne(string $expression, string $context=''): void
     {
-        $message = 'There must be an element that matches the XPath expression "' . $expression . '"';
+        $message = 'There must be no more than one element that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
             $message .= ' under "' . $context . '"';
         }
@@ -258,7 +258,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasErrorNoneOrOne(string $expression, string $context=''): void
     {
-        $message = 'There must be no more than one element that matches the XPath expression "' . $expression . '"';
+        $message = 'There must be either no element or only one that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
             $message .= ' under "' . $context . '"';
         }
