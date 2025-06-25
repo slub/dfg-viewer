@@ -24,7 +24,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:kitodo="http://typo3.org/ns/Kitodo/Dlf/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<f:if condition="{docArray -> f:count()} > 1">
+<f:if condition="{multiview} == 1">
     <f:then>
 
         <div class="page-control-multiview">
@@ -85,6 +85,10 @@
                                 <f:link.action class="prevMeasure" title="{f:translate(key: 'prevMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
                                     <f:translate key="prevMeasure" />
                                 </f:link.action>
+                            </div>
+
+                            <div class="tx-dlf-imagemanipulationtool">
+                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
                             </div>
 
                             <div class="tx-dlf-navigation-next">

@@ -409,15 +409,8 @@
                         }
                     }
                 }
-                &.zoom {
-                    position: relative;
-                    display: inline-block;
-                    .in {
-                        background-position: -360px 0;
-                    }
-                    .out {
-                        background-position: -400px 0;
-                    }
+
+                &.fullscreen {
                     .fullscreen {
                         z-index: auto;
                         background: #fff;
@@ -453,6 +446,17 @@
                                 .transform(rotate(0));
                             }
                         }
+                    }
+                }
+
+                &.zoom {
+                    position: relative;
+                    display: inline-block;
+                    .in {
+                        background-position: -360px 0;
+                    }
+                    .out {
+                        background-position: -400px 0;
                     }
                     .score-visible & {
                         .in, .out {
@@ -1071,7 +1075,7 @@
     width: 80%;
     .alert {
         padding: 20px;
-        background-color: @warning-red;
+        background-color: @error-red;
         color: white;
         margin-bottom: 15px;
         p {
