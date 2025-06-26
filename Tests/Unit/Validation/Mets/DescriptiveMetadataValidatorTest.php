@@ -39,15 +39,15 @@ class DescriptiveMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testDescriptiveMetadata(): void
     {
         $this->removeNodes(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
-        $this->hasErrorAny(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->hasMessageAny(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
-        $this->hasErrorOne(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
+        $this->hasMessageOne(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'DMDID', 'Test');
-        $this->hasErrorAttributeRefToOne('/mets:mets/mets:structMap[1]/mets:div', 'DMDID', 'Test', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->hasMessageAttributeRefToOne('/mets:mets/mets:structMap[1]/mets:div', 'DMDID', 'Test', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
     /**
@@ -58,15 +58,15 @@ class DescriptiveMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testEmbeddedMetadata(): void
     {
         $this->removeNodes(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap');
-        $this->hasErrorOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS));
+        $this->hasMessageOne('mets:mdWrap', VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS));
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap', 'MDTYPE', 'Test');
-        $this->hasErrorAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap', 'MDTYPE', 'Test');
+        $this->hasMessageAttributeWithValue(VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap', 'MDTYPE', 'Test');
         $this->resetDocument();
 
         $this->removeNodes(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS . '/mets:mdWrap/mets:xmlData/mods:mods');
-        $this->hasErrorOne('mets:xmlData[mods:mods]', VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap');
+        $this->hasMessageOne('mets:xmlData[mods:mods]', VH::trimDoubleSlash(VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS) . '/mets:mdWrap');
     }
 
     protected function createValidator(): AbstractDlfValidator

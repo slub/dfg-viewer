@@ -39,7 +39,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testDvRights(): void
     {
         $this->removeNodes(VH::XPATH_DVRIGHTS);
-        $this->hasErrorOne(VH::XPATH_DVRIGHTS);
+        $this->hasMessageOne(VH::XPATH_DVRIGHTS);
     }
 
     /**
@@ -51,30 +51,30 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testDvRightsSubelements(): void
     {
         $this->removeNodes(VH::XPATH_DVRIGHTS . '/dv:owner');
-        $this->hasErrorOne(VH::XPATH_DVRIGHTS . '/dv:owner');
+        $this->hasMessageOne(VH::XPATH_DVRIGHTS . '/dv:owner');
         $this->resetDocument();
 
         $this->assertNodeContent(VH::XPATH_DVRIGHTS . '/dv:ownerLogo', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerLogo');
         $this->assertNodeContent(VH::XPATH_DVRIGHTS . '/dv:ownerSiteURL', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerSiteURL');
         $this->assertNodeContent(VH::XPATH_DVRIGHTS . '/dv:ownerContact', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerContact');
         $this->setContentValue(VH::XPATH_DVRIGHTS . '/dv:ownerContact', 'mailto:Test');
-        $this->hasErrorEmailContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerContact', 'mailto:Test');
+        $this->hasMessageEmailContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:ownerContact', 'mailto:Test');
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVRIGHTS, VH::NAMESPACE_DV, 'dv:aggregator');
-        $this->hasErrorNoneOrOne(VH::XPATH_DVRIGHTS . '/dv:aggregator');
+        $this->hasMessageNoneOrOne(VH::XPATH_DVRIGHTS . '/dv:aggregator');
         $this->resetDocument();
         $this->assertOptionalNodeContent(VH::XPATH_DVRIGHTS, 'dv:aggregatorLogo', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:aggregatorLogo');
         $this->assertOptionalNodeContent(VH::XPATH_DVRIGHTS, 'dv:aggregatorSiteURL', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:aggregatorSiteURL');
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVRIGHTS, VH::NAMESPACE_DV, 'dv:sponsor');
-        $this->hasErrorNoneOrOne(VH::XPATH_DVRIGHTS . '/dv:sponsor');
+        $this->hasMessageNoneOrOne(VH::XPATH_DVRIGHTS . '/dv:sponsor');
         $this->resetDocument();
         $this->assertOptionalNodeContent(VH::XPATH_DVRIGHTS, 'dv:sponsorLogo', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:sponsorLogo');
         $this->assertOptionalNodeContent(VH::XPATH_DVRIGHTS, 'dv:sponsorSiteURL', VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:sponsorSiteURL');
 
         $this->setContentValue(VH::XPATH_DVRIGHTS . '/dv:license', 'Test');
-        $this->hasErrorUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:license', 'Test');
+        $this->hasMessageUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_RIGHTS_METADATA) . '/mets:mdWrap/mets:xmlData/dv:rights/dv:license', 'Test');
     }
 
     /**
@@ -85,7 +85,7 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testDvLinks(): void
     {
         $this->removeNodes(VH::XPATH_DVLINKS);
-        $this->hasErrorOne(VH::XPATH_DVLINKS);
+        $this->hasMessageOne(VH::XPATH_DVLINKS);
     }
 
     /**
@@ -97,53 +97,53 @@ class DvMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testDvLinksSubelements(): void
     {
         $this->removeNodes(VH::XPATH_DVLINKS . '/dv:reference');
-        $this->hasErrorAny(VH::XPATH_DVLINKS . '/dv:reference');
+        $this->hasMessageAny(VH::XPATH_DVLINKS . '/dv:reference');
         $this->resetDocument();
 
         // if there are multiple `dv:references`, the `linktext` attribute must be present.
         $this->addChildNodeWithNamespace(VH::XPATH_DVLINKS, VH::NAMESPACE_DV, 'dv:reference');
-        $this->hasErrorAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:reference[1]', 'linktext');
+        $this->hasMessageAttribute(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:reference[1]', 'linktext');
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVLINKS, VH::NAMESPACE_DV, 'dv:presentation');
-        $this->hasErrorNoneOrOne(VH::XPATH_DVLINKS . '/dv:presentation');
+        $this->hasMessageNoneOrOne(VH::XPATH_DVLINKS . '/dv:presentation');
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVLINKS, VH::NAMESPACE_DV, 'dv:sru');
-        $this->hasErrorNoneOrOne(VH::XPATH_DVLINKS . '/dv:sru');
+        $this->hasMessageNoneOrOne(VH::XPATH_DVLINKS . '/dv:sru');
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_DVLINKS . '/dv:sru', 'Test');
-        $this->hasErrorUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:sru', 'Test');
+        $this->hasMessageUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:sru', 'Test');
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_DVLINKS, VH::NAMESPACE_DV, 'dv:iiif');
-        $this->hasErrorNoneOrOne(VH::XPATH_DVLINKS . '/dv:iiif');
+        $this->hasMessageNoneOrOne(VH::XPATH_DVLINKS . '/dv:iiif');
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_DVLINKS . '/dv:iiif', 'Test');
-        $this->hasErrorUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:iiif', 'Test');
+        $this->hasMessageUrlContent(VH::trimDoubleSlash(VH::XPATH_ADMINISTRATIVE_DIGIPROV_METADATA) . '/mets:mdWrap/mets:xmlData/dv:links/dv:iiif', 'Test');
     }
 
     protected function assertNodeContent(string $expression, string $expectedExpression): void
     {
         $this->removeNodes($expression);
-        $this->hasErrorOne($expression);
+        $this->hasMessageOne($expression);
         $this->resetDocument();
 
         $this->setContentValue($expression, 'Test');
-        $this->hasErrorUrlContent($expectedExpression, 'Test');
+        $this->hasMessageUrlContent($expectedExpression, 'Test');
         $this->resetDocument();
     }
 
     protected function assertOptionalNodeContent(string $expression, string $name, string $expectedExpression): void
     {
         $this->addChildNodeWithNamespace($expression, VH::NAMESPACE_DV, $name);
-        $this->hasErrorNoneOrOne($expression . '/' . $name);
+        $this->hasMessageNoneOrOne($expression . '/' . $name);
         $this->resetDocument();
 
         $this->setContentValue($expression . '/' . $name, 'Test');
-        $this->hasErrorUrlContent($expectedExpression, 'Test');
+        $this->hasMessageUrlContent($expectedExpression, 'Test');
         $this->resetDocument();
     }
 

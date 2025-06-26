@@ -28,6 +28,7 @@ namespace Slub\Dfgviewer\Validation;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
+use function PHPUnit\Framework\assertEquals;
 
 /**
  * The validator validates against the rules of the MODS application profile 2.4.
@@ -44,20 +45,21 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateTitle();
         $this->validateNames();
         $this->validateGenre();
-        $this->validateOrigin();
+       // $this->validateOrigin();
         $this->validateLanguage();
         $this->validatePhysicalDescription();
         // Validation of chapter "2.7 Abstract" already covered by MODS XML schema validation
         $this->validateNotes();
-        $this->validateSubjects();
-        $this->validateClassification();
-        $this->validateRelatedItem();
-        $this->validateIdentifier();
-        $this->validateLocation();
-        // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
-        $this->validatePart();
-        $this->validateRecordInfo();
-        // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
+       //  $this->validateSubjects();
+         $this->validateClassification();
+        //  $this->validateRelatedItem();
+          $this->validateIdentifier();
+          $this->validateLocation();
+          // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
+        //  $this->validatePart();
+          $this->validateRecordInfo();
+          // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
+
     }
 
     /**
@@ -90,7 +92,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    public function validateTitleInfo(mixed $titleInfo): void
+    protected function validateTitleInfo(mixed $titleInfo): void
     {
         if ($titleInfo instanceof \DOMElement) {
             $nodeValidator = $this->createNodeValidator($titleInfo);
@@ -145,13 +147,14 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    public function validateName(\DOMElement $name): void
+    protected function validateName(\DOMElement $name): void
     {
         $nodeValidator = $this->createNodeValidator($name)
             ->validateHasAttributeValue('type', ['personal', 'corporate', 'conference', 'family']);
-        self::checkUriAttributes($nodeValidator);
 
         $this->createNodeValidator($name, SeverityLevel::NOTICE)->validateHasAttribute('valueURI');
+
+        self::checkUriAttributes($nodeValidator);
 
         $this->validateNameSubElements($name);
     }
@@ -171,17 +174,15 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
         foreach ($nameParts as $namePart) {
             $nodeValidator = $this->createNodeValidator($namePart);
-
-            $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
-
-            if ($nodeValidator->getDomElement()->getAttribute('type') == 'personal') {
-                $nodeValidator
-                    ->validateHasAttributeValue('type', ['family', 'given', 'date', 'termsOfAddress']);
+            if ($this->createNodeValidator($name)->getDomElement()->getAttribute('type') == 'personal') {
+                $nodeValidator->validateHasAttributeValue('type', ['family', 'given', 'date', 'termsOfAddress']);
+                $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
             } else {
                 $nodeValidator
                     ->validateHasNoneAttribute('type');
             }
         }
+
 
         // Validates against the rules of chapter "2.2.2.2 Anzeigeform – mods:displayForm"
         $this->createNodeListValidator('mods:displayForm', $name)
@@ -206,15 +207,14 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                     ->validateHasAttributeValue('type', ['text', 'code']);
                 $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
                 if ($nodeValidator->getDomElement()->getAttribute('type') == 'code') {
-                    $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
-                        ->validateHasAttributeValue('authority', 'marcrelator')
-                        ->validateHasAttributeValue('authorityURI', 'http://id.loc.gov/vocabulary/relators');
+                  //  $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
+                  //      ->validateHasAttributeValue('authority', ['marcrelator'])
+                  //      ->validateHasAttributeValue('authorityURI', ['http://id.loc.gov/vocabulary/relators']);
                     // TODO @Sebastian ist diese URL nicht HTTPS?
                 }
                 self::checkUriAttributes($nodeValidator);
             }
         }
-
     }
 
     /**
@@ -346,8 +346,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     protected function validatePhysicalDescription(): void
     {
         $this->createNodeListValidator(VH::XPATH_MODS_PHYSICAL_DESCRIPTION)
-            ->validateHasNoneOrOne()
-            ->getNodeList();
+            ->validateHasNoneOrOne();
         // Validation of chapters "2.6.2.1 Form – mods:form" and "2.6.2.2 Umfang – mods:extent" already covered by MODS XML schema validation
     }
 
@@ -535,10 +534,10 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 self::checkUriAttributes($this->createNodeValidator($physicalLocation));
             }
 
-            $this->createNodeListValidator('mods:url or mods:physicalLocation', $location)
-                ->validateHasOne();
+            $this->createNodeListValidator('mods:url | mods:physicalLocation', $location)
+                ->validateHasAny();
 
-            $urls = $this->createNodeListValidator('mods:url', $location);
+            $urls = $this->createNodeListValidator('mods:url', $location)->getNodeList();
             foreach ($urls as $url) {
                 $this->createNodeValidator($url, SeverityLevel::NOTICE)->validateHasAttributeValue('access', ['preview','raw object', 'object in context']);
             }
@@ -621,7 +620,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
     private function checkUniqueAttributeUnderParent(DomNodeValidator $nodeValidator, string $attribute): void
     {
         $element = $nodeValidator->getDomElement();
-        $this->createNodeListValidator('mods:' . $element->tagName . '[@' . $attribute . '="' . $element->getAttribute($attribute) . '"]', $element->parentNode)
+        $this->createNodeListValidator($element->tagName . '[@' . $attribute . '="' . $element->getAttribute($attribute) . '"]', $element->parentNode)
             ->validateHasOne();
     }
 

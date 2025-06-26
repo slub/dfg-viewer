@@ -66,10 +66,17 @@
                         </mods:location>
                     </mods:relatedItem>
                     <mods:identifier type="gettyaat">none</mods:identifier>
+                    <mods:location>
+                        <mods:physicalLocation>Example location</mods:physicalLocation>
+                        <mods:url access="object in context">
+                            http://example.com/object/identifier
+                        </mods:url>
+                        <mods:shelfLocator>Example E</mods:shelfLocator>
+                    </mods:location>
                     <mods:accessCondition type="license">CC-BY</mods:accessCondition>
                     <mods:recordInfo>
                         <mods:recordIdentifier source="[Unique Repository Identifier]"/>
-                        <mods:recordInfoNote>INDIA</mods:recordInfoNote>
+                        <mods:descriptionStandard>Example</mods:descriptionStandard>
                     </mods:recordInfo>
                 </mods:mods>
             </mets:xmlData>

@@ -27,6 +27,7 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
 
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use Slub\Dfgviewer\Validation\Common\SeverityLevel;
 use Slub\Dfgviewer\Validation\ModsMetadataValidator;
 
 class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
@@ -40,22 +41,26 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testTitle(): void
     {
+        // TODO ausschließen wenn host type exist
         $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'type', 'alternative');
-        $this->hasErrorOne(VH::XPATH_MODS_TITLEINFO . '[not(@type)]');
+        $this->hasMessageOne(VH::XPATH_MODS_TITLEINFO . '[not(@type)]');
 
         // validate title info
+        // add empty title info to prevent error of not existing none type mods:titleInfos
         $this->addChildNodeWithNamespace(self::MODS_BASEPATH, VH::NAMESPACE_MODS, 'mods:titleInfo');
         $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO . '[@type="alternative"]', 'type', 'Test');
-        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:titleInfo[1]', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:titleInfo[1]', 'type', 'Test');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'lang', 'Test');
-        $this->hasErrorAttributeWithIso6392B(self::MODS_BASEPATH . '/mods:titleInfo', 'lang', 'Test');
+        $this->hasMessageAttributeWithIso6392B(self::MODS_BASEPATH . '/mods:titleInfo', 'lang', 'Test');
+        $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'lang', 'eng');
+        $this->hasNoMessage();
         $this->resetDocument();
 
         // validate title info sub elements
         $this->removeNodes(VH::XPATH_MODS_TITLEINFO . '/mods:title');
-        $this->hasErrorOne('mods:title', self::MODS_BASEPATH . '/mods:titleInfo');
+        $this->hasMessageOne('mods:title', self::MODS_BASEPATH . '/mods:titleInfo');
     }
 
     /**
@@ -63,23 +68,19 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      *
      * @return void
      */
-    public function testName(): void
+    public function testNames(): void
     {
         // validate name
         $this->setAttributeValue(VH::XPATH_MODS_NAMES, 'type', 'Test');
-        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]', 'type', 'Test');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'valueURI');
-        $this->hasErrorAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'valueURI');
-        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'valueURI', 'Test');
-        $this->hasErrorUrlAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'valueURI', 'Test');
-        $this->resetDocument();
-
-        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]', 'authorityURI', 'Test');
-        $this->hasErrorUrlAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'authorityURI', 'Test');
+        $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'valueURI', SeverityLevel::NOTICE);
+        $this->checkUriAttributes(VH::XPATH_MODS_NAMES . '[@type="personal"]', self::MODS_BASEPATH . '/mods:name[1]');
 
         // validate name subelemets
+
     }
 
     /**
@@ -89,7 +90,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testGenre(): void
     {
-        $this->checkUriAttributes(VH::XPATH_MODS_GENRES, self::MODS_BASEPATH . '/mods:genre');
+         $this->checkUriAttributes(VH::XPATH_MODS_GENRES, self::MODS_BASEPATH . '/mods:genre');
     }
 
     /**
@@ -109,20 +110,24 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testLanguage(): void
     {
+        $this->removeNodes(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm');
+        $this->hasMessageAny( 'mods:languageTerm', self::MODS_BASEPATH . '/mods:language');
+        $this->resetDocument();
+
         $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'type', 'Test');
-        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:language/mods:languageTerm', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:language/mods:languageTerm', 'type', 'Test');
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'Test');
-        $this->hasErrorIso6392BContent(self::MODS_BASEPATH . '/mods:language/mods:languageTerm', 'Test');
+        $this->hasMessageIso6392BContent(self::MODS_BASEPATH . '/mods:language/mods:languageTerm', 'Test', SeverityLevel::NOTICE);
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'type', 'Test');
-        $this->hasErrorAttributeWithValue(self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'type', 'Test');
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'Test');
-        $this->hasErrorIso15924Content( self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'Test');
+        $this->hasMessageIso15924Content( self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'Test', SeverityLevel::NOTICE);
     }
 
     /**
@@ -133,7 +138,8 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testPhysicalDescription(): void
     {
         $this->addChildNodeWithNamespace(self::MODS_BASEPATH, VH::NAMESPACE_MODS, 'mods:physicalDescription');
-        $this->hasErrorNoneOrOne(self::MODS_BASEPATH . '/mods:physicalDescription');
+        $this->addChildNodeWithNamespace(self::MODS_BASEPATH, VH::NAMESPACE_MODS, 'mods:physicalDescription');
+        $this->hasMessageNoneOrOne('//mods:mods/mods:physicalDescription');
     }
 
     /**
@@ -143,8 +149,8 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testNotes(): void
     {
-        $this->removeAttribute(VH::XPATH_MODS . '/mods:note', 'type');
-        $this->hasErrorAttribute(self::MODS_BASEPATH . '/mods:note', 'type');
+        $this->removeAttribute(VH::XPATH_MODS_NOTE, 'type');
+        $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:note', 'type', SeverityLevel::NOTICE);
     }
 
     /**
@@ -167,14 +173,74 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->checkUriAttributes(VH::XPATH_MODS_CLASSIFICATION, self::MODS_BASEPATH . '/mods:classification');
     }
 
+    /**
+     * Test validation against the rules of chapter "2.12 Identifier"
+     *
+     * @return void
+     */
+    public function testIdentifier(): void
+    {
+        $this->removeAttribute(VH::XPATH_MODS_IDENTIFIER, 'type');
+        $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:identifier', 'type');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_IDENTIFIER, 'invalid', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:identifier', 'invalid', 'Test');
+        $this->setAttributeValue(VH::XPATH_MODS_IDENTIFIER, 'invalid', 'yes');
+        $this->hasNoMessage();
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.13 Zugang zur Ressource"
+     *
+     * @return void
+     */
+    public function testLocation(): void
+    {
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_LOCATION, VH::NAMESPACE_MODS, 'mods:physicalLocation');
+        $this->hasMessageNoneOrOne('mods:physicalLocation', self::MODS_BASEPATH . '/mods:location');
+        $this->resetDocument();
+
+        $this->removeNodes(VH::XPATH_MODS_LOCATION . '/mods:physicalLocation');
+        $this->removeNodes(VH::XPATH_MODS_LOCATION . '/mods:url');
+        $this->hasMessageAny('mods:url | mods:physicalLocation', self::MODS_BASEPATH . '/mods:location');
+        $this->resetDocument();
+
+        $this->setAttributeValue( VH::XPATH_MODS_LOCATION . '/mods:url', 'access', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:location/mods:url', 'access', 'Test', SeverityLevel::NOTICE);
+        $this->resetDocument();
+
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_LOCATION, VH::NAMESPACE_MODS, 'mods:shelfLocator');
+        $this->hasMessageNoneOrOne('mods:shelfLocator', self::MODS_BASEPATH . '/mods:location');
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.16 Informationen zum Metadatensatz"
+     *
+     * @return void
+     */
+    public function testRecordInfo(): void
+    {
+        $this->removeNodes(VH::XPATH_MODS_RECORDINFO);
+        $this->hasMessageOne('//mods:mods/mods:recordInfo');
+        $this->resetDocument();
+
+        $this->removeNodes(VH::XPATH_MODS_RECORDINFO . '/mods:recordIdentifier');
+        $this->hasMessageOne('mods:recordIdentifier',self::MODS_BASEPATH . '/mods:recordInfo');
+        $this->resetDocument();
+
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_RECORDINFO, VH::NAMESPACE_MODS, 'mods:descriptionStandard');
+        $this->hasMessageNoneOrOne('mods:descriptionStandard',self::MODS_BASEPATH . '/mods:recordInfo');
+    }
+
     protected function checkUriAttributes(string $expression, string $expectedExpression): void
     {
         $this->setAttributeValue($expression, 'authorityURI', 'Test');
-        $this->hasErrorUrlAttribute($expectedExpression, 'authorityURI', 'Test');
+        $this->hasMessageUrlAttribute($expectedExpression, 'authorityURI', 'Test');
         $this->resetDocument();
 
         $this->setAttributeValue($expression, 'valueURI', 'Test');
-        $this->hasErrorUrlAttribute($expectedExpression, 'valueURI', 'Test');
+        $this->hasMessageUrlAttribute($expectedExpression, 'valueURI', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator
