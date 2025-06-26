@@ -36,6 +36,23 @@
                         <mods:dateCreated point="end" encoding="iso8601"/>
                         <mods:dateIssued encoding="iso8601"/>
                     </mods:originInfo>
+                    <mods:subject authority="gnd">
+                        <mods:topic valueURI="http://example.com">
+                            Example
+                        </mods:topic>
+                        <mods:geographic valueURI="http://example.com">
+                            Example
+                        </mods:geographic>
+                    </mods:subject>
+                    <mods:subject>
+                        <mods:name type="personal">
+                            <mods:namePart type="family">Example</mods:namePart>
+                            <mods:namePart type="given">Example</mods:namePart>
+                        </mods:name>
+                        <mods:titleInfo>
+                            <mods:title>Example</mods:title>
+                        </mods:titleInfo>
+                    </mods:subject>
                     <mods:classification authority="lcc">QM21</mods:classification>
                     <mods:relatedItem type="original">
                         <mods:titleInfo>
@@ -69,7 +86,7 @@
                     <mods:location>
                         <mods:physicalLocation>Example location</mods:physicalLocation>
                         <mods:url access="object in context">
-                            http://example.com/object/identifier
+                            http://example.com
                         </mods:url>
                         <mods:shelfLocator>Example E</mods:shelfLocator>
                     </mods:location>

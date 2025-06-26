@@ -49,7 +49,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validatePhysicalDescription();
         // Validation of chapter "2.7 Abstract" already covered by MODS XML schema validation
         $this->validateNotes();
-       //  $this->validateSubjects();
+        $this->validateSubjects();
          $this->validateClassification();
         //  $this->validateRelatedItem();
           $this->validateIdentifier();
@@ -382,7 +382,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $subjectValidator->validateHasUrlAttribute('authorityURI');
             }
 
-            $subjectsSubElements = $this->createNodeListValidator('mods:topic or mods:geographic or mods:temporal or mods:titleInfo or mods:name', $subject)
+            $subjectsSubElements = $this->createNodeListValidator('mods:topic | mods:geographic | mods:temporal | mods:titleInfo | mods:name', $subject)
                 ->getNodeList();
 
             foreach ($subjectsSubElements as $subjectsSubElement) {
@@ -401,9 +401,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                         }
                     } elseif ($subjectsSubElement->nodeName == 'mods:name') {
                         $this->validateName($subjectsSubElement);
-                        $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
-                        $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)
-                            ->validateHasOne();
+                        if ($subjectsSubElement->hasAttribute('nameTitleGroup')) {
+                            $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
+                            $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)
+                                ->validateHasOne();
+                        }
                     }
                 }
             }

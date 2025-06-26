@@ -160,7 +160,19 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testSubjects(): void
     {
+        $this->checkUriAttributes(VH::XPATH_MODS_SUBJECT, self::MODS_BASEPATH . '/mods:subject[1]', ['authorityURI']);
 
+        // check subelements
+        $this->checkUriAttributes(VH::XPATH_MODS_SUBJECT . '/mods:topic', self::MODS_BASEPATH . '/mods:subject[1]/mods:topic', ['valueURI']);
+
+        // TODO validate title info
+        $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:titleInfo', 'nameTitleGroup', '0');
+        $this->hasMessageOne('mods:name[@nameTitleGroup="0"]', self::MODS_BASEPATH . '/mods:subject[2]', SeverityLevel::NOTICE);
+        $this->resetDocument();
+
+        // TODO validate name
+        $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:name', 'nameTitleGroup', '0');
+        $this->hasMessageOne('mods:titleInfo[@nameTitleGroup="0"]', self::MODS_BASEPATH . '/mods:subject[2]', SeverityLevel::NOTICE);
     }
 
     /**
@@ -233,14 +245,13 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasMessageNoneOrOne('mods:descriptionStandard',self::MODS_BASEPATH . '/mods:recordInfo');
     }
 
-    protected function checkUriAttributes(string $expression, string $expectedExpression): void
+    protected function checkUriAttributes(string $expression, string $expectedExpression, array $attributes = ['authorityURI', 'valueURI']): void
     {
-        $this->setAttributeValue($expression, 'authorityURI', 'Test');
-        $this->hasMessageUrlAttribute($expectedExpression, 'authorityURI', 'Test');
-        $this->resetDocument();
-
-        $this->setAttributeValue($expression, 'valueURI', 'Test');
-        $this->hasMessageUrlAttribute($expectedExpression, 'valueURI', 'Test');
+        foreach ($attributes as $attribute) {
+            $this->setAttributeValue($expression, $attribute, 'Test');
+            $this->hasMessageUrlAttribute($expectedExpression, $attribute, 'Test');
+            $this->resetDocument();
+        }
     }
 
     protected function createValidator(): AbstractDlfValidator
