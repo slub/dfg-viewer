@@ -2,8 +2,6 @@
 
 namespace Slub\Dfgviewer\Common;
 
-use function PHPUnit\Framework\assertEquals;
-
 /**
  * Copyright notice
  *

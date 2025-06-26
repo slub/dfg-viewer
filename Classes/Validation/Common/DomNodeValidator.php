@@ -31,6 +31,7 @@ use Slub\Dfgviewer\Common\IsoLanguageHelper;
 use Slub\Dfgviewer\Common\IsoScriptHelper;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Result;
+use function PHPUnit\Framework\assertEquals;
 
 /**
  * The validator contains functions to validate a DOMNode.

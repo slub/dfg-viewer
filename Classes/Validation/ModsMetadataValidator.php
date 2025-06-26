@@ -28,7 +28,6 @@ namespace Slub\Dfgviewer\Validation;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
-use function PHPUnit\Framework\assertEquals;
 
 /**
  * The validator validates against the rules of the MODS application profile 2.4.

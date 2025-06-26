@@ -85,20 +85,20 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasMessageAny(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE);
         $this->resetDocument();
 
-        $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'ID');
-        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div', 'ID');
+        $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ID');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'ID');
         $this->resetDocument();
 
-        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'ID', 'MUS_0000');
-        $this->hasMessageUniqueId('/mets:mets/mets:structMap[3]/mets:div', 'MUS_0000');
+        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ID', 'MUS_0001');
+        $this->hasMessageUniqueId('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'MUS_0001');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'TYPE');
         $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'TYPE');
         $this->resetDocument();
 
-        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ORDER', 'MUS_0000');
-        $this->hasMessageNumericAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'ORDER', 'MUS_0000');
+        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ORDER', 'Test');
+        $this->hasMessageNumericAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'ORDER', 'Test');
     }
 
     /**
