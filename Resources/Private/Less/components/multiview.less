@@ -73,6 +73,7 @@
                         }
 
                         button[type="submit"] {
+                            cursor: pointer;
                             position: absolute;
                             bottom: 20px;
                             right: 20px;
@@ -82,11 +83,13 @@
                             .text-hide();
 
                             &::after {
-                                position: relative;
+                                position: absolute;
                                 font-size: 22px;
-                                line-height: 30px;
+                                line-height: 25px;
                                 color: @base-blue;
                                 content: "+";
+                                left: 6px;
+                                top: -1px;
                             }
                         }
                     }
@@ -124,6 +127,7 @@
 
                             input[type="text"] {
                                 padding: 6px 10px;
+                                padding-right: 24px;
                                 height: 24px;
                                 line-height: 24px;
                             }

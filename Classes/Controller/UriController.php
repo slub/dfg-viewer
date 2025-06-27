@@ -77,7 +77,7 @@ class UriController extends AbstractController
         $uriBook = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[0]]['contentIds'], TRUE);
 
         if (empty($uriBook)) {
-            $uriBook = $doc->getLogicalStructure($doc->toplevelId);
+            $uriBook = $doc->getLogicalStructure($doc->getToplevelId());
             $uriBook = GeneralUtility::trimExplode(' ', $uriBook['contentIds'], TRUE);
         }
 

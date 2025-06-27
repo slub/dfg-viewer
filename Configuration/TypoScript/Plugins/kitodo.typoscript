@@ -246,6 +246,13 @@ plugin.tx_dlf_fulltexttool {
     }
 }
 
+plugin.tx_dlf_adddocumenttool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_adddocumenttool {
+    settings {
+        tools = adddocumenttool
+    }
+}
+
 plugin.tx_dlf_scoretool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_scoretool {
     settings {
