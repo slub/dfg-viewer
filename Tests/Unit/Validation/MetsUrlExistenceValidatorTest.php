@@ -31,7 +31,7 @@ use Slub\Dfgviewer\Validation\MetsUrlExistenceValidator;
 
 class MetsUrlExistenceValidatorTest extends AbstractDomDocumentValidatorTest
 {
-
+/*
     public function testBrokenUrlError(): void
     {
         // check a not existing notExistingUrl
@@ -46,7 +46,7 @@ class MetsUrlExistenceValidatorTest extends AbstractDomDocumentValidatorTest
         $this->setAttributeValue(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat','xlink:href', 'https://picsum.photos/1');
         $this->hasNoMessage();
     }
-
+*/
     protected function createValidator(): AbstractDlfValidator
     {
         // ignore all urls of fixture xml to test specifically

@@ -31,10 +31,14 @@
                     </mods:language>
                     <mods:note type="statementOfResponsibility">Ab Hermanno Boerhaave</mods:note>
                     <mods:originInfo eventType="digitisation">
+                        <mods:place>
+                            <mods:placeTerm type="text">Example</mods:placeTerm>
+                        </mods:place>
                         <mods:publisher/>
                         <mods:dateCreated point="start" encoding="iso8601"/>
                         <mods:dateCreated point="end" encoding="iso8601"/>
                         <mods:dateIssued encoding="iso8601"/>
+                        <mods:edition>Example</mods:edition>
                     </mods:originInfo>
                     <mods:subject authority="gnd">
                         <mods:topic valueURI="http://example.com">

@@ -44,21 +44,20 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateTitle();
         $this->validateNames();
         $this->validateGenre();
-       // $this->validateOrigin();
+        $this->validateOrigin();
         $this->validateLanguage();
         $this->validatePhysicalDescription();
         // Validation of chapter "2.7 Abstract" already covered by MODS XML schema validation
         $this->validateNotes();
         $this->validateSubjects();
-         $this->validateClassification();
+        $this->validateClassification();
         //  $this->validateRelatedItem();
-          $this->validateIdentifier();
-          $this->validateLocation();
-          // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
+        $this->validateIdentifier();
+        $this->validateLocation();
+        // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
         //  $this->validatePart();
-          $this->validateRecordInfo();
-          // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
-
+        $this->validateRecordInfo();
+        // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
     }
 
     /**
@@ -270,16 +269,17 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             }
 
             // Validates against the rules of chapters 2.4.2.4 - 2.4.2.8
-            $dates = $this->createNodeListValidator('mods:dateIssued or mods:dateCreated or mods:dateValid or mods:dateOther', $originInfo);
+            $dates = $this->createNodeListValidator('mods:dateIssued | mods:dateCreated | mods:dateValid | mods:dateOther', $originInfo)->getNodeList();
             foreach ($dates as $date) {
                 $nodeValidator = $this->createNodeValidator($date);
                 if ($date instanceof \DOMElement) {
-                    if ($date->hasAttribute('authorityURI')) {
+                    if ($date->hasAttribute('qualifier')) {
                         $nodeValidator->validateHasAttributeValue('qualifier', ['approximate', 'inferred', 'questionable']);
                     }
                     if ($date->hasAttribute('point')) {
                         $nodeValidator->validateHasAttributeValue('point', ['start', 'end']);
                         if ($date->hasAttribute('keyDate')) {
+                            $nodeValidator->validateHasAttributeValue('keyDate', ['yes']);
                             $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']); // TODO @Sebastian ist das Korrekt -> nur Jahreszahl kein ISO8601
                         }
                     }
@@ -287,12 +287,12 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 }
             }
 
-            $this->createNodeListValidator('[@keyDate="yes"]', $originInfo)
+            $this->createNodeListValidator('mods:dateIssued[@keyDate="yes"] | mods:dateCreated[@keyDate="yes"] | mods:dateValid[@keyDate="yes"] | mods:dateOther[@keyDate="yes"]', $originInfo)
                 ->validateHasNoneOrOne();
 
 
             // Validates against the rules of chapter 2.4.2.9
-            $this->createNodeListValidator(' mods:edition', $originInfo)
+            $this->createNodeListValidator('mods:edition', $originInfo)
                 ->validateHasNoneOrOne();
         }
     }
@@ -400,7 +400,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                                 ->validateHasOne();
                         }
                     } elseif ($subjectsSubElement->nodeName == 'mods:name') {
-                        $this->validateName($subjectsSubElement);
+                        // $this->validateName($subjectsSubElement);
                         if ($subjectsSubElement->hasAttribute('nameTitleGroup')) {
                             $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
                             $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)

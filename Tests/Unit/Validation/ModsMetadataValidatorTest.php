@@ -100,7 +100,55 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testOrigin(): void
     {
+        $this->removeAttribute(VH::XPATH_MODS_ORIGININFO,'eventType');
+        $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:originInfo', 'eventType');
+        $this->resetDocument();
 
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO,'eventType', 'Test');
+        $this->addChildNodeWithNamespace(self::MODS_BASEPATH, VH::NAMESPACE_MODS, 'mods:originInfo');
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '[not(@eventType)]','eventType', 'Test');
+        $this->hasMessageOne('mods:originInfo[@eventType="Test"]', self::MODS_BASEPATH);
+        $this->resetDocument();
+
+        // check mods:place
+        $this->removeNodes(VH::XPATH_MODS_ORIGININFO . '/mods:place/mods:placeTerm');
+        $this->hasMessageAny('mods:placeTerm', self::MODS_BASEPATH  . '/mods:originInfo/mods:place');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:place/mods:placeTerm','type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:originInfo/mods:place/mods:placeTerm', 'type', 'Test');
+        $this->resetDocument();
+
+        // check mods:agent
+        // TODO validate name
+
+        // check dates
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateIssued','qualifier', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:originInfo/mods:dateIssued', 'qualifier', 'Test');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateCreated','point', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:originInfo/mods:dateCreated[1]', 'point', 'Test');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateCreated','keyDate', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:originInfo/mods:dateCreated[1]', 'keyDate', 'Test');
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateCreated','keyDate', 'yes');
+        $this->removeAttribute(VH::XPATH_MODS_ORIGININFO . '/mods:dateCreated','encoding');
+        $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:originInfo/mods:dateCreated[1]', 'encoding');
+        $this->setAttributeValue(self::MODS_BASEPATH . '/mods:originInfo/mods:dateCreated[1]','encoding', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:originInfo/mods:dateCreated[1]', 'encoding', 'Test');
+        $this->resetDocument();
+
+        // check duplicate key date
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateCreated','keyDate', 'yes');
+        $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateIssued','keyDate', 'yes');
+        $this->hasMessageNoneOrOne('mods:dateIssued[@keyDate="yes"] | mods:dateCreated[@keyDate="yes"] | mods:dateValid[@keyDate="yes"] | mods:dateOther[@keyDate="yes"]', self::MODS_BASEPATH . '/mods:originInfo');
+        $this->resetDocument();
+
+        // check mods:edition
+        $this->addChildNodeWithNamespace(self::MODS_BASEPATH . '/mods:originInfo', VH::NAMESPACE_MODS, 'mods:edition');
+        $this->hasMessageNoneOrOne('mods:edition', self::MODS_BASEPATH . '/mods:originInfo');
     }
 
     /**
