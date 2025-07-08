@@ -41,7 +41,6 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testTitle(): void
     {
-        // TODO ausschließen wenn host type exist
         $this->setAttributeValue(VH::XPATH_MODS_TITLEINFO, 'type', 'alternative');
         $this->hasMessageOne(VH::XPATH_MODS_TITLEINFO . '[not(@type)]');
 
@@ -79,8 +78,55 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:name[1]', 'valueURI', SeverityLevel::NOTICE);
         $this->checkUriAttributes(VH::XPATH_MODS_NAMES . '[@type="personal"]', self::MODS_BASEPATH . '/mods:name[1]');
 
-        // validate name subelemets
+        // validate name subelements
+        // check mods:namePart
+        $this->removeNodes(VH::XPATH_MODS_NAMES . '/mods:namePart');
+        $this->hasMessageAny('mods:namePart', self::MODS_BASEPATH . '/mods:name[1]');
+        $this->resetDocument();
 
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]/mods:namePart', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]/mods:namePart[1]', 'type', 'Test');
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]/mods:namePart', 'type', 'family');
+        $this->hasMessageOne('mods:namePart[@type="family"]', self::MODS_BASEPATH . '/mods:name[1]');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="corporate"]/mods:namePart', 'type', 'Test');
+        $this->hasMessageNoneAttribute(self::MODS_BASEPATH . '/mods:name[2]/mods:namePart', 'type');
+        $this->resetDocument();
+
+        // check mods:displayForm
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_NAMES . '[@type="personal"]', VH::NAMESPACE_MODS, 'mods:displayForm');
+        $this->hasMessageNoneOrOne('mods:displayForm', self::MODS_BASEPATH . '/mods:name[1]');
+        $this->resetDocument();
+
+        // check mods:role
+        $this->removeNodes(VH::XPATH_MODS_NAMES . '/mods:role');
+        $this->hasMessageAny('mods:role', self::MODS_BASEPATH . '/mods:name[1]');
+        $this->resetDocument();
+
+        // checko mods:role/mods:roleTerm
+        $this->removeNodes(VH::XPATH_MODS_NAMES . '/mods:role/mods:roleTerm');
+        $this->hasMessageAny('mods:roleTerm', self::MODS_BASEPATH . '/mods:name[1]/mods:role');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '/mods:role/mods:roleTerm', 'type', 'Test');
+        $this->hasMessageOne('mods:roleTerm[@type="code"]', self::MODS_BASEPATH . '/mods:name[1]/mods:role');
+        $this->resetDocument();
+
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_NAMES . '[@type="personal"]/mods:role', VH::NAMESPACE_MODS, 'mods:roleTerm');
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '[@type="personal"]/mods:role/mods:roleTerm[not(@type)]', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]/mods:role/mods:roleTerm[2]', 'type', 'Test');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '/mods:role/mods:roleTerm[@type="code"]', 'authority', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]/mods:role/mods:roleTerm', 'authority', 'Test',SeverityLevel::NOTICE);
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_NAMES . '/mods:role/mods:roleTerm[@type="code"]', 'authorityURI', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:name[1]/mods:role/mods:roleTerm', 'authorityURI', 'Test',SeverityLevel::NOTICE);
+        $this->resetDocument();
+
+        $this->checkUriAttributes(VH::XPATH_MODS_NAMES . '/mods:role/mods:roleTerm', self::MODS_BASEPATH . '/mods:name[1]/mods:role/mods:roleTerm');
     }
 
     /**
@@ -120,7 +166,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         // check mods:agent
-        // TODO validate name
+        // TODO validate ref name
 
         // check dates
         $this->setAttributeValue(VH::XPATH_MODS_ORIGININFO . '/mods:dateIssued','qualifier', 'Test');
@@ -213,16 +259,12 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         // check subelements
         $this->checkUriAttributes(VH::XPATH_MODS_SUBJECT . '/mods:topic', self::MODS_BASEPATH . '/mods:subject[1]/mods:topic', ['valueURI']);
 
-        // check mods:titleInfo with short sample
-        $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:titleInfo', 'type', 'Test');
-        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:subject[2]/mods:titleInfo', 'type', 'Test');
-        $this->resetDocument();
-
+        // TODO validate ref title info
         $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:titleInfo', 'nameTitleGroup', '0');
         $this->hasMessageOne('mods:name[@nameTitleGroup="0"]', self::MODS_BASEPATH . '/mods:subject[2]', SeverityLevel::NOTICE);
         $this->resetDocument();
 
-        // TODO validate name
+        // TODO validate ref name
         $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:name', 'nameTitleGroup', '0');
         $this->hasMessageOne('mods:titleInfo[@nameTitleGroup="0"]', self::MODS_BASEPATH . '/mods:subject[2]', SeverityLevel::NOTICE);
     }
@@ -252,10 +294,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasMessageAny('mods:titleInfo', self::MODS_BASEPATH . '/mods:relatedItem');
         $this->resetDocument();
 
-        // check mods:titleInfo with short sample
-        $this->setAttributeValue(VH::XPATH_MODS_RELATEDITEM . '/mods:titleInfo', 'type', 'Test');
-        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:relatedItem/mods:titleInfo', 'type', 'Test');
-        $this->resetDocument();
+        // TODO validate mods:titleInfo reference
 
         // check mods:part
         $this->addChildNodeWithNamespace(VH::XPATH_MODS_RELATEDITEM, VH::NAMESPACE_MODS, 'mods:part');

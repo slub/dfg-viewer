@@ -184,7 +184,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             }
         }
 
-
         // Validates against the rules of chapter "2.2.2.2 Anzeigeform – mods:displayForm"
         $this->createNodeListValidator('mods:displayForm', $name)
             ->validateHasNoneOrOne();
@@ -208,9 +207,9 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                     ->validateHasAttributeValue('type', ['text', 'code']);
                 $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
                 if ($nodeValidator->getDomElement()->getAttribute('type') == 'code') {
-                  //  $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
-                  //      ->validateHasAttributeValue('authority', ['marcrelator'])
-                  //      ->validateHasAttributeValue('authorityURI', ['http://id.loc.gov/vocabulary/relators']);
+                    $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
+                        ->validateHasAttributeValue('authority', ['marcrelator'])
+                        ->validateHasAttributeValue('authorityURI', ['http://id.loc.gov/vocabulary/relators', 'https://id.loc.gov/vocabulary/relators']);
                     // TODO @Sebastian ist diese URL nicht HTTPS?
                 }
                 self::checkUriAttributes($nodeValidator);

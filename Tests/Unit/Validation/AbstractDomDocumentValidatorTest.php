@@ -111,6 +111,17 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     }
 
     /**
+     * Save the current document.
+     *
+     * @return void
+     */
+    protected function saveDocument(string $filename="document.xml"): void
+    {
+        $this->doc->save($filename);
+    }
+
+
+    /**
      * Reset the document.
      *
      * @return void
@@ -332,6 +343,21 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not permissible.', $severityLevel);
     }
+
+
+    /**
+     * Assert error of has none attribute validation.
+     *
+     * @param string $expression The expression in error message
+     * @param string $name The attribute name
+     * @return void
+     */
+    protected function hasMessageNoneAttribute(string $expression, string $name, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    {
+        $this->validateAndAssertEquals('Attribute "' . $name . '" is not allowed on node "' . $expression . '".', $severityLevel);
+    }
+
+    /**
 
     /**
      * Assert error of has attribute with URL value validation.

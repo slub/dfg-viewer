@@ -8,28 +8,27 @@
                         <mods:title>"INDIA"</mods:title>
                     </mods:titleInfo>
                     <mods:name type="personal" valueURI="http://example.com">
-                        <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid">none</mods:nameIdentifier>
                         <mods:namePart type="family"/>
                         <mods:namePart type="given"/>
-                        <mods:displayForm>"tecnoarcadia"</mods:displayForm>
+                        <mods:displayForm>Example</mods:displayForm>
                         <mods:role>
-                            <mods:roleTerm authority="marcrelator" type="code">aut</mods:roleTerm>
+                            <mods:roleTerm authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" type="code">aut</mods:roleTerm>
                         </mods:role>
                     </mods:name>
                     <mods:name type="corporate" valueURI="http://example.com">
-                        <mods:namePart>Royal Society &lt;London&gt;</mods:namePart>
+                        <mods:namePart>Example</mods:namePart>
                         <mods:role>
-                            <mods:roleTerm authority="marcrelator" type="code">ctb</mods:roleTerm>
+                            <mods:roleTerm authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" type="code">ctb</mods:roleTerm>
                         </mods:role>
                     </mods:name>
-                    <mods:genre valueURI="http://uri.gbv.de/terminology/aadgenres/gt17">
-                        Archäologie
+                    <mods:genre valueURI="http://example.com">
+                        Example
                     </mods:genre>
                     <mods:language>
                         <mods:languageTerm type="code" authority="iso639-2b">ger</mods:languageTerm>
                         <mods:scriptTerm type="code" authority="iso15924">Latf</mods:scriptTerm>
                     </mods:language>
-                    <mods:note type="statementOfResponsibility">Ab Hermanno Boerhaave</mods:note>
+                    <mods:note type="example">Example</mods:note>
                     <mods:originInfo eventType="digitisation">
                         <mods:place>
                             <mods:placeTerm type="text">Example</mods:placeTerm>
