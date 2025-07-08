@@ -28,6 +28,9 @@ namespace Slub\Dfgviewer\Validation;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
+use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertTrue;
 
 /**
  * The validator validates against the rules of the MODS application profile 2.4.
@@ -55,7 +58,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateIdentifier();
         $this->validateLocation();
         // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
-        //$this->validatePart();
+        $this->validatePart();
         $this->validateRecordInfo();
         // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
     }
@@ -563,7 +566,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             $orderValue = $nodeValidator
                 ->validateHasAttribute('order')
                 ->getDomElement()->getAttribute('order');
-            if (!(is_int($orderValue) && $orderValue >= 0)) {
+            if (!(ctype_digit($orderValue) && (int)$orderValue >= 0)) {
                 $nodeValidator->addSeverityMessage('Value "' . $orderValue . '" in the "order" attribute of "' . $part->getNodePath() . '" is not a positiv integer.', 1746779788);
             }
 

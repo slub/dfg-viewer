@@ -337,9 +337,35 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
      */
     public function testPart(): void
     {
-        // TODO check related item
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS, VH::NAMESPACE_MODS, 'mods:part');
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS, VH::NAMESPACE_MODS, 'mods:part');
+        $this->hasMessageNoneOrOne('//mods:mods/mods:part');
+        $this->resetDocument();
 
+        $this->removeNodes(VH::XPATH_MODS_PART);
+        $this->setAttributeValue(VH::XPATH_MODS_RELATEDITEM, 'type', 'host');
+        $this->hasMessageOne('//mods:mods/mods:part');
+        $this->resetDocument();
+
+        $this->removeAttribute(VH::XPATH_MODS_PART, 'order');
+        $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:part', 'order');
+        $this->setAttributeValue(VH::XPATH_MODS_PART, 'order', '-1');
+        $this->validateAndAssertEquals('Value "-1" in the "order" attribute of "' . self::MODS_BASEPATH . '/mods:part" is not a positiv integer.');
+        $this->resetDocument();
+
+        // check mods:detail
+        $this->removeNodes(VH::XPATH_MODS_PART .  '/mods:detail');
+        $this->hasMessageAny('mods:detail', self::MODS_BASEPATH . '/mods:part');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_PART.  '/mods:detail', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:part/mods:detail', 'type', 'Test');
+        $this->resetDocument();
+
+        $this->removeNodes(VH::XPATH_MODS_PART .  '/mods:detail/mods:number');
+        $this->hasMessageOne('mods:number', self::MODS_BASEPATH . '/mods:part/mods:detail');
     }
+
 
     /**
      * Test validation against the rules of chapter "2.16 Informationen zum Metadatensatz"

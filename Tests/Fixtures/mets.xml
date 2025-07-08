@@ -90,6 +90,11 @@
                             </mods:detail>
                         </mods:part>
                     </mods:relatedItem>
+                    <mods:part order="2">
+                        <mods:detail type="volume">
+                            <mods:number>0123456</mods:number>
+                        </mods:detail>
+                    </mods:part>
                     <mods:identifier type="gettyaat">none</mods:identifier>
                     <mods:location>
                         <mods:physicalLocation>Example location</mods:physicalLocation>
