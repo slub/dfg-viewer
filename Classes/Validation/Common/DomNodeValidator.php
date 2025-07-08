@@ -141,7 +141,7 @@ class DomNodeValidator extends DomValidator
     }
 
     /**
-     * Validate that the node has an attribute with a ISO 639-2/B value.
+     * Validate that the node has an attribute with an ISO 639-2/B value.
      *
      * @param string $name The attribute name
      * @return $this
