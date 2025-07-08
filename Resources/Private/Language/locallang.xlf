@@ -68,18 +68,6 @@
 		<trans-unit id="metadata">
 			<source>Metadata</source>
 		</trans-unit>
-        <trans-unit id="multiview.add_document.description">
-            <source>To add another document to this view, enter the entire URL of the METS/MODS file here.</source>
-        </trans-unit>
-        <trans-unit id="multiview.add_document.label">
-            <source>Add Document</source>
-        </trans-unit>
-        <trans-unit id="multiview.add_document.placeholder">
-            <source>Document URL</source>
-        </trans-unit>
-        <trans-unit id="multiview.add_document.submit">
-            <source>Add now</source>
-        </trans-unit>
         <trans-unit id="multiview.remove_document">
             <source>Remove Document from view</source>
         </trans-unit>
