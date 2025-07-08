@@ -86,7 +86,7 @@ class DomNodeValidator extends DomValidator
     }
 
     /**
-     * Validate that the node's content contains a ISO 639-2b.
+     * Validate that the node's content contains an ISO 639-2b.
      *
      * @return $this
      */
