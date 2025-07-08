@@ -213,7 +213,11 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         // check subelements
         $this->checkUriAttributes(VH::XPATH_MODS_SUBJECT . '/mods:topic', self::MODS_BASEPATH . '/mods:subject[1]/mods:topic', ['valueURI']);
 
-        // TODO validate title info
+        // check mods:titleInfo with short sample
+        $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:titleInfo', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:subject[2]/mods:titleInfo', 'type', 'Test');
+        $this->resetDocument();
+
         $this->setAttributeValue(VH::XPATH_MODS_SUBJECT . '/mods:titleInfo', 'nameTitleGroup', '0');
         $this->hasMessageOne('mods:name[@nameTitleGroup="0"]', self::MODS_BASEPATH . '/mods:subject[2]', SeverityLevel::NOTICE);
         $this->resetDocument();
@@ -231,6 +235,58 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testClassification(): void
     {
         $this->checkUriAttributes(VH::XPATH_MODS_CLASSIFICATION, self::MODS_BASEPATH . '/mods:classification');
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.11 Beziehungen zu anderen Ressourcen"
+     *
+     * @return void
+     */
+    public function testRelatedItem(): void
+    {
+        $this->setAttributeValue(VH::XPATH_MODS_RELATEDITEM, 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:relatedItem', 'type', 'Test');
+        $this->resetDocument();
+
+        $this->removeNodes(VH::XPATH_MODS_RELATEDITEM . '/mods:titleInfo');
+        $this->hasMessageAny('mods:titleInfo', self::MODS_BASEPATH . '/mods:relatedItem');
+        $this->resetDocument();
+
+        // check mods:titleInfo with short sample
+        $this->setAttributeValue(VH::XPATH_MODS_RELATEDITEM . '/mods:titleInfo', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:relatedItem/mods:titleInfo', 'type', 'Test');
+        $this->resetDocument();
+
+        // check mods:part
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_RELATEDITEM, VH::NAMESPACE_MODS, 'mods:part');
+        $this->hasMessageNoneOrOne('mods:part', self::MODS_BASEPATH . '/mods:relatedItem');
+        $this->resetDocument();
+
+        $this->removeNodes(VH::XPATH_MODS_RELATEDITEM . '/mods:part/mods:detail');
+        $this->hasMessageAny("mods:detail", self::MODS_BASEPATH . '/mods:relatedItem/mods:part');
+        $this->resetDocument();
+
+        $this->setAttributeValue(VH::XPATH_MODS_RELATEDITEM . '/mods:part/mods:detail', 'type', 'Test');
+        $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:relatedItem/mods:part/mods:detail', 'type', 'Test');
+        $this->resetDocument();
+
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_RELATEDITEM . '/mods:part', VH::NAMESPACE_MODS, 'mods:detail');
+        $this->setAttributeValue(VH::XPATH_MODS_RELATEDITEM . '/mods:part/mods:detail', 'type', 'volume');
+        $this->hasMessageOne('mods:detail[@type="volume"]', self::MODS_BASEPATH . '/mods:relatedItem/mods:part');
+        $this->resetDocument();
+
+        $this->removeNodes(VH::XPATH_MODS_RELATEDITEM . '/mods:part/mods:detail/mods:number');
+        $this->hasMessageOne("mods:number", self::MODS_BASEPATH . '/mods:relatedItem/mods:part/mods:detail');
+        $this->resetDocument();
+
+        // check mods:recordInfo
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_RELATEDITEM, VH::NAMESPACE_MODS, 'mods:recordInfo');
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_RELATEDITEM, VH::NAMESPACE_MODS, 'mods:recordInfo');
+        $this->hasMessageNoneOrOne('mods:recordInfo', self::MODS_BASEPATH . '/mods:relatedItem');
+        $this->resetDocument();
+
+        $this->addChildNodeWithNamespace(VH::XPATH_MODS_RELATEDITEM, VH::NAMESPACE_MODS, 'mods:recordInfo');
+        $this->hasMessageOne('mods:recordIdentifier', self::MODS_BASEPATH . '/mods:relatedItem/mods:recordInfo');
     }
 
     /**
@@ -272,6 +328,17 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
 
         $this->addChildNodeWithNamespace(VH::XPATH_MODS_LOCATION, VH::NAMESPACE_MODS, 'mods:shelfLocator');
         $this->hasMessageNoneOrOne('mods:shelfLocator', self::MODS_BASEPATH . '/mods:location');
+    }
+
+    /**
+     * Test validation against the rules of chapter "2.15 Angabe von Bänden und anderen Teilen"
+     *
+     * @return void
+     */
+    public function testPart(): void
+    {
+        // TODO check related item
+
     }
 
     /**

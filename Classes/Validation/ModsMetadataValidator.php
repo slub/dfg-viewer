@@ -51,11 +51,11 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         $this->validateNotes();
         $this->validateSubjects();
         $this->validateClassification();
-        //  $this->validateRelatedItem();
+        $this->validateRelatedItem();
         $this->validateIdentifier();
         $this->validateLocation();
         // Chapter "2.14 Zugriffs- und Verarbeitungsrechte" currently not formulated
-        //  $this->validatePart();
+        //$this->validatePart();
         $this->validateRecordInfo();
         // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
     }
@@ -473,8 +473,8 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                         $this->createNodeValidator($detail)
                             ->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'collection', 'class', 'series', 'file']);
                         // type attribute can only be used once within a mods:part
-                        $this->createNodeListValidator('mods:detail[@type="' . $detail->hasAttribute('type') . '"]', $part)
-                            ->validateHasNoneOrOne();
+                        $this->createNodeListValidator('mods:detail[@type="' . $detail->getAttribute('type') . '"]', $part)
+                            ->validateHasOne();
                     }
 
                     // Validation of chapter "2.11.2.3.2.1 mods:number"
@@ -483,11 +483,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             }
 
             // Validation of chapter "2.11.2.4 Ressource – mods:recordInfo"
-            if (count($titleInfos) == 0) {
-                $recordInfoListValidator->validateHasOne();
-            } else {
-                $recordInfoListValidator->validateHasNoneOrOne();
-            }
+            $recordInfoListValidator->validateHasNoneOrOne();
 
             if ($recordInfoListValidator->getNodeList()->count() == 1) {
                 $this->createNodeListValidator('mods:recordIdentifier', $recordInfoListValidator->getFirstNode())

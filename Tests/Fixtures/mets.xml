@@ -58,12 +58,11 @@
                         </mods:titleInfo>
                     </mods:subject>
                     <mods:classification authority="lcc">QM21</mods:classification>
-                    <mods:relatedItem type="original">
+                    <mods:relatedItem type="series">
                         <mods:titleInfo>
-                            <mods:title/>
-                        </mods:titleInfo>
-                        <mods:titleInfo type="alternative">
-                            <mods:title>none</mods:title>
+                            <mods:title>
+                                Example
+                            </mods:title>
                         </mods:titleInfo>
                         <mods:name type="personal">
                             <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid"/>
@@ -85,6 +84,11 @@
                             <mods:url displayLabel="wikidata">none</mods:url>
                             <mods:url displayLabel="wikipedia">none</mods:url>
                         </mods:location>
+                        <mods:part>
+                            <mods:detail type="volume">
+                                <mods:number>0123456</mods:number>
+                            </mods:detail>
+                        </mods:part>
                     </mods:relatedItem>
                     <mods:identifier type="gettyaat">none</mods:identifier>
                     <mods:location>
