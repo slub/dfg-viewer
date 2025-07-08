@@ -148,7 +148,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateName(\DOMElement $name): void
+    protected function validateName(\DOMNode $name): void
     {
         $nodeValidator = $this->createNodeValidator($name)
             ->validateHasAttributeValue('type', ['personal', 'corporate', 'conference', 'family']);
@@ -605,7 +605,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
         }
     }
 
-    private static function checkUriAttributes(DomNodeValidator $nodeValidator): void
+    protected static function checkUriAttributes(DomNodeValidator $nodeValidator): void
     {
         $element = $nodeValidator->getDomElement();
         if ($element->hasAttribute('authorityURI')) {
