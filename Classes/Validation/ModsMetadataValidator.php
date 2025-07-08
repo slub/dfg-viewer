@@ -380,7 +380,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             ->getNodeList();
         foreach ($subjects as $subject) {
             $subjectValidator = $this->createNodeValidator($subject);
-            if ($subject->hasAttribute('authorityURI')) {
+            if ($subjectValidator->getDomElement()->hasAttribute('authorityURI')) {
                 $subjectValidator->validateHasUrlAttribute('authorityURI');
             }
 
@@ -472,10 +472,10 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 foreach ($details as $detail) {
                     // one detail without type attribute can exist
                     if ($details->length > 1 || ($detail instanceof \DOMElement && $detail->hasAttribute('type'))) {
-                        $this->createNodeValidator($detail)
+                        $nodeValidator = $this->createNodeValidator($detail)
                             ->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'collection', 'class', 'series', 'file']);
                         // type attribute can only be used once within a mods:part
-                        $this->createNodeListValidator('mods:detail[@type="' . $detail->getAttribute('type') . '"]', $part)
+                        $this->createNodeListValidator('mods:detail[@type="' . $nodeValidator->getDomElement()->getAttribute('type') . '"]', $part)
                             ->validateHasOne();
                     }
 
