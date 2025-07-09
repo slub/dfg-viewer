@@ -48,9 +48,12 @@
                         </mods:geographic>
                     </mods:subject>
                     <mods:subject>
-                        <mods:name type="personal">
+                        <mods:name type="personal" valueURI="http://example.com">
                             <mods:namePart type="family">Example</mods:namePart>
                             <mods:namePart type="given">Example</mods:namePart>
+                            <mods:role>
+                                <mods:roleTerm authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" type="code">ctb</mods:roleTerm>
+                            </mods:role>
                         </mods:name>
                         <mods:titleInfo>
                             <mods:title>Example</mods:title>

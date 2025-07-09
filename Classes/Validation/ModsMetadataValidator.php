@@ -403,7 +403,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                                 ->validateHasOne();
                         }
                     } elseif ($subjectsSubElement->nodeName == 'mods:name') {
-                       // $this->validateName($subjectsSubElement);
+                        $this->validateName($subjectsSubElement);
                         if ($subjectsSubElement->hasAttribute('nameTitleGroup')) {
                             $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
                             $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)
