@@ -210,7 +210,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                     $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
                         ->validateHasAttributeValue('authority', ['marcrelator'])
                         ->validateHasAttributeValue('authorityURI', ['http://id.loc.gov/vocabulary/relators', 'https://id.loc.gov/vocabulary/relators']);
-                    // TODO @Sebastian ist diese URL nicht HTTPS?
                 }
                 self::checkUriAttributes($nodeValidator);
             }
@@ -283,10 +282,9 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                         if ($date->hasAttribute('keyDate')) {
                             $nodeValidator->validateHasAttributeValue('keyDate', ['yes']);
                             $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']);
-                            // TODO @Sebastian ist das Korrekt -> nur Jahreszahl kein ISO8601
+                            // TODO Jahreszahl auf ISO
                         }
                     }
-                    // TODO Severity Notice @Sebastian ISO Validierung macht keinen Sinn da kein ISO String YYYY-MM-DDTHH:MM:SS.sssZ
                 }
             }
 
@@ -454,7 +452,6 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 $titleInfoListValidator->validateHasAny();
             }
 
-            // TODO Sebstian nachfrage wegen "host" Prüfung in related Item wenn nicht vorhanden -> L451
             $titleInfos = $titleInfoListValidator->getNodeList();
             foreach ($titleInfos as $titleInfo) {
                 $this->validateTitleInfo($titleInfo);
