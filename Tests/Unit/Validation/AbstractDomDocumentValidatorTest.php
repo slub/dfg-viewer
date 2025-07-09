@@ -253,7 +253,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         }
 
         if ($hasResults) {
-            $this->validateAndAssertEquals("no result", $severityLevel);
+            $this->validateAndAssertEquals("no result message for severity level", $severityLevel);
         }
         static::assertFalse($hasResults);
     }
