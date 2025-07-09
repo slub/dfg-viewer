@@ -43,14 +43,14 @@ trait SeverityTrait
     public function addSeverityMessage($message, $code)
     {
         switch ($this->severityLevel) {
-            case SeverityLevel::WARNING:
-                $this->getResult()->addWarning(new Warning($message, $code));
-                break;
-            case SeverityLevel::NOTICE:
-                $this->getResult()->addNotice(new Notice($message, $code));
-                break;
-            default:
-                $this->getResult()->addError(new Error($message, $code));
+        case SeverityLevel::WARNING:
+            $this->getResult()->addWarning(new Warning($message, $code));
+            break;
+        case SeverityLevel::NOTICE:
+            $this->getResult()->addNotice(new Notice($message, $code));
+            break;
+        default:
+            $this->getResult()->addError(new Error($message, $code));
         }
     }
 

@@ -282,7 +282,8 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                         $nodeValidator->validateHasAttributeValue('point', ['start', 'end']);
                         if ($date->hasAttribute('keyDate')) {
                             $nodeValidator->validateHasAttributeValue('keyDate', ['yes']);
-                            $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']); // TODO @Sebastian ist das Korrekt -> nur Jahreszahl kein ISO8601
+                            $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']);
+                            // TODO @Sebastian ist das Korrekt -> nur Jahreszahl kein ISO8601
                         }
                     }
                     // TODO Severity Notice @Sebastian ISO Validierung macht keinen Sinn da kein ISO String YYYY-MM-DDTHH:MM:SS.sssZ
@@ -388,10 +389,10 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->getNodeList();
 
             foreach ($subjectsSubElements as $subjectsSubElement) {
-                $subjectsSubElementValidator = $this->createNodeValidator($subjectsSubElement);
+                $subElementValidator = $this->createNodeValidator($subjectsSubElement);
                 if ($subjectsSubElement instanceof \DOMElement) {
                     if ($subjectsSubElement->hasAttribute('valueURI')) {
-                        $subjectsSubElementValidator->validateHasUrlAttribute('valueURI');
+                        $subElementValidator->validateHasUrlAttribute('valueURI');
                     }
 
                     if ($subjectsSubElement->nodeName == 'mods:titleInfo') {
@@ -402,7 +403,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                                 ->validateHasOne();
                         }
                     } elseif ($subjectsSubElement->nodeName == 'mods:name') {
-                        // $this->validateName($subjectsSubElement);
+                       // $this->validateName($subjectsSubElement);
                         if ($subjectsSubElement->hasAttribute('nameTitleGroup')) {
                             $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
                             $this->createNodeListValidator('mods:titleInfo[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)

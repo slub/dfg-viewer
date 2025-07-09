@@ -425,7 +425,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasMessageNoneOrOne('mods:descriptionStandard',self::MODS_BASEPATH . '/mods:recordInfo');
     }
 
-    protected function checkUriAttributes(string $expression, string $expectedExpression, array $attributes = ['authorityURI', 'valueURI']): void
+    protected function checkUriAttributes(string $expression, string $expectedExpression, array $attributes=['authorityURI', 'valueURI']): void
     {
         foreach ($attributes as $attribute) {
             $this->setAttributeValue($expression, $attribute, 'Test');
