@@ -238,7 +238,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      *
      * @return void
      */
-    protected function hasNoMessage(SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasNoMessage(SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $result = $this->validate();
         switch ($severityLevel) {
@@ -265,7 +265,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $context The context in error message
      * @return void
      */
-    protected function hasMessageAny(string $expression, string $context='', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageAny(string $expression, string $context='', SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $message = 'There must be at least one element that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
@@ -281,7 +281,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $context The context in error message
      * @return void
      */
-    protected function hasMessageOne(string $expression, string $context='', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageOne(string $expression, string $context='', SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $message = 'There must be exactly one element that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
@@ -297,7 +297,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $context The context in error message
      * @return void
      */
-    protected function hasMessageNoneOrOne(string $expression, string $context='', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageNoneOrOne(string $expression, string $context='', SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $message = 'There must be either no element or only one that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
@@ -313,7 +313,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $name The attribute name
      * @return void
      */
-    protected function hasMessageAttribute(string $expression, string $name, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageAttribute(string $expression, string $name, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Mandatory "' . $name . '" attribute of "' . $expression . '" is missing.', $severityLevel);
     }
@@ -326,7 +326,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasMessageAttributeWithIso6392B(string $expression, string $name, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageAttributeWithIso6392B(string $expression, string $name, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $expression . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', $severityLevel);
     }
@@ -339,7 +339,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasMessageAttributeWithValue(string $expression, string $name, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageAttributeWithValue(string $expression, string $name, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not permissible.', $severityLevel);
     }
@@ -352,7 +352,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $name The attribute name
      * @return void
      */
-    protected function hasMessageNoneAttribute(string $expression, string $name, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageNoneAttribute(string $expression, string $name, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Attribute "' . $name . '" is not allowed on node "' . $expression . '".', $severityLevel);
     }
@@ -367,7 +367,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasMessageUrlAttribute(string $expression, string $name, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageUrlAttribute(string $expression, string $name, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the "' . $name . '" attribute of node "' . $expression . '" is not valid.', $severityLevel);
     }
@@ -381,7 +381,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $targetExpression The target context expression
      * @return void
      */
-    protected function hasMessageAttributeRefToOne(string $expression, string $name, string $value, string $targetExpression, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageAttributeRefToOne(string $expression, string $name, string $value, string $targetExpression, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" must reference an element within the XPath expression "' . $targetExpression . '"', $severityLevel);
     }
@@ -393,7 +393,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The content value
      * @return void
      */
-    protected function hasMessageEmailContent(string $expression, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageEmailContent(string $expression, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Email "' . $value . '" in the content of "' . $expression . '" is not valid.', $severityLevel);
     }
@@ -405,7 +405,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The content value
      * @return void
      */
-    protected function hasMessageIso6392BContent(string $expression, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageIso6392BContent(string $expression, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the content of "' . $expression . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', $severityLevel);
     }
@@ -418,7 +418,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The content value
      * @return void
      */
-    protected function hasMessageIso15924Content(string $expression, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageIso15924Content(string $expression, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the content of "' . $expression . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', $severityLevel);
     }
@@ -430,7 +430,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The content value
      * @return void
      */
-    protected function hasMessageUrlContent(string $expression, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageUrlContent(string $expression, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('URL "' . $value . '" in the content of "' . $expression . '" is not valid.', $severityLevel);
     }
@@ -442,7 +442,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasMessageUniqueId(string $expression, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageUniqueId(string $expression, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->hasMessageUniqueAttribute($expression, 'ID', $value, $severityLevel);
     }
@@ -455,7 +455,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasMessageNumericAttribute(string $expression, string $name, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageNumericAttribute(string $expression, string $name, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" is not numeric.', $severityLevel);
     }
@@ -469,7 +469,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $regex The attribute value
      * @return void
      */
-    protected function hasMessageRegexAttribute(string $expression, string $name, string $value, string $regex, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageRegexAttribute(string $expression, string $name, string $value, string $regex, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" does not match the pattern "/^' . $regex . '$/i".', $severityLevel);
     }
@@ -482,7 +482,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $value The attribute value
      * @return void
      */
-    protected function hasMessageUniqueAttribute(string $expression, string $name, string $value, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageUniqueAttribute(string $expression, string $name, string $value, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $this->validateAndAssertEquals('Value "' . $value . '" in the "' . $name . '" attribute of "' . $expression . '" already exists.', $severityLevel);
     }
