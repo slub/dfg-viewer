@@ -116,7 +116,7 @@ class DomNodeListValidator extends DomValidator
     public function validateHasOne(): DomNodeListValidator
     {
         if ($this->nodeList->length != 1) {
-            $this->addMessage('There must be no more than one element', 1736504354);
+            $this->addMessage('There must be exactly one element', 1736504354);
         }
         return $this;
     }

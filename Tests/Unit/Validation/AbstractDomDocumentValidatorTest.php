@@ -283,7 +283,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected function hasMessageOne(string $expression, string $context = '', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
     {
-        $message = 'There must be no more than one element that matches the XPath expression "' . $expression . '"';
+        $message = 'There must be exactly one element that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
             $message .= ' under "' . $context . '"';
         }
