@@ -92,19 +92,19 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
 
         switch ($severityLevel) {
             case SeverityLevel::WARNING:
-                if ($result->hasWarnings()) {
-                    $resultMessage = $result->getFirstWarning()->getMessage();
-                }
-                break;
+            if ($result->hasWarnings()) {
+                 $resultMessage = $result->getFirstWarning()->getMessage();
+            }
+            break;
             case SeverityLevel::NOTICE:
-                if ($result->hasNotices()) {
-                    $resultMessage = $result->getFirstNotice()->getMessage();
-                }
-                break;
+            if ($result->hasNotices()) {
+                 $resultMessage = $result->getFirstNotice()->getMessage();
+            }
+            break;
             default:
-                if ($result->hasErrors()){
-                    $resultMessage = $result->getFirstError()->getMessage();
-                }
+            if ($result->hasErrors()){
+                $resultMessage = $result->getFirstError()->getMessage();
+            }
         }
 
         self::assertEquals($message,$resultMessage);
@@ -252,7 +252,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
                 $hasResults = $result->hasErrors();
         }
 
-        if($hasResults) {
+        if ($hasResults) {
             $this->validateAndAssertEquals("no result", $severityLevel);
         }
         static::assertFalse($hasResults);
@@ -265,7 +265,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $context The context in error message
      * @return void
      */
-    protected function hasMessageAny(string $expression, string $context = '', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageAny(string $expression, string $context='', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
     {
         $message = 'There must be at least one element that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
@@ -281,7 +281,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $context The context in error message
      * @return void
      */
-    protected function hasMessageOne(string $expression, string $context = '', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageOne(string $expression, string $context='', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
     {
         $message = 'There must be exactly one element that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
@@ -297,7 +297,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param string $context The context in error message
      * @return void
      */
-    protected function hasMessageNoneOrOne(string $expression, string $context = '', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function hasMessageNoneOrOne(string $expression, string $context='', SeverityLevel $severityLevel = SeverityLevel::ERROR): void
     {
         $message = 'There must be either no element or only one that matches the XPath expression "' . $expression . '"';
         if ($context != '') {
