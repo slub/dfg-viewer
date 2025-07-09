@@ -40,6 +40,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class DomNodeListValidator extends DomValidator
 {
+
     /**
      * @var string The expression of XPath query
      */
@@ -82,7 +83,7 @@ class DomNodeListValidator extends DomValidator
      */
     public function getNode(int $index): ?DOMNode
     {
-        return $this->nodeList->length > $index ? $this->nodeList->item($index): null;
+        return $this->nodeList->length > $index ? $this->nodeList->item($index) : null;
     }
 
     /**

@@ -43,6 +43,7 @@ use function PHPUnit\Framework\assertEquals;
  */
 class DomNodeValidator extends DomValidator
 {
+
     /**
      * @var DOMXPath The XPath of document to validate
      */

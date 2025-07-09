@@ -30,11 +30,18 @@ use TYPO3\CMS\Extbase\Error\Notice;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Error\Warning;
 
-trait SeverityTrait {
+trait SeverityTrait
+{
 
+    /**
+     * Define the severity level
+     *
+     * @var SeverityLevel
+     */
     protected SeverityLevel $severityLevel = SeverityLevel::ERROR;
 
-    public function addSeverityMessage($message, $code) {
+    public function addSeverityMessage($message, $code)
+    {
         switch ($this->severityLevel) {
             case SeverityLevel::WARNING:
                 $this->getResult()->addWarning(new Warning($message, $code));
