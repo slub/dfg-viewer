@@ -25,12 +25,10 @@ namespace Slub\Dfgviewer\Validation;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertFalse;
-use function PHPUnit\Framework\assertTrue;
 
 /**
  * The validator validates against the rules of the MODS application profile 2.4.
@@ -282,8 +280,12 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                         if ($date->hasAttribute('keyDate')) {
                             $nodeValidator->validateHasAttributeValue('keyDate', ['yes']);
                             $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']);
-                            // TODO Jahreszahl auf ISO
                         }
+                    }
+
+                    if (!$date->hasAttribute('point') || !$date->hasAttribute('keyDate')) {
+                       $this->createNodeValidator($date, SeverityLevel::NOTICE)
+                            ->validateHasAttributeValue('encoding', ['iso8601']);
                     }
                 }
             }
