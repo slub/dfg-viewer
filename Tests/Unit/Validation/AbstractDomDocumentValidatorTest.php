@@ -102,7 +102,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
             }
             break;
             default:
-            if ($result->hasErrors()){
+            if ($result->hasErrors()) {
                 $resultMessage = $result->getFirstError()->getMessage();
             }
         }

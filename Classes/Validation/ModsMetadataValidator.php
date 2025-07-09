@@ -25,7 +25,6 @@ namespace Slub\Dfgviewer\Validation;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Slub\Dfgviewer\Common\ValidationHelper;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
@@ -76,8 +75,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->validateHasOne();
         }
 
-        $titleInfos = $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO )
-            ->getNodeList();
+        $titleInfos = $this->createNodeListValidator(VH::XPATH_MODS_TITLEINFO)->getNodeList();
 
         foreach ($titleInfos as $titleInfo) {
             $this->validateTitleInfo($titleInfo);
@@ -284,15 +282,13 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                     }
 
                     if (!$date->hasAttribute('point') || !$date->hasAttribute('keyDate')) {
-                       $this->createNodeValidator($date, SeverityLevel::NOTICE)
-                            ->validateHasAttributeValue('encoding', ['iso8601']);
+                        $this->createNodeValidator($date, SeverityLevel::NOTICE)->validateHasAttributeValue('encoding', ['iso8601']);
                     }
                 }
             }
 
             $this->createNodeListValidator('mods:dateIssued[@keyDate="yes"] | mods:dateCreated[@keyDate="yes"] | mods:dateValid[@keyDate="yes"] | mods:dateOther[@keyDate="yes"]', $originInfo)
                 ->validateHasNoneOrOne();
-
 
             // Validates against the rules of chapter 2.4.2.9
             $this->createNodeListValidator('mods:edition', $originInfo)
@@ -447,14 +443,14 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
                 ->validateHasAttributeValue('type', ['host', 'preceding', 'succeeding', 'series', 'original']);
 
             // Validation of chapter "2.11.2.1 Titelangaben – mods:titleInfo"
-            $titleInfoListValidator = $this->createNodeListValidator('mods:titleInfo', $relatedItem);
-            $recordInfoListValidator = $this->createNodeListValidator('mods:recordInfo', $relatedItem);
+            $titleInfoValidator = $this->createNodeListValidator('mods:titleInfo', $relatedItem);
+            $recordInfoValidator = $this->createNodeListValidator('mods:recordInfo', $relatedItem);
 
-            if ($recordInfoListValidator->getNodeList()->length == 0) {
-                $titleInfoListValidator->validateHasAny();
+            if ($recordInfoValidator->getNodeList()->length == 0) {
+                $titleInfoValidator->validateHasAny();
             }
 
-            $titleInfos = $titleInfoListValidator->getNodeList();
+            $titleInfos = $titleInfoValidator->getNodeList();
             foreach ($titleInfos as $titleInfo) {
                 $this->validateTitleInfo($titleInfo);
             }
@@ -485,10 +481,10 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             }
 
             // Validation of chapter "2.11.2.4 Ressource – mods:recordInfo"
-            $recordInfoListValidator->validateHasNoneOrOne();
+            $recordInfoValidator->validateHasNoneOrOne();
 
-            if ($recordInfoListValidator->getNodeList()->count() == 1) {
-                $this->createNodeListValidator('mods:recordIdentifier', $recordInfoListValidator->getFirstNode())
+            if ($recordInfoValidator->getNodeList()->count() == 1) {
+                $this->createNodeListValidator('mods:recordIdentifier', $recordInfoValidator->getFirstNode())
                     ->validateHasOne();
             }
         }
@@ -565,7 +561,7 @@ class ModsMetadataValidator extends AbstractDomDocumentValidator
             $orderValue = $nodeValidator
                 ->validateHasAttribute('order')
                 ->getDomElement()->getAttribute('order');
-            if (!(ctype_digit($orderValue) && (int)$orderValue >= 0)) {
+            if (!(ctype_digit($orderValue) && (int) $orderValue >= 0)) {
                 $nodeValidator->addSeverityMessage('Value "' . $orderValue . '" in the "order" attribute of "' . $part->getNodePath() . '" is not a positiv integer.', 1746779788);
             }
 
