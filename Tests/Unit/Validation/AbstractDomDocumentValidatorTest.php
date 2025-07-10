@@ -85,7 +85,7 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      * @param $severityLevel SeverityLevel
      * @return void
      */
-    protected function validateAndAssertEquals(string $message, SeverityLevel $severityLevel = SeverityLevel::ERROR): void
+    protected function validateAndAssertEquals(string $message, SeverityLevel $severityLevel=SeverityLevel::ERROR): void
     {
         $result = $this->validator->validate($this->doc);
         $resultMessage = 'no result message for severity level';

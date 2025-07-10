@@ -205,7 +205,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
     public function testLanguage(): void
     {
         $this->removeNodes(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm');
-        $this->hasMessageAny( 'mods:languageTerm', self::MODS_BASEPATH . '/mods:language');
+        $this->hasMessageAny('mods:languageTerm', self::MODS_BASEPATH . '/mods:language');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MODS_LANGUAGE . '/mods:languageTerm', 'type', 'Test');
@@ -221,7 +221,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->resetDocument();
 
         $this->setContentValue(VH::XPATH_MODS_LANGUAGE . '/mods:scriptTerm', 'Test');
-        $this->hasMessageIso15924Content( self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'Test', SeverityLevel::NOTICE);
+        $this->hasMessageIso15924Content(self::MODS_BASEPATH . '/mods:language/mods:scriptTerm', 'Test', SeverityLevel::NOTICE);
     }
 
     /**
@@ -361,7 +361,7 @@ class ModsMetadataValidatorTest extends AbstractDomDocumentValidatorTest
         $this->hasMessageAny('mods:url | mods:physicalLocation', self::MODS_BASEPATH . '/mods:location');
         $this->resetDocument();
 
-        $this->setAttributeValue( VH::XPATH_MODS_LOCATION . '/mods:url', 'access', 'Test');
+        $this->setAttributeValue(VH::XPATH_MODS_LOCATION . '/mods:url', 'access', 'Test');
         $this->hasMessageAttributeWithValue(self::MODS_BASEPATH . '/mods:location/mods:url', 'access', 'Test', SeverityLevel::NOTICE);
         $this->resetDocument();
 
