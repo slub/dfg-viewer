@@ -38,7 +38,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * @access public
  */
-class DomNodeListValidator extends DomValidator
+class NodeListValidator extends AbstractDomValidator
 {
 
     /**
@@ -101,7 +101,7 @@ class DomNodeListValidator extends DomValidator
      *
      * @return $this
      */
-    public function validateHasAny(): DomNodeListValidator
+    public function validateHasAny(): NodeListValidator
     {
         if (!$this->nodeList->length > 0) {
             $this->addMessage('There must be at least one element', 1736504345);
@@ -114,7 +114,7 @@ class DomNodeListValidator extends DomValidator
      *
      * @return $this
      */
-    public function validateHasOne(): DomNodeListValidator
+    public function validateHasOne(): NodeListValidator
     {
         if ($this->nodeList->length != 1) {
             $this->addMessage('There must be exactly one element', 1736504354);
@@ -127,7 +127,7 @@ class DomNodeListValidator extends DomValidator
      *
      * @return $this
      */
-    public function validateHasNoneOrOne(): DomNodeListValidator
+    public function validateHasNoneOrOne(): NodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
             $this->addMessage('There must be either no element or only one', 1736504361);

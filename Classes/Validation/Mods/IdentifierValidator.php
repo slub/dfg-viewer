@@ -42,9 +42,9 @@ class IdentifierValidator extends AbstractModsValidator
         $identifiers = $this->createNodeListValidator(VH::XPATH_MODS_IDENTIFIER)
             ->getNodeList();
         foreach ($identifiers as $identifier) {
-            $nodeValidator = $this->createNodeValidator($identifier)->validateHasAttribute('type');
+            $nodeValidator = $this->createNodeAttributeValidator($identifier)->validateHas('type');
             if ($identifier instanceof \DOMElement && $identifier->hasAttribute("invalid")) {
-                $nodeValidator->validateHasAttributeValue('invalid', ['yes']);
+                $nodeValidator->validateValue('invalid', ['yes']);
             }
         }
     }

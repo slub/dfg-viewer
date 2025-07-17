@@ -43,8 +43,8 @@ class OriginValidator extends AbstractModsValidator
         $originInfos = $this->createNodeListValidator(VH::XPATH_MODS_ORIGININFO)
             ->getNodeList();
         foreach ($originInfos as $originInfo) {
-            $nodeValidator = $this->createNodeValidator($originInfo)
-                ->validateHasAttribute('eventType');
+            $nodeValidator = $this->createNodeAttributeValidator($originInfo)
+                ->validateHas('eventType');
 
             $this->checkUniqueAttributeUnderParent($nodeValidator, 'eventType');
 
@@ -55,8 +55,8 @@ class OriginValidator extends AbstractModsValidator
                     ->validateHasAny()
                     ->getNodeList();
                 foreach ($placeTerms as $placeTerm) {
-                    $nodeValidator = $this->createNodeValidator($placeTerm)
-                        ->validateHasAttributeValue('type', ['text', 'code']);
+                    $nodeValidator = $this->createNodeAttributeValidator($placeTerm)
+                        ->validateValue('type', ['text', 'code']);
                     static::checkUriAttributes($nodeValidator);
                 }
             }
@@ -71,21 +71,21 @@ class OriginValidator extends AbstractModsValidator
             // Validates against the rules of chapters 2.4.2.4 - 2.4.2.8
             $dates = $this->createNodeListValidator('mods:dateIssued | mods:dateCreated | mods:dateValid | mods:dateOther', $originInfo)->getNodeList();
             foreach ($dates as $date) {
-                $nodeValidator = $this->createNodeValidator($date);
+                $nodeValidator = $this->createNodeAttributeValidator($date);
                 if ($date instanceof \DOMElement) {
                     if ($date->hasAttribute('qualifier')) {
-                        $nodeValidator->validateHasAttributeValue('qualifier', ['approximate', 'inferred', 'questionable']);
+                        $nodeValidator->validateValue('qualifier', ['approximate', 'inferred', 'questionable']);
                     }
                     if ($date->hasAttribute('point')) {
-                        $nodeValidator->validateHasAttributeValue('point', ['start', 'end']);
+                        $nodeValidator->validateValue('point', ['start', 'end']);
                         if ($date->hasAttribute('keyDate')) {
-                            $nodeValidator->validateHasAttributeValue('keyDate', ['yes']);
-                            $nodeValidator->validateHasAttributeValue('encoding', ['iso8601']);
+                            $nodeValidator->validateValue('keyDate', ['yes']);
+                            $nodeValidator->validateValue('encoding', ['iso8601']);
                         }
                     }
 
                     if (!$date->hasAttribute('point') || !$date->hasAttribute('keyDate')) {
-                        $this->createNodeValidator($date, SeverityLevel::NOTICE)->validateHasAttributeValue('encoding', ['iso8601']);
+                        $this->createNodeAttributeValidator($date, SeverityLevel::NOTICE)->validateValue('encoding', ['iso8601']);
                     }
                 }
             }

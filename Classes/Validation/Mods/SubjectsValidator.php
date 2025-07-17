@@ -43,19 +43,19 @@ class SubjectsValidator extends AbstractModsValidator
         $subjects = $this->createNodeListValidator(VH::XPATH_MODS_SUBJECT)
             ->getNodeList();
         foreach ($subjects as $subject) {
-            $subjectValidator = $this->createNodeValidator($subject);
+            $subjectValidator = $this->createNodeAttributeValidator($subject);
             if ($subjectValidator->getDomElement()->hasAttribute('authorityURI')) {
-                $subjectValidator->validateHasUrlAttribute('authorityURI');
+                $subjectValidator->validateUrl('authorityURI');
             }
 
             $subjectsSubElements = $this->createNodeListValidator('mods:topic | mods:geographic | mods:temporal | mods:titleInfo | mods:name', $subject)
                 ->getNodeList();
 
             foreach ($subjectsSubElements as $subjectsSubElement) {
-                $subElementValidator = $this->createNodeValidator($subjectsSubElement);
+                $subElementValidator = $this->createNodeAttributeValidator($subjectsSubElement);
                 if ($subjectsSubElement instanceof \DOMElement) {
                     if ($subjectsSubElement->hasAttribute('valueURI')) {
-                        $subElementValidator->validateHasUrlAttribute('valueURI');
+                        $subElementValidator->validateUrl('valueURI');
                     }
 
                     if ($subjectsSubElement->nodeName == 'mods:titleInfo') {

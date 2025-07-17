@@ -42,7 +42,7 @@ class GenreValidator extends AbstractModsValidator
         $genres = $this->createNodeListValidator(VH::XPATH_MODS_GENRES)
             ->getNodeList();
         foreach ($genres as $genre) {
-            static::checkUriAttributes($this->createNodeValidator($genre));
+            static::checkUriAttributes($this->createNodeAttributeValidator($genre));
         }
     }
 }

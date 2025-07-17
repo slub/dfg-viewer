@@ -42,8 +42,8 @@ class RelatedItemValidator extends AbstractModsValidator
         $relatedItems = $this->createNodeListValidator(VH::XPATH_MODS_RELATEDITEM)
             ->getNodeList();
         foreach ($relatedItems as $relatedItem) {
-            $this->createNodeValidator($relatedItem)
-                ->validateHasAttributeValue('type', ['host', 'preceding', 'succeeding', 'series', 'original']);
+            $this->createNodeAttributeValidator($relatedItem)
+                ->validateValue('type', ['host', 'preceding', 'succeeding', 'series', 'original']);
 
             // Validation of chapter "2.11.2.1 Titelangaben – mods:titleInfo"
             $titleInfoValidator = $this->createNodeListValidator('mods:titleInfo', $relatedItem);
@@ -71,8 +71,8 @@ class RelatedItemValidator extends AbstractModsValidator
                 foreach ($details as $detail) {
                     // one detail without type attribute can exist
                     if ($details->length > 1 || ($detail instanceof \DOMElement && $detail->hasAttribute('type'))) {
-                        $nodeValidator = $this->createNodeValidator($detail)
-                            ->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'collection', 'class', 'series', 'file']);
+                        $nodeValidator = $this->createNodeAttributeValidator($detail)
+                            ->validateValue('type', ['volume', 'issue', 'chapter', 'collection', 'class', 'series', 'file']);
                         // type attribute can only be used once within a mods:part
                         $this->createNodeListValidator('mods:detail[@type="' . $nodeValidator->getDomElement()->getAttribute('type') . '"]', $part)
                             ->validateHasOne();

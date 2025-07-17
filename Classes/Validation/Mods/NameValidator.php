@@ -41,7 +41,6 @@ class NameValidator extends AbstractModsValidator
     {
         $names = $this->createNodeListValidator(VH::XPATH_MODS_NAMES)
             ->getNodeList();
-
         foreach ($names as $name) {
             $this->validateName($name);
         }

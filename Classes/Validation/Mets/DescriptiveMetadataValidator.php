@@ -53,8 +53,8 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($structureElement)
-            ->validateHasReferenceToId('DMDID', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
+        $this->createNodeAttributeValidator($structureElement)
+            ->validateReferenceToId('DMDID', VH::XPATH_DESCRIPTIVE_METADATA_SECTIONS);
     }
 
     /**
@@ -70,8 +70,8 @@ class DescriptiveMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $nodeValidator = $this->createNodeValidator($mdWrap)
-            ->validateHasAttributeValue('MDTYPE', ['MODS', 'TEIHDR']);
+        $nodeValidator = $this->createNodeAttributeValidator($mdWrap)
+            ->validateValue('MDTYPE', ['MODS', 'TEIHDR']);
 
         if (!$mdWrap) {
             return;

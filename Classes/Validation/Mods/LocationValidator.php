@@ -48,7 +48,7 @@ class LocationValidator extends AbstractModsValidator
                 ->getFirstNode();
 
             if ($physicalLocation != null) {
-                self::checkUriAttributes($this->createNodeValidator($physicalLocation));
+                self::checkUriAttributes($this->createNodeAttributeValidator($physicalLocation));
             }
 
             $this->createNodeListValidator('mods:url | mods:physicalLocation', $location)
@@ -56,7 +56,7 @@ class LocationValidator extends AbstractModsValidator
 
             $urls = $this->createNodeListValidator('mods:url', $location)->getNodeList();
             foreach ($urls as $url) {
-                $this->createNodeValidator($url, SeverityLevel::NOTICE)->validateHasAttributeValue('access', ['preview', 'raw object', 'object in context']);
+                $this->createNodeAttributeValidator($url, SeverityLevel::NOTICE)->validateValue('access', ['preview', 'raw object', 'object in context']);
             }
 
             $this->createNodeListValidator('mods:shelfLocator', $location)

@@ -79,9 +79,9 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
 
     protected function validateFileGroup(\DOMNode $fileGroup): void
     {
-        $this->createNodeValidator($fileGroup)
-            ->validateHasUniqueAttribute("USE", VH::XPATH_FILE_SECTION_GROUPS)
-            ->validateHasAttributeValue("USE", VH::SUPPORTED_FILEGROUPS);
+        $this->createNodeAttributeValidator($fileGroup)
+            ->validateIsUnique("USE", VH::XPATH_FILE_SECTION_GROUPS)
+            ->validateValue("USE", VH::SUPPORTED_FILEGROUPS);
     }
 
     /**
@@ -103,16 +103,16 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
 
     protected function validateFile(\DOMNode $file): void
     {
-        $this->createNodeValidator($file)
-            ->validateHasUniqueId()
-            ->validateHasAttributeValue('MIMETYPE', VH::SUPPORTED_MIMETYPES);
+        $this->createNodeAttributeValidator($file)
+            ->validateUniqueId()
+            ->validateValue('MIMETYPE', VH::SUPPORTED_MIMETYPES);
 
         $fLocat = $this->createNodeListValidator('mets:FLocat', $file)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($fLocat)
-            ->validateHasAttributeValue('LOCTYPE', ['URL', 'PURL'])
-            ->validateHasUrlAttribute('xlink:href');
+        $this->createNodeAttributeValidator($fLocat)
+            ->validateValue('LOCTYPE', ['URL', 'PURL'])
+            ->validateUrl('xlink:href');
     }
 }

@@ -47,24 +47,24 @@ class LanguageValidator extends AbstractModsValidator
                 ->validateHasAny()
                 ->getNodeList();
             foreach ($languageTerms as $languageTerm) {
-                $nodeValidator = $this->createNodeValidator($languageTerm)
-                    ->validateHasAttributeValue('type', ['code', 'text']);
+                $nodeValidator = $this->createNodeAttributeValidator($languageTerm)
+                    ->validateValue('type', ['code', 'text']);
                 self::checkUriAttributes($nodeValidator);
 
-                $this->createNodeValidator($languageTerm, SeverityLevel::NOTICE)
-                    ->validateHasIso6392BContent();
+                $this->createNodeContentValidator($languageTerm, SeverityLevel::NOTICE)
+                    ->validateIso6392B();
             }
 
             $scriptTerms = $this->createNodeListValidator('mods:scriptTerm', $language)
                 ->validateHasAny()
                 ->getNodeList();
             foreach ($scriptTerms as $scriptTerm) {
-                $nodeValidator = $this->createNodeValidator($scriptTerm)
-                    ->validateHasAttributeValue('type', ['code', 'text']);
+                $nodeValidator = $this->createNodeAttributeValidator($scriptTerm)
+                    ->validateValue('type', ['code', 'text']);
                 self::checkUriAttributes($nodeValidator);
 
-                $this->createNodeValidator($scriptTerm, SeverityLevel::NOTICE)
-                    ->validateHasIso15924Content();
+                $this->createNodeContentValidator($scriptTerm, SeverityLevel::NOTICE)
+                    ->validateIso15924();
             }
         }
     }

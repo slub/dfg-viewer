@@ -27,7 +27,8 @@ namespace Slub\Dfgviewer\Validation\Mods;
 
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
 use Slub\Dfgviewer\Validation\AbstractDomDocumentValidator;
-use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
+use Slub\Dfgviewer\Validation\Common\AbstractNodeValidator;
+use Slub\Dfgviewer\Validation\Common\NodeAttributeValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
 
 abstract class AbstractModsValidator extends AbstractDomDocumentValidator
@@ -37,18 +38,18 @@ abstract class AbstractModsValidator extends AbstractDomDocumentValidator
         return $this->createNodeListValidator(VH::XPATH_MODS_RELATEDITEM . '[@type="host"]')->getNodeList()->count() > 0;
     }
 
-    protected static function checkUriAttributes(DomNodeValidator $nodeValidator): void
+    protected static function checkUriAttributes(NodeAttributeValidator $attributeValidator): void
     {
-        $element = $nodeValidator->getDomElement();
+        $element = $attributeValidator->getDomElement();
         if ($element->hasAttribute('authorityURI')) {
-            $nodeValidator->validateHasUrlAttribute('authorityURI');
+            $attributeValidator->validateUrl('authorityURI');
         }
         if ($element->hasAttribute('valueURI')) {
-            $nodeValidator->validateHasUrlAttribute('valueURI');
+            $attributeValidator->validateUrl('valueURI');
         }
     }
 
-    protected function checkUniqueAttributeUnderParent(DomNodeValidator $nodeValidator, string $attribute): void
+    protected function checkUniqueAttributeUnderParent(AbstractNodeValidator $nodeValidator, string $attribute): void
     {
         $element = $nodeValidator->getDomElement();
         $this->createNodeListValidator($element->tagName . '[@' . $attribute . '="' . $element->getAttribute($attribute) . '"]', $element->parentNode)
@@ -68,13 +69,13 @@ abstract class AbstractModsValidator extends AbstractDomDocumentValidator
     protected function validateTitleInfo(mixed $titleInfo): void
     {
         if ($titleInfo instanceof \DOMElement) {
-            $nodeValidator = $this->createNodeValidator($titleInfo);
+            $nodeValidator = $this->createNodeAttributeValidator($titleInfo);
             if ($titleInfo->hasAttribute('type')) {
-                $nodeValidator->validateHasAttributeValue('type', ['abbreviated', 'translated', 'alternative', 'uniform']);
+                $nodeValidator->validateValue('type', ['abbreviated', 'translated', 'alternative', 'uniform']);
             }
             static::checkUriAttributes($nodeValidator);
             if ($titleInfo->hasAttribute('lang')) {
-                $nodeValidator->validateHasAttributeWithIso6392B('lang');
+                $nodeValidator->validateIso6392B('lang');
             }
         }
         $this->validateTitleInfoSubElements($titleInfo);
@@ -106,10 +107,10 @@ abstract class AbstractModsValidator extends AbstractDomDocumentValidator
      */
     protected function validateName(\DOMNode $name): void
     {
-        $nodeValidator = $this->createNodeValidator($name)
-            ->validateHasAttributeValue('type', ['personal', 'corporate', 'conference', 'family']);
+        $nodeValidator = $this->createNodeAttributeValidator($name)
+            ->validateValue('type', ['personal', 'corporate', 'conference', 'family']);
 
-        $this->createNodeValidator($name, SeverityLevel::NOTICE)->validateHasAttribute('valueURI');
+        $this->createNodeAttributeValidator($name, SeverityLevel::NOTICE)->validateHas('valueURI');
 
         self::checkUriAttributes($nodeValidator);
 
@@ -130,13 +131,13 @@ abstract class AbstractModsValidator extends AbstractDomDocumentValidator
             ->validateHasAny()
             ->getNodeList();
         foreach ($nameParts as $namePart) {
-            $nodeValidator = $this->createNodeValidator($namePart);
-            if ($this->createNodeValidator($name)->getDomElement()->getAttribute('type') == 'personal') {
-                $nodeValidator->validateHasAttributeValue('type', ['family', 'given', 'date', 'termsOfAddress']);
+            $nodeValidator = $this->createNodeAttributeValidator($namePart);
+            if ($this->createNodeAttributeValidator($name)->getDomElement()->getAttribute('type') == 'personal') {
+                $nodeValidator->validateValue('type', ['family', 'given', 'date', 'termsOfAddress']);
                 $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
             } else {
                 $nodeValidator
-                    ->validateHasNoneAttribute('type');
+                    ->validateHasNone('type');
             }
         }
 
@@ -159,13 +160,13 @@ abstract class AbstractModsValidator extends AbstractDomDocumentValidator
                 ->validateHasOne();
 
             foreach ($roleTerms as $roleTerm) {
-                $nodeValidator = $this->createNodeValidator($roleTerm)
-                    ->validateHasAttributeValue('type', ['text', 'code']);
+                $nodeValidator = $this->createNodeAttributeValidator($roleTerm)
+                    ->validateValue('type', ['text', 'code']);
                 $this->checkUniqueAttributeUnderParent($nodeValidator, 'type');
                 if ($nodeValidator->getDomElement()->getAttribute('type') == 'code') {
-                    $this->createNodeValidator($roleTerm, SeverityLevel::NOTICE)
-                        ->validateHasAttributeValue('authority', ['marcrelator'])
-                        ->validateHasAttributeValue('authorityURI', ['http://id.loc.gov/vocabulary/relators', 'https://id.loc.gov/vocabulary/relators']);
+                    $this->createNodeAttributeValidator($roleTerm, SeverityLevel::NOTICE)
+                        ->validateValue('authority', ['marcrelator'])
+                        ->validateValue('authorityURI', ['http://id.loc.gov/vocabulary/relators', 'https://id.loc.gov/vocabulary/relators']);
                 }
                 self::checkUriAttributes($nodeValidator);
             }

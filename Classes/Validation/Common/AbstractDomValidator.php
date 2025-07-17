@@ -1,6 +1,6 @@
 <?php
 
-namespace Slub\Dfgviewer\Validation\Mods;
+namespace Slub\Dfgviewer\Validation\Common;
 
 /**
  * Copyright notice
@@ -25,25 +25,35 @@ namespace Slub\Dfgviewer\Validation\Mods;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use Slub\Dfgviewer\Common\ValidationHelper as VH;
-use Slub\Dfgviewer\Validation\Common\SeverityLevel;
+use TYPO3\CMS\Extbase\Error\Result;
 
 /**
- * The validator validates against the rules outlined in chapter 2.8 of the MODS application profile 2.4.
+ * The validator contains functions to validate a DOMNode.
  *
  * @package TYPO3
  * @subpackage dfg-viewer
  *
  * @access public
  */
-class NoteValidator extends AbstractModsValidator
+abstract class AbstractDomValidator
 {
-    public function isValidDocument(): void
+    use SeverityTrait;
+
+    public function __construct(SeverityLevel $severityLevel=SeverityLevel::ERROR)
     {
-        $notes = $this->createNodeListValidator(VH::XPATH_MODS_NOTE)
-            ->getNodeList();
-        foreach ($notes as $note) {
-            $this->createNodeAttributeValidator($note, SeverityLevel::NOTICE)->validateHas('type');
-        }
+        $this->severityLevel = $severityLevel;
+    }
+
+    /**
+     * @var Result The result containing errors of validation
+     */
+    protected Result $result;
+
+    /**
+     * @return Result
+     */
+    public function getResult(): Result
+    {
+        return $this->result;
     }
 }

@@ -42,7 +42,7 @@ class ClassificationValidator extends AbstractModsValidator
         $classifications = $this->createNodeListValidator(VH::XPATH_MODS_CLASSIFICATION)
             ->getNodeList();
         foreach ($classifications as $classification) {
-            static::checkUriAttributes($this->createNodeValidator($classification));
+            static::checkUriAttributes($this->createNodeAttributeValidator($classification));
         }
     }
 }

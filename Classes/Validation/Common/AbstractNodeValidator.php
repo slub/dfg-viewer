@@ -25,6 +25,8 @@ namespace Slub\Dfgviewer\Validation\Common;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use DOMNode;
+use DOMXPath;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -35,25 +37,46 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * @access public
  */
-abstract class DomValidator
+class AbstractNodeValidator extends AbstractDomValidator
 {
-    use SeverityTrait;
+    /**
+     * @var DOMXPath The XPath of document to validate
+     */
+    protected DOMXPath $xpath;
 
-    public function __construct(SeverityLevel $severityLevel=SeverityLevel::ERROR)
+    /**
+     * @var DOMNode|null The node to validate
+     */
+    protected ?DOMNode $node;
+
+    public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node, SeverityLevel $severityLevel=SeverityLevel::ERROR)
     {
-        $this->severityLevel = $severityLevel;
+        parent::__construct($severityLevel);
+        $this->xpath = $xpath;
+        $this->result = $result;
+        $this->node = $node;
     }
 
     /**
-     * @var Result The result containing errors of validation
+     * Checks if node type is DOMElement.
+     *
+     * @return bool True if is element node
      */
-    protected Result $result;
+    public function isElementType(): bool
+    {
+        return $this->node instanceof \DOMElement;
+    }
 
     /**
-     * @return Result
+     * Get the DOMElement.
+     *
+     * @return \DOMElement The element node
      */
-    public function getResult(): Result
+    public function getDomElement(): ?\DOMElement
     {
-        return $this->result;
+        if ($this->node instanceof \DOMElement) {
+            return $this->node;
+        }
+        return null;
     }
 }

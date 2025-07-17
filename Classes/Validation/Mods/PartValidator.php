@@ -45,9 +45,9 @@ class PartValidator extends AbstractModsValidator
 
         $part = $nodeListValidator->getFirstNode();
         if ($part != null) {
-            $nodeValidator = $this->createNodeValidator($part);
+            $nodeValidator = $this->createNodeAttributeValidator($part);
             $orderValue = $nodeValidator
-                ->validateHasAttribute('order')
+                ->validateHas('order')
                 ->getDomElement()->getAttribute('order');
             if (!(ctype_digit($orderValue) && (int) $orderValue >= 0)) {
                 $nodeValidator->addSeverityMessage('Value "' . $orderValue . '" in the "order" attribute of "' . $part->getNodePath() . '" is not a positiv integer.', 1746779788);
@@ -58,8 +58,7 @@ class PartValidator extends AbstractModsValidator
                 ->validateHasAny()
                 ->getNodeList();
             foreach ($details as $detail) {
-                $this->createNodeValidator($detail)->validateHasAttributeValue('type', ['volume', 'issue', 'chapter', 'album']);
-
+                $this->createNodeAttributeValidator($detail)->validateValue('type', ['volume', 'issue', 'chapter', 'album']);
                 $this->createNodeListValidator('mods:number', $detail)->validateHasOne();
             }
         }

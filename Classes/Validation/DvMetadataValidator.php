@@ -73,11 +73,11 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
 
         $sruNode = $this->createNodeListValidator(VH::XPATH_DVLINKS . '/dv:sru')
             ->validateHasNoneOrOne()->getFirstNode();
-        $this->createNodeValidator($sruNode)->validateHasUrlContent();
+        $this->createNodeContentValidator($sruNode)->validateUrl();
 
         $iiifNode = $this->createNodeListValidator(VH::XPATH_DVLINKS . '/dv:iiif')
             ->validateHasNoneOrOne()->getFirstNode();
-        $this->createNodeValidator($iiifNode)->validateHasUrlContent();
+        $this->createNodeContentValidator($iiifNode)->validateUrl();
     }
 
     /**
@@ -108,7 +108,7 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
             ->validateHasNoneOrOne()
             ->getFirstNode();
         if ($licenseNode && !in_array($licenseNode->nodeValue, ['pdm', 'cc0', 'cc-by', 'cc-by-sa', 'cc-by-nd', 'cc-by-nc', 'cc-by-nc-sa', 'cc-by-nc-nd', 'reserved'])) {
-            $this->createNodeValidator($licenseNode)->validateHasUrlContent();
+            $this->createNodeContentValidator($licenseNode)->validateUrl();
         }
     }
 
@@ -123,8 +123,8 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
     protected function validateReference(\DOMNode $reference): void
     {
         if ($this->xpath->query('dv:reference', $reference->parentNode)->length > 1) {
-            $this->createNodeValidator($reference)
-                ->validateHasAttribute('linktext');
+            $this->createNodeAttributeValidator($reference)
+                ->validateHas('linktext');
         }
     }
 
@@ -145,11 +145,11 @@ class DvMetadataValidator extends AbstractDomDocumentValidator
             return;
         }
 
-        $nodeValidator = $this->createNodeValidator($node);
+        $nodeValidator = $this->createNodeContentValidator($node);
         if (str_starts_with(strtolower($node->nodeValue), 'mailto:')) {
-            $nodeValidator->validateHasEmailContent();
+            $nodeValidator->validateEmail();
         } else {
-            $nodeValidator->validateHasUrlContent();
+            $nodeValidator->validateUrl();
         }
     }
 }

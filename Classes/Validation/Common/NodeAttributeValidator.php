@@ -25,13 +25,10 @@ namespace Slub\Dfgviewer\Validation\Common;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use DOMNode;
-use DOMXPath;
 use Slub\Dfgviewer\Common\IsoLanguageHelper;
 use Slub\Dfgviewer\Common\IsoScriptHelper;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Result;
-use function PHPUnit\Framework\assertEquals;
 
 /**
  * The validator contains functions to validate a DOMNode.
@@ -41,120 +38,22 @@ use function PHPUnit\Framework\assertEquals;
  *
  * @access public
  */
-class DomNodeValidator extends DomValidator
+class NodeAttributeValidator extends AbstractNodeValidator
 {
-
-    /**
-     * @var DOMXPath The XPath of document to validate
-     */
-    private DOMXPath $xpath;
-
-    /**
-     * @var DOMNode|null The node to validate
-     */
-    private ?DOMNode $node;
-
-    public function __construct(DOMXPath $xpath, Result $result, ?DOMNode $node, SeverityLevel $severityLevel=SeverityLevel::ERROR)
-    {
-        parent::__construct($severityLevel);
-        $this->xpath = $xpath;
-        $this->result = $result;
-        $this->node = $node;
-    }
-
-    /**
-     * Validate that the node's content contains an Email.
-     *
-     * @return $this
-     */
-    public function validateHasEmailContent(): DomNodeValidator
-    {
-        if (!isset($this->node) || !$this->node->nodeValue) {
-            return $this;
-        }
-
-        $email = $this->node->nodeValue;
-
-        if (str_starts_with(strtolower($email), 'mailto:')) {
-            $email = substr($email, 7);
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->addSeverityMessage('Email "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504169);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Validate that the node's content contains an ISO 639-2b.
-     *
-     * @return $this
-     */
-    public function validateHasIso6392BContent(): DomNodeValidator
-    {
-        if (!isset($this->node) || !$this->node->nodeValue) {
-            return $this;
-        }
-
-        if (!IsoLanguageHelper::iso6392BCodeExists($this->node->nodeValue)) {
-            $this->addSeverityMessage('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1746455012);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Validate that the node's content contains a ISO 15924 value.
-     *
-     * @return $this
-     */
-    public function validateHasIso15924Content(): DomNodeValidator
-    {
-        if (!isset($this->node) || !$this->node->nodeValue) {
-            return $this;
-        }
-
-        if (!array_key_exists($this->node->nodeValue, IsoScriptHelper::ISO_15924)) {
-            $this->addSeverityMessage('Value "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1746455012);
-        }
-
-        return $this;
-    }
-
-
-    /**
-     * Validate that the node's content contains a URL.
-     *
-     * @return $this
-     */
-    public function validateHasUrlContent(): DomNodeValidator
-    {
-        if (!isset($this->node) || !$this->node->nodeValue) {
-            return $this;
-        }
-
-        if (!preg_match('/^' . ValidationHelper::URL_REGEX . '$/i', $this->node->nodeValue)) {
-            $this->addSeverityMessage('URL "' . $this->node->nodeValue . '" in the content of "' . $this->node->getNodePath() . '" is not valid.', 1736504177);
-        }
-
-        return $this;
-    }
-
     /**
      * Validate that the node has an attribute with an ISO 639-2/B value.
      *
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttributeWithIso6392B(string $name): DomNodeValidator
+    public function validateIso6392B(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $value = $this->getDomElement()->getAttribute($name);
@@ -172,14 +71,14 @@ class DomNodeValidator extends DomValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttributeWithIso15924(string $name): DomNodeValidator
+    public function validateIso15924(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $value = $this->getDomElement()->getAttribute($name);
@@ -197,14 +96,14 @@ class DomNodeValidator extends DomValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasUrlAttribute(string $name): DomNodeValidator
+    public function validateUrl(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $value = $this->getDomElement()->getAttribute($name);
@@ -223,14 +122,14 @@ class DomNodeValidator extends DomValidator
      * @param array $values The allowed values
      * @return $this
      */
-    public function validateHasAttributeValue(string $name, array $values): DomNodeValidator
+    public function validateValue(string $name, array $values): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $attrValue = $this->getDomElement()->getAttribute($name);
@@ -255,14 +154,14 @@ class DomNodeValidator extends DomValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasNumericAttribute(string $name): DomNodeValidator
+    public function validateIsNumeric(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $value = $this->getDomElement()->getAttribute($name);
@@ -280,14 +179,14 @@ class DomNodeValidator extends DomValidator
      * @param string $contextExpression The context expression to determine uniqueness.
      * @return $this
      */
-    public function validateHasUniqueAttribute(string $name, string $contextExpression): DomNodeValidator
+    public function validateIsUnique(string $name, string $contextExpression): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $value = $this->getDomElement()->getAttribute($name);
@@ -303,14 +202,14 @@ class DomNodeValidator extends DomValidator
      *
      * @return $this
      */
-    public function validateHasRegexAttribute(string $name, string $regex): DomNodeValidator
+    public function validateRegex(string $name, string $regex): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $value = $this->getDomElement()->getAttribute($name);
@@ -328,9 +227,9 @@ class DomNodeValidator extends DomValidator
      *
      * @return $this
      */
-    public function validateHasUniqueId(): DomNodeValidator
+    public function validateUniqueId(): NodeAttributeValidator
     {
-        $this->validateHasUniqueAttribute("ID", "//*");
+        $this->validateIsUnique("ID", "//*");
         return $this;
     }
 
@@ -340,7 +239,7 @@ class DomNodeValidator extends DomValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasAttribute(string $name): DomNodeValidator
+    public function validateHas(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
@@ -358,7 +257,7 @@ class DomNodeValidator extends DomValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateHasNoneAttribute(string $name): DomNodeValidator
+    public function validateHasNone(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
@@ -377,14 +276,14 @@ class DomNodeValidator extends DomValidator
      * @param string $targetExpression The context expression to the target reference
      * @return $this
      */
-    public function validateHasReferenceToId(string $name, string $targetExpression): DomNodeValidator
+    public function validateReferenceToId(string $name, string $targetExpression): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
         }
 
         if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHasAttribute($name);
+            return $this->validateHas($name);
         }
 
         $identifier = $this->getDomElement()->getAttribute($name);
@@ -402,28 +301,5 @@ class DomNodeValidator extends DomValidator
         }
 
         return $this;
-    }
-
-    /**
-     * Checks if node type is DOMElement.
-     *
-     * @return bool True if is element node
-     */
-    public function isElementType(): bool
-    {
-        return $this->node instanceof \DOMElement;
-    }
-
-    /**
-     * Get the DOMElement.
-     *
-     * @return \DOMElement The element node
-     */
-    public function getDomElement(): ?\DOMElement
-    {
-        if ($this->node instanceof \DOMElement) {
-            return $this->node;
-        }
-        return null;
     }
 }
