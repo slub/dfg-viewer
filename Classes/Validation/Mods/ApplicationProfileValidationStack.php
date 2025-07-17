@@ -42,7 +42,6 @@ class ApplicationProfileValidationStack extends AbstractDlfValidationStack
     public function __construct()
     {
         parent::__construct(\DOMDocument::class);
-        // codacy:disable
         $this->addValidator(TitleValidator::class);
         $this->addValidator(NameValidator::class);
         $this->addValidator(GenreValidator::class);
@@ -60,6 +59,5 @@ class ApplicationProfileValidationStack extends AbstractDlfValidationStack
         $this->addValidator(PartValidator::class);
         $this->addValidator(RecordInfoValidator::class);
         // Validation of chapter "3.1 Erweiterung – mods:extension" already covered by MODS XML schema validation
-        // codacy:enable
     }
 }
