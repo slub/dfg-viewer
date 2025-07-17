@@ -90,7 +90,7 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
         $element = $this->createNodeAttributeValidator($sequenceElement)
             ->validateUniqueId()
             ->validateValue("TYPE", ["page", "doublepage", "track"])
-            ->validateIsNumeric('ORDER')
+            ->validateNumeric('ORDER')
             ->getDomElement();
         $this->validateFiles('mets:fptr', $element);
     }

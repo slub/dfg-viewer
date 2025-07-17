@@ -80,7 +80,7 @@ class DigitalRepresentationValidator extends AbstractDomDocumentValidator
     protected function validateFileGroup(\DOMNode $fileGroup): void
     {
         $this->createNodeAttributeValidator($fileGroup)
-            ->validateIsUnique("USE", VH::XPATH_FILE_SECTION_GROUPS)
+            ->validateUnique("USE", VH::XPATH_FILE_SECTION_GROUPS)
             ->validateValue("USE", VH::SUPPORTED_FILEGROUPS);
     }
 

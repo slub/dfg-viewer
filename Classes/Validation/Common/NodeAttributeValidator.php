@@ -26,7 +26,6 @@ namespace Slub\Dfgviewer\Validation\Common;
  */
 
 use Slub\Dfgviewer\Common\IsoLanguageHelper;
-use Slub\Dfgviewer\Common\IsoScriptHelper;
 use Slub\Dfgviewer\Common\ValidationHelper;
 use TYPO3\CMS\Extbase\Error\Result;
 
@@ -60,31 +59,6 @@ class NodeAttributeValidator extends AbstractNodeValidator
 
         if (!IsoLanguageHelper::iso6392BCodeExists($value)) {
             $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 639-2/B code. For more information, please consider https://www.loc.gov/standards/iso639-2/php/code_list.php.', 1743159957);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Validate that the node has an attribute with an ISO 15924 value.
-     *
-     * @param string $name The attribute name
-     * @return $this
-     */
-    public function validateIso15924(string $name): NodeAttributeValidator
-    {
-        if (!isset($this->node) || !$this->isElementType()) {
-            return $this;
-        }
-
-        if (!$this->getDomElement()->hasAttribute($name)) {
-            return $this->validateHas($name);
-        }
-
-        $value = $this->getDomElement()->getAttribute($name);
-
-        if (!array_key_exists($value, IsoScriptHelper::ISO_15924)) {
-            $this->addSeverityMessage('Value "' . $value . '" in the "' . $name . '" attribute of node "' . $this->node->getNodePath() . '" is not a valid ISO 15924 code. For more information, please consider https://unicode.org/iso15924/iso15924-codes.html.', 1743588592);
         }
 
         return $this;
@@ -154,7 +128,7 @@ class NodeAttributeValidator extends AbstractNodeValidator
      * @param string $name The attribute name
      * @return $this
      */
-    public function validateIsNumeric(string $name): NodeAttributeValidator
+    public function validateNumeric(string $name): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
@@ -179,7 +153,7 @@ class NodeAttributeValidator extends AbstractNodeValidator
      * @param string $contextExpression The context expression to determine uniqueness.
      * @return $this
      */
-    public function validateIsUnique(string $name, string $contextExpression): NodeAttributeValidator
+    public function validateUnique(string $name, string $contextExpression): NodeAttributeValidator
     {
         if (!isset($this->node) || !$this->isElementType()) {
             return $this;
@@ -229,7 +203,7 @@ class NodeAttributeValidator extends AbstractNodeValidator
      */
     public function validateUniqueId(): NodeAttributeValidator
     {
-        $this->validateIsUnique("ID", "//*");
+        $this->validateUnique("ID", "//*");
         return $this;
     }
 

@@ -87,7 +87,7 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
         $this->createNodeAttributeValidator($measureElement)
             ->validateUniqueId()
             ->validateValue('TYPE', ['measure'])
-            ->validateIsNumeric('ORDER');
+            ->validateNumeric('ORDER');
 
         $measureFptrs = $this->createNodeListValidator('mets:fptr', $measureElement)
             ->validateHasAny()
