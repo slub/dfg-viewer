@@ -10,8 +10,16 @@
                 <target><![CDATA[METS-Anwendungsprofil Validator]]></target>
             </trans-unit>
             <trans-unit id="validator.metsapplicationprofile.description" approved="yes">
-                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile version 2.4</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
-                <target><![CDATA[Validierung gegen das <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile Version 2.4</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
+                <source><![CDATA[Validation against the Validation against the <a href="%s">%s</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+                <target><![CDATA[Validierung gegen das Validation against the <a href="%s">%s</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
+            </trans-unit>
+            <trans-unit id="validator.modsapplicationprofile.title" approved="yes">
+                <source><![CDATA[MODS Application Profile Validator]]></source>
+                <target><![CDATA[MODS-Anwendungsprofil Validator]]></target>
+            </trans-unit>
+            <trans-unit id="validator.modsapplicationprofile.description" approved="yes">
+                <source><![CDATA[Validation against the Validation against the <a href="%s">%s</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+                <target><![CDATA[Validierung gegen das Validation against the <a href="%s">%s</a>. Weitere Informationen finden Sie auf der <a href="https://dfg-viewer.de/en/metadata">Metadata Profile-Seite</a> der <a href="https://dfg-viewer.de/en/">DFG Viewer-Website</a>.]]></target>
             </trans-unit>
             <trans-unit id="validator.metsurlexistence.title">
                 <source><![CDATA[METS URL Existence Validator]]></source>

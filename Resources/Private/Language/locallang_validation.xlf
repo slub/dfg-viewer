@@ -9,7 +9,13 @@
 				<source><![CDATA[METS Application Profile Validator]]></source>
 			</trans-unit>
             <trans-unit id="validator.metsapplicationprofile.description">
-                <source><![CDATA[Validation against the <a href="https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf">METS Application Profile version 2.4</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+                <source><![CDATA[Validation against the <a href="%s">%s</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
+            </trans-unit>
+            <trans-unit id="validator.modsapplicationprofile.title">
+                <source><![CDATA[MODS Application Profile Validator]]></source>
+            </trans-unit>
+            <trans-unit id="validator.modsapplicationprofile.description">
+                <source><![CDATA[Validation against the <a href="%s">%s</a>. Further information can be found on the <a href="https://dfg-viewer.de/en/metadata">Metadata Profile page</a> of the <a href="https://dfg-viewer.de/en/">DFG Viewer website</a>.]]></source>
             </trans-unit>
             <trans-unit id="validator.metsurlexistence.title">
                 <source><![CDATA[METS URL Existence Validator]]></source>
