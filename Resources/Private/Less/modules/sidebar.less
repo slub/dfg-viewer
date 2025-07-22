@@ -168,6 +168,7 @@
         .fullscreen & {
             min-height: 0;
         }
+
         @media screen and (min-width: @tabletLandscapeViewportWidth) {
             position: absolute;
             top: 6px;
@@ -323,6 +324,34 @@
             border-width: 1px 1px 1px 0;
         }
     }
+
+    .footer-bar {
+        position: absolute;
+        bottom: 0;
+        height: 60px;
+        width: 100%;
+        .collapse-trigger {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            right: 28px;
+            top: 14px;
+            cursor: pointer;
+            &::before {
+                position: absolute;
+                left: 19px;
+                top: 9px;;
+                width: 11px;
+                height: 11px;
+                border: solid white;
+                border-width: 2px 2px 0 0;
+                content: " ";
+                transform: translateX(-50%) rotate(-135deg);
+                .transition();
+            }
+        }
+    }
+
     @media screen and (min-width: @phoneLandscapeViewportWidth) {
         .metadata-wrapper, .toc-wrapper {
             width: 55%;
@@ -333,7 +362,7 @@
             position: absolute;
             inset: 90px 0 0 0;
             overflow: auto;
-            padding-bottom: 40px;
+            margin-bottom: 60px;
         }
 
         .metadata-wrapper, .toc-wrapper {
@@ -417,6 +446,60 @@
         }
     }
 }
+
+.control-bar-collapse {
+    .document-view {
+        @media screen and (min-width: @tabletLandscapeViewportWidth) {
+            left: 84px !important;
+        }
+    }
+
+    .control-bar {
+        @media screen and (min-width: @tabletLandscapeViewportWidth) {
+            width: 84px;
+        }
+
+        .header-bar {
+            h1 {
+                width: 42px;
+                left: 21px;
+
+                a {
+                    background: url('../Images/dfgviewerIcon.svg') no-repeat center center;
+                }
+            }
+
+            nav {
+                top: 50px;
+                position: relative;
+
+                .nav-toggle {
+                    right: 32px;
+                    top: 20px;
+                }
+
+                .language-nav {
+                    right: 18px;
+                    top: 55px;
+                }
+            }
+        }
+
+        .control-bar-content {
+            display: none;
+        }
+
+        .footer-bar {
+            .collapse-trigger {
+                &::before {
+                    left: 12px;
+                    transform: translateX(-50%) rotate(45deg);
+                }
+            }
+        }
+    }
+}
+
 
 /* ==============[ toc (inside the respective wrap > see above) ]========================= */
 ul.toc {

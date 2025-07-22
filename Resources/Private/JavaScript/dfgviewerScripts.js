@@ -46,6 +46,10 @@ $(document).ready(function() {
         $(this).parent().toggleClass('open');
     });
 
+    $('.control-bar .collapse-trigger').on(mobileEvent, function() {
+        $('.main-wrapper').toggleClass('control-bar-collapse');
+    });
+
     // active toggle for submenus
     $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
         $('li.submenu.open a').not(this).parent().removeClass('open');
