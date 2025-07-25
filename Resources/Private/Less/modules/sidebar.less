@@ -447,7 +447,8 @@
     }
 }
 
-.control-bar-collapse {
+.control-bar-collapsed {
+
     .document-view {
         @media screen and (min-width: @tabletLandscapeViewportWidth) {
             left: 84px !important;
@@ -496,6 +497,16 @@
                     transform: translateX(-50%) rotate(45deg);
                 }
             }
+        }
+    }
+
+    .fullscreen & {
+        .document-view {
+            left: 0;
+        }
+
+        .control-bar {
+           width: 0;
         }
     }
 }

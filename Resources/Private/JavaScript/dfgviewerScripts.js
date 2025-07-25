@@ -47,7 +47,7 @@ $(document).ready(function() {
     });
 
     $('.control-bar .collapse-trigger').on(mobileEvent, function() {
-        $('.main-wrapper').toggleClass('control-bar-collapse');
+        $('.main-wrapper').toggleClass('control-bar-collapsed');
     });
 
     // active toggle for submenus
