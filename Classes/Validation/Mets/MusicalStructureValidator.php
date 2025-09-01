@@ -62,9 +62,9 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($node)
-            ->validateHasUniqueId()
-            ->validateHasAttributeValue('TYPE', ['measures']);
+        $this->createNodeAttributeValidator($node)
+            ->validateUniqueId()
+            ->validateValue('TYPE', ['measures']);
 
         $measureElements = $this->createNodeListValidator(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE)
             ->validateHasAny()
@@ -84,10 +84,10 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      */
     protected function validateMeasureElement(\DOMNode $measureElement): void
     {
-        $this->createNodeValidator($measureElement)
-            ->validateHasUniqueId()
-            ->validateHasAttributeValue('TYPE', ['measure'])
-            ->validateHasNumericAttribute('ORDER');
+        $this->createNodeAttributeValidator($measureElement)
+            ->validateUniqueId()
+            ->validateValue('TYPE', ['measure'])
+            ->validateNumeric('ORDER');
 
         $measureFptrs = $this->createNodeListValidator('mets:fptr', $measureElement)
             ->validateHasAny()
@@ -127,8 +127,8 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
      */
     protected function validateMeasureLink(\DOMNode $measureArea, string &$measureFileId): void
     {
-        $nodeValidator = $this->createNodeValidator($measureArea)
-            ->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
+        $nodeValidator = $this->createNodeAttributeValidator($measureArea)
+            ->validateReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
 
         $fileId = $nodeValidator->getDomElement()->getAttribute('FILEID');
 
@@ -141,17 +141,17 @@ class MusicalStructureValidator extends AbstractDomDocumentValidator
         }
 
         $files = $this->xpath->query(VH::XPATH_FILE_SECTION_FILES . '[@ID="' . $fileId . '"]');
-        if ($files->length > 0 && $this->createNodeValidator($files->item(0))->isElementType()) {
+        if ($files->length > 0 && $this->createNodeAttributeValidator($files->item(0))->isElementType()) {
             $file = $files->item(0);
             // check if measure linked file is an image derivative
             if ($file instanceof \DOMElement && $file->hasAttribute('MIMETYPE') && str_starts_with($file->getAttribute('MIMETYPE'), 'image')) {
-                $nodeValidator->validateHasRegexAttribute('COORDS',VH::COORDS_REGEX);
-                $nodeValidator->validateHasAttributeValue('SHAPE', ['RECT']);
+                $nodeValidator->validateRegex('COORDS',VH::COORDS_REGEX);
+                $nodeValidator->validateValue('SHAPE', ['RECT']);
             } else {
                 // validate as MEI derivative
-                $nodeValidator->validateHasAttribute('BEGIN');
-                $nodeValidator->validateHasAttribute('END');
-                $nodeValidator->validateHasAttributeValue('BETYPE', ['IDREF']);
+                $nodeValidator->validateHas('BEGIN');
+                $nodeValidator->validateHas('END');
+                $nodeValidator->validateValue('BETYPE', ['IDREF']);
             }
         }
     }

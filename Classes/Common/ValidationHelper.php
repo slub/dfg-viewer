@@ -39,7 +39,9 @@ class ValidationHelper
 
     const NAMESPACE_METS = 'http://www.loc.gov/METS/';
 
-    const URL_REGEX = '(http|https):\/\/([\w_-]+(?:\.[\w_-]+)+)([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])';
+    const NAMESPACE_MODS = 'http://www.loc.gov/mods/v3';
+
+    const URL_REGEX = '(http|https):\/\/([\w_-]+(?:\.[\w_-]+)+)([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])?';
 
     const COORDS_REGEX = '\d+,\d+,\d+,\d+';
 
@@ -56,6 +58,36 @@ class ValidationHelper
     ];
 
     const XPATH_METS = '//mets:mets';
+
+    const XPATH_MODS = '//mods:mods';
+
+    const XPATH_MODS_TITLEINFO = self::XPATH_MODS . '/mods:titleInfo';
+
+    const XPATH_MODS_NAMES = self::XPATH_MODS . '/mods:name';
+
+    const XPATH_MODS_GENRES = self::XPATH_MODS . '/mods:genre';
+
+    const XPATH_MODS_ORIGININFO = self::XPATH_MODS . '/mods:originInfo';
+
+    const XPATH_MODS_LANGUAGE = self::XPATH_MODS . '/mods:language';
+
+    const XPATH_MODS_PHYSICAL_DESCRIPTION = self::XPATH_MODS . '/mods:physicalDescription';
+
+    const XPATH_MODS_NOTE = self::XPATH_MODS . '/mods:note';
+
+    const XPATH_MODS_SUBJECT = self::XPATH_MODS . '/mods:subject';
+
+    const XPATH_MODS_CLASSIFICATION = self::XPATH_MODS . '/mods:classification';
+
+    const XPATH_MODS_RELATEDITEM = self::XPATH_MODS . '/mods:relatedItem';
+
+    const XPATH_MODS_IDENTIFIER = self::XPATH_MODS . '/mods:identifier';
+
+    const XPATH_MODS_LOCATION = self::XPATH_MODS . '/mods:location';
+
+    const XPATH_MODS_RECORDINFO = self::XPATH_MODS . '/mods:recordInfo';
+
+    const XPATH_MODS_PART = self::XPATH_MODS . '/mods:part';
 
     const XPATH_ADMINISTRATIVE_METADATA = self::XPATH_METS . '/mets:amdSec';
 

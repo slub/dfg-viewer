@@ -44,7 +44,7 @@ class MetsUrlExistenceValidatorTest extends AbstractDomDocumentValidatorTest
         $this->validateAndAssertEquals('URL "'.$notFoundUrl.'" could not be found.');
 
         $this->setAttributeValue(ValidationHelper::XPATH_FILE_SECTION_FILES . '/mets:FLocat','xlink:href', 'https://picsum.photos/1');
-        $this->hasNoError();
+        $this->hasNoMessage();
     }
 
     protected function createValidator(): AbstractDlfValidator

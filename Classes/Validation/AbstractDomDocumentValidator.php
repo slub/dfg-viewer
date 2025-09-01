@@ -29,8 +29,10 @@ use DOMDocument;
 use DOMNode;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
-use Slub\Dfgviewer\Validation\Common\DomNodeListValidator;
-use Slub\Dfgviewer\Validation\Common\DomNodeValidator;
+use Slub\Dfgviewer\Validation\Common\NodeAttributeValidator;
+use Slub\Dfgviewer\Validation\Common\NodeContentValidator;
+use Slub\Dfgviewer\Validation\Common\NodeListValidator;
+use Slub\Dfgviewer\Validation\Common\SeverityLevel;
 
 abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
 {
@@ -69,13 +71,18 @@ abstract class AbstractDomDocumentValidator extends AbstractDlfValidator
         $this->isValidDocument();
     }
 
-    protected function createNodeListValidator(string $expression, ?DOMNode $contextNode=null): DomNodeListValidator
+    protected function createNodeListValidator(string $expression, ?DOMNode $contextNode=null, SeverityLevel $severityLevel=SeverityLevel::ERROR): NodeListValidator
     {
-        return new DomNodeListValidator($this->xpath, $this->result, $expression, $contextNode);
+        return new NodeListValidator($this->xpath, $this->result, $expression, $contextNode, $severityLevel);
     }
 
-    protected function createNodeValidator(?DOMNode $node): DomNodeValidator
+    protected function createNodeContentValidator(?DOMNode $node, SeverityLevel $severityLevel=SeverityLevel::ERROR): NodeContentValidator
     {
-        return new DomNodeValidator($this->xpath, $this->result, $node);
+        return new NodeContentValidator($this->xpath, $this->result, $node, $severityLevel);
+    }
+
+    protected function createNodeAttributeValidator(?DOMNode $node, SeverityLevel $severityLevel=SeverityLevel::ERROR): NodeAttributeValidator
+    {
+        return new NodeAttributeValidator($this->xpath, $this->result, $node, $severityLevel);
     }
 }

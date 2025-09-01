@@ -42,7 +42,7 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
         $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:structMap');
         $node->setAttribute('TYPE', 'MUSICAL');
         $this->addChildNode('/mets:mets', $node);
-        $this->hasErrorNoneOrOne(VH::XPATH_MUSICAL_STRUCTURES);
+        $this->hasMessageNoneOrOne(VH::XPATH_MUSICAL_STRUCTURES);
     }
 
     /**
@@ -54,22 +54,22 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testStructuralElement(): void
     {
         $this->removeNodes(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT);
-        $this->hasErrorOne(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT);
+        $this->hasMessageOne(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT);
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'ID');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div', 'ID');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div', 'ID');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'ID', 'MUS_0001');
-        $this->hasErrorUniqueId('/mets:mets/mets:structMap[3]/mets:div', 'MUS_0001');
+        $this->hasMessageUniqueId('/mets:mets/mets:structMap[3]/mets:div', 'MUS_0001');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'TYPE');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div', 'TYPE');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div', 'TYPE');
 
         $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'TYPE', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[3]/mets:div', 'TYPE', 'Test');
+        $this->hasMessageAttributeWithValue('/mets:mets/mets:structMap[3]/mets:div', 'TYPE', 'Test');
         $this->resetDocument();
     }
 
@@ -82,23 +82,23 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testMeasureElement(): void
     {
         $this->removeNodes(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE);
-        $this->hasErrorAny(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE);
+        $this->hasMessageAny(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE);
         $this->resetDocument();
 
-        $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'ID');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div', 'ID');
+        $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ID');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'ID');
         $this->resetDocument();
 
-        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_ELEMENT, 'ID', 'MUS_0000');
-        $this->hasErrorUniqueId('/mets:mets/mets:structMap[3]/mets:div', 'MUS_0000');
+        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ID', 'MUS_0001');
+        $this->hasMessageUniqueId('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'MUS_0001');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'TYPE');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'TYPE');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'TYPE');
         $this->resetDocument();
 
-        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ORDER', 'MUS_0000');
-        $this->hasErrorNumericAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'ORDER', 'MUS_0000');
+        $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE, 'ORDER', 'Test');
+        $this->hasMessageNumericAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]', 'ORDER', 'Test');
     }
 
     /**
@@ -110,7 +110,7 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testMeasureDigitalRepresentation(): void
     {
         $this->removeNodes(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr');
-        $this->hasErrorAny('mets:fptr', '/mets:mets/mets:structMap[3]/mets:div/mets:div[1]');
+        $this->hasMessageAny('mets:fptr', '/mets:mets/mets:structMap[3]/mets:div/mets:div[1]');
         $this->resetDocument();
     }
 
@@ -123,7 +123,7 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testMeasureLink(): void
     {
         $this->removeNodes(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area');
-        $this->hasErrorAny('mets:area', '/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]');
+        $this->hasMessageAny('mets:area', '/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]');
         $this->resetDocument();
 
         $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:area');
@@ -134,39 +134,39 @@ class MusicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
 
         // test MEI notation
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'BEGIN');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'BEGIN');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'BEGIN');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'END');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'END');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'END');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'BETYPE');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'BETYPE');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'BETYPE');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'BETYPE', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'BETYPE', 'Test');
+        $this->hasMessageAttributeWithValue('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'BETYPE', 'Test');
 
         // change mimetype of MEI and test image derivative handling
         $this->setAttributeValue(VH::XPATH_FILE_SECTION_FILES . '[@ID="FILE_0001_SCORE"]', 'MIMETYPE', 'image/jpeg');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'COORDS');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[1]/mets:area', 'COORDS');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'COORDS');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'COORDS');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'COORDS');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'COORDS', 'Test');
-        $this->hasErrorRegexAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'COORDS',  'Test', VH::COORDS_REGEX);
+        $this->hasMessageRegexAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'COORDS',  'Test', VH::COORDS_REGEX);
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'SHAPE');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'SHAPE');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'SHAPE');
         $this->resetDocument();
 
         $this->setAttributeValue(VH::XPATH_MUSICAL_STRUCTURAL_MEASURE . '/mets:fptr/mets:area', 'SHAPE', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'SHAPE', 'Test');
+        $this->hasMessageAttributeWithValue('/mets:mets/mets:structMap[3]/mets:div/mets:div[1]/mets:fptr[2]/mets:area', 'SHAPE', 'Test');
     }
 
     protected function createValidator(): AbstractDlfValidator

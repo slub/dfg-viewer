@@ -59,8 +59,8 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateAdministrativMetadataNode(\DOMNode $amdSection): void
     {
-        $this->createNodeValidator($amdSection)
-            ->validateHasUniqueId();
+        $this->createNodeAttributeValidator($amdSection)
+            ->validateUniqueId();
     }
 
     /**
@@ -81,16 +81,16 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateDigitalProvenanceMetadataNode(\DOMNode $digiprov): void
     {
-        $this->createNodeValidator($digiprov)
-            ->validateHasUniqueId();
+        $this->createNodeAttributeValidator($digiprov)
+            ->validateUniqueId();
 
         $mdWrap = $this->createNodeListValidator('mets:mdWrap', $digiprov)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mdWrap)
-            ->validateHasAttributeValue('MDTYPE', ['OTHER'])
-            ->validateHasAttributeValue('OTHERMDTYPE', ['DVLINKS']);
+        $this->createNodeAttributeValidator($mdWrap)
+            ->validateValue('MDTYPE', ['OTHER'])
+            ->validateValue('OTHERMDTYPE', ['DVLINKS']);
 
         $this->createNodeListValidator('mets:xmlData[dv:links]', $mdWrap)
             ->validateHasOne();
@@ -114,16 +114,16 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateRightsMetadataNode(\DOMNode $rightsMetadata): void
     {
-        $this->createNodeValidator($rightsMetadata)
-            ->validateHasUniqueId();
+        $this->createNodeAttributeValidator($rightsMetadata)
+            ->validateUniqueId();
 
         $mpWrap = $this->createNodeListValidator('mets:mdWrap', $rightsMetadata)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mpWrap)
-            ->validateHasAttributeValue('MDTYPE', ['OTHER'])
-            ->validateHasAttributeValue('OTHERMDTYPE', ['DVRIGHTS']);
+        $this->createNodeAttributeValidator($mpWrap)
+            ->validateValue('MDTYPE', ['OTHER'])
+            ->validateValue('OTHERMDTYPE', ['DVRIGHTS']);
 
         $this->createNodeListValidator('mets:xmlData[dv:rights]', $mpWrap)
             ->validateHasOne();
@@ -147,16 +147,16 @@ class AdministrativeMetadataValidator extends AbstractDomDocumentValidator
 
     protected function validateTechnicalMetadataNode(\DOMNode $technicalMd): void
     {
-        $this->createNodeValidator($technicalMd)
-            ->validateHasUniqueId();
+        $this->createNodeAttributeValidator($technicalMd)
+            ->validateUniqueId();
 
         $mdWrap = $this->createNodeListValidator('mets:mdWrap', $technicalMd)
             ->validateHasOne()
             ->getFirstNode();
 
-        $this->createNodeValidator($mdWrap)
-            ->validateHasAttribute("MDTYPE")
-            ->validateHasAttribute("OTHERMDTYPE");
+        $this->createNodeAttributeValidator($mdWrap)
+            ->validateHas("MDTYPE")
+            ->validateHas("OTHERMDTYPE");
 
         $this->createNodeListValidator('mets:xmlData', $mdWrap)
             ->validateHasOne();

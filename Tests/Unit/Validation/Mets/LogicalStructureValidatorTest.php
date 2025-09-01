@@ -39,7 +39,7 @@ class LogicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testNotExistingLogicalStructureElement(): void
     {
         $this->removeNodes(VH::XPATH_LOGICAL_STRUCTURES);
-        $this->hasErrorAny(VH::XPATH_LOGICAL_STRUCTURES);
+        $this->hasMessageAny(VH::XPATH_LOGICAL_STRUCTURES);
     }
 
     /**
@@ -49,24 +49,24 @@ class LogicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     public function testStructuralElements(): void
     {
         $this->removeNodes(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
-        $this->hasErrorAny(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
+        $this->hasMessageAny(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS);
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'ID');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[1]/mets:div', 'ID');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[1]/mets:div', 'ID');
         $this->resetDocument();
 
         $node = $this->doc->createElementNS(VH::NAMESPACE_METS, 'mets:div');
         $node->setAttribute('ID', 'LOG_0001');
         $this->addChildNode(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, $node);
-        $this->hasErrorUniqueId('/mets:mets/mets:structMap[1]/mets:div', 'LOG_0001');
+        $this->hasMessageUniqueId('/mets:mets/mets:structMap[1]/mets:div', 'LOG_0001');
         $this->resetDocument();
 
         $this->removeAttribute(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'TYPE');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[1]/mets:div', 'TYPE');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[1]/mets:div', 'TYPE');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, 'TYPE', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[1]/mets:div', 'TYPE', 'Test');
+        $this->hasMessageAttributeWithValue('/mets:mets/mets:structMap[1]/mets:div', 'TYPE', 'Test');
     }
 
     /**
@@ -78,24 +78,23 @@ class LogicalStructureValidatorTest extends AbstractDomDocumentValidatorTest
     {
         $this->addChildNodeWithNamespace(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, VH::NAMESPACE_METS, 'mets:mptr');
         $this->addChildNodeWithNamespace(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, VH::NAMESPACE_METS, 'mets:mptr');
-        $this->hasErrorNoneOrOne(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES);
+        $this->hasMessageNoneOrOne(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES);
         $this->resetDocument();
 
         $this->addChildNodeWithNamespace(VH::XPATH_LOGICAL_STRUCTURAL_ELEMENTS, VH::NAMESPACE_METS, 'mets:mptr');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'LOCTYPE', 'Test');
-        $this->hasErrorAttributeWithValue('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE', 'Test');
+        $this->hasMessageAttributeWithValue('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'LOCTYPE', 'Test');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'LOCTYPE', 'URL');
-        $this->hasErrorAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href');
+        $this->hasMessageAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'xlink:href', 'Test');
-        $this->hasErrorUrlAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href', 'Test');
+        $this->hasMessageUrlAttribute('/mets:mets/mets:structMap[1]/mets:div/mets:mptr', 'xlink:href', 'Test');
 
         $this->setAttributeValue(VH::XPATH_LOGICAL_EXTERNAL_REFERENCES, 'xlink:href', 'http://example.com/periodical.xml');
-        $result = $this->validate();
-        self::assertFalse($result->hasErrors());
+        $this->hasNoMessage();
     }
 
     protected function createValidator(): AbstractDlfValidator

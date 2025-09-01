@@ -55,10 +55,27 @@ plugin.tx_dlf {
                 }
                 20 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
-                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
+                    description {
+                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
+                        arguments {
+                            0 = /fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf
+                            1 = METS Application Profile version 2.4
+                        }
+                    }
                     className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
                 }
                 30 {
+                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.title
+                    description {
+                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.description
+                        arguments {
+                            0 = /fileadmin/groups/dfgviewer/MODS_application_profile_2.4.pdf
+                            1 = MODS Application Profile version 2.4
+                        }
+                    }
+                    className = Slub\Dfgviewer\Validation\Mods\ApplicationProfileValidationStack
+                }
+                40 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.title
                     description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.description
                     className = Slub\Dfgviewer\Validation\MetsUrlExistenceValidator

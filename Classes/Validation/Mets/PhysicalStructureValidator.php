@@ -61,8 +61,8 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
             ->validateHasOne()
             ->getFirstNode();
 
-        $nodeValidator = $this->createNodeValidator($node)
-            ->validateHasAttributeValue('TYPE', ['physSequence', 'object']);
+        $nodeValidator = $this->createNodeAttributeValidator($node)
+            ->validateValue('TYPE', ['physSequence', 'object']);
 
         // validates the 3D object models, pages or track-based media
         if ($nodeValidator->isElementType() && $nodeValidator->getDomElement()->getAttribute('TYPE') === 'object') {
@@ -87,10 +87,10 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
      */
     protected function validateSequenceElement(\DOMNode $sequenceElement): void
     {
-        $element = $this->createNodeValidator($sequenceElement)
-            ->validateHasUniqueId()
-            ->validateHasAttributeValue("TYPE", ["page", "doublepage", "track"])
-            ->validateHasNumericAttribute('ORDER')
+        $element = $this->createNodeAttributeValidator($sequenceElement)
+            ->validateUniqueId()
+            ->validateValue("TYPE", ["page", "doublepage", "track"])
+            ->validateNumeric('ORDER')
             ->getDomElement();
         $this->validateFiles('mets:fptr', $element);
     }
@@ -102,14 +102,14 @@ class PhysicalStructureValidator extends AbstractDomDocumentValidator
      *
      * @return void
      */
-    protected function validateFiles(string $expression, \DOMElement $contextNode=null): void
+    protected function validateFiles(string $expression, ?\DOMElement $contextNode=null): void
     {
         $fileList = $this->createNodeListValidator($expression, $contextNode)
             ->validateHasAny()
             ->getNodeList();
         foreach ($fileList as $file) {
-            $this->createNodeValidator($file)
-                ->validateHasReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
+            $this->createNodeAttributeValidator($file)
+                ->validateReferenceToId("FILEID", VH::XPATH_FILE_SECTION_FILES);
         }
     }
 }

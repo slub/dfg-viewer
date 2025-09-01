@@ -28,7 +28,6 @@ namespace Slub\Dfgviewer\Validation\Common;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
-use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -39,7 +38,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * @access public
  */
-class DomNodeListValidator
+class NodeListValidator extends AbstractDomValidator
 {
 
     /**
@@ -57,13 +56,9 @@ class DomNodeListValidator
      */
     private DOMNodeList $nodeList;
 
-    /**
-     * @var Result The result containing errors of validation
-     */
-    private Result $result;
-
-    public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode=null)
+    public function __construct(DOMXPath $xpath, Result $result, string $expression, ?DOMNode $contextNode=null, SeverityLevel $severityLevel=SeverityLevel::ERROR)
     {
+        parent::__construct($severityLevel);
         $this->expression = $expression;
         $this->contextNode = $contextNode;
         $this->nodeList = $xpath->query($expression, $contextNode);
@@ -88,7 +83,7 @@ class DomNodeListValidator
      */
     public function getNode(int $index): ?DOMNode
     {
-        return $this->nodeList->item($index);
+        return $this->nodeList->length > $index ? $this->nodeList->item($index) : null;
     }
 
     /**
@@ -106,10 +101,10 @@ class DomNodeListValidator
      *
      * @return $this
      */
-    public function validateHasAny(): DomNodeListValidator
+    public function validateHasAny(): NodeListValidator
     {
         if (!$this->nodeList->length > 0) {
-            $this->addError('There must be at least one element', 1736504345);
+            $this->addMessage('There must be at least one element', 1736504345);
         }
         return $this;
     }
@@ -119,10 +114,10 @@ class DomNodeListValidator
      *
      * @return $this
      */
-    public function validateHasOne(): DomNodeListValidator
+    public function validateHasOne(): NodeListValidator
     {
         if ($this->nodeList->length != 1) {
-            $this->addError('There must be an element', 1736504354);
+            $this->addMessage('There must be exactly one element', 1736504354);
         }
         return $this;
     }
@@ -132,20 +127,20 @@ class DomNodeListValidator
      *
      * @return $this
      */
-    public function validateHasNoneOrOne(): DomNodeListValidator
+    public function validateHasNoneOrOne(): NodeListValidator
     {
         if (!($this->nodeList->length == 0 || $this->nodeList->length == 1)) {
-            $this->addError('There must be no more than one element', 1736504361);
+            $this->addMessage('There must be either no element or only one', 1736504361);
         }
         return $this;
     }
 
-    private function addError(string $prefix, int $code): void
+    private function addMessage(string $prefix, int $code): void
     {
         $message = $prefix . ' that matches the XPath expression "' . $this->expression . '"';
         if ($this->contextNode) {
             $message .= ' under "' . $this->contextNode->getNodePath() . '"';
         }
-        $this->result->addError(new Error($message, $code));
+        $this->addSeverityMessage($message, $code);
     }
 }

@@ -66,8 +66,8 @@ class LinkingLogicalPhysicalStructureValidator extends AbstractDomDocumentValida
 
     protected function validateLinkElement(\DOMNode $linkElement): void
     {
-        $this->createNodeValidator($linkElement)
-            ->validateHasReferenceToId("xlink:from", VH::XPATH_LOGICAL_STRUCTURES . '//mets:div')
-            ->validateHasReferenceToId("xlink:to", VH::XPATH_PHYSICAL_STRUCTURES . '//mets:div');
+        $this->createNodeAttributeValidator($linkElement)
+            ->validateReferenceToId("xlink:from", VH::XPATH_LOGICAL_STRUCTURES . '//mets:div')
+            ->validateReferenceToId("xlink:to", VH::XPATH_PHYSICAL_STRUCTURES . '//mets:div');
     }
 }

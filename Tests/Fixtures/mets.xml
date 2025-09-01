@@ -7,36 +7,64 @@
                     <mods:titleInfo>
                         <mods:title>"INDIA"</mods:title>
                     </mods:titleInfo>
-                    <mods:name type="personal">
-                        <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid">none</mods:nameIdentifier>
+                    <mods:name type="personal" valueURI="http://example.com">
                         <mods:namePart type="family"/>
                         <mods:namePart type="given"/>
-                        <mods:displayForm>"tecnoarcadia"</mods:displayForm>
+                        <mods:displayForm>Example</mods:displayForm>
                         <mods:role>
-                            <mods:roleTerm authority="marcrelator" type="code">aut</mods:roleTerm>
+                            <mods:roleTerm authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" type="code">aut</mods:roleTerm>
                         </mods:role>
                     </mods:name>
-                    <mods:name type="corporate">
-                        <mods:nameIdentifier type="viaf" typeURI="http://id.loc.gov/vocabulary/identifiers/viaf">none</mods:nameIdentifier>
-                        <mods:namePart type="family"/>
-                        <mods:namePart type="given"/>
-                        <mods:displayForm></mods:displayForm>
+                    <mods:name type="corporate" valueURI="http://example.com">
+                        <mods:namePart>Example</mods:namePart>
                         <mods:role>
-                            <mods:roleTerm authority="marcrelator" type="code">prv</mods:roleTerm>
+                            <mods:roleTerm authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" type="code">ctb</mods:roleTerm>
                         </mods:role>
                     </mods:name>
+                    <mods:genre valueURI="http://example.com">
+                        Example
+                    </mods:genre>
+                    <mods:language>
+                        <mods:languageTerm type="code" authority="iso639-2b">ger</mods:languageTerm>
+                        <mods:scriptTerm type="code" authority="iso15924">Latf</mods:scriptTerm>
+                    </mods:language>
+                    <mods:note type="example">Example</mods:note>
                     <mods:originInfo eventType="digitisation">
+                        <mods:place>
+                            <mods:placeTerm type="text">Example</mods:placeTerm>
+                        </mods:place>
                         <mods:publisher/>
                         <mods:dateCreated point="start" encoding="iso8601"/>
                         <mods:dateCreated point="end" encoding="iso8601"/>
                         <mods:dateIssued encoding="iso8601"/>
+                        <mods:edition>Example</mods:edition>
                     </mods:originInfo>
-                    <mods:relatedItem type="original">
+                    <mods:subject authority="gnd">
+                        <mods:topic valueURI="http://example.com">
+                            Example
+                        </mods:topic>
+                        <mods:geographic valueURI="http://example.com">
+                            Example
+                        </mods:geographic>
+                    </mods:subject>
+                    <mods:subject>
+                        <mods:name type="personal" valueURI="http://example.com">
+                            <mods:namePart type="family">Example</mods:namePart>
+                            <mods:namePart type="given">Example</mods:namePart>
+                            <mods:role>
+                                <mods:roleTerm authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" type="code">ctb</mods:roleTerm>
+                            </mods:role>
+                        </mods:name>
                         <mods:titleInfo>
-                            <mods:title/>
+                            <mods:title>Example</mods:title>
                         </mods:titleInfo>
-                        <mods:titleInfo type="alternative">
-                            <mods:title>none</mods:title>
+                    </mods:subject>
+                    <mods:classification authority="lcc">QM21</mods:classification>
+                    <mods:relatedItem type="series">
+                        <mods:titleInfo>
+                            <mods:title>
+                                Example
+                            </mods:title>
                         </mods:titleInfo>
                         <mods:name type="personal">
                             <mods:nameIdentifier type="orcid" typeURI="http://id.loc.gov/vocabulary/identifiers/orcid"/>
@@ -58,12 +86,29 @@
                             <mods:url displayLabel="wikidata">none</mods:url>
                             <mods:url displayLabel="wikipedia">none</mods:url>
                         </mods:location>
+                        <mods:part>
+                            <mods:detail type="volume">
+                                <mods:number>0123456</mods:number>
+                            </mods:detail>
+                        </mods:part>
                     </mods:relatedItem>
+                    <mods:part order="2">
+                        <mods:detail type="volume">
+                            <mods:number>0123456</mods:number>
+                        </mods:detail>
+                    </mods:part>
                     <mods:identifier type="gettyaat">none</mods:identifier>
+                    <mods:location>
+                        <mods:physicalLocation>Example location</mods:physicalLocation>
+                        <mods:url access="object in context">
+                            http://example.com
+                        </mods:url>
+                        <mods:shelfLocator>Example E</mods:shelfLocator>
+                    </mods:location>
                     <mods:accessCondition type="license">CC-BY</mods:accessCondition>
                     <mods:recordInfo>
                         <mods:recordIdentifier source="[Unique Repository Identifier]"/>
-                        <mods:recordInfoNote>INDIA</mods:recordInfoNote>
+                        <mods:descriptionStandard>Example</mods:descriptionStandard>
                     </mods:recordInfo>
                 </mods:mods>
             </mets:xmlData>
