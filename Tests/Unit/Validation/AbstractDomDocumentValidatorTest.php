@@ -93,21 +93,21 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
         switch ($severityLevel) {
             case SeverityLevel::WARNING:
             if ($result->hasWarnings()) {
-                 $resultMessage = $result->getFirstWarning()->getMessage();
+                $resultMessage = $result->getFirstWarning()->getMessage();
             }
-            break;
+                break;
             case SeverityLevel::NOTICE:
             if ($result->hasNotices()) {
-                 $resultMessage = $result->getFirstNotice()->getMessage();
+                $resultMessage = $result->getFirstNotice()->getMessage();
             }
-            break;
+                break;
             default:
             if ($result->hasErrors()) {
                 $resultMessage = $result->getFirstError()->getMessage();
             }
         }
 
-        self::assertEquals($message,$resultMessage);
+        self::assertEquals($message, $resultMessage);
     }
 
     /**

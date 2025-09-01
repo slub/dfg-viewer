@@ -65,7 +65,7 @@ class SubjectsValidator extends AbstractModsValidator
                             $this->createNodeListValidator('mods:name[@nameTitleGroup="' . $nameTitleGroup . '"]', $subject, SeverityLevel::NOTICE)
                                 ->validateHasOne();
                         }
-                    } elseif ($subjectsSubElement->nodeName == 'mods:name') {
+                    } else if ($subjectsSubElement->nodeName == 'mods:name') {
                         $this->validateName($subjectsSubElement);
                         if ($subjectsSubElement->hasAttribute('nameTitleGroup')) {
                             $nameTitleGroup = $subjectsSubElement->getAttribute('nameTitleGroup');
