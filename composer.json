@@ -44,7 +44,7 @@
     "require": {
         "php": "8.1 - 8.4",
         "typo3/cms-core": "^11.5.41|^12.4.24",
-        "kitodo/presentation": "dev-main",
+        "kitodo/presentation": "dev-6.x",
         "slub/slub-digitalcollections": "dev-master"
     },
     "require-dev": {
