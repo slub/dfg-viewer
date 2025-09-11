@@ -60,13 +60,11 @@
 
         <div class="grid-stack-wrapper">
             <div class="grid-stack">
-                <f:for each="{docArray}" as="document" iteration="iterator">
+                <f:for each="{docArray}" as="document" iteration="iterator" key="docArrayKey">
                     <div class="grid-stack-item" gs-w="6" gs-h="6" gs-id="{iterator.index}">
                         <div class="grid-stack-item-content">
 
                             <div id="tx-dfgviewer-map-{iterator.index}" data-viewercount="{iterator.index}" class="tx-dlf-map"></div>
-
-                            <f:variable name="curDocPage" value="{docPage.{iterator.index}}" />
 
                             <div class="tx-dlf-navigation-prev">
                                 <f:if condition="{docPage.{iterator.index}} > 1">
@@ -111,17 +109,15 @@
                             </div>
 
                         </div>
-
                         <div class="gridstack-dragging-handle" title="{f:translate(key: 'multiview.dragging_label', extensionName: 'dfgviewer')}"></div>
-
-                        <f:if condition="{removeDocumentButton.{iterator.index}} || {removeDocumentButton.{iterator.index}} === '0'">
+                        <f:variable name="multipleSourceValue" value="{kitodo:multipleSource(docArrayKey: docArrayKey)}" />
+                        <f:if condition="{multipleSourceValue} >= 0">
                             <div class="removeDocument">
-                                <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{removeDocumentButton.{iterator.index}}]'}">
+                                <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{multipleSourceValue}]'}">
                                     <f:translate key="multiview.remove_document" extensionName="dfgviewer" />
                                 </f:link.action>
                             </div>
                         </f:if>
-
                     </div>
                 </f:for>
             </div>
