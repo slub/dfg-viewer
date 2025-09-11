@@ -32,7 +32,9 @@ use GuzzleHttp\Exception\RequestException;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Psr\Log\LoggerAwareTrait;
 use Slub\Dfgviewer\Common\ValidationHelper as VH;
+use TYPO3\CMS\Core\Http\Client\GuzzleClientFactory;
 use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -130,8 +132,9 @@ class MetsUrlExistenceValidator extends AbstractDlfValidator
 
     private function urlExists($url): bool
     {
-        /** @var RequestFactory $requestFactory */
-        $requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
+        $clientFactory = GeneralUtility::makeInstance(GuzzleClientFactory::class);
+        $requestFactory = GeneralUtility::makeInstance(RequestFactory::class, $clientFactory);
+
         try {
             $response = $requestFactory->request($url);
             $statusCode = $response->getStatusCode();
@@ -139,6 +142,7 @@ class MetsUrlExistenceValidator extends AbstractDlfValidator
         } catch (ConnectException | RequestException $e) {
             $this->logger->debug($e->getMessage());
         }
+
         return false;
     }
 

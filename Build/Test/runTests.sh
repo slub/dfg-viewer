@@ -75,12 +75,12 @@ Options:
             - functional: PHP functional tests
             - unit (default): PHP unit tests
 
-    -t <|10.4|11.5>
+    -t <12.4|13.4>
         Only with -s composerInstall
         Specifies which TYPO3 version to install. When unset, installs either the packages from
         composer.lock, or the latest version otherwise (default behavior of "composer install").
-            - 10.4
-            - 11.5
+            - 12.4
+            - 13.4
 
     -a <mysqli|pdo_mysql>
         Only with -s functional
@@ -98,34 +98,26 @@ Options:
             - mariadb (default): use mariadb
             - mysql: use MySQL server
 
-    -i <10.1|10.2|10.3|10.4|10.5|10.6|10.7|10.8|10.9|10.10>
+    -i <10.3|10.4|10.5|10.6|10.11>
         Only with -d mariadb
         Specifies on which version of mariadb tests are performed
-            - 10.1
-            - 10.2
             - 10.3 (default)
             - 10.4
             - 10.5
             - 10.6
-            - 10.7
-            - 10.8
-            - 10.9
-            - 10.10
+            - 10.11
 
-    -j <5.5|5.6|5.7|8.0>
+    -j <8.0>
         Only with -d mysql
         Specifies on which version of mysql tests are performed
-            - 5.5 (default)
-            - 5.6
-            - 5.7
-            - 8.0
+            - 8.0 (default)
 
-    -p <7.4|8.0|8.1|8.2>
+    -p <8.1|8.2|8.3|8.4>
         Specifies the PHP minor version to be used
-            - 7.4: (default) use PHP 7.4
-            - 8.0: use PHP 8.0
-            - 8.1: use PHP 8.1
-            - 8.2: use PHP 8.2 (note that xdebug is currently not available for PHP8.2)
+            - 8.1: use PHP 8.1 (default)
+            - 8.2: use PHP 8.2
+            - 8.3: use PHP 8.3
+            - 8.4: use PHP 8.4
 
     -e "<phpunit options>"
         Only with -s functional|functionalDeprecated|unit|unitDeprecated|unitRandom|acceptance
@@ -181,7 +173,7 @@ fi
 TEST_SUITE="unit"
 TYPO3_VERSION=""
 DBMS="mariadb"
-PHP_VERSION="7.4"
+PHP_VERSION="8.1"
 PHP_XDEBUG_ON=0
 PHP_XDEBUG_PORT=9003
 SERVER_PORT=8000
@@ -190,7 +182,7 @@ SCRIPT_VERBOSE=0
 PHPUNIT_WATCH=0
 DATABASE_DRIVER=""
 MARIADB_VERSION="10.3"
-MYSQL_VERSION="5.5"
+MYSQL_VERSION="8.0"
 
 # Option parsing
 # Reset in case getopts has been used previously in the shell
@@ -214,19 +206,19 @@ while getopts ":a:s:t:d:i:j:p:e:xy:whuv" OPT; do
             ;;
         i)
             MARIADB_VERSION=${OPTARG}
-            if ! [[ ${MARIADB_VERSION} =~ ^(10.2|10.3|10.4|10.5|10.6|10.11)$ ]]; then
+            if ! [[ ${MARIADB_VERSION} =~ ^(10.3|10.4|10.5|10.6|10.11)$ ]]; then
                 INVALID_OPTIONS+=("${OPTARG}")
             fi
             ;;
         j)
             MYSQL_VERSION=${OPTARG}
-            if ! [[ ${MYSQL_VERSION} =~ ^(5.7|8.0)$ ]]; then
+            if ! [[ ${MYSQL_VERSION} =~ ^(8.0)$ ]]; then
                 INVALID_OPTIONS+=("${OPTARG}")
             fi
             ;;
         p)
             PHP_VERSION=${OPTARG}
-            if ! [[ ${PHP_VERSION} =~ ^(7.4|8.0|8.1|8.2|8.3)$ ]]; then
+            if ! [[ ${PHP_VERSION} =~ ^(8.1|8.2|8.3|8.4)$ ]]; then
                 INVALID_OPTIONS+=("${OPTARG}")
             fi
             ;;
