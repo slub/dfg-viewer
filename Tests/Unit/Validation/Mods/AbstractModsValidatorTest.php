@@ -25,7 +25,7 @@ namespace Slub\Dfgviewer\Tests\Unit\Validation;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-abstract class AbstractModsValidatorTest extends AbstractDomDocumentValidatorTest
+class AbstractModsValidatorTest extends AbstractDomDocumentValidatorTest
 {
     const MODS_BASEPATH = '/mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods';
 
