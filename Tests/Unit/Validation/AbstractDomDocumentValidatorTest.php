@@ -30,10 +30,11 @@ use DOMElement;
 use DOMXPath;
 use Kitodo\Dlf\Validation\AbstractDlfValidator;
 use Slub\Dfgviewer\Validation\Common\SeverityLevel;
+use Slub\Dfgviewer\Validation\Mods\ClassificationValidator;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
+class AbstractDomDocumentValidatorTest extends UnitTestCase
 {
 
     /**
@@ -46,7 +47,12 @@ abstract class AbstractDomDocumentValidatorTest extends UnitTestCase
      */
     protected $doc;
 
-    abstract protected function createValidator(): AbstractDlfValidator;
+    protected function createValidator(): AbstractDlfValidator
+    {
+        // This method should be implemented in the subclass to return the specific validator instance.
+        //throw new \Exception('You must implement the createValidator method in the subclass.');
+        return new ClassificationValidator();
+    }
 
     public function setUp(): void
     {

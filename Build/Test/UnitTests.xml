@@ -1,7 +1,7 @@
 <!-- adopted from https://github.com/TYPO3/styleguide/blob/2a51dc3db6c2916c07595dd96e8b817a73216002/Build/UnitTests.xml -->
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.5/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
     backupGlobals="true"
     bootstrap="../../vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
     cacheResult="false"
