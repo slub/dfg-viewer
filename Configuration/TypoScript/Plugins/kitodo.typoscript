@@ -85,6 +85,7 @@ plugin.tx_dlf {
                 }
             }
         }
+        multiViewType = composition
     }
 	view {
 		partialRootPaths {
@@ -131,6 +132,15 @@ plugin.tx_dlf_pageview {
         features =
         elementId = tx-dfgviewer-map-0
         multiViewType = composition
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
+# multiview
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_multiview < tt_content.list.20.dlf_multiview
+plugin.tx_dlf_multiview {
+    settings {
     }
 }
 
