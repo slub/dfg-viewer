@@ -27,90 +27,37 @@
 <f:if condition="{multiview} == 1">
     <f:then>
 
-        <div class="page-control-multiview">
+       <div class="page-control-multiview">
             <div class="backs">
                 <span class="prev">
-                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllPagePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
-                        <f:translate key="prevPage" />
-                    </f:link.action>
+                    <a href="#" data-page-control-selector=".backs .prev a"><f:translate key="prevPage" /></a>
                 </span>
             </div>
             <div class="measureBacks">
                 <span class="prev">
-                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllMeasurePrev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
-                        <f:translate key="prevMeasure" />
-                    </f:link.action>
+                    <a href="#" data-page-control-selector=".measureBacks .next a"><f:translate key="prevMeasure" /></a>
                 </span>
             </div>
             <div class="fwds">
                 <span class="next">
-                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllPageNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure]'}">
-                        <f:translate key="nextPage" />
-                    </f:link.action>
+                    <a href="#" data-page-control-selector=".fwds .next a"><f:translate key="nextPage" /></a>
                 </span>
             </div>
             <div class="measureFwds">
                 <span class="next">
-                    <f:link.action addQueryString="untrusted" additionalParams="{navigateAllMeasureNext}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage]'}">
-                        <f:translate key="nextMeasure" />
-                    </f:link.action>
+                    <a href="#" data-page-control-selector=".measureFwds .next a" ></f:translate key="nextMeasure" /></a>
                 </span>
             </div>
         </div>
 
         <div class="grid-stack-wrapper">
             <div class="grid-stack">
-                <f:for each="{docArray}" as="document" iteration="iterator" key="docArrayKey">
-                    <div class="grid-stack-item" gs-w="6" gs-h="6" gs-id="{iterator.index}">
-                        <div class="grid-stack-item-content">
-
-                            <div id="tx-dfgviewer-map-{iterator.index}" data-viewercount="{iterator.index}" class="tx-dlf-map"></div>
-
-                            <div class="tx-dlf-navigation-prev">
-                                <f:if condition="{docPage.{iterator.index}} > 1">
-                                    <f:then>
-                                        <f:link.action title="{f:translate(key: 'prevPage')}" class="prev" addQueryString="untrusted" additionalParams="{navigationArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
-                                            <f:translate key="prevPage" />
-                                        </f:link.action>
-                                    </f:then>
-                                    <f:else>
-                                        <span class="prev" title="{f:translate(key: 'prevPage')}">
-                                            <f:translate key="prevPage" />
-                                        </span>
-                                    </f:else>
-                                </f:if>
-
-                                <f:link.action class="prevMeasure" title="{f:translate(key: 'prevMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.prev}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
-                                    <f:translate key="prevMeasure" />
-                                </f:link.action>
-                            </div>
-
-                            <div class="tx-dlf-imagemanipulationtool">
-                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
-                            </div>
-
-                            <div class="tx-dlf-navigation-next">
-                                <f:if condition="{docPage.{iterator.index}} < {docNumPage.{iterator.index}}">
-                                    <f:then>
-                                        <f:link.action title="{f:translate(key: 'nextPage')}" class="next" addQueryString="untrusted" additionalParams="{navigationArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docMeasure][{iterator.index}]'}">
-                                            <f:translate key="nextPage" />
-                                        </f:link.action>
-                                    </f:then>
-                                    <f:else>
-                                        <span class="next" title="{f:translate(key: 'nextPage')}">
-                                            <f:translate key="nextPage" />
-                                        </span>
-                                    </f:else>
-                                </f:if>
-
-                                <f:link.action class="nextMeasure"title="{f:translate(key: 'nextMeasure')}" addQueryString="untrusted" additionalParams="{navigationMeasureArray.{iterator.index}.next}" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[docPage][{iterator.index}]'}">
-                                    <f:translate key="nextMeasure" />
-                                </f:link.action>
-                            </div>
-
+                <f:for each="{multiViewDocuments}" as="document" iteration="iterator" >
+                    <div class="grid-stack-item" gs-w="6" gs-h="6" gs-id="{iterator.index}" >
+                        <div class="grid-stack-item-content" style="overflow: hidden">
+                            <iframe src="/viewer?tx_dlf%5Bid%5D={document.encodedUrl}&tx_dlf%5Bpage%5D={document.page}" width="100%" height="100%" style="overflow: hidden;" ></iframe>
                         </div>
                         <div class="gridstack-dragging-handle" title="{f:translate(key: 'multiview.dragging_label', extensionName: 'dfgviewer')}"></div>
-                        <f:variable name="multipleSourceValue" value="{kitodo:multipleSource(docArrayKey: docArrayKey)}" />
                         <f:if condition="{multipleSourceValue} >= 0">
                             <div class="removeDocument">
                                 <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multipleSource][{multipleSourceValue}]'}">
@@ -122,23 +69,50 @@
                 </f:for>
             </div>
         </div>
+
+        <script>
+            const iframes = document.querySelectorAll('.grid-stack iframe');
+            const multiviewControls = document.querySelectorAll(".page-control-multiview a");
+
+            multiviewControls.forEach(multiviewControl => {
+                multiviewControl.addEventListener("click", function (event) {
+                    event.preventDefault(); // stops navigation
+                    const clicked = event.currentTarget;
+
+                    const loadedIframes = Array.from(document.querySelectorAll('.grid-stack iframe')).filter(iframe => {
+                        try {
+                            // Accessing contentDocument throws an error if cross-origin
+                            return iframe.contentDocument && iframe.contentDocument.readyState === 'complete';
+                        } catch (e) {
+                            return false;
+                        }
+                    });
+
+                    loadedIframes.forEach(iframe => {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        const pageControl = iframeDoc.querySelector('.page-control ' + clicked.dataset.pageControlSelector);
+                        if(pageControl) {
+                            pageControl.click();
+                        }
+                    });
+
+                    iframes.forEach(iframe => {
+                        iframe.addEventListener('load', () => {
+                            console.log('Iframe loaded:', iframe.src);
+                        });
+                    });
+
+                });
+            });
+        </script>
+
     </f:then>
     <f:else>
         <div id="tx-dfgviewer-map-0" class="tx-dlf-map"></div>
-        <div id="svg_panel">
-            <f:asset.script identifier="wildwebmidi-remote-package-base" priority="true">
-                const WILDWEBMIDI_REMOTE_PACKAGE_BASE = '{viewData.publicResourcePath}/JavaScript/WildWebMidi/wildwebmidi.data';
-            </f:asset.script>
-            <div id="player"></div>
-            <div id="svg_output" style="overflow:hidden;"></div>
-        </div>
-
         <div class="score-container">
             <div id="tx-dlf-score-0"></div>
         </div>
+        <kitodo:jsFooter inlineCode="{viewerConfiguration}" />
     </f:else>
 </f:if>
-
-<kitodo:jsFooter inlineCode="{viewerConfiguration}" />
-
 </html>
