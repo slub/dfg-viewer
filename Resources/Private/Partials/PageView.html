@@ -49,6 +49,7 @@
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_embedded3dviewer"/>
             </f:then>
             <f:else>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_document" />
                 <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
                         <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />

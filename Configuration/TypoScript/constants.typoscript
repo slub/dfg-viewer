@@ -12,6 +12,9 @@ plugin.tx_dfgviewer {
     # cat=plugin.tx_dfgviewer/links/040; type=int+; label=Kitodo Page View
     kitodoPageView =
 
+    # cat=plugin.tx_dfgviewer/links/051; type=int+; label=PID for Pre-rendered Metadata
+    prerenderMetadataPid =
+
     matomo {
         # cat=plugin.tx_dfgviewer/matomo/010; type=string; label=Matomo Hostname
         hostname =
