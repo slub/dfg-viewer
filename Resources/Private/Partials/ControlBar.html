@@ -26,7 +26,9 @@
       lang="en">
 
 <f:section name="ControlBar">
-    <div class="control-bar {f:if(condition:'{gp-multiview}', then:'multiview')}">
+    <div class="control-bar">
+
+      <f:if condition="{gp-multiviewembedded} != 1">
       <div class="header-bar">
         <h1><f:link.page pageUid="{rootPageId}" title="DFG-Viewer" class="dfgviewer-logo">DFG-Viewer</f:link.page></h1>
         <nav>
@@ -41,6 +43,7 @@
           </button>
         </nav>
       </div>
+      </f:if>
 
       <div class="control-bar-content">
           <div class="metadata-wrapper">

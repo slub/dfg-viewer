@@ -8,135 +8,96 @@
  *
  */
 
+.multiview {
+    /* ==============[ buttons and control elements ]================= */
 
-/* ==============[ buttons and control elements ]================= */
-.document-view.multiview {
+    .document-view {
 
-    > .page-control,
-    .view-functions ul li.pages,
-    .document-functions ul li.grid {
-        display: none;
-    }
-
-    .document-functions {
-        .provider {
-            background-color: lighten(@light-blue, 20%);
+        > .page-control,
+        .view-functions ul li.pages,
+        .document-functions ul li.grid {
+            display: none;
         }
 
-        > ul > li {
-            &.add-multiview-document {
-                > a {
-                    background-position: -720px -80px;
-                }
-
-                &.submenu {
-                    > form {
-                        position: fixed;
-                        bottom: 80px;
-                        left: 40px;
-                        right: 40px;
-                        padding: 20px;
-                        background: fade(@base-blue, 90%);
-                        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-                        font-size: 14px;
-                        line-height: 1.4;
-                        text-align: left;
-                        transform-origin: center bottom;
-                        .transition();
-                        .transform(scaleY(0) translateY(100px));
-                        opacity: 0;
-                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-
-                        p.add-document-description {
-                            color: white;
-                            margin-bottom: 20px;
-                        }
-
-                        label {
-                            display: none;
-                        }
-
-                        input[type="text"] {
-                            position: relative;
-                            width: 100%;
-                            padding: 6px 10px;
-                            color: @base-blue;
-                            border: 0 none;
-                            outline: none;
-                            height: 30px;
-                            line-height: 30px;
-                            box-shadow: inset 1px 1px 2px fade(@base-blue, 20%);
-
-                            &::placeholder {
-                                color: lighten(@light-blue, 10%);
-                            }
-                        }
-
-                        button[type="submit"] {
-                            cursor: pointer;
-                            position: absolute;
-                            bottom: 20px;
-                            right: 20px;
-                            width: 30px;
-                            height: 30px;
-                            padding: 0;
-                            .text-hide();
-
-                            &::after {
-                                position: absolute;
-                                font-size: 22px;
-                                line-height: 25px;
-                                color: @base-blue;
-                                content: "+";
-                                left: 6px;
-                                top: -1px;
-                            }
-                        }
-                    }
-                }
-
-                &.submenu.open {
-                    > form {
-                        .transform(scaleY(1) translateY(0));
-                        opacity: 1;
-                    }
-                }
-            }
-
-            > a.reset-gridstack-layout {
-                background-position: -720px -40px;
-            }
-        }
-    }
-
-    @media screen and (min-width: @tabletLandscapeViewportWidth) {
         .document-functions {
+            .provider {
+                background-color: lighten(@light-blue, 20%);
+            }
+
             > ul > li {
+
+                &.downloads,
+                &.doublepage {
+                    display: none;
+                }
+
                 &.add-multiview-document {
+                    > a {
+                        background-position: -720px -80px;
+                    }
+
                     &.submenu {
                         > form {
-                            position: absolute;
-                            inset: 50px auto auto -20px;
-                            width: 450px;
-                            transform-origin: center top;
-                            transform: scaleY(0) translateY(-100px);
+                            position: fixed;
+                            bottom: 80px;
+                            left: 40px;
+                            right: 40px;
+                            padding: 20px;
+                            background: fade(@base-blue, 90%);
+                            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+                            font-size: 14px;
+                            line-height: 1.4;
+                            text-align: left;
+                            transform-origin: center bottom;
+                            .transition();
+                            .transform(scaleY(0) translateY(100px));
+                            opacity: 0;
+                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
                             p.add-document-description {
-                                margin-bottom: 10px;
+                                color: white;
+                                margin-bottom: 20px;
+                            }
+
+                            label {
+                                display: none;
                             }
 
                             input[type="text"] {
+                                position: relative;
+                                width: 100%;
                                 padding: 6px 10px;
-                                padding-right: 24px;
-                                height: 24px;
-                                line-height: 24px;
+                                color: @base-blue;
+                                border: 0 none;
+                                outline: none;
+                                height: 30px;
+                                line-height: 30px;
+                                box-shadow: inset 1px 1px 2px fade(@base-blue, 20%);
+
+                                &::placeholder {
+                                    color: lighten(@light-blue, 10%);
+                                }
                             }
 
                             button[type="submit"] {
-                                width: 24px;
-                                height: 24px;
-                                line-height: 24px;
-                                font-size: 18px;
+                                cursor: pointer;
+                                position: absolute;
+                                bottom: 20px;
+                                right: 20px;
+                                width: 30px;
+                                height: 30px;
+                                padding: 0;
+                                .text-hide();
+
+                                &::after {
+                                    position: absolute;
+                                    font-size: 22px;
+                                    line-height: 25px;
+                                    color: @base-blue;
+                                    content: "+";
+                                    left: 6px;
+                                    top: -1px;
+                                }
                             }
                         }
                     }
@@ -144,216 +105,296 @@
                     &.submenu.open {
                         > form {
                             .transform(scaleY(1) translateY(0));
+                            opacity: 1;
                         }
                     }
+                }
+
+                > a.reset-gridstack-layout {
+                    background-position: -720px -40px;
                 }
             }
         }
 
-    }
-}
+        @media screen and (min-width: @tabletLandscapeViewportWidth) {
+            .document-functions {
+                > ul > li {
+                    &.add-multiview-document {
+                        &.submenu {
+                            > form {
+                                position: absolute;
+                                inset: 50px auto auto -20px;
+                                width: 450px;
+                                transform-origin: center top;
+                                transform: scaleY(0) translateY(-100px);
 
-/* ==============[ the stack layout itself ]================= */
-.grid-stack-wrapper {
-    position: absolute;
-    inset: 0;
-    overflow: auto;
-    padding: 60px 5px 75px 5px;
+                                p.add-document-description {
+                                    margin-bottom: 10px;
+                                }
 
-    .grid-stack {
-        .grid-stack-item {
-            border: 0 none;
+                                input[type="text"] {
+                                    padding: 6px 10px;
+                                    padding-right: 24px;
+                                    height: 24px;
+                                    line-height: 24px;
+                                }
 
-            &::before {
-                position: absolute;
-                inset: 5px;
-                background-color: lighten(@light-blue, 20%);
-                border: 1px solid lighten(@light-blue, 10%);
-                content: " ";
-                pointer-events: none;
+                                button[type="submit"] {
+                                    width: 24px;
+                                    height: 24px;
+                                    line-height: 24px;
+                                    font-size: 18px;
+                                }
+                            }
+                        }
 
-            }
-
-            .score-tool {
-                display: none;
-            }
-
-            .tx-dlf-navigation-prev,
-            .tx-dlf-navigation-next {
-                display: none;
-            }
-
-            .tx-dlf-imagemanipulationtool {
-                position: relative;
-                display: inline-block;
-                > span {
-                    opacity: 1;
-                    overflow: hidden;
-                    width: auto;
-                    height: auto;
-                    display: inline;
-                    margin: 0;
-                    > span > a {
-                        position: relative;
-                        display: inline-block;
-                        width: 40px;
-                        height: 40px;
-                        .text-hide();
-                        border-radius: 20px;
-                        margin: 0 5px;
-                        background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
-                        background-size: auto 120px;
-                        &.active:before {
-                            position: absolute;
-                            top: 2px;
-                            right: 0px;
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 8px;
-                            border: 2px solid #fff;
-                            background: @okay-green;
-                            display: block;
-                            content: " ";
+                        &.submenu.open {
+                            > form {
+                                .transform(scaleY(1) translateY(0));
+                            }
                         }
                     }
                 }
             }
 
-
-            .gridstack-dragging-handle,
-            .ui-resizable-handle,
-            .removeDocument a {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                width: 24px;
-                height: 24px;
-                background-color: white;
-                background-image: none;
-
-                &::before {
-                    position: absolute;
-                    inset: 2px;
-                    content: " ";
-                }
-            }
-
-            .gridstack-dragging-handle {
-                left: 0;
-                cursor: grab;
-
-                &::before {
-                    left: 5px;
-                    background: linear-gradient(0deg, @base-blue 7.14%, transparent 7.14%, transparent 50%, @base-blue 50%, @base-blue 57.14%, transparent 57.14%, transparent 100%);
-                    background-size: 10px 11px;
-                    right: 5px;
-                    opacity: .5;
-                }
-            }
-
-            .ui-resizable-handle {
-                transform: rotate(90deg);
-
-                &::before {
-                    background: url(../Images/controlIcons.svg) no-repeat 0 0;
-                    background-size: auto 60px;
-                    background-position: -160px 0;
-                }
-            }
-
-            .removeDocument a {
-                top: 0;
-                .text-hide();
-                background-color: white;
-
-                &::before {
-                    content: "+";
-                    color: @base-blue;
-                    font-size: 20px;
-                    line-height: 1;
-                    transform: rotate(-45deg);
-                    opacity: .5;
-                }
-            }
         }
     }
 
-    @media screen and (min-width: @tabletLandscapeViewportWidth) {
-        padding: 5px;
-    }
+    /* ==============[ the stack layout itself ]================= */
 
-    @media screen and (min-width: @desktopViewportWidth) {
-        padding: 25px;
+    .grid-stack-wrapper {
+        position: absolute;
+        inset: 0;
+        overflow: auto;
+        padding: 60px 5px 75px 5px;
 
         .grid-stack {
             .grid-stack-item {
+                border: 0 none;
 
-                .tx-dlf-imagemanipulationtool {
+                &::before {
                     position: absolute;
-                    inset: auto 10px auto auto;
-                    display: flex;
+                    inset: 5px;
+                    background-color: lighten(@light-blue, 20%);
+                    border: 1px solid lighten(@light-blue, 10%);
+                    content: " ";
+                    pointer-events: none;
+
+                }
+
+                .score-tool {
+                    display: none;
                 }
 
                 .tx-dlf-navigation-prev,
                 .tx-dlf-navigation-next {
-                    position: absolute;
-                    inset: auto auto 10px 50%;
-                    display: flex;
+                    display: none;
+                }
 
-                    > a, > span {
-                        position: relative;
-                        width: 40px;
-                        height: 40px;
-                        display: block;
-                        .text-hide();
-                        background: white url(../Images/controlIcons.svg) no-repeat 0 0;
-                        background-size: auto 120px;
-                        border-radius: 20px;
-                        margin: 0 5px;
-
-                        &.prevMeasure {
-                            background-position: -680px -80px;
-                            transform: scale(.8);
-                        }
-
-                        &.nextMeasure {
-                            background-position: -680px -40px;
-                            transform: scale(.8);
-                        }
-
-                        &.prev {
-                            background-position: -240px -80px;
-                        }
-
-                        &.next {
-                            background-position: -280px -80px;
-                        }
-                    }
+                .tx-dlf-imagemanipulationtool {
+                    position: relative;
+                    display: inline-block;
 
                     > span {
-                        opacity: .3;
+                        opacity: 1;
+                        overflow: hidden;
+                        width: auto;
+                        height: auto;
+                        display: inline;
+                        margin: 0;
+
+                        > span > a {
+                            position: relative;
+                            display: inline-block;
+                            width: 40px;
+                            height: 40px;
+                            .text-hide();
+                            border-radius: 20px;
+                            margin: 0 5px;
+                            background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
+                            background-size: auto 120px;
+
+                            &.active:before {
+                                position: absolute;
+                                top: 2px;
+                                right: 0px;
+                                width: 8px;
+                                height: 8px;
+                                border-radius: 8px;
+                                border: 2px solid #fff;
+                                background: @okay-green;
+                                display: block;
+                                content: " ";
+                            }
+                        }
                     }
                 }
 
-                .tx-dlf-navigation-prev {
-                    flex-direction: row-reverse;
-                    transform: translateX(-100%);
+
+                .gridstack-dragging-handle,
+                .ui-resizable-handle,
+                .removeDocument a {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 24px;
+                    height: 24px;
+                    background-color: white;
+                    background-image: none;
+
+                    &::before {
+                        position: absolute;
+                        inset: 2px;
+                        content: " ";
+                    }
+                }
+
+                .gridstack-dragging-handle {
+                    left: 0;
+                    cursor: grab;
+
+                    &::before {
+                        left: 5px;
+                        background: linear-gradient(0deg, @base-blue 7.14%, transparent 7.14%, transparent 50%, @base-blue 50%, @base-blue 57.14%, transparent 57.14%, transparent 100%);
+                        background-size: 10px 11px;
+                        right: 5px;
+                        opacity: .5;
+                    }
+                }
+
+                .ui-resizable-handle {
+                    transform: rotate(90deg);
+
+                    &::before {
+                        background: url(../Images/controlIcons.svg) no-repeat 0 0;
+                        background-size: auto 60px;
+                        background-position: -160px 0;
+                    }
+                }
+
+                .removeDocument a {
+                    top: 0;
+                    .text-hide();
+                    background-color: white;
+
+                    &::before {
+                        content: "+";
+                        color: @base-blue;
+                        font-size: 20px;
+                        line-height: 1;
+                        transform: rotate(-45deg);
+                        opacity: .5;
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width: @tabletLandscapeViewportWidth) {
+            padding: 5px;
+        }
+
+        @media screen and (min-width: @desktopViewportWidth) {
+            padding: 25px;
+
+            .grid-stack {
+                .grid-stack-item {
+
+                    .tx-dlf-imagemanipulationtool {
+                        position: absolute;
+                        inset: auto 10px auto auto;
+                        display: flex;
+                    }
+
+                    .tx-dlf-navigation-prev,
+                    .tx-dlf-navigation-next {
+                        position: absolute;
+                        inset: auto auto 10px 50%;
+                        display: flex;
+
+                        > a, > span {
+                            position: relative;
+                            width: 40px;
+                            height: 40px;
+                            display: block;
+                            .text-hide();
+                            background: white url(../Images/controlIcons.svg) no-repeat 0 0;
+                            background-size: auto 120px;
+                            border-radius: 20px;
+                            margin: 0 5px;
+
+                            &.prevMeasure {
+                                background-position: -680px -80px;
+                                transform: scale(.8);
+                            }
+
+                            &.nextMeasure {
+                                background-position: -680px -40px;
+                                transform: scale(.8);
+                            }
+
+                            &.prev {
+                                background-position: -240px -80px;
+                            }
+
+                            &.next {
+                                background-position: -280px -80px;
+                            }
+                        }
+
+                        > span {
+                            opacity: .3;
+                        }
+                    }
+
+                    .tx-dlf-navigation-prev {
+                        flex-direction: row-reverse;
+                        transform: translateX(-100%);
+                    }
+                }
+            }
+        }
+
+        .no-touchevents & {
+            .grid-stack-item {
+                .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
+                    opacity: 0;
+                    transition: all .3s ease-in-out;
+                }
+
+                &:hover {
+                    .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
+                        opacity: 1;
+                    }
                 }
             }
         }
     }
+}
 
-    .no-touchevents & {
-        .grid-stack-item {
-            .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
-                opacity: 0;
-                transition: all .3s ease-in-out;
+.multiviewembedded {
+    .main-wrapper {
+        bottom: 0;
+        box-shadow: none;
+    }
+
+    .document-view {
+        top: 0;
+        .document-functions {
+            .provider,
+            .grid {
+                display: none;
             }
+        }
+    }
 
-            &:hover {
-                .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
-                    opacity: 1;
-                }
+    .view-functions ul {
+        display: flex;
+        justify-content: center;
+        top: 15px;
+        li {
+            display: block;
+            &.fullscreen {
+                display: none;
             }
         }
     }
