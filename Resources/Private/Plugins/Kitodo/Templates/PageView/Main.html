@@ -59,7 +59,7 @@
                         <div class="gridstack-dragging-handle" title="{f:translate(key: 'multiview.dragging_label', extensionName: 'dfgviewer')}"></div>
                         <f:if condition="{document.sourceKey} >= 0">
                             <div class="removeDocument">
-                                <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multiViewSource][{document.sourceKey}]'}">
+                                <f:link.action addQueryString="untrusted" argumentsToBeExcludedFromQueryString="{0: 'tx_dlf[multiViewSource][{document.sourceKey}]', 1: 'tx_dlf[multiview]'}">
                                     <f:translate key="multiview.remove_document" extensionName="dfgviewer" />
                                 </f:link.action>
                             </div>
