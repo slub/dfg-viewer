@@ -14,100 +14,20 @@
     .document-view {
 
         > .page-control,
-        .view-functions ul li.pages,
-        .document-functions ul li.grid {
+        .view-functions ul li.pages {
             display: none;
         }
 
         .document-functions {
             .provider {
-                background-color: lighten(@light-blue, 20%);
+                background-color: transparent;
             }
 
             > ul > li {
-
-                &.downloads,
+                &.score,
+                &.grid,
                 &.doublepage {
                     display: none;
-                }
-
-                &.add-multiview-document {
-                    > a {
-                        background-position: -720px -80px;
-                    }
-
-                    &.submenu {
-                        > form {
-                            position: fixed;
-                            bottom: 80px;
-                            left: 40px;
-                            right: 40px;
-                            padding: 20px;
-                            background: fade(@base-blue, 90%);
-                            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-                            font-size: 14px;
-                            line-height: 1.4;
-                            text-align: left;
-                            transform-origin: center bottom;
-                            .transition();
-                            .transform(scaleY(0) translateY(100px));
-                            opacity: 0;
-                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-
-                            p.add-document-description {
-                                color: white;
-                                margin-bottom: 20px;
-                            }
-
-                            label {
-                                display: none;
-                            }
-
-                            input[type="text"] {
-                                position: relative;
-                                width: 100%;
-                                padding: 6px 10px;
-                                color: @base-blue;
-                                border: 0 none;
-                                outline: none;
-                                height: 30px;
-                                line-height: 30px;
-                                box-shadow: inset 1px 1px 2px fade(@base-blue, 20%);
-
-                                &::placeholder {
-                                    color: lighten(@light-blue, 10%);
-                                }
-                            }
-
-                            button[type="submit"] {
-                                cursor: pointer;
-                                position: absolute;
-                                bottom: 20px;
-                                right: 20px;
-                                width: 30px;
-                                height: 30px;
-                                padding: 0;
-                                .text-hide();
-
-                                &::after {
-                                    position: absolute;
-                                    font-size: 22px;
-                                    line-height: 25px;
-                                    color: @base-blue;
-                                    content: "+";
-                                    left: 6px;
-                                    top: -1px;
-                                }
-                            }
-                        }
-                    }
-
-                    &.submenu.open {
-                        > form {
-                            .transform(scaleY(1) translateY(0));
-                            opacity: 1;
-                        }
-                    }
                 }
 
                 > a.reset-gridstack-layout {
@@ -116,48 +36,6 @@
             }
         }
 
-        @media screen and (min-width: @tabletLandscapeViewportWidth) {
-            .document-functions {
-                > ul > li {
-                    &.add-multiview-document {
-                        &.submenu {
-                            > form {
-                                position: absolute;
-                                inset: 50px auto auto -20px;
-                                width: 450px;
-                                transform-origin: center top;
-                                transform: scaleY(0) translateY(-100px);
-
-                                p.add-document-description {
-                                    margin-bottom: 10px;
-                                }
-
-                                input[type="text"] {
-                                    padding: 6px 10px;
-                                    padding-right: 24px;
-                                    height: 24px;
-                                    line-height: 24px;
-                                }
-
-                                button[type="submit"] {
-                                    width: 24px;
-                                    height: 24px;
-                                    line-height: 24px;
-                                    font-size: 18px;
-                                }
-                            }
-                        }
-
-                        &.submenu.open {
-                            > form {
-                                .transform(scaleY(1) translateY(0));
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
     }
 
     /* ==============[ the stack layout itself ]================= */
@@ -189,45 +67,6 @@
                 .tx-dlf-navigation-prev,
                 .tx-dlf-navigation-next {
                     display: none;
-                }
-
-                .tx-dlf-imagemanipulationtool {
-                    position: relative;
-                    display: inline-block;
-
-                    > span {
-                        opacity: 1;
-                        overflow: hidden;
-                        width: auto;
-                        height: auto;
-                        display: inline;
-                        margin: 0;
-
-                        > span > a {
-                            position: relative;
-                            display: inline-block;
-                            width: 40px;
-                            height: 40px;
-                            .text-hide();
-                            border-radius: 20px;
-                            margin: 0 5px;
-                            background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
-                            background-size: auto 120px;
-
-                            &.active:before {
-                                position: absolute;
-                                top: 2px;
-                                right: 0px;
-                                width: 8px;
-                                height: 8px;
-                                border-radius: 8px;
-                                border: 2px solid #fff;
-                                background: @okay-green;
-                                display: block;
-                                content: " ";
-                            }
-                        }
-                    }
                 }
 
 
@@ -298,12 +137,6 @@
 
             .grid-stack {
                 .grid-stack-item {
-
-                    .tx-dlf-imagemanipulationtool {
-                        position: absolute;
-                        inset: auto 10px auto auto;
-                        display: flex;
-                    }
 
                     .tx-dlf-navigation-prev,
                     .tx-dlf-navigation-next {
@@ -380,6 +213,8 @@
     .document-view {
         top: 0;
         .document-functions {
+            .add-multiview-document,
+            .score,
             .provider,
             .grid {
                 display: none;
@@ -395,6 +230,155 @@
             display: block;
             &.fullscreen {
                 display: none;
+            }
+        }
+    }
+
+    .page-control {
+        width: 500px;
+        margin-left: -250px;
+
+        .measureBacks,
+        .measureFwds{
+            display: block;
+        }
+
+        .measureBacks {
+            left: 50px;
+        }
+
+        .measureFwds{
+            right: 50px;
+        }
+    }
+}
+
+.document-view {
+    .document-functions {
+        > ul > li {
+            &.add-multiview-document {
+                > a {
+                    background-position: -720px -80px;
+                }
+
+                &.submenu {
+                    > form {
+                        position: fixed;
+                        bottom: 80px;
+                        left: 40px;
+                        right: 40px;
+                        padding: 20px;
+                        background: fade(@base-blue, 90%);
+                        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+                        font-size: 14px;
+                        line-height: 1.4;
+                        text-align: left;
+                        transform-origin: center bottom;
+                        .transition();
+                        .transform(scaleY(0) translateY(100px));
+                        opacity: 0;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+                        p.add-document-description {
+                            color: white;
+                            margin-bottom: 20px;
+                        }
+
+                        label {
+                            display: none;
+                        }
+
+                        input[type="text"] {
+                            position: relative;
+                            width: 100%;
+                            padding: 6px 10px;
+                            color: @base-blue;
+                            border: 0 none;
+                            outline: none;
+                            height: 30px;
+                            line-height: 30px;
+                            box-shadow: inset 1px 1px 2px fade(@base-blue, 20%);
+
+                            &::placeholder {
+                                color: lighten(@light-blue, 10%);
+                            }
+                        }
+
+                        button[type="submit"] {
+                            cursor: pointer;
+                            position: absolute;
+                            bottom: 20px;
+                            right: 20px;
+                            width: 30px;
+                            height: 30px;
+                            padding: 0;
+                            .text-hide();
+
+                            &::after {
+                                position: absolute;
+                                font-size: 22px;
+                                line-height: 25px;
+                                color: @base-blue;
+                                content: "+";
+                                left: 6px;
+                                top: -1px;
+                            }
+                        }
+                    }
+                }
+
+                &.submenu.open {
+                    > form {
+                        .transform(scaleY(1) translateY(0));
+                        opacity: 1;
+                    }
+                }
+            }
+
+            > a.reset-gridstack-layout {
+                background-position: -720px -40px;
+            }
+        }
+    }
+
+    @media screen and (min-width: @tabletLandscapeViewportWidth) {
+        .document-functions {
+            > ul > li {
+                &.add-multiview-document {
+                    &.submenu {
+                        > form {
+                            position: absolute;
+                            inset: 50px auto auto -20px;
+                            width: 450px;
+                            transform-origin: center top;
+                            transform: scaleY(0) translateY(-100px);
+
+                            p.add-document-description {
+                                margin-bottom: 10px;
+                            }
+
+                            input[type="text"] {
+                                padding: 6px 10px;
+                                padding-right: 24px;
+                                height: 24px;
+                                line-height: 24px;
+                            }
+
+                            button[type="submit"] {
+                                width: 24px;
+                                height: 24px;
+                                line-height: 24px;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+
+                    &.submenu.open {
+                        > form {
+                            .transform(scaleY(1) translateY(0));
+                        }
+                    }
+                }
             }
         }
     }

@@ -68,9 +68,11 @@
                                              it's a newspaper!
                                         </f:if>
                                         <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                                        <div class="fulltext-container">
-                                            <div id="tx-dlf-fulltextselection"></div>
-                                        </div>
+                                        <f:if condition="{gp-multiview} != 1">
+                                            <div class="fulltext-container">
+                                                <div id="tx-dlf-fulltextselection"></div>
+                                            </div>
+                                        </f:if>
                                     </f:else>
                                 </f:if>
                             </f:else>
@@ -90,12 +92,10 @@
                 </div>
                 <f:if condition="{gp-multiview} != 1">
                     <div class="page-control">
-                        <f:if condition="{gp-pagegrid} == 1">
-                            <f:else>
-                                <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
-                            </f:else>
+                        <f:if condition="{gp-pagegrid} != 1">
+                            <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
                         </f:if>
-                </div>
+                    </div>
                 </f:if>
             </f:else>
         </f:if>
