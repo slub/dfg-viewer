@@ -65,14 +65,9 @@
                                     </f:then>
                                     <f:else>
                                         <f:if condition="{isNewspaper} == 'newspaper_issue'">
-                                             it's a newspaper!
+                                            <!-- it's a newspaper! -->
                                         </f:if>
                                         <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                                        <f:if condition="{gp-multiview} != 1">
-                                            <div class="fulltext-container">
-                                                <div id="tx-dlf-fulltextselection"></div>
-                                            </div>
-                                        </f:if>
                                     </f:else>
                                 </f:if>
                             </f:else>
