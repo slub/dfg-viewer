@@ -67,7 +67,16 @@
                                         <f:if condition="{isNewspaper} == 'newspaper_issue'">
                                             <!-- it's a newspaper! -->
                                         </f:if>
-                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+
+                                        <f:if condition="{gp-multiview} == 1">
+                                            <f:then>
+                                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_multiview" />
+                                            </f:then>
+                                            <f:else>
+                                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                                            </f:else>
+                                        </f:if>
+
                                     </f:else>
                                 </f:if>
                             </f:else>
