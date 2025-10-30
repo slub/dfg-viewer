@@ -104,11 +104,5 @@ page {
 page {
     bodyTag = <body class="dfgviewer multiviewembedded">
     meta.viewport = width=1023, initial-scale=1.0, maximum-scale=1.0
-    10 {
-        variables {
-            gp-multiviewembedded = TEXT
-            gp-multiviewembedded.data = GP:tx_dlf|multiviewembedded
-        }
-    }
 }
 [END]
