@@ -90,6 +90,7 @@ page {
 
 [request && traverse(request.getQueryParams(), 'tx_dlf/multiview') == 1]
 page {
+    bodyTag = <body class="dfgviewer multiview">
     10 {
         variables {
             gp-multiview = TEXT
@@ -101,6 +102,7 @@ page {
 
 [request && traverse(request.getQueryParams(), 'tx_dlf/multiviewembedded') == 1]
 page {
+    bodyTag = <body class="dfgviewer multiviewembedded">
     meta.viewport = width=1023, initial-scale=1.0, maximum-scale=1.0
     10 {
         variables {
