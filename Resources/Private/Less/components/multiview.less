@@ -12,8 +12,11 @@
     .document-view {
 
         .page-control > div,
-        .view-functions ul li.pages {
+        .view-functions > ul > li {
             display: none;
+            &.fullscreen {
+                display: block;
+            }
         }
 
         .document-functions {
@@ -60,6 +63,16 @@
                 &.grid-stack-item-highlighted {
                     &::before {
                         background-color: lighten(@light-blue, 10%);
+                    }
+                }
+
+                .grid-stack-item-content {
+                    .loader {
+
+                    }
+
+                    iframe {
+                        overflow: hidden
                     }
                 }
 
