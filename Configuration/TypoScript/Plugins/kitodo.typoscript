@@ -272,10 +272,10 @@ plugin.tx_dlf_fulltexttool {
     }
 }
 
-plugin.tx_dlf_adddocumenttool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_adddocumenttool {
+plugin.tx_dlf_multiviewaddsourcetool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_multiviewaddsourcetool {
     settings {
-        tools = adddocumenttool
+        tools = multiviewaddsourcetool
     }
 }
 
