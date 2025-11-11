@@ -123,6 +123,16 @@ plugin.tx_dlf_metadata {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
+# multiview
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_multiview < tt_content.list.20.dlf_multiview
+plugin.tx_dlf_multiview {
+    settings {
+        multiDocumentTypes = composition
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
 # pageview / workview
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
@@ -130,7 +140,6 @@ plugin.tx_dlf_pageview {
     settings {
         features =
         elementId = tx-dfgviewer-map-0
-        multiViewType = composition
     }
 }
 
@@ -263,10 +272,10 @@ plugin.tx_dlf_fulltexttool {
     }
 }
 
-plugin.tx_dlf_adddocumenttool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_adddocumenttool {
+plugin.tx_dlf_multiviewaddsourcetool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_multiviewaddsourcetool {
     settings {
-        tools = adddocumenttool
+        tools = multiviewaddsourcetool
     }
 }
 

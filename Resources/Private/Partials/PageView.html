@@ -22,11 +22,11 @@
 </f:comment>
 
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
-    xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
+      data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-    <div class="document-view {f:if(condition:'{gp-multiview}', then:'multiview')}">
+
+    <div class="document-view">
         <div id="browser-hint" class="hidden">
             <div class="alert">
                 <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
@@ -67,11 +67,23 @@
                                         <f:if condition="{isNewspaper} == 'newspaper_issue'">
                                             <!-- it's a newspaper! -->
                                         </f:if>
-                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
-                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
-                                        <div class="fulltext-container">
-                                            <div id="tx-dlf-fulltextselection"></div>
-                                        </div>
+
+                                        <f:if condition="{gp-multiview} == 1">
+                                            <f:then>
+                                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_multiview" />
+                                            </f:then>
+                                            <f:else>
+                                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_audioplayer" />
+                                                <div class="fulltext-container">
+                                                    <div id="tx-dlf-fulltextselection"></div>
+                                                </div>
+                                                <div class="score-container">
+                                                    <div id="tx-dlf-score-0"></div>
+                                                </div>
+                                            </f:else>
+                                        </f:if>
+
                                     </f:else>
                                 </f:if>
                             </f:else>
@@ -80,26 +92,22 @@
                 </f:if>
 
                 <div class="view-functions">
-                    <f:if condition="{gp-pagegrid} == 1">
-                        <f:else>
-                            <ul>
-                                <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
-                                <f:if condition="{gp-multiview}">
-                                    <li class="tx-dlf-imagemanipulationtool">
-                                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
-                                    </li>
-                                </f:if>
-                            </ul>
-                        </f:else>
+                    <f:if condition="{gp-pagegrid} != 1">
+                        <ul>
+                            <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
+                            <li class="tx-dlf-imagemanipulationtool">
+                                <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
+                            </li>
+                        </ul>
                     </f:if>
                 </div>
-                <div class="page-control">
-                    <f:if condition="{gp-pagegrid} == 1">
-                        <f:else>
+                <f:if condition="{gp-multiview} != 1">
+                    <div class="page-control">
+                        <f:if condition="{gp-pagegrid} != 1">
                             <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
-                        </f:else>
-                    </f:if>
-                </div>
+                        </f:if>
+                    </div>
+                </f:if>
             </f:else>
         </f:if>
     </div>
