@@ -1,108 +1,108 @@
 {
-  "name": "slub/dfgviewer",
-  "type": "typo3-cms-extension",
-  "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.",
-  "homepage": "https://github.com/slub/dfg-viewer",
-  "keywords": [
-    "TYPO3",
-    "extension",
-    "dfgviewer"
-  ],
-  "authors": [
-    {
-      "name": "Alexander Bigga",
-      "email": "typo3@slub-dresden.de",
-      "role": "Developer"
+    "name": "slub/dfgviewer",
+    "type": "typo3-cms-extension",
+    "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.",
+    "homepage": "https://github.com/slub/dfg-viewer",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "dfgviewer"
+    ],
+    "authors": [
+        {
+            "name": "Alexander Bigga",
+            "email": "typo3@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Christos Sidiropoulos",
+            "email": "typo3@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Thomas Jung",
+            "email": "thomas.jung@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Sebastian Meyer",
+            "email": "sebastian.meyer@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Markus Weigelt",
+            "email": "markus.weigelt@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Beatrycze Volk",
+            "email": "beatrycze.volk@slub-dresden.de",
+            "role": "Developer"
+        }
+    ],
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "php": "8.1 - 8.4",
+        "typo3/cms-core": "^12.4|^13.4",
+        "kitodo/presentation": "dev-main",
+        "slub/slub-digitalcollections": "dev-main"
     },
-    {
-      "name": "Christos Sidiropoulos",
-      "email": "typo3@slub-dresden.de",
-      "role": "Developer"
+    "require-dev": {
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^10.1",
+        "spatie/phpunit-watcher": "^1.23.6",
+        "typo3/testing-framework": "^8.2"
     },
-    {
-      "name": "Thomas Jung",
-      "email": "thomas.jung@slub-dresden.de",
-      "role": "Developer"
+    "replace": {
+        "typo3-ter/dfgviewer": "self.version"
     },
-    {
-      "name": "Sebastian Meyer",
-      "email": "sebastian.meyer@slub-dresden.de",
-      "role": "Developer"
+    "autoload": {
+        "psr-4": {
+            "Slub\\Dfgviewer\\": "Classes/"
+        }
     },
-    {
-      "name": "Markus Weigelt",
-      "email": "markus.weigelt@slub-dresden.de",
-      "role": "Developer"
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "dfgviewer"
+        }
     },
-    {
-      "name": "Beatrycze Volk",
-      "email": "beatrycze.volk@slub-dresden.de",
-      "role": "Developer"
-    }
-  ],
-  "license": "GPL-3.0-or-later",
-  "require": {
-    "php": "8.1 - 8.4",
-    "typo3/cms-core": "^12.4|^13.4",
-    "kitodo/presentation": "dev-main",
-    "slub/slub-digitalcollections": "dev-main"
-  },
-  "require-dev": {
-    "phpstan/phpstan": "^1.12",
-    "phpunit/phpunit": "^10.1",
-    "spatie/phpunit-watcher": "^1.23.6",
-    "typo3/testing-framework": "^8.2"
-  },
-  "replace": {
-    "typo3-ter/dfgviewer": "self.version"
-  },
-  "autoload": {
-    "psr-4": {
-      "Slub\\Dfgviewer\\": "Classes/"
-    }
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "dfgviewer"
-    }
-  },
-  "scripts": {
-    "docs:build": [
-      "rm -Rf ./Documentation-GENERATED-temp",
-      "docker run --user=$(id -u):$(id -g) --rm -v ./:/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation",
-      "cp ./Build/Documentation/index.html ./Documentation-GENERATED-temp"
-    ],
-    "docs:start": [
-      "docker run -d --name dlf_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 9000:8000 jdkelley/simple-http-server:latest"
-    ],
-    "docs:stop": [
-      "docker stop dlf_docs"
-    ],
-    "docs:rebuild": [
-      "@composer docs:stop",
-      "@composer docs:build",
-      "@composer docs:start"
-    ],
-    "phpstan": [
-      "@php vendor/bin/phpstan --configuration=\".github/phpstan.neon\""
-    ],
-    "test:unit:local": [
-      "phpunit -c Build/Test/UnitTests.xml"
-    ],
-    "test:unit:watch": [
-      "phpunit-watcher watch -c Build/Test/UnitTests.xml"
+    "scripts": {
+      "docs:build": [
+        "rm -Rf ./Documentation-GENERATED-temp",
+        "docker run --user=$(id -u):$(id -g) --rm -v ./:/project -it ghcr.io/typo3-documentation/render-guides:latest --config ./Documentation",
+        "cp ./Build/Documentation/index.html ./Documentation-GENERATED-temp"
+      ],
+      "docs:start": [
+        "docker run -d --name dlf_docs --rm -v ./Documentation-GENERATED-temp:/serve -p 9000:8000 jdkelley/simple-http-server:latest"
+      ],
+      "docs:stop": [
+        "docker stop dlf_docs"
+      ],
+      "docs:rebuild": [
+        "@composer docs:stop",
+        "@composer docs:build",
+        "@composer docs:start"
+      ],
+      "phpstan": [
+        "@php vendor/bin/phpstan --configuration=\".github/phpstan.neon\""
+      ],
+      "test:unit:local": [
+        "phpunit -c Build/Test/UnitTests.xml"
+      ],
+      "test:unit:watch": [
+        "phpunit-watcher watch -c Build/Test/UnitTests.xml"
+      ]
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/kitodo/php-iiif-prezi-reader.git"
+        }
     ]
-  },
-  "config": {
-    "allow-plugins": {
-      "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true
-    }
-  },
-  "repositories": [
-    {
-      "type": "github",
-      "url": "https://github.com/kitodo/php-iiif-prezi-reader.git"
-    }
-  ]
 }
