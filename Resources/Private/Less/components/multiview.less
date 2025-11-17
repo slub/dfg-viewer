@@ -8,21 +8,273 @@
  *
  */
 
+.multiview {
+    .document-view {
 
-/* ==============[ buttons and control elements ]================= */
-.document-view.multiview {
+        .page-control > div,
+        .view-functions > ul > li {
+            display: none;
+            &.fullscreen {
+                display: block;
+            }
+        }
 
-    > .page-control,
-    .view-functions ul li.pages,
-    .document-functions ul li.grid {
+        .document-functions {
+            .provider {
+                background-color: transparent;
+            }
+
+            > ul > li {
+                &.score,
+                &.grid,
+                &.doublepage {
+                    display: none;
+                }
+
+                > a.reset-gridstack-layout {
+                    background-position: -720px -40px;
+                }
+            }
+        }
+    }
+
+    /* ==============[ the stack layout itself ]================= */
+
+    .grid-stack-wrapper {
+        position: absolute;
+        inset: 0;
+        overflow: auto;
+        padding: 75px 5px 75px 5px;
+
+        .grid-stack {
+            .grid-stack-item {
+                border: 0 none;
+
+                &::before {
+                    position: absolute;
+                    inset: 5px;
+                    background-color: lighten(@light-blue, 20%);
+                    border: 1px solid lighten(@light-blue, 10%);
+                    content: " ";
+                    pointer-events: none;
+
+                }
+
+                &.grid-stack-item-highlighted {
+                    &::before {
+                        background-color: lighten(@light-blue, 10%);
+                    }
+                }
+
+                .grid-stack-item-content {
+                    .loader {
+                        background-color: white;
+                    }
+
+                    iframe {
+                        overflow: hidden
+                    }
+                }
+
+                .score-tool {
+                    display: none;
+                }
+
+                .tx-dlf-navigation-prev,
+                .tx-dlf-navigation-next {
+                    display: none;
+                }
+
+
+                .gridstack-dragging-handle,
+                .ui-resizable-handle,
+                .removeDocument a {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 24px;
+                    height: 24px;
+                    background-color: white;
+                    background-image: none;
+
+                    &::before {
+                        position: absolute;
+                        inset: 2px;
+                        content: " ";
+                    }
+                }
+
+                .gridstack-dragging-handle {
+                    left: 0;
+                    cursor: grab;
+
+                    &::before {
+                        left: 5px;
+                        background: linear-gradient(0deg, @base-blue 7.14%, transparent 7.14%, transparent 50%, @base-blue 50%, @base-blue 57.14%, transparent 57.14%, transparent 100%);
+                        background-size: 10px 11px;
+                        right: 5px;
+                        opacity: .5;
+                    }
+                }
+
+                .ui-resizable-handle {
+                    transform: rotate(90deg);
+
+                    &::before {
+                        background: url(../Images/controlIcons.svg) no-repeat 0 0;
+                        background-size: auto 60px;
+                        background-position: -160px 0;
+                    }
+                }
+
+                .removeDocument a {
+                    top: 0;
+                    .text-hide();
+                    background-color: white;
+
+                    &::before {
+                        content: "+";
+                        color: @base-blue;
+                        font-size: 20px;
+                        line-height: 1;
+                        transform: rotate(-45deg);
+                        opacity: .5;
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width: @desktopViewportWidth) {
+
+            .grid-stack {
+                .grid-stack-item {
+
+                    .tx-dlf-navigation-prev,
+                    .tx-dlf-navigation-next {
+                        position: absolute;
+                        inset: auto auto 10px 50%;
+                        display: flex;
+
+                        > a, > span {
+                            position: relative;
+                            width: 40px;
+                            height: 40px;
+                            display: block;
+                            .text-hide();
+                            background: white url(../Images/controlIcons.svg) no-repeat 0 0;
+                            background-size: auto 120px;
+                            border-radius: 20px;
+                            margin: 0 5px;
+
+                            &.prevMeasure {
+                                background-position: -680px -80px;
+                                transform: scale(.8);
+                            }
+
+                            &.nextMeasure {
+                                background-position: -680px -40px;
+                                transform: scale(.8);
+                            }
+
+                            &.prev {
+                                background-position: -240px -80px;
+                            }
+
+                            &.next {
+                                background-position: -280px -80px;
+                            }
+                        }
+
+                        > span {
+                            opacity: .3;
+                        }
+                    }
+
+                    .tx-dlf-navigation-prev {
+                        flex-direction: row-reverse;
+                        transform: translateX(-100%);
+                    }
+                }
+            }
+        }
+
+        .no-touchevents & {
+            .grid-stack-item {
+                .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
+                    opacity: 0;
+                    transition: all .3s ease-in-out;
+                }
+
+                &:hover {
+                    .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.multiviewembedded {
+    .main-wrapper {
+        bottom: 0;
+        box-shadow: none;
+    }
+
+    .control-bar > .header-bar {
         display: none;
     }
 
-    .document-functions {
-        .provider {
-            background-color: lighten(@light-blue, 20%);
+    .document-view {
+        top: 0;
+        .document-functions {
+            .add-multiview-document,
+            .score,
+            .provider,
+            .grid {
+                display: none;
+            }
+
+            > ul > li.submenu > ul {
+                bottom: 68px;
+            }
+
+        }
+    }
+
+    .view-functions ul {
+        display: flex;
+        justify-content: center;
+        top: 15px;
+        li {
+            display: block;
+            &.fullscreen {
+                display: none;
+            }
+        }
+    }
+
+    .page-control {
+        width: 500px;
+        margin-left: -250px;
+
+        .measureBacks,
+        .measureFwds{
+            display: block;
         }
 
+        .measureBacks {
+            left: 50px;
+        }
+
+        .measureFwds{
+            right: 50px;
+        }
+    }
+}
+
+.document-view {
+    .document-functions {
         > ul > li {
             &.add-multiview-document {
                 > a {
@@ -146,213 +398,6 @@
                             .transform(scaleY(1) translateY(0));
                         }
                     }
-                }
-            }
-        }
-
-    }
-}
-
-/* ==============[ the stack layout itself ]================= */
-.grid-stack-wrapper {
-    position: absolute;
-    inset: 0;
-    overflow: auto;
-    padding: 60px 5px 75px 5px;
-
-    .grid-stack {
-        .grid-stack-item {
-            border: 0 none;
-
-            &::before {
-                position: absolute;
-                inset: 5px;
-                background-color: lighten(@light-blue, 20%);
-                border: 1px solid lighten(@light-blue, 10%);
-                content: " ";
-                pointer-events: none;
-
-            }
-
-            .score-tool {
-                display: none;
-            }
-
-            .tx-dlf-navigation-prev,
-            .tx-dlf-navigation-next {
-                display: none;
-            }
-
-            .tx-dlf-imagemanipulationtool {
-                position: relative;
-                display: inline-block;
-                > span {
-                    opacity: 1;
-                    overflow: hidden;
-                    width: auto;
-                    height: auto;
-                    display: inline;
-                    margin: 0;
-                    > span > a {
-                        position: relative;
-                        display: inline-block;
-                        width: 40px;
-                        height: 40px;
-                        .text-hide();
-                        border-radius: 20px;
-                        margin: 0 5px;
-                        background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
-                        background-size: auto 120px;
-                        &.active:before {
-                            position: absolute;
-                            top: 2px;
-                            right: 0px;
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 8px;
-                            border: 2px solid #fff;
-                            background: @okay-green;
-                            display: block;
-                            content: " ";
-                        }
-                    }
-                }
-            }
-
-
-            .gridstack-dragging-handle,
-            .ui-resizable-handle,
-            .removeDocument a {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                width: 24px;
-                height: 24px;
-                background-color: white;
-                background-image: none;
-
-                &::before {
-                    position: absolute;
-                    inset: 2px;
-                    content: " ";
-                }
-            }
-
-            .gridstack-dragging-handle {
-                left: 0;
-                cursor: grab;
-
-                &::before {
-                    left: 5px;
-                    background: linear-gradient(0deg, @base-blue 7.14%, transparent 7.14%, transparent 50%, @base-blue 50%, @base-blue 57.14%, transparent 57.14%, transparent 100%);
-                    background-size: 10px 11px;
-                    right: 5px;
-                    opacity: .5;
-                }
-            }
-
-            .ui-resizable-handle {
-                transform: rotate(90deg);
-
-                &::before {
-                    background: url(../Images/controlIcons.svg) no-repeat 0 0;
-                    background-size: auto 60px;
-                    background-position: -160px 0;
-                }
-            }
-
-            .removeDocument a {
-                top: 0;
-                .text-hide();
-                background-color: white;
-
-                &::before {
-                    content: "+";
-                    color: @base-blue;
-                    font-size: 20px;
-                    line-height: 1;
-                    transform: rotate(-45deg);
-                    opacity: .5;
-                }
-            }
-        }
-    }
-
-    @media screen and (min-width: @tabletLandscapeViewportWidth) {
-        padding: 5px;
-    }
-
-    @media screen and (min-width: @desktopViewportWidth) {
-        padding: 25px;
-
-        .grid-stack {
-            .grid-stack-item {
-
-                .tx-dlf-imagemanipulationtool {
-                    position: absolute;
-                    inset: auto 10px auto auto;
-                    display: flex;
-                }
-
-                .tx-dlf-navigation-prev,
-                .tx-dlf-navigation-next {
-                    position: absolute;
-                    inset: auto auto 10px 50%;
-                    display: flex;
-
-                    > a, > span {
-                        position: relative;
-                        width: 40px;
-                        height: 40px;
-                        display: block;
-                        .text-hide();
-                        background: white url(../Images/controlIcons.svg) no-repeat 0 0;
-                        background-size: auto 120px;
-                        border-radius: 20px;
-                        margin: 0 5px;
-
-                        &.prevMeasure {
-                            background-position: -680px -80px;
-                            transform: scale(.8);
-                        }
-
-                        &.nextMeasure {
-                            background-position: -680px -40px;
-                            transform: scale(.8);
-                        }
-
-                        &.prev {
-                            background-position: -240px -80px;
-                        }
-
-                        &.next {
-                            background-position: -280px -80px;
-                        }
-                    }
-
-                    > span {
-                        opacity: .3;
-                    }
-                }
-
-                .tx-dlf-navigation-prev {
-                    flex-direction: row-reverse;
-                    transform: translateX(-100%);
-                }
-            }
-        }
-    }
-
-    .no-touchevents & {
-        .grid-stack-item {
-            .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
-                opacity: 0;
-                transition: all .3s ease-in-out;
-            }
-
-            &:hover {
-                .tx-dlf-navigation-prev, .tx-dlf-navigation-next, .gridstack-dragging-handle, .removeDocument a {
-                    opacity: 1;
                 }
             }
         }
