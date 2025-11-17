@@ -256,15 +256,15 @@
                 }
             }
             &.score {
-                a#tx-dlf-tools-midi {
+                a#tx-dlf-tools-score-midi {
                     background-position: -640px 0;
 
-                    .midi-active & {
+                    .tx-dlf-score-midi-active & {
                         background-position: -680px 0;
                     }
                 }
 
-                a.score-visible.active:before {
+                a.tx-dlf-score-visible.active:before {
                     position: absolute;
                     top: 2px;
                     right: 0px;
@@ -500,14 +500,16 @@
                     }
                 }
                 &.rotate {
-                    .rotate-left {
-                        background-position: -240px 0;
-                    }
-                    .rotate-right {
-                        background-position: -240px -40px;
-                    }
-                    .upend {
-                        background-position: -280px 0;
+                    display: none;
+                }
+
+                &.zoom {
+                    position: relative;
+                    display: inline-block;
+                    .tx-dlf-score-visible & {
+                        .in, .out {
+                            display: none;
+                        }
                     }
                 }
                 &.sync-view {
@@ -762,7 +764,7 @@
         left: 50%;
         width: 300px;
         margin-left: -150px;
-        .score-visible & {
+        .tx-dlf-score-visible & {
             width: 340px;
             margin-left: -170px;
         }
@@ -775,7 +777,7 @@
         height: 100%;
         margin: 0;
         pointer-events: none;
-        .score-visible & {
+        .tx-dlf-score-visible & {
             width: 100%;
             margin: 0;
         }

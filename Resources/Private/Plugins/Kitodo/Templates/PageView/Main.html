@@ -139,6 +139,12 @@
     </f:else>
 </f:if>
 
-<kitodo:jsFooter inlineCode="{viewerConfiguration}" />
+<f:if condition="{scores}">
+<div class="score-container">
+    <div id="tx-dlf-score-0"></div>
+</div>
+<midi-player id="tx-dlf-score-midi-player"></midi-player>
+</f:if>
 
+<kitodo:jsFooter inlineCode="{viewerConfiguration}" />
 </html>

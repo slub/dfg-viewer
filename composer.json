@@ -44,8 +44,8 @@
     "require": {
         "php": "8.1 - 8.4",
         "typo3/cms-core": "^12.4|^13.4",
-        "kitodo/presentation": "dev-main",
-        "slub/slub-digitalcollections": "dev-main"
+        "kitodo/presentation": "@dev",
+        "slub/slub-digitalcollections": "@dev"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.12",
@@ -103,6 +103,9 @@
         {
             "type": "github",
             "url": "https://github.com/kitodo/php-iiif-prezi-reader.git"
+        },
+        {
+          "packagist.org": true
         }
     ]
 }
