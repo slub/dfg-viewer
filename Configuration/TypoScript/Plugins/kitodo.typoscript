@@ -32,6 +32,7 @@ plugin.tx_dlf {
             dfgviewer {
                 10 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
+                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.shortdescription
                     description {
                         key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
                         arguments {
@@ -55,6 +56,7 @@ plugin.tx_dlf {
                 }
                 20 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
+                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.shortdescription
                     description {
                         key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
                         arguments {
@@ -66,6 +68,7 @@ plugin.tx_dlf {
                 }
                 30 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.title
+                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.shortdescription
                     description {
                         key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.description
                         arguments {
@@ -77,11 +80,13 @@ plugin.tx_dlf {
                 }
                 40 {
                     title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.title
+                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.shortdescription
                     description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.description
                     className = Slub\Dfgviewer\Validation\MetsUrlExistenceValidator
                     configuration {
                         excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
                     }
+                    disabled = true
                 }
             }
         }
