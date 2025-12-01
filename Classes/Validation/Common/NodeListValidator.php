@@ -66,7 +66,7 @@ class NodeListValidator extends AbstractDomValidator
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             $errorMessage = substr($errorMessage, 0, strrpos($errorMessage, ' in'));
-            throw new Exception($errorMessage . ' under XPath expression "' . $this->expression . '"'  );
+            throw new Exception($errorMessage . ' under XPath expression "' . $this->expression . '"');
         }
 
         $this->result = $result;
