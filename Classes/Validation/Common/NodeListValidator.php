@@ -62,11 +62,22 @@ class NodeListValidator extends AbstractDomValidator
         $this->expression = $expression;
         $this->contextNode = $contextNode;
         try {
-            $this->nodeList = $xpath->query($expression, $contextNode);
+            $nodeList = $xpath->query($expression, $contextNode);
+            if ($nodeList === false) {
+                throw new Exception(
+                    'Invalid XPath expression'
+                );
+            }
+            $this->nodeList = $nodeList;
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
+            // Remove the NodeListValidator from error message
             $errorMessage = substr($errorMessage, 0, strrpos($errorMessage, ' in'));
-            throw new Exception($errorMessage . ' under XPath expression "' . $this->expression . '"');
+            $errorMessage = $errorMessage . ' that matches the XPath expression "' . $this->expression . '"';
+            if ($this->contextNode) {
+                $errorMessage .= ' under "' . $this->contextNode->getNodePath() . '"';
+            }
+            throw new Exception($errorMessage);
         }
 
         $this->result = $result;
