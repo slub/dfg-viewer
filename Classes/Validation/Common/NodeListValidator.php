@@ -65,15 +65,15 @@ class NodeListValidator extends AbstractDomValidator
             $nodeList = $xpath->query($expression, $contextNode);
             if ($nodeList === false) {
                 throw new Exception(
-                    'Invalid XPath expression'
+                    'A syntax error occurred while querying'
                 );
             }
             $this->nodeList = $nodeList;
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             // Remove the NodeListValidator from error message
-            $errorMessage = substr($errorMessage, 0, strrpos($errorMessage, ' in'));
-            $errorMessage = $errorMessage . ' that matches the XPath expression "' . $this->expression . '"';
+            // s$errorMessage = substr($errorMessage, 0, strrpos($errorMessage, ' in'));
+            $errorMessage = $errorMessage . ' with XPath expression "' . $this->expression . '"';
             if ($this->contextNode) {
                 $errorMessage .= ' under "' . $this->contextNode->getNodePath() . '"';
             }
