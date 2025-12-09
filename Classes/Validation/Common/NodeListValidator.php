@@ -70,9 +70,9 @@ class NodeListValidator extends AbstractDomValidator
             }
             $this->nodeList = $nodeList;
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage() . ' with XPath expression "' . $this->expression . '"';
+            $errorMessage = sprintf('%s with XPath expression "%s"', $e->getMessage(), $this->expression);
             if ($this->contextNode) {
-                $errorMessage .= ' under "' . $this->contextNode->getNodePath() . '"';
+                $errorMessage .= sprintf(' under "%s"', $this->contextNode->getNodePath());
             }
             throw new Exception($errorMessage, $e->getCode(), $e);
         }
