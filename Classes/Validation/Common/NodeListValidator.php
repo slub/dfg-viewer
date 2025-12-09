@@ -75,7 +75,6 @@ class NodeListValidator extends AbstractDomValidator
             if ($this->contextNode) {
                 $errorMessage .= sprintf(' under "%s"', $this->contextNode->getNodePath());
             }
-            // codacy-disable-next-line
             throw new Exception($errorMessage, $e->getCode(), $e);
         }
 
