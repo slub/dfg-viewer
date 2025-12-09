@@ -41,6 +41,7 @@ use TYPO3\CMS\Extbase\Error\Result;
  */
 class NodeListValidator extends AbstractDomValidator
 {
+
     /**
      * @var string The expression of XPath query
      */
@@ -74,6 +75,7 @@ class NodeListValidator extends AbstractDomValidator
             if ($this->contextNode) {
                 $errorMessage .= sprintf(' under "%s"', $this->contextNode->getNodePath());
             }
+            // codacy-disable-next-line
             throw new Exception($errorMessage, $e->getCode(), $e);
         }
 
