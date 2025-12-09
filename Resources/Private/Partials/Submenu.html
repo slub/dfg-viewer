@@ -101,12 +101,6 @@
     </li>
     <f:if condition="{is3dObject} == 1">
         <f:then>
-            <li class="submenu downloads">
-                <a href="#" id="tab-download-model" title="Downloads">Downloads</a>
-                <ul>
-                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_modeldownloadtool"/>
-                </ul>
-            </li>
             <li class="viewer-selection" >
                 <ul>
                     <li class="viewers">
@@ -132,7 +126,7 @@
                             <f:translate key="double.singlePageView" extensionName="dfgviewer" />
                         </f:link.page>
                         <f:link.page pageUid="{kitodoPageView}"
-                            additionalParams="{tx_dlf:{page:'{dc:calc(val1:\'{gp-page}\', val2:\'1\', operator:\'+\')}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
+                            additionalParams="{tx_dlf:{page:'{{gp-page} + 1}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
                             class="tx-dlf-navigation-doublePlusOne"
                             title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span>
                                 <f:translate key="double.RectoVerso" extensionName="dfgviewer" />

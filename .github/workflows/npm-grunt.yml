@@ -29,7 +29,7 @@ jobs:
       working-directory: ./Build
       run: |
         npm install -g grunt-cli
-        npm audit fix
+        npm update grunt grunt-terser
         echo "Running `grunt less`"
         grunt less
         echo "Running `grunt terser`"
@@ -42,6 +42,6 @@ jobs:
         if [ -n "$(git status --porcelain -- ./Resources/Public/)" ]; then
             echo "Changes detected in compiled files"
             exit 1
-        else 
+        else
             echo "No changes detected in compiled files"
         fi
