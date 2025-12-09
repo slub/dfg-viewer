@@ -70,15 +70,11 @@ class NodeListValidator extends AbstractDomValidator
             }
             $this->nodeList = $nodeList;
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            // Remove the NodeListValidator from error message
-            $errorMessage = substr($errorMessage, 0, strrpos($errorMessage, ' in'));
-            $errorMessage = $errorMessage . ' with XPath expression "' . $this->expression . '"';
+            $errorMessage = $e->getMessage() . ' with XPath expression "' . $this->expression . '"';
             if ($this->contextNode) {
                 $errorMessage .= ' under "' . $this->contextNode->getNodePath() . '"';
             }
-            // codacy-disable-next-line
-            throw new Exception($errorMessage);
+            throw new Exception($errorMessage, $e->getCode(), $e);
         }
 
         $this->result = $result;
