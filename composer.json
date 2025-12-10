@@ -44,8 +44,8 @@
     "require": {
         "php": "8.1 - 8.4",
         "typo3/cms-core": "^11.5.41|^12.4.24",
-        "kitodo/presentation": "dev-6.x",
-        "slub/slub-digitalcollections": "dev-master"
+        "kitodo/presentation": "6.0",
+        "slub/slub-digitalcollections": "5.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.12",
