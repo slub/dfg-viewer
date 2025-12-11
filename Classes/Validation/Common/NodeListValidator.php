@@ -28,6 +28,7 @@ namespace Slub\Dfgviewer\Validation\Common;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
+use Exception;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -61,7 +62,22 @@ class NodeListValidator extends AbstractDomValidator
         parent::__construct($severityLevel);
         $this->expression = $expression;
         $this->contextNode = $contextNode;
-        $this->nodeList = $xpath->query($expression, $contextNode);
+        try {
+            $nodeList = $xpath->query($expression, $contextNode);
+            if ($nodeList === false) {
+                throw new Exception(
+                    'A syntax error occurred while querying'
+                );
+            }
+            $this->nodeList = $nodeList;
+        } catch (Exception $e) {
+            $errorMessage = sprintf('%s with XPath expression "%s"', $e->getMessage(), $this->expression);
+            if ($this->contextNode) {
+                $errorMessage .= sprintf(' under "%s"', $this->contextNode->getNodePath());
+            }
+            throw new Exception($errorMessage, $e->getCode(), $e);
+        }
+
         $this->result = $result;
     }
 
