@@ -9,6 +9,16 @@
     position:relative;
     font-size: 14px;
 
+    form {
+        .disabled-validators {
+            margin-top: 10px !important;
+
+            label {
+                margin-top: 5px !important;
+            }
+        }
+    }
+
     .validation {
         .validation-entry {
             margin-bottom: 2em;
@@ -21,59 +31,59 @@
                 margin: 1.5em 0;
                 margin-top: 0.5em;
             }
+        }
 
-            .callout {
-                border-radius: .25rem;
-                box-shadow: 0 1px 3px rgba(0 0 0 / 12%), 0 1px 2px rgba(0 0 0 / 24%);
-                background-color: #fff;
-                border-left: 5px solid #e9ecef;
-                margin-bottom: 1rem;
-                padding: 1rem;
+        .callout {
+            border-radius: .25rem;
+            box-shadow: 0 1px 3px rgba(0 0 0 / 12%), 0 1px 2px rgba(0 0 0 / 24%);
+            background-color: #fff;
+            border-left: 5px solid #e9ecef;
+            margin-bottom: 1rem;
+            padding: 1rem;
 
-                &.callout-error {
-                    border-left-color: @error-red;
-
-                    h3 {
-                        color: @error-red;
-                    }
-                }
-
-                &.callout-warning {
-                    border-left-color: @warning-yellow;
-
-                    h3 {
-                        color: @warning-yellow;
-                    }
-                }
-
-                &.callout-notice {
-                    border-left-color: @base-blue;
-
-                    h3 {
-                        color: @base-blue;
-                    }
-                }
-
-                &.callout-success {
-                    border-left-color: @okay-green;
-
-                    h3 {
-                        color: @okay-green;
-                    }
-                }
-
-                ul li {
-                    margin: 0.5em 0;
-
-                    &::before {
-                        top: -1px;
-                    }
-                }
+            &.callout-error {
+                border-left-color: @error-red;
 
                 h3 {
-                    margin: 0;
-                    font-size: 18px;
+                    color: @error-red;
                 }
+            }
+
+            &.callout-warning {
+                border-left-color: @warning-yellow;
+
+                h3 {
+                    color: @warning-yellow;
+                }
+            }
+
+            &.callout-notice {
+                border-left-color: @base-blue;
+
+                h3 {
+                    color: @base-blue;
+                }
+            }
+
+            &.callout-success {
+                border-left-color: @okay-green;
+
+                h3 {
+                    color: @okay-green;
+                }
+            }
+
+            ul li {
+                margin: 0.5em 0;
+
+                &::before {
+                    top: -1px;
+                }
+            }
+
+            h3 {
+                margin: 0;
+                font-size: 18px;
             }
         }
     }
