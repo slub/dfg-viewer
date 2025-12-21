@@ -1,10 +1,11 @@
 # Using a qualified path allows, for example, running with Podman out of the box
 FROM docker.io/php:8.4-apache-bookworm
 
+ARG BUILD_DATE
 ARG GIT_REF=master
 ARG GIT_REPOSITORY=slub/dfg-viewer
 ARG GIT_SERVER_URL=https://github.com
-ARG BUILD_DATE
+ARG T3_VERSION=13
 
 LABEL \
     maintainer="https://slub-dresden.de" \
@@ -39,7 +40,7 @@ RUN apt-get update && \
         graphicsmagick && \
 # Configure extensions
     docker-php-ext-configure gd --with-libdir=/usr/include/ --with-jpeg --with-freetype && \
-    docker-php-ext-install -j$(nproc) mysqli soap gd zip opcache intl pgsql pdo_pgsql && \
+    docker-php-ext-install -j$(nproc) mysqli soap gd zip opcache intl pgsql pdo_pgsql exif && \
     echo 'always_populate_raw_post_data = -1\nmax_execution_time = 240\nmax_input_vars = 1500\nupload_max_filesize = 32M\npost_max_size = 32M' > /usr/local/etc/php/conf.d/typo3.ini && \
 # Configure Apache as needed
     a2enmod rewrite && \
@@ -59,7 +60,7 @@ RUN curl -sS https://getcomposer.org/installer \
 
 # Install TYPO3
 RUN cd /var/www/html && \
-    composer create-project typo3/cms-base-distribution dfg-viewer "^12" && \
+    composer create-project typo3/cms-base-distribution dfg-viewer "^${T3_VERSION}" && \
    # cp ./dfg-viewer/public/typo3/sysext/install/Resources/Private/FolderStructureTemplateFiles/root-htaccess ./dfg-viewer/public/.htaccess && \
     touch ./dfg-viewer/public/FIRST_INSTALL && \
     mkdir -p ./dfg-viewer/public/fileadmin && \
