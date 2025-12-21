@@ -56,9 +56,13 @@ mkdir -p build/extensions
 Then, the three extension repositories, [DFG Viewer](https://github.com/slub/dfg-viewer), [Kitodo.Presentation](https://github.com/kitodo/kitodo-presentation), [SLUB Digital Collections](https://github.com/slub/slub_digitalcollections), must be cloned into this folder.
 
 ```bash
-git clone https://github.com/slub/dfg-viewer build/extensions
-git clone https://github.com/kitodo/kitodo-presentation build/extensions
-git clone https://github.com/slub/slub_digitalcollections build/extensions
+git clone https://github.com/slub/dfg-viewer build/extensions/dfg-viewer
+```
+```bash
+git clone https://github.com/kitodo/kitodo-presentation build/extensions/kitodo-presentation
+```
+```bash
+git clone https://github.com/slub/slub_digitalcollections build/extensions/slub_digitalcollections
 ```
 
 Adjust the `composer.json` files of the checkouts as follows.
@@ -69,7 +73,7 @@ Adjust the `composer.json` files of the checkouts as follows.
   ...
   "require": {
     ...
-    "kitodo/presentation": "@dev"
+    "kitodo/presentation": "@dev",
     "slub/slub-digitalcollection": "@dev"
     ...
   },
@@ -93,7 +97,7 @@ Build the image.
 *Ensure that the `.env` file has been created. It is recommended to adjust the password of the TYPO3 admin user `APP_T3_PASSWORD`, the database password `DB_PASSWORD` in general and the `APP_IMAGE` name for building custom images in `.env` file.*
 
 ```bash
-docker compose build dfg-viewer-app
+docker compose build
 ```
 
 ## Further information

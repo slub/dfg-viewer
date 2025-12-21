@@ -27,6 +27,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         wget \
+        git \
 # Configure PHP
         libxml2-dev libfreetype6-dev \
         libjpeg62-turbo-dev \

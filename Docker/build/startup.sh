@@ -9,11 +9,20 @@ if ! test -f "config/system/settings.php"; then
     # Overwrite php version of composer.json
     composer config platform.php 8.4
 
-    # Add repository which provides iiif-prezi-reader
-    composer config repositories.iiif-prezi-reader github https://github.com/kitodo/php-iiif-prezi-reader.git
+    composer config --global github-protocols https
+
+    composer self-update
+
+    git config --global --add safe.directory /var/www/extensions/dfg-viewer
+     git config --global --add safe.directory /var/www/extensions/kitodo-presentation
+     git config --global --add safe.directory /var/www/extensions/slub_digitalcollections
+
+
+    # configure composer
+    composer config repositories.0 github https://github.com/kitodo/php-iiif-prezi-reader.git
 
     # Install common extension
-    composer req helhum/typo3-console "^8.2"
+    composer req helhum/typo3-console "^8.3"
 
     # Install extensions from mounted extension folder
     composer req slub/dfgviewer "@dev"
