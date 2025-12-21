@@ -27,7 +27,6 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         wget \
-        git \
 # Configure PHP
         libxml2-dev libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -74,12 +73,7 @@ RUN a2ensite dfg-viewer.conf && \
 # Disable default behaviour
     a2dissite 000-default.conf
 
-# Install extension path and support of dev dependencies
-RUN mkdir -p /var/www/extensions/ && \
-    composer config repositories.local path /var/www/extensions/* && \
-    composer config minimum-stability dev
-
-COPY extensions /var/www/extensions
+COPY extensions /var/www/html/dfg-viewer/packages
 
 # Sites configuration
 COPY --chown=www-data site/dfgviewer/config.yaml ./config/sites/dfgviewer/config.yaml

@@ -6,19 +6,10 @@ echo "Waiting for database container."
 # run only once
 if ! test -f "config/system/settings.php"; then
 
-    # Overwrite php version of composer.json
+    # Configure composer
     composer config platform.php 8.4
-
+    composer config minimum-stability dev
     composer config --global github-protocols https
-
-    composer self-update
-
-    git config --global --add safe.directory /var/www/extensions/dfg-viewer
-     git config --global --add safe.directory /var/www/extensions/kitodo-presentation
-     git config --global --add safe.directory /var/www/extensions/slub_digitalcollections
-
-
-    # configure composer
     composer config repositories.0 github https://github.com/kitodo/php-iiif-prezi-reader.git
 
     # Install common extension
