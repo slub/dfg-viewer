@@ -1,5 +1,5 @@
 # Using a qualified path allows, for example, running with Podman out of the box
-FROM docker.io/php:8.4-apache-bookworm
+FROM docker.io/php:8.4-apache-trixie
 
 ARG BUILD_DATE
 ARG GIT_REF=master
@@ -30,6 +30,7 @@ RUN apt-get update && \
         wget \
 # Configure PHP
         libxml2-dev libfreetype6-dev \
+        libicu-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libpng-dev \
@@ -47,6 +48,7 @@ RUN apt-get update && \
     apt-get clean && \
     apt-get -y purge \
         libxml2-dev libfreetype6-dev \
+        libicu-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libpng-dev \
