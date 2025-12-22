@@ -6,14 +6,14 @@ echo "Waiting for database container."
 # run only once
 if ! test -f "config/system/settings.php"; then
 
-    # Overwrite php version of composer.json
+    # Configure composer
     composer config platform.php 8.4
-
-    # Add repository which provides iiif-prezi-reader
-    composer config repositories.iiif-prezi-reader github https://github.com/kitodo/php-iiif-prezi-reader.git
+    composer config minimum-stability dev
+    composer config --global github-protocols https
+    composer config repositories.0 github https://github.com/kitodo/php-iiif-prezi-reader.git
 
     # Install common extension
-    composer req helhum/typo3-console "^8.2"
+    composer req helhum/typo3-console "^8.3"
 
     # Install extensions from mounted extension folder
     composer req slub/dfgviewer "@dev"
