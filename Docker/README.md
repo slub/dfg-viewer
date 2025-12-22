@@ -58,9 +58,11 @@ Then, the three extension repositories, [DFG Viewer](https://github.com/slub/dfg
 ```bash
 git clone https://github.com/slub/dfg-viewer build/extensions/dfg-viewer
 ```
+
 ```bash
 git clone https://github.com/kitodo/kitodo-presentation build/extensions/kitodo-presentation
 ```
+
 ```bash
 git clone https://github.com/slub/slub_digitalcollections build/extensions/slub_digitalcollections
 ```
