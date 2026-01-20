@@ -25,13 +25,11 @@ module.exports = function(grunt) {
                 },
                 files: {
                     "Resources/Public/JavaScript/allScripts.js" : [
-                        'Resources/Private/JavaScript/modernizrCustom.js',
                         'Resources/Private/JavaScript/js.cookie.js',
                         'Resources/Private/JavaScript/dfgviewerSru.js',
                         'Resources/Private/JavaScript/dfgviewerScripts.js',
                     ],
                     "Resources/Public/JavaScript/webScripts.js" : [
-                        'Resources/Private/JavaScript/modernizrCustom.js',
                         'Resources/Public/JavaScript/Highlight/highlight.pack.js',
                         'Resources/Private/JavaScript/websiteScripts.js',
                     ],
