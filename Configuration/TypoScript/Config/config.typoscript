@@ -17,8 +17,9 @@ config {
   sendCacheHeaders = 1
   headerComment =
 
-  spamProtectEmailAddresses = ascii
-  spamProtectEmailAddresses_atSubst = &#64;
+  spamProtectEmailAddresses = -3
+  spamProtectEmailAddresses_atSubst = (at)
+  spamProtectEmailAddresses_lastDotSubst = (dot)
 
   prefixLocalAnchors = all
   simulateStaticDocuments = 0
