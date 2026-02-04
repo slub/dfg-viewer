@@ -10,6 +10,15 @@ Older releases can be found on [Launchpad](https://launchpad.net/dfg-viewer).
 
 The development of the DFG Viewer is predominantly funded by the [German Research Foundation](https://www.dfg.de/).
 
+## Credits
+
+- [Google Fonts](https://fonts.google.com/specimen/Open+Sans) Open Sans
+
+- [Highlight.js
+](https://github.com/highlightjs/highlight.js/tree/10-stable) v. 10.7.2
+
+- [jQuery](https://github.com/jquery/jquery/tree/3.6-stable) v. 3.6.0
+
 ## Maintainer
 
 If you have any questions or encounter any problems, please do not hesitate to contact us.
