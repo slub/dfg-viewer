@@ -41,6 +41,10 @@ $(document).ready(function() {
     }
     var mobileEvent = mobileCheck() ? 'touchend' : 'click';
 
+    function touchSupport() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints; // Check for touch support
+    }
+
     // menu toggles for offcanvas toc and metadata
     $('.offcanvas-toggle').on(mobileEvent, function(event) {
         $(this).parent().toggleClass('open');
@@ -182,7 +186,7 @@ $(document).ready(function() {
     });
 
     // Complex page turning mechanism and check if a click on page control was made and unfold next/back navigation
-    if (Modernizr.touchevents) {
+    if (touchSupport()) {
         $('.fwds, .backs')
             .on('touchstart', function () {
                 $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
