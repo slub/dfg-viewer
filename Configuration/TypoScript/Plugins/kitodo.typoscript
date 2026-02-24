@@ -238,33 +238,21 @@ lib.kitodo.navigation.viewfunction {
 
 # available tools:
 
-# fulltexttool
 # annotationtool
+# audiovideotool
+# fulltexttool
 # fulltextdownloadtool
 # imagedownloadtool
 # imagemanipulationtool
 # modeldownloadtool
-# viewerselectiontool
 # pdfdownloadtool
+# scoretool
 # searchindocumenttool
+# viewerselectiontool
 
 plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
 plugin.tx_dlf_toolbox {
     settings {
-    }
-}
-
-plugin.tx_dlf_modeldownloadtool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_modeldownloadtool {
-    settings {
-        tools = modeldownloadtool
-    }
-}
-
-plugin.tx_dlf_viewerselectiontool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_viewerselectiontool {
-    settings {
-        tools = viewerselectiontool
     }
 }
 
@@ -277,10 +265,31 @@ plugin.tx_dlf_fulltexttool {
     }
 }
 
+plugin.tx_dlf_imagemanipulationtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_imagemanipulationtool {
+    settings {
+        tools = imagemanipulationtool
+    }
+}
+
+plugin.tx_dlf_modeldownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_modeldownloadtool {
+    settings {
+        tools = modeldownloadtool
+    }
+}
+
 plugin.tx_dlf_multiviewaddsourcetool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_multiviewaddsourcetool {
     settings {
         tools = multiviewaddsourcetool
+    }
+}
+
+plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_pdfdownloadtool {
+    settings {
+        tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
     }
 }
 
@@ -292,17 +301,10 @@ plugin.tx_dlf_scoretool {
     }
 }
 
-plugin.tx_dlf_imagemanipulationtool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_imagemanipulationtool {
+plugin.tx_dlf_viewerselectiontool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_viewerselectiontool {
     settings {
-        tools = imagemanipulationtool
-    }
-}
-
-plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_pdfdownloadtool {
-    settings {
-        tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
+        tools = viewerselectiontool
     }
 }
 
