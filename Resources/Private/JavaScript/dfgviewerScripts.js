@@ -170,7 +170,7 @@ $(document).ready(function() {
         });
     }
 
-    // if cookie for fullscreen view is present adapat initial page rendering
+    // if cookie for fullscreen view is present adapt initial page rendering
     if (Cookies.get('tx-dlf-pageview-zoomFullscreen') === 'true') {
         $('body').addClass('fullscreen static');
         $('a.fullscreen').addClass('active');

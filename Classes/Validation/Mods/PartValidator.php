@@ -50,7 +50,7 @@ class PartValidator extends AbstractModsValidator
                 ->validateHas('order')
                 ->getDomElement()->getAttribute('order');
             if (!(ctype_digit($orderValue) && (int) $orderValue >= 0)) {
-                $nodeValidator->addSeverityMessage('Value "' . $orderValue . '" in the "order" attribute of "' . $part->getNodePath() . '" is not a positiv integer.', 1746779788);
+                $nodeValidator->addSeverityMessage('Value "' . $orderValue . '" in the "order" attribute of "' . $part->getNodePath() . '" is not a positive integer.', 1746779788);
             }
 
             // Validation of chapter "2.15.2 Unterelemente zu mods:part"
