@@ -25,27 +25,23 @@
       data-namespace-typo3-fluid="true">
 
 <f:if condition="{day}">
-    <f:then>
-        <f:if condition="{day.issues}">
-            <f:then>
-                <div class="contains-issues">
-                    {day.dayValue -> f:format.html()}
-                </div>
-                <ul class="issues">
-                    <ul>
-                        <f:for each="{day.issues}" as="item">
-                            <li>
-                                <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}">
-                                    {item.text}
-                                </f:link.page>
-                            </li>
-                        </f:for>
-                    </ul>
-                </ul>
-            </f:then>
-            <f:else>
+    <f:if condition="{day.issues}">
+        <f:then>
+            <div class="contains-issues">
                 {day.dayValue -> f:format.html()}
-            </f:else>
-        </f:if>
-    </f:then>
+            </div>
+            <ul class="issues">
+                <ul>
+                    <f:for each="{day.issues}" as="item">
+                        <li>
+                            <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}">{item.text}</f:link.page>
+                        </li>
+                    </f:for>
+                </ul>
+            </ul>
+        </f:then>
+        <f:else>
+            {day.dayValue -> f:format.html()}
+        </f:else>
+    </f:if>
 </f:if>
