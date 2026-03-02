@@ -51,7 +51,7 @@ class PartValidatorTest extends AbstractModsValidatorTest
         $this->removeAttribute(VH::XPATH_MODS_PART, 'order');
         $this->hasMessageAttribute(self::MODS_BASEPATH . '/mods:part', 'order');
         $this->setAttributeValue(VH::XPATH_MODS_PART, 'order', '-1');
-        $this->validateAndAssertEquals('Value "-1" in the "order" attribute of "' . self::MODS_BASEPATH . '/mods:part" is not a positiv integer.');
+        $this->validateAndAssertEquals('Value "-1" in the "order" attribute of "' . self::MODS_BASEPATH . '/mods:part" is not a positive integer.');
         $this->resetDocument();
 
         // check mods:detail
