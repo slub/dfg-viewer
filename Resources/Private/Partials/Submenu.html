@@ -170,9 +170,7 @@
             </f:if>
             <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
                 <f:if condition="{gp-double} != 1 && {gp-pagegrid} != 1">
-                    <f:then>
-                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
-                    </f:then>
+                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
                 </f:if>
             </f:if>
             <li class="grid">
@@ -204,14 +202,11 @@
                     </f:else>
                 </f:if>
             </li>
-            <f:if
-                condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
-                <f:then>
-                    <li class="submenu search">
-                        <a href="#" title="Search">Search</a>
-                        <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
-                    </li>
-                </f:then>
+            <f:if condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
+                <li class="submenu search">
+                    <a href="#" title="Search">Search</a>
+                    <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
+                </li>
             </f:if>
             <li class="submenu add-multiview-document">
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_multiviewaddsourcetool"/>

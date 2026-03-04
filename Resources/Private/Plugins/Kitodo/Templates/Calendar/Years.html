@@ -31,14 +31,10 @@
                 <li class="year">
                     <f:if condition="{yearEntry.documentId}">
                         <f:then>
-                            <f:link.page additionalParams="{'tx_dlf[id]': yearEntry.documentId}">
-                                {yearEntry.title}
-                            </f:link.page>
+                            <f:link.page additionalParams="{'tx_dlf[id]': yearEntry.documentId}">{yearEntry.title}</f:link.page>
                         </f:then>
                         <f:else>
-                            <a href="#" style="cursor: default;" onclick="event.preventDefault()">
-                                {yearEntry.title}
-                            </a>
+                            <a href="#" style="cursor: default;" onclick="event.preventDefault()">{yearEntry.title}</a>
                         </f:else>
                     </f:if>
                 </li>
