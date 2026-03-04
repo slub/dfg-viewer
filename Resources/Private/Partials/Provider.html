@@ -35,8 +35,7 @@
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
                     <li>
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
-                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" title="{logoTitle}" alt="Logo von {logoTitle}" />
                         </f:link.external>
                     </li>
                 </f:if>
@@ -47,8 +46,7 @@
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
                     <li>
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
-                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" title="{logoTitle}" alt="Logo von {logoTitle}" />
                         </f:link.external>
                     </li>
                 </f:if>
@@ -60,8 +58,7 @@
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
                     <li>
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
-                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                            <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}" title="{logoTitle}" alt="Logo von {logoTitle}" />
                         </f:link.external>
                     </li>
                 </f:if>
@@ -70,14 +67,14 @@
     </f:if>
 
     <dl class="mobile-meta">
-        <dt class="tx-dlf-title">Titel</dt>
+        <dt class="tx-dlf-title"><f:translate key='metadata.title' extensionName='dlf' /></dt>
         <dd class="tx-dlf-title">
             <a href="#">
                 <dc:xpath
                     xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName)' />
             </a>
         </dd>
-        <dt>Autor</dt>
+        <dt><f:translate key='metadata.author' extensionName='dlf' /></dt>
         <dd>
             <dc:xpath
                 xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:relatedItem[@type="host"]/mods:name[//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:name/mods:role/mods:roleTerm[@authority="marcrelator"][@type="code"]="aut"]/mods:displayForm)[1]' />

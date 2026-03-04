@@ -189,22 +189,18 @@
                             <f:else>
                                 <f:link.page pageUid="{kitodoPageView}"
                                     additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
-                                    title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
-                                    <f:translate key='gridpage.preview' extensionName='dfgviewer' />
-                                </f:link.page>
+                                    title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
                             </f:else>
                         </f:if>
                     </f:then>
                     <f:else>
-                        <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}">
-                            <f:translate key='gridpage.preview' extensionName='dfgviewer' />
-                        </span>
+                        <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></span>
                     </f:else>
                 </f:if>
             </li>
             <f:if condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
                 <li class="submenu search">
-                    <a href="#" title="Search">Search</a>
+                    <a href="#" title="{f:translate(key:'sru.search', extensionName:'dfgviewer')}"><f:translate key='sru.search' extensionName='dfgviewer' /></a>
                     <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
                 </li>
             </f:if>
@@ -213,9 +209,7 @@
             </li>
             <f:if condition="{gp-multiview}">
                 <li>
-                    <a href="#" class="reset-gridstack-layout" title="{f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}">
-                        {f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}
-                    </a>
+                    <a href="#" class="reset-gridstack-layout" title="{f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}">{f:translate(key:'multiview.reset_layout', extensionName:'dfgviewer')}</a>
                 </li>
             </f:if>
         </f:else>
