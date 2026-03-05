@@ -284,8 +284,8 @@ plugin.tx_dlf_multiviewaddsourcetool {
     }
 }
 
-plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_pdfdownloadtool {
+plugin.tx_dlf_downloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_downloadtool {
     settings {
         tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool
     }
