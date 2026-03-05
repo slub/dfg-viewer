@@ -19,7 +19,7 @@ plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 
 
 # --------------------------------------------------------------------------------------------------------------------
-# plugin configuration
+# Plugin configuration
 # --------------------------------------------------------------------------------------------------------------------
 
 plugin.tx_dlf {
@@ -91,21 +91,21 @@ plugin.tx_dlf {
             }
         }
     }
-	view {
-		partialRootPaths {
-			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
-			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Partials
-		}
-		templateRootPaths {
-			10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates
-			20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Templates
-		}
-	}
+    view {
+        partialRootPaths {
+            10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
+            20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Partials
+        }
+        templateRootPaths {
+            10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates
+            20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Templates
+        }
+    }
 }
 
 
 # --------------------------------------------------------------------------------------------------------------------
-# musical sources
+# Musical sources
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_annotation < tt_content.list.20.dlf_annotation
 plugin.tx_dlf_annotation {
@@ -114,7 +114,7 @@ plugin.tx_dlf_annotation {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# metadata
+# Metadata Plugin
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_metadata < tt_content.list.20.dlf_metadata
 plugin.tx_dlf_metadata {
@@ -128,7 +128,7 @@ plugin.tx_dlf_metadata {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# multiview
+# Multiview Plugin
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_multiview < tt_content.list.20.dlf_multiview
 plugin.tx_dlf_multiview {
@@ -138,7 +138,7 @@ plugin.tx_dlf_multiview {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# pageview / workview
+# Pageview / Workview Plugin
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_pageview < tt_content.list.20.dlf_pageview
 plugin.tx_dlf_pageview {
@@ -149,21 +149,21 @@ plugin.tx_dlf_pageview {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# validation form
+# Validation form
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_validationform < tt_content.list.20.dlf_validationform
 plugin.tx_dlf_validationform {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# embedded 3D viewer
+# Embedded 3D viewer
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_embedded3dviewer < tt_content.list.20.dlf_embedded3dviewer
 plugin.tx_dlf_embedded3dviewer {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# thumbnail previews
+# Thumbnail previews
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_pagegrid < tt_content.list.20.dlf_pagegrid
 plugin.tx_dlf_pagegrid {
@@ -184,7 +184,7 @@ plugin.tx_dlf_pagegrid {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# table of contents
+# Table of contents Plugin
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_tableofcontents < tt_content.list.20.dlf_tableofcontents
 plugin.tx_dlf_tableofcontents {
@@ -204,7 +204,7 @@ plugin.tx_dlf_tableofcontents {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# navigation
+# Navigation Plugin
 # --------------------------------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -230,21 +230,22 @@ lib.kitodo.navigation.viewfunction {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# Tools like imagemanipulation, fulltext and downloads eg.
+# Tools like image manipulation, fulltext and downloads eg.
 # --------------------------------------------------------------------------------------------------------------------
 
-# available tools:
+# Available tools:
 
 # annotationtool
 # audiovideotool
-# fulltexttool
 # fulltextdownloadtool
+# fulltexttool
 # imagedownloadtool
 # imagemanipulationtool
 # modeldownloadtool
+# multiviewaddsourcetool
 # pdfdownloadtool
-# scoretool
 # searchindocumenttool
+# scoretool
 # viewerselectiontool
 
 plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
@@ -316,7 +317,7 @@ plugin.tx_dlf_audioplayer {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
-# 3d object
+# 3D object
 # --------------------------------------------------------------------------------------------------------------------
 [getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "object"]
     page.10.variables {
@@ -326,7 +327,7 @@ plugin.tx_dlf_audioplayer {
 [END]
 
 # --------------------------------------------------------------------------------------------------------------------
-# newspaper navigation
+# Newspaper navigation
 # --------------------------------------------------------------------------------------------------------------------
 [getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "ephemera" or getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "newspaper"]
 page.10.variables {
