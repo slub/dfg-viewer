@@ -85,6 +85,7 @@ class SruController extends \Kitodo\Dlf\Controller\AbstractController
         $this->view->assign('sruLink', $sruLink);
         $this->view->assign('currentDocument', $this->document->getLocation());
         $this->view->assign('actionUrl', $actionUrl);
+        $this->view->assign("languageKey", $this->getLanguageService()->lang);
     }
 
     /**
