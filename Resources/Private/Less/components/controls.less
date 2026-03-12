@@ -383,31 +383,27 @@
         position: relative;
         li {
             display: none;
-            &.rotate {
-                .rotate-left {
-                    background-position: -240px 0;
-                }
-                .rotate-right {
-                    background-position: -240px -40px;
-                }
-                .upend {
-                    background-position: -280px 0;
-                }
+            &.tx-dlf-tools-rotate-left a {
+                background-position: -240px 0;
             }
-            &.zoom {
-                .in {
-                    background-position: -360px 0;
-                }
-                .out {
-                    background-position: -400px 0;
-                }
+            &.tx-dlf-tools-rotate-right a {
+                background-position: -240px -40px;
+            }
+            &.tx-dlf-tools-rotate-reset a {
+                background-position: -280px 0;
+            }
+            &.tx-dlf-tools-zoom-in a {
+                background-position: -360px 0;
+            }
+            &.tx-dlf-tools-zoom-out a {
+                background-position: -400px 0;
             }
             &.sync-view {
                 .sync-view-toggle {
                     background-position: -720px 0;
                 }
             }
-            &.pages {
+            &.tx-dlf-navigation-pages {
                 position: relative;
                 top: auto;
                 right: auto;
@@ -418,7 +414,7 @@
                     right: 0;
                 }
             }
-            &.fullscreen {
+            &.tx-dlf-tools-fullscreen a {
                 .fullscreen {
                     z-index: auto;
                     background: #fff;
@@ -456,7 +452,7 @@
                     }
                 }
             }
-            &.tx-dlf-imagemanipulationtool {
+            &.tx-dlf-tools-imagemanipulation {
                 position: relative;
                 display: inline-block;
                 > span {
@@ -500,7 +496,9 @@
             height: 40px;
             li {
                 display: inline-block;
-                &.rotate {
+                &.tx-dlf-tools-rotate-left a,
+                &.tx-dlf-tools-rotate-right a,
+                &.tx-dlf-tools-rotate-reset a {
                     display: none;
                 }
 
