@@ -139,7 +139,7 @@ $(document).ready(function() {
     });
 
     // Copy selected page number to mobile meta (in order to transform select field to ui button)
-    if($('.pages select option[selected]')[0]) {
+    if($('.tx-dlf-pages select option[selected]')[0]) {
         const pageNumberText = $('.pages select option[selected]').text();
         $('dl.mobile-meta').append('<dt class="mobile-page-number">No.</dt><dd class="mobile-page-number"></dd>');
         $('dl.mobile-meta dd.mobile-page-number').text(pageNumberText);
@@ -147,7 +147,7 @@ $(document).ready(function() {
 
     // Copy some controls for mobile (page select, fullscreen)
     $('.provider').append('<div class="mobile-controls" />');
-    $('.view-functions .pages form, .view-functions .zoom a.fullscreen, .fulltext-search-toggle').clone().appendTo('.provider .mobile-controls');
+    $('.view-functions .tx-dlf-pages form, .view-functions .tx-dlf-tools-fullscreen a, .fulltext-search-toggle').clone().appendTo('.provider .mobile-controls');
 
     // Shorten mobile meta title
     let shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
@@ -173,11 +173,11 @@ $(document).ready(function() {
     // if cookie for fullscreen view is present adapt initial page rendering
     if (Cookies.get('tx-dlf-pageview-zoomFullscreen') === 'true') {
         $('body').addClass('fullscreen static');
-        $('a.fullscreen').addClass('active');
+        $('li.tx-dlf-tools-fullscreen a').addClass('active');
     }
 
     // enable click on fullscreen button
-    $('a.fullscreen').on(mobileEvent, function() {
+    $('li.tx-dlf-tools-fullscreen a').on(mobileEvent, function() {
         if($('body.fullscreen')[0]) {
             exitFullscreen();
         } else {
@@ -268,7 +268,7 @@ $(document).keyup(function(e) {
 function enterFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").addClass('fullscreen');
-    $('a.fullscreen').addClass('active');
+    $('li.tx-dlf-tools-fullscreen a').addClass('active');
     Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true', { sameSite: 'lax' });
 }
 
@@ -276,7 +276,7 @@ function enterFullscreen() {
 function exitFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").removeClass('fullscreen');
-    $('a.fullscreen').removeClass('active');
+    $('li.tx-dlf-tools-fullscreen a').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
