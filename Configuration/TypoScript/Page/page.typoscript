@@ -12,7 +12,10 @@ page {
   10 {
     file = EXT:dfgviewer/Resources/Private/Templates/Main.html
     layoutRootPath = EXT:dfgviewer/Resources/Private/Layouts/
-    partialRootPath = EXT:dfgviewer/Resources/Private/Partials/
+    partialRootPaths {
+        10 = EXT:dfgviewer/Resources/Private/Partials
+        20 = EXT:slub_digitalcollections/Resources/Private/Partials
+    }
 
     settings {
         # show provider logo in Kitodo pageview
