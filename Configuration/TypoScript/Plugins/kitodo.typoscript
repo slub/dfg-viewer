@@ -305,6 +305,7 @@ plugin.tx_dlf_viewerselectiontool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_viewerselectiontool {
     settings {
         tools = viewerSelectionTool
+        showAsList = 1
     }
 }
 
