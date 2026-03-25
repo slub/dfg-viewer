@@ -758,10 +758,10 @@
             }
         }
     }
-    .backs {
+    .tx-dlf-navigation-backward {
         left: 0;
     }
-    .fwds {
+    .tx-dlf-navigation-forward {
         right: 0;
     }
     .measureBacks, .measureFwds {
@@ -844,7 +844,7 @@
             }
             bottom: 50%;
             margin-bottom: -20px;
-            &.backs {
+            &.tx-dlf-navigation-backward {
                 left: 10px;
                 span {
                     a, span {
@@ -855,7 +855,7 @@
                             left: 20px;
                         }
                     }
-                    &.prev {
+                    &.tx-dlf-navigation-prev {
                         a, span {
                             top: 0;
                             height: 80px;
@@ -870,7 +870,7 @@
                             }
                         }
                     }
-                    &.rwnd {
+                    &.tx-dlf-navigation-back {
                         a, span {
                             top: 0;
                             color: fade(@base-blue,0%);
@@ -886,7 +886,7 @@
                             opacity: 0;
                         }
                     }
-                    &.first {
+                    &.tx-dlf-navigation-first {
                         a, span {
                             bottom: 0;
                             opacity: 0;
@@ -899,12 +899,12 @@
                 }
                 &.over {
                     span {
-                        &.prev {
+                        &.tx-dlf-navigation-prev {
                             a, span {
                                 color: @base-blue;
                             }
                         }
-                        &.rwnd {
+                        &.tx-dlf-navigation-back {
                             a, span {
                                 top: -45px;
                                 color: @base-blue;
@@ -920,7 +920,7 @@
                                 opacity: .3;
                             }
                         }
-                        &.first {
+                        &.tx-dlf-navigation-first {
                             a, span {
                                 bottom: -45px;
                             }
@@ -934,7 +934,7 @@
                     }
                 }
             }
-            &.fwds {
+            &.tx-dlf-navigation-forward {
                 right: 10px;
                 span {
                     a, span {
@@ -945,7 +945,7 @@
                             right: 20px;
                         }
                     }
-                    &.next {
+                    &.tx-dlf-navigation-next {
                         a, span {
                             top: 0;
                             height: 80px;
@@ -960,7 +960,7 @@
                             }
                         }
                     }
-                    &.fwd {
+                    &.tx-dlf-navigation-fwd {
                         a, span {
                             top: 0;
                             color: fade(@base-blue,0%);
@@ -972,7 +972,7 @@
                             }
                         }
                     }
-                    &.last {
+                    &.tx-dlf-navigation-last {
                         a, span {
                             bottom: 0;
                             opacity: 0;
@@ -984,12 +984,12 @@
                 }
                 &.over {
                     span {
-                        &.next {
+                        &.tx-dlf-navigation-next {
                             a, span {
                                 color: @base-blue;
                             }
                         }
-                        &.fwd {
+                        &.tx-dlf-navigation-fwd {
                             a, span {
                                 top: -45px;
                                 color: @base-blue;
@@ -1002,7 +1002,7 @@
                                 }
                             }
                         }
-                        &.last {
+                        &.tx-dlf-navigation-last {
                             a, span {
                                 bottom: -45px;
                             }
