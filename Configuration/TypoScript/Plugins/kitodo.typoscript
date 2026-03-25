@@ -3,17 +3,17 @@
 # ------------------------------------
 
 # map set[mets] --> tx_dlf[id]
-[like(traverse(request.getQueryParams(), 'set/mets'), 'http*')]
+[request?.getQueryParams()?['set']?['mets'] =~ /http.*/]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
 # map set[image] --> tx_dlf[page]
-[traverse(request.getQueryParams(), 'set/image')]
+[request?.getQueryParams()?['set']?['image']]
 plugin.tx_dlf._DEFAULT_PI_VARS.page.stdWrap.data = GP:set|image
 [END]
 
 # map set[double] --> tx_dlf[double]
-[traverse(request.getQueryParams(), 'set/double') > 0]
+[request?.getQueryParams()?['set']?['double'] > 0]
 plugin.tx_dlf._DEFAULT_PI_VARS.double.stdWrap.data = GP:set|double
 [END]
 
