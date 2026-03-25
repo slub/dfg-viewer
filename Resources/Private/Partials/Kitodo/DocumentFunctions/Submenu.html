@@ -116,94 +116,15 @@
                     <f:cObject typoscriptObjectPath="plugin.tx_dlf_downloadtool" />
                 </ul>
             </li>
-            <li class="doublepage">
-                <f:if condition="{gp-double} == 1">
-                    <f:then>
-                        <f:link.page pageUid="{kitodoPageView}"
-                            additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
-                            class="tx-dlf-navigation-doubleOff"
-                            title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
-                            <f:translate key="double.singlePageView" extensionName="dfgviewer" />
-                        </f:link.page>
-                        <f:link.page pageUid="{kitodoPageView}"
-                            additionalParams="{tx_dlf:{page:'{gp-page + 1}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
-                            class="tx-dlf-navigation-doublePlusOne"
-                            title="{f:translate(key:'double.RectoVerso', extensionName:'dfgviewer')}"><span>
-                                <f:translate key="double.RectoVerso" extensionName="dfgviewer" />
-                            </span></f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.page pageUid="{kitodoPageView}"
-                            additionalParams="{tx_dlf:{page:'{gp-page}', double:'1', id:'{gp-id}', pagegrid:'0'}}"
-                            class="tx-dlf-navigation-doubleOn"
-                            title="{f:translate(key:'double.doublePageView', extensionName:'dfgviewer')}">
-                            <f:translate key="double.doublePageView" extensionName="dfgviewer" />
-                        </f:link.page>
-                    </f:else>
-                </f:if>
-            </li>
-            <f:if
-                condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'FULLTEXT\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
-                <li class="fulltext">
-                    <f:if condition="{gp-double} == 1">
-                        <f:then>
-                            <span class="select switchoff" id="tx-dlf-tools-fulltext"
-                                title="{f:translate(key:'fulltext.no_fulltext_double', extensionName:'dfgviewer')}">
-                                <f:translate key='fulltext.no_fulltext_double' extensionName='dfgviewer' />
-                            </span>
-                        </f:then>
-                        <f:else>
-                            <f:if condition="{gp-pagegrid} == 1">
-                                <f:then>
-                                    <span class="select switchoff" id="tx-dlf-tools-fulltext"
-                                        title="{f:translate(key:'fulltext.no_fulltext_gridpage', extensionName:'dfgviewer')}">
-                                        <f:translate key='fulltext.no_fulltext_gridpage' extensionName='dfgviewer' />
-                                    </span>
-                                </f:then>
-                                <f:else>
-                                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_fulltexttool" />
-                                </f:else>
-                            </f:if>
-                        </f:else>
-                    </f:if>
-                </li>
-            </f:if>
+            <f:render partial="Kitodo/DocumentFunctions/DoublePage" arguments="{_all}" />
+            <f:render partial="Kitodo/DocumentFunctions/Fulltext" arguments="{_all}" />
             <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
                 <f:if condition="{gp-double} != 1 && {gp-pagegrid} != 1">
                     <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
                 </f:if>
             </f:if>
-            <li class="grid">
-                <f:if
-                    condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'THUMBS\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
-                    <f:then>
-                        <f:if condition="{gp-pagegrid} == 1">
-                            <f:then>
-                                <f:link.page pageUid="{kitodoPageView}"
-                                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'0'}}"
-                                    class="active"
-                                    title="{f:translate(key:'double.singlePageView', extensionName:'dfgviewer')}">
-                                    <f:translate key='double.singlePageView' extensionName='dfgviewer' />
-                                </f:link.page>
-                            </f:then>
-                            <f:else>
-                                <f:link.page pageUid="{kitodoPageView}"
-                                    additionalParams="{tx_dlf:{page:'{gp-page}', double:'0', id:'{gp-id}', pagegrid:'1'}}"
-                                    title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></f:link.page>
-                            </f:else>
-                        </f:if>
-                    </f:then>
-                    <f:else>
-                        <span title="{f:translate(key:'gridpage.preview', extensionName:'dfgviewer')}"><f:translate key='gridpage.preview' extensionName='dfgviewer' /></span>
-                    </f:else>
-                </f:if>
-            </li>
-            <f:if condition="{dc:xpath(xpath:'//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:sru')}">
-                <li class="submenu search">
-                    <a href="#" title="{f:translate(key:'sru.search', extensionName:'dfgviewer')}"><f:translate key='sru.search' extensionName='dfgviewer' /></a>
-                    <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
-                </li>
-            </f:if>
+            <f:render partial="Kitodo/DocumentFunctions/PageGrid" arguments="{_all}" />
+            <f:render partial="Kitodo/DocumentFunctions/SruSearch" arguments="{_all}" />
             <li class="submenu add-multiview-document">
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_multiviewaddsourcetool"/>
             </li>
