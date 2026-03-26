@@ -252,7 +252,6 @@ lib.kitodo.navigation.viewfunction {
 plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
 plugin.tx_dlf_toolbox {
     settings {
-        showAsList = 0
     }
 }
 
