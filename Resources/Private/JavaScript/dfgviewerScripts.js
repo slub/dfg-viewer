@@ -187,7 +187,7 @@ $(document).ready(function() {
 
     // Complex page turning mechanism and check if a click on page control was made and unfold next/back navigation
     if (touchSupport()) {
-        $('.fwds, .backs')
+        $('.tx-dlf-navigation-forward, .tx-dlf-navigation-backward')
             .on('touchstart', function () {
                 $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
                 triggeredElement = $(this);
@@ -201,7 +201,7 @@ $(document).ready(function() {
         $('body').on('touchstart', function (event) {
             let target = $(event.target);
             if (!target.closest('.page-control')[0]) {
-                $('.fwds, .backs').removeClass('over enable-touchevent').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').removeClass('over');
+                $('.tx-dlf-navigation-forward, .tx-dlf-navigation-backward').removeClass('over enable-touchevent').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').removeClass('over');
                 localStorage.clear();
             }
         });
@@ -210,7 +210,7 @@ $(document).ready(function() {
             localStorage.clear();
         }
     } else {
-        $('.fwds, .backs')
+        $('.tx-dlf-navigation-forward, .tx-dlf-navigation-backward')
             .on('mouseenter', function () {
                 $(this).addClass('over').siblings('[class$=' + $(this).attr('class').split(' ')[0].slice(1) + ']').addClass('over');
             })
@@ -240,7 +240,7 @@ $(document).ready(function() {
     // Finally all things are settled. Bring back animations a second later.
     setTimeout(function () {
         localStorage.clear();
-        $('.fwds, .backs').removeClass('no-transition');
+        $('.tx-dlf-navigation-forward, .tx-dlf-navigation-backward').removeClass('no-transition');
         $('body').removeClass('static');
     }, 1000);
 
