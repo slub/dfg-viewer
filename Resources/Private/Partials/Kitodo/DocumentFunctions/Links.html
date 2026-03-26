@@ -1,0 +1,62 @@
+<f:comment>
+    Copyright notice
+
+    (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
+    All rights reserved
+
+    This script is part of the TYPO3 project. The TYPO3 project is
+    free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
+
+    The GNU General Public License can be found at
+    http://www.gnu.org/copyleft/gpl.html.
+
+    This script is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    This copyright notice MUST APPEAR in all copies of the script!
+</f:comment>
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true"
+      lang="en">
+
+<li class="submenu links">
+    <a href="#" title="Links">Links</a>
+    <ul>
+        <li>
+            <f:variable name="presentationXpath"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:presentation)[1]' htmlspecialchars='FALSE' /></f:variable>
+            <f:variable name="providerLocalPresentation"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:variable>
+            <f:if condition="{presentationXpath}">
+                <f:then>
+                    <f:link.external uri="{presentationXpath}" class="local-presentation" title="{providerLocalPresentation}">{providerLocalPresentation}</f:link.external>
+                </f:then>
+                <f:else>
+                    <span class="local-presentation" title="{providerLocalPresentation}">{providerLocalPresentation}</span>
+                </f:else>
+            </f:if>
+        </li>
+        <f:render partial="Kitodo/DocumentFunctions/ReferenceLinks" arguments="{_all}" />
+        <f:variable name="ownerContactXpath"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:rights/dv:ownerContact)[1]' htmlspecialchars='FALSE' /></f:variable>
+        <f:variable name="providerEmailProvider"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:variable>
+        <f:if condition="{ownerContactXpath}">
+            <f:then>
+                <li>
+                    <f:link.external uri="{ownerContactXpath}" class="local-contact" title="{providerEmailProvider} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})">{providerEmailProvider}</f:link.external>
+                </li>
+            </f:then>
+            <f:else>
+                <f:variable name="providerNoLocalPresentation"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></f:variable>
+                <li>
+                    <span class="local-contact" title="{providerNoLocalPresentation}">{providerNoLocalPresentation}</span>
+                </li>
+            </f:else>
+        </f:if>
+        <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_uri" />
+    </ul>
+</li>
+</html>
