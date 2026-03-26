@@ -25,7 +25,7 @@
       lang="en">
 
 <ul class="document-submenu">
-    <f:render partial="Kitodo/DocumentFunctions/Links" arguments="{_all}" />
+    <f:render partial="Kitodo/DocumentFunctions/Submenu/Links" arguments="{_all}" />
     <f:if condition="{is3dObject} == 1">
         <f:then>
             <li class="viewer-selection" >
@@ -37,15 +37,15 @@
                 <a href="#" id="tab-downloads" title="Downloads">Downloads</a>
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_downloadtool" />
             </li>
-            <f:render partial="Kitodo/DocumentFunctions/DoublePage" arguments="{_all}" />
-            <f:render partial="Kitodo/DocumentFunctions/Fulltext" arguments="{_all}" />
+            <f:render partial="Kitodo/DocumentFunctions/Submenu/DoublePage" arguments="{_all}" />
+            <f:render partial="Kitodo/DocumentFunctions/Submenu/Fulltext" arguments="{_all}" />
             <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
                 <f:if condition="{gp-double} != 1 && {gp-pagegrid} != 1">
                     <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
                 </f:if>
             </f:if>
-            <f:render partial="Kitodo/DocumentFunctions/PageGrid" arguments="{_all}" />
-            <f:render partial="Kitodo/DocumentFunctions/SruSearch" arguments="{_all}" />
+            <f:render partial="Kitodo/DocumentFunctions/Submenu/PageGrid" arguments="{_all}" />
+            <f:render partial="Kitodo/DocumentFunctions/Submenu/SruSearch" arguments="{_all}" />
             <li class="submenu add-multiview-document">
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_multiviewaddsourcetool"/>
             </li>
