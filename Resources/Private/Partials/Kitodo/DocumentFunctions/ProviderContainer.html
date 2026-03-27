@@ -27,7 +27,7 @@
 <div class="provider">
     <f:render partial="Kitodo/DocumentFunctions/Provider" arguments="{_all}" />
 
-    <f:variable name="docTitle"><dc:xpath xpath='(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type="alternative")]/mods:partName)' /></f:variable>
+    <f:variable name="docTitle"><dc:xpath xpath='({modsXpath}/mods:titleInfo[not(@type="alternative")]/mods:nonSort | {modsXpath}/mods:titleInfo[not(@type="alternative")]/mods:title | {modsXpath}/mods:titleInfo[not(@type="alternative")]/mods:partNumber | {modsXpath}/mods:titleInfo[not(@type="alternative")]/mods:partName)' /></f:variable>
     <f:render partial="Kitodo/DocumentFunctions/MobileMeta" arguments="{_all}" />
 
 </div>

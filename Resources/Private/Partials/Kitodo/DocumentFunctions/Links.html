@@ -29,7 +29,7 @@
     <a href="#" title="Links">Links</a>
     <ul>
         <li>
-            <f:variable name="presentationXpath"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links/dv:presentation)[1]' htmlspecialchars='FALSE' /></f:variable>
+            <f:variable name="presentationXpath"><dc:xpath xpath='({dvLinksXpath}/dv:presentation)[1]' htmlspecialchars='FALSE' /></f:variable>
             <f:variable name="providerLocalPresentation"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:variable>
             <f:if condition="{presentationXpath}">
                 <f:then>
@@ -41,12 +41,12 @@
             </f:if>
         </li>
         <f:render partial="Kitodo/DocumentFunctions/ReferenceLinks" arguments="{_all}" />
-        <f:variable name="ownerContactXpath"><dc:xpath xpath='(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:rights/dv:ownerContact)[1]' htmlspecialchars='FALSE' /></f:variable>
+        <f:variable name="ownerContactXpath"><dc:xpath xpath='({dvRightsXpath}/dv:ownerContact)[1]' htmlspecialchars='FALSE' /></f:variable>
         <f:variable name="providerEmailProvider"><f:translate key='provider.email_provider' extensionName='dfgviewer' /></f:variable>
         <f:if condition="{ownerContactXpath}">
             <f:then>
                 <li>
-                    <f:link.external uri="{ownerContactXpath}" class="local-contact" title="{providerEmailProvider} ({dc:xpath(xpath:'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\'DVRIGHTS\']/mets:xmlData/dv:rights/dv:owner)[1]')})">{providerEmailProvider}</f:link.external>
+                    <f:link.external uri="{ownerContactXpath}" class="local-contact" title="{providerEmailProvider} ({dc:xpath(xpath:'({dvRightsXpath}/dv:owner)[1]')})">{providerEmailProvider}</f:link.external>
                 </li>
             </f:then>
             <f:else>

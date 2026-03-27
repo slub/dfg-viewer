@@ -35,6 +35,13 @@
             </div>
         </div>
 
+        <f:variable name="dvXpath">//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData</f:variable>
+        <f:variable name="dvLinksXpath">{dvXpath}/dv:links</f:variable>
+        <f:variable name="dvRightsXpath">{dvXpath}/dv:rights</f:variable>
+        <f:variable name="fileGrpXpath">//mets:fileSec/mets:fileGrp</f:variable>
+        <f:variable name="fulltextLocationXpath">({fileGrpXpath}[@USE="FULLTEXT"]/mets:file[1]/mets:FLocat/@xlink:href)</f:variable>
+        <f:variable name="modsXpath">//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods</f:variable>
+
         <div class="document-functions">
             <f:render partial="Kitodo/DocumentFunctions/ProviderContainer" arguments="{_all}"/>
             <f:render partial="Kitodo/DocumentFunctions/Submenu" arguments="{_all}"/>
