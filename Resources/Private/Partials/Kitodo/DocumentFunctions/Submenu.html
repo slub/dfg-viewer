@@ -39,7 +39,7 @@
             </li>
             <f:render partial="Kitodo/DocumentFunctions/Submenu/DoublePage" arguments="{_all}" />
             <f:render partial="Kitodo/DocumentFunctions/Submenu/Fulltext" arguments="{_all}" />
-            <f:if condition="{dc:xpath(xpath:'(//mets:fileSec/mets:fileGrp[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
+            <f:if condition="{dc:xpath(xpath:'({fileGrpXpath}[@USE=\'SCORE\']/mets:file[1]/mets:FLocat/@xlink:href)[1]')}">
                 <f:if condition="{gp-double} != 1 && {gp-pagegrid} != 1">
                     <f:cObject typoscriptObjectPath="plugin.tx_dlf_scoretool"/>
                 </f:if>
