@@ -13,8 +13,8 @@ page {
     file = EXT:dfgviewer/Resources/Private/Templates/Main.html
     layoutRootPath = EXT:dfgviewer/Resources/Private/Layouts/
     partialRootPaths {
-        10 = EXT:dfgviewer/Resources/Private/Partials
-        20 = EXT:slub_digitalcollections/Resources/Private/Partials
+        10 = EXT:slub_digitalcollections/Resources/Private/Partials
+        20 = EXT:dfgviewer/Resources/Private/Partials
     }
 
     settings {
