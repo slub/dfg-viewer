@@ -514,7 +514,7 @@
 
 
 /* ==============[ toc (inside the respective wrap > see above) ]========================= */
-ul.toc {
+ul.tx-dlf-tableofcontents-list {
     position: relative;
     overflow: hidden;
     overflow-y: auto;
@@ -548,7 +548,7 @@ ul.toc {
     }
     li {
         position: relative;
-        &.submenu {
+        &.tx-dlf-tableofcontents-submenu {
             &:before {
                 position: absolute;
                 top: 12px;
@@ -561,14 +561,14 @@ ul.toc {
                 border-left-color: #fff;
             }
         }
-        &.active {
+        &.tx-dlf-tableofcontents-active {
             background: rgba(255,255,255,0.1);
             &:before {
                 left: 8px;
                 .transform(rotate(90deg));
             }
         }
-        .current {
+        .tx-dlf-tableofcontents-current {
             & > a, & > span.a {
                 background: rgba(255,255,255,0.6);
                 color: @base-blue;
@@ -593,7 +593,7 @@ ul.toc {
                 // We have no type icons in DFG-Viewer, yet.
                 display: none;
             }
-            &.submenu {
+            &.tx-dlf-tableofcontents-submenu {
                 &:before {
                     position: absolute;
                     top: 12px;
@@ -606,14 +606,14 @@ ul.toc {
                     border-left-color: #fff;
                 }
             }
-            &.active {
+            &.tx-dlf-tableofcontents-active {
                 background: rgba(255,255,255,0.1);
                 &:before {
                     left: 8px;
                     .transform(rotate(90deg));
                 }
             }
-            .current {
+            .tx-dlf-tableofcontents-current {
                 & > a, & > span.a {
                     background: rgba(255,255,255,0.6);
                     color: @base-blue;
@@ -623,13 +623,13 @@ ul.toc {
         }
         a, span.a { padding-left: 30px; }
         ul {
-            &:before, li.submenu:before { left: 30px; }
+            &:before, li.tx-dlf-tableofcontents-submenu:before { left: 30px; }
             a, span.a { padding-left: 50px; }
             ul {
-                &:before, li.submenu:before { left: 50px; }
+                &:before, li.tx-dlf-tableofcontents-submenu:before { left: 50px; }
                 a, span.a { padding-left: 70px; }
                 ul {
-                    &:before, li.submenu:before { left: 70px; }
+                    &:before, li.tx-dlf-tableofcontents-submenu:before { left: 70px; }
                     a, span.a { padding-left: 90px; }
                 }
             }
