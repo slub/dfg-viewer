@@ -1,115 +1,67 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-27T13:16:48Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2026-03-22T12:04:56Z">
 		<header>
 			<generator>LFEditor</generator>
 		</header>
-		<body>
-        <trans-unit id="digitisation">
-            <source>Digitisation</source>
-        </trans-unit>
-		<trans-unit id="double.RectoVerso">
-			<source>Adjust recto/verso</source>
-		</trans-unit>
-		<trans-unit id="double.doublePageView">
-			<source>Show double pages</source>
-		</trans-unit>
-		<trans-unit id="double.singlePageView">
-			<source>Show single page</source>
-		</trans-unit>
-		<trans-unit id="download.leftPage">
-			<source>Download left page</source>
-		</trans-unit>
-		<trans-unit id="download.rightPage">
-			<source>Download right page</source>
-		</trans-unit>
-		<trans-unit id="download.singlePage">
-			<source>Download single page</source>
-		</trans-unit>
-		<trans-unit id="download.work">
-			<source>Download whole work</source>
-		</trans-unit>
-		<trans-unit id="fulltext.no_fulltext_gridpage">
-			<source>No fulltext in gridpage mode.</source>
-		</trans-unit>
-		<trans-unit id="fullscreen">
-			<source>Fullscreen Mode</source>
-		</trans-unit>
-		<trans-unit id="fulltext.no_fulltext_double">
-			<source>No fulltext in double page mode.</source>
-		</trans-unit>
-		<trans-unit id="gridpage.preview">
-			<source>Thumbnail Preview</source>
-		</trans-unit>
-		<trans-unit id="provider.local_presentation">
-			<source>Show in local context</source>
-		</trans-unit>
-		<trans-unit id="provider.no_local_presentation">
-			<source>No local presentation available</source>
-		</trans-unit>
-        <trans-unit id="provider.no_local_contact">
-			<source>No email address given of data provider</source>
-		</trans-unit>
-		<trans-unit id="provider.local_catalogue">
-			<source>Online Public Access Catalog</source>
-		</trans-unit>
-		<trans-unit id="provider.email_provider">
-			<source>Email to data provider</source>
-		</trans-unit>
-		<trans-unit id="website.last_updated">
-			<source>Last updated</source>
-		</trans-unit>
-		<trans-unit id="website.totop">
-			<source>to top</source>
-		</trans-unit>
-		<trans-unit id="website.jump_totop">
-			<source>Jump to top of page</source>
-		</trans-unit>
-		<trans-unit id="metadata">
-			<source>Metadata</source>
-		</trans-unit>
-        <trans-unit id="multiview.remove_document">
-            <source>Remove Document from view</source>
-        </trans-unit>
-        <trans-unit id="multiview.reset_layout">
-            <source>Reset Layout</source>
-        </trans-unit>
-        <trans-unit id="multiview.dragging_label">
-            <source>Drag view to another position</source>
-        </trans-unit>
-		<trans-unit id="toc">
-			<source>Table of Content</source>
-		</trans-unit>
-		<trans-unit id="browser-hint.outdated_browser">
-			<source>Outdated Browser</source>
-		</trans-unit>
-		<trans-unit id="browser-hint.outdated_browser.description">
-			<source>You use an outdated browser which lacks the support for modern JavaScript. Some features may not work as expected (e.g. images views). Please update to a current browser.</source>
-		</trans-unit>
-        <trans-unit id="sru.label.query">
-            <source><![CDATA[Search for:]]></source>
-        </trans-unit>
-        <trans-unit id="sru.label.delete_search">
-            <source><![CDATA[Delete Search]]></source>
-        </trans-unit>
-        <trans-unit id="sru.label.loading">
-            <source><![CDATA[Loading Results]]></source>
-        </trans-unit>
-        <trans-unit id="sru.label.submit">
-            <source><![CDATA[Search]]></source>
-        </trans-unit>
-        <trans-unit id="sru.label.noresult">
-            <source><![CDATA[No results found for your search.]]></source>
-        </trans-unit>
-        <trans-unit id="sru.search">
-            <source><![CDATA[Search]]></source>
-        </trans-unit>
-		<trans-unit id="uri.book">
-            <source>Persistent Identifiers (Book)</source>
-        </trans-unit>
-		<trans-unit id="uri.page">
-            <source>Persistent Identifiers (Page)</source>
-        </trans-unit>
-		</body>
+        <body>
+            <trans-unit id="browser-hint.outdated_browser">
+                <source>Outdated Browser</source>
+            </trans-unit>
+            <trans-unit id="browser-hint.outdated_browser.description">
+                <source>You use an outdated browser which lacks the support for modern JavaScript. Some features may not work as expected (e.g. images views). Please update to a current browser.</source>
+            </trans-unit>
+            <trans-unit id="digitisation">
+                <source>Digitisation</source>
+            </trans-unit>
+            <trans-unit id="metadata">
+                <source>Metadata</source>
+            </trans-unit>
+            <trans-unit id="multiview.reset_layout">
+                <source>Reset Layout</source>
+            </trans-unit>
+            <trans-unit id="toc">
+                <source>Table of Content</source>
+            </trans-unit>
+            <trans-unit id="provider.email_provider">
+                <source>Email to data provider</source>
+            </trans-unit>
+            <trans-unit id="provider.local_presentation">
+                <source>Show in local context</source>
+            </trans-unit>
+            <trans-unit id="provider.no_local_presentation">
+                <source>No local presentation available</source>
+            </trans-unit>
+            <trans-unit id="sru.label.query">
+                <source><![CDATA[Search for:]]></source>
+            </trans-unit>
+            <trans-unit id="sru.label.delete_search">
+                <source><![CDATA[Delete Search]]></source>
+            </trans-unit>
+            <trans-unit id="sru.label.loading">
+                <source><![CDATA[Loading Results]]></source>
+            </trans-unit>
+            <trans-unit id="sru.label.submit">
+                <source><![CDATA[Search]]></source>
+            </trans-unit>
+            <trans-unit id="sru.label.noresult">
+                <source><![CDATA[No results found for your search.]]></source>
+            </trans-unit>
+            <trans-unit id="uri.book">
+                <source>Persistent Identifiers (Book)</source>
+            </trans-unit>
+            <trans-unit id="uri.page">
+                <source>Persistent Identifiers (Page)</source>
+            </trans-unit>
+            <trans-unit id="website.jump_totop">
+                <source>Jump to top of page</source>
+            </trans-unit>
+            <trans-unit id="website.last_updated">
+                <source>Last updated</source>
+            </trans-unit>
+            <trans-unit id="website.totop">
+                <source>to top</source>
+            </trans-unit>
+        </body>
 	</file>
 </xliff>
