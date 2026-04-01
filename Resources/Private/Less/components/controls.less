@@ -415,75 +415,63 @@
                 }
             }
             &.tx-dlf-tools-fullscreen a {
-                .fullscreen {
-                    z-index: auto;
-                    background: #fff;
-                    &:before,
-                    &:after {
-                        position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        background: url(../Images/controlIcons.svg) no-repeat -574px -54px;
-                        background-size: auto 120px;
-                        display: block;
-                        content: " ";
-                        .transition();
-                        pointer-events: none;
-                        .static & {
-                            .transition(none);
-                        }
+                z-index: auto;
+                background: #fff;
+                &:before,
+                &:after {
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    background: url(../Images/controlIcons.svg) no-repeat -574px -54px;
+                    background-size: auto 120px;
+                    display: block;
+                    content: " ";
+                    .transition();
+                    pointer-events: none;
+                    .static & {
+                        .transition(none);
                     }
+                }
+                &:before {
+                    top: 9px;
+                    right: 9px;
+                }
+                &:after {
+                    bottom: 9px;
+                    left: 9px;
+                    .transform(rotate(180deg));
+                }
+                &.active {
                     &:before {
-                        top: 9px;
-                        right: 9px;
-                    }
-                    &:after {
-                        bottom: 9px;
-                        left: 9px;
                         .transform(rotate(180deg));
                     }
-                    &.active {
-                        &:before {
-                            .transform(rotate(180deg));
-                        }
-                        &:after {
-                            .transform(rotate(0));
-                        }
+                    &:after {
+                        .transform(rotate(0));
                     }
                 }
             }
             &.tx-dlf-tools-imagemanipulation {
-                position: relative;
-                display: inline-block;
-                > span {
-                    opacity: 1;
-                    overflow: hidden;
-                    width: auto;
-                    height: auto;
-                    display: inline;
-                    margin: 0;
-                    > span > a {
-                        position: relative;
-                        display: inline-block;
-                        width: 40px;
-                        height: 40px;
-                        .text-hide();
-                        border-radius: 20px;
-                        margin: 0 5px;
-                        background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
-                        background-size: auto 120px;
-                        &.active:before {
-                            position: absolute;
-                            top: 2px;
-                            right: 0px;
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 8px;
-                            border: 2px solid #fff;
-                            background: @okay-green;
-                            display: block;
-                            content: " ";
-                        }
+                > span > a {
+                    position: relative;
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    .text-hide();
+                    border-radius: 20px;
+                    margin: 0 5px;
+                    background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
+                    background-size: auto 120px;
+                    &.active:before {
+                        position: absolute;
+                        top: 2px;
+                        right: 0px;
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 8px;
+                        border: 2px solid #fff;
+                        background: @okay-green;
+                        display: block;
+                        content: " ";
                     }
                 }
             }
