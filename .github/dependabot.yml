@@ -20,6 +20,8 @@ updates:
 
   # Enable version updates for npm.
   - package-ecosystem: "npm"
-    directory: "/"
+    directories:
+      - "/"
+      - "/Build"
     schedule:
       interval: "weekly"
