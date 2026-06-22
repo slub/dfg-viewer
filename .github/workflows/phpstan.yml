@@ -17,12 +17,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Fix git ownership
+        run: git config --global --add safe.directory /app
+
       - name: Install dependencies
         uses: php-actions/composer@v6
         with:
           command: update
           php_version: ${{ matrix.variants.php }}
-          args: --ignore-platform-reqs --with=typo3/cms-core:^${{ matrix.variants.typo3 }}
+          args: --ignore-platform-reqs --no-audit --with=typo3/cms-core:^${{ matrix.variants.typo3 }}
 
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@v3
