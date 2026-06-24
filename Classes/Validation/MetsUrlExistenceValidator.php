@@ -91,7 +91,7 @@ class MetsUrlExistenceValidator extends AbstractDlfValidator
 
         // get the urls of document without file group nodes
         preg_match_all('/' . VH::URL_REGEX . '/i', $tempDocument->saveXML(), $matches);
-        if (is_array($matches) && count($matches) > 0) {
+        if (count($matches) > 0) {
             $urls += $matches[0];
         }
         return array_unique($urls);

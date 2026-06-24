@@ -142,7 +142,7 @@ class ValidationHelper
     public static function getHost($url): string
     {
         preg_match('/' . ValidationHelper::URL_REGEX . '/i', $url, $matches);
-        if (is_array($matches) && count($matches) > 2) {
+        if (count($matches) > 2) {
             return $matches[2];
         }
         return '';
