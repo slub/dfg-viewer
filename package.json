@@ -3,7 +3,7 @@
   "description": "DFG Viewer",
   "main": "index.js",
   "dependencies": {
-    "jquery": "^3.6.0",
+    "jquery": "^4.0.0",
     "highlight.js": "^11.11.1"
   },
   "devDependencies": {},
