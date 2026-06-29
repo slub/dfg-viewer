@@ -10,22 +10,22 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             - name: Checkout DFG-Viewer repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   repository: ${{ github.repository }}
                   path: ./Docker/build/extensions/dfg-viewer
 
             - name: Checkout Kitodo.Presentation repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   repository: kitodo/kitodo-presentation
                   path: ./Docker/build/extensions/kitodo-presentation
 
             - name: Checkout SLUB Digital Collections repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   repository: ${{ github.repository_owner }}/slub_digitalcollections
                   path: ./Docker/build/extensions/slub_digitalcollections
