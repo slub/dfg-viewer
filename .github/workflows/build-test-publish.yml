@@ -58,7 +58,7 @@ jobs:
               uses: docker/setup-buildx-action@v4
 
             - name: Build the DFG-Viewer image and cache to GitHub Actions cache
-              uses: docker/build-push-action@v6
+              uses: docker/build-push-action@v7
               with:
                   build-args: |
                       BUILD_DATE=${{ env.build_date }}
@@ -99,7 +99,7 @@ jobs:
                   password: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Build the DFG-Viewer image using GitHub Actions cache and deploy to GitHub Container Repository
-              uses: docker/build-push-action@v6
+              uses: docker/build-push-action@v7
               with:
                   build-args: |
                       BUILD_DATE=${{ env.build_date }}
