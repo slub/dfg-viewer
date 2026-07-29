@@ -116,3 +116,14 @@
     border: 1px solid white;
     border-radius: 20px;
 }
+
+@media screen and (min-width: @tabletViewportWidth) {
+    .tx-dlf-pagegrid ul.tx-dlf-pagination li.tx-dlf-pagination-previous, .tx-dlf-pagegrid ul.tx-dlf-pagination li.tx-dlf-pagination-next {
+        width: 80px;
+    }
+}
+@media screen and (min-width: @tabletLandscapeViewportWidth) {
+    .tx-dlf-pagegrid ul.tx-dlf-pagination li.tx-dlf-pagination-previous, .tx-dlf-pagegrid ul.tx-dlf-pagination li.tx-dlf-pagination-next {
+        width: 100px;
+    }
+}
