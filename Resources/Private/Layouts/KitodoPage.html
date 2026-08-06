@@ -1,26 +1,27 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-	  xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
-	  xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers"
-	  data-namespace-typo3-fluid="true"
-      lang="en">
+      xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
+      xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers"
+      data-namespace-typo3-fluid="true" lang="en">
 
 <dv:titleTag
-	title="{dc:xpath(xpath:'(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:partName)')}"
+    title="{dc:xpath(xpath:'(//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:nonSort | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:title | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:partNumber | //mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:titleInfo[not(@type=\'alternative\')]/mods:partName)')}"
 />
 
 <div class="main-wrapper">
-        <f:render section="ControlBar" partial="ControlBar" arguments="{_all}" />
+    <f:render section="ControlBar" partial="ControlBar" arguments="{_all}" />
 
-        <f:render section="PageView" partial="PageView" arguments="{_all}" />
+    <f:if condition="{isAudio} == 1 OR {isVideo} == 1">
+        <f:then>
+            <f:render section="MediaView" partial="MediaView" arguments="{_all}" />
+        </f:then>
+        <f:else>
+            <f:render section="PageView" partial="PageView" arguments="{_all}" />
+        </f:else>
+    </f:if>
 </div>
 
-<f:comment><!-- Old browsers (IE11) will show the browser hint as the nomodule attribute is not understood. --></f:comment>
-<script nomodule>
-    document.getElementById('browser-hint').className="";
-</script>
-
 <f:if condition="{matomoIdsite}">
-	<f:render section="Matomo" partial="Matomo" arguments="{_all}" />
+    <f:render section="Matomo" partial="Matomo" arguments="{_all}" />
 </f:if>
 
 </html>

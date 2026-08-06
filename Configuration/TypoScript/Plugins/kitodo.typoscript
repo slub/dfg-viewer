@@ -128,6 +128,159 @@ plugin.tx_dlf_metadata {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
+# Mediaplayer Plugin
+# --------------------------------------------------------------------------------------------------------------------
+plugin.tx_dlf_mediaplayer < tt_content.list.20.dlf_mediaplayer
+plugin.tx_dlf_mediaplayer {
+    settings {
+        elementId = tx-dlf-media
+
+        playerTranslations {
+            // Language file of player localization strings without language prefix
+            baseFile = EXT:dlf/Resources/Private/Language/locallang_media.xlf
+        }
+
+        // Share buttons to be shown in bookmark modal
+        // Both numeric and non-numeric keys may be used
+        shareButtons {
+            0 {
+                // Type of the button/icon: 'material' or 'image'
+                type = material
+                // For material icons, this is the icon key (https://material.io/icons)
+                icon = email
+                // Key in to specified language file shown as tooltip
+                titleTranslationKey = share.email.tooltip
+                // Template of generated link target. Placeholders may be used.
+                hrefTemplate = mailto:?body={url}%0A%0A
+            }
+
+            1 {
+                type = material
+                icon = qr_code
+                titleTranslationKey = share.qr_code.tooltip
+                // 'dlf:qr_code' indicates that a QR code of the video URL should be shown
+                hrefTemplate = dlf:qr_code
+            }
+
+            2 {
+                type = image
+                // For icons based on images, specify the image source
+                src = EXT:dlf/Resources/Public/Images/mastodon-logo-purple.svg
+                titleTranslationKey = share.mastodon.tooltip
+                hrefTemplate = dlf:mastodon_share
+            }
+        }
+
+        // Captions that can be shown shown on generated screenshots
+        screenshotCaptions {
+            0 {
+                // Horizontal position: left, center, right
+                h = left
+                // Vertical position / baseline: top, middle, bottom
+                v = bottom
+                // Text to be shown. Placeholders may be used.
+                text = {host}
+            }
+
+            1 {
+                h = right
+                v = bottom
+                // This is an example to show metadata
+                text = {title} - {hh}:{mm}:{ss}.{ff}
+            }
+        }
+
+        constants {
+            // Number of seconds in which to still rewind to previous chapter
+            prevChapterTolerance = 5
+
+            // Fractional value of volume increase/decrease when pressing up/down arrow keys
+            volumeStep = 0.05
+
+            // Number of seconds for seek/rewind
+            seekStep = 5
+
+            // On mobile, whether or not to switch to landscape in fullscreen mode
+            forceLandscapeOnFullscreen = 1
+
+            // Whether or not showing the Poster Image, if given, until playback is first started
+            showPoster = 0
+
+            // Whether or not showing the Audio Label-Image in Audio mode inside the media-panel
+            showAudioLabelImage = 1
+
+            // Template of filename used when downloading screenshot (without file extension)
+            // Placeholders may be used
+            screenshotFilenameTemplate = slub_digitalcollections_screenshot_{title}_h{hh}m{mm}s{ss}f{ff}
+
+            // Template of comment that is written to screenshot metadata
+            // (EXIF in JPEG, iTxt in PNG)
+            // Placeholders may be used
+            screenshotCommentTemplate (
+Screenshot taken on SLUB Digitale Sammlungen.
+
+{url}
+)
+        }
+
+        equalizer {
+            // Whether or not the equalizer control is shown
+            enabled = 1
+
+            // Key of the preset that should be selected by default
+            default = 3-band
+
+            // Presets that are available to the user as dropdown
+            presets {
+                // "band-iso" defines an ISO graphic/band equalizer. Starting at 1000 Hz,
+                // bands are added by stepping up and down by the specified number of octaves
+                3-band {
+                    // Used translation key: control.sound_tools.equalizer.preset.group.graphic
+                    group = graphic
+                    mode = band-iso
+                    label = 3-Band
+                    // One decade = log2(10) octaves
+                    octaveStep = 3.32
+                }
+
+                // It is also possible to specify bands manually via "mode = band".
+                10-band {
+                    group = graphic
+                    mode = band-iso
+                    label = 10-Band
+                    octaveStep = 1
+                }
+
+                // In "mode = riaa", the time constants of a RIAA-style EQ can be specified.
+                // Parameters that are not needed may be omitted (in particular, deepBaseRolloff).
+                riaa {
+                    group = riaa
+                    mode = riaa
+                    label = RIAA
+                    params {
+                        trebleCut = 75
+                        baseBoost = 318
+                        baseBoostRolloff = 3180
+                    }
+                }
+
+                riaa-iec {
+                    group = riaa
+                    mode = riaa
+                    label = Enhanced RIAA / IEC
+                    params {
+                        trebleCut = 75
+                        baseBoost = 318
+                        baseBoostRolloff = 3180
+                        deepBaseRolloff = 7950
+                    }
+                }
+            }
+        }
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
 # Multiview Plugin
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_multiview < tt_content.list.20.dlf_multiview
@@ -255,6 +408,20 @@ plugin.tx_dlf_toolbox {
     }
 }
 
+plugin.tx_dlf_audiovideotool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_audiovideotool {
+    settings {
+        tools = audioVideoTool
+
+        # copy constants from Mediaplayer into the plugin
+        constants < plugin.tx_dlf_mediaplayer.settings.constants
+
+        # copy page.10 Mediaplayer variables into the plugin
+        isAudio < page.10.variables.isAudio.value
+        isVideo < page.10.variables.isVideo.value
+    }
+}
+
 plugin.tx_dlf_fulltexttool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_fulltexttool {
     settings {
@@ -308,6 +475,26 @@ plugin.tx_dlf_viewerselectiontool {
         showAsList = 1
     }
 }
+
+# --------------------------------------------------------------------------------------------------------------------
+# Audio/Video
+# --------------------------------------------------------------------------------------------------------------------
+
+# Set variables for audio and video to control the display of the Mediaplayer in the page view.
+page.10.variables {
+    isAudio = TEXT
+    isAudio.value = 0
+    isVideo = TEXT
+    isVideo.value = 0
+}
+
+[isAudio({$plugin.tx_dlf.persistence.storagePid})]
+    page.10.variables.isAudio.value = 1
+[END]
+
+[isVideo({$plugin.tx_dlf.persistence.storagePid})]
+    page.10.variables.isVideo.value = 1
+[END]
 
 # --------------------------------------------------------------------------------------------------------------------
 # 3D object
