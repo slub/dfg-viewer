@@ -5,12 +5,6 @@
 			<generator>LFEditor</generator>
 		</header>
         <body>
-            <trans-unit id="browser-hint.outdated_browser">
-                <source>Outdated Browser</source>
-            </trans-unit>
-            <trans-unit id="browser-hint.outdated_browser.description">
-                <source>You use an outdated browser which lacks the support for modern JavaScript. Some features may not work as expected (e.g. images views). Please update to a current browser.</source>
-            </trans-unit>
             <trans-unit id="digitisation">
                 <source>Digitisation</source>
             </trans-unit>

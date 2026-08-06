@@ -232,11 +232,6 @@ $(document).ready(function() {
         showLoadingAnimation();
     });
 
-    // hide outdated browser hint, if cookie was found
-    if (Cookies.get('tx-dlf-pageview-hidebrowseralert') === 'true') {
-        $('#browser-hint').addClass('hidden');
-    }
-
     // Finally all things are settled. Bring back animations a second later.
     setTimeout(function () {
         localStorage.clear();
@@ -278,14 +273,6 @@ function exitFullscreen() {
     $("body").removeClass('fullscreen');
     $('li.tx-dlf-tools-fullscreen a').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
-}
-
-// hide warning about outdated browser and save decision to cookie
-function hideBrowserAlert(){
-
-    $('#browser-hint').addClass('hidden');
-    Cookies.set('tx-dlf-pageview-hidebrowseralert', 'true', { sameSite: 'lax' });
-
 }
 
 function showLoadingAnimation() {
