@@ -17,14 +17,6 @@
 <f:section name="PageView">
 
     <div class="document-view">
-        <div id="browser-hint" class="hidden">
-            <div class="alert">
-                <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
-                <h2><f:translate key='browser-hint.outdated_browser' extensionName='dfgviewer' /></h2>
-                <p><f:translate key='browser-hint.outdated_browser.description' extensionName='dfgviewer' /></p>
-            </div>
-        </div>
-
         <f:variable name="dvLinksXpath">//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links</f:variable>
         <f:variable name="dvRightsXpath">//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE="DVRIGHTS"]/mets:xmlData/dv:rights/dv:</f:variable>
         <f:variable name="fileGrpXpath">//mets:fileSec/mets:fileGrp</f:variable>
