@@ -12,10 +12,16 @@
 
     <f:if condition="{isAudio} == 1 OR {isVideo} == 1">
         <f:then>
-            <f:render section="MediaView" partial="MediaView" arguments="{_all}" />
+            <f:render section="MediaView" partial="Kitodo/View/MediaView" arguments="{_all}" />
         </f:then>
+        <f:else if="{is3dObject} == 1">
+            <f:render section="ModelView" partial="Kitodo/View/ModelView" arguments="{_all}" />
+        </f:else>
+        <f:else if="{isNewspaper} == 'newspaper_anchor' OR {isNewspaper} == 'newspaper_year'">
+            <f:render section="CalendarView" partial="Kitodo/View/CalendarView" arguments="{_all}" />
+        </f:else>
         <f:else>
-            <f:render section="PageView" partial="PageView" arguments="{_all}" />
+            <f:render section="PageView" partial="Kitodo/View/PageView" arguments="{_all}" />
         </f:else>
     </f:if>
 </div>
