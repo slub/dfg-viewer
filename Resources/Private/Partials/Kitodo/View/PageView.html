@@ -1,0 +1,55 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true" lang="en">
+
+<f:comment>
+    Copyright notice
+
+    (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
+    All rights reserved
+
+    This script is part of the TYPO3 project.
+
+    @license GNU General Public License version 3 or later.
+    For the full copyright and license information, please read the
+    LICENSE.txt file that was distributed with this source code.
+</f:comment>
+
+<f:section name="PageView">
+    <div class="document-view">
+        <f:render section="DocumentFunctions" partial="Kitodo/DocumentFunctions" arguments="{_all}"/>
+
+        <f:if condition="{gp-pagegrid} == 1">
+            <f:then>
+                <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
+            </f:then>
+            <f:else>
+                <f:if condition="{gp-multiview} == 1">
+                    <f:then>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_multiview" />
+                    </f:then>
+                    <f:else>
+                        <f:cObject typoscriptObjectPath="plugin.tx_dlf_pageview" />
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+
+        <div class="view-functions">
+            <f:if condition="{gp-pagegrid} != 1">
+                <ul>
+                    <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
+                    <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
+                </ul>
+            </f:if>
+        </div>
+        <f:if condition="{gp-multiview} != 1">
+            <div class="page-control">
+                <f:if condition="{gp-pagegrid} != 1">
+                    <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
+                </f:if>
+            </div>
+        </f:if>
+    </div>
+</f:section>
+
+</html>

@@ -24,16 +24,8 @@
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_mediaplayer" />
             </f:else>
         </f:if>
-        <f:variable name="dvLinksXpath">//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData/dv:links</f:variable>
-        <f:variable name="dvRightsXpath">//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE="DVRIGHTS"]/mets:xmlData/dv:rights/dv:</f:variable>
-        <f:variable name="fileGrpXpath">//mets:fileSec/mets:fileGrp</f:variable>
-        <f:variable name="fulltextLocationXpath">({fileGrpXpath}[@USE="FULLTEXT"]/mets:file[1]/mets:FLocat/@xlink:href)</f:variable>
-        <f:variable name="modsXpath">//mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods</f:variable>
 
-        <div class="document-functions">
-            <f:render partial="Kitodo/DocumentFunctions/Provider" arguments="{_all}"/>
-            <f:render partial="Kitodo/DocumentFunctions/Submenu" arguments="{_all}"/>
-        </div>
+        <f:render section="DocumentFunctions" partial="Kitodo/DocumentFunctions" arguments="{_all}"/>
 
         <f:comment><!-- [Cover-Image, Video, Equalizer and Marker buttons in page view] --></f:comment>
         <div class="view-functions">
