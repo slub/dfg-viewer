@@ -3,7 +3,7 @@
 # ------------------------------------
 
 # map set[mets] --> tx_dlf[id]
-[request?.getQueryParams()?['set']?['mets'] =~ /http.*/]
+like(request?.getQueryParams()?['set']?['mets'], 'http*')]
 plugin.tx_dlf._DEFAULT_PI_VARS.id.stdWrap.data = GP:set|mets
 [END]
 
