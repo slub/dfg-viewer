@@ -500,10 +500,10 @@ page.10.variables {
 # 3D object
 # --------------------------------------------------------------------------------------------------------------------
 [getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "object"]
-    page.10.variables {
-        is3dObject = TEXT
-        is3dObject.value = 1
-    }
+page.10.variables {
+    is3dObject = TEXT
+    is3dObject.value = 1
+}
 [END]
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -511,21 +511,18 @@ page.10.variables {
 # --------------------------------------------------------------------------------------------------------------------
 [getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "ephemera" or getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "newspaper"]
 page.10.variables {
-  isNewspaper = TEXT
-  isNewspaper.value = newspaper_anchor
+    isCalendar = TEXT
+    isCalendar.value = 1
+    isCalendarType = TEXT
+    isCalendarType.value = anchor
 }
 [END]
 
 [getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "year"]
 page.10.variables {
-  isNewspaper = TEXT
-  isNewspaper.value = newspaper_year
-}
-[END]
-
-[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "issue"]
-page.10.variables {
-  isNewspaper = TEXT
-  isNewspaper.value = newspaper_issue
+    isCalendar = TEXT
+    isCalendar.value = 1
+    isCalendarType = TEXT
+    isCalendarType.value = year
 }
 [END]

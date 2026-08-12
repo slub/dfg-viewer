@@ -17,7 +17,7 @@
         <f:else if="{is3dObject} == 1">
             <f:render section="ModelView" partial="Kitodo/View/ModelView" arguments="{_all}" />
         </f:else>
-        <f:else if="{isNewspaper} == 'newspaper_anchor' OR {isNewspaper} == 'newspaper_year'">
+        <f:else if="{isCalendar} == 1">
             <f:render section="CalendarView" partial="Kitodo/View/CalendarView" arguments="{_all}" />
         </f:else>
         <f:else>
