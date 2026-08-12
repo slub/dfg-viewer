@@ -30,6 +30,12 @@ return [
             'after' => [
                 'typo3/cms-frontend/prepare-tsfe-rendering'
             ]
+        ],
+        'dfgviewer/set-legacy-parameters' => [
+            'target' => Slub\Dfgviewer\Middleware\SetLegacyParametersMiddleware::class,
+            'after' => [
+                'typo3/cms-frontend/prepare-tsfe-rendering'
+            ],
         ]
     ],
 ];
