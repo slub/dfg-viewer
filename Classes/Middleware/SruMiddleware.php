@@ -54,12 +54,11 @@ class SruMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
     {
-        $response = $handler->handle($request);
         // parameters are sent by POST --> use getParsedBody() instead of getQueryParams()
         $parameters = $request->getParsedBody();
         // Return if not this middleware
         if (!isset($parameters['middleware']) || ($parameters['middleware'] != 'dfgviewer/sru')) {
-            return $response;
+            return $handler->handle($request);
         }
 
         $sru = (string) $parameters['sru'];
@@ -72,15 +71,14 @@ class SruMiddleware implements MiddlewareInterface
 
         $results = [];
 
-        if ($sruXML !== FALSE) {
+        if ($sruXML !== false) {
             // the result may be a valid <srw:searchRetrieveResponse> or some HTML code
             $sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
-
-            if ($sruResponse === FALSE) {
+            if ($sruResponse === false) {
                 $results['error'] = '';
             } else {
                 $sruRecords = $sruXML->xpath('/srw:searchRetrieveResponse/srw:records/srw:record');
-                if ($sruRecords === FALSE || empty($sruRecords)) {
+                if (empty($sruRecords)) {
                     $results['error'] = '';
                 } else {
                     $results = $this->getSruRecords($sruRecords);
@@ -88,7 +86,6 @@ class SruMiddleware implements MiddlewareInterface
             }
         }
 
-        // create response object
         /** @var Response $response */
         $response = GeneralUtility::makeInstance(Response::class);
         $response->getBody()->write(json_encode($results));
@@ -110,14 +107,15 @@ class SruMiddleware implements MiddlewareInterface
 
         foreach ($sruRecords as $id => $record) {
             $fullTextHit = $record->xpath('//srw:recordData');
+            $page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page;
             $pageAttributes = [];
-            foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->attributes() as $key => $val) {
+            foreach ($page->attributes() as $key => $val) {
                 $pageAttributes[$key] = $val;
             }
 
             $hitFound = [];
             // there may be multiple hits on a page per search query
-            foreach ($fullTextHit[$id]->children('http://dfg-viewer.de/')->page->fulltexthit as $hit) {
+            foreach ($page->fulltexthit as $hit) {
                 $hitAttributes = [];
                 foreach ($hit->attributes() as $key => $val) {
                     $hitAttributes[$key] = $val;
@@ -129,10 +127,10 @@ class SruMiddleware implements MiddlewareInterface
                 ];
             }
 
-            $page = (int) $pageAttributes['id'];
+            $pageId = (int) $pageAttributes['id'];
 
             // get METS file of search hit
-            $parentUrl = (string) $fullTextHit[$id]->children('http://dfg-viewer.de/')->page->parent->attributes()->url;
+            $parentUrl = (string) $page->parent->attributes()->url;
 
             // unset $highlightParams but make sure, it's an array()
             $highlightParams = [];
@@ -166,15 +164,15 @@ class SruMiddleware implements MiddlewareInterface
 
                 $origImageParams = '0,' . $pageAttributes['width'] . ',' . $pageAttributes['height'];
 
-                $data = [];
-
-                $data['link'] = $parentUrl;
-                $data['page'] = $page;
-                $data['text'] = $spanText;
-                $data['previewImage'] = $spanPreview;
-                $data['previewText'] = $spanText;
-                $data['origImage'] = $origImageParams;
-                $data['highlight'] = urlencode(serialize($highlightParams));
+                $data = [
+                    'link' => $parentUrl,
+                    'page' => $pageId,
+                    'text' => $spanText,
+                    'previewImage' => $spanPreview,
+                    'previewText' => $spanText,
+                    'origImage' => $origImageParams,
+                    'highlight' => urlencode(serialize($highlightParams))
+                ];
 
                 $results[] = $data;
             }
