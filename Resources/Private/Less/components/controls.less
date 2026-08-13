@@ -109,7 +109,7 @@
                     background: fade(@base-blue,90%);
                     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
                     font-size: 14px;
-                    line-height: 1.4;
+                    line-height: 0.4;
                     text-align: left;
                     transform-origin: center bottom;
                     .transition();
@@ -153,6 +153,33 @@
                             }
                         }
                         span {
+                            &.local-presentation,
+                            &.local-contact {
+                                position: relative;
+                                color: #fff;
+                                display: block;
+                                padding-left: 40px;
+                                min-height: 40px;
+                                line-height: 40px;
+                                white-space: nowrap;
+                                opacity: 0.5;
+                                &:before {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 40px;
+                                    height: 40px;
+                                    content: " ";
+                                    background: url(../Images/controlIcons.svg) no-repeat 0 0;
+                                    background-size: auto 120px;
+                                }
+                            }
+                            &.local-presentation:before {
+                                background-position: -440px -80px;
+                            }
+                            &.local-contact:before {
+                                background-position: -400px -40px;
+                            }
                             &.tx-dlf-tools-pdf-work a:before {
                                 background-position: -360px -40px;
                             }
@@ -161,9 +188,30 @@
                             &.tx-dlf-tools-pdf-page a:before {
                                 background-position: -320px -40px;
                             }
-                            &.tx-dlf-tools-fulltextdownload a:before,
-                            &.tx-dlf-tools-fulltext-not-available:before {
-                                background-position: -280px -40px;
+                            &.tx-dlf-tools-fulltextdownload {
+                                a:before {
+                                    background-position: -280px -40px;
+                                }
+                                span.tx-dlf-tools-fulltext-not-available {
+                                    position: relative;
+                                    color: #fff;
+                                    display: block;
+                                    padding-left: 40px;
+                                    min-height: 40px;
+                                    line-height: 40px;
+                                    white-space: nowrap;
+                                    opacity: 0.5;
+                                    &:before {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        width: 40px;
+                                        height: 40px;
+                                        content: " ";
+                                        background: url(../Images/controlIcons.svg) no-repeat -280px -40px;
+                                        background-size: auto 120px;
+                                    }
+                                }
                             }
                         }
                     }
