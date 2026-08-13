@@ -24,8 +24,6 @@ namespace Slub\Dfgviewer\ViewHelpers;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -44,31 +42,21 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class TitleTagViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * Initialize arguments.
      */
     public function initializeArguments()
     {
-        parent::initializeArguments();
-        $this->registerArgument('title', 'string', 'new page title', true);
+        $this->registerArgument('title', 'string', 'New page title', true);
     }
 
     /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
+     * Set the page title in the current frontend context.
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-      ) {
-        $title = $arguments['title'];
-
-        if ($title !== null) {
-            $GLOBALS['TSFE']->page['title'] = $title;
+    public function render()
+    {
+        if ($this->arguments['title'] !== null) {
+            $GLOBALS['TSFE']->page['title'] = $this->arguments['title'];
         }
     }
 }

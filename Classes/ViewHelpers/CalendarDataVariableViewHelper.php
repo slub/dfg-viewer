@@ -25,7 +25,6 @@ namespace Slub\Dfgviewer\ViewHelpers;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -46,23 +45,16 @@ class CalendarDataVariableViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     *
      * @return void
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
-        $data = $arguments['data'];
+    public function render()
+    {
+        $data = $this->arguments['data'];
 
         if (count($data) === 12) {
             // Rule 1: If it's a single year (no season split), do show all the months
             // The condition works because showEmptyMonths = 1 in plugin configuration
-            $renderingContext->getVariableProvider()->add($arguments['name'], $data);
+            $this->renderingContext->getVariableProvider()->add($this->arguments['name'], $data);
         } else {
             $firstUsedIdx = 0;
             $lastUsedIdx = 0;
@@ -111,7 +103,7 @@ class CalendarDataVariableViewHelper extends AbstractViewHelper
                 $selectedData[$key] = $data[$key];
             }
 
-            $renderingContext->getVariableProvider()->add($arguments['name'], $selectedData);
+            $this->renderingContext->getVariableProvider()->add($this->arguments['name'], $selectedData);
         }
     }
 }
