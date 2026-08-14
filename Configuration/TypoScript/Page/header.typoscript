@@ -10,7 +10,7 @@ page {
     annotations = EXT:dfgviewer/Resources/Public/Css/annotationStyles.css
   }
   includeJSFooterlibs {
-    jQuery = EXT:dfgviewer/Resources/Public/JavaScript/jQuery/jquery-3.6.0.min.js
+    jQuery = EXT:dlf/Resources/Public/JavaScript/jQuery/jquery-3.6.0.min.js
     jQuery.forceOnTop = 1
     jQueryUiMouseSlider = EXT:dlf/Resources/Public/JavaScript/jQueryUI/jquery-ui-mouse-slider-resizable-autocomplete.js
     dfgviewer = EXT:dfgviewer/Resources/Public/JavaScript/webScripts.js
