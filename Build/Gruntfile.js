@@ -25,7 +25,6 @@ module.exports = function(grunt) {
                 },
                 files: {
                     "Resources/Public/JavaScript/allScripts.js" : [
-                        'Build/node_modules/jquery/dist/jquery.js',
                         'Resources/Private/JavaScript/js.cookie.js',
                         'Resources/Private/JavaScript/dfgviewerSru.js',
                         'Resources/Private/JavaScript/dfgviewerScripts.js',
