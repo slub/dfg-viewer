@@ -23,6 +23,9 @@
             <trans-unit id="provider.local_presentation">
                 <source>Show in local context</source>
             </trans-unit>
+            <trans-unit id="provider.no_email_provider">
+                <source>No email provider available</source>
+            </trans-unit>
             <trans-unit id="provider.no_local_presentation">
                 <source>No local presentation available</source>
             </trans-unit>

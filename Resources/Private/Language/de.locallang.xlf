@@ -25,6 +25,10 @@
 				<source><![CDATA[Show in local context]]></source>
 				<target><![CDATA[Lokale Präsentation anzeigen]]></target>
 			</trans-unit>
+            <trans-unit id="provider.no_email_provider" approved="yes">
+                <source><![CDATA[No email provider available]]></source>
+                <target><![CDATA[Kein Email-Provider verfügbar]]></target>
+            </trans-unit>
 			<trans-unit id="provider.no_local_presentation" approved="yes">
 				<source><![CDATA[No local presentation available]]></source>
 				<target><![CDATA[Keine lokale Präsentation verfügbar]]></target>
