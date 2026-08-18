@@ -407,3 +407,71 @@ a {
         transform: rotate(360deg);
     }
 }
+
+/* ==============[ empty pageview element message ]======================================= */
+.tx-dlf-empty {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    a {
+        position: relative;
+        color: @light-blue;
+        padding-bottom: 60px;
+        .error-arrow {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: -20px;
+            text-align: center;
+            font-size: 40px;
+            line-height: 40px;
+            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+            .transform(rotate(-45deg));
+            opacity: .3;
+        }
+    }
+    @media screen and (min-width: @phoneLandscapeViewportWidth) {
+        padding: 30px 20%;
+        a {
+            padding: 0;
+            .error-arrow {
+                display: none;
+            }
+        }
+    }
+    @media screen and (min-width: @tabletViewportWidth) {
+        a {
+            padding-top: 300px;
+            &:before {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                width: 260px;
+                height: 260px;
+                border-radius: 130px;
+                margin-left: -130px;
+                border: 1px solid @light-blue;
+                content: " ";
+            }
+            &:after {
+                position: absolute;
+                top: 30px;
+                left: 50%;
+                width: 1px;
+                height: 200px;
+                background: @light-blue;
+                content: " ";
+                .transform(rotate(-45deg));
+            }
+        }
+    }
+}

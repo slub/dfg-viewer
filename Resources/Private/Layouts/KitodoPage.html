@@ -20,6 +20,9 @@
         <f:else if="{isCalendar} == 1">
             <f:render section="CalendarView" partial="Kitodo/View/CalendarView" arguments="{_all}" />
         </f:else>
+        <f:else if="{isMultivolumeWork} == 1">
+            <f:render section="MultivolumeWorkPageView" partial="Kitodo/View/MultivolumeWorkPageView" arguments="{_all}" />
+        </f:else>
         <f:else>
             <f:render section="PageView" partial="Kitodo/View/PageView" arguments="{_all}" />
         </f:else>

@@ -185,6 +185,20 @@ $(document).ready(function() {
         }
     });
 
+    // Replace link for error message to add link to the volume
+    function replaceLinkForVolume() {
+        const $emptyContainer = $('.tx-dlf-pageview .tx-dlf-empty');
+
+        // If the container with empty message replace link
+        if ($emptyContainer.length > 0) {
+            const firstVolHref = $('.tx-dlf-tableofcontents ul li ul li:first-child a').attr('href');
+            $('.tx-dlf-emptyToFirstVol').attr('href', firstVolHref || '#');
+        }
+    }
+
+    // Wait for 500ms to replace link
+    setTimeout(replaceLinkForVolume, 500);
+
     // Complex page turning mechanism and check if a click on page control was made and unfold next/back navigation
     if (touchSupport()) {
         $('.tx-dlf-navigation-forward, .tx-dlf-navigation-backward')
