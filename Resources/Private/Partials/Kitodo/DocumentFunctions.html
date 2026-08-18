@@ -24,6 +24,11 @@
     <div class="document-functions">
         <f:render partial="Kitodo/DocumentFunctions/Provider" arguments="{_all}"/>
         <f:if condition="{isCalendar} == 1">
+            <f:then>
+                <ul class="document-submenu">
+                    <f:render partial="Kitodo/DocumentFunctions/Submenu/Links" arguments="{_all}"/>
+                </ul>
+            </f:then>
             <f:else>
                 <f:render partial="Kitodo/DocumentFunctions/Submenu" arguments="{_all}"/>
             </f:else>
