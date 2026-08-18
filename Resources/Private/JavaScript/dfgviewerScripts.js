@@ -84,14 +84,22 @@ $(document).ready(function() {
                 $(this).text(metadataToggleLabelMore);
             }
             $('.control-bar .metadata-basic').toggleClass('all-metadata').find('dl.tx-dlf-metadata-titledata:nth-child(n+3)').slideToggle();
-
         });
     }
 
-    // extract title information from the meta data and add it to the top of the sidebar
+    // extract title information from the metadata and add it to the top of the sidebar
     ($('.tx-dlf-metadata dl.tx-dlf-metadata-titledata dd.tx-dlf-title')[0]) && $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().find('dd.tx-dlf-title').text() + '</h2></div>');
 
-    // add a toggle function for sub meta data "(+ n more)"
+    // if there is no title in the first metadata block, take it from table of contents and clone it to the header and first position
+    let header = $('.tx-dlf-metadata .metadata-title h2');
+    if (header.text().length < 1) {
+        header.remove();
+        let title = $('li.tx-dlf-tableofcontents-current a').first()[0].title;
+        $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + title + '</h2></div>');
+        $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().prepend('<dt class="tx-dlf-title">' + (($('html[lang^="de"]')[0]) ? ' Titel' : ' Title') + '</dt><dd class="tx-dlf-title">' + title + '</dd>');
+    }
+
+    // add a toggle function for sub metadata "(+ n more)"
     $('dl.tx-dlf-metadata-titledata dd > dl').each(function () {
         $(this).parent().addClass('has-submetadata').prepend('<span class="submetadata-toggle">+' + $(this).find('dt').length + (($('html[lang^="de"]')[0]) ? ' weitere' : ' more') + '</span>').prev().addClass('has-submetadata');
     });
