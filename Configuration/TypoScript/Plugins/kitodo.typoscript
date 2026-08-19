@@ -487,7 +487,7 @@ page.10.variables {
 [END]
 
 # --------------------------------------------------------------------------------------------------------------------
-# Newspaper navigation
+# Newspaper
 # --------------------------------------------------------------------------------------------------------------------
 [getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "ephemera" or getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "newspaper"]
 page.10.variables {
@@ -504,5 +504,15 @@ page.10.variables {
     isCalendar.value = 1
     isCalendarType = TEXT
     isCalendarType.value = year
+}
+[END]
+
+# --------------------------------------------------------------------------------------------------------------------
+# Multivolume work
+# --------------------------------------------------------------------------------------------------------------------
+[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) === 'multivolume_work']
+page.10.variables {
+  isMultivolumeWork = TEXT
+  isMultivolumeWork.value = 1
 }
 [END]
