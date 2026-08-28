@@ -489,7 +489,7 @@ page.10.variables {
 # --------------------------------------------------------------------------------------------------------------------
 # Newspaper
 # --------------------------------------------------------------------------------------------------------------------
-[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "ephemera" or getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == "newspaper"]
+[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) in ["ephemera", "newspaper"]]
 page.10.variables {
     isCalendar = TEXT
     isCalendar.value = 1
