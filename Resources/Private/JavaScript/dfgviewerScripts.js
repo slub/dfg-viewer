@@ -94,9 +94,13 @@ $(document).ready(function() {
     let header = $('.tx-dlf-metadata .metadata-title h2');
     if (header.text().length < 1) {
         header.remove();
-        let title = $('li.tx-dlf-tableofcontents-current a').first()[0].title;
-        $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + title + '</h2></div>');
-        $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().prepend('<dt class="tx-dlf-title">' + (($('html[lang^="de"]')[0]) ? ' Titel' : ' Title') + '</dt><dd class="tx-dlf-title">' + title + '</dd>');
+        let firstEntry = $('li.tx-dlf-tableofcontents-current a').first()[0];
+        if (firstEntry) {
+            let title = firstEntry.title;
+            $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + title + '</h2></div>');
+            $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().prepend('<dt class="tx-dlf-title">' + (($('html[lang^="de"]')[0]) ? ' Titel' : ' Title') + '</dt><dd class="tx-dlf-title">' + title + '</dd>');
+        }
+
     }
 
     // add a toggle function for sub metadata "(+ n more)"
