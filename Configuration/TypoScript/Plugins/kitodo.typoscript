@@ -510,7 +510,7 @@ page.10.variables {
 # --------------------------------------------------------------------------------------------------------------------
 # Multivolume work
 # --------------------------------------------------------------------------------------------------------------------
-[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) === 'multivolume_work']
+[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) in ['multivolume_work','periodical','inventory']]
 page.10.variables {
   isMultivolumeWork = TEXT
   isMultivolumeWork.value = 1
