@@ -1,0 +1,27 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
+
+<f:comment>
+    Copyright notice
+
+    (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
+    All rights reserved
+
+    This script is part of the TYPO3 project.
+
+    @license GNU General Public License version 3 or later.
+    For the full copyright and license information, please read the
+    LICENSE.txt file that was distributed with this source code.
+</f:comment>
+
+<f:variable name="xpath"><dc:xpath xpath='{dvLinksXpath}/dv:sru' /></f:variable>
+
+<f:if condition="{xpath}">
+    <f:variable name="search"><f:translate key="sru.search" extensionName="slub_digitalcollections" /></f:variable>
+    <li class="submenu search">
+        <a href="#" title="{search}">{search}</a>
+        <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
+    </li>
+</f:if>
+
+</html>
