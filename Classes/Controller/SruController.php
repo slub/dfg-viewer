@@ -28,6 +28,7 @@ namespace Slub\Dfgviewer\Controller;
 use Kitodo\Dlf\Common\MetsDocument;
 use Kitodo\Dlf\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Localization\Locale;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -59,8 +60,11 @@ class SruController extends AbstractController
             return $this->htmlResponse();
         }
 
+        /** @var MetsDocument $currentDocument */
+        $currentDocument = $this->document->getCurrentDocument();
+
         // Get digital provenance information.
-        $digiProv = $this->document->getCurrentDocument()->mets->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
+        $digiProv = $currentDocument->getMets()->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
 
         if ($digiProv) {
             $links = $digiProv[0]->children('http://dfg-viewer.de/')->links;
@@ -87,7 +91,7 @@ class SruController extends AbstractController
         $this->view->assign('sruLink', $sruLink);
         $this->view->assign('currentDocument', $this->document->getLocation());
         $this->view->assign('actionUrl', $actionUrl);
-        $this->view->assign("languageKey", $this->getLanguageService()->lang);
+        $this->view->assign("languageKey", $this->getLocale()?->getLanguageCode());
 
         return $this->htmlResponse();
     }
@@ -115,5 +119,21 @@ class SruController extends AbstractController
             $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
             $pageRenderer->addJsFooterInlineCode('tx-dfgviewer-footer', $javascriptFooter);
         }
+    }
+
+    /**
+     * Get locale from request.
+     *
+     * @access private
+     *
+     * @return Locale|null
+     */
+    private function getLocale(): ?Locale
+    {
+        $attributes = $this->request->getAttributes();
+        if (isset($attributes['language'])) {
+            return $attributes['language']->getLocale() ?? null;
+        }
+        return null;
     }
 }
