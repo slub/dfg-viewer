@@ -17,7 +17,7 @@
 <f:variable name="xpath"><dc:xpath xpath='{dvLinksXpath}/dv:sru' /></f:variable>
 
 <f:if condition="{xpath}">
-    <f:variable name="search"><f:translate key="sru.search" extensionName="slub_digitalcollections" /></f:variable>
+    <f:variable name="search"><f:translate key="sru.label.submit" extensionName="dfgviewer" /></f:variable>
     <li class="submenu search">
         <a href="#" title="{search}">{search}</a>
         <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_sru" />
