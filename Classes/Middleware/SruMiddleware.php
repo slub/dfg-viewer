@@ -136,30 +136,23 @@ class SruMiddleware implements MiddlewareInterface
             $highlightParams = [];
 
             // get highlight boxes for all results of a page
-            foreach ($hitFound as $key => $hit) {
+            foreach ($hitFound as $hit) {
                 $highlightField = $hit['attributes']['x1'] . ',' . $hit['attributes']['y1'] . ',' . $hit['attributes']['x2'] . ',' . $hit['attributes']['y2'];
                 if (!in_array($highlightField, $highlightParams)) {
                     $highlightParams[] = $highlightField;
                 }
             }
 
-            foreach ($hitFound as $key => $hit) {
-                $spanPreview = '';
-                $spanText = '';
-                if (!empty($hit['attributes']['preview'])) {
-                    $spanPreview = '<span class="sru-preview"><img src="' . $hit['attributes']['preview'] . '"></span>';
-                }
-
+            foreach ($hitFound as $hit) {
+                $previewImage = (string) ($hit['attributes']['preview'] ?? '');
+                $previewText = [];
                 if (is_object($hit['text'])) {
-                    $spanText = '<span class="sru-textsnippet">';
-                    foreach ($hit['text'] as $key => $text) {
-                        if ($text->attributes()->class[0] == 'highlight') {
-                            $spanText .= '<span class="highlight">' . $text . '</span>';
-                        } else {
-                            $spanText .= $text;
-                        }
+                    foreach ($hit['text'] as $text) {
+                        $previewText[] = [
+                            'text' => (string) $text,
+                            'highlight' => (string) $text->attributes()->class === 'highlight'
+                        ];
                     }
-                    $spanText .= '</span>';
                 }
 
                 $origImageParams = '0,' . $pageAttributes['width'] . ',' . $pageAttributes['height'];
@@ -167,9 +160,8 @@ class SruMiddleware implements MiddlewareInterface
                 $data = [
                     'link' => $parentUrl,
                     'page' => $pageId,
-                    'text' => $spanText,
-                    'previewImage' => $spanPreview,
-                    'previewText' => $spanText,
+                    'previewImage' => $previewImage,
+                    'previewText' => $previewText,
                     'origImage' => $origImageParams,
                     'highlight' => urlencode(serialize($highlightParams))
                 ];

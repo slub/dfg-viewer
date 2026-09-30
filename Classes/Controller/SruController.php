@@ -64,6 +64,7 @@ class SruController extends AbstractController
         $currentDocument = $this->document->getCurrentDocument();
 
         // Get digital provenance information.
+        // @phpstan-ignore-next-line getMets() exists and returns SimpleXMLElement, but PHPSstan does not recognize it
         $digiProv = $currentDocument->getMets()->xpath('//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE="DVLINKS"]/mets:xmlData');
 
         if ($digiProv) {
