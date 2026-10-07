@@ -165,7 +165,7 @@ $(document).ready(function() {
     let shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
     let shortenMobileMetaTitle = shortenMobileMetaElement.text();
     if(shortenMobileMetaTitle.length > 140) {
-        shortenMobileMetaTitle = shortenMobileMetaTitle.substr(0,140) + '...';
+        shortenMobileMetaTitle = shortenMobileMetaTitle.slice(0,140) + '...';
         shortenMobileMetaElement.text(shortenMobileMetaTitle);
     }
 
