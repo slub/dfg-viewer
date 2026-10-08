@@ -31,6 +31,5 @@ If you have any questions or encounter any problems, please do not hesitate to c
 
 This project includes code from the following external projects:
 
-- [jQuery](https://jquery.com/) version 3.6.0
 - [highlight.js](https://highlightjs.org/) version 10.7.2
 - [Google Fonts](https://fonts.google.com/) (2020)
