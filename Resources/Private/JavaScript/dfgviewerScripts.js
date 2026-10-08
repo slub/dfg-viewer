@@ -157,6 +157,23 @@ $(document).ready(function() {
         $('dl.mobile-meta dd.mobile-page-number').text(pageNumberText);
     }
 
+    // Build the mobile title from the main title and the selected table-of-contents title.
+    const mobileTitle = $('.provider dl.mobile-meta dd.tx-dlf-title a');
+    if (mobileTitle.length) {
+        const mainTitle = $('.control-bar .metadata-wrapper .metadata-basic > dl:nth-child(2) > dd.tx-dlf-title').first();
+        const tocTitle = $('.control-bar .metadata-wrapper .metadata-basic > dl:nth-child(3) > dd').first();
+        const titles = [];
+        if (mainTitle.length) {
+            titles.push(mainTitle.text().trim());
+        }
+        if (tocTitle.length) {
+            titles.push(tocTitle.text().trim());
+        }
+        if (titles.length) {
+            mobileTitle.text(titles.filter(Boolean).join(' > '));
+        }
+    }
+
     // Shorten mobile meta title
     let shortenMobileMetaElement = $('.provider dl.mobile-meta dd.tx-dlf-title a');
     let shortenMobileMetaTitle = shortenMobileMetaElement.text();
