@@ -50,9 +50,9 @@
     form {
         @media screen and (max-width: @tabletLandscapeViewportWidth) {
             position: relative;
-            width: 140px;
+            width: 40px;
             height: 40px;
-            flex: 0 0 140px;
+            flex: 0 0 40px;
             margin-right: 5px;
             label {
                 display: none;
@@ -83,9 +83,12 @@
             @media screen and (max-width: @tabletLandscapeViewportWidth) {
                 display: block;
                 position: relative;
-                width: 140px;
+                width: 40px;
                 height: 40px;
+                background: white url(../Images/controlIcons.svg) no-repeat -600px -80px;
+                background-size: auto 120px;
                 -webkit-appearance: none;
+                border: 0 none;
                 &[disabled] {
                     display: none;
                 }
@@ -471,7 +474,7 @@
                 @media screen and (max-width: @tabletLandscapeViewportWidth) {
                     position: relative;
                     display: block;
-                    flex: 0 0 140px;
+                    flex: 0 0 40px;
                     margin-right: 10px;
                     order: 1;
                 }
