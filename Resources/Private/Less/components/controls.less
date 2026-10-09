@@ -48,6 +48,16 @@
     }
 
     form {
+        @media screen and (max-width: @tabletLandscapeViewportWidth) {
+            position: relative;
+            width: 140px;
+            height: 40px;
+            flex: 0 0 140px;
+            margin-right: 5px;
+            label {
+                display: none;
+            }
+        }
         select {
             color: desaturate(lighten(@base-blue,20%),20%);
             background: #fff url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDIwIDEyIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5zdDB7ZmlsbDpub25lO3N0cm9rZTojNjg4N0EzO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9PC9zdHlsZT48ZyBpZD0iWE1MSURfMV8iPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMy40IDMuMmwtNi40IDYuNC02LjQtNi40Ii8+PC9nPjwvc3ZnPg==') no-repeat right center;
@@ -68,6 +78,16 @@
                 &:hover {
                     border: 1px solid lighten(@light-blue,12%);
                     background-color: lighten(@light-blue,20%);
+                }
+            }
+            @media screen and (max-width: @tabletLandscapeViewportWidth) {
+                display: block;
+                position: relative;
+                width: 140px;
+                height: 40px;
+                -webkit-appearance: none;
+                &[disabled] {
+                    display: none;
                 }
             }
         }
@@ -405,6 +425,14 @@
 .view-functions {
     ul {
         position: relative;
+        @media screen and (max-width: @tabletLandscapeViewportWidth) {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            right: 15px;
+            top: 80px;
+        }
         li {
             display: none;
             &.tx-dlf-tools-rotate-left a {
@@ -436,6 +464,24 @@
                     position: absolute;
                     top: 0;
                     right: 0;
+                    @media screen and (max-width: @tabletLandscapeViewportWidth) {
+                        position: relative;
+                    }
+                }
+                @media screen and (max-width: @tabletLandscapeViewportWidth) {
+                    position: relative;
+                    display: block;
+                    flex: 0 0 140px;
+                    margin-right: 10px;
+                    order: 1;
+                }
+            }
+            &.tx-dlf-tools-fullscreen {
+                @media screen and (max-width: @tabletLandscapeViewportWidth) {
+                    display: block;
+                    position: relative;
+                    flex: 0 0 40px;
+                    order: 2;
                 }
             }
             &.tx-dlf-tools-fullscreen a {
@@ -472,6 +518,10 @@
                     &:after {
                         .transform(rotate(0));
                     }
+                }
+                @media screen and (max-width: @tabletLandscapeViewportWidth) {
+                    display: inline-block;
+                    position: relative;
                 }
             }
             &.tx-dlf-tools-imagemanipulation {

@@ -199,78 +199,6 @@ a {
                     }
                 }
             }
-            .mobile-controls {
-                position: absolute;
-                bottom: -50px;
-                right: 15px;
-                display: flex;
-                form { // The goto page button
-                    position: relative;
-                    width: 40px;
-                    height: 40px;
-                    flex: 0 0 40px;
-                    margin-right: 5px;
-                    label {
-                        display: none;
-                    }
-                    select {
-                        position: relative;
-                        width: 40px;
-                        height: 40px;
-                        padding-left: 40px;
-                        background: #fff url(../Images/controlIcons.svg) no-repeat -560px -77px;
-                        background-size: auto 120px;
-                        outline: none;
-                        border-radius: 20px;
-                        -webkit-appearance: none;
-                        border: 0 none;
-                        &[disabled] {
-                            display: none;
-                        }
-                    }
-                }
-                .tx-dlf-tools-fullscreen { // The fullscreen button
-                    position: relative;
-                    flex: 0 0 40px;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 20px;
-                    .text-hide();
-                    background: #fff;
-                    &:before,
-                    &:after {
-                        position: absolute;
-                        width: 12px;
-                        height: 12px;
-                        background: url(../Images/controlIcons.svg) no-repeat -574px -54px;
-                        background-size: auto 120px;
-                        display: block;
-                        content: " ";
-                        .transition();
-                        pointer-events: none;
-                        .static & {
-                            .transition(none);
-                        }
-                    }
-                    &:before {
-                        top: 9px;
-                        right: 9px;
-                    }
-                    &:after {
-                        bottom: 9px;
-                        left: 9px;
-                        .transform(rotate(180deg));
-                    }
-                    &.active {
-                        &:before {
-                            .transform(rotate(180deg));
-                        }
-                        &:after {
-                            .transform(rotate(0));
-                        }
-                    }
-                }
-            }
             .fullscreen & {
                 .transform(translateY(-10%));
             }
@@ -293,14 +221,6 @@ a {
         .document-functions .provider {
             .mobile-meta {
                 padding-right: 100px;
-            }
-            .mobile-controls {
-                bottom: auto;
-                top: 10px;
-                .fullscreen & {
-                    bottom: -50px;
-                    top: unset;
-                }
             }
         }
     }
@@ -359,8 +279,7 @@ a {
                         object-fit: scale-down;
                     }
                 }
-                .mobile-meta,
-                .mobile-controls {
+                .mobile-meta {
                     display: none;
                 }
             }
