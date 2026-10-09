@@ -99,8 +99,10 @@ class CalendarDataVariableViewHelper extends AbstractViewHelper
             $selectedData = [];
             $keys = array_keys($data);
             for ($i = $firstEntryIdx; $i <= $lastEntryIdx; $i++) {
-                $key = $keys[$i];
-                $selectedData[$key] = $data[$key];
+                if (array_key_exists($i, $keys)) {
+                    $key = $keys[$i];
+                    $selectedData[$key] = $data[$key];
+                }
             }
 
             $this->renderingContext->getVariableProvider()->add($this->arguments['name'], $selectedData);
