@@ -71,7 +71,7 @@ class SruMiddleware implements MiddlewareInterface
         // make request to SRU service and return stream warnings to the client
         $errorMessage = '';
         set_error_handler(
-            static function (string $message) use (&$errorMessage): bool {
+            static function (int $severity, string $message) use (&$errorMessage): bool {
                 $errorMessage = $message;
                 return true;
             }
