@@ -53,6 +53,10 @@
                 <source><![CDATA[No results found for your search.]]></source>
                 <target><![CDATA[Kein Ergebnis für Ihre Suche gefunden.]]></target>
             </trans-unit>
+            <trans-unit id="sru.label.error" approved="yes">
+                <source><![CDATA[An error occurred while loading search results.]]></source>
+                <target><![CDATA[Beim Laden der Suchergebnisse ist ein Fehler aufgetreten.]]></target>
+            </trans-unit>
 			<trans-unit id="toc" approved="yes">
 				<source><![CDATA[Table of Content]]></source>
 				<target><![CDATA[Inhaltsverzeichnis]]></target>

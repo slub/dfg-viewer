@@ -66,12 +66,33 @@ class SruMiddleware implements MiddlewareInterface
 
         $url = $sru . '?operation=searchRetrieve&version=1.2&startRecord=1&maximumRecords=10&recordSchema=dfg-viewer/page&query=' . urlencode($query);
 
-        // make request to SRU service
-        $sruXML = simplexml_load_file($url);
-
         $results = [];
 
-        if ($sruXML !== false) {
+        // make request to SRU service and return stream warnings to the client
+        $errorMessage = '';
+        set_error_handler(
+            static function (int $severity, string $message) use (&$errorMessage): bool {
+                $errorMessage = $message;
+                return true;
+            }
+        );
+        try {
+            $sruXML = simplexml_load_file($url);
+        } finally {
+            restore_error_handler();
+        }
+
+        if ($errorMessage !== '') {
+            $results = [
+                'error' => true,
+                'message' => $errorMessage,
+            ];
+        } else if ($sruXML === false) {
+            $results = [
+                'error' => true,
+                'message' => 'The SRU server returned an unreadable response.',
+            ];
+        } else {
             // the result may be a valid <srw:searchRetrieveResponse> or some HTML code
             $sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
             if ($sruResponse === false) {
