@@ -25,10 +25,13 @@ namespace Slub\Dfgviewer\Middleware;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use DOMElement;
+use DOMText;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use SimpleXMLElement;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -41,6 +44,22 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class SruMiddleware implements MiddlewareInterface
 {
+
+    /**
+     * Namespace of the SRU (SRW) response envelope (see SRU 1.2,
+     * https://www.loc.gov/standards/sru/).
+     *
+     * @var string
+     */
+    private const SRW_NAMESPACE = 'http://www.loc.gov/zing/srw/';
+
+    /**
+     * Namespace of the "dfg-viewer/page" record schema (DFG-Viewer
+     * SRU/ALTO application profile).
+     *
+     * @var string
+     */
+    private const DFGVIEWER_NAMESPACE = 'http://dfg-viewer.de/';
 
     /**
      * The main method of the middleware.
@@ -95,6 +114,11 @@ class SruMiddleware implements MiddlewareInterface
                 'message' => 'The SRU server returned an unreadable response.',
             ];
         } else {
+            // Register the `srw` prefix used in the XPath queries below. The
+            // prefix is only matched against the namespace *URI*, so this works
+            // regardless of the prefix (or default namespace) the server actually
+            // emits.
+            $sruXML->registerXPathNamespace('srw', self::SRW_NAMESPACE);
             // the result may be a valid <srw:searchRetrieveResponse> or some HTML code
             $sruResponse = $sruXML->xpath('/srw:searchRetrieveResponse');
             if ($sruResponse === false) {
@@ -129,8 +153,11 @@ class SruMiddleware implements MiddlewareInterface
         $results = [];
 
         foreach ($sruRecords as $id => $record) {
+            // XPath namespace bindings are not inherited by descendant nodes,
+            // so register the prefix on the record node as well.
+            $record->registerXPathNamespace('srw', self::SRW_NAMESPACE);
             $fullTextHit = $record->xpath('//srw:recordData');
-            $page = $fullTextHit[$id]->children('http://dfg-viewer.de/')->page;
+            $page = $fullTextHit[$id]->children(self::DFGVIEWER_NAMESPACE)->page;
             $pageAttributes = [];
             foreach ($page->attributes() as $key => $val) {
                 $pageAttributes[$key] = $val;
@@ -170,12 +197,7 @@ class SruMiddleware implements MiddlewareInterface
                 $previewImage = (string) ($hit['attributes']['preview'] ?? '');
                 $previewText = [];
                 if (is_object($hit['text'])) {
-                    foreach ($hit['text'] as $text) {
-                        $previewText[] = [
-                            'text' => (string) $text,
-                            'highlight' => (string) $text->attributes()->class === 'highlight'
-                        ];
-                    }
+                    $previewText = $this->getSpanSegments($hit['text']);
                 }
 
                 $origImageParams = '0,' . $pageAttributes['width'] . ',' . $pageAttributes['height'];
@@ -194,5 +216,47 @@ class SruMiddleware implements MiddlewareInterface
         }
 
         return $results;
+    }
+
+    /**
+     * Gets the text segments of a snippet `<span>` element.
+     *
+     * The DFG-Viewer snippet is a `<span>` whose content may mix plain text
+     * with nested `<span class="highlight">` elements marking the matched
+     * search term, e.g.
+     * `<span>context <span class="highlight">term</span> context</span>`.
+     * Both text nodes and element children are read in document order so that
+     * neither the surrounding context nor the highlighted term is lost. A text
+     * node is treated as highlighted when the outer span itself carries the
+     * "highlight" class (e.g. `<span class="highlight">term</span>`).
+     *
+     * @access private
+     *
+     * @param SimpleXMLElement $span the snippet `<span>` element
+     *
+     * @return array[] the segments, each with "text" (string) and "highlight" (bool)
+     */
+    private function getSpanSegments(SimpleXMLElement $span): array
+    {
+        $segments = [];
+        // A plain text node is marked as highlighted when the outer span itself
+        // carries the "highlight" class (e.g. <span class="highlight">term</span>).
+        $inheritHighlight = (string) $span->attributes()->class === 'highlight';
+        $domNode = dom_import_simplexml($span);
+        foreach ($domNode->childNodes as $child) {
+            if ($child instanceof DOMText) {
+                $segments[] = [
+                    'text' => (string) $child->nodeValue,
+                    'highlight' => $inheritHighlight
+                ];
+            } else if ($child instanceof DOMElement) {
+                $segments[] = [
+                    'text' => (string) $child->nodeValue,
+                    'highlight' => (string) $child->getAttribute('class') === 'highlight'
+                ];
+            }
+        }
+
+        return $segments;
     }
 }

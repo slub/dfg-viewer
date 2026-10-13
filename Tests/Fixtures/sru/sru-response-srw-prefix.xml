@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The same "dfg-viewer/page" records as sru-response-default-namespace.xml, but
+    with the literal "srw:" prefix (xmlns:srw="http://www.loc.gov/zing/srw/")
+    instead of the default namespace, as emitted by Kitodo.Presentation. The
+    client must parse both shapes identically.
+-->
+<srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/">
+    <srw:version>1.2</srw:version>
+    <srw:numberOfRecords>2</srw:numberOfRecords>
+    <srw:records>
+        <srw:record>
+            <srw:recordSchema>dfg-viewer/page</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <page xmlns="http://dfg-viewer.de/" id="4" width="2481" height="3508">
+                    <parent url="https://host.example/mets.xml"/>
+                    <fulltexthit x1="100" y1="200" x2="500" y2="240" preview="https://host.example/preview-4a.jpg">
+                        <span>some context <span class="highlight">term</span> more context</span>
+                    </fulltexthit>
+                    <fulltexthit x1="10" y1="20" x2="90" y2="40">
+                        <span>second <span class="highlight">hit</span> here</span>
+                    </fulltexthit>
+                </page>
+            </srw:recordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>dfg-viewer/page</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <page xmlns="http://dfg-viewer.de/" id="9" width="100" height="200">
+                    <parent url="https://host.example/mets2.xml"/>
+                    <fulltexthit x1="1" y1="2" x2="3" y2="4">
+                        <span>only plain text, no highlight</span>
+                    </fulltexthit>
+                </page>
+            </srw:recordData>
+        </srw:record>
+    </srw:records>
+</srw:searchRetrieveResponse>
