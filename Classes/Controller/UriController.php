@@ -43,6 +43,8 @@ class UriController extends AbstractController
     /**
      * The main method of the plugin
      *
+     * @access public
+     *
      * @return ResponseInterface
      */
     public function mainAction(): ResponseInterface
@@ -68,7 +70,10 @@ class UriController extends AbstractController
     /**
      * Assign the uri book.
      *
+     * @access private
+     *
      * @param AbstractDocument|null $doc
+     *
      * @return void
      */
     private function assignUriBook(?AbstractDocument $doc): void
@@ -82,18 +87,7 @@ class UriController extends AbstractController
         }
 
         if (!empty($uriBook)) {
-            $uris = [];
-            foreach ($uriBook as $uri) {
-                if (Helper::isValidHttpUrl($uri)) {
-                    $uris[] = $uri;
-                } elseif (strpos($uri, 'urn:') === 0) {
-                    if (strpos($uri, '/fragment/') === false) {
-                        $uris[] = 'https://nbn-resolving.de/' . $uri;
-                    } else {
-                        $uris[] = 'https://nbn-resolving.org/' . $uri;
-                    }
-                }
-            }
+            $uris = $this->getUris($uriBook);
             if (!empty($uris)) {
                 $this->view->assign('uriBooks', $uris);
             }
@@ -103,7 +97,10 @@ class UriController extends AbstractController
     /**
      * Assign the uri page.
      *
+     * @access private
+     *
      * @param AbstractDocument|null $doc
+     *
      * @return void
      */
     private function assignUriPage(?AbstractDocument $doc): void
@@ -116,22 +113,36 @@ class UriController extends AbstractController
         $uriPage = GeneralUtility::trimExplode(' ', $doc->physicalStructureInfo[$doc->physicalStructure[$this->requestData['page']]]['contentIds'], TRUE);
 
         if (!empty($uriPage)) {
-            $uris = [];
-
-            foreach ($uriPage as $uri) {
-                if (Helper::isValidHttpUrl($uri)) {
-                    $uris[] = $uri;
-                } elseif (strpos($uri, 'urn:') === 0) {
-                    if (strpos($uri, '/fragment/') === false) {
-                        $uris[] = 'https://nbn-resolving.de/' . $uri;
-                    } else {
-                        $uris[] = 'https://nbn-resolving.org/' . $uri;
-                    }
-                }
-            }
+            $uris = $this->getUris($uriPage);
             if (!empty($uris)) {
                 $this->view->assign('uriPages', $uris);
             }
         }
+    }
+
+    /**
+     * Get the URIs from the given array.
+     *
+     * @access private
+     *
+     * @param string[] $uris
+     *
+     * @return string[]
+     */
+    private function getUris(array $uris): array
+    {
+        $filteredUris = [];
+        foreach ($uris as $uri) {
+            if (Helper::isValidHttpUrl($uri)) {
+                $filteredUris[] = $uri;
+            } else if (str_starts_with($uri, 'urn:')) {
+                if (!str_contains($uri, '/fragment/')) {
+                    $filteredUris[] = 'https://nbn-resolving.de/' . $uri;
+                } else {
+                    $filteredUris[] = 'https://nbn-resolving.org/' . $uri;
+                }
+            }
+        }
+        return $filteredUris;
     }
 }
