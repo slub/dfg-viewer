@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Standards-compliant SRU 1.2 "searchRetrieveResponse" in the "dfg-viewer/page"
+    record schema: the SRW envelope uses the default namespace, as returned by
+    conformant SRU servers (cf. https://www.loc.gov/standards/sru/).
+-->
+<searchRetrieveResponse xmlns="http://www.loc.gov/zing/srw/">
+    <version>1.2</version>
+    <numberOfRecords>2</numberOfRecords>
+    <records>
+        <record>
+            <recordSchema>dfg-viewer/page</recordSchema>
+            <recordPacking>xml</recordPacking>
+            <recordData>
+                <page xmlns="http://dfg-viewer.de/" id="4" width="2481" height="3508">
+                    <parent url="https://host.example/mets.xml"/>
+                    <fulltexthit x1="100" y1="200" x2="500" y2="240" preview="https://host.example/preview-4a.jpg">
+                        <span>some context <span class="highlight">term</span> more context</span>
+                    </fulltexthit>
+                    <fulltexthit x1="10" y1="20" x2="90" y2="40">
+                        <span>second <span class="highlight">hit</span> here</span>
+                    </fulltexthit>
+                </page>
+            </recordData>
+        </record>
+        <record>
+            <recordSchema>dfg-viewer/page</recordSchema>
+            <recordPacking>xml</recordPacking>
+            <recordData>
+                <page xmlns="http://dfg-viewer.de/" id="9" width="100" height="200">
+                    <parent url="https://host.example/mets2.xml"/>
+                    <fulltexthit x1="1" y1="2" x2="3" y2="4">
+                        <span>only plain text, no highlight</span>
+                    </fulltexthit>
+                </page>
+            </recordData>
+        </record>
+    </records>
+</searchRetrieveResponse>
