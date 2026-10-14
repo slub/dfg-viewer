@@ -44,6 +44,9 @@
             <trans-unit id="sru.label.noresult">
                 <source><![CDATA[No results found for your search.]]></source>
             </trans-unit>
+            <trans-unit id="sru.label.error">
+                <source><![CDATA[An error occurred while loading search results.]]></source>
+            </trans-unit>
             <trans-unit id="uri.book">
                 <source>Persistent Identifiers (Book)</source>
             </trans-unit>

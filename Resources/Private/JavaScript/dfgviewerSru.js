@@ -44,13 +44,21 @@ $(document).ready(function () {
             },
             function (data) {
                 let resultCount = 0;
-                let resultList = $('<div class="sru-results-active-indicator"></div><ul>');
+                let resultList = $('<div class="sru-results-active-indicator"></div><ul></ul>');
+                let resultItems = resultList.filter('ul');
 
                 if (data.error) {
-                    $('<li/>', {
-                        class: "noresult",
-                        text: $('#tx-dfgviewer-sru-label-noresult').text()
-                    }).appendTo(resultList);
+                    if (data.message) {
+                        $('<li/>', {
+                            class: "sru-error",
+                            text: data.message
+                        }).appendTo(resultItems);
+                    } else {
+                        $('<li/>', {
+                            class: "noresult",
+                            text: $('#tx-dfgviewer-sru-label-noresult').text()
+                        }).appendTo(resultItems);
+                    }
                 } else {
                     for (let i = 0; i < data.length; i++) {
                         let linkCurrent = $(location).attr('href');
@@ -81,7 +89,7 @@ $(document).ready(function () {
                                     href: linkNew
                                 })
                                     .append(preview)
-                            ).appendTo(resultList);
+                            ).appendTo(resultItems);
                             resultCount++;
                         }
                         if (data[i].previewText && data[i].previewText.length > 0) {
@@ -103,7 +111,7 @@ $(document).ready(function () {
                                     href: linkNew
                                 })
                                     .append(textSnippet)
-                            ).appendTo(resultList);
+                            ).appendTo(resultItems);
                             resultCount++;
                         }
                     }
@@ -112,7 +120,7 @@ $(document).ready(function () {
                         $('<li/>', {
                             class: "noresult",
                             text: $('#tx-dfgviewer-sru-label-noresult').text()
-                        }).appendTo(resultList);
+                        }).appendTo(resultItems);
                     }
                 }
 
@@ -120,7 +128,23 @@ $(document).ready(function () {
             },
             "json"
         )
-            .done(function (data) {
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                let errorMessage = jqXHR.responseJSON && jqXHR.responseJSON.message;
+                if (!errorMessage) {
+                    errorMessage = jqXHR.responseText || errorThrown || textStatus;
+                }
+                if (!errorMessage) {
+                    errorMessage = $('#tx-dfgviewer-sru-label-error').text();
+                }
+
+                let resultList = $('<div class="sru-results-active-indicator"></div><ul></ul>');
+                $('<li/>', {
+                    class: "sru-error",
+                    text: errorMessage
+                }).appendTo(resultList.filter('ul'));
+                $('#tx-dfgviewer-sru-results').empty().append(resultList);
+            })
+            .always(function () {
                 $('#tx-dfgviewer-sru-results-loading').hide();
                 $('#tx-dfgviewer-sru-results-clearing').show();
             });
