@@ -72,7 +72,9 @@ class SruMiddleware implements MiddlewareInterface
         $errorMessage = '';
         set_error_handler(
             static function (int $severity, string $message) use (&$errorMessage): bool {
-                $errorMessage = $message;
+                if ((error_reporting() & $severity) !== 0) {
+                    $errorMessage = $message;
+                }
                 return true;
             }
         );
