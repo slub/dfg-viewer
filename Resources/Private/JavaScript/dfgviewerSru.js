@@ -51,7 +51,7 @@ $(document).ready(function () {
                     if (data.message) {
                         $('<li/>', {
                             class: "sru-error",
-                            text: data.message
+                            text: 'Error: ' + data.message
                         }).appendTo(resultItems);
                     } else {
                         $('<li/>', {
