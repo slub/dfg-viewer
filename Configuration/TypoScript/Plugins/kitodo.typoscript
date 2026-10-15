@@ -278,6 +278,7 @@ plugin.tx_dlf_pageview {
     settings {
         features =
         elementId = tx-dfgviewer-map-0
+        useInternalProxy = 0
     }
 }
 
