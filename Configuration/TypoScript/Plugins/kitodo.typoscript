@@ -8,68 +8,6 @@ plugin.tx_dlf {
     }
     settings {
         storagePid = {$plugin.tx_dlf.persistence.storagePid}
-        domDocumentValidation {
-            dfgviewer {
-                10 {
-                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
-                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.shortdescription
-                    description {
-                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
-                        arguments {
-                            0 = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
-                            1 = METS 1.12.1
-                            2 = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
-                            3 = MODS 3.8
-                        }
-                    }
-                    className = Kitodo\Dlf\Validation\XmlSchemasValidator
-                    configuration {
-                        mets {
-                            namespace = http://www.loc.gov/METS/
-                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
-                        }
-                        mods {
-                            namespace = http://www.loc.gov/mods/v3
-                            schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
-                        }
-                    }
-                }
-                20 {
-                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
-                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.shortdescription
-                    description {
-                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
-                        arguments {
-                            0 = /fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf
-                            1 = METS Application Profile version 2.4
-                        }
-                    }
-                    className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
-                }
-                30 {
-                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.title
-                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.shortdescription
-                    description {
-                        key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.description
-                        arguments {
-                            0 = /fileadmin/groups/dfgviewer/MODS_application_profile_2.4.pdf
-                            1 = MODS Application Profile version 2.4
-                        }
-                    }
-                    className = Slub\Dfgviewer\Validation\Mods\ApplicationProfileValidationStack
-                }
-                40 {
-                    title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.title
-                    shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.shortdescription
-                    description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.description
-                    className = Slub\Dfgviewer\Validation\MetsUrlExistenceValidator
-                    configuration {
-                        excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
-                    }
-                    disabled = true
-                }
-            }
-        }
     }
     view {
         partialRootPaths {
@@ -287,6 +225,68 @@ plugin.tx_dlf_pageview {
 # --------------------------------------------------------------------------------------------------------------------
 plugin.tx_dlf_validationform < tt_content.list.20.dlf_validationform
 plugin.tx_dlf_validationform {
+    settings {
+        domDocumentValidation {
+            10 {
+                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.title
+                shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.shortdescription
+                description {
+                    key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.xmlschemas.description
+                    arguments {
+                        0 = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
+                        1 = METS 1.12.1
+                        2 = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
+                        3 = MODS 3.8
+                    }
+                }
+                className = Kitodo\Dlf\Validation\XmlSchemasValidator
+                configuration {
+                    mets {
+                        namespace = http://www.loc.gov/METS/
+                        schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mets/1.12.1.xsd
+                    }
+                    mods {
+                        namespace = http://www.loc.gov/mods/v3
+                        schemaLocation = EXT:dfgviewer/Resources/Public/Xsd/Mods/3.8.xsd
+                    }
+                }
+            }
+            20 {
+                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.title
+                shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.shortdescription
+                description {
+                    key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsapplicationprofile.description
+                    arguments {
+                        0 = /fileadmin/groups/dfgviewer/METS_application_profile_2.4.pdf
+                        1 = METS Application Profile version 2.4
+                    }
+                }
+                className = Slub\Dfgviewer\Validation\Mets\ApplicationProfileValidationStack
+            }
+            30 {
+                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.title
+                shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.shortdescription
+                description {
+                    key = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.modsapplicationprofile.description
+                    arguments {
+                        0 = /fileadmin/groups/dfgviewer/MODS_application_profile_2.4.pdf
+                        1 = MODS Application Profile version 2.4
+                    }
+                }
+                className = Slub\Dfgviewer\Validation\Mods\ApplicationProfileValidationStack
+            }
+            40 {
+                title = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.title
+                shortdescription = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.shortdescription
+                description = LLL:EXT:dfgviewer/Resources/Private/Language/locallang_validation.xlf:validator.metsurlexistence.description
+                className = Slub\Dfgviewer\Validation\MetsUrlExistenceValidator
+                configuration {
+                    excludeHosts = dfg-viewer.de,www.loc.gov,id.loc.gov,www.openarchives.org,purl.org,www.w3.org
+                }
+                disabled = true
+            }
+        }
+    }
 }
 
 # --------------------------------------------------------------------------------------------------------------------
