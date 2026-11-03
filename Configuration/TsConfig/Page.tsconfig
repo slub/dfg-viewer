@@ -1,7 +1,7 @@
 ##############
 #### PAGE ####
 ##############
-@import 'EXT:dfgviewer/Configuration/TypoScript/TsConfig/Page/*.tsconfig'
+@import 'EXT:dfgviewer/Configuration/TsConfig/Page/*.tsconfig'
 
 
 # PAGE DEFAULT PERMISSIONS
