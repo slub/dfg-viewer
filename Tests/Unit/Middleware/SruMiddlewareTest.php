@@ -25,6 +25,8 @@ namespace Slub\Dfgviewer\Tests\Unit\Middleware;
  * This copyright notice MUST APPEAR in all copies of the script!
  */
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use SimpleXMLElement;
@@ -104,7 +106,9 @@ class SruMiddlewareTest extends TestCase
      * A standards-compliant server using a default namespace for the SRW
      * envelope must be parsed (previously yielded no results silently).
      */
-    public function testParsesDefaultNamespaceResponse(): void
+    #[Test]
+    #[Group('parseResponse')]
+    public function parseDefaultNamespaceResponse(): void
     {
         $results = $this->parseFixture('sru-response-default-namespace.xml');
         self::assertCount(3, $results, 'Both records, all their hits must be parsed');
@@ -113,7 +117,9 @@ class SruMiddlewareTest extends TestCase
     /**
      * A server emitting the literal `srw:` prefix must be parsed identically.
      */
-    public function testParsesLiteralSrwPrefixResponse(): void
+    #[Test]
+    #[Group('parseResponse')]
+    public function parseLiteralSrwPrefixResponse(): void
     {
         $defaultNs = $this->parseFixture('sru-response-default-namespace.xml');
         $literal = $this->parseFixture('sru-response-srw-prefix.xml');
@@ -124,7 +130,9 @@ class SruMiddlewareTest extends TestCase
      * The parsed structure must carry the page id, parent METS link,
      * dimensions, preview and the snippet segments with highlight flags.
      */
-    public function testParsedRecordStructure(): void
+    #[Test]
+    #[Group('parseHit')]
+    public function parseRecordStructure(): void
     {
         $results = $this->parseFixture('sru-response-default-namespace.xml');
 
@@ -156,7 +164,9 @@ class SruMiddlewareTest extends TestCase
     /**
      * Multiple hits on one page must all be present, each with its own snippet.
      */
-    public function testMultipleHitsPerPage(): void
+    #[Test]
+    #[Group('parseHit')]
+    public function parseMultipleHitsPerPage(): void
     {
         $results = $this->parseFixture('sru-response-default-namespace.xml');
         // Page 4 has two hits -> two result rows for that page.
@@ -176,7 +186,9 @@ class SruMiddlewareTest extends TestCase
      * getSpanSegments must keep context and highlight segments together, in
      * document order (mixed content).
      */
-    public function testSpanSegmentsMixedContent(): void
+    #[Test]
+    #[Group('getSpanSegments')]
+    public function getSpanSegmentsMixedContent(): void
     {
         $segments = $this->invokeGetSpanSegments(
             '<span>pre <span class="highlight">term</span> post</span>'
@@ -195,7 +207,9 @@ class SruMiddlewareTest extends TestCase
      * A span that is entirely plain text (no children) must be kept as a
      * single non-highlight segment.
      */
-    public function testSpanSegmentsPlainTextOnly(): void
+    #[Test]
+    #[Group('getSpanSegments')]
+    public function getSpanSegmentsPlainTextOnly(): void
     {
         $segments = $this->invokeGetSpanSegments('<span>just plain text</span>');
         self::assertSame([['text' => 'just plain text', 'highlight' => false]], $segments);
@@ -205,7 +219,9 @@ class SruMiddlewareTest extends TestCase
      * A span carrying the highlight class at the top level (no children) must
      * be a single highlighted segment.
      */
-    public function testSpanSegmentsTopLevelHighlight(): void
+    #[Test]
+    #[Group('getSpanSegments')]
+    public function getSpanSegmentsTopLevelHighlight(): void
     {
         $segments = $this->invokeGetSpanSegments('<span class="highlight">term</span>');
         self::assertSame([['text' => 'term', 'highlight' => true]], $segments);
