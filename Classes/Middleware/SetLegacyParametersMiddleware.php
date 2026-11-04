@@ -52,15 +52,23 @@ class SetLegacyParametersMiddleware implements MiddlewareInterface
     {
         $parameters = $request->getQueryParams();
         $setParameters = ($parameters['set'] ?? []);
-        if (!empty($setParameters)) {
+        if (is_array($setParameters) && !empty($setParameters)) {
+            $legacyParameters = [];
             if (isset($setParameters['mets'])) {
-                $parameters['tx_dlf']['id'] = $setParameters['mets'];
+                $legacyParameters['id'] = $setParameters['mets'];
             }
             if (isset($setParameters['image'])) {
-                $parameters['tx_dlf']['page'] = $setParameters['image'];
+                $legacyParameters['page'] = $setParameters['image'];
             }
             if (isset($setParameters['double'])) {
-                $parameters['tx_dlf']['double'] = $setParameters['double'];
+                $legacyParameters['double'] = $setParameters['double'];
+            }
+            if ($legacyParameters !== []) {
+                $pluginParameters = ($parameters['tx_dlf'] ?? null);
+                if (!is_array($pluginParameters)) {
+                    $parameters['tx_dlf'] = [];
+                }
+                $parameters['tx_dlf'] = array_merge($parameters['tx_dlf'], $legacyParameters);
             }
             $request = $request->withQueryParams($parameters);
         }
