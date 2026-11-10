@@ -53,25 +53,25 @@
                     <f:for each="{month.week}" as="week">
                         <tr>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYMON}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYMON}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYTUE}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYTUE}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYWED}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYWED}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYTHU}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYTHU}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYFRI}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYFRI}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYSAT}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYSAT}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                             <td class="">
-                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYSUN}'}"></f:render>
+                                <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYSUN}', 'requestData': '{requestData}'}"></f:render>
                             </td>
                         </tr>
                     </f:for>
