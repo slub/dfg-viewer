@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema targetNamespace="http://dfg-viewer.de/"
+           xmlns:dv="http://dfg-viewer.de/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           version="1.0">
+  
+  <!-- to be included in mets:amdSec/mets:rightsMD -->
+  <xs:element name="rights">
+    <xs:annotation>
+      <xs:documentation>Root element for metadata which describe the rights to the digital representation of the digitally represented work</xs:documentation>
+    </xs:annotation>
+    <!-- references:
+         - https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf
+         - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/src/main/java/org/kitodo/production/services/schema/SchemaService.java
+         - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Resources/Private/Partials/PageView.html
+    -->
+    <xs:complexType>
+      <xs:sequence>
+        <!-- todo: add documentation -->
+        <xs:element name="owner" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>name of the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ownerLogo" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>logo URL of the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ownerSiteURL" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>website URL of the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ownerContact" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>contact (email/webform) at the institution holding the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregator" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>name of the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregatorLogo" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>logo URL of the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregatorSiteURL" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>website URL of the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="aggregatorContact" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>contact (email/webform) at the aggregator or portal owning the data to the digital object</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsor" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>name of the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsorLogo" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>logo URL of the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsorSiteURL" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>website URL of the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sponsorContact" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>contact (email/webform) at the sponsor for the digitization process</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="license" minOccurs="0" default="reserved">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="pdm">
+                <xs:annotation><xs:documentation>Marking as public domain</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc0">
+                <xs:annotation><xs:documentation>Licensing as a CCO-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-sa">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-SA-license,</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nd">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-ND-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nc">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-NC-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nc-sa">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-NC-SA-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="cc-by-nc-nd">
+                <xs:annotation><xs:documentation>Licensing as a CC-BY-NC-ND-license</xs:documentation></xs:annotation>
+              </xs:enumeration>
+              <xs:enumeration value="reserved">
+                <xs:annotation><xs:documentation>other rights reserved</xs:documentation></xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaVersion" type="xs:decimal" default="1.0"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- to be included in mets:amdSec/mets:digiprovMD -->
+  <xs:element name="links">
+    <xs:annotation>
+      <xs:documentation>Root element for metadata which describe the development of the digital representation of the digitally represented work.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <!-- references: 
+             - https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf
+             - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/src/main/java/org/kitodo/production/services/schema/SchemaService.java
+             - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Resources/Private/Partials/PageView.html
+        -->
+        <xs:element name="reference" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>reference to a catalogue or search guide</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:anyURI">
+                <xs:attribute name="linktext" type="xs:string"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="presentation" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>reference to a local presentation website</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="sru" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>link to the Search/Retrieve via URL.
+            The specification has to be made in form of a valid URL but without URL parameter.
+            The DFG viewer adds the required SRU-parameters necessary for the query of the interface
+            automatically. The SRU/ALTO application profile in version 1.0 describes  which  parameter
+            the interface has to support as a minimum.</xs:documentation>
+            <xs:appinfo>http://www.loc.gov/standards/sru/</xs:appinfo>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="iiif" type="xs:anyURI" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>link to an IIIF manifest of the digital object
+            Has to be a valid URI of a Presentation API of the International Image Interoperability Framework (IIIF).</xs:documentation>
+            <xs:appinfo>https://iiif.io/api/presentation/</xs:appinfo>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="schemaVersion" type="xs:decimal" default="1.0"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- to be included in mets:amdSec/mets:techMD -->
+  <!-- fixme: root name unknown
+       references: 
+       - https://dfg-viewer.de/fileadmin/groups/dfgviewer/METS_application_profile_2.3.1.pdf
+       - https://github.com/kitodo/kitodo-production/blob/dc3e3a9a495a16fa97812a285c1587ca27d51688/Kitodo/src/main/java/org/kitodo/production/services/schema/SchemaService.java
+  <xs:element name="?">
+    <xs:annotation>
+      <xs:documentation>Root element for metadata that is necessary for the technical processing in any way and therefore needs to be stored somewhere.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="purlUrl" type="xs:anyURI"/>
+        <xs:element name="contentIDs">
+          <xs:complexContent>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="\S+"/>
+            </xs:restriction>
+          </xs:complexContent>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  -->
+
+  <!-- to be included in srw:recordData -->
+  <xs:element name="page">
+    <xs:annotation>
+      <xs:documentation>Root element for metadata which describe the search result</xs:documentation>
+    </xs:annotation>
+    <!-- references: 
+         - https://dfg-viewer.de/fileadmin/groups/dfgviewer/SRU-ALTO-Anwendungsprofil_1.0.pdf
+         - https://github.com/slub/dfg-viewer/blob/c832c5e87fd874c7ec802e1c3881970eed47959f/Classes/Plugins/Sru/SruEid.php
+    -->
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>describes a search result (single match)</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>    
+        <xs:element name="parent">
+          <xs:annotation>
+            <xs:documentation>the structural element (document chapter/page) where the match belongs to</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:annotation>
+              <xs:documentation>contains the main title of the document (as in mods:titleInfo/mods:title)</xs:documentation>
+            </xs:annotation>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:ID" use="required">
+                  <xs:annotation>
+                    <xs:documentation>the @ID of the logical structMap div</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="url" type="xs:anyURI" use="required">
+                  <xs:annotation>
+                    <xs:documentation>the address of the document METS</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="pagination" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>contains the page number</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="fulltexthit" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>the match on the page</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <!-- fixme: unbounded or 1? -->
+              <xs:element name="span" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:documentation>the text content around the match</xs:documentation>
+                  </xs:annotation>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="class" type="xs:string"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="x1" type="xs:int" use="required">
+              <xs:annotation>
+                <xs:documentation>the left boundary position of the match (in relation to the page image dimensions @width/@height)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="y1" type="xs:int" use="required">
+              <xs:annotation>
+                <xs:documentation>the upper boundary position of the match (in relation to the page image dimensions @width/@height)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="x2" type="xs:int" use="required">
+              <xs:annotation>
+                <xs:documentation>the right boundary position of the match (in relation to the page image dimensions @width/@height)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="y2" type="xs:int" use="required">
+              <xs:annotation>
+                <xs:documentation>the lower boundary position of the match (in relation to the page image dimensions @width/@height)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="preview" type="xs:anyURI">
+              <xs:annotation>
+                <xs:documentation>the address of the image cropped around the match (by x1:x2,y1:y2)</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required">
+        <xs:annotation>
+          <xs:documentation>the @ID of the physical structMap div page</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="width" type="xs:int" use="required">
+        <xs:annotation>
+          <xs:documentation>the width of the page image (in px)</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="height" type="xs:int" use="required">
+        <xs:annotation>
+          <xs:documentation>the height of the pge image (in px)</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="url" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>the address of the page image</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="schemaVersion" type="xs:decimal" default="1.0"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
